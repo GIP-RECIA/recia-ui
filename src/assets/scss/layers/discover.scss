@@ -1,0 +1,85 @@
+/**
+ * Copyright (C) 2025 GIP-RECIA, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@use '../base' as *;
+
+.discover {
+  &-video {
+    width: 100%;
+    margin-bottom: 32px;
+    border-radius: 3.5px
+  }
+
+  &-section {
+    > h1 {
+      margin-bottom: 16px;
+    }
+
+    &-nav {
+      @include list-reset;
+
+      margin-bottom: 24px;
+      display: flex;
+
+      > li {
+        padding: 8px 12px;
+        border-bottom: 1px solid $stroke;
+        font-weight: bold;
+        font-size: 14px;
+
+        &.active {
+          border-color: $basic-black;
+          background-color: rgba($alert-info, .1);
+        }
+      }
+    }
+
+    > p {
+      margin-bottom: 24px;
+    }
+
+    &-tiles {
+      @include list-reset;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 16px;
+      margin-bottom: 16px;
+
+      > li > a {
+        text-decoration: none;
+        color: inherit;
+        border-radius: 10px;
+        background-color: $white;
+        box-shadow: $shadow-strong;
+        padding: 16px;
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        > svg {
+          font-size: 13px;
+          margin-bottom: 8px;
+        }
+
+        > p {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+}

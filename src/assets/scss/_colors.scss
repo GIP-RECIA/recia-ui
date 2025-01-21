@@ -1,0 +1,70 @@
+/**
+ * Copyright (C) 2025 GIP-RECIA, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$primary: var(--primary, #0062BC);
+$primary-pressed: var(--primary-pressed, #004584);
+$secondary-pressed: var(--secondary-pressed, #CCE0F2);
+$secondary-hover: var(--secondary-hover, #E6EFF8);
+
+$alert-info: #005099;
+$alert-error: #AD1919;
+
+$categories: (
+  documentation: (#AB47BC, #C400F3),
+  collaboratif: (#5747BC, #665BE7),
+  apprentissage: (#FFAC2F, #F5C72E),
+  vie-scolaire: (#858585, #5B5B5B),
+  orientation: (#26C6DA, #70EAF5),
+  parametres: (#66BB6A, #4EF186),
+  communication: (#EC407A, #F60086)
+);
+
+// @each $category, $colors in $categories {
+//   #{'--#{$category}'}: nth($colors, 1);
+//   #{'--#{$category}-hover'}: nth($colors, 2);
+// }
+
+// $documentation: #AB47BC;
+// $documentation-hover: #C400F3;
+
+// $collaboratif: #5747BC;
+// $collaboratif-hover: #665BE7;
+
+// $apprentissage: #FFAC2F;
+// $apprentissage-hover: #F5C72E;
+
+// $vie-scolaire: #858585;
+// $vie-scolaire-hover: #5B5B5B;
+
+// $orientation: #26C6DA;
+// $orientation-hover: #70EAF5;
+
+// $parametres: #66BB6A;
+// $parametres-hover: #4EF186;
+
+// $communication: #EC407A;
+// $communication-hover: #F60086;
+
+$white: #FFFFFF;
+$black: #000000;
+$basic-grey: #F4F4F4;           // Couleur de fond du footer haut
+$stroke: #E9E9E9;               // A utiliser pour tous les contours et délimitations
+$tutorial: #171717;             // Tutorial background card
+$lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
+$basic-black: #1E1E1E;          // Couleur du texte et des icônes, background color du bouton primaire par défaut
+$favorite: #FFAA46;
+$basic-black-30: #1E1E1E;
+$basic-black-lighter: #737373;  // A utiliser lorsque le texte est de moindre importance
