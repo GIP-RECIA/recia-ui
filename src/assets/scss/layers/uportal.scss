@@ -58,7 +58,7 @@
 
         > li {
           > a {
-            color: $alert-info;
+            map.get($system, blue);
           }
         }
 
@@ -122,7 +122,7 @@
         text-align: center;
 
         .fa-heart {
-          color: $alert-error;
+          color: map.get($system, red);
         }
       }
     }

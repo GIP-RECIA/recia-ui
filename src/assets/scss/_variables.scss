@@ -19,8 +19,10 @@ $primary-pressed: var(--primary-pressed, #004584);
 $secondary-pressed: var(--secondary-pressed, #CCE0F2);
 $secondary-hover: var(--secondary-hover, #E6EFF8);
 
-$alert-info: #005099;
-$alert-error: #AD1919;
+$system: (
+  blue: #005099,
+  red: #AD1919,
+);
 
 $categories: (
   documentation: (

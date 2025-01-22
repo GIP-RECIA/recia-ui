@@ -43,7 +43,7 @@
 
         &.active {
           border-color: $basic-black;
-          background-color: rgba($alert-info, .1);
+          background-color: rgba(map.get($system, blue), .1);
         }
       }
     }
