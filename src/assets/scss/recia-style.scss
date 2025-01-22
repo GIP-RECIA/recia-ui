@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-@use 'bootstrap';
+// @use 'bootstrap';
 
-@forward 'colors';
-@forward 'shadows';
 @forward 'fonts';
+@forward 'variables';
 
 @forward 'utils/list';
+
+@forward 'containers';
