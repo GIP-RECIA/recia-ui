@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@use 'sass:map';
 @use '../base' as *;
 
 .login {
@@ -44,7 +45,7 @@
       border: 1px solid $stroke;
       border-radius: 10px;
       background-color: $white;
-      box-shadow: $shadow-strong;
+      box-shadow: map.get($shadows, strong) rgba($black, .1);
       padding: 12px;
       display: inline-block;
       width: 100%;

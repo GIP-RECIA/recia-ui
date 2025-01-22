@@ -23,48 +23,56 @@ $alert-info: #005099;
 $alert-error: #AD1919;
 
 $categories: (
-  documentation: (#AB47BC, #C400F3),
-  collaboratif: (#5747BC, #665BE7),
-  apprentissage: (#FFAC2F, #F5C72E),
-  vie-scolaire: (#858585, #5B5B5B),
-  orientation: (#26C6DA, #70EAF5),
-  parametres: (#66BB6A, #4EF186),
-  communication: (#EC407A, #F60086)
+  documentation: (
+    color: #AB47BC,
+    hover: #C400F3,
+  ),
+  collaboratif: (
+    color: #5747BC,
+    hover: #665BE7,
+  ),
+  apprentissage: (
+    color: #FFAC2F,
+    hover: #F5C72E,
+  ),
+  vie-scolaire: (
+    color: #858585,
+    hover: #5B5B5B,
+  ),
+  orientation: (
+    color: #26C6DA,
+    hover: #70EAF5,
+  ),
+  parametres: (
+    color: #66BB6A,
+    hover: #4EF186,
+  ),
+  communication: (
+    color: #EC407A,
+    hover: #F60086,
+  ),
 );
-
-// @each $category, $colors in $categories {
-//   #{'--#{$category}'}: nth($colors, 1);
-//   #{'--#{$category}-hover'}: nth($colors, 2);
-// }
-
-// $documentation: #AB47BC;
-// $documentation-hover: #C400F3;
-
-// $collaboratif: #5747BC;
-// $collaboratif-hover: #665BE7;
-
-// $apprentissage: #FFAC2F;
-// $apprentissage-hover: #F5C72E;
-
-// $vie-scolaire: #858585;
-// $vie-scolaire-hover: #5B5B5B;
-
-// $orientation: #26C6DA;
-// $orientation-hover: #70EAF5;
-
-// $parametres: #66BB6A;
-// $parametres-hover: #4EF186;
-
-// $communication: #EC407A;
-// $communication-hover: #F60086;
 
 $white: #FFFFFF;
 $black: #000000;
-$basic-grey: #F4F4F4;           // Couleur de fond du footer haut
+
+$favorite: #FFAA46;
 $stroke: #E9E9E9;               // A utiliser pour tous les contours et délimitations
 $tutorial: #171717;             // Tutorial background card
-$lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
+$basic-grey: #F4F4F4;           // Couleur de fond du footer haut
 $basic-black: #1E1E1E;          // Couleur du texte et des icônes, background color du bouton primaire par défaut
-$favorite: #FFAA46;
 $basic-black-30: #1E1E1E;
 $basic-black-lighter: #737373;  // A utiliser lorsque le texte est de moindre importance
+$lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
+
+// x y blur spread
+$shadows: (
+  neutral: 0 4px 15.9px 0,
+  strong: 0 4px 24.4px 0,
+  hover: 0 4px 26px 0,
+  low-elevation: 0 2px 6px 0,
+  low-elevation-avatar-notif: 0 1px 24px 0,
+);
+
+$sora: 'Sora', 'sans-serif';
+$dm-sans: 'DM Sans', 'sans-serif';
