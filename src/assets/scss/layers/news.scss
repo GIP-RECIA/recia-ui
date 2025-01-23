@@ -3,7 +3,7 @@
 
 .news {
   &-tiles {
-    @include list-reset;
+    @include list-unstyled;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 15px;

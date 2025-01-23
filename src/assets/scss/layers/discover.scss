@@ -14,7 +14,7 @@
     }
 
     &-nav {
-      @include list-reset;
+      @include list-unstyled;
 
       margin-bottom: 24px;
       display: flex;
@@ -37,7 +37,7 @@
     }
 
     &-tiles {
-      @include list-reset;
+      @include list-unstyled;
 
       display: grid;
       grid-template-columns: repeat(2, 1fr);
