@@ -60,6 +60,15 @@
           }
         }
       }
+
+      &:hover, &:focus {
+        outline: 2px solid map.get($system, blue);
+        box-shadow: map.get($shadows, hover) rgba(map.get($system, blue), .2);
+
+        .news-tile-content > header .header-title {
+          color: $primary;
+        }
+      }
     }
   }
 
