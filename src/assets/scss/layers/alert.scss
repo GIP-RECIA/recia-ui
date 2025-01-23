@@ -72,7 +72,7 @@
     }
   }
 
-  @media (width >= 768px) {
+  @media (width >= map.get($grid-breakpoints, md)) {
     column-gap: 34px;
     padding: 16px 34px;
     font-size: 14px;
