@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use 'recia-style' as *;
 
 @use 'layers/alert';
@@ -15,7 +17,7 @@ body {
   font-family: $dm-sans;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: map.get($font-sizes, mobile, body);
   letter-spacing: 0;
   color: $black;
 
@@ -28,30 +30,38 @@ body {
     'main'
     'footer';
 
-    > header {
-      grid-area: header;
-    }
+  > header {
+    grid-area: header;
+  }
 
-    > .alert {
-      grid-area: alert;
-    }
+  > .alert {
+    grid-area: alert;
+  }
 
-    > main {
-      grid-area: main;
-      margin: 40px 0;
-      display: grid;
-      row-gap: 40px;
-    }
+  > main {
+    grid-area: main;
+    margin: 40px 0;
+    display: grid;
+    row-gap: 40px;
+  }
 
-    > footer {
-      grid-area: footer;
-    }
-}
+  > footer {
+    grid-area: footer;
+  }
 
-h1 {
-  font-family: $sora;
-  font-weight: bold;
-  font-size: 18px;
+  h1 {
+    font-family: $sora;
+    font-weight: bold;
+    font-size: map.get($font-sizes, mobile, h1);
+  }
+
+  @media (width >= map.get($grid-breakpoints, sm)) {
+    font-size: map.get($font-sizes, web, body);
+
+    h1 {
+      font-size: map.get($font-sizes, web, h1);
+    }
+  }
 }
 
 .grow-1 {

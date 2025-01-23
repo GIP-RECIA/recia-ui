@@ -65,7 +65,7 @@
   @media (width >= map.get($grid-breakpoints, sm)) {
     &-tiles {
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      font-size: 14px;
+      font-size: unset;
 
       > li > a {
         &:hover, &:focus {
@@ -95,7 +95,6 @@
 
     &-tiles {
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      font-size: 14px;
 
       > li > a {
         padding: 16px;

@@ -76,6 +76,17 @@ $shadows: (
 $sora: 'Sora', 'sans-serif';
 $dm-sans: 'DM Sans', 'sans-serif';
 
+$font-sizes: (
+  mobile: (
+    body: 12px,
+    h1: 18px,
+  ),
+  web: (
+    body: 14px,
+    h1: 20px,
+  ),
+);
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
