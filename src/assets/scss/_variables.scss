@@ -1,7 +1,20 @@
-$primary: var(--primary, #0062BC);
-$primary-pressed: var(--primary-pressed, #004584);
-$secondary-pressed: var(--secondary-pressed, #CCE0F2);
-$secondary-hover: var(--secondary-hover, #E6EFF8);
+@use 'sass:map';
+
+$colors: (
+  primary: (
+    default: #0062BC,
+    pressed: #004584,
+  ),
+  secondary: (
+    hover: #E6EFF8,
+    pressed: #CCE0F2,
+  ),
+);
+
+$primary: var(--primary, map.get($colors, primary, default));
+$primary-pressed: var(--primary-pressed, map.get($colors, primary, pressed));
+$secondary-hover: var(--secondary-hover, map.get($colors, secondary, hover));
+$secondary-pressed: var(--secondary-pressed, map.get($colors, secondary, pressed));
 
 $system: (
   blue: #005099,

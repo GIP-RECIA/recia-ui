@@ -47,6 +47,14 @@
 }
 
 @font-face {
+  font-family: 'DM Sans';
+  src: url('../../fonts/DM_Sans/static/DMSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Sora';
   src: url('../../fonts/Sora/static/Sora-Bold.ttf') format('truetype');
   font-weight: bold;

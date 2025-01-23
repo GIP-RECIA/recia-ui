@@ -2,6 +2,12 @@
 @use '../recia-style' as *;
 
 .news {
+  > header {
+    > a {
+      display: none
+    }
+  }
+
   &-tiles {
     @include list-unstyled;
     display: grid;
@@ -34,7 +40,7 @@
         &-content {
           padding: 16px;
 
-          header {
+          > header {
             .header {
               &-context {
                 font-size: 12px;
@@ -57,19 +63,23 @@
     }
   }
 
-  footer {
+  > footer {
     display: flex;
     margin: 8px 16px;
+  }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-      font-style: 14px;
-      font-weight: bold;
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > header {
+      display: flex;
+      align-items: center;
 
-      > svg {
-        margin-left: 12px;
+      > a {
+        display: inline-flex;
       }
+    }
+
+    > footer {
+      display: none;
     }
   }
 }
