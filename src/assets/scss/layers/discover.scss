@@ -47,6 +47,7 @@
       > li > a {
         text-decoration: none;
         color: inherit;
+        outline: 1px solid $stroke;
         border-radius: 10px;
         background-color: $white;
         box-shadow: map.get($shadows, strong) rgba($black, .1);
@@ -62,6 +63,12 @@
 
         > p {
           font-weight: 500;
+        }
+
+        &:hover, &:focus {
+          color: $primary;
+          outline: 1px solid $primary;
+          box-shadow: map.get($shadows, strong) rgba(map.get($colors, primary, default), .2);
         }
       }
     }
