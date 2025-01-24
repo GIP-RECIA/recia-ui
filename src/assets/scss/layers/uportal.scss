@@ -85,29 +85,54 @@
   > .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     row-gap: 32px;
     color: $white;
     padding-top: 16px;
     padding-bottom: 16px;
 
-    .footer {
+    > .footer {
       &-links {
         @include list-unstyled;
         display: flex;
         justify-content: space-between;
+        column-gap: 32px;
+        font-size: 12px;
+        line-height: 17px;
 
         > li > a {
           text-decoration: none;
           color: inherit;
+
+          &:hover, &:focus {
+            text-decoration: underline;
+            outline: none;
+          }
         }
       }
 
-      &-hero {
+      &-made-by {
+        font-size: 10px;
         text-align: center;
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
 
         .fa-heart {
           color: map.get($system, red);
+          font-size: 20px;
         }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .container {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+
+      > .footer-links {
+        margin-left: 32px;
       }
     }
   }
