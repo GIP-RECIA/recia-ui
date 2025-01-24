@@ -17,7 +17,7 @@ body {
   font-family: $dm-sans;
   font-style: normal;
   font-weight: normal;
-  font-size: map.get($font-sizes, mobile, body);
+  font-size: map.get($font-sizes, mobile, 0);
   letter-spacing: 0;
   color: $black;
 
@@ -49,17 +49,25 @@ body {
     grid-area: footer;
   }
 
-  h1 {
-    font-family: $sora;
-    font-weight: bold;
-    font-size: map.get($font-sizes, mobile, h1);
+  @each $size, $value in map.get($font-sizes, mobile) {
+    @if $size != 0 {
+      h#{$size} {
+        font-family: $sora;
+        font-weight: bold;
+        font-size: $value;
+      }
+    }
   }
 
   @media (width >= map.get($grid-breakpoints, sm)) {
-    font-size: map.get($font-sizes, web, body);
+    font-size: map.get($font-sizes, web, 0);
 
-    h1 {
-      font-size: map.get($font-sizes, web, h1);
+    @each $size, $value in map.get($font-sizes, web) {
+      @if $size != 0 {
+        h#{$size} {
+          font-size: $value;
+        }
+      }
     }
   }
 }
