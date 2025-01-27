@@ -1,0 +1,39 @@
+@use 'variables' as *;
+
+:root {
+  @each $color, $value in $colors {
+    --#{$prefix}#{$color}: #{$value};
+  }
+
+  @each $color, $value in $blacks {
+    --#{$prefix}black-#{$color}: #{$value};
+  }
+
+  @each $color, $value in $system-blues {
+    --#{$prefix}system-blue-#{$color}: #{$value};
+  }
+
+  @each $color, $value in $system-reds {
+    --#{$prefix}system-red-#{$color}: #{$value};
+  }
+
+  @each $color, $value in $primarys {
+    --#{$prefix}primary-#{$color}: #{$value};
+  }
+
+  @each $color, $value in $theme-colors {
+    --#{$prefix}#{$color}: #{$value};
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+
+    @each $color, $value in $primarys-dark {
+      --#{$prefix}primary-#{$color}: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-dark {
+      --#{$prefix}#{$color}: #{$value};
+    }
+  }
+}
