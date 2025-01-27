@@ -1,0 +1,39 @@
+{
+  "name": "@gip-recia/ui",
+  "type": "module",
+  "version": "0.0.0",
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test:unit": "echo No tests available"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.1.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@types/bootstrap": "^5.2.10",
+    "bootstrap": "^5.3.3",
+    "eslint": "^9.19.0",
+    "eslint-plugin-format": "^1.0.1",
+    "lint-staged": "^15.4.3",
+    "ress": "^5.0.2",
+    "sass": "^1.83.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11"
+  }
+}

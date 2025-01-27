@@ -42,7 +42,7 @@
 
         > li {
           > a {
-            map.get($system, blue);
+            color: map.get($system, blue);
           }
         }
 
