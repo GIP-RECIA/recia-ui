@@ -3,7 +3,7 @@
 
 .extended-uportal-header {
   background-color: $white;
-  box-shadow: map.get($shadows, strong) rgba($black, .1);
+  box-shadow: map.get($shadows, strong) $black-10;
   height: 64px;
   display: flex;
   align-items: center;
@@ -42,7 +42,7 @@
 
         > li {
           > a {
-            color: map.get($system, blue);
+            color: $system-blue;
           }
         }
 
@@ -119,7 +119,7 @@
         column-gap: 8px;
 
         .fa-heart {
-          color: map.get($system, red);
+          color: $system-red;
           font-size: 20px;
         }
       }

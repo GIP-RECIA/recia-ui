@@ -26,18 +26,18 @@
 
     &:active {
       background-color: $primary-pressed;
-      @include set-color(map.get($colors, primary, pressed));
+      @include set-color($primary-pressed);
     }
 
     &:hover {
       background-color: $primary;
-      @include set-color(map.get($colors, primary, default));
+      @include set-color($primary);
     }
 
     &:focus {
       background-color: $primary;
-      @include set-color(map.get($colors, primary, default));
-      outline: 4px solid rgba(map.get($colors, primary, default), .3);
+      @include set-color($primary);
+      outline: 4px solid $primary-30;
     }
 
     &:disabled, &.disabled {

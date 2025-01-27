@@ -33,7 +33,7 @@
 
         &.active {
           border-color: $basic-black;
-          background-color: rgba(map.get($system, blue), .1);
+          background-color: $system-blue-10;
         }
 
         &:hover, &:focus {
@@ -61,7 +61,7 @@
         outline: 1px solid $stroke;
         border-radius: 10px;
         background-color: $white;
-        box-shadow: map.get($shadows, strong) rgba($black, .1);
+        box-shadow: map.get($shadows, strong) $black-10;
         padding: 16px;
         display: block;
         width: 100%;
@@ -79,7 +79,7 @@
         &:hover, &:focus {
           color: $primary;
           outline: 1px solid $primary;
-          box-shadow: map.get($shadows, strong) rgba(map.get($colors, primary, default), .2);
+          box-shadow: map.get($shadows, strong) $primary-20;
         }
       }
     }

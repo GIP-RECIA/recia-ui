@@ -1,24 +1,125 @@
-@use 'sass:map';
+// Color system
 
-$colors: (
-  primary: (
-    default: #0062BC,
-    pressed: #004584,
-  ),
-  secondary: (
-    hover: #E6EFF8,
-    pressed: #CCE0F2,
-  ),
+$white: #FFF;
+$black: #000;
+$black-10: rgba($black, .1);
+$black-20: rgba($black, .2);
+$black-30: rgba($black, .3);
+$black-40: rgba($black, .4);
+$black-50: rgba($black, .5);
+
+$blacks: (
+  '10': $black-10,
+  '20': $black-20,
+  '30': $black-30,
+  '40': $black-40,
+  '50': $black-50,
 );
 
-$primary: var(--primary, map.get($colors, primary, default));
-$primary-pressed: var(--primary-pressed, map.get($colors, primary, pressed));
-$secondary-hover: var(--secondary-hover, map.get($colors, secondary, hover));
-$secondary-pressed: var(--secondary-pressed, map.get($colors, secondary, pressed));
+$favorite: #FFAA46;
+$stroke: #E9E9E9;               // A utiliser pour tous les contours et délimitations
+$tutorial: #171717;             // Tutorial background card
+$basic-grey: #F4F4F4;           // Couleur de fond du footer haut
+$basic-black: #1E1E1E;          // Couleur du texte et des icônes, background color du bouton primaire par défaut
+$basic-black-lighter: #737373;  // A utiliser lorsque le texte est de moindre importance
+$lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
 
-$system: (
-  blue: #005099,
-  red: #AD1919,
+$system-blue: #005099;
+$system-blue-10: rgba($system-blue, .1);
+$system-blue-20: rgba($system-blue, .2);
+$system-blue-30: rgba($system-blue, .3);
+$system-blue-40: rgba($system-blue, .4);
+$system-blue-50: rgba($system-blue, .5);
+
+$system-blues: (
+  '10': $system-blue-10,
+  '20': $system-blue-20,
+  '30': $system-blue-30,
+  '40': $system-blue-40,
+  '50': $system-blue-50,
+);
+
+$system-red: #AD1919;
+$system-red-10: rgba($system-red, .1);
+$system-red-20: rgba($system-red, .2);
+$system-red-30: rgba($system-red, .3);
+$system-red-40: rgba($system-red, .4);
+$system-red-50: rgba($system-red, .5);
+
+$system-reds: (
+  '10': $system-red-10,
+  '20': $system-red-20,
+  '30': $system-red-30,
+  '40': $system-red-40,
+  '50': $system-red-50,
+);
+
+$colors: (
+  'white': $white,
+  'black': $black,
+  'favorite': $favorite,
+  'stroke': $stroke,
+  'tutorial': $tutorial,
+  'basic-grey': $basic-grey,
+  'basic-black': $basic-black,
+  'basic-black-lighter': $basic-black-lighter,
+  'lighter-black': $lighter-black,
+  'system-blue': $system-blue,
+  'system-red': $system-red,
+);
+
+$primary: #0062BC;
+$primary-10: rgba($primary, .1);
+$primary-20: rgba($primary, .2);
+$primary-30: rgba($primary, .3);
+$primary-40: rgba($primary, .4);
+$primary-50: rgba($primary, .5);
+$primary-pressed: #004584;
+$primary-dark: #57AEFF;
+$primary-dark-10: rgba($primary-dark, .1);
+$primary-dark-20: rgba($primary-dark, .2);
+$primary-dark-30: rgba($primary-dark, .3);
+$primary-dark-40: rgba($primary-dark, .4);
+$primary-dark-50: rgba($primary-dark, .5);
+$primary-pressed-dark: #8AC7FF;
+
+$primarys: (
+  '10': $primary-10,
+  '20': $primary-20,
+  '30': $primary-30,
+  '40': $primary-40,
+  '50': $primary-50,
+);
+
+$primarys-dark: (
+  '10': $primary-dark-10,
+  '20': $primary-dark-20,
+  '30': $primary-dark-30,
+  '40': $primary-dark-40,
+  '50': $primary-dark-50,
+);
+
+$secondary: $basic-grey;
+$secondary-hover: #E6EFF8;
+$secondary-pressed: #CCE0F2;
+$secondary-dark: $white;
+$secondary-hover-dark: #1A1F23;
+$secondary-pressed-dark: #212E3A;
+
+$theme-colors: (
+  'primary': $primary,
+  'primary-pressed': $primary-pressed,
+  'secondary': $secondary,
+  'secondary-hover': $secondary-hover,
+  'secondary-pressed': $secondary-pressed,
+);
+
+$theme-colors-dark: (
+  'primary': $primary-dark,
+  'primary-pressed': $primary-pressed-dark,
+  'secondary': $secondary-dark,
+  'secondary-hover': $secondary-hover-dark,
+  'secondary-pressed': $secondary-pressed-dark,
 );
 
 $categories: (
@@ -52,17 +153,7 @@ $categories: (
   ),
 );
 
-$white: #FFFFFF;
-$black: #000000;
-
-$favorite: #FFAA46;
-$stroke: #E9E9E9;               // A utiliser pour tous les contours et délimitations
-$tutorial: #171717;             // Tutorial background card
-$basic-grey: #F4F4F4;           // Couleur de fond du footer haut
-$basic-black: #1E1E1E;          // Couleur du texte et des icônes, background color du bouton primaire par défaut
-$basic-black-30: #1E1E1E;
-$basic-black-lighter: #737373;  // A utiliser lorsque le texte est de moindre importance
-$lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
+// Shadow
 
 // x y blur spread
 $shadows: (
@@ -72,6 +163,41 @@ $shadows: (
   low-elevation: 0 2px 6px 0,
   low-elevation-avatar-notif: 0 1px 24px 0,
 );
+
+// Prefix for :root CSS variables
+
+$prefix: recia-;
+
+// Spacing
+
+// Body
+
+// Links
+
+// Paragraphs
+
+// Grid breakpoints
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Grid containers
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// Typography
 
 $font-family-sans-serif: 'sans-serif';
 $sora: 'Sora', $font-family-sans-serif;
@@ -98,19 +224,3 @@ $font-sizes: (
   ),
 );
 
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
-
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
-);
