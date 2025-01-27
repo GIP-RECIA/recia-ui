@@ -786,6 +786,7 @@ __metadata:
   resolution: "@gip-recia/ui-webcomponents@workspace:packages/webcomponents"
   dependencies:
     lit: "npm:^3.2.1"
+    ress: "npm:^5.0.2"
     sass: "npm:^1.83.4"
     typescript: "npm:^5.7.3"
     vite: "npm:^6.0.11"

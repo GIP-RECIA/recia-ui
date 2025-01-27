@@ -15,6 +15,7 @@
  */
 
 /* eslint-disable node/prefer-global/process */
+import { fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -23,6 +24,18 @@ export default ({ mode }: { mode: string }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return defineConfig({
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use '@/assets/scss/global.scss';`,
+        },
+      },
+    },
     build: {
       sourcemap: true,
       lib: {

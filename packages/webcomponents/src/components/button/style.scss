@@ -1,0 +1,115 @@
+$prefix: recia-;
+
+$font-family-sans-serif: 'sans-serif';
+$sora: 'Sora', $font-family-sans-serif;
+$dm-sans: 'DM Sans', $font-family-sans-serif;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  padding: 12px 24px;
+  font-family: $sora;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50px;
+  text-decoration: none;
+
+  &-primary {
+    @extend .btn;
+    background-color: var(--#{$prefix}btn-primary-bg);
+    color: var(--#{$prefix}btn-primary-color);
+
+    &:active {
+      background-color: var(--#{$prefix}primary-pressed);
+    }
+
+    &:hover {
+      background-color: var(--#{$prefix}primary);
+    }
+
+    &:focus {
+      background-color: var(--#{$prefix}primary);
+      outline: 4px solid var(--#{$prefix}primary-30);
+    }
+
+    &:disabled, &.disabled {
+      opacity: .33;
+      pointer-events: none;
+    }
+  }
+
+  &-secondary {
+    @extend .btn;
+    background-color: var(--#{$prefix}btn-secondary-bg);
+    color: var(--#{$prefix}body-secondary-color);
+
+    &:active {
+      background-color: var(--#{$prefix}secondary-pressed);
+      color: var(--#{$prefix}primary);
+    }
+
+    &:hover {
+      background-color: var(--#{$prefix}secondary-hover);
+      color: var(--#{$prefix}primary);
+    }
+
+    &:focus {
+      background-color: var(--#{$prefix}secondary-hover);
+      color: var(--#{$prefix}primary);
+      outline: 4px solid var(--#{$prefix}primary);
+    }
+
+    &:disabled, &.disabled {
+      opacity: .33;
+      pointer-events: none;
+    }
+  }
+
+  &-tertiary {
+    @extend .btn;
+    padding: 8px 16px;
+    font-family: $dm-sans;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 17px;
+
+    &:hover {
+      background-color: var(--#{$prefix}body-bg);
+      color: var(--#{$prefix}primary);
+      text-decoration: underline;
+    }
+
+    &:focus {
+      background-color: var(--#{$prefix}body-bg);
+      color: var(--#{$prefix}primary);
+      text-decoration: underline;
+      outline: 4px solid var(--#{$prefix}primary);
+    }
+
+    &:disabled, &.disabled {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
+
+  &.small {
+    font-size: 14px;
+    padding: 8px 16px;
+
+    &.icon {
+      padding: 8px;
+    }
+  }
+
+  &.icon {
+    padding: 12px;
+    aspect-ratio: 1 / 1;
+  }
+}
+

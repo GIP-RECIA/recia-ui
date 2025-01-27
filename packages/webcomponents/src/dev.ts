@@ -14,4 +14,22 @@
  * limitations under the License.
  */
 
-export { ReciaButton } from './components/button';
+import './dev.css'
+import { dom, library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faArrowLeft,
+  faArrowRight,
+  faHeart,
+  faStepForward,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faArrowLeft,
+  faArrowRight,
+  faHeart,
+  faStepForward,
+  faXmark,
+)
+
+dom.watch()

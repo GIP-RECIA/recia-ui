@@ -1,0 +1,61 @@
+:root {
+  --recia-white: #FFF;
+  --recia-black: #000;
+  --recia-favorite: #FFAA46;
+  --recia-stroke: #E9E9E9;
+  --recia-tutorial: #171717;
+  --recia-basic-grey: #F4F4F4;
+  --recia-basic-black: #1E1E1E;
+  --recia-basic-black-lighter: #737373;
+  --recia-lighter-black: #2C2C2C;
+  --recia-system-blue: #005099;
+  --recia-system-red: #AD1919;
+  --recia-black-10: rgba(0, 0, 0, 0.1);
+  --recia-black-20: rgba(0, 0, 0, 0.2);
+  --recia-black-30: rgba(0, 0, 0, 0.3);
+  --recia-black-40: rgba(0, 0, 0, 0.4);
+  --recia-black-50: rgba(0, 0, 0, 0.5);
+  --recia-system-blue-10: rgba(0, 80, 153, 0.1);
+  --recia-system-blue-20: rgba(0, 80, 153, 0.2);
+  --recia-system-blue-30: rgba(0, 80, 153, 0.3);
+  --recia-system-blue-40: rgba(0, 80, 153, 0.4);
+  --recia-system-blue-50: rgba(0, 80, 153, 0.5);
+  --recia-system-red-10: rgba(173, 25, 25, 0.1);
+  --recia-system-red-20: rgba(173, 25, 25, 0.2);
+  --recia-system-red-30: rgba(173, 25, 25, 0.3);
+  --recia-system-red-40: rgba(173, 25, 25, 0.4);
+  --recia-system-red-50: rgba(173, 25, 25, 0.5);
+  --recia-primary-10: rgba(0, 98, 188, 0.1);
+  --recia-primary-20: rgba(0, 98, 188, 0.2);
+  --recia-primary-30: rgba(0, 98, 188, 0.3);
+  --recia-primary-40: rgba(0, 98, 188, 0.4);
+  --recia-primary-50: rgba(0, 98, 188, 0.5);
+  --recia-primary: #0062BC;
+  --recia-primary-pressed: #004584;
+  --recia-secondary: #F4F4F4;
+  --recia-secondary-hover: #E6EFF8;
+  --recia-secondary-pressed: #CCE0F2;
+  --recia-btn-primary-color: #FFF;
+  --recia-btn-secondary-color: #1E1E1E;
+  --recia-btn-primary-bg: #1E1E1E;
+  --recia-btn-secondary-bg: #F4F4F4;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --recia-primary-10: rgba(87, 174, 255, 0.1);
+    --recia-primary-20: rgba(87, 174, 255, 0.2);
+    --recia-primary-30: rgba(87, 174, 255, 0.3);
+    --recia-primary-40: rgba(87, 174, 255, 0.4);
+    --recia-primary-50: rgba(87, 174, 255, 0.5);
+    --recia-primary: #57AEFF;
+    --recia-primary-pressed: #8AC7FF;
+    --recia-secondary: #FFF;
+    --recia-secondary-hover: #1A1F23;
+    --recia-secondary-pressed: #212E3A;
+    --recia-btn-primary-color: #1E1E1E;
+    --recia-btn-secondary-color: #FFF;
+    --recia-btn-primary-bg: #FFF;
+    --recia-btn-secondary-bg: #1E1E1E;
+  }
+}
