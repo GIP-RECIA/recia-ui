@@ -13,13 +13,13 @@
 }
 
 body {
-  background-color: $white;
+  background-color: var(--#{$prefix}body-bg);
   font-family: $dm-sans;
   font-style: normal;
   font-weight: normal;
   font-size: map.get($font-sizes, mobile, 0);
   letter-spacing: 0;
-  color: $black;
+  color: var(--#{$prefix}body-color);
 
   height: 100vh;
   display: grid;

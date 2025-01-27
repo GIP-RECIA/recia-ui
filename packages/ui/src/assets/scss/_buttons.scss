@@ -25,17 +25,17 @@
     @include set-color($basic-black);
 
     &:active {
-      background-color: $primary-pressed;
+      background-color: var(--#{$prefix}primary-pressed);
       @include set-color($primary-pressed);
     }
 
     &:hover {
-      background-color: $primary;
+      background-color: var(--#{$prefix}primary);
       @include set-color($primary);
     }
 
     &:focus {
-      background-color: $primary;
+      background-color: var(--#{$prefix}primary);
       @include set-color($primary);
       outline: 4px solid $primary-30;
     }
@@ -52,19 +52,19 @@
     @include set-color($basic-grey);
 
     &:active {
-      background-color: $secondary-pressed;
-      color: $primary;
+      background-color: var(--#{$prefix}secondary-pressed);
+      color: var(--#{$prefix}primary);
     }
 
     &:hover {
-      background-color: $secondary-hover;
-      color: $primary;
+      background-color: var(--#{$prefix}secondary-hover);
+      color: var(--#{$prefix}primary);
     }
 
     &:focus {
-      background-color: $secondary-hover;
-      color: $primary;
-      outline: 4px solid $primary;
+      background-color: var(--#{$prefix}secondary-hover);
+      color: var(--#{$prefix}primary);
+      outline: 4px solid var(--#{$prefix}primary);
     }
 
     &:disabled, &.disabled {
@@ -82,16 +82,16 @@
     border-radius: 17px;
 
     &:hover {
-      background-color: $white;
-      color: $primary;
+      background-color: var(--#{$prefix}body-bg);
+      color: var(--#{$prefix}primary);
       text-decoration: underline;
     }
 
     &:focus {
-      background-color: $white;
-      color: $primary;
+      background-color: var(--#{$prefix}body-bg);
+      color: var(--#{$prefix}primary);
       text-decoration: underline;
-      outline: 4px solid $primary;
+      outline: 4px solid var(--#{$prefix}primary);
     }
 
     &:disabled, &.disabled {

@@ -37,8 +37,8 @@
         }
 
         &:hover, &:focus {
-          border-color: $primary;
-          color: $primary;
+          border-color: var(--#{$prefix}primary);
+          color: var(--#{$prefix}primary);
         }
       }
     }
@@ -60,7 +60,7 @@
         color: inherit;
         outline: 1px solid $stroke;
         border-radius: 10px;
-        background-color: $white;
+        background-color: var(--#{$prefix}body-bg);
         box-shadow: map.get($shadows, strong) $black-10;
         padding: 16px;
         display: block;
@@ -77,8 +77,8 @@
         }
 
         &:hover, &:focus {
-          color: $primary;
-          outline: 1px solid $primary;
+          color: var(--#{$prefix}primary);
+          outline: 1px solid var(--#{$prefix}primary);
           box-shadow: map.get($shadows, strong) $primary-20;
         }
       }

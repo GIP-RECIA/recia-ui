@@ -2,7 +2,7 @@
 @use '../recia-style' as *;
 
 .extended-uportal-header {
-  background-color: $white;
+  background-color: var(--#{$prefix}body-bg);
   box-shadow: map.get($shadows, strong) $black-10;
   height: 64px;
   display: flex;

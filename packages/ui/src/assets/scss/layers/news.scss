@@ -21,7 +21,7 @@
       text-decoration: none;
       color: inherit;
       border-radius: 10px;
-      background-color: $white;
+      background-color: var(--#{$prefix}body-bg);
       box-shadow: map.get($shadows, strong) $black-10;
       display: block;
       width: 100%;
@@ -64,7 +64,7 @@
         box-shadow: map.get($shadows, hover) $system-blue-20;
 
         .news-tile-content > header .header-title {
-          color: $primary;
+          color: var(--#{$prefix}primary);
         }
       }
     }
