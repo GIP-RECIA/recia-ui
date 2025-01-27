@@ -28,6 +28,10 @@
     --#{$prefix}#{$color}: #{$value};
   }
 
+  @each $color, $value in $buttons {
+    --#{$prefix}btn-#{$color}: #{$value};
+  }
+
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
 
@@ -40,6 +44,10 @@
 
     @each $color, $value in $theme-colors-dark {
       --#{$prefix}#{$color}: #{$value};
+    }
+
+    @each $color, $value in $buttons-dark {
+      --#{$prefix}btn-#{$color}: #{$value};
     }
   }
 }

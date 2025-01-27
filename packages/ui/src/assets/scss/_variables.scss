@@ -172,7 +172,7 @@ $prefix: recia-;
 
 // Body
 
-$body-color: $black;
+$body-color: $basic-black;
 $body-color-dark: $white;
 
 $body-bg: $white;
@@ -230,3 +230,28 @@ $font-sizes: (
   ),
 );
 
+// Buttons
+
+$btn-primary-color: $white;
+$btn-primary-color-dark: $basic-black;
+$btn-secondary-color: $basic-black;
+$btn-secondary-color-dark: $white;
+
+$btn-primary-bg: $basic-black;
+$btn-primary-bg-dark: $white;
+$btn-secondary-bg: $basic-grey;
+$btn-secondary-bg-dark: $basic-black;
+
+$buttons: (
+  'primary-color': $btn-primary-color,
+  'secondary-color': $btn-secondary-color,
+  'primary-bg': $btn-primary-bg,
+  'secondary-bg': $btn-secondary-bg,
+);
+
+$buttons-dark: (
+  'primary-color': $btn-primary-color-dark,
+  'secondary-color': $btn-secondary-color-dark,
+  'primary-bg': $btn-primary-bg-dark,
+  'secondary-bg': $btn-secondary-bg-dark,
+);
