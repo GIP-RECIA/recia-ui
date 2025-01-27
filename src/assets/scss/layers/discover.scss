@@ -3,9 +3,14 @@
 
 .discover {
   &-video {
-    width: 100%;
+    display: flex;
+    align-items: center;
     margin-bottom: 32px;
-    border-radius: 3.5px
+
+    > * {
+      width: 100%;
+      border-radius: 3.5px
+    }
   }
 
   &-section {
@@ -19,15 +24,21 @@
       margin-bottom: 24px;
       display: flex;
 
-      > li {
+      > li > button {
         padding: 8px 12px;
         border-bottom: 1px solid $stroke;
         font-weight: bold;
         font-size: 14px;
+        border-radius: 3.5px 3.5px 0 0 ;
 
         &.active {
           border-color: $basic-black;
           background-color: rgba(map.get($system, blue), .1);
+        }
+
+        &:hover, &:focus {
+          border-color: $primary;
+          color: $primary;
         }
       }
     }
@@ -71,6 +82,35 @@
           box-shadow: map.get($shadows, strong) rgba(map.get($colors, primary, default), .2);
         }
       }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 24px;
+
+    &-video {
+      margin-bottom: unset;
+
+      > * {
+        max-width: 25vw;
+      }
+    }
+
+
+    &-section {
+      &-tiles {
+        > li > a > svg {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, xl)) {
+    &-video > * {
+      max-width: 345px;
     }
   }
 
