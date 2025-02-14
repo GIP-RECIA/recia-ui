@@ -57,7 +57,7 @@
         outline: 1px solid var(--#{$prefix}stroke);
         border-radius: 10px;
         background-color: var(--#{$prefix}body-bg);
-        box-shadow: map.get($shadows, strong) var(--#{$prefix}black-10);
+        box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
         padding: 16px;
         display: block;
         width: 100%;
@@ -75,7 +75,7 @@
         &:hover, &:focus {
           color: var(--#{$prefix}primary);
           outline: 1px solid var(--#{$prefix}primary);
-          box-shadow: map.get($shadows, strong) var(--#{$prefix}primary-20);
+          box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}primary-20);
         }
       }
     }

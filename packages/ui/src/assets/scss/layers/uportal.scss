@@ -3,7 +3,7 @@
 
 .extended-uportal-header {
   background-color: var(--#{$prefix}body-bg);
-  box-shadow: map.get($shadows, strong) var(--#{$prefix}black-10);
+  box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
   height: 64px;
   display: flex;
   align-items: center;

@@ -33,6 +33,10 @@
     --#{$prefix}btn-#{$color}: #{$value};
   }
 
+  @each $shadow, $value in $shadows {
+    --#{$prefix}shadow-#{$shadow}: #{$value};
+  }
+
   --#{$prefix}font-size-base: #{$font-size-base};
 
   --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, xs)});

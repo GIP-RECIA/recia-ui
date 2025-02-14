@@ -22,7 +22,7 @@
       color: inherit;
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
-      box-shadow: map.get($shadows, strong) var(--#{$prefix}black-10);
+      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
       display: block;
       width: 100%;
       height: 100%;
@@ -52,7 +52,7 @@
 
       &:hover, &:focus {
         outline: 2px solid var(--#{$prefix}system-blue);
-        box-shadow: map.get($shadows, hover) var(--#{$prefix}system-blue-20);
+        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}system-blue-20);
 
         .news-tile-content > header h3 {
           color: var(--#{$prefix}primary);
