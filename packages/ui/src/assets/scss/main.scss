@@ -43,6 +43,10 @@ body {
     margin: 40px 0;
     display: grid;
     row-gap: 40px;
+
+    > * {
+      min-width: 0;
+    }
   }
 
   > footer {
