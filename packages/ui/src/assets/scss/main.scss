@@ -8,10 +8,8 @@
 @use 'layers/news';
 @use 'layers/uportal';
 
-@use 'typo';
-
-* {
-  box-sizing: border-box;
+:root {
+  // --#{$prefix}primary: #C60440;
 }
 
 body {
@@ -50,12 +48,4 @@ body {
   > footer {
     grid-area: footer;
   }
-}
-
-.grow-1 {
-  flex-grow: 1;
-}
-
-:root {
-  // --primary: #C60440;
 }

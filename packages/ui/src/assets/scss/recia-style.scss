@@ -1,8 +1,10 @@
 // @use 'bootstrap';
-@use 'mixins/banner';
-@use 'root';
+@forward 'mixins/banner';
+@forward 'global';
+@forward 'root';
 
 @forward 'fonts';
+@forward 'typo';
 @forward 'variables';
 
 @forward 'mixins';
