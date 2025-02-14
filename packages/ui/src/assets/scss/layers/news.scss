@@ -40,20 +40,11 @@
           padding: 16px;
 
           > header {
-            .header {
-              &-context {
-                font-weight: 500;
-                color: $basic-black;
-                opacity: .5;
-                margin-bottom: 4px;
-              }
-
-              &-title {
-                font-family: $sora;
-                font-weight: 600;
-                font-size: 14px;
-                margin-bottom: 16px;
-              }
+            .context {
+              font-weight: 500;
+              color: $basic-black;
+              opacity: .5;
+              margin-bottom: 4px;
             }
           }
         }
@@ -63,7 +54,7 @@
         outline: 2px solid $system-blue;
         box-shadow: map.get($shadows, hover) $system-blue-20;
 
-        .news-tile-content > header .header-title {
+        .news-tile-content > header h3 {
           color: var(--#{$prefix}primary);
         }
       }

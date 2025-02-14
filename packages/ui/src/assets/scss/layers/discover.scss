@@ -14,10 +14,6 @@
   }
 
   &-section {
-    > header {
-      margin-bottom: 16px;
-    }
-
     &-nav {
       @include list-unstyled;
 
