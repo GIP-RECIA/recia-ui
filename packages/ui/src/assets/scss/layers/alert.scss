@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   column-gap: 8px;
-  background-color: $system-blue;
-  color: $white;
+  background-color: var(--#{$prefix}system-blue);
+  color: var(--#{$prefix}white);
   padding: 14px 16px;
 
   &-icon {
@@ -16,7 +16,7 @@
     mask: url('assets/svg/campaign.svg') center;
     mask-repeat: no-repeat;
     mask-size: contain;
-    background-color: $white;
+    background-color: var(--#{$prefix}white);
     opacity: .5;
   }
 

@@ -3,7 +3,7 @@
 
 .extended-uportal-header {
   background-color: var(--#{$prefix}body-bg);
-  box-shadow: map.get($shadows, strong) $black-10;
+  box-shadow: map.get($shadows, strong) var(--#{$prefix}black-10);
   height: 64px;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
 }
 
 .extended-uportal-footer {
-  background-color: $basic-grey;
+  background-color: var(--#{$prefix}basic-grey);
 
   > .container {
     display: flex;
@@ -42,7 +42,7 @@
 
         > li {
           > a {
-            color: $system-blue;
+            color: var(--#{$prefix}system-blue);
           }
         }
 
@@ -80,7 +80,7 @@
 }
 
 .uportal-footer {
-  background-color: $lighter-black;
+  background-color: var(--#{$prefix}lighter-black);
 
   > .container {
     display: flex;
@@ -119,7 +119,7 @@
         column-gap: 8px;
 
         .fa-heart {
-          color: $system-red;
+          color: var(--#{$prefix}system-red);
           font-size: 20px;
         }
       }

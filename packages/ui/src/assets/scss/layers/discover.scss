@@ -22,14 +22,14 @@
 
       > li > button {
         padding: 8px 12px;
-        border-bottom: 1px solid $stroke;
+        border-bottom: 1px solid var(--#{$prefix}stroke);
         font-weight: bold;
         font-size: 14px;
         border-radius: 3.5px 3.5px 0 0 ;
 
         &.active {
-          border-color: $basic-black;
-          background-color: $system-blue-10;
+          border-color: var(--#{$prefix}basic-black);
+          background-color: var(--#{$prefix}system-blue-10);
         }
 
         &:hover, &:focus {
@@ -54,10 +54,10 @@
       > li > a {
         text-decoration: none;
         color: inherit;
-        outline: 1px solid $stroke;
+        outline: 1px solid var(--#{$prefix}stroke);
         border-radius: 10px;
         background-color: var(--#{$prefix}body-bg);
-        box-shadow: map.get($shadows, strong) $black-10;
+        box-shadow: map.get($shadows, strong) var(--#{$prefix}black-10);
         padding: 16px;
         display: block;
         width: 100%;
@@ -75,7 +75,7 @@
         &:hover, &:focus {
           color: var(--#{$prefix}primary);
           outline: 1px solid var(--#{$prefix}primary);
-          box-shadow: map.get($shadows, strong) $primary-20;
+          box-shadow: map.get($shadows, strong) var(--#{$prefix}primary-20);
         }
       }
     }
