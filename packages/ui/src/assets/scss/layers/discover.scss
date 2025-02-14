@@ -16,9 +16,10 @@
   &-section {
     &-nav {
       @include list-unstyled;
-
       margin-bottom: 24px;
       display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
 
       > li > button {
         padding: 8px 12px;
@@ -45,7 +46,6 @@
 
     &-tiles {
       @include list-unstyled;
-
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
