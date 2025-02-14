@@ -36,7 +36,7 @@
 
       &-links {
         @include list-unstyled;
-        font-size: 15px;
+        font-size: var(--#{$prefix}font-size-sm); // 15px;
         font-weight: 500;
         line-height: 37px;
 
@@ -62,15 +62,14 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 100%;
 
           > a {
             display: inline-block;
 
             > img {
               display: block;
-              width: auto;
-              height: 60px;
+              max-height: 60px;
+              max-width: 100%;
             }
           }
         }
