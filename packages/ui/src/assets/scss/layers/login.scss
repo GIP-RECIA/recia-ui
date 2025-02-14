@@ -17,7 +17,7 @@
     @include list-unstyled;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
+    gap: 15px;
     text-align: center;
     font-size: 10px;
     font-weight: 500;

@@ -12,7 +12,7 @@
     @include list-unstyled;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    grid-gap: 15px;
+    gap: 15px;
     font-weight: normal;
     line-height: 150%;
     margin: 24px 0;
