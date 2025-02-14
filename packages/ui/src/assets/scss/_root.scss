@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'variables' as *;
 
 :root {
@@ -30,6 +31,28 @@
 
   @each $color, $value in $buttons {
     --#{$prefix}btn-#{$color}: #{$value};
+  }
+
+  --#{$prefix}font-size-base: #{$font-size-base};
+
+  --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, xs)});
+
+  @media screen and (width >= map.get($grid-breakpoints, lg)) {
+    --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
+  }
+
+  @each $breakpoints, $value in $font-size-breakpoints {
+    --#{$prefix}font-size-#{$breakpoints}: calc(var(--#{$prefix}font-size-base) * #{$value});
+  }
+
+  @each $size, $value in $headings-font-sizes {
+    --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
+  }
+
+  @media screen and (width >= map.get($grid-breakpoints, lg)) {
+    @each $size, $value in $headings-font-sizes-lg {
+      --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
+    }
   }
 
   @media (prefers-color-scheme: dark) {

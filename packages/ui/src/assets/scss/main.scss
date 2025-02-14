@@ -8,6 +8,8 @@
 @use 'layers/news';
 @use 'layers/uportal';
 
+@use 'typo';
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +19,7 @@ body {
   font-family: $dm-sans;
   font-style: normal;
   font-weight: normal;
-  font-size: map.get($font-sizes, mobile, 0);
+  font-size: var(--#{$prefix}body-font-size);
   letter-spacing: 0;
   color: var(--#{$prefix}body-color);
 
@@ -47,28 +49,6 @@ body {
 
   > footer {
     grid-area: footer;
-  }
-
-  @each $size, $value in map.get($font-sizes, mobile) {
-    @if $size != 0 {
-      h#{$size} {
-        font-family: $sora;
-        font-weight: bold;
-        font-size: $value;
-      }
-    }
-  }
-
-  @media (width >= map.get($grid-breakpoints, sm)) {
-    font-size: map.get($font-sizes, web, 0);
-
-    @each $size, $value in map.get($font-sizes, web) {
-      @if $size != 0 {
-        h#{$size} {
-          font-size: $value;
-        }
-      }
-    }
   }
 }
 

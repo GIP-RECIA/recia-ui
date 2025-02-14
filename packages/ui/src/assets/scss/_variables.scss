@@ -190,7 +190,7 @@ $grid-breakpoints: (
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1400px
+  xxl: 1400px,
 );
 
 // Grid containers
@@ -200,7 +200,7 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1140px,
-  xxl: 1320px
+  xxl: 1320px,
 );
 
 // Typography
@@ -209,25 +209,35 @@ $font-family-sans-serif: 'sans-serif';
 $sora: 'Sora', $font-family-sans-serif;
 $dm-sans: 'DM Sans', $font-family-sans-serif;
 
-$font-sizes: (
-  mobile: (
-    0: 12px,
-    1: 20px,
-    2: 18px,
-    3: 16px,
-    4: 14px,
-    5: 12px,
-    6: 10px,
-  ),
-  web: (
-    0: 14px,
-    1: 24px,
-    2: 20px,
-    3: 16px,
-    4: 12px,
-    5: 8px,
-    6: 4px,
-  ),
+$headings-font-family: $sora;
+
+$font-size-base: 1rem; // 16px
+
+$headings-font-sizes: (
+  1: 1.25,  // 20px
+  2: 1.125, // 18px
+  3: 1,     // 16px
+  4: 0.875, // 14px
+  // 5: ,
+  // 6: ,
+);
+
+$headings-font-sizes-lg: (
+  1: 1.5,   // 24px
+  2: 1.25,  // 20px
+  3: 1,     // 16px
+  4: 0.875, // 14px
+  // 5: ,
+  // 6: ,
+);
+
+$font-size-breakpoints: (
+  xs: 0.75,  // 12px
+  sm: 0.875, // 14px
+  md: 1,     // 16px
+  lg: 1.125, // 18px
+  xl: 1.25,  // 20px
+  xxl: 1.5,  // 24px
 );
 
 // Buttons
