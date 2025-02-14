@@ -37,10 +37,6 @@
 
   --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, xs)});
 
-  @media screen and (width >= map.get($grid-breakpoints, lg)) {
-    --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
-  }
-
   @each $breakpoints, $value in $font-size-breakpoints {
     --#{$prefix}font-size-#{$breakpoints}: calc(var(--#{$prefix}font-size-base) * #{$value});
   }
@@ -48,14 +44,10 @@
   @each $size, $value in $headings-font-sizes {
     --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
   }
+}
 
-  @media screen and (width >= map.get($grid-breakpoints, lg)) {
-    @each $size, $value in $headings-font-sizes-lg {
-      --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+  :root {
     color-scheme: dark;
 
     --#{$prefix}body-color: #{$body-color-dark};
@@ -71,6 +63,16 @@
 
     @each $color, $value in $buttons-dark {
       --#{$prefix}btn-#{$color}: #{$value};
+    }
+  }
+}
+
+@media screen and (width >= map.get($grid-breakpoints, lg)) {
+  :root {
+    --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
+
+    @each $size, $value in $headings-font-sizes-lg {
+      --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
     }
   }
 }
