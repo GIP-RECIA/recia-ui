@@ -13,7 +13,7 @@
     height: 24px;
     width: 24px;
     aspect-ratio: 1/1;
-    mask: url('assets/svg/campaign.svg') center;
+    mask: url('./svg/campaign.svg') center;
     mask-repeat: no-repeat;
     mask-size: contain;
     background-color: var(--#{$prefix}white);

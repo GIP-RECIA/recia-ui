@@ -53,7 +53,7 @@
 
     @for $i from 1 through 6 {
       &.profile#{$i} {
-        mask: url('assets/svg/profile#{$i}.svg') center;
+        mask: url('./svg/profile#{$i}.svg') center;
         mask-repeat: no-repeat;
         mask-size: contain;
       }
