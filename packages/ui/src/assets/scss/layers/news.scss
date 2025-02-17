@@ -30,14 +30,21 @@
       .news-tile {
         display: grid;
         grid-template-columns: 92px 1fr;
+        grid-template-rows: 1fr;
         height: 140px;
+
+        > * {
+          min-height: 0;
+        }
 
         &-image {
           border-radius: 10px 0 0 10px;
         }
 
         &-content {
-          padding: 16px;
+          margin: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
 
           > header {
             .context {
