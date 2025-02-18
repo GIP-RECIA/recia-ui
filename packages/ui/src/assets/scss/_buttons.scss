@@ -21,7 +21,7 @@
   padding: 12px 24px;
   font-family: $sora;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--#{$prefix}font-size-md);
 
   &-primary {
     @extend .btn;
@@ -116,7 +116,7 @@
     padding: 8px 16px;
     font-family: $dm-sans;
     font-weight: 600;
-    font-size: 14px;
+    font-size: var(--#{$prefix}font-size-sm);
     border-radius: 17px;
     color: var(--#{$prefix}secondary-color);
 
@@ -152,7 +152,7 @@
   padding: 8px 16px;
   font-family: $dm-sans;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--#{$prefix}font-size-sm);
 
   &.active {
     background-color: var(--#{$prefix}basic-black);

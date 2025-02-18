@@ -25,7 +25,7 @@
         padding: 8px 12px;
         border-bottom: 1px solid var(--#{$prefix}stroke);
         font-weight: bold;
-        font-size: 14px;
+        font-size: var(--#{$prefix}font-size-sm);
         border-radius: 3.5px 3.5px 0 0 ;
 
         &.active {
@@ -64,7 +64,7 @@
         height: 100%;
 
         > svg {
-          font-size: 13px;
+          font-size: var(--#{$prefix}font-size-xs); // TODO: Should be 13px
           margin-bottom: 8px;
         }
 

@@ -36,7 +36,7 @@
 
       &-links {
         @include list-unstyled;
-        font-size: var(--#{$prefix}font-size-sm); // 15px;
+        font-size: var(--#{$prefix}font-size-sm); // TODO: Should be 15px
         font-weight: 500;
         line-height: 37px;
 
@@ -96,7 +96,7 @@
         display: flex;
         justify-content: space-between;
         column-gap: 32px;
-        font-size: 12px;
+        font-size: var(--#{$prefix}font-size-xs);
         line-height: 17px;
 
         > li > a {
@@ -111,7 +111,7 @@
       }
 
       &-made-by {
-        font-size: 10px;
+        font-size: var(--#{$prefix}font-size-xxs);
         text-align: center;
         display: flex;
         align-items: center;
@@ -119,7 +119,7 @@
 
         .fa-heart {
           color: var(--#{$prefix}system-red);
-          font-size: 20px;
+          font-size: var(--#{$prefix}font-size-xl);
         }
       }
     }

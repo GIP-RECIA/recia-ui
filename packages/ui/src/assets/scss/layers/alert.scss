@@ -48,7 +48,7 @@
     width: 24px;
     border-radius: 50%;
     aspect-ratio: 1 / 1;
-    font-size: 14px;
+    font-size: var(--#{$prefix}font-size-sm);
 
     &:hover, &:focus {
       opacity: 1;
