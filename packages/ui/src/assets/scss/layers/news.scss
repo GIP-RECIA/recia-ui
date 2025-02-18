@@ -57,7 +57,7 @@
         }
       }
 
-      &:hover, &:focus {
+      &:hover, &:focus-visible {
         outline: 2px solid var(--#{$prefix}primary);
         box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
 

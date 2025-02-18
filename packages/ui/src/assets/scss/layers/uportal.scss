@@ -103,7 +103,7 @@
           text-decoration: none;
           color: inherit;
 
-          &:hover, &:focus {
+          &:hover, &:focus-visible {
             text-decoration: underline;
             outline: none;
           }

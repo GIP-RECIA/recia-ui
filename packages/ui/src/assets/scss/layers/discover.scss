@@ -33,7 +33,7 @@
           background-color: var(--#{$prefix}system-blue-10);
         }
 
-        &:hover, &:focus {
+        &:hover, &:focus-visible {
           border-color: var(--#{$prefix}primary);
           color: var(--#{$prefix}primary);
         }
@@ -72,7 +72,7 @@
           font-weight: 500;
         }
 
-        &:hover, &:focus {
+        &:hover, &:focus-visible {
           color: var(--#{$prefix}primary);
           outline: 1px solid var(--#{$prefix}primary);
           box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}primary-20);

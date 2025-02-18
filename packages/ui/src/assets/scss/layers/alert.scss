@@ -35,7 +35,7 @@
     font-weight: normal;
     text-wrap: nowrap;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       text-decoration: underline 2px solid;
       outline: none;
     }
@@ -50,7 +50,7 @@
     aspect-ratio: 1 / 1;
     font-size: var(--#{$prefix}font-size-sm);
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       opacity: 1;
     }
   }
