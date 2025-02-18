@@ -42,6 +42,14 @@
 
         &-image {
           border-radius: 10px 0 0 10px;
+          overflow: hidden;
+
+          > img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            transition: transform .15s ease-out;
+          }
         }
 
         &-content {
@@ -64,8 +72,14 @@
         outline: 2px solid var(--#{$prefix}primary);
         box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
 
-        .news-tile-content > header h3 {
-          color: var(--#{$prefix}primary);
+        .news-tile {
+          &-image > img {
+            transform: scale(1.4);
+          }
+
+          &-content > header h3 {
+            color: var(--#{$prefix}primary);
+          }
         }
       }
     }
