@@ -8,9 +8,81 @@
 @use 'layers/news';
 @use 'layers/uportal';
 
-:root {
-  // --#{$prefix}primary: #C60440;
-}
+// Agricole
+// :root {
+//   --#{$prefix}primary: #37872A;
+//   --#{$prefix}primary-pressed: #275F1D;
+//   --#{$prefix}secondary-pressed: #D7E7D4;
+//   --#{$prefix}secondary-hover: #EBF3EA;
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     color-scheme: dark;
+
+//     --#{$prefix}primary: #87B77F;
+//     --#{$prefix}primary-pressed: #AFCFAA;
+//     --#{$prefix}secondary-pressed: #282F27;
+//     --#{$prefix}secondary-hover: #1D1F1C;
+//   }
+// }
+
+// Touraine E-school
+// :root {
+//   --#{$prefix}primary: #C60440;
+//   --#{$prefix}primary-pressed: #8B032D;
+//   --#{$prefix}secondary-pressed: #F4CDD9;
+//   --#{$prefix}secondary-hover: #F9E6EC;
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     color-scheme: dark;
+
+//     --#{$prefix}primary: #DD688C;
+//     --#{$prefix}primary-pressed: #E89BB3;
+//     --#{$prefix}secondary-pressed: #352429;
+//     --#{$prefix}secondary-hover: #211B1D;
+//   }
+// }
+
+// Collèges 41
+// :root {
+//   --#{$prefix}primary: #007EB4;
+//   --#{$prefix}primary-pressed: #00587E;
+//   --#{$prefix}secondary-pressed: #CCE5F0;
+//   --#{$prefix}secondary-hover: #E6F2F8;
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     color-scheme: dark;
+
+//     --#{$prefix}primary: #66B2D2;
+//     --#{$prefix}primary-pressed: #90CDE1;
+//     --#{$prefix}secondary-pressed: #232F33;
+//     --#{$prefix}secondary-hover: #1B1F20;
+//   }
+// }
+
+// CHERCAN
+// :root {
+//   --#{$prefix}primary: #004899;
+//   --#{$prefix}primary-pressed: #00326B;
+//   --#{$prefix}secondary-pressed: #CCDAEB;
+//   --#{$prefix}secondary-hover: #E6EDF5;
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     color-scheme: dark;
+
+//     --#{$prefix}primary: #6691C2;
+//     --#{$prefix}primary-pressed: #99B6D6;
+//     --#{$prefix}secondary-pressed: #232A31;
+//     --#{$prefix}secondary-hover: #1B1D20;
+//   }
+// }
 
 body {
   background-color: var(--#{$prefix}body-bg);
