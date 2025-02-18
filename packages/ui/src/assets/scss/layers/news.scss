@@ -58,8 +58,8 @@
       }
 
       &:hover, &:focus {
-        outline: 2px solid var(--#{$prefix}system-blue);
-        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}system-blue-20);
+        outline: 2px solid var(--#{$prefix}primary);
+        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
 
         .news-tile-content > header h3 {
           color: var(--#{$prefix}primary);
