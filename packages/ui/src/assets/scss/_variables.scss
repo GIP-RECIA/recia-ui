@@ -166,12 +166,13 @@ $headings-font-sizes-lg: (
 );
 
 $font-size-breakpoints: (
-  xs: 0.75,  // 12px
-  sm: 0.875, // 14px
-  md: 1,     // 16px
-  lg: 1.125, // 18px
-  xl: 1.25,  // 20px
-  xxl: 1.5,  // 24px
+  xxs: 0.625, // 10px
+  xs: 0.75,   // 12px
+  sm: 0.875,  // 14px
+  md: 1,      // 16px
+  lg: 1.125,  // 18px
+  xl: 1.25,   // 20px
+  xxl: 1.5,   // 24px
 );
 
 // Buttons
