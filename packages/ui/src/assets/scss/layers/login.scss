@@ -39,6 +39,11 @@
       &:hover, &:focus-visible {
         outline: 2px solid var(--#{$prefix}primary);
         box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+
+        > .login-profile {
+          background-color: var(--#{$prefix}primary);
+          opacity: unset;
+        }
       }
     }
   }
@@ -49,7 +54,8 @@
     height: 64px;
     width: 64px;
     aspect-ratio: 1 / 1;
-    background-color: var(--#{$prefix}primary);
+    background-color: var(--#{$prefix}basic-black);
+    opacity: .33;
 
     @for $i from 1 through 6 {
       &.profile#{$i} {
@@ -60,24 +66,17 @@
     }
   }
 
+  @media (hover: none) {
+    &-profile {
+      background-color: var(--#{$prefix}primary);
+      opacity: unset;
+    }
+  }
+
   @media (width >= map.get($grid-breakpoints, sm)) {
     &-tiles {
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       font-size: unset;
-
-      > li > a {
-        &:hover, &:focus-visible {
-          .login-profile {
-            background-color: var(--#{$prefix}primary);
-            opacity: 1;
-          }
-        }
-      }
-    }
-
-    &-profile {
-      background-color: var(--#{$prefix}basic-black);
-      opacity: .33;
     }
   }
 
