@@ -9,20 +9,20 @@
     --#{$prefix}#{$color}: #{$value};
   }
 
-  @each $color, $value in $blacks {
-    --#{$prefix}black-#{$color}: #{$value};
+  @for $i from 1 through 5 {
+    --#{$prefix}black-#{$i}0: rgba(from var(--#{$prefix}black) r g b / 0.#{$i});
   }
 
-  @each $color, $value in $system-blues {
-    --#{$prefix}system-blue-#{$color}: #{$value};
+  @for $i from 1 through 5 {
+    --#{$prefix}system-blue-#{$i}0: rgba(from var(--#{$prefix}system-blue) r g b / 0.#{$i});
   }
 
-  @each $color, $value in $system-reds {
-    --#{$prefix}system-red-#{$color}: #{$value};
+  @for $i from 1 through 5 {
+    --#{$prefix}system-red-#{$i}0: rgba(from var(--#{$prefix}system-red) r g b / 0.#{$i});
   }
 
-  @each $color, $value in $primarys {
-    --#{$prefix}primary-#{$color}: #{$value};
+  @for $i from 1 through 5 {
+    --#{$prefix}primary-#{$i}0: rgba(from var(--#{$prefix}primary) r g b / 0.#{$i});
   }
 
   @each $color, $value in $theme-colors {
@@ -56,10 +56,6 @@
 
     --#{$prefix}body-color: #{$body-color-dark};
     --#{$prefix}body-bg: #{$body-bg-dark};
-
-    @each $color, $value in $primarys-dark {
-      --#{$prefix}primary-#{$color}: #{$value};
-    }
 
     @each $color, $value in $theme-colors-dark {
       --#{$prefix}#{$color}: #{$value};

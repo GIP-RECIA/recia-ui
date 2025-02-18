@@ -2,19 +2,6 @@
 
 $white: #FFF;
 $black: #000;
-$black-10: rgba($black, .1);
-$black-20: rgba($black, .2);
-$black-30: rgba($black, .3);
-$black-40: rgba($black, .4);
-$black-50: rgba($black, .5);
-
-$blacks: (
-  '10': $black-10,
-  '20': $black-20,
-  '30': $black-30,
-  '40': $black-40,
-  '50': $black-50,
-);
 
 $favorite: #FFAA46;
 $stroke: #E9E9E9;               // A utiliser pour tous les contours et délimitations
@@ -25,34 +12,7 @@ $basic-black-lighter: #737373;  // A utiliser lorsque le texte est de moindre im
 $lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
 
 $system-blue: #005099;
-$system-blue-10: rgba($system-blue, .1);
-$system-blue-20: rgba($system-blue, .2);
-$system-blue-30: rgba($system-blue, .3);
-$system-blue-40: rgba($system-blue, .4);
-$system-blue-50: rgba($system-blue, .5);
-
-$system-blues: (
-  '10': $system-blue-10,
-  '20': $system-blue-20,
-  '30': $system-blue-30,
-  '40': $system-blue-40,
-  '50': $system-blue-50,
-);
-
 $system-red: #AD1919;
-$system-red-10: rgba($system-red, .1);
-$system-red-20: rgba($system-red, .2);
-$system-red-30: rgba($system-red, .3);
-$system-red-40: rgba($system-red, .4);
-$system-red-50: rgba($system-red, .5);
-
-$system-reds: (
-  '10': $system-red-10,
-  '20': $system-red-20,
-  '30': $system-red-30,
-  '40': $system-red-40,
-  '50': $system-red-50,
-);
 
 $colors: (
   'white': $white,
@@ -69,35 +29,9 @@ $colors: (
 );
 
 $primary: #0062BC;
-$primary-10: rgba($primary, .1);
-$primary-20: rgba($primary, .2);
-$primary-30: rgba($primary, .3);
-$primary-40: rgba($primary, .4);
-$primary-50: rgba($primary, .5);
 $primary-pressed: #004584;
 $primary-dark: #57AEFF;
-$primary-dark-10: rgba($primary-dark, .1);
-$primary-dark-20: rgba($primary-dark, .2);
-$primary-dark-30: rgba($primary-dark, .3);
-$primary-dark-40: rgba($primary-dark, .4);
-$primary-dark-50: rgba($primary-dark, .5);
 $primary-pressed-dark: #8AC7FF;
-
-$primarys: (
-  '10': $primary-10,
-  '20': $primary-20,
-  '30': $primary-30,
-  '40': $primary-40,
-  '50': $primary-50,
-);
-
-$primarys-dark: (
-  '10': $primary-dark-10,
-  '20': $primary-dark-20,
-  '30': $primary-dark-30,
-  '40': $primary-dark-40,
-  '50': $primary-dark-50,
-);
 
 $secondary: $basic-grey;
 $secondary-hover: #E6EFF8;
