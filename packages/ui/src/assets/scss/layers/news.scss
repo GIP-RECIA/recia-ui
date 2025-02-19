@@ -1,83 +1,153 @@
 @use 'sass:map';
 @use '../recia-style' as *;
 
+%carousel-action {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+%news-tiles {
+  @include list-unstyled;
+  gap: 15px;
+  font-weight: normal;
+  line-height: 150%;
+
+  > li > a {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    background-color: var(--#{$prefix}body-bg);
+    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition:
+      outline .15s ease-out,
+      box-shadow .15s ease-out;
+
+    .news-tile {
+      display: grid;
+      grid-template-rows: 1fr;
+
+      > * {
+        min-height: 0;
+      }
+
+      &-image {
+        border-radius: 10px 0 0 10px;
+        overflow: hidden;
+
+        > img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+          transition: transform .15s ease-out;
+        }
+      }
+
+      &-content {
+        margin: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        > header {
+          .context {
+            font-weight: 500;
+            color: var(--#{$prefix}basic-black);
+            opacity: .5;
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
+
+    &:hover, &:focus-visible {
+      outline: 2px solid var(--#{$prefix}primary);
+      box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+
+      .news-tile {
+        &-image > img {
+          transform: scale(1.4);
+        }
+
+        &-content > header h3 {
+          color: var(--#{$prefix}primary);
+        }
+      }
+    }
+  }
+}
+
 .news {
   > header > a {
     display: none
   }
 
   & > &-tiles {
-    @include list-unstyled;
+    @extend %news-tiles;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    gap: 15px;
-    font-weight: normal;
-    line-height: 150%;
     margin: 24px 0;
 
-    > li > a {
-      text-decoration: none;
-      color: inherit;
-      border-radius: 10px;
-      background-color: var(--#{$prefix}body-bg);
-      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
-      display: block;
-      width: 100%;
-      height: 100%;
-      transition:
-        outline .15s ease-out,
-        box-shadow .15s ease-out;
+    > li > a .news-tile {
+      grid-template-columns: 92px 1fr;
+      height: 140px;
+    }
+  }
 
-      .news-tile {
-        display: grid;
-        grid-template-columns: 92px 1fr;
-        grid-template-rows: 1fr;
-        height: 140px;
+  &-carousel {
+    $spacing: 24px;
+    display: none;
+    position: relative;
+    margin: -$spacing;
+    margin-top: -$spacing + 20px;
 
-        > * {
-          min-height: 0;
-        }
+    > .carousel {
+      &-container {
+        overflow-x: auto;
+        scrollbar-width: none;
 
-        &-image {
-          border-radius: 10px 0 0 10px;
-          overflow: hidden;
+        > .news-tiles {
+          @extend %news-tiles;
+          display: flex;
+          column-gap: 15px;
 
-          > img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-            transition: transform .15s ease-out;
-          }
-        }
+          > li {
+            flex-shrink: 0;
+            padding-top: $spacing;
+            padding-bottom: $spacing;
 
-        &-content {
-          margin: 16px;
-          overflow: hidden;
-          text-overflow: ellipsis;
+            &:first-child {
+              padding-left: $spacing;
+            }
 
-          > header {
-            .context {
-              font-weight: 500;
-              color: var(--#{$prefix}basic-black);
-              opacity: .5;
-              margin-bottom: 4px;
+            &:last-child {
+              padding-right: $spacing;
+            }
+
+            > a > .news-tile {
+              grid-template-columns: 92px 1fr;
+              height: 175px;
+              width: 292px;
             }
           }
         }
       }
 
-      &:hover, &:focus-visible {
-        outline: 2px solid var(--#{$prefix}primary);
-        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+      &-action {
+        &-back > * {
+          @extend %carousel-action;
+          left: 0;
+          margin-left: -44px;
+        }
 
-        .news-tile {
-          &-image > img {
-            transform: scale(1.4);
-          }
-
-          &-content > header h3 {
-            color: var(--#{$prefix}primary);
-          }
+        &-next > * {
+          @extend %carousel-action;
+          right: 0;
+          margin-right: -44px;
         }
       }
     }
@@ -96,6 +166,14 @@
       > a {
         display: inline-flex;
       }
+    }
+
+    & > &-tiles {
+      display: none;
+    }
+
+    & > &-carousel  {
+      display: revert;
     }
 
     > footer {

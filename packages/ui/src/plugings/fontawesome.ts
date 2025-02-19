@@ -16,6 +16,7 @@
 
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faArrowLeft,
   faArrowRight,
   faHeart,
   faStepForward,
@@ -24,6 +25,7 @@ import {
 
 function register() {
   library.add(
+    faArrowLeft,
     faArrowRight,
     faHeart,
     faStepForward,
