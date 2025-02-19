@@ -9,11 +9,9 @@
   align-items: center;
   justify-content: center;
 
-  .header {
-    &-logo {
-      height: 27px;
-      width: auto;
-    }
+  > .header-logo {
+    height: 27px;
+    width: auto;
   }
 }
 
@@ -28,7 +26,7 @@
     padding-top: 34px;
     padding-bottom: 16px;
 
-    .footer {
+    > .footer {
       &-logo {
         height: 45px;
         width: auto;
@@ -45,7 +43,6 @@
             color: var(--#{$prefix}system-blue);
           }
         }
-
       }
 
       &-parteners {
@@ -117,7 +114,7 @@
         align-items: center;
         column-gap: 8px;
 
-        .fa-heart {
+        > .fa-heart {
           color: var(--#{$prefix}system-red);
           font-size: var(--#{$prefix}font-size-xl);
         }

@@ -4,16 +4,14 @@
 .login {
   margin-bottom: 8px;
 
-  header {
-    h1 > span {
-      display: block;
-      font-size: var(--#{$prefix}font-size-sm); // TODO: Should be 13px
-      font-weight: normal;
-      line-height: 21px;
-    }
+  > header h1 > span {
+    display: block;
+    font-size: var(--#{$prefix}font-size-sm); // TODO: Should be 13px
+    font-weight: normal;
+    line-height: 21px;
   }
 
-  &-tiles {
+  & > &-tiles {
     @include list-unstyled;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -39,6 +37,32 @@
         outline .15s ease-in,
         box-shadow .15s ease-in;
 
+      > .login-profile {
+        display: block;
+        margin: 0 auto 8px auto;
+        height: 64px;
+        width: 64px;
+        aspect-ratio: 1 / 1;
+        background-color: var(--#{$prefix}basic-black);
+        opacity: .33;
+        transition:
+          background-color .15s ease-in,
+          opacity .15s ease-in;
+
+        @for $i from 1 through 6 {
+          &.profile#{$i} {
+            mask: url('./svg/profile#{$i}.svg') center;
+            mask-repeat: no-repeat;
+            mask-size: contain;
+          }
+        }
+
+        @media (hover: none) {
+          background-color: var(--#{$prefix}primary);
+          opacity: unset;
+        }
+      }
+
       &:hover, &:focus-visible {
         outline: 2px solid var(--#{$prefix}primary);
         box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
@@ -51,52 +75,22 @@
     }
   }
 
-  &-profile {
-    display: block;
-    margin: 0 auto 8px auto;
-    height: 64px;
-    width: 64px;
-    aspect-ratio: 1 / 1;
-    background-color: var(--#{$prefix}basic-black);
-    opacity: .33;
-    transition:
-      background-color .15s ease-in,
-      opacity .15s ease-in;
-
-    @for $i from 1 through 6 {
-      &.profile#{$i} {
-        mask: url('./svg/profile#{$i}.svg') center;
-        mask-repeat: no-repeat;
-        mask-size: contain;
-      }
-    }
-  }
-
-  @media (hover: none) {
-    &-profile {
-      background-color: var(--#{$prefix}primary);
-      opacity: unset;
-    }
-  }
-
   @media (width >= map.get($grid-breakpoints, sm)) {
-    &-tiles {
+    & > &-tiles {
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       font-size: unset;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    header {
-      h1 > span {
-        display: unset;
-        font-size: unset;
-        font-weight: unset;
-        line-height: unset;
-      }
+    > header > h1 > span {
+      display: unset;
+      font-size: unset;
+      font-weight: unset;
+      line-height: unset;
     }
 
-    &-tiles {
+    & > &-tiles {
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 
       > li > a {

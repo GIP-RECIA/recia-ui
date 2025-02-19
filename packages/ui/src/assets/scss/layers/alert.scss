@@ -9,7 +9,7 @@
   color: var(--#{$prefix}white);
   padding: 14px 16px;
 
-  &-icon {
+  & > &-icon {
     height: 24px;
     width: 24px;
     aspect-ratio: 1/1;
@@ -20,7 +20,7 @@
     opacity: .5;
   }
 
-  &-text {
+  & > &-text {
     flex-grow: 1;
     font-family: $dm-sans;
     font-weight: bold;
@@ -28,20 +28,20 @@
     > * {
       display: inline;
     }
-  }
 
-  &-link {
-    color: inherit;
-    font-weight: normal;
-    text-wrap: nowrap;
+    > .alert-link {
+      color: inherit;
+      font-weight: normal;
+      text-wrap: nowrap;
 
-    &:hover, &:focus-visible {
-      text-decoration: underline 2px solid;
-      outline: none;
+      &:hover, &:focus-visible {
+        text-decoration: underline 2px solid;
+        outline: none;
+      }
     }
   }
 
-  &-close {
+  & > &-close {
     color: inherit;
     opacity: .5;
     height: 24px;
@@ -59,7 +59,7 @@
     column-gap: 34px;
     padding: 16px 34px;
 
-    &-text {
+    & > &-text {
       display: flex;
       justify-content: space-between;
       column-gap: 8px;

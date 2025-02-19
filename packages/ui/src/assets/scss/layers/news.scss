@@ -2,13 +2,11 @@
 @use '../recia-style' as *;
 
 .news {
-  > header {
-    > a {
-      display: none
-    }
+  > header > a {
+    display: none
   }
 
-  &-tiles {
+  & > &-tiles {
     @include list-unstyled;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
