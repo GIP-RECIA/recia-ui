@@ -136,14 +136,17 @@ body {
   }
 
   > footer {
-    margin-top: 64px;
-    margin-bottom: 64px;
+    margin-top: 32px;
     grid-area: footer;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
     > main {
       row-gap: 70px;
+    }
+
+    > footer {
+      margin-top: unset;
     }
   }
 }
