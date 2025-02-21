@@ -18,7 +18,12 @@ import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowLeft,
   faArrowRight,
+  faArrowRotateLeft,
+  faBolt,
+  faEye,
+  faEyeSlash,
   faHeart,
+  faLockOpen,
   faStepForward,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -27,7 +32,12 @@ function register() {
   library.add(
     faArrowLeft,
     faArrowRight,
+    faArrowRotateLeft,
+    faBolt,
+    faEye,
+    faEyeSlash,
     faHeart,
+    faLockOpen,
     faStepForward,
     faXmark,
   )

@@ -1,0 +1,105 @@
+@use 'variables' as *;
+
+.field {
+  & > &-layout {
+    position: relative;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: var(--#{$prefix}basic-grey);
+
+    > .field-container {
+      display: flex;
+      align-items: center;
+
+      > .start {
+        display: inline-flex;
+        margin-inline: 12px 4px;
+        opacity: .7;
+
+        > svg {
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      > .middle {
+        flex: 1 1 0;
+        position: relative;
+        margin-inline: 8px;
+
+        > label {
+          position: absolute;
+          top: 16px;
+          font-size: var(--#{$prefix}font-size-md);
+          transition:
+            top .15s ease-in,
+            font-size .15s ease-in;
+        }
+
+        > input {
+          width: 100%;
+          padding-top: 24px;
+          padding-bottom: 8px;
+          outline: unset;
+          font-size: var(--#{$prefix}font-size-md);
+        }
+
+        &:has(input:not(:placeholder-shown)) > label {
+          top: 8px;
+          opacity: .75;
+          font-size: unset;
+        }
+      }
+
+      > .end {
+        display: inline-flex;
+        margin-inline: 4px 12px;
+        opacity: .7;
+
+        > svg {
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+
+    > .active-indicator {
+      position: absolute;
+      inset: auto 0 0;
+      border-bottom: 1px solid var(--#{$prefix}basic-black);
+    }
+  }
+
+  & > &-informations {
+    margin-top: 8px;
+  }
+
+  &:hover:not(:focus-within) {
+    > .field {
+      &-layout {
+        background-color: var(--#{$prefix}stroke);
+
+        > .active-indicator {
+          border-bottom: 2px solid var(--#{$prefix}basic-black);
+        }
+      }
+    }
+  }
+
+  &:focus-within {
+    > .field {
+      &-layout {
+        > .field-container > .middle > label {
+          top: 8px;
+          opacity: unset !important;
+          color: var(--#{$prefix}primary);
+          font-size: unset;
+        }
+
+        > .active-indicator {
+          border-bottom: 2px solid var(--#{$prefix}primary);
+        }
+      }
+    }
+  }
+}

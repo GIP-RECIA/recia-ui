@@ -1,0 +1,73 @@
+@use '../recia-style' as *;
+
+.login {
+  & > &-card {
+    outline: 1px solid var(--#{$prefix}stroke);
+    border-radius: 10px;
+    background-color: var(--#{$prefix}body-bg);
+    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    padding: 25px 20px;
+    margin-bottom: 16px;
+
+    > p {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    > form {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      .field {
+        margin-bottom: 24px;
+      }
+
+      > #password-forgotten {
+        display: inline-block;
+        margin-top: -24px + 8px;
+        margin-bottom: 24px;
+        text-align: end;
+        color: var(--#{$prefix}primary);
+        font-style: italic;
+      }
+
+      > button[type="submit"] {
+        width: 100%;
+      }
+    }
+  }
+
+  & > &-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 12px;
+
+    button {
+      @extend %button-and-tag;
+      text-align: unset;
+      outline: 1px solid var(--#{$prefix}stroke);
+      border-radius: 10px;
+      background-color: var(--#{$prefix}body-bg);
+      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+      padding: 16px;
+      transition:
+        outline .15s ease-in,
+        box-shadow .15s ease-in;
+
+      > svg {
+        height: 32px;
+        transition: color .15s ease-in;
+      }
+
+      &:hover,
+      &:focus-visible {
+        outline: 2px solid var(--#{$prefix}primary);
+        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+
+        > svg {
+          color: var(--#{$prefix}primary);
+        }
+      }
+    }
+  }
+}
