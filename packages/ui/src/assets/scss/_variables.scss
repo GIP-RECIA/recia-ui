@@ -17,15 +17,15 @@ $system-red: #AD1919;
 $colors: (
   'white': $white,
   'black': $black,
-  'favorite': $favorite,
-  'stroke': $stroke,
-  'tutorial': $tutorial,
-  'basic-grey': $basic-grey,
-  'basic-black': $basic-black,
-  'basic-black-lighter': $basic-black-lighter,
-  'lighter-black': $lighter-black,
-  'system-blue': $system-blue,
-  'system-red': $system-red,
+  favorite: $favorite,
+  stroke: $stroke,
+  tutorial: $tutorial,
+  basic-grey: $basic-grey,
+  basic-black: $basic-black,
+  basic-black-lighter: $basic-black-lighter,
+  lighter-black: $lighter-black,
+  system-blue: $system-blue,
+  system-red: $system-red,
 );
 
 $primary: #0062BC;
@@ -41,49 +41,70 @@ $secondary-hover-dark: #1A1F23;
 $secondary-pressed-dark: #212E3A;
 
 $theme-colors: (
-  'primary': $primary,
-  'primary-pressed': $primary-pressed,
-  'secondary': $secondary,
-  'secondary-hover': $secondary-hover,
-  'secondary-pressed': $secondary-pressed,
+  primary: $primary,
+  primary-pressed: $primary-pressed,
+  secondary: $secondary,
+  secondary-hover: $secondary-hover,
+  secondary-pressed: $secondary-pressed,
 );
 
 $theme-colors-dark: (
-  'primary': $primary-dark,
-  'primary-pressed': $primary-pressed-dark,
-  'secondary': $secondary-dark,
-  'secondary-hover': $secondary-hover-dark,
-  'secondary-pressed': $secondary-pressed-dark,
+  primary: $primary-dark,
+  primary-pressed: $primary-pressed-dark,
+  secondary: $secondary-dark,
+  secondary-hover: $secondary-hover-dark,
+  secondary-pressed: $secondary-pressed-dark,
 );
 
 $categories: (
   documentation: (
     color: #AB47BC,
-    hover: #C400F3,
+    hover: (
+      color: #C400F3,
+      shadow: .1,
+    )
   ),
   collaboratif: (
     color: #5747BC,
-    hover: #665BE7,
+    hover: (
+      color: #665BE7,
+      shadow: .15,
+    )
   ),
   apprentissage: (
     color: #FFAC2F,
-    hover: #F5C72E,
+    hover: (
+      color: #F5C72E,
+      shadow: .15,
+    )
   ),
   vie-scolaire: (
     color: #858585,
-    hover: #5B5B5B,
+    hover: (
+      color: #5B5B5B,
+      shadow: .15,
+    )
   ),
   orientation: (
     color: #26C6DA,
-    hover: #70EAF5,
+    hover: (
+      color: #70EAF5,
+      shadow: .15,
+    )
   ),
   parametres: (
     color: #66BB6A,
-    hover: #4EF186,
+    hover: (
+      color: #4EF186,
+      shadow: .15,
+    )
   ),
   communication: (
     color: #EC407A,
-    hover: #F60086,
+    hover: (
+      color: #F60086,
+      shadow: .2,
+    )
   ),
 );
 
@@ -188,15 +209,15 @@ $btn-secondary-bg: $basic-grey;
 $btn-secondary-bg-dark: $basic-black;
 
 $buttons: (
-  'primary-color': $btn-primary-color,
-  'secondary-color': $btn-secondary-color,
-  'primary-bg': $btn-primary-bg,
-  'secondary-bg': $btn-secondary-bg,
+  primary-color: $btn-primary-color,
+  secondary-color: $btn-secondary-color,
+  primary-bg: $btn-primary-bg,
+  secondary-bg: $btn-secondary-bg,
 );
 
 $buttons-dark: (
-  'primary-color': $btn-primary-color-dark,
-  'secondary-color': $btn-secondary-color-dark,
-  'primary-bg': $btn-primary-bg-dark,
-  'secondary-bg': $btn-secondary-bg-dark,
+  primary-color: $btn-primary-color-dark,
+  secondary-color: $btn-secondary-color-dark,
+  primary-bg: $btn-primary-bg-dark,
+  secondary-bg: $btn-secondary-bg-dark,
 );

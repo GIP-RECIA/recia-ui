@@ -1,0 +1,141 @@
+@use 'sass:map';
+@use '../recia-style' as *;
+
+.service {
+  border-radius: 10px;
+  border-top: 11px solid var(--#{$prefix}service);
+  background-color: var(--#{$prefix}body-bg);
+  box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+  padding: 5px 16px 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  & > &-new {
+    position: absolute;
+    top: 5px;
+    left: -6px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: var(--#{$prefix}system-red);
+    color: var(--#{$prefix}btn-primary-color);
+    font-size: var(--#{$prefix}font-size-xxs);
+    font-weight: bold;
+  }
+
+  & > &-favorite {
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    transition:
+      opacity .3s ease-out,
+      visibility .3s ease-out;
+
+    > button {
+      display: inline-flex;
+      border-radius: 50%;
+
+      > svg {
+        height: 20px;
+        width: 20px;
+        margin: 2px;
+        color: var(--#{$prefix}stroke);
+        transition: color .3s ease-out;
+
+        &.favorite {
+          color: var(--#{$prefix}favorite);
+        }
+      }
+    }
+  }
+
+  & > &-icon {
+    height: 40px;
+    width: 40px;
+    color: var(--#{$prefix}stroke);
+    transition: color .3s ease-out;
+  }
+
+  & > &-category {
+    margin-top: 8px;
+    font-size: var(--#{$prefix}font-size-xxs);
+    opacity: .5;
+    margin-bottom: 4px;
+  }
+
+  & > &-name {
+    font-family: $sora;
+    font-weight: 600;
+    font-size: var(--#{$prefix}font-size-xs);
+  }
+
+  & > &-more {
+    margin-top: 8px;
+    text-decoration: underline;
+    color: var(--#{$prefix}system-blue);
+    font-family: $sora;
+    font-size: var(--#{$prefix}font-size-xs);
+    transition:
+      opacity .3s ease-out,
+      visibility .3s ease-out;
+  }
+
+  @each $type, $values in $categories {
+    &.#{$type} {
+      --#{$prefix}service: var(--#{$prefix}#{$type});
+      --#{$prefix}service-hover: var(--#{$prefix}#{$type}-hover);
+      --#{$prefix}service-hover-shadow: var(--#{$prefix}#{$type}-hover-shadow);
+    }
+  }
+
+  &:hover {
+    border-top: 11px solid var(--#{$prefix}service-hover);
+    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}service-hover-shadow);
+
+    > .service {
+      &-favorite {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      &-icon {
+        color: var(--#{$prefix}service-hover);
+      }
+
+      &-more {
+        // position: unset;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    width: 152px;
+    padding: 17px 16px 24px;
+
+    & > &-category {
+      font-size: var(--#{$prefix}font-size-xs);
+    }
+
+    & > &-name {
+      font-size: var(--#{$prefix}font-size-md);
+    }
+  }
+
+  @media (hover: hover) {
+    & > &-favorite:not(:has(.favorite)) {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    & > &-more {
+      // position: absolute;
+      // bottom: 0;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}

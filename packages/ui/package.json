@@ -25,6 +25,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "eslint": "^9.21.0",
     "eslint-plugin-format": "^1.0.1",

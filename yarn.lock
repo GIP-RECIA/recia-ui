@@ -781,6 +781,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/free-regular-svg-icons@npm:^6.7.2":
+  version: 6.7.2
+  resolution: "@fortawesome/free-regular-svg-icons@npm:6.7.2"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": "npm:6.7.2"
+  checksum: 10/f4385f19f04c07447c71943b2ae624d5b63e58d3f62583a12f75417e6e3e108a4df0d1466127c2c3f9fc2d7d68e3a6634c45b212ddf244721cb7461ba34c0f95
+  languageName: node
+  linkType: hard
+
 "@fortawesome/free-solid-svg-icons@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/free-solid-svg-icons@npm:6.7.2"
@@ -809,6 +818,7 @@ __metadata:
   dependencies:
     "@antfu/eslint-config": "npm:^4.3.0"
     "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     eslint: "npm:^9.21.0"
     eslint-plugin-format: "npm:^1.0.1"

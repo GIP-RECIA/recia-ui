@@ -29,6 +29,12 @@
     --#{$prefix}#{$color}: #{$value};
   }
 
+  @each $type, $values in $categories {
+    --#{$prefix}#{$type}: #{map.get($values, color)};
+    --#{$prefix}#{$type}-hover: #{map.get($values, hover, color)};
+    --#{$prefix}#{$type}-hover-shadow: rgba(from var(--#{$prefix}#{$type}-hover) r g b / #{map.get($values, hover, shadow)});
+  }
+
   @each $color, $value in $buttons {
     --#{$prefix}btn-#{$color}: #{$value};
   }

@@ -16,6 +16,9 @@
 
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faStar as farStar,
+} from '@fortawesome/free-regular-svg-icons'
+import {
   faArrowLeft,
   faArrowRight,
   faArrowRotateLeft,
@@ -26,6 +29,7 @@ import {
   faEyeSlash,
   faHeart,
   faLockOpen,
+  faStar,
   faStepForward,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -42,8 +46,12 @@ function register() {
     faEyeSlash,
     faHeart,
     faLockOpen,
+    faStar,
     faStepForward,
     faXmark,
+  )
+  library.add(
+    farStar,
   )
 
   dom.watch()
