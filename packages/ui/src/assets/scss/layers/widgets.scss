@@ -1,0 +1,141 @@
+@use 'sass:map';
+@use '../recia-style' as *;
+
+.widget {
+  margin-bottom: 8px;
+
+  & > &-tiles {
+    @include list-unstyled;
+    display: grid;
+    gap: 8px;
+
+    > li > .widget-tile {
+      border: 1px solid var(--#{$prefix}stroke);
+      border-radius: 10px;
+      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+      overflow: hidden;
+      height: 100%;
+
+      &:hover,
+      &:focus-within {
+        outline: 2px solid var(--#{$prefix}primary);
+      }
+
+      > button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 8px;
+        height: 60px;
+        width: 100%;
+        background-color: var(--#{$prefix}basic-grey);
+        padding: 16px 12px;
+
+        > .start {
+          display: flex;
+          flex-direction: column;
+          row-gap: 4px;
+
+          > h3 {
+            font-size: var(--#{$prefix}font-size-sm);
+            margin-bottom: 0;
+          }
+
+          > .subtitle {
+            font-size: var(--#{$prefix}font-size-xxs);
+            color: var(--#{$prefix}basic-black-lighter);
+          }
+        }
+
+        > .end {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+
+          > .counter {
+            padding: 2.5px 14px;
+            border-radius: 27px;
+            background-color: var(--#{$prefix}primary);
+            color: var(--#{$prefix}btn-primary-color);
+            font-size: var(--#{$prefix}font-size-md);
+            font-weight: bold;
+          }
+
+          > svg {
+            color: var(--#{$prefix}basic-black);
+            height: 15px;
+            width: 15px;
+            margin: 4.5px;
+          }
+        }
+
+      }
+
+      > ul {
+        @include list-unstyled;
+        border-top: 1px solid var(--#{$prefix}stroke);
+        background-color: var(--#{$prefix}body-bg);
+        max-height: 48px * 4 + 1;
+        overflow-y: auto;
+
+        > li {
+          > * {
+            padding: 16px 12px;
+
+            &:hover {
+              color: var(--#{$prefix}primary);
+              background-color: var(--#{$prefix}secondary-hover);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    & > &-tiles {
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-auto-rows: 1fr;
+
+      li > .widget-tile {
+        > button > .end > svg {
+          display: none;
+        }
+
+        > ul {
+          max-height: 49px * 3 + 1;
+
+          > li {
+            &:not(:last-child) {
+              border-bottom: 1px solid var(--#{$prefix}stroke);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    & > &-tiles > li > .widget-tile {
+      > button {
+        > .start {
+          row-gap: unset;
+
+          > h3 {
+            font-size: initial;
+          }
+
+          > .subtitle {
+            font-size: var(--#{$prefix}font-size-xs);
+            color: unset;
+          }
+        }
+      }
+
+      ul {
+        max-height: 51px * 3 + 1;
+      }
+    }
+  }
+}
