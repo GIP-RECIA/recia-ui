@@ -42,23 +42,14 @@
         margin: 0 auto 8px auto;
         height: 64px;
         width: 64px;
-        aspect-ratio: 1 / 1;
-        background-color: var(--#{$prefix}basic-black);
+        color: var(--#{$prefix}basic-black);
         opacity: .33;
         transition:
-          background-color .15s ease-in,
+          color .15s ease-in,
           opacity .15s ease-in;
 
-        @for $i from 1 through 6 {
-          &.profile#{$i} {
-            mask: url('./svg/profile#{$i}.svg') center;
-            mask-repeat: no-repeat;
-            mask-size: contain;
-          }
-        }
-
         @media (hover: none) {
-          background-color: var(--#{$prefix}primary);
+          color: var(--#{$prefix}primary);
           opacity: unset;
         }
       }
@@ -68,7 +59,7 @@
         box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
 
         > .waif-profile {
-          background-color: var(--#{$prefix}primary);
+          color: var(--#{$prefix}primary);
           opacity: unset;
         }
       }
