@@ -43,6 +43,7 @@
     button {
       @extend %button-and-tag;
       text-align: unset;
+      justify-content: unset;
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
@@ -51,9 +52,12 @@
       transition:
         outline .15s ease-in,
         box-shadow .15s ease-in;
+      word-wrap: anywhere;
 
       > svg {
         height: 32px;
+        width: 48px;
+        margin: 0 8px;
         transition: color .15s ease-in;
       }
 

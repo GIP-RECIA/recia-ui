@@ -64,8 +64,9 @@
         height: 100%;
 
         > svg {
-          font-size: var(--#{$prefix}font-size-xs); // TODO: Should be 13px
-          margin-bottom: 8px;
+          height: 14px;
+          width: 14px;
+          margin: 5px 5px 5 + 8px;
         }
 
         > p {

@@ -115,8 +115,10 @@
         column-gap: 8px;
 
         > .fa-heart {
+          height: 18px;
+          width: 18px;
+          margin: 2px;
           color: var(--#{$prefix}system-red);
-          font-size: var(--#{$prefix}font-size-xl);
         }
       }
     }
