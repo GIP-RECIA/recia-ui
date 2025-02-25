@@ -2,6 +2,10 @@
 @use '../recia-style' as *;
 
 .suggestion {
+  > header > a {
+    display: none
+  }
+
   & > &-tile {
     @include list-unstyled;
     display: grid;
@@ -20,6 +24,15 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
+    > header {
+      display: flex;
+      align-items: center;
+
+      > a {
+        display: inline-flex;
+      }
+    }
+
     & > &-tile {
       display: flex;
 
