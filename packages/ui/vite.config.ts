@@ -26,5 +26,15 @@ export default () => {
         currentColor: true,
       }),
     ],
+    build: {
+      sourcemap: true,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name].[ext]',
+          entryFileNames: 'assets/[name].js',
+          chunkFileNames: 'assets/[name].js',
+        },
+      },
+    },
   })
 }
