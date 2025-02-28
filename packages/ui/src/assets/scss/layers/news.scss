@@ -18,26 +18,23 @@
   > li > a {
     text-decoration: none;
     color: inherit;
-    border-radius: 10px;
-    background-color: var(--#{$prefix}body-bg);
-    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition:
-      outline .15s ease-out,
-      box-shadow .15s ease-out;
 
     .news-tile {
       display: grid;
       grid-template-rows: 1fr;
+      border-radius: 10px;
+      background-color: var(--#{$prefix}body-bg);
+      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+      overflow: hidden;
+      transition:
+        outline .15s ease-out,
+        box-shadow .15s ease-out;
 
       > * {
         min-height: 0;
       }
 
       &-image {
-        border-radius: 10px 0 0 10px;
         overflow: hidden;
 
         > img {
@@ -62,19 +59,20 @@
           }
         }
       }
-    }
 
-    &:hover, &:focus-visible {
-      outline: 2px solid var(--#{$prefix}primary);
-      box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+      &:hover,
+      &:focus-visible {
+        outline: 2px solid var(--#{$prefix}primary);
+        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
 
-      .news-tile {
-        &-image > img {
-          transform: scale(1.4);
-        }
+        > .news-tile {
+          &-image > img {
+            transform: scale(1.4);
+          }
 
-        &-content > header h3 {
-          color: var(--#{$prefix}primary);
+          &-content > header h3 {
+            color: var(--#{$prefix}primary);
+          }
         }
       }
     }
