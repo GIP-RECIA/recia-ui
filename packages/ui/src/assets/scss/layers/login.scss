@@ -6,7 +6,7 @@
     outline: 1px solid var(--#{$prefix}stroke);
     border-radius: 10px;
     background-color: var(--#{$prefix}body-bg);
-    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    box-shadow: var(--#{$prefix}shadow-neutral) var(--#{$prefix}black-10);
     padding: 25px 20px;
     margin-bottom: 16px;
 
@@ -47,7 +47,7 @@
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
-      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+      box-shadow: var(--#{$prefix}shadow-neutral) var(--#{$prefix}black-10);
       padding: 16px;
       transition:
         outline .15s ease-in,
