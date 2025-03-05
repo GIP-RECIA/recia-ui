@@ -51,11 +51,15 @@
         text-overflow: ellipsis;
 
         > header {
+          display: flex;
+          flex-direction: column;
+
           h3 {
             transition: color .15s ease-out;
           }
 
           .context {
+            order: -1;
             font-weight: 500;
             color: var(--#{$prefix}basic-black);
             opacity: .5;
