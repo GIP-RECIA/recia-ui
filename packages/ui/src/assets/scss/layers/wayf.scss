@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../recia-style' as *;
 
-.waif {
+.wayf {
   margin-bottom: 8px;
 
   > header h1 > span {
@@ -37,7 +37,7 @@
         outline .15s ease-in,
         box-shadow .15s ease-in;
 
-      > .waif-profile {
+      > .wayf-profile {
         display: block;
         margin: 0 auto 8px auto;
         height: 64px;
@@ -58,7 +58,7 @@
         outline: 2px solid var(--#{$prefix}primary);
         box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
 
-        > .waif-profile {
+        > .wayf-profile {
           color: var(--#{$prefix}primary);
           opacity: unset;
         }
