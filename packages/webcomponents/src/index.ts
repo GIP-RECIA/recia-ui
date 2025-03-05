@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export { ReciaButton } from './components/button';
+export { ReciaButton } from './components/button'

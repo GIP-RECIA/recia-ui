@@ -1,1 +1,16 @@
-@use 'ress/dist/ress.min.css'
+@forward 'mixins';
+
+$prefix: recia-;
+
+$font-family-sans-serif: 'sans-serif';
+$sora: 'Sora', $font-family-sans-serif;
+$dm-sans: 'DM Sans', $font-family-sans-serif;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);

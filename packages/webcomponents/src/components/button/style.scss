@@ -1,8 +1,4 @@
-$prefix: recia-;
-
-$font-family-sans-serif: 'sans-serif';
-$sora: 'Sora', $font-family-sans-serif;
-$dm-sans: 'DM Sans', $font-family-sans-serif;
+@use '@/assets/scss/global.scss' as *;
 
 .btn {
   display: inline-flex;

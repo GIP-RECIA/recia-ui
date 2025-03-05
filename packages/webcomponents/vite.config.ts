@@ -32,7 +32,7 @@ export default ({ mode }: { mode: string }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use '@/assets/scss/global.scss';`,
+          additionalData: `@use 'ress/dist/ress.min.css';`,
         },
       },
     },
@@ -40,7 +40,7 @@ export default ({ mode }: { mode: string }) => {
       sourcemap: true,
       lib: {
         entry: {
-          'my-element': './src/components/my-element/my-element.ts',
+          'r-button': './src/components/button',
         },
         formats: ['es'],
       },
@@ -54,8 +54,8 @@ export default ({ mode }: { mode: string }) => {
     },
     plugins: [
       dts({
-        tsconfigPath: './tsconfig.json'
+        tsconfigPath: './tsconfig.json',
       }),
-    ]
+    ],
   })
 }
