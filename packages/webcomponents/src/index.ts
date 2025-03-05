@@ -15,3 +15,4 @@
  */
 
 export { ReciaButton } from './components/button'
+export { ReciaWayf } from './components/wayf'
