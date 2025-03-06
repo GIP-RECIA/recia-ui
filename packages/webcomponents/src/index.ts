@@ -15,4 +15,5 @@
  */
 
 export { ReciaButton } from './components/button'
+export { ReciaTag } from './components/tag'
 export { ReciaWayf } from './components/wayf'

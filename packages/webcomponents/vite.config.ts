@@ -41,6 +41,7 @@ export default ({ mode }: { mode: string }) => {
       lib: {
         entry: {
           'r-button': './src/components/button',
+          'r-tag': './src/components/tag',
           'r-wayf': './src/components/wayf',
         },
         formats: ['es'],
