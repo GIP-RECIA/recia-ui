@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-import { LitElement, css, html, nothing, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import styles from './style.scss?inline'
 
 @customElement('r-button')
 export class ReciaButton extends LitElement {
-
   @property({ type: String })
-  type?: string;
+  type?: string
 
   @property({ type: Boolean })
-  disabled = false;
+  disabled = false
 
   @property()
   variant: 'primary' | 'secondary' | 'tertiary' = 'primary'
 
   @property({ type: Boolean })
-  icon = false
+  circle = false
 
   @property({ type: String })
   size?: 'small'
@@ -41,14 +40,14 @@ export class ReciaButton extends LitElement {
       <button
         type=${this.type ?? nothing}
         ?disabled=${this.disabled}
-        class="btn-${this.variant}${this.icon ? ' icon' : '' }${this.size ? ` ${this.size}` : ''}"
+        class="btn-${this.variant}${this.circle ? ' circle' : ''}${this.size ? ` ${this.size}` : ''}"
       >
         <slot></slot>
       </button>
     `
   }
 
-  static styles = css`${unsafeCSS(styles)}`;
+  static styles = css`${unsafeCSS(styles)}`
 }
 
 declare global {

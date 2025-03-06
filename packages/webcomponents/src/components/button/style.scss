@@ -5,16 +5,17 @@
   align-items: center;
   justify-content: center;
   column-gap: 8px;
-  padding: 12px 24px;
-  font-family: $sora;
-  font-weight: 600;
-  font-size: 16px;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
   border-radius: 50px;
   text-decoration: none;
+  color: unset;
+  padding: 12px 24px;
+  font-family: $sora;
+  font-weight: 600;
+  font-size: var(--#{$prefix}font-size-md);
 
   &-primary {
     @extend .btn;
@@ -22,48 +23,83 @@
     color: var(--#{$prefix}btn-primary-color);
 
     &:active {
-      background-color: var(--#{$prefix}primary-pressed);
+      background-color: var(--#{$prefix}primary-pressed) !important;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background-color: var(--#{$prefix}primary);
     }
 
-    &:focus {
-      background-color: var(--#{$prefix}primary);
+    &:focus-visible {
       outline: 4px solid var(--#{$prefix}primary-30);
     }
 
-    &:disabled, &.disabled {
+    &:disabled,
+    &.disabled {
       opacity: .33;
       pointer-events: none;
+    }
+
+    &.circle {
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      padding: 12px;
+    }
+
+    &.small {
+      padding: 8px 16px;
+
+      &.circle {
+        width: 34px;
+        height: 34px;
+        padding: 8px;
+      }
     }
   }
 
   &-secondary {
     @extend .btn;
     background-color: var(--#{$prefix}btn-secondary-bg);
-    color: var(--#{$prefix}body-secondary-color);
+    color: var(--#{$prefix}secondary-color);
 
     &:active {
-      background-color: var(--#{$prefix}secondary-pressed);
-      color: var(--#{$prefix}primary);
+      background-color: var(--#{$prefix}secondary-pressed) !important;
+      color: var(--#{$prefix}primary) !important;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background-color: var(--#{$prefix}secondary-hover);
       color: var(--#{$prefix}primary);
     }
 
-    &:focus {
-      background-color: var(--#{$prefix}secondary-hover);
-      color: var(--#{$prefix}primary);
+    &:focus-visible {
       outline: 4px solid var(--#{$prefix}primary);
     }
 
-    &:disabled, &.disabled {
+    &:disabled,
+    &.disabled {
       opacity: .33;
       pointer-events: none;
+    }
+
+    &.circle {
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      padding: 12px;
+    }
+
+    &.small {
+      padding: 8px 16px;
+
+      &.circle {
+        width: 34px;
+        height: 34px;
+        padding: 8px;
+      }
     }
   }
 
@@ -72,40 +108,32 @@
     padding: 8px 16px;
     font-family: $dm-sans;
     font-weight: 600;
-    font-size: 14px;
+    font-size: var(--#{$prefix}font-size-sm);
     border-radius: 17px;
+    color: var(--#{$prefix}secondary-color);
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background-color: var(--#{$prefix}body-bg);
       color: var(--#{$prefix}primary);
       text-decoration: underline;
     }
 
-    &:focus {
-      background-color: var(--#{$prefix}body-bg);
-      color: var(--#{$prefix}primary);
-      text-decoration: underline;
+    &:focus-visible {
       outline: 4px solid var(--#{$prefix}primary);
     }
 
-    &:disabled, &.disabled {
+    &:disabled,
+    &.disabled {
       opacity: .5;
       pointer-events: none;
     }
-  }
 
-  &.small {
-    font-size: 14px;
-    padding: 8px 16px;
-
-    &.icon {
+    &.circle {
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
       padding: 8px;
     }
   }
-
-  &.icon {
-    padding: 12px;
-    aspect-ratio: 1 / 1;
-  }
 }
-

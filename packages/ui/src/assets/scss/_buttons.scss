@@ -56,13 +56,12 @@
 
     &.small {
       padding: 8px 16px;
-    }
 
-    &.small.circle {
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      padding: 8px;
+      &.circle {
+        width: 34px;
+        height: 34px;
+        padding: 8px;
+      }
     }
   }
 
@@ -101,13 +100,12 @@
 
     &.small {
       padding: 8px 16px;
-    }
 
-    &.small.circle {
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      padding: 8px;
+      &.circle {
+        width: 34px;
+        height: 34px;
+        padding: 8px;
+      }
     }
   }
 
@@ -188,10 +186,6 @@
     pointer-events: none;
   }
 
-  &.small {
-    padding: 4px 12px;
-  }
-
   &.circle {
     border-radius: 50%;
     width: 34px;
@@ -199,10 +193,13 @@
     padding: 8px;
   }
 
-  &.small.circle {
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    padding: 4px;
+  &.small {
+    padding: 4px 12px;
+
+    &.circle {
+      width: 26px;
+      height: 26px;
+      padding: 4px;
+    }
   }
 }
