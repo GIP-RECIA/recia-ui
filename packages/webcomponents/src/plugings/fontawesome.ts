@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import './dev.css'
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowLeft,

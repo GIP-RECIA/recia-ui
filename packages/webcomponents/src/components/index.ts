@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-import './dev.css'
-import './components'
-import './plugings/fontawesome.ts'
+export { ReciaButton } from './button'
+export { ReciaTag } from './tag'
+export { ReciaWayf } from './wayf'

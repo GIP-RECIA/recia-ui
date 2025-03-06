@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
-import './dev.css'
-import './components'
-import './plugings/fontawesome.ts'
+// Component tag name prefix
+const prefix = 'r-'
+
+// Components to build
+const components = [
+  'button',
+  'tag',
+  'wayf',
+]
+
+export { components, prefix }

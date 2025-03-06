@@ -18,7 +18,10 @@ import type { TemplateResult } from 'lit'
 import { msg } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { prefix } from '../../../config.ts'
 import styles from './style.scss?inline'
+
+const tagName = `${prefix}wayf`
 
 enum IdpIdType {
   ParentEleveEN = 'parentEleveEN-IdP',
@@ -56,7 +59,7 @@ const config: Record<IdpIdType, { svg: string, i18n: string }> = {
   },
 }
 
-@customElement('r-wayf')
+@customElement(tagName)
 export class ReciaWayf extends LitElement {
   @property({ attribute: 'cas-url', type: String })
   casUrl?: string
@@ -101,6 +104,6 @@ export class ReciaWayf extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'r-wayf': ReciaWayf
+    [tagName]: ReciaWayf
   }
 }

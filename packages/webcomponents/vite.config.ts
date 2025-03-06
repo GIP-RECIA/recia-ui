@@ -15,13 +15,22 @@
  */
 
 /* eslint-disable node/prefer-global/process */
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import dts from 'vite-plugin-dts'
+import { components, prefix } from './config'
 
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+
+  const entry = Object.fromEntries(
+    components.map(component => [
+      `${prefix}${component}`,
+      path.resolve(__dirname, `src/components/${component}`),
+    ]),
+  )
 
   return defineConfig({
     resolve: {
@@ -36,14 +45,11 @@ export default ({ mode }: { mode: string }) => {
         },
       },
     },
+    publicDir: mode === 'development' ? undefined : false,
     build: {
       sourcemap: true,
       lib: {
-        entry: {
-          'r-button': './src/components/button',
-          'r-tag': './src/components/tag',
-          'r-wayf': './src/components/wayf',
-        },
+        entry,
         formats: ['es'],
       },
       rollupOptions: {

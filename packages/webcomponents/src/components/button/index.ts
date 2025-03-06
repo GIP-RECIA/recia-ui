@@ -16,9 +16,12 @@
 
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { prefix } from '../../../config.ts'
 import styles from './style.scss?inline'
 
-@customElement('r-button')
+const tagName = `${prefix}button`
+
+@customElement(tagName)
 export class ReciaButton extends LitElement {
   @property({ type: String })
   type?: string
@@ -52,6 +55,6 @@ export class ReciaButton extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'r-button': ReciaButton
+    [tagName]: ReciaButton
   }
 }
