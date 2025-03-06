@@ -2,8 +2,6 @@
 @use '../recia-style' as *;
 
 .wayf {
-  margin-bottom: 8px;
-
   > header h1 > span {
     display: block;
     font-size: var(--#{$prefix}font-size-sm); // TODO: Should be 13px
