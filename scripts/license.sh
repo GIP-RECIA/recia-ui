@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-files=$(find ./packages/ ./scripts/ -name '*.vue' -type f \
+files=$(find ./packages/ ./scripts/ \
+  -path '.*/dist/*' -prune \
+  -name '*.vue' -type f \
   -or -name '*.tsx' -type f \
   -or -name '*.ts' -type f \
   -or -name '*.java' -type f \
