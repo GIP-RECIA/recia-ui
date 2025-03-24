@@ -27,7 +27,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "eslint": "^9.22.0",
+    "eslint": "^9.23.0",
     "eslint-plugin-format": "^1.0.1",
     "lint-staged": "^15.5.0",
     "ress": "^5.0.2",
