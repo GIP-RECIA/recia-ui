@@ -19,82 +19,51 @@ import { msg } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { prefix } from '../../../config.ts'
+import { IdpIdType } from './IdpIdType.ts'
 import styles from './style.scss?inline'
 
 const tagName = `${prefix}wayf`
-
-enum IdpIdType {
-  ParentEleveEN = 'parentEleveEN-IdP',
-  ElevesParents = 'eleves-parents',
-  Catel = 'catel-IdP',
-  Agri = 'agri-IdP',
-  RCVL = 'RCVL-IdP',
-  AutresPublics = 'autres-publics',
-}
-
-const config: Record<IdpIdType, { svg: string, i18n: string }> = {
-  [IdpIdType.ParentEleveEN]: {
-    svg: 'profile1',
-    i18n: 'Élèves ou parent\n(éducation nationale)',
-  },
-  [IdpIdType.ElevesParents]: {
-    svg: 'profile2',
-    i18n: 'Élève ou parent\n(enseignement agricole)',
-  },
-  [IdpIdType.Catel]: {
-    svg: 'profile3',
-    i18n: 'Personnel\n(éducation nationale)',
-  },
-  [IdpIdType.Agri]: {
-    svg: 'profile4',
-    i18n: 'Personnel\n(enseignement agricole)',
-  },
-  [IdpIdType.RCVL]: {
-    svg: 'profile5',
-    i18n: 'Personnel\n(Région Centre-Val de Loire)',
-  },
-  [IdpIdType.AutresPublics]: {
-    svg: 'profile6',
-    i18n: 'Autre public\n(utilisateur local, entreprise,...)',
-  },
-}
 
 @customElement(tagName)
 export class ReciaWayf extends LitElement {
   @property({ attribute: 'cas-url', type: String })
   casUrl?: string
 
-  @property({ type: String })
-  service?: string
-
-  @property({ type: String })
-  token?: string
-
   @property({ attribute: 'idp-ids', type: Array })
   idpIds?: Array<IdpIdType>
 
   @property({ attribute: 'svg-url', type: String })
-  svgUrl: string = '/spritemap.svg'
+  svgUrl: string = '/wayf.spritemap.svg'
 
-  tile(idpId: IdpIdType): TemplateResult {
-    const { svg, i18n } = config[idpId]
 
-    return html`
-      <li>
-        <a href="${this.casUrl}">
-          <svg class="wayf-profile" aria-hidden="true">
-            <use href="${this.svgUrl}#${svg}"></use>
-          </svg>
-          <span>${msg(i18n)}</span>
-        </a>
-      </li>
-    `
+  static i18n(): Record<IdpIdType, string> {
+    return {
+      [IdpIdType.ParentEleveEN]: msg('Élèves ou parent\n(éducation nationale)'),
+      [IdpIdType.ElevesParents]: msg('Élève ou parent\n(enseignement agricole)'),
+      [IdpIdType.Catel]: msg('Personnel\n(éducation nationale)'),
+      [IdpIdType.Agri]: msg('Personnel\n(enseignement agricole)'),
+      [IdpIdType.RCVL]: msg('Personnel\n(Région Centre-Val de Loire)'),
+      [IdpIdType.AutresPublics]: msg('Autre public\n(utilisateur local, entreprise,...)'),
+    }
   }
 
-  render() {
+  render(): TemplateResult {
     return html`
       <ul class="wayf-tiles">
-        ${this.idpIds?.filter(idpId => Object.values(IdpIdType).includes(idpId)).map(idpId => this.tile(idpId))}
+        ${
+          this.idpIds?.filter(idpId => Object.values(IdpIdType)
+            .includes(idpId))
+            .map(idpId => html`
+              <li>
+                <a href="${this.casUrl}&idpId=${idpId}">
+                  <svg class="wayf-profile" aria-hidden="true" >
+                    <use href="${this.svgUrl}#${idpId}"></use>
+                  </svg>
+                  <span>${ReciaWayf.i18n()[idpId]}</span>
+                </a>
+              </li>
+            `)
+        }
       </ul>
     `
   }

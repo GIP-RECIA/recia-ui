@@ -19,6 +19,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import dts from 'vite-plugin-dts'
+import { svgSpritemap } from 'vite-plugin-svg-spritemap'
 import { components, prefix } from './config'
 
 // https://vitejs.dev/config/
@@ -33,6 +34,17 @@ export default ({ mode }: { mode: string }) => {
   )
 
   return defineConfig({
+    publicDir: mode === 'development' ? undefined : false,
+    plugins: [
+      svgSpritemap({
+        pattern: 'src/components/wayf/svg/*.svg',
+        filename: 'wayf.spritemap.svg',
+        currentColor: true,
+      }),
+      dts({
+        tsconfigPath: './tsconfig.json',
+      }),
+    ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -45,7 +57,6 @@ export default ({ mode }: { mode: string }) => {
         },
       },
     },
-    publicDir: mode === 'development' ? undefined : false,
     build: {
       sourcemap: true,
       lib: {
@@ -60,10 +71,5 @@ export default ({ mode }: { mode: string }) => {
         },
       },
     },
-    plugins: [
-      dts({
-        tsconfigPath: './tsconfig.json',
-      }),
-    ],
   })
 }
