@@ -15,15 +15,18 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { msg } from '@lit/localize'
+import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { prefix } from '../../../config.ts'
+import langHelper from '../../helpers/langHelper.ts'
+import { setLocale } from '../../localization.ts'
 import { IdpIdType } from './IdpIdType.ts'
 import styles from './style.scss?inline'
 
 const tagName = `${prefix}wayf`
 
+@localized()
 @customElement(tagName)
 export class ReciaWayf extends LitElement {
   @property({ attribute: 'cas-url', type: String })
@@ -35,6 +38,13 @@ export class ReciaWayf extends LitElement {
   @property({ attribute: 'svg-url', type: String })
   svgUrl: string = '/wayf.spritemap.svg'
 
+  constructor() {
+    super()
+    const lang = langHelper.getPageLang()
+    setLocale(lang)
+    langHelper.setLocale(lang)
+    updateWhenLocaleChanges(this)
+  }
 
   static i18n(): Record<IdpIdType, string> {
     return {

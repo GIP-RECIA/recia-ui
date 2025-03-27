@@ -13,13 +13,18 @@
 # limitations under the License.
 
 files=$(find ./packages/ ./scripts/ \
-  -path '.*/dist/*' -prune \
-  -name '*.vue' -type f \
-  -or -name '*.tsx' -type f \
-  -or -name '*.ts' -type f \
-  -or -name '*.java' -type f \
-  -or -name '*.xml' -type f \
-  -or -name '*.sh' -type f)
+  \( \
+    -path '.*/dist/*' -o \
+    -path '.*/generated/*' \
+  \) -prune -o \
+  \( \
+    -name '*.vue' -o \
+    -name '*.tsx' -o \
+    -name '*.ts' -o \
+    -name '*.java' -o \
+    -name '*.xml' -o \
+    -name '*.sh' \
+  \) -type f -print)
 
 check() {
   docker run --rm -t --name licence -v ${PWD}:/src \
