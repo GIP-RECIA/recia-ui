@@ -2,6 +2,7 @@
   "name": "@gip-recia/ui-webcomponents",
   "type": "module",
   "version": "1.0.0",
+  "description": "",
   "contributors": [
     {
       "name": "Quentin Guillemin",
@@ -10,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "homepage": "https://github.com/GIP-RECIA/recia-ui/tree/main/packages/webcomponents#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GIP-RECIA/recia-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GIP-RECIA/recia-ui/issues"
+  },
+  "keywords": [
+    "gip-recia"
+  ],
   "files": [
     "dist"
   ],
