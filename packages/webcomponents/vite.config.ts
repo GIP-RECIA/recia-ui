@@ -65,9 +65,9 @@ export default ({ mode }: { mode: string }) => {
       },
       rollupOptions: {
         output: {
-          assetFileNames: 'assets/[name].[ext]',
-          entryFileNames: 'assets/[name].js',
-          chunkFileNames: 'assets/[name].js',
+          assetFileNames: 'components/[name].[ext]',
+          entryFileNames: 'components/[name].js',
+          chunkFileNames: 'components/r-wc-[name].js',
         },
       },
     },
