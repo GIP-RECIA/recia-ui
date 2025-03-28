@@ -32,7 +32,8 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test:unit": "echo No tests available"
+    "test:unit": "echo No tests available",
+    "release": "yarn run -T commit-and-tag-version -t 'ui-webcomponents/v' --path . --release-as $1 || echo 'Please specify a version type (yarn run release -- [patch, minor, major])'"
   },
   "dependencies": {
     "@lit/localize": "^0.12.2",
