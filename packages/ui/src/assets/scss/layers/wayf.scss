@@ -2,7 +2,7 @@
 @use '../recia-style' as *;
 
 .wayf {
-  > header h1 > span {
+  > header > h1 > span {
     display: block;
     font-size: var(--#{$prefix}font-size-sm); // TODO: Should be 13px
     font-weight: normal;
