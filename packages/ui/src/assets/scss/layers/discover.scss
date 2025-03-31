@@ -52,8 +52,7 @@
       margin-bottom: 16px;
 
       > li > a {
-        text-decoration: none;
-        color: inherit;
+        @include link-unstyled;
         outline: 1px solid var(--#{$prefix}stroke);
         border-radius: 10px;
         background-color: var(--#{$prefix}body-bg);

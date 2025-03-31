@@ -24,13 +24,13 @@
       }
 
       > #password-forgotten {
+        @include link-unstyled;
         display: inline-block;
         margin-top: -24px + 8px;
         margin-bottom: 24px;
         text-align: end;
         color: var(--#{$prefix}primary);
         font-style: italic;
-        text-decoration: none;
       }
     }
   }

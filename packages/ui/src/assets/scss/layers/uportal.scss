@@ -97,8 +97,7 @@
         line-height: 17px;
 
         > li > a {
-          text-decoration: none;
-          color: inherit;
+          @include link-unstyled;
 
           &:hover, &:focus-visible {
             text-decoration: underline;

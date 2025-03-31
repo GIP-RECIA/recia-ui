@@ -14,8 +14,7 @@
     margin: 24px 0;
 
     > li > a {
-      color: unset;
-      text-decoration: unset;
+      @include link-unstyled;
     }
   }
 

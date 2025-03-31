@@ -1,8 +1,9 @@
 @use 'sass:map';
 @use 'variables' as *;
-@use 'mixins/colors' as *;
+@use 'mixins' as *;
 
 %button-and-tag {
+  @include link-unstyled;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -12,8 +13,6 @@
   cursor: pointer;
   user-select: none;
   border-radius: 50px;
-  text-decoration: none;
-  color: unset;
 }
 
 .btn {
