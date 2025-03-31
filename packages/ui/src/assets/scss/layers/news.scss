@@ -15,13 +15,11 @@
   font-weight: normal;
   line-height: 150%;
 
-  > li > a {
-    text-decoration: none;
-    color: inherit;
-
+  > li {
     .news-tile {
       display: grid;
       grid-template-rows: 1fr;
+      text-align: left;
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
       box-shadow: var(--#{$prefix}shadow-neutral) var(--#{$prefix}black-10);
@@ -98,7 +96,7 @@
     grid-template-rows: repeat(3, 1fr);
     margin: 24px 0;
 
-    > li > a .news-tile {
+    > li > .news-tile {
       grid-template-columns: 92px 1fr;
       height: 140px;
     }
@@ -134,7 +132,7 @@
               padding-right: $spacing;
             }
 
-            > a > .news-tile {
+            > .news-tile {
               grid-template-columns: 92px 1fr;
               height: 175px;
               width: 292px;
