@@ -16,43 +16,52 @@
     }
 
     > form {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
 
-      .field {
+      > *:not(:last-child) {
         margin-bottom: 24px;
       }
 
-      > #password-forgotten {
+      > a#password-forgotten {
         @include link-unstyled;
-        display: inline-block;
-        margin-top: -24px + 8px;
-        margin-bottom: 24px;
-        text-align: end;
+        align-self: flex-end;
+        width: fit-content;
         color: var(--#{$prefix}primary);
         font-style: italic;
+        font-size: var(--#{$prefix}font-size-xs);
+        margin-top: -24px + 8px;
+
+        &:hover,
+        &:focus-visible {
+          text-decoration: underline;
+          outline: none;
+        }
       }
     }
   }
 
   & > &-actions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 
-    button {
+    > button {
       @extend %button-and-tag;
       text-align: unset;
       justify-content: unset;
+      font-weight: 500;
+      letter-spacing: -.25px;
+      font-size: var(--#{$prefix}font-size-sm);
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
       box-shadow: var(--#{$prefix}shadow-neutral) var(--#{$prefix}black-10);
       padding: 16px;
+      flex: 1;
       transition:
         outline .15s ease-in,
         box-shadow .15s ease-in;
-      word-wrap: anywhere;
 
       > svg {
         height: 32px;
@@ -73,6 +82,13 @@
     }
   }
 
+  @media (width >= 350px) {
+    & > &-actions {
+      flex-direction: row;
+    }
+  }
+
+
   @media (width >= map.get($grid-breakpoints, sm)) {
     display: flex;
     flex-direction: column;
@@ -84,19 +100,23 @@
       max-width: 432px;
 
       > form > button[type="submit"] {
+        align-self: flex-end;
         width: fit-content;
-        justify-self: end;
       }
     }
 
     & > &-actions {
       column-gap: 24px;
       max-width: 512px;
+    }
+  }
 
-      button {
-        > svg {
-          height: 43px;
-        }
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    & > &-actions > button {
+      font-size: var(--#{$prefix}font-size-md);
+
+      > svg {
+        height: 43px;
       }
     }
   }
