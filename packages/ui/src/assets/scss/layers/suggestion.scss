@@ -6,7 +6,7 @@
     display: none
   }
 
-  & > &-tile {
+  & > &-tiles {
     @include list-unstyled;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -32,7 +32,7 @@
       }
     }
 
-    & > &-tile {
+    & > &-tiles {
       display: flex;
 
       > * {
