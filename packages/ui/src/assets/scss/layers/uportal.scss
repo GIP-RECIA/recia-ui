@@ -101,7 +101,8 @@
         > li > a {
           @include link-unstyled;
 
-          &:hover, &:focus-visible {
+          &:hover,
+          &:focus-visible {
             text-decoration: underline;
             outline: none;
           }
