@@ -1,6 +1,7 @@
 @use '@/assets/scss/global.scss' as *;
 
 .btn {
+  @include link-unstyled;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -10,8 +11,6 @@
   cursor: pointer;
   user-select: none;
   border-radius: 50px;
-  text-decoration: none;
-  color: unset;
   padding: 12px 24px;
   font-family: $sora;
   font-weight: 600;

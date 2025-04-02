@@ -1,6 +1,7 @@
 @use '@/assets/scss/global.scss' as *;
 
 .tag {
+  @include link-unstyled;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -10,8 +11,6 @@
   cursor: pointer;
   user-select: none;
   border-radius: 50px;
-  text-decoration: none;
-  color: unset;
   padding: 8px 16px;
   font-family: $dm-sans;
   font-weight: 500;
