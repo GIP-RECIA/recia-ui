@@ -3,6 +3,7 @@
 
 .eyebrow {
   position: relative;
+  width: fit-content;
 
   & > &-notification {
     position: absolute;
@@ -145,11 +146,8 @@
     }
 
     & > &-menu > li {
-      > a,
-      > button {
-        &#notification {
-          display: none;
-        }
+      &:has(> button#notification) {
+        display: none;
       }
 
       &:not(:last-child) {
