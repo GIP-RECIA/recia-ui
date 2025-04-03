@@ -15,6 +15,7 @@
  */
 
 /* eslint-disable node/prefer-global/process */
+import type { ConfigEnv } from 'vite'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
@@ -23,7 +24,7 @@ import { svgSpritemap } from 'vite-plugin-svg-spritemap'
 import { components, prefix } from './config'
 
 // https://vitejs.dev/config/
-export default ({ mode }: { mode: string }) => {
+export default ({ mode }: ConfigEnv) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   const entry = Object.fromEntries(
