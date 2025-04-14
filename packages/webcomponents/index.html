@@ -69,6 +69,14 @@
     <hr>
 
     <section>
+      <h1>Eyebrow</h1>
+
+      <div class="flex-row-reverse">
+        <r-eyebrow></r-eyebrow>
+      </div>
+    </section>
+
+    <section>
       <h1>Tag</h1>
 
       <r-tag disabled>
@@ -125,5 +133,11 @@
         </r-wayf>
       </section>
     </section>
+
+    <script type="module">
+      window.addEventListener("launch", (e) => {
+        console.log("launch", e.detail)
+      });
+    </script>
   </body>
 </html>

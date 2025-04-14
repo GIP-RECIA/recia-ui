@@ -38,6 +38,30 @@
   <target>Other public
 (local user, company,...)</target>
 </trans-unit>
+<trans-unit id="s5be3c6d61cd9182f">
+  <source>Notifications</source>
+  <target>Notifications</target>
+</trans-unit>
+<trans-unit id="sb1ae6414f46b7471">
+  <source>Mon profil</source>
+  <target>My profile</target>
+</trans-unit>
+<trans-unit id="sbddc966a2760f55c">
+  <source>Changer d'établissement</source>
+  <target>Change school</target>
+</trans-unit>
+<trans-unit id="s4c45c541dc69732e">
+  <source>Lancer le didacticiel</source>
+  <target>Start tutorial</target>
+</trans-unit>
+<trans-unit id="sc3a31f700d8e22a1">
+  <source>Déconnexion</source>
+  <target>Lougout</target>
+</trans-unit>
+<trans-unit id="sbf71c25c7ca379d8">
+  <source>Infos de l'établissement</source>
+  <target>School info</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

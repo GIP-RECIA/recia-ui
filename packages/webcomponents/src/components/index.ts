@@ -15,5 +15,6 @@
  */
 
 export { ReciaButton } from './button'
+export { ReciaEyebrow } from './eyebrow'
 export { ReciaTag } from './tag'
 export { ReciaWayf } from './wayf'

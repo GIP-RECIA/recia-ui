@@ -2,10 +2,30 @@ body {
   display: revert;
 }
 
-section:not(.sub) {
+section {
   margin: 32px 0;
 }
 
 section.sub {
   margin: 16px 0;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  display: flex;
+  flex-direction: column-reverse;
 }

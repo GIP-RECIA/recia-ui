@@ -1,0 +1,154 @@
+@use 'sass:map';
+@use '@/assets/scss/global.scss' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+.eyebrow {
+  position: relative;
+  width: fit-content;
+
+  & > &-notification {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: var(--#{$prefix}primary);
+  }
+
+  & > &-button {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    border-radius: 50px;
+
+    > .picture {
+      height: 46px;
+      width: 46px;
+      border-radius: 50%;
+    }
+
+    > .info {
+      display: none;
+      align-items: baseline;
+      flex-direction: column;
+
+      > .displayname {
+        font-size: var(--#{$prefix}font-size-md);
+        font-weight: bold;
+      }
+
+      > .function {
+        font-size: var(--#{$prefix}font-size-xs);
+      }
+    }
+
+    > svg {
+      display: none;
+      opacity: .3;
+      margin-right: 12px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      > svg {
+        opacity: 1;
+      }
+    }
+
+    &:focus-visible {
+      outline: 4px solid var(--#{$prefix}primary);
+    }
+  }
+
+  & > &-menu {
+    @include list-unstyled;
+    position: absolute;
+    top: 46px + 6px;
+    right: 0;
+    min-width: 248px;
+    max-width: calc(100vw - 32px);
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 8px;
+    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    overflow: hidden;
+    z-index: 1000;
+
+    > li {
+      > a,
+      > button {
+        @include link-unstyled;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 16px;
+        padding: 14px 12px;
+        text-wrap: nowrap;
+        font-size: var(--#{$prefix}font-size-sm);
+        width: 100%;
+
+        > svg {
+          min-width: var(--#{$prefix}body-font-size);
+          opacity: .3;
+        }
+
+        &#notification {
+          position: relative;
+
+          > .counter {
+            position: absolute;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 27px;
+            background-color: var(--#{$prefix}primary);
+            color: var(--#{$prefix}btn-primary-color);
+            font-size: var(--#{$prefix}font-size-xs);
+            font-weight: bold;
+          }
+        }
+
+        &#logout {
+          color: var(--#{$prefix}system-red);
+        }
+
+        &:hover,
+        &:focus-visible {
+          font-weight: 500;
+          background-color:var(--#{$prefix}hover);
+          outline: none;
+
+          > svg {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    & > &-notification {
+      display: none;
+    }
+
+    & > &-button {
+      > .info {
+        display: flex;
+      }
+
+      > svg {
+        display: unset;
+      }
+    }
+
+    & > &-menu > li {
+      &:has(> button#notification),
+      &:has(> button#info-etab) {
+        display: none;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--#{$prefix}black-10)
+      }
+    }
+  }
+}
