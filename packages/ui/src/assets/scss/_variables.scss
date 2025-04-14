@@ -40,12 +40,16 @@ $secondary-dark: $white;
 $secondary-hover-dark: #1A1F23;
 $secondary-pressed-dark: #212E3A;
 
+$hover: #F8F8F8;                // Couleur des élément interaftifs en hover (ex: dropdown item)
+$hover-dark: #262626;
+
 $theme-colors: (
   primary: $primary,
   primary-pressed: $primary-pressed,
   secondary: $secondary,
   secondary-hover: $secondary-hover,
   secondary-pressed: $secondary-pressed,
+  hover: $hover
 );
 
 $theme-colors-dark: (
@@ -54,6 +58,7 @@ $theme-colors-dark: (
   secondary: $secondary-dark,
   secondary-hover: $secondary-hover-dark,
   secondary-pressed: $secondary-pressed-dark,
+  hover: $hover-dark
 );
 
 $categories: (

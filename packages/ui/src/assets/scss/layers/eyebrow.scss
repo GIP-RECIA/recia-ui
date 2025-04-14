@@ -45,7 +45,6 @@
 
     > svg {
       display: none;
-      color: var(--#{$prefix}basic-black);
       opacity: .3;
       margin-right: 12px;
     }
@@ -69,16 +68,17 @@
     right: 0;
     min-width: 248px;
     max-width: calc(100vw - 32px);
-    background-color: var(--#{$prefix}white);
+    background-color: var(--#{$prefix}body-bg);
     border-radius: 8px;
     box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
     overflow: hidden;
+    z-index: 1000;
 
     > li {
       > a,
       > button {
         @include link-unstyled;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: space-between;
         column-gap: 16px;
@@ -89,7 +89,6 @@
 
         > svg {
           min-width: var(--#{$prefix}body-font-size);
-          color: var(--#{$prefix}basic-black);
           opacity: .3;
         }
 
@@ -110,16 +109,12 @@
 
         &#logout {
           color: var(--#{$prefix}system-red);
-
-          > svg {
-            color: inherit;
-          }
         }
 
         &:hover,
         &:focus-visible {
           font-weight: 500;
-          background-color: #F8F8F8;
+          background-color:var(--#{$prefix}hover);
           outline: none;
 
           > svg {
@@ -146,7 +141,8 @@
     }
 
     & > &-menu > li {
-      &:has(> button#notification) {
+      &:has(> button#notification),
+      &:has(> button#info-etab) {
         display: none;
       }
 
