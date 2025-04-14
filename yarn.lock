@@ -2600,29 +2600,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commit-and-tag-version@npm:^12.5.0":
-  version: 12.5.0
-  resolution: "commit-and-tag-version@npm:12.5.0"
+"commit-and-tag-version@npm:^12.5.1":
+  version: 12.5.1
+  resolution: "commit-and-tag-version@npm:12.5.1"
   dependencies:
     chalk: "npm:^2.4.2"
     conventional-changelog: "npm:4.0.0"
     conventional-changelog-config-spec: "npm:2.1.0"
     conventional-changelog-conventionalcommits: "npm:6.1.0"
     conventional-recommended-bump: "npm:7.0.1"
-    detect-indent: "npm:^6.0.0"
+    detect-indent: "npm:^6.1.0"
     detect-newline: "npm:^3.1.0"
     dotgitignore: "npm:^2.1.0"
-    figures: "npm:^3.1.0"
+    figures: "npm:^3.2.0"
     find-up: "npm:^5.0.0"
-    git-semver-tags: "npm:^5.0.0"
-    jsdom: "npm:^25.0.0"
+    git-semver-tags: "npm:^5.0.1"
+    jsdom: "npm:^25.0.1"
     semver: "npm:^7.6.3"
     w3c-xmlserializer: "npm:^5.0.0"
-    yaml: "npm:^2.4.1"
+    yaml: "npm:^2.6.0"
     yargs: "npm:^17.7.2"
   bin:
     commit-and-tag-version: bin/cli.js
-  checksum: 10/e757d90faebafb88b456e9b720cb18146c1fd1b692e70edd02fb41ca23e11a5035984d875e396654bfccb345dbbd3288d387305c21d2cda7309fbc8db4f2908d
+  checksum: 10/2915ed68736476bbac2ccae681ccd5e6f510bc0568c926c7bcf29fbc6240377e06e377af81422100bf48ccf27a92dd68e334df1ab87e43665667cbf753bd6fa7
   languageName: node
   linkType: hard
 
@@ -3125,7 +3125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-indent@npm:^6.0.0":
+"detect-indent@npm:^6.1.0":
   version: 6.1.0
   resolution: "detect-indent@npm:6.1.0"
   checksum: 10/ab953a73c72dbd4e8fc68e4ed4bfd92c97eb6c43734af3900add963fd3a9316f3bc0578b018b24198d4c31a358571eff5f0656e81a1f3b9ad5c547d58b2d093d
@@ -4062,7 +4062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figures@npm:^3.1.0":
+"figures@npm:^3.2.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
   dependencies:
@@ -4320,7 +4320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"git-semver-tags@npm:^5.0.0":
+"git-semver-tags@npm:^5.0.0, git-semver-tags@npm:^5.0.1":
   version: 5.0.1
   resolution: "git-semver-tags@npm:5.0.1"
   dependencies:
@@ -4858,7 +4858,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:^25.0.0":
+"jsdom@npm:^25.0.1":
   version: 25.0.1
   resolution: "jsdom@npm:25.0.1"
   dependencies:
@@ -6829,7 +6829,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^19.8.0"
     "@commitlint/config-conventional": "npm:^19.8.0"
-    commit-and-tag-version: "npm:^12.5.0"
+    commit-and-tag-version: "npm:^12.5.1"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^15.5.1"
   languageName: unknown
@@ -8317,12 +8317,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.0.0, yaml@npm:^2.4.1, yaml@npm:^2.7.0":
+"yaml@npm:^2.0.0, yaml@npm:^2.7.0":
   version: 2.7.0
   resolution: "yaml@npm:2.7.0"
   bin:
     yaml: bin.mjs
   checksum: 10/c8c314c62fbd49244a6a51b06482f6d495b37ab10fa685fcafa1bbaae7841b7233ee7d12cab087bcca5a0b28adc92868b6e437322276430c28d00f1c1732eeec
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.6.0":
+  version: 2.7.1
+  resolution: "yaml@npm:2.7.1"
+  bin:
+    yaml: bin.mjs
+  checksum: 10/af57658d37c5efae4bac7204589b742ae01878a278554d632f01012868cf7fa66cba09b39140f12e7f6ceecc693ae52bcfb737596c4827e6e233338cb3a9528e
   languageName: node
   linkType: hard
 
