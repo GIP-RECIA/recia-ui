@@ -132,6 +132,7 @@ export class ReciaEyebrow extends LitElement {
           class="eyebrow-button"
           aria-expanded="${this.isExpanded}"
           aria-controls="eyebrow-menu"
+          aria-label="${msg('Menu mon compte')}"
           @click="${this.toggleDropdown}"
         >
           <img src="https://placehold.co/46x46" alt="" class="picture"/>

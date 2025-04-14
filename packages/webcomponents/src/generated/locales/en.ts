@@ -11,6 +11,7 @@
     export const templates = {
       's0125c06ad08c527e': `Students or parents
 (national education)`,
+'s0879a675a2208eb0': `My account menu`,
 's4c45c541dc69732e': `Start tutorial`,
 's5be3c6d61cd9182f': `Notifications`,
 's884ff070dd0e70ab': `Staff

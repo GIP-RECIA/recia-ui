@@ -62,6 +62,10 @@
   <source>Infos de l'établissement</source>
   <target>School info</target>
 </trans-unit>
+<trans-unit id="s0879a675a2208eb0">
+  <source>Menu mon compte</source>
+  <target>My account menu</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
