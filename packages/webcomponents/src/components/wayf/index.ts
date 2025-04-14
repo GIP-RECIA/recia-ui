@@ -65,7 +65,7 @@ export class ReciaWayf extends LitElement {
             .includes(idpId))
             .map(idpId => html`
               <li>
-                <a href="${this.casUrl}&idpId=${idpId}">
+                <a id=${idpId} href="${this.casUrl}&idpId=${idpId}">
                   <svg class="wayf-profile" aria-hidden="true" >
                     <use href="${this.svgUrl}#${idpId}"></use>
                   </svg>
