@@ -60,6 +60,9 @@ export class ReciaEyebrow extends LitElement {
   @property({ type: Number })
   notification = 0
 
+  @property({ attribute: 'avatar-size', type: String })
+  avatarSize = ''
+
   @state()
   isExpanded = false
 
@@ -263,7 +266,15 @@ export class ReciaEyebrow extends LitElement {
           aria-label="${msg('Menu mon compte')}"
           @click="${this.toggleDropdown}"
         >
-          <img src="${this.picture}" alt="" class="picture"/>
+          <img
+            src="${this.picture}"
+            alt=""
+            class="picture"
+            style="${styleMap({
+              height: this.avatarSize !== '' ? this.avatarSize : undefined,
+              width: this.avatarSize !== '' ? this.avatarSize : undefined,
+            })}"
+          />
           <div class="info">
             <span class="displayname">${this.displayName}</span>
             <span
