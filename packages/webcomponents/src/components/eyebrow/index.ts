@@ -31,6 +31,7 @@ import {
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
+import { keyed } from 'lit/directives/keyed.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { prefix } from '../../../config.ts'
@@ -203,42 +204,42 @@ export class ReciaEyebrow extends LitElement {
       ${ReciaEyebrow.i18n()[item.id]}
       ${
         item.id === ItemType.Notification
-          ? html`
-          <div
-            class="counter"
-            style="${styleMap({
-              display: this.notification > 0 ? undefined : 'none',
-            })}"
-          >
-            ${this.notification}
-          </div>
-        `
+          ? keyed(this.notification, html`
+            <div
+              class="counter"
+              style="${styleMap({
+                display: this.notification > 0 ? undefined : 'none',
+              })}"
+            >
+              ${this.notification}
+            </div>
+          `)
           : undefined
       }
-      ${item.icon ? this.getIcon(item.icon) : undefined}
+      ${item.icon ? keyed(item.icon, this.getIcon(item.icon)) : undefined}
     `
 
     return html`
       <li>
         ${
-          item.link && item.link.trim() !== ''
+          keyed(item.link, item.link && item.link.trim() !== ''
             ? html`
-            <a
-              id="${item.id}"
-              href="${item.link}"
-              @click="${this.closeDropdown}"
-            >
-              ${content}
-            </a>
-          `
+              <a
+                id="${item.id}"
+                href="${item.link}"
+                @click="${this.closeDropdown}"
+              >
+                ${content}
+              </a>
+            `
             : html`
-            <button
-              id="${item.id}"
-              @click="${(e: Event) => this.emitEvent(e, item.id)}"
-            >
-              ${content}
-            </button>
-          `
+              <button
+                id="${item.id}"
+                @click="${(e: Event) => this.emitEvent(e, item.id)}"
+              >
+                ${content}
+              </button>
+            `)
         }
       </li>
     `
