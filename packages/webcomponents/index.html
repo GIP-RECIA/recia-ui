@@ -71,16 +71,37 @@
     <section>
       <h1>Eyebrow</h1>
 
-      <div class="flex-row-reverse">
+      <div>Notification</div>
+      <button id="eybrow-notification-decrease">-</button>
+      <span id="eybrow-notification">0</span>
+      <button id="eybrow-notification-increase">+</button>
+
+      <div class="flex-row justify-between">
+        <pre><code>&lt;r-eyebrow
+  picture="https://placehold.co/46x46"
+  display-name="Ana&iuml;s Durant"
+  config='{
+    "notification": false,
+    "settings": false,
+    "info-etab": {
+      "icon": ""
+    },
+    "change-etab": {
+      "icon": null
+    },
+    "starter": false,
+    "logout": {
+      "link": "/portail/Logout"
+    }
+  }'
+  notification="0"
+  &gt;
+&lt;/r-eyebrow&gt;</code></pre>
         <r-eyebrow
           picture="https://placehold.co/46x46"
           display-name="Anaïs Durant"
-          function="Enseignante"
           config='{
             "notification": false,
-            "toto": {
-              "icon": "faChevronUp"
-            },
             "settings": false,
             "info-etab": {
               "icon": ""
@@ -93,12 +114,30 @@
               "link": "/portail/Logout"
             }
           }'
-          notification="4"
+          notification="0"
         >
         </r-eyebrow>
       </div>
 
-      <div class="flex-row-reverse">
+      <div class="flex-row justify-between">
+        <pre><code>&lt;r-eyebrow
+  picture="https://placehold.co/46x46"
+  display-name="Ana&iuml;s Durant"
+  function="Enseignante"
+  config='{
+    "settings": {
+      "link": "/MCE"
+    },
+    "change-etab": {
+      "link": null
+    },
+    "logout": {
+      "link": "/portail/Logout"
+    }
+  }'
+  notification="0"
+  &gt;
+&lt;/r-eyebrow&gt;</code></pre>
         <r-eyebrow
           picture="https://placehold.co/46x46"
           display-name="Anaïs Durant"
@@ -114,10 +153,30 @@
               "link": "/portail/Logout"
             }
           }'
-          notification="4"
+          notification="0"
         >
         </r-eyebrow>
       </div>
+
+      <script type="module">
+        window.addEventListener("launch", (e) => {
+          console.log("launch", e.detail)
+        });
+
+        const eyebrows = document.querySelectorAll('r-eyebrow')
+        const value = document.querySelector('#eybrow-notification')
+        let notification = 0
+        document.querySelector('#eybrow-notification-increase').addEventListener('click', () => {
+          notification++
+          value.textContent = notification
+          eyebrows.forEach(eyebrow => eyebrow.setAttribute('notification', notification))
+        })
+        document.querySelector('#eybrow-notification-decrease').addEventListener('click', () => {
+          notification - 1 >= 0 ? notification-- : notification
+          value.textContent = notification
+          eyebrows.forEach(eyebrow => eyebrow.setAttribute('notification', notification))
+        })
+      </script>
     </section>
 
     <section>
@@ -177,11 +236,5 @@
         </r-wayf>
       </section>
     </section>
-
-    <script type="module">
-      window.addEventListener("launch", (e) => {
-        console.log("launch", e.detail)
-      });
-    </script>
   </body>
 </html>
