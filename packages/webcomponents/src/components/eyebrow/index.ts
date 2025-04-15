@@ -30,12 +30,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { prefix } from '../../../config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { setLocale } from '../../localization.ts'
+import { ItemType } from './ItemType.ts'
 import styles from './style.scss?inline'
 
 const tagName = `${prefix}eyebrow`
@@ -43,9 +44,46 @@ const tagName = `${prefix}eyebrow`
 @localized()
 @customElement(tagName)
 export class ReciaEyebrow extends LitElement {
+  @property({ type: String })
+  picture = ''
+
+  @property({ attribute: 'display-name', type: String })
+  displayName = ''
+
+  @property({ type: String })
+  function = ''
+
+  @property({ type: String })
+  config = '{}'
+
+  @property({ type: Number })
+  notification = 0
 
   @state()
   isExpanded = false
+
+  @state()
+  localConfig: Record<ItemType, false | { icon?: IconDefinition, link?: string | null }> = {
+    [ItemType.Notification]: {},
+    [ItemType.Settings]: {
+      icon: faGear,
+      link: '',
+    },
+    [ItemType.InfoEtab]: {
+      icon: faInfoCircle,
+    },
+    [ItemType.ChangeEtab]: {
+      icon: faRightLeft,
+      link: '/uPortal/p/switchStruct/',
+    },
+    [ItemType.Starter]: {
+      icon: faPlay,
+    },
+    [ItemType.Logout]: {
+      icon: faArrowRightFromBracket,
+      link: '/uPortal/Logout',
+    },
+  }
 
   constructor() {
     super()
@@ -76,6 +114,32 @@ export class ReciaEyebrow extends LitElement {
     this.removeEventListener('keyup', this.handleKeyPress.bind(this))
     window.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
     window.removeEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
+  updated(changedProps: Map<string, any>) {
+    if (changedProps.has('config')) {
+      this.mergeConfig()
+    }
+  }
+
+  mergeConfig(): void {
+    const parsedConfig = JSON.parse(this.config)
+    const merged: typeof this.localConfig = { ...this.localConfig }
+
+    for (const key in parsedConfig) {
+      const value = parsedConfig[key]
+      if (value === false) {
+        merged[key as ItemType] = false
+      }
+      else {
+        merged[key as ItemType] = {
+          ...merged[key as ItemType],
+          ...value,
+        }
+      }
+    }
+
+    this.localConfig = merged
   }
 
   toggleDropdown(e: Event): void {
@@ -123,10 +187,73 @@ export class ReciaEyebrow extends LitElement {
     return unsafeHTML(icon(svg).html.toString())
   }
 
+  static i18n(): Record<ItemType, string> {
+    return {
+      [ItemType.Notification]: msg('Notifications'),
+      [ItemType.Settings]: msg('Mon profil'),
+      [ItemType.InfoEtab]: msg('Infos de l\'établissement'),
+      [ItemType.ChangeEtab]: msg('Changer d\'établissement'),
+      [ItemType.Starter]: msg('Lancer le didacticiel'),
+      [ItemType.Logout]: msg('Déconnexion'),
+    }
+  }
+
+  itemTemplate(item: { id: ItemType, icon?: IconDefinition, link?: string | null }): TemplateResult {
+    const content = html`
+      ${ReciaEyebrow.i18n()[item.id]}
+      ${
+        item.id === ItemType.Notification
+          ? html`
+          <div
+            class="counter"
+            style="${styleMap({
+              display: this.notification > 0 ? undefined : 'none',
+            })}"
+          >
+            ${this.notification}
+          </div>
+        `
+          : undefined
+      }
+      ${item.icon ? this.getIcon(item.icon) : undefined}
+    `
+
+    return html`
+      <li>
+        ${
+          item.link && item.link.trim() !== ''
+            ? html`
+            <a
+              id="${item.id}"
+              href="${item.link}"
+              @click="${this.closeDropdown}"
+            >
+              ${content}
+            </a>
+          `
+            : html`
+            <button
+              id="${item.id}"
+              @click="${(e: Event) => this.emitEvent(e, item.id)}"
+            >
+              ${content}
+            </button>
+          `
+        }
+      </li>
+    `
+  }
+
   render(): TemplateResult {
     return html`
       <div class="eyebrow">
-        <div class="eyebrow-notification"></div>
+        <div
+          class="eyebrow-notification"
+          style="${styleMap({
+            display: this.localConfig.notification !== false && this.notification > 0 ? undefined : 'none',
+          })}"
+        >
+        </div>
         <button
           id="eyebrow-button"
           class="eyebrow-button"
@@ -135,10 +262,17 @@ export class ReciaEyebrow extends LitElement {
           aria-label="${msg('Menu mon compte')}"
           @click="${this.toggleDropdown}"
         >
-          <img src="https://placehold.co/46x46" alt="" class="picture"/>
+          <img src="${this.picture}" alt="" class="picture"/>
           <div class="info">
-            <span class="displayname">Anaïs Durant</span>
-            <span class="function">Enseignante</span>
+            <span class="displayname">${this.displayName}</span>
+            <span
+              class="function"
+              style="${styleMap({
+                display: this.function !== '' ? undefined : 'none',
+              })}"
+            >
+              ${this.function}
+            </span>
           </div>
           ${this.getIcon(this.isExpanded ? faChevronUp : faChevronDown)}
         </button>
@@ -149,62 +283,14 @@ export class ReciaEyebrow extends LitElement {
             display: this.isExpanded ? undefined : 'none',
           })}"
         >
-          <li>
-            <button
-              id="notification"
-              @click="${(e: Event) => this.emitEvent(e, 'notification')}"
-            >
-              ${msg('Notifications')}
-              <div class="counter">4</div>
-            </button>
-          </li>
-          <li>
-            <a
-              id="settings"
-              href="#"
-              @click="${this.closeDropdown}"
-            >
-              ${msg('Mon profil')}
-              ${this.getIcon(faGear)}
-            </a>
-          </li>
-          <li>
-            <button
-              id="info-etab"
-              @click="${(e: Event) => this.emitEvent(e, 'info-etab')}"
-            >
-              ${msg('Infos de l\'établissement')}
-              ${this.getIcon(faInfoCircle)}
-            </button>
-          </li>
-          <li>
-            <button
-              id="change-etab"
-              @click="${(e: Event) => this.emitEvent(e, 'change-etab')}"
-            >
-              ${msg('Changer d\'établissement')}
-              ${this.getIcon(faRightLeft)}
-            </button>
-          </li>
-          <li>
-            <button
-              id="starter"
-              @click="${(e: Event) => this.emitEvent(e, 'starter')}"
-            >
-              ${msg('Lancer le didacticiel')}
-              ${this.getIcon(faPlay)}
-            </button>
-          </li>
-          <li>
-            <a
-              id="logout"
-              href="#"
-              @click="${this.closeDropdown}"
-            >
-              ${msg('Déconnexion')}
-              ${this.getIcon(faArrowRightFromBracket)}
-            </a>
-          </li>
+          ${
+            Object.entries(this.localConfig)
+              ?.filter(([key, value]) => {
+                return Object.values(ItemType).includes(key as ItemType)
+                  && value !== false
+              })
+              .map(([key, value]) => this.itemTemplate({ id: key as ItemType, ...value }))
+          }
         </ul>
       </div>
     `
