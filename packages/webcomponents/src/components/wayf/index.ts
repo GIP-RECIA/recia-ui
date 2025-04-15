@@ -61,8 +61,7 @@ export class ReciaWayf extends LitElement {
     return html`
       <ul class="wayf-tiles">
         ${
-          this.idpIds?.filter(idpId => Object.values(IdpIdType)
-            .includes(idpId))
+          this.idpIds?.filter(idpId => Object.values(IdpIdType).includes(idpId))
             .map(idpId => html`
               <li>
                 <a id=${idpId} href="${this.casUrl}&idpId=${idpId}">
