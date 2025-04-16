@@ -19,8 +19,6 @@ const prefix = 'r-'
 
 // Components to build
 const components = [
-  'button',
-  'tag',
   'wayf',
 ]
 
