@@ -1,3 +1,5 @@
+@use 'ress/dist/ress.min.css';
+
 @forward 'mixins';
 
 $prefix: recia-;
@@ -14,3 +16,7 @@ $grid-breakpoints: (
   xl: 1200px,
   xxl: 1400px
 );
+
+* {
+  box-sizing: border-box;
+}

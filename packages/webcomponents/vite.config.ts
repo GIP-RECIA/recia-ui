@@ -51,13 +51,6 @@ export default ({ mode }: ConfigEnv) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@use 'ress/dist/ress.min.css';`,
-        },
-      },
-    },
     build: {
       sourcemap: true,
       lib: {
