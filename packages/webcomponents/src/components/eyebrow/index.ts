@@ -15,7 +15,7 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
 import type { DirectiveResult } from 'lit/async-directive.js'
 import type { UnsafeHTMLDirective } from 'lit/directives/unsafe-html.js'
 import { icon, library } from '@fortawesome/fontawesome-svg-core'
@@ -120,10 +120,11 @@ export class ReciaEyebrow extends LitElement {
     window.removeEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
-  updated(changedProps: Map<string, any>) {
-    if (changedProps.has('config')) {
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('config')) {
       this.mergeConfig()
     }
+    return true
   }
 
   mergeConfig(): void {
