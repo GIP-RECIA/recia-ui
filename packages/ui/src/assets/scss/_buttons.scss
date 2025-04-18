@@ -25,7 +25,7 @@
   &-primary {
     @extend .btn;
     background-color: var(--#{$prefix}btn-primary-bg);
-    color: var(--#{$prefix}btn-primary-color);
+    color: var(--#{$prefix}btn-primary);
 
     &:active {
       background-color: var(--#{$prefix}primary-pressed) !important;
@@ -67,7 +67,7 @@
   &-secondary {
     @extend .btn;
     background-color: var(--#{$prefix}btn-secondary-bg);
-    color: var(--#{$prefix}secondary-color);
+    color: var(--#{$prefix}secondary);
 
     &:active {
       background-color: var(--#{$prefix}secondary-pressed) !important;
@@ -115,7 +115,7 @@
     font-weight: 600;
     font-size: var(--#{$prefix}font-size-sm);
     border-radius: 17px;
-    color: var(--#{$prefix}secondary-color);
+    color: var(--#{$prefix}secondary);
 
     &:hover,
     &:focus-visible {
