@@ -57,6 +57,7 @@
       padding: 8px 16px;
 
       &.circle {
+        border-radius: 50%;
         width: 34px;
         height: 34px;
         padding: 8px;
@@ -101,6 +102,7 @@
       padding: 8px 16px;
 
       &.circle {
+        border-radius: 50%;
         width: 34px;
         height: 34px;
         padding: 8px;
@@ -114,7 +116,6 @@
     font-family: $dm-sans;
     font-weight: 600;
     font-size: var(--#{$prefix}font-size-sm);
-    border-radius: 17px;
     color: var(--#{$prefix}btn-secondary);
 
     &:hover,
