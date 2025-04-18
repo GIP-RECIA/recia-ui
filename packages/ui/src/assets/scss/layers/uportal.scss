@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '../recia-style' as *;
-@use './eyebrow.scss';
 
 .extended-uportal-header {
   background-color: var(--#{$prefix}body-bg);
