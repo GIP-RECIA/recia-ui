@@ -14,6 +14,21 @@
     height: 27px;
     width: auto;
   }
+
+  .back-home {
+    @extend %button-and-tag;
+    border-radius: 50%;
+
+    > svg {
+      height: 36px;
+      width: 36px;
+      color: var(--#{$prefix}primary);
+    }
+
+    &:focus-visible {
+      outline: 4px solid var(--#{$prefix}primary);
+    }
+  }
 }
 
 .extended-uportal-footer {
