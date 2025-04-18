@@ -20,7 +20,7 @@
     padding: 6px 10px;
     border-radius: 4px;
     background-color: var(--#{$prefix}system-red);
-    color: var(--#{$prefix}body-inverted);
+    color: var(--#{$prefix}white);
     font-size: var(--#{$prefix}font-size-xxs);
     font-weight: bold;
   }
@@ -79,7 +79,9 @@
     font-size: var(--#{$prefix}font-size-xs);
     transition:
       opacity .3s ease-out,
-      visibility .3s ease-out;
+      visibility .3s ease-out,
+      height .1.5s ease-out,
+      margin-top .3s ease-out;
   }
 
   @each $type, $values in $categories {
@@ -90,7 +92,9 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
+    outline: none;
     border-top: 11px solid var(--#{$prefix}service-hover);
     box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}service-hover-shadow);
 
@@ -105,9 +109,10 @@
       }
 
       &-more {
-        // position: unset;
         opacity: 1;
         visibility: visible;
+        height: 100%;
+        margin-top: 8px;
       }
     }
   }
@@ -132,10 +137,10 @@
     }
 
     & > &-more {
-      // position: absolute;
-      // bottom: 0;
       opacity: 0;
       visibility: hidden;
+      height: 0;
+      margin-top: 0;
     }
   }
 }
