@@ -84,7 +84,7 @@
 
             &:hover {
               color: var(--#{$prefix}primary);
-              background-color: var(--#{$prefix}secondary-hover);
+              background-color: var(--#{$prefix}btn-secondary-hover);
             }
           }
         }

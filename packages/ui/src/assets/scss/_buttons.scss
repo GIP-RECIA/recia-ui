@@ -28,7 +28,7 @@
     color: var(--#{$prefix}btn-primary);
 
     &:active {
-      background-color: var(--#{$prefix}primary-pressed) !important;
+      background-color: var(--#{$prefix}btn-primary-pressed) !important;
     }
 
     &:hover,
@@ -67,16 +67,16 @@
   &-secondary {
     @extend .btn;
     background-color: var(--#{$prefix}btn-secondary-bg);
-    color: var(--#{$prefix}secondary);
+    color: var(--#{$prefix}btn-secondary);
 
     &:active {
-      background-color: var(--#{$prefix}secondary-pressed) !important;
+      background-color: var(--#{$prefix}btn-secondary-pressed) !important;
       color: var(--#{$prefix}primary) !important;
     }
 
     &:hover,
     &:focus-visible {
-      background-color: var(--#{$prefix}secondary-hover);
+      background-color: var(--#{$prefix}btn-secondary-hover);
       color: var(--#{$prefix}primary);
     }
 
@@ -115,7 +115,7 @@
     font-weight: 600;
     font-size: var(--#{$prefix}font-size-sm);
     border-radius: 17px;
-    color: var(--#{$prefix}secondary);
+    color: var(--#{$prefix}btn-secondary);
 
     &:hover,
     &:focus-visible {
@@ -168,12 +168,12 @@
 
   &:not(.active) {
     &:hover {
-      background-color: var(--#{$prefix}secondary-hover);
+      background-color: var(--#{$prefix}btn-secondary-hover);
       color: var(--#{$prefix}primary);
     }
 
     &:focus-visible {
-      background-color: var(--#{$prefix}secondary-hover);
+      background-color: var(--#{$prefix}btn-secondary-hover);
       color: var(--#{$prefix}primary);
       outline: 3px solid var(--#{$prefix}primary);
     }

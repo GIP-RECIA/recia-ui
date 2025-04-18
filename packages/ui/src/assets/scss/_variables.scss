@@ -29,35 +29,18 @@ $colors: (
 );
 
 $primary: #0062BC;
-$primary-pressed: #004584;
 $primary-dark: #57AEFF;
-$primary-pressed-dark: #8AC7FF;
-
-$secondary: $basic-grey;
-$secondary-hover: #E6EFF8;
-$secondary-pressed: #CCE0F2;
-$secondary-dark: $white;
-$secondary-hover-dark: #1A1F23;
-$secondary-pressed-dark: #212E3A;
 
 $hover: #F8F8F8;                // Couleur des élément interaftifs en hover (ex: dropdown item)
 $hover-dark: #262626;
 
 $theme-colors: (
   primary: $primary,
-  primary-pressed: $primary-pressed,
-  secondary: $secondary,
-  secondary-hover: $secondary-hover,
-  secondary-pressed: $secondary-pressed,
   hover: $hover
 );
 
 $theme-colors-dark: (
   primary: $primary-dark,
-  primary-pressed: $primary-pressed-dark,
-  secondary: $secondary-dark,
-  secondary-hover: $secondary-hover-dark,
-  secondary-pressed: $secondary-pressed-dark,
   hover: $hover-dark
 );
 
@@ -207,8 +190,15 @@ $font-size-breakpoints: (
 
 $btn-primary: $white;
 $btn-primary-dark: $basic-black;
+$btn-primary-pressed: #004584;
+$btn-primary-pressed-dark: #8AC7FF;
+
 $btn-secondary: $basic-black;
 $btn-secondary-dark: $white;
+$btn-secondary-hover: #E6EFF8;
+$btn-secondary-hover-dark: #1A1F23;
+$btn-secondary-pressed: #CCE0F2;
+$btn-secondary-pressed-dark: #212E3A;
 
 $btn-primary-bg: $basic-black;
 $btn-primary-bg-dark: $white;
@@ -217,14 +207,20 @@ $btn-secondary-bg-dark: $basic-black;
 
 $buttons: (
   primary: $btn-primary,
+  primary-pressed: $btn-primary-pressed,
   secondary: $btn-secondary,
+  secondary-hover: $btn-secondary-hover,
+  secondary-pressed: $btn-secondary-pressed,
   primary-bg: $btn-primary-bg,
   secondary-bg: $btn-secondary-bg,
 );
 
 $buttons-dark: (
   primary: $btn-primary-dark,
+  primary-pressed: $btn-primary-pressed-dark,
   secondary: $btn-secondary-dark,
+  secondary-hover: $btn-secondary-hover-dark,
+  secondary-pressed: $btn-secondary-pressed-dark,
   primary-bg: $btn-primary-bg-dark,
   secondary-bg: $btn-secondary-bg-dark,
 );
