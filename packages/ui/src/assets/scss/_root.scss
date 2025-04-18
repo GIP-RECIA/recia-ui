@@ -3,6 +3,7 @@
 
 :root {
   --#{$prefix}body-color: #{$body-color};
+  --#{$prefix}body-inverted: #{$body-inverted};
   --#{$prefix}body-bg: #{$body-bg};
 
   @each $color, $value in $colors {
@@ -61,6 +62,7 @@
     color-scheme: dark;
 
     --#{$prefix}body-color: #{$body-color-dark};
+    --#{$prefix}body-inverted: #{$body-inverted-dark};
     --#{$prefix}body-bg: #{$body-bg-dark};
 
     @each $color, $value in $theme-colors-dark {
