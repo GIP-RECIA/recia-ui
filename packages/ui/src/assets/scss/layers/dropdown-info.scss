@@ -1,0 +1,74 @@
+@use 'sass:map';
+@use '../recia-style' as *;
+
+.dropdown-info {
+  position: relative;
+
+  & > &-button {
+    @extend .btn-secondary;
+    background-color: unset;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+
+    &:active {
+      background-color: var(--#{$prefix}primary) !important;
+      color: var(--#{$prefix}body-inverted) !important;
+    }
+
+    &.active {
+      color: var(--#{$prefix}body-inverted);
+      background-color: var(--#{$prefix}primary);
+      box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+      position: relative;
+      z-index: 1010;
+    }
+  }
+
+  & > &-menu {
+    position: absolute;
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 10px;
+    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    overflow: hidden;
+    z-index: 1000;
+    padding: 32px;
+
+    &.top {
+      top: -8px;
+
+      &.right {
+        left: -8px;
+        padding-left: 58px;
+        border-top-left-radius: 20px;
+      }
+
+      &.left {
+        right: -8px;
+        padding-right: 58px;
+        border-top-right-radius: 20px;
+      }
+    }
+
+    &.bottom {
+      bottom: -8px;
+
+      &.right {
+        left: -8px;
+        padding-left: 58px;
+        border-bottom-left-radius: 20px;
+      }
+
+      &.left {
+        right: -8px;
+        padding-right: 58px;
+        border-bottom-right-radius: 20px;
+      }
+    }
+
+    &.no-padding {
+      padding: 0 !important;
+    }
+  }
+}
