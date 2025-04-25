@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use '../recia-style' as *;
+
+.bottom-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 1050;
+
+  &.masked {
+    background-color: rgba(#000000, .25);
+  }
+
+  > .scrollable-container {
+    @extend .container;
+    position: absolute;
+    inset: 0;
+    z-index: 1055;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    > .sheet {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--#{$prefix}body-bg);
+      border-radius: 8px 8px 0 0;
+      margin-top: 54px;
+      padding: 16px;
+      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+
+      > .dragable {
+        align-self: center;
+        height: 6px;
+        width: 104px;
+        opacity: .33;
+        background-color: var(--#{$prefix}lighter-black);
+        border-radius: 3px;
+        margin-bottom: 16px;
+      }
+
+      &.no-padding {
+        padding: 0 !important;
+      }
+    }
+  }
+}
