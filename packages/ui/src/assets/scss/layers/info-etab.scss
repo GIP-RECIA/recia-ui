@@ -4,8 +4,10 @@
 .info-etab {
   position: relative;
   display: flex;
+  flex-direction: column;
 
-  > .image {
+  > .image-container {
+    display: none;
     position: relative;
     width: 244px;
     overflow: hidden;
@@ -19,25 +21,23 @@
     }
   }
 
-  > .content {
-    padding: 32px;
-    text-wrap: nowrap;
-    flex-shrink: 0;
-
+  > .content-container {
     > header {
       display: flex;
       align-items: center;
       column-gap: 16px;
-      margin-bottom: 32px;
+      margin-bottom: 16px;
       font-family: $sora;
 
       > svg {
-        height: 32px;
-        width: 32px;
+        flex-shrink: 0;
+        height: 36px;
+        width: 36px;
+        margin: -4px;
         --logo-simple-color: var(--#{$prefix}primary);
       }
 
-      .heading {
+      > div > .heading {
         &-etab {
           display: block;
           font-size: var(--#{$prefix}font-size-lg);
@@ -53,6 +53,7 @@
       }
 
       > .close {
+        display: none;
         @extend %button-and-tag;
         align-self: start;
         font-size: 20px;
@@ -73,30 +74,91 @@
       }
     }
 
-    > address {
-      font-style: unset;
+    > .content {
+      > .image {
+        height: 141px;
+        overflow: hidden;
+        margin-bottom: 24px;
+        border-radius: 4px;
 
-      > ul {
-        @include list-unstyled;
-        display: flex;
-        flex-direction: column;
-        row-gap: 12px;
-        font-size: var(--#{$prefix}font-size-md);
-        line-height: 24px;
-        opacity: .8;
+        > img  {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
+      }
 
-        > li {
-          display: inline-flex;
-          gap: 16px;
+      > address {
+        font-style: unset;
 
-          > svg {
-            font-size: var(--#{$prefix}font-size-xxl);
-            width: 32px;
-            opacity: .3;
+        > ul {
+          @include list-unstyled;
+          font-size: var(--#{$prefix}font-size-sm);
+          font-weight: 500;
+
+          > li {
+            display: flex;
+            column-gap: 12px;
+            align-items: center;
+
+            > svg {
+              font-size: var(--#{$prefix}font-size-md);
+              width: 22px;
+              opacity: .3;
+            }
+
+            > a {
+              @include link-unstyled;
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 24px;
+            }
           }
+        }
+      }
+    }
+  }
 
-          > a {
-            @include link-unstyled;
+  @media (width >= map.get($grid-breakpoints, md)) {
+    flex-direction: row;
+
+    > .image-container {
+      display: unset;
+    }
+
+    > .content-container {
+      padding: 32px;
+      text-wrap: nowrap;
+
+      > header {
+        margin-bottom: 32px;
+
+        > .close {
+          display: unset;
+        }
+      }
+
+      > .content {
+        > .image {
+          display: none;
+        }
+
+        > address > ul {
+          font-weight: unset;
+          font-size: var(--#{$prefix}font-size-md);
+          line-height: 24px;
+          opacity: .8;
+
+          > li {
+            > svg {
+              font-size: var(--#{$prefix}font-size-xl);
+              width: 32px;
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 12px;
+            }
           }
         }
       }

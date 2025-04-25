@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" style="overflow-y: hidden;">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8" />
@@ -18,36 +18,10 @@
         </a>
         <span>Lycée international de Palaiseau</span>
         <div class="dropdown-info">
-          <button class="dropdown-info-button active" aria-expanded="true" aria-controls="dropdown-info-menu" aria-label="Menu fiche établissement">
+          <button class="dropdown-info-button" aria-expanded="false" aria-controls="dropdown-info-menu" aria-label="Menu fiche établissement">
             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
           </button>
-          <div id="dropdown-info-menu" class="dropdown-info-menu top right no-padding">
-            <div class="info-etab">
-              <div class="image">
-                <img src="https://placehold.co/600x800" alt="">
-              </div>
-              <div class="content">
-                <header>
-                  <svg aria-hidden="true">
-                    <use xlink:href="/svg/NOC-simple.svg#simple"></use>
-                  </svg>
-                  <div>
-                    <span class="heading-etab">Lycée international de Plaiseau</span>
-                    <span class="heading-acad">Académie Orléans-Tours</span>
-                  </div>
-                  <button class="close" aria-label="Fermer la fiche établissement">
-                    <i class="fa-solid fa-times" aria-hidden="true"></i>
-                  </button>
-                </header>
-                <address>
-                  <ul>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i>17-19 Cr Pierre Vasseur, 91120 Palaiseau</li>
-                    <li><i class="fa-solid fa-at" aria-hidden="true"></i><a href="mailto:ce.0912433a@ac-versailles.fr">ce.0912433a@ac-versailles.fr</a></li>
-                    <li><i class="fa-solid fa-phone" aria-hidden="true"></i><a href="tel:+33 (0)1.85.37.13.15">+33 (0)1.85.37.13.15</a></li>
-                  </ul>
-                </address>
-              </div>
-            </div>
+          <div id="dropdown-info-menu" class="dropdown-info-menu top right no-padding" style="display: none;">
           </div>
         </div>
       </div>
@@ -422,15 +396,6 @@
     </div>
   </main>
 
-  <div class="bottom-sheet masked" role="dialog" aria-modal="true">
-    <div class="scrollable-container">
-      <div class="grow-1"></div>
-      <div class="sheet">
-        <div class="dragable"></div>
-      </div>
-    </div>
-  </div>
-
   <footer>
     <div class="extended-uportal-footer">
       <div class="container">
@@ -486,6 +451,10 @@
   </footer>
 
   <script type="module" src="/src/main.ts"></script>
+  <script type="module">
+    document.querySelector('.dropdown-info-button').addEventListener('click', (e) => {
+      window.location = '/info-etab.html'
+    })
+  </script>
 </body>
-
 </html>
