@@ -23,6 +23,10 @@
       box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
       position: relative;
       z-index: 1010;
+
+      &:focus-visible {
+        outline: 4px solid var(--#{$prefix}primary-30);
+      }
     }
 
     &:not(.active) {
