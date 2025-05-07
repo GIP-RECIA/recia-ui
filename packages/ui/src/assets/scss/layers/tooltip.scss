@@ -1,0 +1,65 @@
+@use 'sass:map';
+@use '../recia-style' as *;
+
+.tooltip {
+  display: none;
+  text-wrap: nowrap;
+  color: #FFF;
+  font-size: var(--#{$prefix}font-size-xxs);
+  font-weight: bold;
+
+  > .angle {
+    position: absolute;
+    height: 0;
+    width: 0;
+    right: calc(50% - 5px);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+  }
+
+  > span {
+    position: absolute;
+    background-color: var(--#{$prefix}basic-black);
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: var(--#{$prefix}shadow-low-elevation) var(--#{$prefix}black-20);
+  }
+
+  &.top {
+    > .angle {
+      bottom: calc(100% + 5px);
+      border-top: 5px solid var(--#{$prefix}basic-black);
+    }
+
+    > span {
+      bottom: calc(100% + 10px);
+    }
+
+    &.right > span {
+      left: 0;
+    }
+
+    &.left > span {
+      right: 0;
+    }
+  }
+
+  &.bottom {
+    > .angle {
+      top: calc(100% + 5px);
+      border-bottom: 5px solid var(--#{$prefix}basic-black);
+    }
+
+    > span {
+      top: calc(100% + 10px);
+    }
+
+    &.right > span {
+      left: 0;
+    }
+
+    &.left > span {
+      right: 0;
+    }
+  }
+}
