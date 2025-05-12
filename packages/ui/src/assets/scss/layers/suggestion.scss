@@ -9,8 +9,8 @@
   & > &-tiles {
     @include list-unstyled;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 16px;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 16px;
     margin: 24px 0;
 
     > li > a {
@@ -34,9 +34,10 @@
 
     & > &-tiles {
       display: flex;
+      flex-wrap: nowrap;
 
-      > * {
-        flex-shrink: 0;
+      > li {
+        flex: 0 0 150px;
       }
     }
 
