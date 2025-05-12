@@ -19,3 +19,19 @@ import 'ress/dist/ress.min.css'
 import './assets/scss/main.scss'
 
 register()
+
+// Eyebrow
+const eyebrow = document.querySelector<HTMLElement>('.eyebrow')
+const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('.eyebrow-button')
+const eyebrowMenu = eyebrow?.querySelector<HTMLElement>('#eyebrow-menu')
+if (eyebrow && eyebrowButton && eyebrowMenu) {
+  let isEyebrowExpended = false
+  eyebrowButton.addEventListener('click', () => {
+    isEyebrowExpended = !isEyebrowExpended
+    eyebrowButton.ariaExpanded = isEyebrowExpended.toString()
+    const buttonIcon = eyebrowButton.querySelector<HTMLElement>('svg')
+    buttonIcon?.classList.remove('fa-chevron-down', 'fa-chevron-up')
+    buttonIcon?.classList.add(isEyebrowExpended ? 'fa-chevron-up' : 'fa-chevron-down')
+    eyebrowMenu.style.display = isEyebrowExpended ? '' : 'none'
+  })
+}
