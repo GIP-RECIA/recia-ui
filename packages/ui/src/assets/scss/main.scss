@@ -6,6 +6,8 @@
 @use 'layers/bottom-sheet';
 @use 'layers/discover';
 @use 'layers/dropdown-info';
+@use 'layers/extended-uportal-footer';
+@use 'layers/extended-uportal-header';
 @use 'layers/eyebrow';
 @use 'layers/info-etab';
 @use 'layers/login';
@@ -14,7 +16,7 @@
 @use 'layers/service';
 @use 'layers/suggestion';
 @use 'layers/tooltip';
-@use 'layers/uportal';
+@use 'layers/uportal-footer';
 @use 'layers/wayf';
 @use 'layers/widgets';
 
