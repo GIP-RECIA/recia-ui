@@ -87,3 +87,30 @@ dropdownInfoButton?.addEventListener('click', () => {
   isDropdownInfoExpended = !isDropdownInfoExpended
   changeDropdownInfoState(isDropdownInfoExpended)
 })
+
+// Search
+const extendedUportalHeader = document.querySelector<HTMLElement>('.extended-uportal-header')
+const extendedUportalHeaderSearchButton = extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-button'))
+const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.expended')
+
+const search = extendedUportalHeaderExpended?.querySelector<HTMLElement>('.search')
+const searchCloseButton = search?.querySelector<HTMLButtonElement>('.search-field > .end > button')
+
+let isExtendedUportalHeaderExpended = false
+
+function changeSearchState(show: boolean): void {
+  if (!extendedUportalHeader || !extendedUportalHeaderExpended)
+    return
+  document.documentElement.style.overflowY = show ? 'hidden' : ''
+  extendedUportalHeaderExpended.style.display = show ? '' : 'none'
+}
+
+extendedUportalHeaderSearchButton?.addEventListener('click', () => {
+  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
+  changeSearchState(isExtendedUportalHeaderExpended)
+})
+
+searchCloseButton?.addEventListener('click', () => {
+  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
+  changeSearchState(isExtendedUportalHeaderExpended)
+})

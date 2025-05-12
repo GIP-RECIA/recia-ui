@@ -61,6 +61,9 @@
       <div class="middle">
       </div>
       <div class="end">
+        <button class="search-button">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </button>
         <div class="eyebrow">
           <div class="eyebrow-notification"></div>
           <button class="eyebrow-button" aria-expanded="false" aria-controls="eyebrow-menu" aria-label="Menu mon compte">
@@ -107,6 +110,79 @@
                 Déconnexion
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
               </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="expended" style="display: none;">
+        <div class="search">
+          <div class="search-mask"></div>
+          <div class="search-field">
+            <div class="start">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </div>
+            <div class="middle">
+              <input type="text" placeholder="Rechercher un service" title="Rechercher un service">
+            </div>
+            <div class="end">
+              <button>
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <ul class="search-results">
+            <li>
+              <div class="section-name">
+                <span>Services</span>
+              </div>
+              <ul>
+                <li>
+                  <a href="#">
+                    <header>
+                      <span class="result-tag">Espace collaboratif</span><span class="result-title">Espaces Nextcloud</span>
+                    </header>
+                    <span>Espaces de <strong>stockage</strong> cloud de l'ENT</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div class="section-name">
+                <span>Médiacentre</span>
+              </div>
+              <ul>
+                <li>
+                  <a href="#">
+                    <header>
+                      <span class="result-title">Apprendre tous les secrets de Nextcloud</span>
+                    </header>
+                    <span>Les espaces de <strong>stockage</strong> Nextcloud offrent bien plus de fonctionnalités que vous ne le pensiez : ...</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div class="section-name">
+                <span>Actualités</span>
+              </div>
+              <ul>
+                <li>
+                  <a href="#">
+                    <header>
+                      <span class="result-tag">Collectivités</span><span class="result-title">Espaces de <strong>stockage</strong> Nextcloud inaccessibles du 13/04 au 15/04</span>
+                    </header>
+                    <span>Ce week-end, les espaces de <strong>stockage</strong> cloud de l’ENT subiront une interruption de maintenance l...</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <header>
+                      <span class="result-tag">Etablissement</span><span class="result-title">Attention aux piratage des espaces de <strong>stockage</strong></span>
+                    </header>
+                    <span>Depuis le début de l’année scolaire, plus d’une dizaine de comptes étudiants ont été piratés, résul...</span>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
