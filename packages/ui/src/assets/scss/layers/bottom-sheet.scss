@@ -2,7 +2,7 @@
 @use '../recia-style' as *;
 
 .bottom-sheet {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 1050;
   background-color: rgba(#000000, .25);
