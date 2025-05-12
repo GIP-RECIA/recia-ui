@@ -40,7 +40,7 @@ bottomSheetInfoDraggable?.addEventListener('click', () => {
 
 // Eyebrow
 const eyebrow = document.querySelector<HTMLElement>('.eyebrow')
-const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('.eyebrow-button')
+const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('button.eyebrow-button')
 const eyebrowMenu = eyebrow?.querySelector<HTMLElement>('#eyebrow-menu')
 
 let isEyebrowExpended = false
@@ -60,7 +60,7 @@ eyebrowButton?.addEventListener('click', () => {
   changeEyebrowState(isEyebrowExpended)
 })
 
-eyebrow?.querySelector<HTMLButtonElement>('#info-etab')?.addEventListener('click', () => {
+eyebrow?.querySelector<HTMLButtonElement>('button#info-etab')?.addEventListener('click', () => {
   isEyebrowExpended = !isEyebrowExpended
   changeEyebrowState(isEyebrowExpended)
   isBottomSheetInfo = !isBottomSheetInfo
@@ -69,7 +69,7 @@ eyebrow?.querySelector<HTMLButtonElement>('#info-etab')?.addEventListener('click
 
 // Dropdown info
 const dropdownInfo = document.querySelector<HTMLElement>('.dropdown-info')
-const dropdownInfoButton = dropdownInfo?.querySelector<HTMLButtonElement>('.dropdown-info-button')
+const dropdownInfoButton = dropdownInfo?.querySelector<HTMLButtonElement>('button.dropdown-info-button')
 const dropdownInfoMask = dropdownInfo?.querySelector<HTMLElement>('.dropdown-info-mask')
 const dropdownInfoMenu = dropdownInfo?.querySelector<HTMLElement>('#dropdown-info-menu')
 

@@ -2,31 +2,115 @@
 @use '../recia-style' as *;
 
 .extended-uportal-header {
+  position: relative;
   background-color: var(--#{$prefix}body-bg);
   box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
-  height: 64px;
+  padding: 14px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
+  flex-direction: column;
+  row-gap: 14px;
 
   > .header-logo {
     height: 27px;
     width: auto;
   }
 
-  .back-home {
-    @extend %button-and-tag;
-    border-radius: 50%;
+  > * {
+    width: 100%;
+  }
 
-    > svg {
-      height: 36px;
-      width: 36px;
-      color: var(--#{$prefix}primary);
+  > .content {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 14px;
+
+    > .start {
+      display: flex;
+      column-gap: 16px;
+      align-items: center;
+
+      > .back-home {
+        @extend %button-and-tag;
+        border-radius: 50%;
+        margin-right: -2px;
+
+        > svg {
+          height: 44px;
+          width: 44px;
+          margin: -4px;
+          color: var(--#{$prefix}primary);
+        }
+
+        &:focus-visible {
+          outline: none;
+          > svg {
+            color: var(--#{$prefix}primary-30);
+          }
+        }
+      }
+
+      > span {
+        font-family: $sora;
+        font-size: var(--#{$prefix}font-size-sm);
+        font-weight: 600;
+      }
+
+      > .dropdown-info {
+        display: none;
+      }
     }
 
-    &:focus-visible {
-      outline: 4px solid var(--#{$prefix}primary);
+    > .middle {
+    }
+
+    > .end {
+      display: flex;
+      align-items: center;
+      column-gap: 14px;
+
+      > .search-button {
+        @extend %button-and-tag;
+        font-family: $sora;
+        font-weight: 600;
+        font-size: var(--#{$prefix}font-size-md);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        padding: 12px;
+        border: 1px solid var(--#{$prefix}stroke);
+        background-color: var(--#{$prefix}basic-grey);
+
+        &:focus-visible {
+          outline: 4px solid var(--#{$prefix}primary);
+        }
+      }
+
+      > .notification {
+        display: none;
+      }
+    }
+  }
+
+  > .expended {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    & > .content > .end > .notification {
+      display: unset;
+    }
+
+    & > .content > .start .dropdown-info {
+      display: unset;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    & > .content > .end > .search-button {
+      display: none;
     }
   }
 }
