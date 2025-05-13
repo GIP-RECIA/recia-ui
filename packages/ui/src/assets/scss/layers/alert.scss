@@ -8,13 +8,25 @@
   background-color: var(--#{$prefix}system-blue);
   color: var(--#{$prefix}white);
   padding: 14px 16px;
+  height: 60px;
 
-  > svg,
-  & > &-close > svg {
-    height: 20px;
-    width: 20px;
-    margin: 2px;
-    color: var(--#{$prefix}white);
+  & > &-icon,
+  & > &-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    margin: -4px;
+    flex: 0 0 auto;
+    color: inherit;
+    font-size: 16px;
     opacity: .5;
   }
 
@@ -32,23 +44,24 @@
       font-weight: normal;
       text-wrap: nowrap;
 
-      &:hover,
       &:focus-visible {
-        text-decoration: underline 2px solid;
         outline: none;
+        font-weight: bold;
+        text-decoration: underline 2px;
       }
     }
   }
 
   & > &-close {
-    border-radius: 50%;
-    display: inline-flex;
+    cursor: pointer;
 
     &:hover,
     &:focus-visible {
-      > svg {
-        opacity: 1;
-      }
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #FFF;
     }
   }
 
