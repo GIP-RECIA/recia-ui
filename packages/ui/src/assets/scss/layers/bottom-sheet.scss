@@ -17,7 +17,16 @@
     overflow-y: auto;
     scrollbar-width: none;
 
+    &:focus-visible {
+      outline: none;
+
+      > .sheet {
+        outline: 2px dotted var(--#{$prefix}system-blue);
+      }
+    }
+
     > .sheet {
+      position: relative;
       display: flex;
       flex-direction: column;
       background-color: var(--#{$prefix}body-bg);
@@ -36,8 +45,30 @@
         margin-bottom: 16px;
       }
 
+      > .close {
+        display: none;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 16px;
+      }
+
       &.no-padding {
         padding: 0 !important;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .scrollable-container > .sheet {
+      padding: 32px;
+
+      > .dragable {
+        display: none;
+      }
+
+      > .close {
+        display: unset;
       }
     }
   }
