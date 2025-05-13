@@ -50,49 +50,56 @@ $categories: (
     hover: (
       color: #C400F3,
       shadow: .1,
-    )
+    ),
+    text: $white
   ),
   collaboratif: (
     color: #5747BC,
     hover: (
       color: #665BE7,
       shadow: .15,
-    )
+    ),
+    text: $white
   ),
   apprentissage: (
     color: #FFAC2F,
     hover: (
       color: #F5C72E,
       shadow: .15,
-    )
+    ),
+    text: $black
   ),
   vie-scolaire: (
     color: #858585,
     hover: (
       color: #5B5B5B,
       shadow: .15,
-    )
+    ),
+    text: $black
   ),
   orientation: (
     color: #26C6DA,
     hover: (
       color: #70EAF5,
       shadow: .15,
-    )
+    ),
+    text: $black
   ),
   parametres: (
     color: #66BB6A,
     hover: (
       color: #4EF186,
       shadow: .15,
-    )
+    ),
+    text: $black
   ),
   communication: (
     color: #EC407A,
     hover: (
       color: #F60086,
       shadow: .2,
-    )
+    ),
+    text: $black
   ),
 );
 

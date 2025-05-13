@@ -114,3 +114,27 @@ searchCloseButton?.addEventListener('click', () => {
   isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
   changeSearchState(isExtendedUportalHeaderExpended)
 })
+
+// Bottom sheet service more
+const bottomSheetInfoServiceMore = document.querySelector<HTMLElement>('#bottom-sheet-service-more')
+const bottomSheetInfoServiceMoreDraggable = bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')
+
+let isBottomSheetInfoServiceMore = false
+
+function changeBottomSheetInfoServiceMoreState(show: boolean): void {
+  if (!bottomSheetInfoServiceMore)
+    return
+  document.documentElement.style.overflowY = show ? 'hidden' : ''
+  bottomSheetInfoServiceMore.style.display = show ? '' : 'none'
+}
+
+bottomSheetInfoServiceMoreDraggable?.addEventListener('click', () => {
+  isBottomSheetInfoServiceMore = !isBottomSheetInfoServiceMore
+  changeBottomSheetInfoServiceMoreState(isBottomSheetInfoServiceMore)
+})
+
+document.querySelector<HTMLButtonElement>('button.service-more')?.addEventListener('click', (e) => {
+  e.preventDefault()
+  isBottomSheetInfoServiceMore = !isBottomSheetInfoServiceMore
+  changeBottomSheetInfoServiceMoreState(isBottomSheetInfoServiceMore)
+})

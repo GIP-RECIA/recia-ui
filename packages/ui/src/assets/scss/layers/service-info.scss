@@ -1,0 +1,196 @@
+@use 'sass:map';
+@use '../recia-style' as *;
+
+.service-info {
+  > header {
+    > .heading {
+      display: flex;
+      column-gap: 6px;
+      margin-bottom: 8px;
+
+      > .heading-logo {
+        height: 100px;
+        width: 100px;
+      }
+
+      > .heading-text {
+        > h1 {
+          margin: 0;
+        }
+
+        > .origin {
+          display: block;
+          font-style: italic;
+          font-size: var(--#{$prefix}font-size-sm);
+          line-height: 150%;
+        }
+
+        > .category {
+          margin-top: 9px;
+          display: inline-flex;
+          font-size: var(--#{$prefix}font-size-xs);
+          font-weight: 500;
+          padding: 4px 10px;
+          border-radius: 13px;
+          background-color: var(--#{$prefix}stroke);
+
+          @each $type, $values in $categories {
+            &.#{$type} {
+              background-color: var(--#{$prefix}#{$type});
+              color: var(--#{$prefix}#{$type}-text);
+            }
+          }
+        }
+      }
+    }
+
+    > a,
+    > button {
+      width: 100%;
+    }
+  }
+
+  > .content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px 58px;
+    padding: 24px 0;
+
+    > section {
+      > p {
+        line-height: 150%;
+
+        > a {
+          color: inherit;
+
+          &:hover,
+          &:focus-visible {
+            outline: none;
+            color: var(--#{$prefix}system-blue);
+          }
+
+          &:focus-visible {
+            font-weight: bold;
+            text-decoration: underline 2px;
+          }
+        }
+      }
+
+      > ul {
+        @include list-unstyled;
+
+        > li > a {
+          color: var(--#{$prefix}system-blue);
+          line-height: 250%;
+
+          &:focus-visible {
+            outline: 2px dotted;
+            padding: 4px 8px;
+            margin: -4px -8px;
+            border-radius: 12px;
+          }
+        }
+      }
+
+      > .video {
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        overflow: hidden;
+
+        > * {
+          width: 100%;
+        }
+      }
+
+      &.tutorials {
+        > a,
+        > button {
+          margin-top: 16px;
+          font-size: unset;
+        }
+      }
+    }
+  }
+
+  > footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    > a,
+    > button {
+      width: 100%;
+
+      &.close {
+        display: none;
+      }
+
+      &.launch > svg {
+        display: none;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 24px;
+
+      > .heading {
+        margin: 0;
+      }
+
+      > a,
+      > button {
+        width: unset;
+      }
+    }
+
+    > .content {
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 24px;
+
+      > section {
+        &.description {
+          flex: 1 0 100%;
+
+          > h2 {
+            display: none;
+          }
+        }
+
+        &.first-step,
+        &.tutorials {
+          flex: 1 0 45%;
+        }
+
+        > ul > li > a {
+          font-weight: bold;
+        }
+      }
+    }
+
+    > footer {
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 32px;
+
+      > a,
+      > button {
+        width: unset;
+
+        &.close {
+          display: unset;
+        }
+
+          &.launch > svg {
+          display: unset;
+        }
+      }
+    }
+  }
+}

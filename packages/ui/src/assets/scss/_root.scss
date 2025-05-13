@@ -34,6 +34,7 @@
     --#{$prefix}#{$type}: #{map.get($values, color)};
     --#{$prefix}#{$type}-hover: #{map.get($values, hover, color)};
     --#{$prefix}#{$type}-hover-shadow: rgba(from var(--#{$prefix}#{$type}-hover) r g b / #{map.get($values, hover, shadow)});
+    --#{$prefix}#{$type}-text: #{map.get($values, text)};
   }
 
   @each $color, $value in $buttons {
