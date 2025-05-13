@@ -6,11 +6,13 @@
     > .heading {
       display: flex;
       column-gap: 6px;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
 
       > .heading-logo {
+        flex: 0 0 auto;
         height: 100px;
         width: 100px;
+        opacity: .2;
       }
 
       > .heading-text {
