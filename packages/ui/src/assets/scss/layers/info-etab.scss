@@ -54,22 +54,15 @@
 
       > .close {
         display: none;
-        @extend %button-and-tag;
-        align-self: start;
+        align-self: flex-start;
+        margin: -4px -4px 0 (24px - 16px);
         font-size: 20px;
         opacity: .5;
-        border-radius: 50%;
-        height: 24px;
-        width: 24px;
-        margin-left: 24px - 16px;
 
         &:hover,
         &:focus-visible {
           opacity: 1;
-        }
-
-        &:focus-visible {
-          outline: 4px solid var(--#{$prefix}primary);
+          color: inherit;
         }
       }
     }
@@ -135,7 +128,7 @@
         margin-bottom: 32px;
 
         > .close {
-          display: unset;
+          display: inline-flex;
         }
       }
 
