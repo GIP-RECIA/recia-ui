@@ -20,121 +20,107 @@ import './assets/scss/main.scss'
 
 register()
 
+/**
+ * Bottom sheet
+ */
+
 // Bottom sheet info
 const bottomSheetInfo = document.querySelector<HTMLElement>('#bottom-sheet-info')
-const bottomSheetInfoDraggable = bottomSheetInfo?.querySelector<HTMLElement>('.dragable')
 
 let isBottomSheetInfo = false
 
-function changeBottomSheetInfoState(show: boolean): void {
-  if (!bottomSheetInfo)
-    return
-  document.documentElement.style.overflowY = show ? 'hidden' : ''
-  bottomSheetInfo.style.display = show ? '' : 'none'
+function toggleBottomSheetInfo(): void {
+  isBottomSheetInfo = !isBottomSheetInfo
+  document.documentElement.style.overflowY = isBottomSheetInfo ? 'hidden' : ''
+  bottomSheetInfo!.style.display = isBottomSheetInfo ? '' : 'none'
 }
 
-bottomSheetInfoDraggable?.addEventListener('click', () => {
-  isBottomSheetInfo = !isBottomSheetInfo
-  changeBottomSheetInfoState(isBottomSheetInfo)
-})
+bottomSheetInfo?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => toggleBottomSheetInfo())
+bottomSheetInfo?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => toggleBottomSheetInfo())
 
-// Eyebrow
-const eyebrow = document.querySelector<HTMLElement>('.eyebrow')
-const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('button.eyebrow-button')
-const eyebrowMenu = eyebrow?.querySelector<HTMLElement>('#eyebrow-menu')
+// Bottom sheet service more
+const bottomSheetInfoServiceMore = document.querySelector<HTMLElement>('#bottom-sheet-service-more')
 
-let isEyebrowExpended = false
+let isBottomSheetInfoServiceMore = false
 
-function changeEyebrowState(isExpended: boolean): void {
-  if (!eyebrow || !eyebrowButton || !eyebrowMenu)
+function toggleBottomSheetInfoServiceMoreState(): void {
+  if (!bottomSheetInfoServiceMore)
     return
-  eyebrowButton.ariaExpanded = isExpended.toString()
-  const buttonIcon = eyebrowButton.querySelector<HTMLElement>('svg')
-  buttonIcon?.classList.remove('fa-chevron-down', 'fa-chevron-up')
-  buttonIcon?.classList.add(isExpended ? 'fa-chevron-up' : 'fa-chevron-down')
-  eyebrowMenu.style.display = isExpended ? '' : 'none'
+  isBottomSheetInfoServiceMore = !isBottomSheetInfoServiceMore
+  document.documentElement.style.overflowY = isBottomSheetInfoServiceMore ? 'hidden' : ''
+  bottomSheetInfoServiceMore.style.display = isBottomSheetInfoServiceMore ? '' : 'none'
 }
 
-eyebrowButton?.addEventListener('click', () => {
-  isEyebrowExpended = !isEyebrowExpended
-  changeEyebrowState(isEyebrowExpended)
+bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => toggleBottomSheetInfoServiceMoreState())
+bottomSheetInfoServiceMore?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => toggleBottomSheetInfoServiceMoreState())
+document.querySelector<HTMLButtonElement>('button.service-more')?.addEventListener('click', (e) => {
+  e.preventDefault()
+  toggleBottomSheetInfoServiceMoreState()
 })
 
-eyebrow?.querySelector<HTMLButtonElement>('button#info-etab')?.addEventListener('click', () => {
-  isEyebrowExpended = !isEyebrowExpended
-  changeEyebrowState(isEyebrowExpended)
-  isBottomSheetInfo = !isBottomSheetInfo
-  changeBottomSheetInfoState(isBottomSheetInfo)
-})
+/**
+ * Extended Uportal Header
+ */
+
+const extendedUportalHeader = document.querySelector<HTMLElement>('.extended-uportal-header')
 
 // Dropdown info
 const dropdownInfo = document.querySelector<HTMLElement>('.dropdown-info')
 const dropdownInfoButton = dropdownInfo?.querySelector<HTMLButtonElement>('button.dropdown-info-button')
-const dropdownInfoMask = dropdownInfo?.querySelector<HTMLElement>('.dropdown-info-mask')
-const dropdownInfoMenu = dropdownInfo?.querySelector<HTMLElement>('#dropdown-info-menu')
 
 let isDropdownInfoExpended = false
 
-function changeDropdownInfoState(isExpended: boolean): void {
-  if (!dropdownInfo || !dropdownInfoButton || !dropdownInfoMask || !dropdownInfoMenu)
+function toggleDropdownInfo(): void {
+  if (!dropdownInfo || !dropdownInfoButton)
     return
-  dropdownInfoButton.ariaExpanded = isExpended.toString()
-  isExpended ? dropdownInfoButton.classList.add('active') : dropdownInfoButton.classList.remove('active')
-  dropdownInfoMask.style.display = isExpended ? '' : 'none'
-  dropdownInfoMenu.style.display = isExpended ? '' : 'none'
-}
-dropdownInfoButton?.addEventListener('click', () => {
   isDropdownInfoExpended = !isDropdownInfoExpended
-  changeDropdownInfoState(isDropdownInfoExpended)
+  dropdownInfoButton.ariaExpanded = isDropdownInfoExpended.toString()
+  isDropdownInfoExpended ? dropdownInfoButton.classList.add('active') : dropdownInfoButton.classList.remove('active')
+  const dropdownInfoMask = dropdownInfo?.querySelector<HTMLElement>('.dropdown-info-mask')
+  dropdownInfoMask && (dropdownInfoMask.style.display = isDropdownInfoExpended ? '' : 'none')
+  const dropdownInfoMenu = dropdownInfo?.querySelector<HTMLElement>('#dropdown-info-menu')
+  dropdownInfoMenu && (dropdownInfoMenu.style.display = isDropdownInfoExpended ? '' : 'none')
+}
+
+dropdownInfoButton?.addEventListener('click', () => toggleDropdownInfo())
+
+// Eyebrow
+const eyebrow = document.querySelector<HTMLElement>('.eyebrow')
+const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('button.eyebrow-button')
+
+let isEyebrowExpended = false
+
+function toggleEyebrow(): void {
+  if (!eyebrow || !eyebrowButton)
+    return
+  isEyebrowExpended = !isEyebrowExpended
+  eyebrowButton.ariaExpanded = isEyebrowExpended.toString()
+  const buttonIcon = eyebrowButton.querySelector<HTMLElement>('svg')
+  buttonIcon?.classList.remove('fa-chevron-down', 'fa-chevron-up')
+  buttonIcon?.classList.add(isEyebrowExpended ? 'fa-chevron-up' : 'fa-chevron-down')
+  const eyebrowMenu = eyebrow.querySelector<HTMLElement>('#eyebrow-menu')
+  eyebrowMenu && (eyebrowMenu.style.display = isEyebrowExpended ? '' : 'none')
+}
+
+eyebrowButton?.addEventListener('click', () => toggleEyebrow())
+eyebrow?.querySelector<HTMLButtonElement>('button#info-etab')?.addEventListener('click', () => {
+  toggleEyebrow()
+  toggleBottomSheetInfo()
 })
 
 // Search
-const extendedUportalHeader = document.querySelector<HTMLElement>('.extended-uportal-header')
-const extendedUportalHeaderSearchButton = extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-button'))
-const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.expended')
-
-const search = extendedUportalHeaderExpended?.querySelector<HTMLElement>('.search')
-const searchCloseButton = search?.querySelector<HTMLButtonElement>('.search-field > .end > button')
+const search = extendedUportalHeader?.querySelector<HTMLElement>('.expended .search')
 
 let isExtendedUportalHeaderExpended = false
 
-function changeSearchState(show: boolean): void {
-  if (!extendedUportalHeader || !extendedUportalHeaderExpended)
+function toggleSearch(): void {
+  if (!extendedUportalHeader)
     return
-  document.documentElement.style.overflowY = show ? 'hidden' : ''
-  extendedUportalHeaderExpended.style.display = show ? '' : 'none'
+  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
+  document.documentElement.style.overflowY = isExtendedUportalHeaderExpended ? 'hidden' : ''
+  const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.expended')
+  extendedUportalHeaderExpended && (extendedUportalHeaderExpended.style.display = isExtendedUportalHeaderExpended ? '' : 'none')
 }
 
-extendedUportalHeaderSearchButton?.addEventListener('click', () => {
-  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
-  changeSearchState(isExtendedUportalHeaderExpended)
-})
-
-searchCloseButton?.addEventListener('click', () => {
-  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
-  changeSearchState(isExtendedUportalHeaderExpended)
-})
-
-// Bottom sheet service more
-const bottomSheetInfoServiceMore = document.querySelector<HTMLElement>('#bottom-sheet-service-more')
-const bottomSheetInfoServiceMoreDraggable = bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')
-
-let isBottomSheetInfoServiceMore = false
-
-function changeBottomSheetInfoServiceMoreState(show: boolean): void {
-  if (!bottomSheetInfoServiceMore)
-    return
-  document.documentElement.style.overflowY = show ? 'hidden' : ''
-  bottomSheetInfoServiceMore.style.display = show ? '' : 'none'
-}
-
-bottomSheetInfoServiceMoreDraggable?.addEventListener('click', () => {
-  isBottomSheetInfoServiceMore = !isBottomSheetInfoServiceMore
-  changeBottomSheetInfoServiceMoreState(isBottomSheetInfoServiceMore)
-})
-
-document.querySelector<HTMLButtonElement>('button.service-more')?.addEventListener('click', (e) => {
-  e.preventDefault()
-  isBottomSheetInfoServiceMore = !isBottomSheetInfoServiceMore
-  changeBottomSheetInfoServiceMoreState(isBottomSheetInfoServiceMore)
-})
+extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-button'))?.addEventListener('click', () => toggleSearch())
+search?.querySelector<HTMLButtonElement>('.search-field > .end > button')?.addEventListener('click', () => toggleSearch())
