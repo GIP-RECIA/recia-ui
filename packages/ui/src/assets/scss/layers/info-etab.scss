@@ -5,8 +5,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   > .image-container {
+    flex: 0 0 244px;
     display: none;
     position: relative;
     width: 244px;
@@ -21,7 +23,15 @@
     }
   }
 
+  &.padding {
+    > .image-container {
+      border-radius: 4px;
+    }
+  }
+
   > .content-container {
+    flex: 0 1 auto;
+
     > header {
       display: flex;
       align-items: center;
@@ -37,18 +47,20 @@
         --logo-simple-color: var(--#{$prefix}primary);
       }
 
-      > div > .heading {
-        &-etab {
-          display: block;
-          font-size: var(--#{$prefix}font-size-lg);
-          font-weight: bold;
-        }
+      > .heading {
+        > .heading {
+          &-etab {
+            display: block;
+            font-size: var(--#{$prefix}font-size-lg);
+            font-weight: bold;
+          }
 
-        &-acad {
-          display: block;
-          font-size: var(--#{$prefix}font-size-xs);
-          font-weight: 600;
-          color: var(--#{$prefix}primary);
+          &-acad {
+            display: block;
+            font-size: var(--#{$prefix}font-size-xs);
+            font-weight: 600;
+            color: var(--#{$prefix}primary);
+          }
         }
       }
 
@@ -83,6 +95,7 @@
 
       > address {
         font-style: unset;
+        margin-right: 8px;
 
         > ul {
           @include list-unstyled;
@@ -120,12 +133,25 @@
       display: unset;
     }
 
+    &.padding {
+    > .content-container {
+      padding-right: 0;
+
+      > header > .heading {
+        text-wrap: unset;
+      }
+    }
+  }
+
     > .content-container {
       padding: 32px;
-      text-wrap: nowrap;
 
       > header {
         margin-bottom: 32px;
+
+        > .heading {
+          text-wrap: nowrap;
+        }
 
         > .close {
           display: inline-flex;
