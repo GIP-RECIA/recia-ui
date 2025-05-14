@@ -50,7 +50,14 @@
         position: absolute;
         top: 16px;
         right: 16px;
-        font-size: 16px;
+        font-size: 20px;
+        opacity: .5;
+
+        &:hover,
+        &:focus-visible {
+          opacity: 1;
+          color: inherit;
+        }
       }
 
       &.no-padding {
@@ -68,7 +75,7 @@
       }
 
       > .close {
-        display: unset;
+        display: inline-flex;
       }
     }
   }
