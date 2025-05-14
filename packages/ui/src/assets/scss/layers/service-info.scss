@@ -124,10 +124,6 @@
     > button {
       width: 100%;
 
-      &.close {
-        display: none;
-      }
-
       &.launch > svg {
         display: none;
       }
@@ -185,11 +181,7 @@
       > button {
         width: unset;
 
-        &.close {
-          display: unset;
-        }
-
-          &.launch > svg {
+        &.launch > svg {
           display: unset;
         }
       }
