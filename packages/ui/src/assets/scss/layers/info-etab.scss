@@ -101,6 +101,7 @@
 
             > a {
               @include link-unstyled;
+              @extend %list-link;
             }
 
             &:not(:last-child) {

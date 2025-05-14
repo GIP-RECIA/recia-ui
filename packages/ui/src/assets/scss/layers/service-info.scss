@@ -63,18 +63,7 @@
         line-height: 150%;
 
         > a {
-          color: inherit;
-
-          &:hover,
-          &:focus-visible {
-            outline: none;
-            color: var(--#{$prefix}system-blue);
-          }
-
-          &:focus-visible {
-            font-weight: bold;
-            text-decoration: underline 2px;
-          }
+          @extend %text-link;
         }
       }
 
@@ -82,15 +71,9 @@
         @include list-unstyled;
 
         > li > a {
+          @extend %list-link;
           color: var(--#{$prefix}system-blue);
           line-height: 250%;
-
-          &:focus-visible {
-            outline: 2px dotted;
-            padding: 4px 8px;
-            margin: -4px -8px;
-            border-radius: 12px;
-          }
         }
       }
 

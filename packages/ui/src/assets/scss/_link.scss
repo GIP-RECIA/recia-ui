@@ -1,0 +1,30 @@
+@use 'variables' as *;
+
+%list-link {
+  &:hover,
+  &:focus-visible {
+    color: var(--#{$prefix}system-blue);
+  }
+
+  &:focus-visible {
+    outline: 2px dotted;
+    padding: 4px 8px;
+    margin: -4px -8px;
+    border-radius: 50px;
+  }
+}
+
+%text-link {
+  color: inherit;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: var(--#{$prefix}system-blue);
+  }
+
+  &:focus-visible {
+    font-weight: bold;
+    text-decoration: underline 2px;
+  }
+}
