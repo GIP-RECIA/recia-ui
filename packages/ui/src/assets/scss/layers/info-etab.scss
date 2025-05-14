@@ -63,20 +63,6 @@
           }
         }
       }
-
-      > .close {
-        display: none;
-        align-self: flex-start;
-        margin: -4px -4px 0 (24px - 16px);
-        font-size: 20px;
-        opacity: .5;
-
-        &:hover,
-        &:focus-visible {
-          opacity: 1;
-          color: inherit;
-        }
-      }
     }
 
     > .content {
@@ -151,10 +137,6 @@
 
         > .heading {
           text-wrap: nowrap;
-        }
-
-        > .close {
-          display: inline-flex;
         }
       }
 
