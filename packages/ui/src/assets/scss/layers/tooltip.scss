@@ -4,7 +4,7 @@
 .tooltip {
   display: none;
   text-wrap: nowrap;
-  color: #FFF;
+  color: var(--#{$prefix}white);
   font-size: var(--#{$prefix}font-size-xxs);
   font-weight: bold;
 
