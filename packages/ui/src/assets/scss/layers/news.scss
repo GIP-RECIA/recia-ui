@@ -22,7 +22,7 @@
       text-align: left;
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
-      box-shadow: var(--#{$prefix}shadow-neutral) var(--#{$prefix}black-10);
+      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
       overflow: hidden;
       transition:
         outline .15s ease-out,
@@ -70,7 +70,7 @@
       &:hover,
       &:focus-visible {
         outline: 2px solid var(--#{$prefix}primary);
-        box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
 
         > .news-tile {
           &-image > img {

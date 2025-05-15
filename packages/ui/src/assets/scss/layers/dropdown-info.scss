@@ -20,12 +20,12 @@
     &.active {
       color: var(--#{$prefix}body-inverted);
       background-color: var(--#{$prefix}primary);
-      box-shadow: var(--#{$prefix}shadow-hover) var(--#{$prefix}primary-20);
+      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
       position: relative;
       z-index: 1010;
 
       &:focus-visible {
-        outline: 4px solid var(--#{$prefix}primary-30);
+        outline: 4px solid HEXToRGBA(var(--#{$prefix}primary), .3);
       }
     }
 
@@ -50,7 +50,7 @@
     position: absolute;
     background-color: var(--#{$prefix}body-bg);
     border-radius: 10px;
-    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
     overflow: hidden;
     z-index: 1000;
     padding: 32px;

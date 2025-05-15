@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'variables' as *;
+@use 'functions' as *;
 
 :root {
   --#{$prefix}body: #{$body};
@@ -8,22 +9,6 @@
 
   @each $color, $value in $colors {
     --#{$prefix}#{$color}: #{$value};
-  }
-
-  @for $i from 1 through 5 {
-    --#{$prefix}black-#{$i}0: rgba(from var(--#{$prefix}black) r g b / 0.#{$i});
-  }
-
-  @for $i from 1 through 5 {
-    --#{$prefix}system-blue-#{$i}0: rgba(from var(--#{$prefix}system-blue) r g b / 0.#{$i});
-  }
-
-  @for $i from 1 through 5 {
-    --#{$prefix}system-red-#{$i}0: rgba(from var(--#{$prefix}system-red) r g b / 0.#{$i});
-  }
-
-  @for $i from 1 through 5 {
-    --#{$prefix}primary-#{$i}0: rgba(from var(--#{$prefix}primary) r g b / 0.#{$i});
   }
 
   @each $color, $value in $theme-colors {
@@ -39,7 +24,7 @@
   @each $type, $values in $categories {
     --#{$prefix}#{$type}: #{map.get($values, color)};
     --#{$prefix}#{$type}-hover: #{map.get($values, hover, color)};
-    --#{$prefix}#{$type}-hover-shadow: rgba(from var(--#{$prefix}#{$type}-hover) r g b / #{map.get($values, hover, shadow)});
+    --#{$prefix}#{$type}-hover-shadow: #{HEXToRGBA(var(--#{$prefix}#{$type}-hover), map.get($values, hover, shadow))};
     --#{$prefix}#{$type}-text: #{map.get($values, text)};
   }
 

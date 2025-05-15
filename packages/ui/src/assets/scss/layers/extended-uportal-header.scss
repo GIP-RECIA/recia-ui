@@ -4,7 +4,7 @@
 .extended-uportal-header {
   position: relative;
   background-color: var(--#{$prefix}body-bg);
-  box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@
         &:focus-visible {
           outline: none;
           > svg {
-            color: var(--#{$prefix}primary-30);
+            color: HEXToRGBA(var(--#{$prefix}primary), .3);
           }
         }
       }

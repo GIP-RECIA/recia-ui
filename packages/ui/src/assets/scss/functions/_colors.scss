@@ -1,0 +1,3 @@
+@function HEXToRGBA($hex, $alpha) {
+  @return rgba(from $hex r g b / $alpha);
+}

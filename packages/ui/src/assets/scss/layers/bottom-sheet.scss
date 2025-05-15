@@ -33,7 +33,7 @@
       border-radius: 8px 8px 0 0;
       margin-top: 54px;
       padding: 16px;
-      box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
 
       > .dragable {
         align-self: center;

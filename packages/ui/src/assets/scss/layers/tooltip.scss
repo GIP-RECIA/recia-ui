@@ -22,7 +22,7 @@
     background-color: var(--#{$prefix}basic-black);
     padding: 6px 12px;
     border-radius: 4px;
-    box-shadow: var(--#{$prefix}shadow-low-elevation) var(--#{$prefix}black-20);
+    box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA(var(--#{$prefix}black), .2);
   }
 
   &.top {

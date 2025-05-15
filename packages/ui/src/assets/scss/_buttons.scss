@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 @use 'mixins' as *;
+@use 'functions' as *;
 
 %button-and-tag {
   @include link-unstyled;
@@ -37,7 +38,7 @@
     }
 
     &:focus-visible {
-      outline: 4px solid var(--#{$prefix}primary-30);
+      outline: 4px solid HEXToRGBA(var(--#{$prefix}primary), .3);
     }
 
     &:disabled,
@@ -163,7 +164,7 @@
     &:focus-visible {
       background-color: var(--#{$prefix}primary);
       color: var(--#{$prefix}white);
-      outline: 3px solid var(--#{$prefix}primary-30);
+      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
     }
   }
 
