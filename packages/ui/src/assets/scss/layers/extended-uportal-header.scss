@@ -98,18 +98,176 @@
     justify-content: center;
   }
 
-  @media (width >= map.get($grid-breakpoints, md)) {
-    & > .content > .end > .notification {
-      display: unset;
+  > .drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 72px;
+    background-color: var(--#{$prefix}lighter-black);
+    color: #FFF;
+
+    > button {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+      height: 64px;
+      width: 72px;
+      font-size: var(--#{$prefix}font-size-xxs);
+
+      > svg {
+        height: 28px;
+        width: 28px;
+        margin: -4px;
+      }
+
+      > span {
+        display: none;
+      }
+
+      &:hover,
+      &:focus-visible {
+        outline: none;
+        background-color: var(--#{$prefix}primary);
+
+        > span {
+          display: unset;
+        }
+      }
     }
 
-    & > .content > .start .dropdown-info {
+    > ul {
+      @include list-unstyled;
+
+      > li {
+        > a,
+        > button {
+          position: relative;
+          display: flex;
+          align-items: center;
+          @include link-unstyled;
+          color: inherit;
+          height: 60px;
+          width: 100%;
+          border-top: 1px solid rgba(#FFF, 5%);
+
+          > .active-indicator {
+            display: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            border-left: 5px solid var(--#{$prefix}primary-dark);
+          }
+
+          > .icon {
+            display: inline-flex;
+            justify-content: center;
+            width: 72px;
+            font-size: 16px;
+          }
+
+          > .text {
+            display: none;
+          }
+
+          &:not(.active) {
+            &:hover,
+            &:focus-visible {
+              outline: none;
+              color: var(--#{$prefix}primary-dark);
+
+              > .active-indicator {
+                display: unset;
+              }
+            }
+
+            &:active {
+              color: #FFF;
+              background-color: var(--#{$prefix}primary-dark);
+            }
+          }
+        }
+
+        > a.active {
+          color: #000;
+          background-color: #FFF;
+          font-weight: bold;
+
+          &:hover,
+          &:focus-visible {
+            outline: none;
+            color: unset;
+            background-color: var(--#{$prefix}primary);
+          }
+
+          &:active {
+            background-color: var(--#{$prefix}primary-dark);
+          }
+        }
+
+        > button.active {
+          background-color: var(--#{$prefix}primary);
+
+          &:hover,
+          &:focus-visible {
+            outline: none;
+            color: #000;
+            background-color: #FFF;
+          }
+
+          &:active {
+            color: #FFF;
+            background-color: var(--#{$prefix}primary-dark);
+          }
+        }
+      }
+    }
+
+    &.expended {
+      width: 320px;
+
+      > button {
+        background-color: var(--#{$prefix}primary);
+      }
+
+      > ul > li {
+        > a,
+        > button {
+          > .icon {
+            opacity: .33;
+          }
+
+          > .text {
+            display: unset;
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .content {
+      > .end > .notification {
+        display: unset;
+      }
+
+      > .start .dropdown-info {
+        display: unset;
+      }
+    }
+
+    > .drawer {
       display: unset;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, lg)) {
-    & > .content > .end > .search-button {
+    > .content > .end > .search-button {
       display: none;
     }
   }

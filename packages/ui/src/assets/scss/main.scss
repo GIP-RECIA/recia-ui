@@ -5,10 +5,12 @@
 @use 'layers/alert';
 @use 'layers/bottom-sheet';
 @use 'layers/discover';
+@use 'layers/dropdown-favorites';
 @use 'layers/dropdown-info';
 @use 'layers/extended-uportal-footer';
 @use 'layers/extended-uportal-header';
 @use 'layers/eyebrow';
+@use 'layers/favorite';
 @use 'layers/info-etab';
 @use 'layers/login';
 @use 'layers/news';
@@ -115,12 +117,28 @@ body {
     'main'
     'footer';
 
+  &:has(> .drawer-placeholder) {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'drawer header'
+      'drawer alert'
+      'drawer main'
+      'drawer footer';
+  }
+
   > header {
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     z-index: 1;
+
+  }
+
+  > .drawer-placeholder {
+    display: none;
+    grid-area: drawer;
+    width: 72px;
   }
 
   > .header-placeholder {
@@ -150,6 +168,10 @@ body {
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
+    > .drawer-placeholder {
+      display: unset;
+    }
+
     > main {
       row-gap: 70px;
     }

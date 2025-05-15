@@ -10,6 +10,146 @@
 <body>
   <header>
     <div class="extended-uportal-header">
+      <div class="drawer">
+        <button>
+          <svg aria-hidden="true">
+            <use xlink:href="/spritemap.svg#NOC-simple"></use>
+          </svg>
+          <span>Menu</span>
+        </button>
+        <ul>
+          <li>
+            <a href="#" title="Accueil" aria-label="Retourer à l'accueil" class="back-home active">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-house"></i>
+              </div>
+              <span class="text">Accueil</span>
+            </a>
+          </li>
+          <li>
+            <button title="Tous les services">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-grip"></i>
+              </div>
+              <span class="text">Tous les services</span>
+            </button>
+          </li>
+          <li class="dropdown-favorites">
+            <button title="Favoris">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <span class="text">Favoris</span>
+            </button>
+            <div style="display: none;">
+              <div class="active-indicator"></div>
+              <header>
+                <h2>Vos favoris</h2>
+                <button class="btn-secondary circle small"><i class="fa-solid fa-plus"></i></button>
+                <div class="grow-1"></div>
+                <button class="btn-secondary small">Gérer<i class="fa-solid fa-gear"></i></button>
+              </header>
+              <ul>
+                <li>
+                  <header>
+                    <span>Services</span>
+                  </header>
+                  <ul>
+                    <li>
+                      <a href="#" class="favorite apprentissage">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#carte-mentale"></use>
+                        </svg>
+                        <p class="favorite-name">Carte mentale</p>
+                        <p class="favorite-category">Apprentissage</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="favorite apprentissage">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#capytale"></use>
+                        </svg>
+                        <p class="favorite-name">Capytale</p>
+                        <p class="favorite-category">Apprentissage</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="favorite collaboratif">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#nextcloud"></use>
+                        </svg>
+                        <p class="favorite-name">Espaces Nextcloud</p>
+                        <p class="favorite-category">Espace collaboratif</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="favorite documentation">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#pod"></use>
+                        </svg>
+                        <p class="favorite-name">Plateforme vidéo</p>
+                        <p class="favorite-category">Documentation</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <header>
+                    <span>Mediacentre</span>
+                  </header>
+                  <ul>
+                    <li>
+                      <a href="#" class="favorite">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#NOC-simple"></use>
+                        </svg>
+                        <p class="favorite-name">Pix</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="favorite">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#NOC-simple"></use>
+                        </svg>
+                        <p class="favorite-name">Peraltrees</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="favorite">
+                        <svg class="favorite-icon" aria-hidden="true">
+                          <use xlink:href="/spritemap.svg#NOC-simple"></use>
+                        </svg>
+                        <p class="favorite-name">EduMalin</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#" title="Mediacentre">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+              <span class="text">Mediacentre</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" title="Tutoriels">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-message"></i>
+              </div>
+              <span class="text">Tutoriels</span>
+            </a>
+          </li>
+        </ul>
+      </div>
       <div class="content">
         <div class="start">
           <a href="#" title="Accueil" aria-label="Retourer à l'accueil" class="back-home">
@@ -193,6 +333,7 @@
       </div>
     </div>
   </header>
+  <div class="drawer-placeholder"></div>
   <div class="header-placeholder"></div>
 
   <div class="alert">
@@ -421,7 +562,7 @@
             </div>
             <div class="service-favorite">
               <button>
-                <i class="fa-solid fa-star favorite"></i>
+                <i class="fa-solid fa-star marked"></i>
               </button>
             </div>
             <svg class="service-icon" aria-hidden="true">
@@ -452,7 +593,7 @@
             </div>
             <div class="service-favorite">
               <button>
-                <i class="fa-solid fa-star favorite"></i>
+                <i class="fa-solid fa-star marked"></i>
               </button>
             </div>
             <svg class="service-icon" aria-hidden="true">
@@ -495,7 +636,7 @@
           <a href="#" class="service documentation">
             <div class="service-favorite">
               <button>
-                <i class="fa-solid fa-star favorite"></i>
+                <i class="fa-solid fa-star marked"></i>
               </button>
             </div>
             <svg class="service-icon" aria-hidden="true">

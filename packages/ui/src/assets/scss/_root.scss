@@ -28,6 +28,12 @@
 
   @each $color, $value in $theme-colors {
     --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}#{$color}-light: #{$value};
+  }
+
+  @each $color, $value in $theme-colors-dark {
+    --#{$prefix}#{$color}-inverted: #{$value};
+    --#{$prefix}#{$color}-dark: #{$value};
   }
 
   @each $type, $values in $categories {
@@ -39,6 +45,12 @@
 
   @each $color, $value in $buttons {
     --#{$prefix}btn-#{$color}: #{$value};
+    --#{$prefix}btn-#{$color}-light: #{$value};
+  }
+
+  @each $color, $value in $buttons-dark {
+    --#{$prefix}btn-#{$color}-inverted: #{$value};
+    --#{$prefix}btn-#{$color}-dark: #{$value};
   }
 
   @each $shadow, $value in $shadows {
@@ -70,8 +82,16 @@
       --#{$prefix}#{$color}: #{$value};
     }
 
+    @each $color, $value in $theme-colors {
+      --#{$prefix}#{$color}-inverted: #{$value};
+    }
+
     @each $color, $value in $buttons-dark {
       --#{$prefix}btn-#{$color}: #{$value};
+    }
+
+    @each $color, $value in $buttons {
+      --#{$prefix}btn-#{$color}-inverted: #{$value};
     }
   }
 }

@@ -124,3 +124,32 @@ function toggleSearch(): void {
 
 extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-button'))?.addEventListener('click', () => toggleSearch())
 search?.querySelector<HTMLButtonElement>('.search-field > .end > button')?.addEventListener('click', () => toggleSearch())
+
+// Drawer
+const drawer = extendedUportalHeader?.querySelector<HTMLElement>('.drawer')
+
+let isDrawerExpended = false
+
+function toggleDrawer() {
+  if (!drawer)
+    return
+  isDrawerExpended = !isDrawerExpended
+  isDrawerExpended ? drawer.classList.add('expended') : drawer.classList.remove('expended')
+}
+
+drawer?.querySelector<HTMLButtonElement>('button')?.addEventListener('click', () => toggleDrawer())
+
+// Dropdown favorite
+const favorite = drawer?.querySelector<HTMLElement>('.dropdown-favorites')
+const favoriteButton = favorite?.querySelector<HTMLButtonElement>('button')
+
+let isDropdownFavorite = false
+
+function toggleFavorites() {
+  isDropdownFavorite = !isDropdownFavorite
+  isDropdownFavorite ? favoriteButton?.classList.add('active') : favoriteButton?.classList.remove('active')
+  const menu = drawer?.querySelector<HTMLElement>('.dropdown-favorites > div')
+  menu && (menu.style.display = isDropdownFavorite ? '' : 'none')
+}
+
+favoriteButton?.addEventListener('click', () => toggleFavorites())

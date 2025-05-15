@@ -45,7 +45,7 @@
         color: var(--#{$prefix}stroke);
         transition: color .3s ease-out;
 
-        &.favorite {
+        &.marked {
           color: var(--#{$prefix}favorite);
         }
       }
@@ -94,7 +94,7 @@
   }
 
   &:hover,
-  &:focus-visible {
+  &:focus-within {
     outline: none;
     border-top: 11px solid var(--#{$prefix}service-hover);
     box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}service-hover-shadow);
@@ -131,7 +131,7 @@
   }
 
   @media (hover: hover) {
-    & > &-favorite:not(:has(.favorite)) {
+    & > &-favorite:not(:has(.marked)) {
       opacity: 0;
       visibility: hidden;
     }
