@@ -53,26 +53,28 @@
   }
 
   & > &-icon {
+    order: 0;
     height: 40px;
     width: 40px;
     color: var(--#{$prefix}stroke);
     transition: color .3s ease-out;
   }
 
+  & > &-name {
+    order: 2;
+    margin: 0;
+  }
+
   & > &-category {
+    order: 1;
     margin-top: 8px;
     font-size: var(--#{$prefix}font-size-xxs);
     opacity: .5;
     margin-bottom: 4px;
   }
 
-  & > &-name {
-    font-family: $sora;
-    font-weight: 600;
-    font-size: var(--#{$prefix}font-size-xs);
-  }
-
   & > &-more {
+    order: 3;
     margin-top: 8px;
     text-decoration: underline;
     color: var(--#{$prefix}system-blue);
