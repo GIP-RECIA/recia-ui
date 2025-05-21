@@ -153,3 +153,23 @@ function toggleFavorites() {
 }
 
 favoriteButton?.addEventListener('click', () => toggleFavorites())
+
+// Widgets
+document.querySelectorAll<HTMLElement>('.widget-tile')?.forEach((widget) => {
+  const button = widget.querySelector<HTMLButtonElement>('button')
+
+  let isExpended = false
+
+  function toggleWidget() {
+    if (!button)
+      return
+    isExpended = !isExpended
+    button.ariaExpanded = isExpended.toString()
+    const indicator = button.querySelector<HTMLElement>('.folded-indicator')
+    indicator && (indicator.style.rotate = isExpended ? '180deg' : '')
+    const menu = widget.querySelector<HTMLElement>('.widget-menu')
+    menu && (menu.style.display = isExpended ? '' : 'none')
+  }
+
+  button?.addEventListener('click', () => toggleWidget())
+})

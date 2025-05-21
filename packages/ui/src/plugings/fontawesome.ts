@@ -19,12 +19,14 @@ import {
   faStar as farStar,
 } from '@fortawesome/free-regular-svg-icons'
 import {
+  faAnglesRight,
   faArrowLeft,
   faArrowRight,
   faArrowRightFromBracket,
   faArrowRotateLeft,
   faAt,
   faBell,
+  faBellSlash,
   faBolt,
   faBookOpen,
   faBullhorn,
@@ -47,17 +49,20 @@ import {
   faRightLeft,
   faStar,
   faStepForward,
+  faThumbtack,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
 
 function register() {
   library.add(
+    faAnglesRight,
     faArrowLeft,
     faArrowRight,
     faArrowRightFromBracket,
     faArrowRotateLeft,
     faAt,
     faBell,
+    faBellSlash,
     faBolt,
     faBookOpen,
     faBullhorn,
@@ -80,6 +85,7 @@ function register() {
     faRightLeft,
     faStar,
     faStepForward,
+    faThumbtack,
     faXmark,
   )
   library.add(

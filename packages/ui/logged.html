@@ -350,78 +350,159 @@
   </div>
 
   <main class="container">
-    <div class="widget">
+    <div>
       <header>
         <h1>Bienvenue sur votre ENT, Anaïs</h1>
-        <h2 class="sr-only">Accès rapides</h2>
       </header>
-      <ul class="widget-tiles">
-        <li>
-          <div class="widget-tile">
-            <button>
-              <div class="start">
-                <h3>Espace vie scolaire</h3>
+      <div class="widget">
+        <header>
+          <h2 class="sr-only">Accès rapides</h2>
+        </header>
+        <ul class="widget-tiles">
+          <li class="widget-tile">
+            <header>
+              <button aria-expanded="false" aria-controls="widget-pronote-menu" aria-label="Widget espace vie scolaire">
+                <div class="heading">
+                  <h3>Espace vie scolaire</h3>
+                </div>
+                <div class="grow-1"></div>
+                <span class="counter">6<span class="sr-only"> notifications</span></span>
+                <i class="folded-indicator fa-solid fa-chevron-down"></i>
+              </button>
+              <a href="#" aria-label="">
+                <i class="focus-indicator fa-solid fa-angles-right"></i>
+                <div class="heading">
+                  <h3>Espace vie scolaire</h3>
+                </div>
+                <div class="grow-1"></div>
+                <span class="counter">6<span class="sr-only"> notifications</span></span>
+              </a>
+            </header>
+            <div id="widget-pronote-menu" class="widget-menu" style="display: none;">
+              <div class="empty">
+                <i class="empty-icon fa-solid fa-bell-slash"></i>
+                <span class="empty-text">
+                  Vous n'avez<span class="large">Aucune nouvelle notification</span>
+                </span>
               </div>
-              <div class="end">
-                <div class="counter">6</div>
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-            </button>
-            <ul>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div class="widget-tile">
-            <button>
-              <div class="start">
-                <h3>Favoris</h3>
-              </div>
-              <div class="end">
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-            </button>
-            <ul>
-              <li>
-                <div>Carte mentale</div>
-              </li>
-              <li>
-                <div>Capytale</div>
-              </li>
-              <li>
-                <div>Espaces Nextcloud</div>
-              </li>
-              <li>
-                <div>Platforme vidéo</div>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <div class="widget-tile">
-            <button>
-              <div class="start">
-                <h3>Médiacentre</h3>
-                <span class="subtitle">Consulté récement</span>
-              </div>
-              <div class="end">
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-            </button>
-            <ul>
-              <li>
-                <div>Titre-du-document.pdf</div>
-              </li>
-              <li>
-                <div>Titre-du-document.pdf</div>
-              </li>
-              <li>
-                <div>Titre-du-document.pdf</div>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
+            </div>
+          </li>
+          <li class="widget-tile">
+            <header>
+              <button aria-expanded="false" aria-controls="widget-favorites-menu" aria-label="Widget favoris">
+                <div class="heading">
+                  <h3>Favoris</h3>
+                </div>
+                <div class="grow-1"></div>
+                <i class="folded-indicator fa-solid fa-chevron-down"></i>
+              </button>
+              <a href="#">
+                <i class="focus-indicator fa-solid fa-angles-right"></i>
+                <div class="heading">
+                  <h3>Favoris</h3>
+                </div>
+                <div class="grow-1"></div>
+              </a>
+            </header>
+            <div id="widget-favorites-menu" class="widget-menu" style="display: none;">
+              <ul>
+                <li>
+                  <a href="#">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="/spritemap.svg#carte-mentale"></use>
+                    </svg>
+                    Carte mentale
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="/spritemap.svg#capytale"></use>
+                    </svg>
+                    Capytale
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="/spritemap.svg#nextcloud"></use>
+                    </svg>
+                    Espaces Nextcloud
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="/spritemap.svg#POD"></use>
+                    </svg>
+                    Platforme vidéo
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="widget-tile">
+            <header>
+              <button aria-expanded="false" aria-controls="widget-mediacentre-menu" aria-label="Widget Médiacentre">
+                <div class="heading">
+                  <h3>Médiacentre</h3>
+                  <span class="heading-subtitle">Consulté récement</span>
+                </div>
+                <div class="grow-1"></div>
+                <i class="folded-indicator fa-solid fa-chevron-down"></i>
+              </button>
+              <a href="#">
+                <i class="focus-indicator fa-solid fa-angles-right"></i>
+                <div class="heading">
+                  <h3>Médiacentre</h3>
+                  <span class="heading-subtitle">Consulté récement</span>
+                </div>
+                <div class="grow-1"></div>
+              </a>
+            </header>
+            <div id="widget-mediacentre-menu" class="widget-menu" style="display: none;">
+              <ul>
+                <li>
+                  <a href="#">
+                    <i class="icon fa-solid fa-thumbtack"></i>
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Titre-du-document.pdf
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="news">
