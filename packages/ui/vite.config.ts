@@ -22,7 +22,7 @@ export default () => {
   return defineConfig({
     plugins: [
       svgSpritemap({
-        pattern: 'src/icons/*.svg',
+        pattern: 'src/icons/**/*.svg',
         currentColor: true,
       }),
     ],
