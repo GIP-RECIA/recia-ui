@@ -96,8 +96,7 @@ function toggleEyebrow(): void {
   isEyebrowExpended = !isEyebrowExpended
   eyebrowButton.ariaExpanded = isEyebrowExpended.toString()
   const buttonIcon = eyebrowButton.querySelector<HTMLElement>('svg')
-  buttonIcon?.classList.remove('fa-chevron-down', 'fa-chevron-up')
-  buttonIcon?.classList.add(isEyebrowExpended ? 'fa-chevron-up' : 'fa-chevron-down')
+  buttonIcon && (buttonIcon.style.rotate = isEyebrowExpended ? '180deg' : '')
   const eyebrowMenu = eyebrow.querySelector<HTMLElement>('#eyebrow-menu')
   eyebrowMenu && (eyebrowMenu.style.display = isEyebrowExpended ? '' : 'none')
 }
