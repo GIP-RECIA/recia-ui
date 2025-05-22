@@ -70,7 +70,7 @@
     max-width: calc(100vw - 32px);
     background-color: var(--#{$prefix}body-bg);
     border-radius: 8px;
-    box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}black-10);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
     overflow: hidden;
     z-index: 1000;
 
@@ -147,7 +147,7 @@
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid var(--#{$prefix}black-10)
+        border-bottom: 1px solid HEXToRGBA(var(--#{$prefix}black), .1);
       }
     }
   }

@@ -1,6 +1,7 @@
 @use 'ress/dist/ress.min.css';
 
 @forward 'mixins';
+@forward 'functions';
 
 $prefix: recia-;
 

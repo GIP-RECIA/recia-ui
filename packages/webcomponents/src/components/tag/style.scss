@@ -27,7 +27,7 @@
     &:focus-visible {
       background-color: var(--#{$prefix}primary);
       color: var(--#{$prefix}white);
-      outline: 3px solid var(--#{$prefix}primary-30);
+      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
     }
   }
 

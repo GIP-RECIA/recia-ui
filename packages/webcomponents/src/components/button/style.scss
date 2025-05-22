@@ -22,7 +22,7 @@
     color: var(--#{$prefix}btn-primary);
 
     &:active {
-      background-color: var(--#{$prefix}primary-pressed) !important;
+      background-color: var(--#{$prefix}btn-primary-pressed) !important;
     }
 
     &:hover,
@@ -31,7 +31,7 @@
     }
 
     &:focus-visible {
-      outline: 4px solid var(--#{$prefix}primary-30);
+      outline: 4px solid HEXToRGBA(var(--#{$prefix}primary), .3);
     }
 
     &:disabled,
@@ -51,6 +51,7 @@
       padding: 8px 16px;
 
       &.circle {
+        border-radius: 50%;
         width: 34px;
         height: 34px;
         padding: 8px;
@@ -61,16 +62,16 @@
   &-secondary {
     @extend .btn;
     background-color: var(--#{$prefix}btn-secondary-bg);
-    color: var(--#{$prefix}secondary);
+    color: var(--#{$prefix}btn-secondary);
 
     &:active {
-      background-color: var(--#{$prefix}secondary-pressed) !important;
+      background-color: var(--#{$prefix}btn-secondary-pressed) !important;
       color: var(--#{$prefix}primary) !important;
     }
 
     &:hover,
     &:focus-visible {
-      background-color: var(--#{$prefix}secondary-hover);
+      background-color: var(--#{$prefix}btn-secondary-hover);
       color: var(--#{$prefix}primary);
     }
 
@@ -95,6 +96,7 @@
       padding: 8px 16px;
 
       &.circle {
+        border-radius: 50%;
         width: 34px;
         height: 34px;
         padding: 8px;
@@ -108,8 +110,7 @@
     font-family: $dm-sans;
     font-weight: 600;
     font-size: var(--#{$prefix}font-size-sm);
-    border-radius: 17px;
-    color: var(--#{$prefix}secondary);
+    color: var(--#{$prefix}btn-secondary);
 
     &:hover,
     &:focus-visible {
