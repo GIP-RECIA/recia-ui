@@ -108,76 +108,78 @@ body {
   letter-spacing: 0;
   color: var(--#{$prefix}body);
 
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-areas:
-    'header'
-    'alert'
-    'main'
-    'footer';
-
-  &:has(> .drawer-placeholder) {
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      'drawer header'
-      'drawer alert'
-      'drawer main'
-      'drawer footer';
-  }
-
-  > header {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 1;
-
-  }
-
-  > .drawer-placeholder {
-    display: none;
-    grid-area: drawer;
-    width: 72px;
-  }
-
-  > .header-placeholder {
-    grid-area: header;
-    height: 64px;
-  }
-
-  > .alert {
-    grid-area: alert;
-  }
-
-  > main {
-    grid-area: main;
-    margin-top: 40px;
-    margin-bottom: 40px;
+  &.dev-playground {
+    height: 100vh;
     display: grid;
-    row-gap: 40px;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      'header'
+      'alert'
+      'main'
+      'footer';
 
-    > * {
-      min-width: 0;
+    &:has(> .drawer-placeholder) {
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        'drawer header'
+        'drawer alert'
+        'drawer main'
+        'drawer footer';
     }
-  }
 
-  > footer {
-    margin-top: 32px;
-    grid-area: footer;
-  }
+    > header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 1;
 
-  @media (width >= map.get($grid-breakpoints, md)) {
+    }
+
     > .drawer-placeholder {
-      display: unset;
+      display: none;
+      grid-area: drawer;
+      width: 72px;
+    }
+
+    > .header-placeholder {
+      grid-area: header;
+      height: 64px;
+    }
+
+    > .alert {
+      grid-area: alert;
     }
 
     > main {
-      row-gap: 70px;
+      grid-area: main;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      display: grid;
+      row-gap: 40px;
+
+      > * {
+        min-width: 0;
+      }
     }
 
     > footer {
-      margin-top: unset;
+      margin-top: 32px;
+      grid-area: footer;
+    }
+
+    @media (width >= map.get($grid-breakpoints, md)) {
+      > .drawer-placeholder {
+        display: unset;
+      }
+
+      > main {
+        row-gap: 70px;
+      }
+
+      > footer {
+        margin-top: unset;
+      }
     }
   }
 }
