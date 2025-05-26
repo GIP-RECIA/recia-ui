@@ -16,8 +16,7 @@
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { StyleInfo } from 'lit/directives/style-map.js'
-import { icon, library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowRightFromBracket,
   faChevronDown,
@@ -28,13 +27,14 @@ import {
   faRightLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, svg, unsafeCSS } from 'lit'
+import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { prefix } from '../../../config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { setLocale } from '../../localization.ts'
+import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { ItemType } from './ItemType.ts'
 import styles from './style.scss?inline'
 
@@ -186,38 +186,6 @@ export class ReciaEyebrow extends LitElement {
     }))
   }
 
-  getIcon(svgDefinition: IconDefinition): TemplateResult {
-    return svg`${icon(svgDefinition).node[0]}`
-  }
-
-  getPath(data: string): TemplateResult {
-    return svg`<path fill="currentColor" d="${data}"></path>`
-  }
-
-  getIconWithStyle(svgDefinition: IconDefinition, styles: Readonly<StyleInfo>): TemplateResult {
-    const { prefix, iconName, icon: [width, height, , , pathData] } = svgDefinition
-
-    return svg`
-      <svg
-        style="${styleMap(styles)}"
-        aria-hidden="true"
-        focusable="false"
-        data-prefix="${prefix}"
-        data-icon="${iconName}"
-        class="svg-inline--fa fa-${iconName}"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 ${width} ${height}"
-      >
-        ${
-          typeof pathData !== 'string'
-            ? pathData.map(data => this.getPath(data))
-            : this.getPath(pathData)
-        }
-      </svg>
-    `
-  }
-
   static i18n(): Record<ItemType, string> {
     return {
       [ItemType.Notification]: msg('Notifications'),
@@ -246,7 +214,7 @@ export class ReciaEyebrow extends LitElement {
           `)
           : undefined
       }
-      ${item.icon ? keyed(item.icon, this.getIcon(item.icon)) : undefined}
+      ${item.icon ? keyed(item.icon, getIcon(item.icon)) : undefined}
     `
 
     return html`
@@ -313,7 +281,7 @@ export class ReciaEyebrow extends LitElement {
               ${this.function}
             </span>
           </div>
-          ${this.getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : '' })}
+          ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : '' }, {})}
         </button>
         <ul
           id="eyebrow-menu"
