@@ -6,70 +6,7 @@ section {
   margin: 32px 0;
 }
 
-section.sub {
+section.sub,
+section > section {
   margin: 16px 0;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-row-reverse {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-col-reverse {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-.justify-start {
-  justify-content: flex-start;
-}
-
-.justify-end {
-  justify-content: flex-end;
-}
-
-.justify-end-safe {
-  justify-content: safe flex-end;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-center-safe {
-  justify-content: safe center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
-}
-
-.justify-evenly {
-  justify-content: space-evenly;
-}
-
-.justify-stretch {
-  justify-content: stretch;
-}
-
-.justify-baseline {
-  justify-content: baseline;
-}
-
-.justify-normal {
-  justify-content: normal;
 }

@@ -6,12 +6,13 @@
     <title>@gip-recia/ui-webcomponents</title>
     <script type="module" src="/src/index.ts"></script>
     <link rel="stylesheet" href="/assets/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="container">
     <section>
       <h1>Buttons</h1>
 
-      <section class="sub">
+      <section>
         <h2>Primary</h2>
 
         <r-button disabled>
@@ -31,7 +32,7 @@
         </r-button>
       </section>
 
-      <section class="sub">
+      <section>
         <h2>Secondary</h2>
 
         <r-button variant="secondary" disabled>
@@ -51,7 +52,7 @@
         </r-button>
       </section>
 
-      <section class="sub">
+      <section>
         <h2>Tertiary</h2>
 
         <r-button variant="tertiary" disabled>
@@ -76,28 +77,8 @@
       <span id="eybrow-notification">0</span>
       <button id="eybrow-notification-increase">+</button>
 
-      <div class="flex-row justify-between">
-        <pre><code>&lt;r-eyebrow
-  picture="https://placehold.co/46x46"
-  display-name="Ana&iuml;s Durant"
-  config='{
-    "notification": false,
-    "settings": false,
-    "info-etab": {
-      "icon": ""
-    },
-    "change-etab": {
-      "icon": null
-    },
-    "starter": false,
-    "logout": {
-      "link": "/portail/Logout"
-    }
-  }'
-  notification="0"
-  avatar-size="28px"
-  &gt;
-&lt;/r-eyebrow&gt;</code></pre>
+      <section class="flex flex-row items-start">
+        <div class="grow-1"></div>
         <r-eyebrow
           picture="https://placehold.co/46x46"
           display-name="Anaïs Durant"
@@ -119,27 +100,10 @@
           avatar-size="28px"
         >
         </r-eyebrow>
-      </div>
+      </section>
 
-      <div class="flex-row justify-between">
-        <pre><code>&lt;r-eyebrow
-  picture="https://placehold.co/46x46"
-  display-name="Ana&iuml;s Durant"
-  function="Enseignante"
-  config='{
-    "settings": {
-      "link": "/MCE"
-    },
-    "change-etab": {
-      "link": null
-    },
-    "logout": {
-      "link": "/portail/Logout"
-    }
-  }'
-  notification="0"
-  &gt;
-&lt;/r-eyebrow&gt;</code></pre>
+      <section class="flex flex-row items-start">
+        <div class="grow-1"></div>
         <r-eyebrow
           picture="https://placehold.co/46x46"
           display-name="Anaïs Durant"
@@ -158,7 +122,7 @@
           notification="0"
         >
         </r-eyebrow>
-      </div>
+      </section>
 
       <script type="module">
         window.addEventListener("launch", (e) => {
@@ -180,6 +144,8 @@
         })
       </script>
     </section>
+
+    <hr>
 
     <section>
       <h1>Tag</h1>
@@ -218,7 +184,7 @@
     <section>
       <h1>WAYF</h1>
 
-      <section class="sub">
+      <section>
         <h2>6 idp ids</h2>
 
         <r-wayf
@@ -228,7 +194,7 @@
         </r-wayf>
       </section>
 
-      <section class="sub">
+      <section>
         <h2>3 idp ids</h2>
 
         <r-wayf
