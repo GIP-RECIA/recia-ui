@@ -49,6 +49,7 @@
 
     &.small {
       padding: 8px 16px;
+      font-size: var(--#{$prefix}font-size-sm);
 
       &.circle {
         border-radius: 50%;
@@ -94,6 +95,7 @@
 
     &.small {
       padding: 8px 16px;
+      font-size: var(--#{$prefix}font-size-sm);
 
       &.circle {
         border-radius: 50%;
