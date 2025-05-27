@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-export { ReciaButton } from './button'
-export { ReciaEyebrow } from './eyebrow'
-export { ReciaTag } from './tag'
-export { ReciaWayf } from './wayf'
-export { ReciaWidget } from './widget'
+function slugify(value: string): string {
+  return String(value)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036F]/g, '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+}
+
+export { slugify }

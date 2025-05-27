@@ -23,13 +23,8 @@
       }
 
       > header {
-        > a {
-          display: none !important;
-        }
-
-        > a,
+        > div,
         > button {
-          @include link-unstyled;
           display: inline-flex;
           align-items: center;
           justify-content: space-between;
@@ -45,6 +40,8 @@
           }
 
           > .heading {
+            @include link-unstyled;
+
             > h3 {
               font-size: var(--#{$prefix}font-size-sm);
               margin-bottom: 0;
@@ -71,15 +68,31 @@
             margin: 4px;
             transition: rotate .2s ease-in-out;
           }
+        }
 
-          &:hover,
-          &:focus-visible {
-            outline: none;
+        > div {
+          display: none !important;
 
+          &:has(.heading:hover, > .heading:focus-visible) {
             > .focus-indicator {
               display: unset;
               color: var(--#{$prefix}primary);
             }
+
+            > .heading {
+              outline: none;
+
+              > h3 {
+                color: var(--#{$prefix}primary);
+              }
+            }
+          }
+        }
+
+        > button {
+          &:hover,
+          &:focus-visible {
+            outline: none;
 
             > .heading > h3 {
               color: var(--#{$prefix}primary);
@@ -153,6 +166,7 @@
             }
           }
 
+          > a,
           > button {
             margin-top: 24px;
           }
@@ -171,7 +185,7 @@
         box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
 
         > header {
-          > a {
+          > div {
             display: inline-flex !important;
             height: 58px;
           }
@@ -199,29 +213,6 @@
             }
           }
         }
-      }
-    }
-  }
-
-  @media (width >= map.get($grid-breakpoints, lg)) {
-    & > &-tiles > .widget-tile {
-      > button {
-        > .start {
-          row-gap: unset;
-
-          > h3 {
-            font-size: initial;
-          }
-
-          > .subtitle {
-            font-size: var(--#{$prefix}font-size-xs);
-            color: unset;
-          }
-        }
-      }
-
-      ul {
-        max-height: 51px * 3 + 1;
       }
     }
   }

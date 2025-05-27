@@ -1,3 +1,8 @@
+html {
+  /* fix tailwind 1.5 line height */
+  line-height: unset;
+}
+
 body {
   display: revert;
 }
