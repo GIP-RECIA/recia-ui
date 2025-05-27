@@ -3,7 +3,7 @@
     // Re-generate this file by running lit-localize
 
     
-    
+    import {str} from '@lit/localize';
 
     /* eslint-disable no-irregular-whitespace */
     /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -14,6 +14,8 @@
 's0879a675a2208eb0': `My account menu`,
 's4c45c541dc69732e': `Start tutorial`,
 's5be3c6d61cd9182f': `Notifications`,
+'s70b7ef13f5cd5ac3': str`No items`,
+'s7b37041836cc3169': str`You have no`,
 's884ff070dd0e70ab': `Staff
 (Centre-Val de Loire region)`,
 's92bd5fa4e899fd8a': `Student or parent
@@ -24,6 +26,7 @@
 'sc3a31f700d8e22a1': `Logout`,
 'sca0972101e448a98': `Staff
 (agricultural education)`,
+'sde4e0c4335914de4': str`Discover`,
 'se6226bfe4a365f9b': `Staff
 (national education)`,
 'seb3f3765a51f4055': `Other public

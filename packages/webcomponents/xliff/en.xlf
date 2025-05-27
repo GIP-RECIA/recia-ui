@@ -66,6 +66,18 @@
   <source>Menu mon compte</source>
   <target>My account menu</target>
 </trans-unit>
+<trans-unit id="s70b7ef13f5cd5ac3">
+  <source>Aucun élément</source>
+  <target>No items</target>
+</trans-unit>
+<trans-unit id="s7b37041836cc3169">
+  <source>Vous n'avez</source>
+  <target>You have no</target>
+</trans-unit>
+<trans-unit id="sde4e0c4335914de4">
+  <source>Découvrir</source>
+  <target>Discover</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
