@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@gip-recia/wayf</title>
+  <script type="module" src="/index.ts"></script>
+  <link rel="stylesheet" href="/assets/index.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="container">
+  <section>
+    <h1>Widget</h1>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <r-widget
+        name="Favoris"
+        link="#1"
+        items='[
+          {
+            "name": "Carte mentale",
+            "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"/spritemap.svg#carte-mentale\"></use></svg>",
+            "link": "#A"
+          },
+          {
+            "name": "Capytale",
+            "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"/spritemap.svg#capytale\"></use></svg>",
+            "link": "#B"
+          },
+          {
+            "name": "Espaces Nextcloud",
+            "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"/spritemap.svg#nextcloud\"></use></svg>",
+            "link": "#C"
+          },
+          {
+            "name": "Platforme vidéo",
+            "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"/spritemap.svg#POD\"></use></svg>",
+            "link": "#D"
+          }
+        ]'
+      >
+      </r-widget>
+
+      <r-widget
+        name="Espace vie scolaire"
+        link="#2"
+      >
+      </r-widget>
+
+      <r-widget
+        name="Cartes mentales"
+        link="#3"
+        empty-icon='<svg class="empty-icon svg-inline--fa" aria-hidden="true"><use xlink:href="/spritemap.svg#carte-mentale"></use></svg>'
+        empty-text="Aucune carte mentale"
+      >
+      </r-widget>
+
+      <r-widget
+        name="Médiacentre"
+        subtitle="Consulté récement"
+        notifications="6"
+        link="#4"
+        empty-discover
+      >
+      </r-widget>
+    </section>
+  </section>
+</body>
+
+</html>

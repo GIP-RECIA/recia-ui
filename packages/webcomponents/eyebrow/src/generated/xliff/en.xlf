@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="s5be3c6d61cd9182f">
+  <source>Notifications</source>
+  <target>Notifications</target>
+</trans-unit>
+<trans-unit id="sb1ae6414f46b7471">
+  <source>Mon profil</source>
+  <target>My profile</target>
+</trans-unit>
+<trans-unit id="sbf71c25c7ca379d8">
+  <source>Infos de l'établissement</source>
+  <target>School info</target>
+</trans-unit>
+<trans-unit id="sbddc966a2760f55c">
+  <source>Changer d'établissement</source>
+  <target>Change school</target>
+</trans-unit>
+<trans-unit id="s4c45c541dc69732e">
+  <source>Lancer le didacticiel</source>
+  <target>Start tutorial</target>
+</trans-unit>
+<trans-unit id="sc3a31f700d8e22a1">
+  <source>Déconnexion</source>
+  <target>Logout</target>
+</trans-unit>
+<trans-unit id="s0879a675a2208eb0">
+  <source>Menu mon compte</source>
+  <target>My account menu</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

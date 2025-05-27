@@ -2,7 +2,9 @@
   "name": "recia-ui",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/ui",
+    "packages/ui-webcomponents",
+    "packages/webcomponents/*"
   ],
   "scripts": {
     "each": "yarn workspaces foreach -At run",

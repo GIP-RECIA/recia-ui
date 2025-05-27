@@ -14,3 +14,6 @@ license-check:
 
 license-generate:
 	./scripts/license.sh 3
+
+build-webcomponents:
+	./scripts/build-wc.sh

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="s0125c06ad08c527e">
+  <source>Élèves ou parent
+(éducation nationale)</source>
+  <target>Students or parents
+(national education)</target>
+</trans-unit>
+<trans-unit id="s92bd5fa4e899fd8a">
+  <source>Élève ou parent
+(enseignement agricole)</source>
+  <target>Student or parent
+(agricultural education)</target>
+</trans-unit>
+<trans-unit id="se6226bfe4a365f9b">
+  <source>Personnel
+(éducation nationale)</source>
+  <target>Staff
+(national education)</target>
+</trans-unit>
+<trans-unit id="sca0972101e448a98">
+  <source>Personnel
+(enseignement agricole)</source>
+  <target>Staff
+(agricultural education)</target>
+</trans-unit>
+<trans-unit id="s884ff070dd0e70ab">
+  <source>Personnel
+(Région Centre-Val de Loire)</source>
+  <target>Staff
+(Centre-Val de Loire region)</target>
+</trans-unit>
+<trans-unit id="seb3f3765a51f4055">
+  <source>Autre public
+(utilisateur local, entreprise,...)</source>
+  <target>Other public
+(local user, company,...)</target>
+</trans-unit>
+</body>
+</file>
+</xliff>
