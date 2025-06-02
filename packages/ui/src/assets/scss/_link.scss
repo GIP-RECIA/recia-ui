@@ -7,7 +7,7 @@
   }
 
   &:focus-visible {
-    outline: 2px dotted;
+    outline: 2px dotted var(--#{$prefix}system-blue);
     padding: 4px 8px;
     margin: -4px -8px;
     border-radius: 50px;
