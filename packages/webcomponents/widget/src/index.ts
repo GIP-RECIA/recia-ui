@@ -134,8 +134,10 @@ export class ReciaWidget extends LitElement {
             ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : '' }, { 'folded-indicator': true })}
           </button>
           <div>
-            ${getIconWithStyle(faAnglesRight, {}, { 'focus-indicator': true })}
-            <a href="${this.link}" class="heading" aria-label="${this.name}">${this.headingTemplate()}</a>
+            <a href="${this.link}" aria-label="${this.name}">
+              ${getIconWithStyle(faAnglesRight, {}, { 'focus-indicator': true })}
+              <div class="heading">${this.headingTemplate()}</div>
+            </a>
             <div class="grow-1"></div>
             ${this.notificationsTemplate()}
           </div>
@@ -154,9 +156,9 @@ export class ReciaWidget extends LitElement {
                   ${
                     this.localItems.map(item => html`
                       <li>
-                        <a href="${item.link}">
+                        <a href="${item.link}" title="${item.name}">
                           ${unsafeSVG(item.icon)}
-                          ${item.name}
+                          <span>${item.name}</span>
                         </a>
                       </li>
                     `)

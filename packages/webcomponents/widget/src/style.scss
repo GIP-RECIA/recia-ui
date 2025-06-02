@@ -30,13 +30,19 @@
       padding: 16px 12px;
       text-align: start;
 
-      > .focus-indicator {
-        display: none;
+      > a {
+        @include link-unstyled;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+
+        > .focus-indicator {
+          display: none;
+        }
       }
 
-      > .heading {
-        @include link-unstyled;
-
+      > .heading,
+      > a > .heading {
         > h3 {
           font-size: var(--#{$prefix}font-size-sm);
           margin-bottom: 0;
@@ -57,7 +63,7 @@
         font-weight: bold;
       }
 
-      > .focus-indicator,
+      > a > .focus-indicator,
       > .folded-indicator {
         font-size: 16px;
         margin: 4px;
@@ -68,18 +74,17 @@
     > div {
       display: none !important;
 
-      &:has(.heading:hover, > .heading:focus-visible) {
+      > a:hover,
+      > a:focus-visible {
+        outline: none;
+
         > .focus-indicator {
           display: unset;
           color: var(--#{$prefix}primary);
         }
 
-        > .heading {
-          outline: none;
-
-          > h3 {
-            color: var(--#{$prefix}primary);
-          }
+        > .heading > h3 {
+          color: var(--#{$prefix}primary);
         }
       }
     }
@@ -119,8 +124,15 @@
           height: 40px;
 
           > .icon {
+            flex-shrink: 0;
             height: 20px;
             width: 20px;
+          }
+
+          > span {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
           }
 
           &:hover,
