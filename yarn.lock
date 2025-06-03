@@ -8942,6 +8942,8 @@ __metadata:
   resolution: "widgets-wrapper@workspace:packages/webcomponents/widgets-wrapper"
   dependencies:
     "@antfu/eslint-config": "npm:^4.13.2"
+    "@lit/localize": "npm:^0.12.2"
+    "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.28.0"
     eslint-plugin-format: "npm:^1.0.1"
