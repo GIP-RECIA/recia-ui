@@ -1,0 +1,99 @@
+@use 'sass:map';
+@use '../../button/src/style';
+@use '../../common/assets/scss/global' as *;
+
+.container {
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @each $name, $value in $grid-breakpoints {
+    @if $value != 0 {
+      @media screen and (width >= $value) {
+        max-width: map.get($container-max-widths, $name);
+      }
+    }
+  }
+}
+
+.bottom-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background-color: rgba(#000000, .25);
+
+  > .scrollable-container {
+    @extend .container;
+    position: absolute;
+    inset: 0;
+    z-index: 1055;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &:focus-visible {
+      outline: none;
+
+      > .sheet {
+        outline: 2px dotted var(--#{$prefix}system-blue);
+      }
+    }
+
+    > .sheet {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--#{$prefix}body-bg);
+      border-radius: 8px 8px 0 0;
+      margin-top: 54px;
+      padding: 16px;
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+
+      > .dragable {
+        align-self: center;
+        height: 6px;
+        width: 104px;
+        opacity: .33;
+        background-color: var(--#{$prefix}lighter-black);
+        border-radius: 3px;
+        margin-bottom: 16px;
+      }
+
+      > .close {
+        display: none;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 20px;
+        opacity: .5;
+
+        &:hover,
+        &:focus-visible {
+          opacity: 1;
+          color: inherit;
+        }
+      }
+
+      &.no-padding {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .scrollable-container > .sheet {
+      padding: 32px;
+
+      > .dragable {
+        display: none;
+      }
+
+      > .close {
+        display: inline-flex;
+      }
+    }
+  }
+}

@@ -14,24 +14,11 @@
  * limitations under the License.
  */
 
-// Component tag name prefix
-const prefix = 'r-'
+import { configureLocalization } from '@lit/localize'
+import { sourceLocale, targetLocales } from '../generated/locale-codes.ts'
 
-function componentName(name: string): string {
-  return `${prefix}${name}`
-}
-
-function fileName(name: string): string {
-  return `${componentName(name)}.js`
-}
-
-function libName(name: string): string {
-  return `${prefix.slice(0, -1)}${name.charAt(0).toUpperCase()}${name.slice(1).replace(/-./g, x => x[1].toUpperCase())}`
-}
-
-export {
-  componentName,
-  fileName,
-  libName,
-  prefix,
-}
+export const { getLocale, setLocale } = configureLocalization({
+  sourceLocale,
+  targetLocales,
+  loadLocale: (locale: string) => import(`../generated/locales/${locale}.ts`),
+})

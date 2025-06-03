@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-// Component tag name prefix
-const prefix = 'r-'
-
-function componentName(name: string): string {
-  return `${prefix}${name}`
+function slugify(value: string): string {
+  return String(value)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036F]/g, '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
 }
 
-function fileName(name: string): string {
-  return `${componentName(name)}.js`
-}
-
-function libName(name: string): string {
-  return `${prefix.slice(0, -1)}${name.charAt(0).toUpperCase()}${name.slice(1).replace(/-./g, x => x[1].toUpperCase())}`
-}
-
-export {
-  componentName,
-  fileName,
-  libName,
-  prefix,
-}
+export { slugify }
