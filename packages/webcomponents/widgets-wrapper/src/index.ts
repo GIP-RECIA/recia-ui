@@ -15,17 +15,29 @@
  */
 
 import type { TemplateResult } from 'lit'
+import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
+import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-import 'widget'
+import { setLocale } from './utils/localizationUtils.ts'
+import 'widget/dist/r-widget.js'
 
 const tagName = componentName(name)
 
+@localized()
 @customElement(tagName)
 export class ReciaWidgetsWrapper extends LitElement {
+  constructor() {
+    super()
+    const lang = langHelper.getPageLang()
+    setLocale(lang)
+    langHelper.setLocale(lang)
+    updateWhenLocaleChanges(this)
+  }
+
   render(): TemplateResult {
     return html`
       <div class="widget">
