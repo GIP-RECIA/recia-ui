@@ -1,0 +1,17 @@
+html {
+  /* fix tailwind 1.5 line height */
+  line-height: unset;
+}
+
+body {
+  display: revert;
+}
+
+section {
+  margin: 32px 0;
+}
+
+section.sub,
+section > section {
+  margin: 16px 0;
+}

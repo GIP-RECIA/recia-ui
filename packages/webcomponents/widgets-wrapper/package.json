@@ -1,0 +1,35 @@
+{
+  "name": "widgets-wrapper",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "",
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test:unit": "echo No tests available"
+  },
+  "dependencies": {
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.13.2",
+    "@types/lodash-es": "^4",
+    "eslint": "^9.28.0",
+    "eslint-plugin-format": "^1.0.1",
+    "lodash-es": "^4.17.21",
+    "ress": "^5.0.2",
+    "sass": "^1.89.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "widget": "workspace:^"
+  }
+}
