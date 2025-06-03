@@ -20,6 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
@@ -73,17 +74,28 @@ export class ReciaBottomSheet extends LitElement {
       e.preventDefault()
       e.stopPropagation()
     }
-    document.documentElement.style.overflowY = open ? 'hidden' : ''
-    this.isOpen = open
     if (open) {
       this.activeElement = document.activeElement as HTMLElement
+      document.documentElement.style.overflowY = 'hidden'
+      this.isOpen = true
       setTimeout(() => {
         this.bottomSheetContainerRef.value?.focus()
       }, 200)
     }
     else {
-      this.open = false
-      this.activeElement?.focus()
+      const scrollTop = this.bottomSheetContainerRef.value?.scrollTop
+      const timeout = (scrollTop ?? 0) > 0 ? 100 : 0
+      this.bottomSheetContainerRef.value && (this.bottomSheetContainerRef.value.scrollTop = 0)
+      setTimeout(() => {
+        this.closeRequested = true
+        setTimeout(() => {
+          document.documentElement.style.overflowY = ''
+          this.isOpen = false
+          this.open = false
+          this.activeElement?.focus()
+          this.closeRequested = false
+        }, 300)
+      }, timeout)
     }
   }
 
@@ -92,7 +104,11 @@ export class ReciaBottomSheet extends LitElement {
   }
 
   handleClick(e: MouseEvent): void {
-    if (this.isOpen && this.bottomSheetSheetRef.value && !e.composedPath().includes(this.bottomSheetSheetRef.value)) {
+    if (
+      this.isOpen
+      && this.bottomSheetSheetRef.value
+      && !e.composedPath().includes(this.bottomSheetSheetRef.value)
+    ) {
       e.preventDefault()
       this.closeBottomSheet(e)
     }
@@ -115,7 +131,11 @@ export class ReciaBottomSheet extends LitElement {
         <div
           ${ref(this.bottomSheetContainerRef)}
           tabindex="-1"
-          class="scrollable-container"
+          class="${classMap({
+            'scrollable-container': true,
+            'slide-up': !this.closeRequested,
+            'slide-down': this.closeRequested,
+          })}"
         >
           <div class="grow-1"></div>
           <div
