@@ -18,14 +18,15 @@ set -euo pipefail
 
 ROOT_DIR=$(pwd)
 SOURCE_DIR="$ROOT_DIR/packages/webcomponents"
-TARGET_DIR="$ROOT_DIR/packages/ui-webcomponents/dist"
+TARGET_DIR="$ROOT_DIR/packages/ui-webcomponents"
+PREFIX="r-"
 
 error=false
 
 echo "🚀 Démarrage du build des webcomponents..."
 
-mkdir -p "$TARGET_DIR"
-rm -rf "$TARGET_DIR"/*
+mkdir -p "$TARGET_DIR/dist" "$TARGET_DIR/docs"
+rm -rf "$TARGET_DIR/dist"/* "$TARGET_DIR/docs"/*
 
 for dir in "$SOURCE_DIR"/*/; do
   if [ -f "${dir}package.json" ]; then
@@ -34,7 +35,8 @@ for dir in "$SOURCE_DIR"/*/; do
 
     pushd "$dir" > /dev/null
     if yarn build; then
-      cp dist/*.js* "$TARGET_DIR" 2>/dev/null
+      cp dist/*.js* "$TARGET_DIR/dist" 2>/dev/null
+      cp README.md "$TARGET_DIR/docs/$PREFIX$(basename "$dir").md" 2>/dev/null
     else
       error=true
     fi

@@ -23,7 +23,8 @@
     "gip-recia"
   ],
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ],
   "publishConfig": {
     "access": "public"
