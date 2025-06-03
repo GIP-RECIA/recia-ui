@@ -121,7 +121,10 @@ export class ReciaWidget extends LitElement {
     const slug = slugify(this.name)
 
     return html`
-      <li class="widget-tile">
+      <div
+        aria-label="Widget ${this.name}"
+        class="widget-tile"
+      >
         <header>
           <button
             aria-expanded="${this.isExpanded}"
@@ -191,7 +194,7 @@ export class ReciaWidget extends LitElement {
               `
           }
         </div>
-      </li>
+      </div>
     `
   }
 
