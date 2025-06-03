@@ -20,6 +20,7 @@ import { faAnglesRight, faArrowRight, faChevronDown, faInfoCircle } from '@forta
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 import { componentName } from '../../common/config.ts'
@@ -131,7 +132,7 @@ export class ReciaWidget extends LitElement {
             <div class="heading">${this.headingTemplate()}</div>
             <div class="grow-1"></div>
             ${this.notificationsTemplate()}
-            ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : '' }, { 'folded-indicator': true })}
+            ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : undefined }, { 'folded-indicator': true })}
           </button>
           <div>
             <a href="${this.link}" aria-label="${this.name}">
@@ -154,7 +155,7 @@ export class ReciaWidget extends LitElement {
               ? html`
                 <ul>
                   ${
-                    this.localItems.map(item => html`
+                    repeat(this.localItems, item => item.name, item => html`
                       <li>
                         <a href="${item.link}" title="${item.name}">
                           ${unsafeSVG(item.icon)}

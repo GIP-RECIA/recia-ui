@@ -18,6 +18,7 @@ import type { TemplateResult } from 'lit'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -34,7 +35,7 @@ export class ReciaWayf extends LitElement {
   casUrl?: string
 
   @property({ attribute: 'idp-ids', type: Array })
-  idpIds?: Array<IdpIdType>
+  idpIds: Array<IdpIdType> = []
 
   @property({ attribute: 'svg-url', type: String })
   svgUrl: string = '/wayf.spritemap.svg'
@@ -62,8 +63,10 @@ export class ReciaWayf extends LitElement {
     return html`
       <ul class="wayf-tiles">
         ${
-          this.idpIds?.filter(idpId => Object.values(IdpIdType).includes(idpId))
-            .map(idpId => html`
+          repeat(
+            this.idpIds.filter(idpId => Object.values(IdpIdType).includes(idpId)),
+            idpId => idpId,
+            idpId => html`
               <li>
                 <a id=${idpId} href="${this.casUrl}&idpId=${idpId}">
                   <svg class="wayf-profile" aria-hidden="true" >
@@ -72,7 +75,8 @@ export class ReciaWayf extends LitElement {
                   <span>${ReciaWayf.i18n()[idpId]}</span>
                 </a>
               </li>
-            `)
+          `,
+          )
         }
       </ul>
     `

@@ -27,9 +27,10 @@ import {
   faRightLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
@@ -203,26 +204,31 @@ export class ReciaEyebrow extends LitElement {
       ${ReciaEyebrow.i18n()[item.id]}
       ${
         item.id === ItemType.Notification
-          ? keyed(this.notification, html`
-            <div
-              class="counter"
-              style="${styleMap({
-                display: this.notification > 0 ? undefined : 'none',
-              })}"
-            >
-              ${this.notification}
-            </div>
-          `)
-          : undefined
+          ? keyed(
+              this.notification > 0 ? 'notifications' : 'no-notifications',
+              html`
+                <div
+                  class="counter"
+                  style="${styleMap({
+                    display: this.notification > 0 ? undefined : 'none',
+                  })}"
+                >
+                  ${this.notification}
+                </div>
+              `,
+            )
+          : nothing
       }
-      ${item.icon ? keyed(item.icon, getIcon(item.icon)) : undefined}
+      ${item.icon ? keyed(item.icon, getIcon(item.icon)) : nothing}
     `
 
     return html`
       <li>
         ${
-          keyed(item.link, item.link && item.link.trim() !== ''
-            ? html`
+          keyed(
+            `${item.id}-${item.link && item.link.trim() !== '' ? 'link' : 'button'}`,
+            item.link && item.link.trim() !== ''
+              ? html`
               <a
                 id="${item.id}"
                 href="${item.link}"
@@ -231,14 +237,15 @@ export class ReciaEyebrow extends LitElement {
                 ${content}
               </a>
             `
-            : html`
+              : html`
               <button
                 id="${item.id}"
                 @click="${(e: Event) => this.emitEvent(e, item.id)}"
               >
                 ${content}
               </button>
-            `)
+            `,
+          )
         }
       </li>
     `
@@ -282,7 +289,7 @@ export class ReciaEyebrow extends LitElement {
               ${this.function}
             </span>
           </div>
-          ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : '' }, {})}
+          ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : undefined }, {})}
         </button>
         <ul
           id="eyebrow-menu"
@@ -292,12 +299,13 @@ export class ReciaEyebrow extends LitElement {
           })}"
         >
           ${
-            Object.entries(this.localConfig)
-              ?.filter(([key, value]) => {
-                return Object.values(ItemType).includes(key as ItemType)
-                  && value !== false
-              })
-              .map(([key, value]) => this.itemTemplate({ id: key as ItemType, ...value }))
+            repeat(
+              Object.entries(this.localConfig)?.filter(([key, value]) => {
+                return Object.values(ItemType).includes(key as ItemType) && value !== false
+              }),
+              ([key, _]) => key,
+              ([key, value]) => this.itemTemplate({ id: key as ItemType, ...value }),
+            )
           }
         </ul>
       </div>
