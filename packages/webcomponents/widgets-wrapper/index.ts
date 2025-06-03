@@ -14,5 +14,9 @@
  * limitations under the License.
  */
 
-import './dev.css'
-import './src'
+import { name as libName } from '../../ui-webcomponents/package.json'
+import { name } from './package.json'
+import './src/index.ts'
+import '../common/assets/css/dev.css'
+
+document.title = `${name} | ${libName}`
