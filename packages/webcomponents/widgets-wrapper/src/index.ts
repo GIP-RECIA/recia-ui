@@ -45,49 +45,46 @@ export class ReciaWidgetsWrapper extends LitElement {
           <h2 class="sr-only">Accès rapides</h2>
         </header>
         <ul class="widget-tiles">
-          <li class="widget-tile">
-            <r-widget
-              name="Favoris"
-              link="#1"
-              items='[
-                {
-                  "name": "Carte mentale",
-                  "link": "#A"
-                },
-                {
-                  "name": "Capytale",
-                  "link": "#B"
-                },
-                {
-                  "name": "Espaces Nextcloud",
-                  "link": "#C"
-                },
-                {
-                  "name": "Platforme vidéo",
-                  "link": "#D"
-                }
-              ]'
-            >
-            </r-widget>
-          </li>
-          <li class="widget-tile">
-            <r-widget
-              name="Médiacentre"
-              subtitle="Consulté récement"
-              link="/portail/p/Mediacentre"
-              empty-text="Aucun favoris"
-              empty-discover
-            >
-            </r-widget>
-          </li>
-          <li class="widget-tile">
-            <r-widget
-              name="Documents"
-              link="#3"
-              empty-text="Aucun document"
-            >
-            </r-widget>
-          </li>
+          <r-widget
+            role="listitem"
+            name="Favoris"
+            link="#1"
+            items='[
+              {
+                "name": "Carte mentale",
+                "link": "#A"
+              },
+              {
+                "name": "Capytale",
+                "link": "#B"
+              },
+              {
+                "name": "Espaces Nextcloud",
+                "link": "#C"
+              },
+              {
+                "name": "Platforme vidéo",
+                "link": "#D"
+              }
+            ]'
+          >
+          </r-widget>
+          <r-widget
+            role="listitem"
+            name="Médiacentre"
+            subtitle="Consulté récement"
+            link="/portail/p/Mediacentre"
+            empty-text="Aucun favoris"
+            empty-discover
+          >
+          </r-widget>
+          <r-widget
+            role="listitem"
+            name="Documents"
+            link="#3"
+            empty-text="Aucun document"
+          >
+          </r-widget>
         </ul>
       </div>
     `
