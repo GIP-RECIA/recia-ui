@@ -1708,6 +1708,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uportal/open-id-connect@npm:^1.40.2":
+  version: 1.40.2
+  resolution: "@uportal/open-id-connect@npm:1.40.2"
+  dependencies:
+    jwt-decode: "npm:^3.0.0"
+  checksum: 10/0e16ad2b0725e0eb1340ba30b0f2d3b7580e7a494364bfc4fab736431616738073d9125a8c6b83544c6f49974928756e2130d04932dc1e78fc81ac629c334519
+  languageName: node
+  linkType: hard
+
 "@vitest/eslint-plugin@npm:^1.2.0":
   version: 1.2.1
   resolution: "@vitest/eslint-plugin@npm:1.2.1"
@@ -4566,6 +4575,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jwt-decode@npm:^3.0.0":
+  version: 3.1.2
+  resolution: "jwt-decode@npm:3.1.2"
+  checksum: 10/20a4b072d44ce3479f42d0d2c8d3dabeb353081ba4982e40b83a779f2459a70be26441be6c160bfc8c3c6eadf9f6380a036fbb06ac5406b5674e35d8c4205eeb
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.4":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -6346,6 +6362,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regenerator-runtime@npm:^0.14.1":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 10/5db3161abb311eef8c45bcf6565f4f378f785900ed3945acf740a9888c792f75b98ecb77f0775f3bf95502ff423529d23e94f41d80c8256e8fa05ed4b07cf471
+  languageName: node
+  linkType: hard
+
 "regexp-ast-analysis@npm:^0.7.0, regexp-ast-analysis@npm:^0.7.1":
   version: 0.7.1
   resolution: "regexp-ast-analysis@npm:0.7.1"
@@ -7646,10 +7669,12 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
+    "@uportal/open-id-connect": "npm:^1.40.2"
     eslint: "npm:^9.28.0"
     eslint-plugin-format: "npm:^1.0.1"
     lit: "npm:^3.3.0"
     lodash-es: "npm:^4.17.21"
+    regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
     sass: "npm:^1.89.1"
     typescript: "npm:^5.8.3"
