@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-import { name as libName } from '../../ui-webcomponents/package.json'
-import { name } from './package.json'
-import './src/index.ts'
-import '../common/assets/css/dev.css'
-import 'regenerator-runtime'
+export class WidgetData {
+  constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string) {
+    this.name = name
+    this.subtitle = subtitle
+    this.link = link
+    this.emptyDiscover = emptyDiscover
+    this.emptyText = emptyText
+    this.items = items
+  }
 
-document.title = `${name} | ${libName}`
+  name: string
+  subtitle: string
+  link: string
+  emptyText: string
+  emptyDiscover: boolean
+  items: string
+}

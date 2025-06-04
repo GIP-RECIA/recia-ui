@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-import { name as libName } from '../../ui-webcomponents/package.json'
-import { name } from './package.json'
-import './src/index.ts'
-import '../common/assets/css/dev.css'
-import 'regenerator-runtime'
+import oidc from '@uportal/open-id-connect'
 
-document.title = `${name} | ${libName}`
+async function getToken(apiUrl: string): Promise<string> {
+  const { encoded, decoded } = await oidc({
+    userInfoApiUrl: apiUrl,
+  })
+  if (decoded.sub.startsWith('guest')) {
+    throw new Error('You are not logged')
+  }
+  return encoded
+}
+
+export { getToken }
