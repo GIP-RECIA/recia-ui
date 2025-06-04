@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-import { name as libName } from '../../ui-webcomponents/package.json'
-import { name } from './package.json'
-import './src/index.ts'
-import '../common/assets/css/dev.css'
-import 'regenerator-runtime'
+export class Item {
+  constructor(name: string, link: string, icon?: string) {
+    this.name = name
+    this.link = link
+    this.icon = icon
+  }
 
-document.title = `${name} | ${libName}`
+  name: string
+  link: string
+  icon?: string
+}

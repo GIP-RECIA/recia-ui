@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-import { name as libName } from '../../ui-webcomponents/package.json'
-import { name } from './package.json'
-import './src/index.ts'
-import '../common/assets/css/dev.css'
-import 'regenerator-runtime'
+const FAVORIS_PORTAIL: string = 'favoris'
+const FAVORIS_MEDIACENTRE: string = 'mediacentre'
+const DOCUMENTS_PUBLISHER: string = 'publisher'
 
-document.title = `${name} | ${libName}`
+export { DOCUMENTS_PUBLISHER, FAVORIS_MEDIACENTRE, FAVORIS_PORTAIL }
