@@ -18,7 +18,7 @@ import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
@@ -34,6 +34,15 @@ const tagName = componentName(name)
 export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean })
   open = false
+
+  @property({ type: Boolean, attribute: 'close-icon' })
+  closeIcon = false
+
+  @property({ type: Boolean, attribute: 'drag-icon' })
+  dragIcon = false
+
+  @property({ type: Boolean, attribute: 'no-padding' })
+  noPadding = false
 
   @state()
   isOpen = false
@@ -142,16 +151,25 @@ export class ReciaBottomSheet extends LitElement {
             ${ref(this.bottomSheetSheetRef)}
             role="dialog"
             aria-modal="true"
-            class="sheet"
+            class="${classMap({
+              'sheet': true,
+              'no-padding': this.noPadding,
+            })}"
           >
-            <div class="dragable"></div>
-            <button
-              class="btn-tertiary circle close"
-              aria-label="Fermer la modale"
-              @click="${this.closeBottomSheet}"
-            >
-              ${getIcon(faTimes)}
-            </button>
+            ${this.dragIcon ? html`<div class="dragable"></div>` : nothing}
+            ${
+              this.closeIcon
+                ? html`
+                  <button
+                    class="btn-tertiary circle close"
+                    aria-label="Fermer la modale"
+                    @click="${this.closeBottomSheet}"
+                  >
+                    ${getIcon(faTimes)}
+                  </button>
+                `
+                : nothing
+            }
             <slot></slot>
           </div>
         </div>

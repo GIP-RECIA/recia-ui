@@ -108,6 +108,10 @@
 
       &.no-padding {
         padding: 0 !important;
+
+        > .dragable {
+          margin-top: 16px;
+        }
       }
     }
   }
