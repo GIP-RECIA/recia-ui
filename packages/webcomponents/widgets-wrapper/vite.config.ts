@@ -25,6 +25,7 @@ export default ({ mode }: ConfigEnv) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return defineConfig({
+    base: process.env.VITE_BASE_URI,
     publicDir: mode === 'development' ? undefined : false,
     build: {
       sourcemap: true,
@@ -39,6 +40,9 @@ export default ({ mode }: ConfigEnv) => {
           entryFileNames: fileName(name),
         },
       },
+    },
+    server: {
+      allowedHosts: ['lycees.test.recia.dev'],
     },
   })
 }
