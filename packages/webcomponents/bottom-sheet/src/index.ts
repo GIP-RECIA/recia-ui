@@ -47,6 +47,9 @@ export class ReciaBottomSheet extends LitElement {
   @state()
   isOpen = false
 
+  @state()
+  closeRequested = false
+
   bottomSheetContainerRef: Ref<HTMLElement> = createRef()
   bottomSheetSheetRef: Ref<HTMLElement> = createRef()
 
