@@ -32,6 +32,12 @@ import 'widget/dist/r-widget.js'
 
 const tagName = componentName(name)
 
+declare global {
+  interface Window {
+    WidgetAdapter: any
+  }
+}
+
 @localized()
 @customElement(tagName)
 export class ReciaWidgetsWrapper extends LitElement {
