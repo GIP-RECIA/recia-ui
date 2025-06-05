@@ -12,7 +12,8 @@
   <section>
     <h1>Bottom sheet</h1>
 
-    <button>Open bottom sheet</button>
+    <button id="btn-short">Open short bottom sheet</button>
+    <button id="btn-long">Open long bottom sheet</button>
 
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, quaerat ullam. Consequatur eligendi ipsa sed commodi debitis velit perferendis tempore, ad magnam iusto delectus nihil non doloremque eaque aperiam quis.
@@ -37,9 +38,19 @@
       Molestias odio quas ut incidunt autem sapiente porro dolores, distinctio numquam labore. Atque, corrupti voluptatum officiis quisquam nesciunt dolore quod architecto? Consequuntur sit libero commodi debitis autem, aut sapiente illo.
     </p>
 
-    <button>Open bottom sheet</button>
+    <button id="btn-short">Open short bottom sheet</button>
+    <button id="btn-long">Open long bottom sheet</button>
 
     <r-bottom-sheet
+      id="short"
+      close-icon
+      drag-icon
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo dolores hic fugiat, nulla, nobis ullam numquam, quis non error ipsum velit! Obcaecati fuga hic perspiciatis, consequatur quia vel maxime porro.
+    </r-bottom-sheet>
+
+    <r-bottom-sheet
+      id="long"
       close-icon
       drag-icon
     >
@@ -67,12 +78,16 @@
   </section>
 
   <script>
-    const bottomSheet = document.querySelector('r-bottom-sheet')
-    let bottomSheetState = false
-    document.querySelectorAll('button').forEach((button) => {
+    const shortBottomSheet = document.querySelector('r-bottom-sheet#short')
+    const longBottomSheet = document.querySelector('r-bottom-sheet#long')
+    document.querySelectorAll('button#btn-short').forEach((button) => {
       button.addEventListener('click', () => {
-        bottomSheetState = !bottomSheetState
-        bottomSheet.open = true
+        shortBottomSheet.setAttribute('open', '')
+      })
+    })
+    document.querySelectorAll('button#btn-long').forEach((button) => {
+      button.addEventListener('click', () => {
+        longBottomSheet.setAttribute('open', '')
       })
     })
   </script>

@@ -32,8 +32,8 @@ const tagName = componentName(name)
 
 @customElement(tagName)
 export class ReciaBottomSheet extends LitElement {
-  @property({ type: Boolean })
-  open = false
+  @property({ type: Boolean, attribute: 'open', reflect: true })
+  isOpen = false
 
   @property({ type: Boolean, attribute: 'close-icon' })
   closeIcon = false
@@ -44,14 +44,19 @@ export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean, attribute: 'no-padding' })
   noPadding = false
 
-  @state()
-  isOpen = false
+  show = false
 
   @state()
   closeRequested = false
 
-  bottomSheetContainerRef: Ref<HTMLElement> = createRef()
-  bottomSheetSheetRef: Ref<HTMLElement> = createRef()
+  containerRef: Ref<HTMLElement> = createRef()
+  growRef: Ref<HTMLElement> = createRef()
+  sheetRef: Ref<HTMLElement> = createRef()
+
+  startY = 0
+  currentY = 0
+  growHeight = 0
+  isDragging = false
 
   activeElement: HTMLElement | undefined
 
@@ -66,70 +71,118 @@ export class ReciaBottomSheet extends LitElement {
     super.connectedCallback()
     this.addEventListener('click', this.handleClick.bind(this))
     this.addEventListener('keyup', this.handleKeyPress.bind(this))
+    this.addEventListener('touchstart', this.handleTouchStart.bind(this))
+    this.addEventListener('touchmove', this.handleTouchMove.bind(this))
+    this.addEventListener('touchend', this.handleTouchEnd.bind(this))
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.removeEventListener('click', this.handleClick.bind(this))
     this.removeEventListener('keyup', this.handleKeyPress.bind(this))
+    this.removeEventListener('touchstart', this.handleTouchStart.bind(this))
+    this.removeEventListener('touchmove', this.handleTouchMove.bind(this))
+    this.removeEventListener('touchend', this.handleTouchEnd.bind(this))
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('open')) {
-      this.toogleBottomSheet(undefined, this.open)
-    }
+    if (_changedProperties.has('isOpen') && _changedProperties.get('isOpen') !== this.isOpen)
+      this.isOpen ? this.open() : this.close()
     return true
   }
 
-  toogleBottomSheet(e: Event | undefined, open: boolean = false): void {
+  open(e: Event | undefined = undefined): void {
     if (e) {
       e.preventDefault()
       e.stopPropagation()
     }
-    if (open) {
-      this.activeElement = document.activeElement as HTMLElement
-      document.documentElement.style.overflowY = 'hidden'
-      this.isOpen = true
-      setTimeout(() => {
-        this.bottomSheetContainerRef.value?.focus()
-      }, 200)
-    }
-    else {
-      const scrollTop = this.bottomSheetContainerRef.value?.scrollTop
-      const timeout = (scrollTop ?? 0) > 0 ? 100 : 0
-      this.bottomSheetContainerRef.value && (this.bottomSheetContainerRef.value.scrollTop = 0)
-      setTimeout(() => {
-        this.closeRequested = true
-        setTimeout(() => {
-          document.documentElement.style.overflowY = ''
-          this.isOpen = false
-          this.open = false
-          this.activeElement?.focus()
-          this.closeRequested = false
-        }, 300)
-      }, timeout)
-    }
+
+    this.activeElement = document.activeElement as HTMLElement
+    document.documentElement.style.overflowY = 'hidden'
+    this.show = true
+    setTimeout(() => {
+      this.containerRef.value!.focus()
+    }, 200)
   }
 
-  closeBottomSheet(e: Event): void {
-    this.toogleBottomSheet(e)
+  close(e: Event | undefined = undefined): void {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
+    const scrollTop = this.containerRef.value?.scrollTop ?? 0
+    const timeout = scrollTop > 0 ? 100 : 0
+    scrollTop > 0 && (this.containerRef.value!.scrollTop = 0)
+    setTimeout(() => {
+      this.closeRequested = true
+      setTimeout(() => {
+        document.documentElement.style.overflowY = ''
+        this.show = false
+        this.isOpen = false
+        this.activeElement?.focus()
+        this.closeRequested = false
+        this.growRef.value!.style.marginTop = ''
+      }, 300)
+    }, timeout)
   }
 
   handleClick(e: MouseEvent): void {
-    if (
-      this.isOpen
-      && this.bottomSheetSheetRef.value
-      && !e.composedPath().includes(this.bottomSheetSheetRef.value)
-    ) {
+    if (this.show && !e.composedPath().includes(this.sheetRef.value!)) {
       e.preventDefault()
-      this.closeBottomSheet(e)
+      this.close(e)
     }
   }
 
   handleKeyPress(e: KeyboardEvent): void {
-    if (this.isOpen && e.key === 'Escape') {
+    if (this.show && e.key === 'Escape') {
       e.preventDefault()
-      this.closeBottomSheet(e)
+      this.close(e)
+    }
+  }
+
+  handleTouchStart(e: TouchEvent): void {
+    if (!this.show || !(this.containerRef.value!.scrollTop === 0))
+      return
+
+    this.startY = e.touches[0].clientY
+    this.growHeight = this.growRef.value!.offsetHeight
+    this.isDragging = true
+  }
+
+  handleTouchMove(e: TouchEvent): void {
+    if (!this.isDragging)
+      return
+
+    this.currentY = e.touches[0].clientY
+    const diffY = this.currentY - this.startY
+
+    if (diffY > 0) {
+      e.preventDefault()
+      const newHeight = diffY
+      this.growRef.value!.style.marginTop = `${this.growHeight + newHeight}px`
+    }
+  }
+
+  handleTouchEnd(_: TouchEvent): void {
+    if (!this.isDragging)
+      return
+
+    this.isDragging = false
+    const diffY = this.currentY - this.startY
+    const requiredScoll = this.sheetRef.value!.offsetHeight > 180
+      ? 180
+      : this.sheetRef.value!.clientHeight * 0.3
+
+    if (diffY > requiredScoll) {
+      this.close()
+    }
+    else {
+      this.growRef.value!.style.transition = 'margin-top .3s ease-in-out'
+      this.growRef.value!.style.marginTop = ''
+      setTimeout(() => {
+        this.growRef.value!.style.transition = ''
+      }, 300)
     }
   }
 
@@ -138,24 +191,16 @@ export class ReciaBottomSheet extends LitElement {
       <div
         id="bottom-sheet-service-more"
         class="bottom-sheet"
-        style="${styleMap({ display: this.isOpen ? '' : 'none' })}"
+        style="${styleMap({ display: this.show ? undefined : 'none' })}"
       >
-        <div
-          ${ref(this.bottomSheetContainerRef)}
-          tabindex="-1"
-          class="${classMap({
-            'scrollable-container': true,
-            'slide-up': !this.closeRequested,
-            'slide-down': this.closeRequested,
-          })}"
-        >
-          <div class="grow-1"></div>
+        <div ${ref(this.containerRef)} tabindex="-1" class="scrollable-container">
+          <div ${ref(this.growRef)} class="grow-1" ></div>
           <div
-            ${ref(this.bottomSheetSheetRef)}
+            ${ref(this.sheetRef)}
             role="dialog"
             aria-modal="true"
-            class="${classMap({
-              'sheet': true,
+            class="sheet${classMap({
+              'slide-down': this.closeRequested,
               'no-padding': this.noPadding,
             })}"
           >
@@ -166,7 +211,7 @@ export class ReciaBottomSheet extends LitElement {
                   <button
                     class="btn-tertiary circle close"
                     aria-label="Fermer la modale"
-                    @click="${this.closeBottomSheet}"
+                    @click="${this.close}"
                   >
                     ${getIcon(faTimes)}
                   </button>
