@@ -29,9 +29,18 @@ function libName(name: string): string {
   return `${prefix.slice(0, -1)}${name.charAt(0).toUpperCase()}${name.slice(1).replace(/-./g, x => x[1].toUpperCase())}`
 }
 
+function setDevEnv(name: string, mainLibName: string): void {
+  const wcName = componentName(name)
+  document.title = `${wcName} | ${mainLibName}`
+  const pageTitle = document.createElement('h1')
+  pageTitle.textContent = wcName
+  document.body.querySelector('section')?.prepend(pageTitle)
+}
+
 export {
   componentName,
   fileName,
   libName,
   prefix,
+  setDevEnv,
 }

@@ -15,8 +15,10 @@
  */
 
 import { name as libName } from '../../ui-webcomponents/package.json'
+import { setDevEnv } from '../common/config.ts'
 import { name } from './package.json'
+
 import './src/index.ts'
 import '../common/assets/css/dev.css'
 
-document.title = `${name} | ${libName}`
+setDevEnv(name, libName)
