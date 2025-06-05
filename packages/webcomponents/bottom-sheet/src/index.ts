@@ -100,6 +100,7 @@ export class ReciaBottomSheet extends LitElement {
     this.activeElement = document.activeElement as HTMLElement
     document.documentElement.style.overflowY = 'hidden'
     this.show = true
+    this.isOpen = true
     setTimeout(() => {
       this.containerRef.value!.focus()
     }, 200)
