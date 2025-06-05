@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-const FAVORIS_PORTAIL: string = 'favoris'
-const FAVORIS_MEDIACENTRE: string = 'mediacentre'
-const DOCUMENTS_PUBLISHER: string = 'publisher'
+const FAVORIS_PORTAIL: string = 'Favoris'
+const FAVORIS_MEDIACENTRE: string = 'Mediacentre'
+const DOCUMENTS_PUBLISHER: string = 'DocumentsEtab'
 
 export { DOCUMENTS_PUBLISHER, FAVORIS_MEDIACENTRE, FAVORIS_PORTAIL }
