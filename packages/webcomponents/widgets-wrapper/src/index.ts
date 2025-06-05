@@ -130,7 +130,7 @@ export class ReciaWidgetsWrapper extends LitElement {
           const json = await response.json()
           return (json.portlet.title)
         }
-        catch (error) {
+        catch (error: any) {
           console.error(error.message)
           return msg('Médiacentre')
         }
@@ -147,7 +147,7 @@ export class ReciaWidgetsWrapper extends LitElement {
           const json = await response.json()
           return (json.portlet.title)
         }
-        catch (error) {
+        catch (error: any) {
           console.error(error.message)
           return msg('Documents')
         }
