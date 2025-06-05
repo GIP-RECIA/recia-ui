@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
@@ -59,7 +59,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     let itemsAsString: string = await this.getWidgetData(key, soffit)
     itemsAsString = this.itemsAsStringLinksProcessing(itemsAsString, key)
 
-    const widgetData: WidgetData = new WidgetData(this.tempGetName(key), '', '#key', '', false, itemsAsString)
+    const name: string = await this.getWidgetName(key)
+    const widgetData: WidgetData = new WidgetData(name, '', '#key', '', false, itemsAsString)
     this.widgetDataMap.set(key, widgetData)
     this.requestUpdate()
   }
@@ -93,16 +94,44 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  tempGetName(key: string): string {
+  async getWidgetName(key: string): Promise<string> {
     switch (key) {
       case FAVORIS_PORTAIL:
-        return 'Favoris'
+        return msg('Favoris')
 
       case FAVORIS_MEDIACENTRE:
-        return 'Médiacentre'
+      { const url = 'https://lycees.test.recia.dev/portail/api/portlet/Mediacentre.json'
+        try {
+          const response = await fetch(url)
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`)
+          }
+
+          const json = await response.json()
+          return (json.portlet.title)
+        }
+        catch (error) {
+          console.error(error.message)
+          return msg('Médiacentre')
+        }
+      }
 
       case DOCUMENTS_PUBLISHER:
-        return 'Documents'
+      { const url = 'https://lycees.test.recia.dev/portail/api/portlet/DocumentsEtab.json'
+        try {
+          const response = await fetch(url)
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`)
+          }
+
+          const json = await response.json()
+          return (json.portlet.title)
+        }
+        catch (error) {
+          console.error(error.message)
+          return msg('Documents')
+        }
+      }
 
       default:
         console.error(`clé inconnue ${key}`)
