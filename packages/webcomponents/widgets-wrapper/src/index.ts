@@ -47,17 +47,18 @@ export class ReciaWidgetsWrapper extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
-    this.widgetKeyArray.push(FAVORIS_PORTAIL)
-    this.widgetKeyArray.push(FAVORIS_MEDIACENTRE)
-    this.widgetKeyArray.push(DOCUMENTS_PUBLISHER)
 
     addEventListener('DOMContentLoaded', async () => {
+      this.widgetKeyArray = this.widgetKeysString.split(';')
       const soffit: string = await getToken(import.meta.env.VITE_USER_RIGHTS_URI)
       for (const value of this.widgetKeyArray) {
         this.buildWidget(value, soffit)
       }
     })
   }
+
+  @property({ type: String, attribute: 'widget-keys' })
+  widgetKeysString = ''
 
   widgetKeyArray: Array<string> = []
 
