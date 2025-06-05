@@ -44,21 +44,19 @@ export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean, attribute: 'no-padding' })
   noPadding = false
 
-  show = false
-
   @state()
   closeRequested = false
 
-  containerRef: Ref<HTMLElement> = createRef()
-  growRef: Ref<HTMLElement> = createRef()
-  sheetRef: Ref<HTMLElement> = createRef()
+  private containerRef: Ref<HTMLElement> = createRef()
+  private growRef: Ref<HTMLElement> = createRef()
+  private sheetRef: Ref<HTMLElement> = createRef()
 
-  startY = 0
-  currentY = 0
-  growHeight = 0
-  isDragging = false
-
-  activeElement: HTMLElement | undefined
+  private show = false
+  private startY = 0
+  private currentY = 0
+  private growHeight = 0
+  private isDragging = false
+  private activeElement: HTMLElement | undefined
 
   constructor() {
     super()
@@ -128,21 +126,17 @@ export class ReciaBottomSheet extends LitElement {
     }, timeout)
   }
 
-  handleClick(e: MouseEvent): void {
-    if (this.show && !e.composedPath().includes(this.sheetRef.value!)) {
-      e.preventDefault()
+  private handleClick(e: MouseEvent): void {
+    if (this.show && !e.composedPath().includes(this.sheetRef.value!))
       this.close(e)
-    }
   }
 
-  handleKeyPress(e: KeyboardEvent): void {
-    if (this.show && e.key === 'Escape') {
-      e.preventDefault()
+  private handleKeyPress(e: KeyboardEvent): void {
+    if (this.show && e.key === 'Escape')
       this.close(e)
-    }
   }
 
-  handleTouchStart(e: TouchEvent): void {
+  private handleTouchStart(e: TouchEvent): void {
     if (!this.show || !(this.containerRef.value!.scrollTop === 0))
       return
 
@@ -151,7 +145,7 @@ export class ReciaBottomSheet extends LitElement {
     this.isDragging = true
   }
 
-  handleTouchMove(e: TouchEvent): void {
+  private handleTouchMove(e: TouchEvent): void {
     if (!this.isDragging)
       return
 
@@ -160,12 +154,12 @@ export class ReciaBottomSheet extends LitElement {
 
     if (diffY > 0) {
       e.preventDefault()
-      const newHeight = diffY
-      this.growRef.value!.style.marginTop = `${this.growHeight + newHeight}px`
+      e.stopPropagation()
+      this.growRef.value!.style.marginTop = `${this.growHeight + diffY}px`
     }
   }
 
-  handleTouchEnd(_: TouchEvent): void {
+  private handleTouchEnd(_: TouchEvent): void {
     if (!this.isDragging)
       return
 
