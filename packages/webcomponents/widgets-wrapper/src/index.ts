@@ -164,7 +164,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   getWidgetRender(key: string): TemplateResult {
     if (this.widgetDataMap.has(key)) {
-      const widgetData: WidgetData = this.widgetDataMap.get(key)
+      const widgetData: WidgetData = this.widgetDataMap.get(key)!
       return html`
       <r-widget
         role="listitem"
