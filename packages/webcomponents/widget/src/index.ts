@@ -37,6 +37,8 @@ interface Item {
   name: string
   icon?: string
   link: string
+  target: string
+  rel: string
 }
 
 @localized()
@@ -166,7 +168,7 @@ export class ReciaWidget extends LitElement {
                   ${
                     repeat(this.localItems, item => item.name, item => html`
                       <li>
-                        <a href="${item.link}" title="${item.name}">
+                        <a href="${item.link}" title="${item.name}" target="${item.target}" rel="${item.rel}">
                           ${unsafeSVG(item.icon)}
                           <span>${item.name}</span>
                         </a>
