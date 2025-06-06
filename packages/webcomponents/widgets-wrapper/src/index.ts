@@ -63,9 +63,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   widgetKeyArray: Array<string> = []
 
   async buildWidget(key: string, soffit: string) {
-    let itemsAsString: string = await this.getWidgetData(key, soffit)
-    itemsAsString = this.itemsAsStringLinksProcessing(itemsAsString, key)
-    itemsAsString = this.itemsAsStringIconsProcessing(itemsAsString, key)
+    const itemsAsString: string = await this.getWidgetData(key, soffit)
     const name: string = await this.getWidgetName(key)
     const widgetData: WidgetData = new WidgetData(name, '', '#key', '', false, itemsAsString)
     this.widgetDataMap.set(key, widgetData)
@@ -74,34 +72,6 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async getWidgetData(key: string, soffit: string): Promise<string> {
     return await window.WidgetAdapter.getJsonForWidget(key, soffit)
-  }
-
-  itemsAsStringLinksProcessing(itemsAsString: string, key: string): string {
-    switch (key) {
-      case FAVORIS_PORTAIL:
-      { const itemArray: Array<Item> = JSON.parse(itemsAsString)
-        const favorisLinkPattern: string = import.meta.env.VITE_FAVORIS_LINK_PATTERN
-        const itemArrayModified: Array<Item> = itemArray.map(v => new Item(v.name, favorisLinkPattern.replace('{fname}', v.link), v.icon))
-        return JSON.stringify(itemArrayModified)
-      }
-
-      default:
-        return itemsAsString
-    }
-  }
-
-  itemsAsStringIconsProcessing(itemsAsString: string, key: string): string {
-    switch (key) {
-      case FAVORIS_PORTAIL:
-      {
-        const itemArray: Array<Item> = JSON.parse(itemsAsString)
-        const favorisLinkPattern: string = import.meta.env.VITE_FAVORIS_ICON_PATTERN
-        const itemArrayModified: Array<Item> = itemArray.map(v => v.icon !== undefined ? new Item(v.name, v.link, favorisLinkPattern.replace('{icon}', v.icon)) : new Item(v.name, v.link, v.icon))
-        return JSON.stringify(itemArrayModified)
-      }
-      default:
-        return itemsAsString
-    }
   }
 
   async getWidgetName(key: string): Promise<string> {
