@@ -3568,6 +3568,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"footer@workspace:packages/webcomponents/footer":
+  version: 0.0.0-use.local
+  resolution: "footer@workspace:packages/webcomponents/footer"
+  dependencies:
+    "@antfu/eslint-config": "npm:^4.16.1"
+    "@lit/localize": "npm:^0.12.2"
+    "@lit/localize-tools": "npm:^0.8.0"
+    "@types/lodash-es": "npm:^4"
+    eslint: "npm:^9.30.0"
+    eslint-plugin-format: "npm:^1.0.1"
+    lit: "npm:^3.3.0"
+    lodash-es: "npm:^4.17.21"
+    ress: "npm:^5.0.2"
+    sass: "npm:^1.89.2"
+    typescript: "npm:^5.8.3"
+    vite: "npm:^7.0.0"
+  languageName: unknown
+  linkType: soft
+
 "foreground-child@npm:^3.1.0":
   version: 3.3.0
   resolution: "foreground-child@npm:3.3.0"

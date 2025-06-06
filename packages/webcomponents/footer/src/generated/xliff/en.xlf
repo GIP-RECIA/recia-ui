@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="s865c883933982300">
+  <source>Fait avec amour par le <x id="0" equiv-text="${'GIP RECIA'}"/></source>
+  <target>Lovingly crafted by <x id="0" equiv-text="${'GIP RECIA'}"/></target>
+</trans-unit>
+</body>
+</file>
+</xliff>
