@@ -73,18 +73,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   async getWidgetData(key: string, soffit: string): Promise<string> {
-    switch (key) {
-      case FAVORIS_PORTAIL:
-        return await window.WidgetAdapter.getFavorisPortail()
-
-      case FAVORIS_MEDIACENTRE:
-        return await window.WidgetAdapter.getFavorisMediacentre(soffit)
-
-      case DOCUMENTS_PUBLISHER:
-        return await window.WidgetAdapter.getDocumentsPublisher(soffit)
-      default:
-        return ''
-    }
+    return await window.WidgetAdapter.getJsonForWidget(key, soffit)
   }
 
   itemsAsStringLinksProcessing(itemsAsString: string, key: string): string {
