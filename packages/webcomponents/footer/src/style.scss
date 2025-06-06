@@ -1,7 +1,8 @@
 @use 'sass:map';
-@use '../recia-style' as *;
+@use '../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
 
-.extended-uportal-footer {
+.footer {
   > .top {
     background-color: var(--#{$prefix}basic-grey);
 
