@@ -63,59 +63,13 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async buildWidget(key: string, soffit: string) {
     const itemsAsString: string = await this.getWidgetData(key, soffit)
-    const name: string = await this.getWidgetName(key)
-    const widgetData: WidgetData = new WidgetData(name, '', '#key', '', false, itemsAsString)
+    const widgetData: WidgetData = JSON.parse(itemsAsString)
     this.widgetDataMap.set(key, widgetData)
     this.requestUpdate()
   }
 
   async getWidgetData(key: string, soffit: string): Promise<string> {
     return await window.WidgetAdapter.getJsonForWidget(key, soffit)
-  }
-
-  async getWidgetName(key: string): Promise<string> {
-    switch (key) {
-      case FAVORIS_PORTAIL:
-        return msg('Favoris')
-
-      case FAVORIS_MEDIACENTRE:
-      { const url = 'https://lycees.test.recia.dev/portail/api/portlet/Mediacentre.json'
-        try {
-          const response = await fetch(url)
-          if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`)
-          }
-
-          const json = await response.json()
-          return (json.portlet.title)
-        }
-        catch (error: any) {
-          console.error(error.message)
-          return msg('Médiacentre')
-        }
-      }
-
-      case DOCUMENTS_PUBLISHER:
-      { const url = 'https://lycees.test.recia.dev/portail/api/portlet/DocumentsEtab.json'
-        try {
-          const response = await fetch(url)
-          if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`)
-          }
-
-          const json = await response.json()
-          return (json.portlet.title)
-        }
-        catch (error: any) {
-          console.error(error.message)
-          return msg('Documents')
-        }
-      }
-
-      default:
-        console.error(`clé inconnue ${key}`)
-        return ''
-    }
   }
 
   @state()
