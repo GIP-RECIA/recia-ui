@@ -83,6 +83,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         role="listitem"
         name="${widgetData.name}"
         link="${widgetData.link}"
+        target="${widgetData.target}"
+        rel="${widgetData.rel}"
         empty-text="${widgetData.emptyText}"
         items=${widgetData.items}
         >

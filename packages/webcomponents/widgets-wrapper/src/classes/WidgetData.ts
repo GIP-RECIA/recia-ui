@@ -15,13 +15,15 @@
  */
 
 export class WidgetData {
-  constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string) {
+  constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string, target: string, rel: string) {
     this.name = name
     this.subtitle = subtitle
     this.link = link
     this.emptyDiscover = emptyDiscover
     this.emptyText = emptyText
     this.items = items
+    this.target = target
+    this.rel = rel
   }
 
   name: string
@@ -30,4 +32,6 @@ export class WidgetData {
   emptyText: string
   emptyDiscover: boolean
   items: string
+  target: string
+  rel: string
 }
