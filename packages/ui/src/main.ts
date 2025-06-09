@@ -172,3 +172,36 @@ document.querySelectorAll<HTMLElement>('.widget-tile')?.forEach((widget) => {
 
   button?.addEventListener('click', () => toggleWidget())
 })
+
+// Theme
+const themes = ['lycee', 'agri', '18', '28', '36', '37', '41', '45']
+let currentTheme = 0
+const body = document.querySelector('body')
+body?.classList.add(`dom-${themes[currentTheme]}`)
+const themeButton = document.createElement('button')
+themeButton.style = `
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0 16px 16px 0;
+  padding: 16px;
+  background-color: bisque;
+  border-radius: 50px;
+`
+themeButton.textContent = themes[currentTheme]
+themeButton.addEventListener('click', () => {
+  let oldTheme, newTheme
+  if (currentTheme + 1 < themes.length) {
+    oldTheme = themes[currentTheme]
+    currentTheme++
+    newTheme = themes[currentTheme]
+  }
+  else {
+    oldTheme = themes[currentTheme]
+    currentTheme = 0
+    newTheme = themes[currentTheme]
+  }
+  body?.classList.replace(`dom-${oldTheme}`, `dom-${newTheme}`)
+  themeButton.textContent = newTheme
+})
+body?.appendChild(themeButton)
