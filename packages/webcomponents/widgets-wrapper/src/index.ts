@@ -15,16 +15,16 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { WidgetData } from './classes/WidgetData.ts'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { isArray } from 'lodash-es'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
-import { WidgetData } from './classes/WidgetData.ts'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-import { DOCUMENTS_PUBLISHER, FAVORIS_MEDIACENTRE, FAVORIS_PORTAIL } from './utils/constants.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
 import 'widget/dist/r-widget.js'
@@ -48,18 +48,90 @@ export class ReciaWidgetsWrapper extends LitElement {
     updateWhenLocaleChanges(this)
 
     addEventListener('DOMContentLoaded', async () => {
-      this.widgetKeyArray = this.widgetKeysString.split(';')
+      if (import.meta.env.DEV) {
+        await this.resetUserFavoriteWidgets()
+      }
+
+      //get all widgets keys known/accepted by the adapter
+      this.allExistingKeys = window.WidgetAdapter.getKeys()
+
+      let userFavoriteWidgetKeys: Array<string> = await this.getUserFavoriteWidgets()
+
+      const userHasFavorties = userFavoriteWidgetKeys !== undefined && isArray(userFavoriteWidgetKeys) && userFavoriteWidgetKeys.length > 0
+
+      const maxWidgets: number = import.meta.env.VITE_WIDGET_COUNT
+
+      if (userHasFavorties) {
+
+        const favInitialLenght: number = userFavoriteWidgetKeys.length
+        userFavoriteWidgetKeys = userFavoriteWidgetKeys.filter(x => this.allExistingKeys.includes(x))
+
+        // if user has more favorites than display max reduce favorites to max
+        if (userFavoriteWidgetKeys.length > maxWidgets) {
+          userFavoriteWidgetKeys = userFavoriteWidgetKeys.slice(0, maxWidgets)
+        }
+
+        // if user favorites has been edited by filter and/or slice, update it
+        if(userFavoriteWidgetKeys.length !== favInitialLenght){
+          this.setUserFavoriteWidgets(userFavoriteWidgetKeys)
+        }
+
+        this.widgetToDisplayKeyArray = userFavoriteWidgetKeys.filter(x => this.allExistingKeys.includes(x))
+      }
+      else {
+        // check that keys given in property are in the know keys, then remove keys exceding maximum
+        this.widgetToDisplayKeyArray = this.widgetKeysString.split(';').filter(x => this.allExistingKeys.includes(x)).slice(0, maxWidgets)
+      }
+
       const soffit: string = await getToken(import.meta.env.VITE_USER_RIGHTS_URI)
-      for (const value of this.widgetKeyArray) {
+      for (const value of this.widgetToDisplayKeyArray) {
         this.buildWidget(value, soffit)
       }
     })
   }
 
+  allExistingKeys: Array<string> = []
+
+  async getUserFavoriteWidgets() {
+    const url = import.meta.env.VITE_USER_FAVORITE_WIDGETS_URI
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`)
+      }
+
+      const json = await response.json()
+      return json.favorites
+    }
+    catch (error: any) {
+      console.error(error.message)
+    }
+  }
+
+  async setUserFavoriteWidgets(keys: Array<string>) {
+    const url = import.meta.env.VITE_USER_SET_FAVORITES_WIDGETS_URI
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify({ favorites: keys }),
+      })
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`)
+      }
+    }
+    catch (error: any) {
+      console.error(error.message)
+    }
+  }
+
+  async resetUserFavoriteWidgets() {
+    await this.setUserFavoriteWidgets([])
+  }
+
   @property({ type: String, attribute: 'widget-keys' })
   widgetKeysString = ''
 
-  widgetKeyArray: Array<string> = []
+  widgetToDisplayKeyArray: Array<string> = []
 
   async buildWidget(key: string, soffit: string) {
     const itemsAsString: string = await this.getWidgetData(key, soffit)
@@ -127,7 +199,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         </header>
         <ul class="widget-tiles">
           ${repeat(
-            this.widgetKeyArray,
+            this.widgetToDisplayKeyArray,
             (widgetKey: string) => widgetKey,
             (widgetKey: string) => html`
             ${this.getWidgetRender(widgetKey)}
