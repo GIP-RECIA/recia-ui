@@ -108,7 +108,7 @@ eyebrow?.querySelector<HTMLButtonElement>('button#info-etab')?.addEventListener(
 })
 
 // Search
-const search = extendedUportalHeader?.querySelector<HTMLElement>('.expended .search')
+const search = extendedUportalHeader?.querySelector<HTMLElement>('.search-container .search')
 
 let isExtendedUportalHeaderExpended = false
 
@@ -117,7 +117,7 @@ function toggleSearch(): void {
     return
   isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
   document.documentElement.style.overflowY = isExtendedUportalHeaderExpended ? 'hidden' : ''
-  const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.expended')
+  const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.search-container')
   extendedUportalHeaderExpended && (extendedUportalHeaderExpended.style.display = isExtendedUportalHeaderExpended ? '' : 'none')
 }
 
@@ -136,7 +136,7 @@ function toggleDrawer() {
   isDrawerExpended ? drawer.classList.add('expended') : drawer.classList.remove('expended')
 }
 
-drawer?.querySelector<HTMLButtonElement>('button')?.addEventListener('click', () => toggleDrawer())
+extendedUportalHeader?.querySelector<HTMLButtonElement>('button.drawer-toggle')?.addEventListener('click', () => toggleDrawer())
 
 // Dropdown favorite
 const favorite = drawer?.querySelector<HTMLElement>('.dropdown-favorites')
@@ -187,6 +187,7 @@ themeButton.style = `
   padding: 16px;
   background-color: bisque;
   border-radius: 50px;
+  z-index: 9999;
 `
 themeButton.textContent = themes[currentTheme]
 themeButton.addEventListener('click', () => {

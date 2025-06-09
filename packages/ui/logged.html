@@ -10,13 +10,17 @@
 <body class="dev-playground">
   <header>
     <div class="extended-uportal-header">
+      <button class="drawer-toggle" aria-label="Menu de navigation">
+        <svg aria-hidden="true">
+          <use xlink:href="/spritemap.svg#NOC-simple"></use>
+        </svg>
+        <span>Menu</span>
+      </button>
       <div class="drawer">
-        <button>
-          <svg aria-hidden="true">
-            <use xlink:href="/spritemap.svg#NOC-simple"></use>
-          </svg>
-          <span>Menu</span>
-        </button>
+        <div>
+          <div class="button-placeholder"></div>
+          <span>Lycée international de Palaiseau</span>
+        </div>
         <ul>
           <li>
             <a href="#" title="Accueil" aria-label="Retourer à l'accueil" class="back-home active">
@@ -152,11 +156,7 @@
       </div>
       <div class="content">
         <div class="start">
-          <a href="#" title="Accueil" aria-label="Retourer à l'accueil" class="back-home">
-            <svg aria-hidden="true">
-              <use xlink:href="/spritemap.svg#NOC-simple"></use>
-            </svg>
-          </a>
+          <div class="button-placeholder"></div>
           <span>Lycée international de Palaiseau</span>
           <div class="dropdown-info">
             <button class="dropdown-info-button" aria-expanded="false" aria-controls="dropdown-info-menu" aria-label="Menu fiche établissement">
@@ -175,7 +175,7 @@
                       <use xlink:href="/svg/NOC-simple.svg#simple"></use>
                     </svg>
                     <div class="heading">
-                      <span class="heading-etab">Lycée international de Plaiseau</span>
+                      <span class="heading-etab">Lycée international de Palaiseau</span>
                       <span class="heading-acad">Académie Orléans-Tours</span>
                     </div>
                   </header>
@@ -258,7 +258,7 @@
           </div>
         </div>
       </div>
-      <div class="expended" style="display: none;">
+      <div class="search-container" style="display: none;">
         <div class="search">
           <div class="search-mask"></div>
           <div class="search-field">

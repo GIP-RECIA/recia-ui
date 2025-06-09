@@ -248,7 +248,7 @@ body {
 
     > .header-placeholder {
       grid-area: header;
-      height: 64px;
+      height: 36px + 2 * 16;
     }
 
     > .alert {
