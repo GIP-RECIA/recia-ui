@@ -57,6 +57,12 @@ export class ReciaWidget extends LitElement {
   link = ''
 
   @property({ type: String })
+  target = ''
+
+  @property({ type: String })
+  rel = ''
+
+  @property({ type: String })
   items = '[]'
 
   @property({ type: String, attribute: 'empty-icon' })
@@ -143,7 +149,7 @@ export class ReciaWidget extends LitElement {
             ${
               this.link.length > 0
                 ? html`
-                <a href="${this.link}" aria-label="${this.name}">
+                <a href="${this.link}" aria-label="${this.name}" target="${this.target}" rel="${this.rel}">
                   ${getIconWithStyle(faAnglesRight, {}, { 'focus-indicator': true })}
                   <div class="heading">${this.headingTemplate()}</div>
                 </a>
