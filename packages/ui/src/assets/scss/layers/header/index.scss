@@ -1,0 +1,71 @@
+@use 'sass:map';
+@use 'variables' as *;
+@use 'content';
+@use 'drawer';
+@use 'search-container';
+
+.extended-uportal-header {
+  position: relative;
+  background-color: var(--#{$prefix}body-bg);
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  > .not-logged {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $header-height;
+
+    > .header-logo {
+      height: 27px;
+      width: auto;
+    }
+  }
+
+  > button {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    height: $header-height + 2 * 16;
+    width: 72px;
+    font-size: var(--#{$prefix}font-size-xxs);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--#{$prefix}lighter-black);
+    color: #FFF;
+    z-index: 1056;
+
+    > svg {
+      height: 28px;
+      width: 28px;
+      margin: -4px;
+    }
+
+    > span {
+      display: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      outline: none;
+      background-color: var(--#{$prefix}primary);
+
+      > span {
+        display: unset;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .not-logged {
+      justify-content: unset;
+    }
+  }
+}

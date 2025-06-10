@@ -2,13 +2,13 @@
 
 @use 'recia-style' as *;
 
+@use 'layers/header';
 @use 'layers/alert';
 @use 'layers/bottom-sheet';
 @use 'layers/discover';
 @use 'layers/dropdown-favorites';
 @use 'layers/dropdown-info';
 @use 'layers/extended-uportal-footer';
-@use 'layers/extended-uportal-header';
 @use 'layers/eyebrow';
 @use 'layers/favorite';
 @use 'layers/info-etab';
