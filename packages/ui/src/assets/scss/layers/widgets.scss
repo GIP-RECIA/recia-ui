@@ -2,7 +2,9 @@
 @use '../recia-style' as *;
 
 .widget {
-  margin-bottom: 8px;
+  > header {
+    margin-bottom: 24px;
+  }
 
   & > &-tiles {
     @include list-unstyled;

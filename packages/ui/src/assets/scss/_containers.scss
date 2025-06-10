@@ -1,12 +1,16 @@
 @use 'sass:map';
 @use 'variables' as *;
 
-.container {
+.container-fluid {
   width: 100%;
   padding-right: 16px;
   padding-left: 16px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.container {
+  @extend .container-fluid;
 
   @each $name, $value in $grid-breakpoints {
     @if $value != 0 {

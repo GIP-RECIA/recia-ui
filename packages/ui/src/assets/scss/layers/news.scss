@@ -10,7 +10,7 @@
 }
 
 %news-tiles {
-  @include list-unstyled;
+  list-style: none;
   display: flex;
   gap: 16px;
   font-weight: normal;
@@ -87,14 +87,23 @@
 }
 
 .news {
-  > header > a {
-    display: none
+  > header {
+    @extend .container;
+    margin-bottom: 24px;
+
+    > h2 {
+      margin-bottom: .5rem;
+    }
+
+    > a {
+      display: none
+    }
   }
 
   & > &-tiles {
+    @extend .container;
     @extend %news-tiles;
     flex-direction: column;
-    margin: 24px 0;
 
     > li > .news-tile {
       height: 140px;
@@ -155,8 +164,9 @@
   }
 
   > footer {
+    @extend .container;
     display: flex;
-    margin: 8px 16px;
+    margin-top: 24px;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {

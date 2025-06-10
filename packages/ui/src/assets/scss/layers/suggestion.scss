@@ -2,16 +2,25 @@
 @use '../recia-style' as *;
 
 .suggestion {
-  > header > a {
-    display: none
+  > header {
+    @extend .container;
+    margin-bottom: 24px;
+
+    > h2 {
+      margin-bottom: .5rem;
+    }
+
+    > a {
+      display: none
+    }
   }
 
-  & > &-tiles {
-    @include list-unstyled;
+  > .suggestion-tiles {
+    @extend .container;
+    list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
     gap: 16px;
-    margin: 24px 0;
 
     > li > a {
       @include link-unstyled;
@@ -19,7 +28,9 @@
   }
 
   > footer {
+    @extend .container;
     display: flex;
+    margin-top: 24px;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
@@ -32,12 +43,34 @@
       }
     }
 
-    & > &-tiles {
+    > .suggestion-tiles {
       display: flex;
       flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      margin-top: -1rem;
+      margin-bottom: -1rem;
+      max-width: unset;
 
       > li {
         flex: 0 0 150px;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        &:first-child { // TODO
+          @each $name, $value in $grid-breakpoints {
+            @if $value != 0 {
+              @media screen and (width >= $value) {
+                margin-left: calc(calc(100vw - #{map.get($container-max-widths, $name)}) / 4);
+              }
+            }
+          }
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px dotted var(--#{$prefix}primary);
       }
     }
 
