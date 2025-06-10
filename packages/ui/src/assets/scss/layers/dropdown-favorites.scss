@@ -13,9 +13,10 @@
     top: 0;
     left: 100%;
     width: 734px;
-    max-width: calc(100vw - (72px + 16px));
+    max-width: calc(100vw - calc(var(--#{$prefix}drawer-width) + 16px));
     padding: 22px 34px;
     color: var(--#{$prefix}body);
+    transition: max-width .3s ease-in-out;
 
     > .active-indicator {
       position: absolute;

@@ -80,6 +80,7 @@ $header-height: 36px;
     transition:
       width .3s ease-in-out,
       transform .3s ease-in-out;
+    --#{$prefix}drawer-width: #{$drawer-width};
 
     > div {
       flex: 0 0 auto;
@@ -200,6 +201,7 @@ $header-height: 36px;
     &.expended {
       width: $drawer-expended-width;
       transform: translateX(0);
+      --#{$prefix}drawer-width: #{$drawer-expended-width};
 
       > button {
         background-color: var(--#{$prefix}primary);
