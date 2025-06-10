@@ -77,7 +77,6 @@ $header-height: 36px;
     color: #FFF;
     font-size: var(--#{$prefix}font-size-sm);
     z-index: 1055;
-    overflow: hidden;
     transition:
       width .3s ease-in-out,
       transform .3s ease-in-out;
@@ -86,6 +85,7 @@ $header-height: 36px;
       flex: 0 0 auto;
       display: flex;
       height: $header-height + 2 * 16;
+      overflow: hidden;
 
       > .button-placeholder {
         flex: 0 0 $drawer-width;
@@ -107,8 +107,6 @@ $header-height: 36px;
     > ul {
       flex: 0 0 auto;
       @include list-unstyled;
-      max-height: 100%;
-      overflow: hidden auto;
 
       > li {
         > a,
@@ -122,6 +120,7 @@ $header-height: 36px;
           width: 100%;
           border-top: 1px solid rgba(#FFF, 5%);
           text-align: start;
+          overflow: hidden;
 
           > .active-indicator {
             display: none;
