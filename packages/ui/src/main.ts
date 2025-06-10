@@ -21,6 +21,34 @@ import './assets/scss/main.scss'
 register()
 
 /**
+ * Grid breakpoints
+ */
+
+const gridBreakpoints: Map<string, number> = new Map([
+  ['xs', 0],
+  ['sm', 576],
+  ['md', 768],
+  ['lg', 992],
+  ['xl', 1200],
+  ['xxl', 1400],
+])
+
+let currentBreakpoint = 0
+
+function handleBreakpoints(): void {
+  let breakpoint = 0
+  for (const [_, value] of gridBreakpoints.entries()) {
+    if (window.innerWidth >= value)
+      breakpoint = value
+  }
+  currentBreakpoint = breakpoint
+}
+
+handleBreakpoints()
+
+window.addEventListener('resize', () => handleBreakpoints())
+
+/**
  * Bottom sheet
  */
 
