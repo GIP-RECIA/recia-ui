@@ -1,5 +1,9 @@
 @use 'sass:map';
+@use 'sass:math';
 @use '../recia-style' as *;
+@use 'header/variables' as *;
+
+$service-width: 150px;
 
 .suggestion {
   > header {
@@ -54,15 +58,15 @@
       max-width: unset;
 
       > li {
-        flex: 0 0 150px;
+        flex: 0 0 $service-width;
         margin-top: 1rem;
         margin-bottom: 1rem;
 
-        &:first-child { // TODO
+        &:first-child {
           @each $name, $value in $grid-breakpoints {
             @if $value != 0 {
               @media screen and (width >= $value) {
-                margin-left: calc(calc(100vw - #{map.get($container-max-widths, $name)}) / 4);
+                margin-left: max(50vw - #{math.div(map.get($container-max-widths, $name) + $service-width + $drawer-width, 2)}, 0px);
               }
             }
           }
