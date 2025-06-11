@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import type { WidgetData } from './classes/WidgetData.ts'
-import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
@@ -52,7 +52,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         await this.resetUserFavoriteWidgets()
       }
 
-      //get all widgets keys known/accepted by the adapter
+      // get all widgets keys known/accepted by the adapter
       this.allExistingKeys = window.WidgetAdapter.getKeys()
 
       let userFavoriteWidgetKeys: Array<string> = await this.getUserFavoriteWidgets()
@@ -62,7 +62,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       const maxWidgets: number = import.meta.env.VITE_WIDGET_COUNT
 
       if (userHasFavorties) {
-
         const favInitialLenght: number = userFavoriteWidgetKeys.length
         userFavoriteWidgetKeys = userFavoriteWidgetKeys.filter(x => this.allExistingKeys.includes(x))
 
@@ -72,7 +71,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         }
 
         // if user favorites has been edited by filter and/or slice, update it
-        if(userFavoriteWidgetKeys.length !== favInitialLenght){
+        if (userFavoriteWidgetKeys.length !== favInitialLenght) {
           this.setUserFavoriteWidgets(userFavoriteWidgetKeys)
         }
 
@@ -189,6 +188,30 @@ export class ReciaWidgetsWrapper extends LitElement {
             ]'
           >
           </r-widget>`
+  }
+
+  getAllKeysNotDisplayed(): Array<string> {
+    return this.allExistingKeys.filter(x => !this.widgetToDisplayKeyArray.includes(x))
+  }
+
+  moveWidgetBack(key: string): void {
+    const index = this.widgetToDisplayKeyArray.indexOf(key)
+    if (index === 0) {
+      return
+    }
+    const indexOther = index - 1;
+    [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]] = [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]]
+    this.requestUpdate()
+  }
+
+  moveWidgetForward(key: string): void {
+    const index = this.widgetToDisplayKeyArray.indexOf(key)
+    if (index === this.widgetToDisplayKeyArray.length - 1) {
+      return
+    }
+    const indexOther = index + 1;
+    [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]] = [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]]
+    this.requestUpdate()
   }
 
   render(): TemplateResult {
