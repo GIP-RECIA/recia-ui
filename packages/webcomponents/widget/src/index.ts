@@ -39,6 +39,8 @@ interface Item {
   link: string
   target: string
   rel: string
+  event: string
+  eventpayload: string
 }
 
 @localized()
@@ -125,6 +127,33 @@ export class ReciaWidget extends LitElement {
       : nothing
   }
 
+  buttonClickHandle(item: Item): void {
+    window.dispatchEvent(new CustomEvent(item.event, { detail: JSON.parse(item.eventpayload) }))
+  }
+
+  itemTemplate(item: Item): TemplateResult {
+    const content: TemplateResult = html`
+      ${unsafeSVG(item.icon)}
+      <span>${item.name}</span>
+    `
+    if (item.event?.length > 0) {
+      return html`
+      <li>
+        <button @click="${() => { this.buttonClickHandle(item) }}" >
+          ${content}
+        </button>
+      </li>
+      `
+    }
+    return html`
+    <li>
+      <a href="${item.link}" title="${item.name}" target="${item.target}" rel="${item.rel}">
+        ${content}
+      </a>
+    </li>
+    `
+  }
+
   render(): TemplateResult {
     const slug = slugify(this.name)
 
@@ -172,14 +201,7 @@ export class ReciaWidget extends LitElement {
               ? html`
                 <ul>
                   ${
-                    repeat(this.localItems, item => item.name, item => html`
-                      <li>
-                        <a href="${item.link}" title="${item.name}" target="${item.target}" rel="${item.rel}">
-                          ${unsafeSVG(item.icon)}
-                          <span>${item.name}</span>
-                        </a>
-                      </li>
-                    `)
+                    repeat(this.localItems, item => item.name, item => this.itemTemplate(item))
                   }
                 </ul>
               `
