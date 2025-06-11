@@ -1,91 +1,6 @@
 @use 'sass:map';
 @use '../recia-style' as *;
 
-%carousel-action {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-%news-tiles {
-  list-style: none;
-  display: flex;
-  gap: 16px;
-  font-weight: normal;
-  line-height: 150%;
-
-  > li {
-    .news-tile {
-      display: flex;
-      text-align: left;
-      border-radius: 10px;
-      background-color: var(--#{$prefix}body-bg);
-      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
-      overflow: hidden;
-      transition:
-        outline .15s ease-out,
-        box-shadow .15s ease-out;
-
-      &-image {
-        flex: 0 0 92px;
-        overflow: hidden;
-
-        > img {
-          object-fit: cover;
-          height: 100%;
-          width: 100%;
-          transition: transform .15s ease-out;
-        }
-      }
-
-      &-content {
-        margin: 16px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        > header {
-          display: flex;
-          flex-direction: column;
-
-          h3 {
-            transition: color .15s ease-out;
-          }
-
-          .context {
-            order: -1;
-            font-weight: 500;
-            color: var(--#{$prefix}basic-black);
-            opacity: .5;
-            margin-bottom: 4px;
-          }
-        }
-
-        > p {
-          line-height: 130%;
-        }
-      }
-
-      &:hover,
-      &:focus-visible {
-        outline: 2px solid var(--#{$prefix}primary);
-        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
-
-        > .news-tile {
-          &-image > img {
-            transform: scale(1.4);
-          }
-
-          &-content > header h3 {
-            color: var(--#{$prefix}primary);
-          }
-        }
-      }
-    }
-  }
-}
-
 .news {
   > header {
     @extend .container;
@@ -102,62 +17,82 @@
 
   & > &-tiles {
     @extend .container;
-    @extend %news-tiles;
+    list-style: none;
+    display: flex;
     flex-direction: column;
+    gap: 16px;
+    font-weight: normal;
+    line-height: 150%;
 
-    > li > .news-tile {
-      height: 140px;
-      width: 100%;
-    }
-  }
+    > li {
+      > .news-tile {
+        display: flex;
+        width: 100%;
+        height: 140px;
+        text-align: left;
+        border-radius: 10px;
+        background-color: var(--#{$prefix}body-bg);
+        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
+        overflow: hidden;
+        transition:
+          outline .15s ease-out,
+          box-shadow .15s ease-out;
 
-  &-carousel {
-    $spacing: 24px;
-    display: none;
-    position: relative;
-    margin: -$spacing;
-    margin-top: -$spacing + 20px;
+        > .news-tile {
+          &-image {
+            flex: 0 0 92px;
+            overflow: hidden;
 
-    > .carousel {
-      &-container {
-        overflow-x: auto;
-        scrollbar-width: none;
+            > img {
+              object-fit: cover;
+              height: 100%;
+              width: 100%;
+              transition: transform .15s ease-out;
+            }
+          }
 
-        > .news-tiles {
-          @extend %news-tiles;
+          &-content {
+            margin: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-          > li {
-            flex: 0 0 auto;
-            padding-top: $spacing;
-            padding-bottom: $spacing;
+            > header {
+              display: flex;
+              flex-direction: column;
 
-            &:first-child {
-              padding-left: $spacing;
+              > h3 {
+                transition: color .15s ease-out;
+              }
+
+              > .context {
+                order: -1;
+                font-weight: 500;
+                color: var(--#{$prefix}basic-black);
+                opacity: .5;
+                margin-bottom: 4px;
+              }
             }
 
-            &:last-child {
-              padding-right: $spacing;
-            }
-
-            > .news-tile {
-              height: 175px;
-              width: 292px;
+            > p {
+              line-height: 130%;
             }
           }
         }
-      }
 
-      &-action {
-        &-back > * {
-          @extend %carousel-action;
-          left: 0;
-          margin-left: -44px;
-        }
+        &:hover,
+        &:focus-visible {
+          outline: 2px solid var(--#{$prefix}primary);
+          box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
 
-        &-next > * {
-          @extend %carousel-action;
-          right: 0;
-          margin-right: -44px;
+          > .news-tile {
+            &-image > img {
+              transform: scale(1.4);
+            }
+
+            &-content > header > h3 {
+              color: var(--#{$prefix}primary);
+            }
+          }
         }
       }
     }
@@ -180,11 +115,34 @@
     }
 
     & > &-tiles {
-      display: none;
-    }
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      margin-top: -1rem;
+      margin-bottom: -1rem;
+      @each $name, $value in $grid-breakpoints {
+        @if $value != 0 {
+          @media screen and (width >= $value) {
+            max-width: map.get($container-max-widths, $name) + 2 * 44;
+          }
+        }
+      }
 
-    & > &-carousel  {
-      display: revert;
+      > li {
+        flex: 0 0 292px;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        > .news-tile {
+          height: 175px;
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px dotted var(--#{$prefix}primary);
+      }
     }
 
     > footer {
