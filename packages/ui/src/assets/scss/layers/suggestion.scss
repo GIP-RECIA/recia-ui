@@ -53,14 +53,14 @@ $service-width: 150px;
       overflow-x: auto;
       scrollbar-width: none;
       scroll-behavior: smooth;
-      margin-top: -1rem;
-      margin-bottom: -1rem;
+      margin-top: -1.5rem;
+      margin-bottom: -1.5rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
       max-width: unset;
 
       > li {
         flex: 0 0 $service-width;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
 
         &:first-child {
           @each $name, $value in $grid-breakpoints {

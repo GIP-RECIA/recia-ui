@@ -15,7 +15,7 @@
     }
   }
 
-  & > &-tiles {
+  .news-tiles {
     @extend .container;
     list-style: none;
     display: flex;
@@ -114,26 +114,20 @@
       }
     }
 
-    & > &-tiles {
+    .news-tiles {
       flex-direction: row;
       flex-wrap: nowrap;
       overflow-x: auto;
       scrollbar-width: none;
       scroll-behavior: smooth;
-      margin-top: -1rem;
-      margin-bottom: -1rem;
-      @each $name, $value in $grid-breakpoints {
-        @if $value != 0 {
-          @media screen and (width >= $value) {
-            max-width: map.get($container-max-widths, $name) + 2 * 44;
-          }
-        }
-      }
+      margin-top: -1.5rem;
+      margin-bottom: -1.5rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
 
       > li {
+        display: revert !important;
         flex: 0 0 292px;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
 
         > .news-tile {
           height: 175px;
