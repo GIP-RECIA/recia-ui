@@ -213,6 +213,7 @@ body {
   color: var(--#{$prefix}body);
 
   &.dev-playground {
+    transition: margin-left .3s ease-in-out;
     height: 100vh;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
@@ -222,24 +223,9 @@ body {
       'main'
       'footer';
 
-    &:has(> .drawer-placeholder) {
-      grid-template-columns: auto 1fr;
-      grid-template-areas:
-        'drawer header'
-        'drawer alert'
-        'drawer main'
-        'drawer footer';
-    }
-
     > header {
       grid-area: header;
       height: 36px + 2 * 16;
-    }
-
-    > .drawer-placeholder {
-      display: none;
-      grid-area: drawer;
-      width: 72px;
     }
 
     > .alert {
@@ -264,9 +250,7 @@ body {
     }
 
     @media (width >= map.get($grid-breakpoints, md)) {
-      > .drawer-placeholder {
-        display: unset;
-      }
+      margin-left: 72px;
 
       > main {
         row-gap: 70px;
