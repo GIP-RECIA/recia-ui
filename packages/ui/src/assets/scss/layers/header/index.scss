@@ -5,7 +5,11 @@
 @use 'search-container';
 
 .extended-uportal-header {
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1030;
   background-color: var(--#{$prefix}body-bg);
   box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
   padding: 16px;
@@ -40,7 +44,7 @@
     left: 0;
     background-color: var(--#{$prefix}lighter-black);
     color: #FFF;
-    z-index: 1056;
+    z-index: 1040;
 
     > svg {
       height: 28px;

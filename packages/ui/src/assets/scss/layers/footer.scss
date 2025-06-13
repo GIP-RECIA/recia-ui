@@ -2,6 +2,8 @@
 @use '../recia-style' as *;
 
 .footer {
+  margin-top: 32px;
+
   > .top {
     background-color: var(--#{$prefix}basic-grey);
 
@@ -118,6 +120,8 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
+    margin-top: unset;
+
     > .top >.container {
       flex-direction: row;
       flex-wrap: wrap;

@@ -22,7 +22,7 @@
       background-color: var(--#{$prefix}primary);
       box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
       position: relative;
-      z-index: 1010;
+      z-index: 1055;
 
       &:focus-visible {
         outline: 4px solid HEXToRGBA(var(--#{$prefix}primary), .3);
@@ -52,7 +52,7 @@
     border-radius: 10px;
     box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
     overflow: hidden;
-    z-index: 1000;
+    z-index: 1050;
     padding: 32px;
 
     &.top {
