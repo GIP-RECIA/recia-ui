@@ -30,14 +30,14 @@
     </button>
   </div>
 
-  <main class="container">
-    <div class="wayf">
+  <main>
+    <section class="wayf container">
       <header>
         <h1>Connectez-vous <span>à votre Espace Numérique de Travail (ENT)</span></h1>
       </header>
       <ul class="wayf-tiles">
         <li>
-          <a href="#">
+          <a href="./logged.html">
             <svg class="wayf-profile" aria-hidden="true">
               <use xlink:href="/spritemap.svg#profile1"></use>
             </svg>
@@ -57,7 +57,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="./logged.html">
             <svg class="wayf-profile" aria-hidden="true">
               <use xlink:href="/spritemap.svg#profile3"></use>
             </svg>
@@ -67,7 +67,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="./logged.html">
             <svg class="wayf-profile" aria-hidden="true">
               <use xlink:href="/spritemap.svg#profile4"></use>
             </svg>
@@ -77,7 +77,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="./logged.html">
             <svg class="wayf-profile" aria-hidden="true">
               <use xlink:href="/spritemap.svg#profile5"></use>
             </svg>
@@ -97,119 +97,59 @@
           </a>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="news">
+    <section class="news">
       <header>
         <h2>Actualités</h2>
         <div class="grow-1"></div>
         <a href="#" class="btn-tertiary">Voir toutes les actualités<i class="fa-solid fa-arrow-right"></i></a>
       </header>
-      <ul class="news-tiles">
-        <li>
-          <button class="news-tile">
-            <div class="news-tile-image">
-              <img src="https://placehold.co/92x140" alt="" />
-            </div>
-            <div class="news-tile-content">
-              <header>
-                <h3 class="h4">Une sécurité sanitaire assurée dans les collèges </h3>
-                <span class="context">Collectivité</span>
-              </header>
-              <p>En cette nouvelle rentrée scolaire, dans le contexte particulier de la ...</p>
-            </div>
-          </button>
-        </li>
-        <li>
-          <button class="news-tile">
-            <div class="news-tile-image">
-              <img src="https://placehold.co/92x140" alt="" />
-            </div>
-            <div class="news-tile-content">
-              <header>
-                <h3 class="h4">Une restauration locale de qualité</h3>
-                <span class="context">Établissement</span>
-              </header>
-              <p>Le conseil départemental s'engage à proposer des aliments de qualité et ...</p>
-            </div>
-          </button>
-        </li>
-        <li>
-          <button class="news-tile">
-            <div class="news-tile-image">
-              <img src="https://placehold.co/92x140" alt="" />
-            </div>
-            <div class="news-tile-content">
-              <header>
-                <h3 class="h4">Un fonds d’aide à la restauration</h3>
-                <span class="context">Rectorat</span>
-              </header>
-              <p>Le département dispose d'un fonds d'aide à la restauration de 100 000 €...</p>
-            </div>
-          </button>
-        </li>
-      </ul>
-      <div class="news-carousel">
-        <div class="carousel-container" tabindex="-1">
-          <ul class="news-tiles">
-            <li>
-              <button class="news-tile">
-                <div class="news-tile-image">
-                  <img src="https://placehold.co/92x175" alt="" />
-                </div>
-                <div class="news-tile-content">
-                  <header>
-                    <h3 class="h4">Une sécurité sanitaire assurée dans les collèges </h3>
-                    <span class="context">Collectivité</span>
-                  </header>
-                  <p>En cette nouvelle rentrée scolaire, dans le contexte particulier de la ...</p>
-                </div>
-              </button>
-            </li>
-            <li>
-              <button class="news-tile">
-                <div class="news-tile-image">
-                  <img src="https://placehold.co/92x175" alt="" />
-                </div>
-                <div class="news-tile-content">
-                  <header>
-                    <h3 class="h4">Une restauration locale de qualité</h3>
-                    <span class="context">Établissement</span>
-                  </header>
-                  <p>Le conseil départemental s'engage à proposer des aliments de qualité et ...</p>
-                </div>
-              </button>
-            </li>
-            <li>
-              <button class="news-tile">
-                <div class="news-tile-image">
-                  <img src="https://placehold.co/92x175" alt="" />
-                </div>
-                <div class="news-tile-content">
-                  <header>
-                    <h3 class="h4">Un fonds d’aide à la restauration</h3>
-                    <span class="context">Rectorat</span>
-                  </header>
-                  <p>Le département dispose d'un fonds d'aide à la restauration de 100 000 €...</p>
-                </div>
-              </button>
-            </li>
-            <li>
-              <button class="news-tile">
-                <div class="news-tile-image">
-                  <img src="https://placehold.co/92x175" alt="" />
-                </div>
-                <div class="news-tile-content">
-                  <header>
-                    <h3 class="h4">Lorem ipsum dolor sit amet</h3>
-                    <span class="context">Lorem</span>
-                  </header>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque, quas.</p>
-                </div>
-              </button>
-            </li>
-          </ul>
-        </div>
+      <div class="carousel">
+        <ul class="carousel-container news-tiles">
+          <li>
+            <button class="news-tile">
+              <div class="news-tile-image">
+                <img src="https://placehold.co/92x140" alt="" />
+              </div>
+              <div class="news-tile-content">
+                <header>
+                  <h3 class="h4">Une sécurité sanitaire assurée dans les collèges </h3>
+                  <span class="context">Collectivité</span>
+                </header>
+                <p>En cette nouvelle rentrée scolaire, dans le contexte particulier de la ...</p>
+              </div>
+            </button>
+          </li>
+          <li>
+            <button class="news-tile">
+              <div class="news-tile-image">
+                <img src="https://placehold.co/92x140" alt="" />
+              </div>
+              <div class="news-tile-content">
+                <header>
+                  <h3 class="h4">Une restauration locale de qualité</h3>
+                  <span class="context">Établissement</span>
+                </header>
+                <p>Le conseil départemental s'engage à proposer des aliments de qualité et ...</p>
+              </div>
+            </button>
+          </li>
+          <li>
+            <button class="news-tile">
+              <div class="news-tile-image">
+                <img src="https://placehold.co/92x140" alt="" />
+              </div>
+              <div class="news-tile-content">
+                <header>
+                  <h3 class="h4">Un fonds d'aide à la restauration</h3>
+                  <span class="context">Rectorat</span>
+                </header>
+                <p>Le département dispose d'un fonds d'aide à la restauration de 100 000 €...</p>
+              </div>
+            </button>
+          </li>
+        </ul>
         <div class="carousel-action-back">
           <button class="btn-primary circle" disabled><i class="fa-solid fa-arrow-left"></i></button>
         </div>
@@ -221,9 +161,9 @@
         <div class="grow-1"></div>
         <a href="#" class="btn-tertiary">Voir toutes les actualités<i class="fa-solid fa-arrow-right"></i></a>
       </footer>
-    </div>
+    </section>
 
-    <div class="discover">
+    <section class="discover container">
       <div class="discover-video">
         <img src="https://placehold.co/1920x1080" />
       </div>
@@ -270,7 +210,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   </main>
 
   <footer>
