@@ -30,13 +30,14 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    transition:
-      opacity .3s ease-out,
-      visibility .3s ease-out;
+    z-index: 1;
+    transition: opacity .3s ease-out;
 
     > button {
       display: inline-flex;
       border-radius: 50%;
+      padding: 4px;
+      margin: -4px;
 
       > svg {
         height: 20px;
@@ -48,6 +49,10 @@
         &.marked {
           color: var(--#{$prefix}favorite);
         }
+      }
+
+      &:focus-visible {
+        outline: 2px dotted var(--#{$prefix}service-hover);
       }
     }
   }
@@ -61,8 +66,22 @@
   }
 
   & > &-name {
+    @include link-unstyled;
     order: 2;
-    margin: 0;
+
+    > h3 {
+      margin: 0;
+    }
+
+    > span {
+      position: absolute;
+      inset: -11px 0 0;
+      border-radius: 10px;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   & > &-category {
@@ -74,17 +93,27 @@
   }
 
   & > &-more {
+    z-index: 1;
     order: 3;
-    margin-top: 8px;
+    padding: 4px 8px;
+    margin: 4px -8px -4px;
     text-decoration: underline;
     color: var(--#{$prefix}system-blue);
     font-family: $sora;
     font-size: var(--#{$prefix}font-size-xs);
+    max-height: 2em;
+    overflow: hidden;
     transition:
-      opacity .3s ease-out,
-      visibility .3s ease-out,
-      height .1.5s ease-out,
+      visibility .25s ease-out,
+      max-height .25s ease-out,
+      padding-top .3s ease-out,
+      padding-bottom .3s ease-out,
       margin-top .3s ease-out;
+
+    &:focus-visible {
+      outline: 2px dotted var(--#{$prefix}system-blue);
+      border-radius: 50px;
+    }
   }
 
   @each $type, $values in $categories {
@@ -96,7 +125,7 @@
   }
 
   &:hover,
-  &:focus-within {
+  &:has(:focus-visible) {
     outline: none;
     border-top: 11px solid var(--#{$prefix}service-hover);
     box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}service-hover-shadow);
@@ -104,7 +133,6 @@
     > .service {
       &-favorite {
         opacity: 1 !important;
-        visibility: visible !important;
       }
 
       &-icon {
@@ -112,10 +140,11 @@
       }
 
       &-more {
-        opacity: 1;
         visibility: visible;
-        height: 100%;
-        margin-top: 8px;
+        max-height: 2em;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin-top: 4px;
       }
     }
   }
@@ -135,13 +164,12 @@
   @media (hover: hover) {
     & > &-favorite:not(:has(.marked)) {
       opacity: 0;
-      visibility: hidden;
     }
 
     & > &-more {
-      opacity: 0;
-      visibility: hidden;
-      height: 0;
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
       margin-top: 0;
     }
   }
