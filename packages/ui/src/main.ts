@@ -210,24 +210,56 @@ document.querySelectorAll<HTMLButtonElement>('.service-favorite > button').forEa
   })
 })
 
-// Theme
-const themes = ['lycee', 'agri', '18', '28', '36', '37', '41', '45']
-let currentTheme = 0
+/**
+ * Dev tools
+ */
+
 const body = document.querySelector('body')
-body?.classList.add(`dom-${themes[currentTheme]}`)
-const themeButton = document.createElement('button')
-themeButton.style = `
+const devContainer = document.createElement('div')
+devContainer.style = `
   position: fixed;
   bottom: 0;
   right: 0;
   margin: 0 16px 16px 0;
-  padding: 16px;
-  background-color: bisque;
-  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   z-index: 9999;
 `
+
+const buttonStyle = `
+  padding: 16px;
+  background-color: var(--recia-primary, bisque);
+  border-radius: 50px;
+  font-weight: bold;
+  color: white;
+`
+
+const themes = ['lycee', 'agri', '18', '28', '36', '37', '41', '45']
+let currentTheme = 0
+body?.classList.add(`dom-${themes[currentTheme]}`)
+
+const themeButton = document.createElement('button')
 themeButton.textContent = themes[currentTheme]
-themeButton.addEventListener('click', () => {
+themeButton.style = buttonStyle
+themeButton.addEventListener('click', () => switchTheme())
+
+const dupNews = document.createElement('button')
+dupNews.textContent = 'Actualités x2'
+dupNews.style = buttonStyle
+dupNews.addEventListener('click', () => duplicate('ul.news-tiles'))
+
+const dupSuggest = document.createElement('button')
+dupSuggest.textContent = 'Suggestions x2'
+dupSuggest.style = buttonStyle
+dupSuggest.addEventListener('click', () => duplicate('ul.suggestion-tiles'))
+
+devContainer.appendChild(themeButton)
+devContainer.appendChild(dupNews)
+devContainer.appendChild(dupSuggest)
+body?.appendChild(devContainer)
+
+function switchTheme(): void {
   let oldTheme, newTheme
   if (currentTheme + 1 < themes.length) {
     oldTheme = themes[currentTheme]
@@ -241,5 +273,15 @@ themeButton.addEventListener('click', () => {
   }
   body?.classList.replace(`dom-${oldTheme}`, `dom-${newTheme}`)
   themeButton.textContent = newTheme
-})
-body?.appendChild(themeButton)
+}
+
+function duplicate(selector: string): void {
+  const items = document.querySelector<HTMLUListElement>(selector)
+  if (items?.children) {
+    const children = Array.from(items.children)
+    for (const child of children) {
+      const newChild = child.cloneNode(true)
+      items.appendChild(newChild)
+    }
+  }
+}
