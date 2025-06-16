@@ -52,38 +52,42 @@ window.addEventListener('resize', () => handleBreakpoints())
  * Bottom sheet
  */
 
-// Bottom sheet info
-const bottomSheetInfo = document.querySelector<HTMLElement>('#bottom-sheet-info')
+function toggleBottomSheet(element: HTMLElement | null, state: boolean): boolean {
+  if (!element)
+    return state
+  state = !state
+  document.documentElement.style.overflowY = state ? 'hidden' : ''
+  element.style.display = state ? '' : 'none'
 
-let isBottomSheetInfo = false
-
-function toggleBottomSheetInfo(): void {
-  isBottomSheetInfo = !isBottomSheetInfo
-  document.documentElement.style.overflowY = isBottomSheetInfo ? 'hidden' : ''
-  bottomSheetInfo!.style.display = isBottomSheetInfo ? '' : 'none'
+  return state
 }
 
-bottomSheetInfo?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => toggleBottomSheetInfo())
-bottomSheetInfo?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => toggleBottomSheetInfo())
+// Bottom sheet info
+const bottomSheetInfo = document.querySelector<HTMLElement>('#bottom-sheet-info')
+let isBottomSheetInfo = false
+
+bottomSheetInfo?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => {
+  isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
+})
+bottomSheetInfo?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
+  isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
+})
 
 // Bottom sheet service more
 const bottomSheetInfoServiceMore = document.querySelector<HTMLElement>('#bottom-sheet-service-more')
-
 let isBottomSheetInfoServiceMore = false
 
-function toggleBottomSheetInfoServiceMoreState(): void {
-  if (!bottomSheetInfoServiceMore)
-    return
-  isBottomSheetInfoServiceMore = !isBottomSheetInfoServiceMore
-  document.documentElement.style.overflowY = isBottomSheetInfoServiceMore ? 'hidden' : ''
-  bottomSheetInfoServiceMore.style.display = isBottomSheetInfoServiceMore ? '' : 'none'
-}
-
-bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => toggleBottomSheetInfoServiceMoreState())
-bottomSheetInfoServiceMore?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => toggleBottomSheetInfoServiceMoreState())
-document.querySelector<HTMLButtonElement>('button.service-more')?.addEventListener('click', (e) => {
-  e.preventDefault()
-  toggleBottomSheetInfoServiceMoreState()
+bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => {
+  isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
+})
+bottomSheetInfoServiceMore?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
+  isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
+})
+document.querySelectorAll<HTMLButtonElement>('button.service-more').forEach((button) => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault()
+    isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
+  })
 })
 
 /**
@@ -103,7 +107,7 @@ function toggleDropdownInfo(): void {
     return
   isDropdownInfoExpended = !isDropdownInfoExpended
   dropdownInfoButton.ariaExpanded = isDropdownInfoExpended.toString()
-  isDropdownInfoExpended ? dropdownInfoButton.classList.add('active') : dropdownInfoButton.classList.remove('active')
+  dropdownInfoButton.classList.toggle('active')
   const dropdownInfoMask = dropdownInfo?.querySelector<HTMLElement>('.dropdown-info-mask')
   dropdownInfoMask && (dropdownInfoMask.style.display = isDropdownInfoExpended ? '' : 'none')
   const dropdownInfoMenu = dropdownInfo?.querySelector<HTMLElement>('#dropdown-info-menu')
@@ -132,7 +136,7 @@ function toggleEyebrow(): void {
 eyebrowButton?.addEventListener('click', () => toggleEyebrow())
 eyebrow?.querySelector<HTMLButtonElement>('button#info-etab')?.addEventListener('click', () => {
   toggleEyebrow()
-  toggleBottomSheetInfo()
+  isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
 })
 
 // Search
@@ -161,7 +165,7 @@ function toggleDrawer() {
   if (!drawer)
     return
   isDrawerExpended = !isDrawerExpended
-  isDrawerExpended ? drawer.classList.add('expended') : drawer.classList.remove('expended')
+  drawer.classList.toggle('expended')
 }
 
 extendedUportalHeader?.querySelector<HTMLButtonElement>('button.drawer-toggle')?.addEventListener('click', () => toggleDrawer())
@@ -174,15 +178,18 @@ let isDropdownFavorite = false
 
 function toggleFavorites() {
   isDropdownFavorite = !isDropdownFavorite
-  isDropdownFavorite ? favoriteButton?.classList.add('active') : favoriteButton?.classList.remove('active')
+  favoriteButton?.classList.toggle('active')
   const menu = drawer?.querySelector<HTMLElement>('.dropdown-favorites > div')
   menu && (menu.style.display = isDropdownFavorite ? '' : 'none')
 }
 
 favoriteButton?.addEventListener('click', () => toggleFavorites())
 
-// Widgets
-document.querySelectorAll<HTMLElement>('.widget-tile')?.forEach((widget) => {
+/**
+ * Widgets
+ */
+
+document.querySelectorAll<HTMLElement>('.widget-tile').forEach((widget) => {
   const button = widget.querySelector<HTMLButtonElement>('button')
 
   let isExpended = false
@@ -200,6 +207,10 @@ document.querySelectorAll<HTMLElement>('.widget-tile')?.forEach((widget) => {
 
   button?.addEventListener('click', () => toggleWidget())
 })
+
+/**
+ * Services
+ */
 
 // Favorite
 document.querySelectorAll<HTMLButtonElement>('.service-favorite > button').forEach((button) => {
