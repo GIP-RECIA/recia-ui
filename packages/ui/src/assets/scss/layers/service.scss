@@ -127,7 +127,7 @@
   &:hover,
   &:has(:focus-visible) {
     outline: none;
-    border-top: 11px solid var(--#{$prefix}service-hover);
+    border-top-color: var(--#{$prefix}service-hover);
     box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}service-hover-shadow);
 
     > .service {
