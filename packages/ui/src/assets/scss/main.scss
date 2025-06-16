@@ -250,7 +250,9 @@ body {
     }
 
     @media (width >= map.get($grid-breakpoints, md)) {
-      margin-left: 72px;
+      &:has(.extended-uportal-header .drawer) {
+        margin-left: 72px;
+      }
 
       > main {
         row-gap: 70px;
