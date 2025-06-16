@@ -201,6 +201,15 @@ document.querySelectorAll<HTMLElement>('.widget-tile')?.forEach((widget) => {
   button?.addEventListener('click', () => toggleWidget())
 })
 
+// Favorite
+document.querySelectorAll<HTMLButtonElement>('.service-favorite > button').forEach((button) => {
+  button?.addEventListener('click', () => {
+    const svg = button.firstElementChild as HTMLElement
+    svg.setAttribute('data-prefix', svg.getAttribute('data-prefix') === 'fas' ? 'far' : 'fas')
+    svg.classList.toggle('marked')
+  })
+})
+
 // Theme
 const themes = ['lycee', 'agri', '18', '28', '36', '37', '41', '45']
 let currentTheme = 0
