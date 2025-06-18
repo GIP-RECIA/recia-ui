@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="/index.ts"></script>
+  <link rel="stylesheet" href="/assets/index.css" />
+</head>
+
+<body class="container">
+  <section>
+    <r-service-info-layout
+      icon-url="/spritemap.svg#capytale"
+      name="Capytale"
+      origin="external"
+      category="apprentissage"
+      description='Capytale est un service web proposé par l&#39;académie de Paris en lien avec la Drane Orléans-Tours. Il permet la création et le partage entre enseignants et élèves d&#39;activités utilisant les langages Python, HTML/CSS/JS, SQL ou les blocs de <a href="#">Scratch</a>. Capytale est un environnement de travail en ligne destiné aux enseignants (essentiellement en <a href="#">SNT</a>, NSI, mathématiques, STI, technologie, informatique) et à leurs élèves des niveaux collèges et lycées (classes préparatoires incluses).'
+      tutorials='[
+        {
+          "name": "Ajouter des documents à un dossier",
+          "href": "#"
+        },
+        {
+          "name": "Partager l&#39;accès à un document",
+          "href": "#"
+        },
+        {
+          "name": "Retrouver une version de fichier dans les logs",
+          "href": "#"
+        },
+        {
+          "name": "Structurer son arborescence de dossiers",
+          "href": "#"
+        }
+      ]'
+      tutorials-link='{
+        "href": "#"
+      }'
+      launch-link='{
+        "href": "#"
+      }'
+    >
+    </r-service-info-layout>
+  </section>
+
+  <script>
+    function logEvents(element, eventType) {
+      element.addEventListener(eventType, (e) => {
+        console.log(eventType, e.detail)
+      })
+    }
+
+    const root = document.querySelector('r-service-info-layout')
+    logEvents(root, 'toggle-favorite')
+    logEvents(root, 'close')
+  </script>
+</body>
+
+</html>

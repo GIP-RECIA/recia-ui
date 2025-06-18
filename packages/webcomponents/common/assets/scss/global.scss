@@ -1,35 +1,14 @@
 @use 'ress/dist/ress.min.css';
 
-@forward 'mixins';
-@forward 'functions';
+@forward '../../../../ui/src/assets/scss/mixins/banner';
+@forward '../../../../ui/src/assets/scss/global';
 
-$prefix: recia-;
+@forward '../../../../ui/src/assets/scss/typo';
+@forward '../../../../ui/src/assets/scss/variables';
 
-$font-family-sans-serif: 'sans-serif';
-$sora: 'Sora', $font-family-sans-serif;
-$dm-sans: 'DM Sans', $font-family-sans-serif;
+@forward '../../../../ui/src/assets/scss/mixins';
+@forward '../../../../ui/src/assets/scss/functions/';
 
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
+@forward '../../../../ui/src/assets/scss/buttons/';
+@forward '../../../../ui/src/assets/scss/link/';
 
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px,
-);
-
-* {
-  box-sizing: border-box;
-}
-
-.grow-1 {
-  flex-grow: 1;
-}
