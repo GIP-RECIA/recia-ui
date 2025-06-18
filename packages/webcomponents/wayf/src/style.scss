@@ -38,7 +38,7 @@
           color .15s ease-in,
           opacity .15s ease-in;
 
-        @media (hover: none) {
+        @media (hover: none) or (pointer: coarse) {
           color: var(--#{$prefix}primary);
           opacity: unset;
         }
