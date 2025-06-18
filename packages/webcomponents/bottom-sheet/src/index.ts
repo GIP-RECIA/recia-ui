@@ -137,7 +137,11 @@ export class ReciaBottomSheet extends LitElement {
   }
 
   private handleTouchStart(e: TouchEvent): void {
-    if (!this.show || !(this.containerRef.value!.scrollTop === 0))
+    if (
+      !this.show
+      || !(this.containerRef.value!.scrollTop === 0)
+      || !e.composedPath().includes(this.sheetRef.value!)
+    )
       return
 
     this.startY = e.touches[0].clientY
