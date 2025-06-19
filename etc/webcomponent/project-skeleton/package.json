@@ -22,14 +22,14 @@
     "lit": "^3.3.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.2",
+    "@antfu/eslint-config": "^4.14.1",
     "@lit/localize-tools": "^0.8.0",
     "@types/lodash-es": "^4",
-    "eslint": "^9.28.0",
+    "eslint": "^9.29.0",
     "eslint-plugin-format": "^1.0.1",
     "lodash-es": "^4.17.21",
     "ress": "^5.0.2",
-    "sass": "^1.89.1",
+    "sass": "^1.89.2",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }
