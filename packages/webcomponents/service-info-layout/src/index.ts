@@ -15,6 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { LinkType } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -28,32 +29,12 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
+import { CategoryType } from './types/CategoryType.ts'
+import { OriginType } from './types/OriginType.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
 const tagName = componentName(name)
-
-enum OriginType {
-  native = 'native',
-  external = 'external',
-}
-
-enum CategoryType {
-  documentation = 'documentation',
-  collaboratif = 'collaboratif',
-  apprentissage = 'apprentissage',
-  vieScolaire = 'vie-scolaire',
-  orientation = 'orientation',
-  parametres = 'parametres',
-  communication = 'communication',
-}
-
-interface linkType {
-  name?: string
-  href: string
-  target?: string
-  rel?: string
-}
 
 @localized()
 @customElement(tagName)
@@ -80,13 +61,13 @@ export class ReciaServiceMoreLayout extends LitElement {
   video = ''
 
   @property({ type: Array })
-  tutorials: Array<linkType> = []
+  tutorials: Array<LinkType> = []
 
   @property({ type: Object, attribute: 'tutorials-link' })
-  tutorialsLink?: linkType
+  tutorialsLink?: LinkType
 
   @property({ type: Object, attribute: 'launch-link' })
-  launchLink?: linkType
+  launchLink?: LinkType
 
   constructor() {
     super()
