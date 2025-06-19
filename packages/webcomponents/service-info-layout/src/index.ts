@@ -38,7 +38,7 @@ const tagName = componentName(name)
 
 @localized()
 @customElement(tagName)
-export class ReciaServiceMoreLayout extends LitElement {
+export class ReciaServiceInfoLayout extends LitElement {
   @property({ type: String, attribute: 'icon-url' })
   iconUrl?: string
 
@@ -187,7 +187,7 @@ export class ReciaServiceMoreLayout extends LitElement {
                 this.origin && Object.values(OriginType).includes(this.origin)
                   ? html`
                       <span class="origin">
-                        ${ReciaServiceMoreLayout.i18nOrigin()[this.origin]}
+                        ${ReciaServiceInfoLayout.i18nOrigin()[this.origin]}
                       </span>
                     `
                   : nothing
@@ -195,7 +195,7 @@ export class ReciaServiceMoreLayout extends LitElement {
               ${
                 this.category && Object.values(CategoryType).includes(this.category)
                   ? html`
-                      <span class="category ${this.category}">${ReciaServiceMoreLayout.i18nCategory()[this.category]}</span>
+                      <span class="category ${this.category}">${ReciaServiceInfoLayout.i18nCategory()[this.category]}</span>
                     `
                   : nothing
               }
@@ -260,6 +260,6 @@ export class ReciaServiceMoreLayout extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    [tagName]: ReciaServiceMoreLayout
+    [tagName]: ReciaServiceInfoLayout
   }
 }
