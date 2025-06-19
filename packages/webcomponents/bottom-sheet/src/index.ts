@@ -35,10 +35,10 @@ export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean, attribute: 'open', reflect: true })
   isOpen = false
 
-  @property({ type: Boolean, attribute: 'close-icon' })
+  @property({ type: Boolean, attribute: 'no-close' })
   closeIcon = false
 
-  @property({ type: Boolean, attribute: 'drag-icon' })
+  @property({ type: Boolean, attribute: 'no-drag' })
   dragIcon = false
 
   @property({ type: Boolean, attribute: 'no-padding' })
@@ -203,9 +203,9 @@ export class ReciaBottomSheet extends LitElement {
               'no-padding': this.noPadding,
             })}"
           >
-            ${this.dragIcon ? html`<div class="dragable"></div>` : nothing}
+            ${!this.dragIcon ? html`<div class="dragable"></div>` : nothing}
             ${
-              this.closeIcon
+              !this.closeIcon
                 ? html`
                   <button
                     class="btn-tertiary circle close"

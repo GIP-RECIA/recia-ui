@@ -12,12 +12,12 @@
 
 ## Propriétés
 
-| Nom          |   Type    | Obligatoire | Default | Description                                          |
-| ------------ | :-------: | :---------: | :-----: | ---------------------------------------------------- |
-| `open`       | `boolean` |   `false`   | `false` | Affiche la bottom sheet                              |
-| `close-icon` | `boolean` |   `false`   | `false` | Ajoute une croix en haut pour fermer la bottom sheet |
-| `drag-icon`  | `boolean` |   `false`   | `false` | Ajoute une barre en haut de la bottom sheet          |
-| `no-padding` | `boolean` |   `false`   | `false` | Retire le padding de la bottom sheet                 |
+| Nom          |   Type    | Obligatoire | Default | Description                                         |
+| ------------ | :-------: | :---------: | :-----: | --------------------------------------------------- |
+| `open`       | `boolean` |   `false`   | `false` | Affiche la bottom sheet                             |
+| `no-close`   | `boolean` |   `false`   | `false` | Masque la croix en haut pour fermer la bottom sheet |
+| `no-drag`    | `boolean` |   `false`   | `false` | Masque la barre en haut de la bottom sheet          |
+| `no-padding` | `boolean` |   `false`   | `false` | Retire le padding de la bottom sheet                |
 
 ## Méthodes
 
