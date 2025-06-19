@@ -46,7 +46,7 @@ const tagName = componentName(name)
 
 @localized()
 @customElement(tagName)
-export class ReciaEyebrow extends LitElement {
+export class ReciaUserMenu extends LitElement {
   @property({ type: String })
   picture = ''
 
@@ -209,7 +209,7 @@ export class ReciaEyebrow extends LitElement {
 
   itemTemplate(item: { id: ItemType, icon?: IconDefinition, link?: LinkType | null }): TemplateResult {
     const content = html`
-      ${ReciaEyebrow.i18n()[item.id]}
+      ${ReciaUserMenu.i18n()[item.id]}
       ${
         item.id === ItemType.Notification
           ? keyed(
@@ -327,6 +327,6 @@ export class ReciaEyebrow extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    [tagName]: ReciaEyebrow
+    [tagName]: ReciaUserMenu
   }
 }

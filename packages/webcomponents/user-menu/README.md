@@ -1,7 +1,7 @@
-- [r-eyebrow](#r-eyebrow)
+- [r-user-menu](#r-user-menu)
   - [Propriétés](#propriétés)
 
-# r-eyebrow
+# r-user-menu
 
 ## Propriétés
 
