@@ -67,38 +67,42 @@
     padding: 24px 0;
 
     > section {
-      > p {
-        line-height: 150%;
+      &.first-step {
+        > .video {
+          display: flex;
+          align-items: center;
+          border-radius: 4px;
+          overflow: hidden;
 
-        > a {
-          @extend %text-link;
+          > * {
+            aspect-ratio: 16/9;
+            width: 100%;
+            height: auto;
+          }
         }
       }
 
-      > ul {
-        @include list-unstyled;
+      &.description {
+        > div {
+          line-height: 150%;
 
-        > li > a {
-          @extend %list-link;
-          color: var(--#{$prefix}system-blue);
-          line-height: 250%;
-        }
-      }
-
-      > .video {
-        display: flex;
-        align-items: center;
-        border-radius: 4px;
-        overflow: hidden;
-
-        > * {
-          aspect-ratio: 16/9;
-          width: 100%;
-          height: auto;
+          a {
+            @extend %text-link;
+          }
         }
       }
 
       &.tutorials {
+        > ul {
+          @include list-unstyled;
+
+          > li > a {
+            @extend %list-link;
+            color: var(--#{$prefix}system-blue);
+            line-height: 250%;
+          }
+        }
+
         > a,
         > button {
           margin-top: 16px;

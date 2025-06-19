@@ -224,7 +224,7 @@ export class ReciaServiceMoreLayout extends LitElement {
         <div class="content">
           <section class="description">
             <h2 class="h3">${msg(str`Description`)}</h2>
-            <p>${unsafeHTML(this.description)}</p>
+            <div>${unsafeHTML(this.description)}</div>
           </section>
           ${this.videoTemplate()}
           ${this.tutorialsTemplate()}
