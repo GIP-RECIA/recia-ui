@@ -50,7 +50,7 @@ export class ReciaUserMenu extends LitElement {
   @property({ type: String })
   picture = ''
 
-  @property({ attribute: 'display-name', type: String })
+  @property({ type: String, attribute: 'display-name' })
   displayName = ''
 
   @property({ type: String })
@@ -62,7 +62,7 @@ export class ReciaUserMenu extends LitElement {
   @property({ type: Number })
   notification = 0
 
-  @property({ attribute: 'avatar-size', type: String })
+  @property({ type: String, attribute: 'avatar-size' })
   avatarSize = ''
 
   @state()

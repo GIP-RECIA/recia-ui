@@ -31,13 +31,13 @@ const tagName = componentName(name)
 @localized()
 @customElement(tagName)
 export class ReciaWayf extends LitElement {
-  @property({ attribute: 'cas-url', type: String })
+  @property({ type: String, attribute: 'cas-url' })
   casUrl?: string
 
-  @property({ attribute: 'idp-ids', type: Array })
+  @property({ type: Array, attribute: 'idp-ids' })
   idpIds: Array<IdpIdType> = []
 
-  @property({ attribute: 'svg-url', type: String })
+  @property({ type: String, attribute: 'svg-url' })
   svgUrl: string = '/wayf.spritemap.svg'
 
   constructor() {
