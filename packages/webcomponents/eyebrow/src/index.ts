@@ -16,6 +16,7 @@
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import type { PropertyValues, TemplateResult } from 'lit'
+import type { LinkType } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowRightFromBracket,
@@ -67,25 +68,31 @@ export class ReciaEyebrow extends LitElement {
   isExpanded = false
 
   @state()
-  localConfig: Record<ItemType, false | { icon?: IconDefinition, link?: string | null }> = {
+  localConfig: Record<ItemType, false | { icon?: IconDefinition, link?: LinkType | null }> = {
     [ItemType.Notification]: {},
     [ItemType.Settings]: {
       icon: faGear,
-      link: '',
+      link: {
+        href: '',
+      },
     },
     [ItemType.InfoEtab]: {
       icon: faInfoCircle,
     },
     [ItemType.ChangeEtab]: {
       icon: faRightLeft,
-      link: '/uPortal/p/switchStruct/',
+      link: {
+        href: '/uPortal/p/switchStruct/',
+      },
     },
     [ItemType.Starter]: {
       icon: faPlay,
     },
     [ItemType.Logout]: {
       icon: faArrowRightFromBracket,
-      link: '/uPortal/Logout',
+      link: {
+        href: '/uPortal/Logout',
+      },
     },
   }
 
@@ -199,7 +206,7 @@ export class ReciaEyebrow extends LitElement {
     }
   }
 
-  itemTemplate(item: { id: ItemType, icon?: IconDefinition, link?: string | null }): TemplateResult {
+  itemTemplate(item: { id: ItemType, icon?: IconDefinition, link?: LinkType | null }): TemplateResult {
     const content = html`
       ${ReciaEyebrow.i18n()[item.id]}
       ${
@@ -226,12 +233,14 @@ export class ReciaEyebrow extends LitElement {
       <li>
         ${
           keyed(
-            `${item.id}-${item.link && item.link.trim() !== '' ? 'link' : 'button'}`,
-            item.link && item.link.trim() !== ''
+            `${item.id}-${item.link && item.link.href.trim() !== '' ? 'link' : 'button'}`,
+            item.link && item.link.href.trim() !== ''
               ? html`
               <a
                 id="${item.id}"
-                href="${item.link}"
+                href="${item.link.href}"
+                target="${item.link.target ?? nothing}"
+                rel="${item.link.rel ?? nothing}"
                 @click="${this.closeDropdown}"
               >
                 ${content}
