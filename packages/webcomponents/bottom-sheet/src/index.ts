@@ -141,8 +141,9 @@ export class ReciaBottomSheet extends LitElement {
       !this.show
       || !(this.containerRef.value!.scrollTop === 0)
       || !e.composedPath().includes(this.sheetRef.value!)
-    )
+    ) {
       return
+    }
 
     this.startY = e.touches[0].clientY
     this.growHeight = this.growRef.value!.offsetHeight
@@ -193,7 +194,7 @@ export class ReciaBottomSheet extends LitElement {
         style="${styleMap({ display: this.show ? undefined : 'none' })}"
       >
         <div ${ref(this.containerRef)} tabindex="-1" class="scrollable-container">
-          <div ${ref(this.growRef)} class="grow-1" ></div>
+          <div ${ref(this.growRef)} class="grow-1"></div>
           <div
             ${ref(this.sheetRef)}
             role="dialog"
