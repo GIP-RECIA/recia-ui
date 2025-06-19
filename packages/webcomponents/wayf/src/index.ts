@@ -22,8 +22,8 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
-import { IdpIdType } from './IdpIdType.ts'
 import styles from './style.scss?inline'
+import { IdpIdType } from './types/IdpIdType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
 const tagName = componentName(name)
