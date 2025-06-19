@@ -23,13 +23,13 @@ import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
-import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 const tagName = componentName(name)
 
@@ -129,7 +129,7 @@ export class ReciaServiceMoreLayout extends LitElement {
 
   videoTemplate(): TemplateResult | typeof nothing {
     return this.video
-      ? html `
+      ? html`
         <section class="first-step">
           <h2 class="h3">${msg(str`Premiers pas avec le service`)}</h2>
           <div class="video">
@@ -148,7 +148,7 @@ export class ReciaServiceMoreLayout extends LitElement {
 
   tutorialsTemplate(): TemplateResult | typeof nothing {
     return this.tutorials.length > 0
-      ? html `
+      ? html`
         <section class="tutorials">
           <h2 class="h3">${msg(str`Tutoriels disponibles (${this.tutorials.length})`)}</h2>
           <ul>
@@ -215,7 +215,7 @@ export class ReciaServiceMoreLayout extends LitElement {
               }
               ${
                 this.category && Object.values(CategoryType).includes(this.category)
-                  ? html `
+                  ? html`
                       <span class="category ${this.category}">${ReciaServiceMoreLayout.i18nCategory()[this.category]}</span>
                     `
                   : nothing
