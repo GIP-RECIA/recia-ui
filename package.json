@@ -2,6 +2,7 @@
   "name": "recia-ui",
   "private": true,
   "workspaces": [
+    "etc/webcomponent/project-skeleton",
     "packages/ui",
     "packages/ui-webcomponents",
     "packages/webcomponents/*"
