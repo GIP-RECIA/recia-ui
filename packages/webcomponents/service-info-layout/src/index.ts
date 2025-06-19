@@ -74,8 +74,6 @@ export class ReciaServiceMoreLayout extends LitElement {
     library.add(
       faStar,
       faArrowRight,
-    )
-    library.add(
       farStar,
     )
     const lang = langHelper.getPageLang()
