@@ -16,6 +16,7 @@
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import type { PropertyValues, TemplateResult } from 'lit'
+import type { ConfigType } from './types/ConfigType.ts'
 import type { LinkType } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -68,7 +69,7 @@ export class ReciaEyebrow extends LitElement {
   isExpanded = false
 
   @state()
-  localConfig: Record<ItemType, false | { icon?: IconDefinition, link?: LinkType | null }> = {
+  localConfig: ConfigType = {
     [ItemType.Notification]: {},
     [ItemType.Settings]: {
       icon: faGear,
@@ -135,17 +136,17 @@ export class ReciaEyebrow extends LitElement {
   }
 
   mergeConfig(): void {
-    const parsedConfig = JSON.parse(this.config)
-    const merged: typeof this.localConfig = { ...this.localConfig }
+    const parsedConfig = JSON.parse(this.config) as ConfigType
+    const merged: ConfigType = { ...this.localConfig }
 
-    for (const key in parsedConfig) {
+    for (const key of Object.keys(parsedConfig) as ItemType[]) {
       const value = parsedConfig[key]
       if (value === false) {
-        merged[key as ItemType] = false
+        merged[key] = false
       }
       else {
-        merged[key as ItemType] = {
-          ...merged[key as ItemType],
+        merged[key] = {
+          ...merged[key],
           ...value,
         }
       }
