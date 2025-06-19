@@ -9,43 +9,45 @@
       column-gap: 6px;
       margin-bottom: 16px;
 
-      > .heading-logo {
-        flex: 0 0 auto;
-        height: 100px;
-        width: 100px;
-        opacity: .2;
+      > .heading {
+        &-logo {
+          flex: 0 0 auto;
+          height: 100px;
+          width: 100px;
+          opacity: .2;
 
-        > image {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      > .heading-text {
-        > h1 {
-          margin: 0;
+          > image {
+            width: 100%;
+            height: 100%;
+          }
         }
 
-        > .origin {
-          display: block;
-          font-style: italic;
-          font-size: var(--#{$prefix}font-size-sm);
-          line-height: 150%;
-        }
+        &-text {
+          > h1 {
+            margin: 0;
+          }
 
-        > .category {
-          margin-top: 9px;
-          display: inline-flex;
-          font-size: var(--#{$prefix}font-size-xs);
-          font-weight: 500;
-          padding: 4px 10px;
-          border-radius: 13px;
-          background-color: var(--#{$prefix}stroke);
+          > .origin {
+            display: block;
+            font-style: italic;
+            font-size: var(--#{$prefix}font-size-sm);
+            line-height: 150%;
+          }
 
-          @each $type, $values in $categories {
-            &.#{$type} {
-              background-color: var(--#{$prefix}#{$type});
-              color: var(--#{$prefix}#{$type}-text);
+          > .category {
+            margin-top: 9px;
+            display: inline-flex;
+            font-size: var(--#{$prefix}font-size-xs);
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 13px;
+            background-color: var(--#{$prefix}stroke);
+
+            @each $type, $values in $categories {
+              &.#{$type} {
+                background-color: var(--#{$prefix}#{$type});
+                color: var(--#{$prefix}#{$type}-text);
+              }
             }
           }
         }
