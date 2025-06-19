@@ -66,6 +66,10 @@
   <source>Lancer le service</source>
   <target>Launch service</target>
 </trans-unit>
+<trans-unit id="sa754c4706bc0af05">
+  <source>Voir tous les tutoriels</source>
+  <target>Show all tutorials</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

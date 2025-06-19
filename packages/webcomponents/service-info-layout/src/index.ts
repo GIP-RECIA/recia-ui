@@ -177,7 +177,7 @@ export class ReciaServiceMoreLayout extends LitElement {
                   href="${this.tutorialsLink.href}"
                   class="btn-secondary small"
                 >
-                  Voir tous les tutoriels
+                  ${msg(str`Voir tous les tutoriels`)}
                   ${getIcon(faArrowRight)}
                 </a>
               `

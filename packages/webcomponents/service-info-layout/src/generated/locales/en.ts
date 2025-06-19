@@ -18,6 +18,7 @@
 's8e501f157694decd': str`Native service`,
 's91fb0e685cae0940': str`Remove from favorites`,
 's9f48ad36dc7d460f': str`Add to favorites`,
+'sa754c4706bc0af05': str`Show all tutorials`,
 'sc0c87afaac2a5993': str`School life`,
 'scd3518ecedad7590': str`Parameters`,
 'sde5d5a164cc22567': str`Collaborative`,
