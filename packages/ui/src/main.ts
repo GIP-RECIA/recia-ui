@@ -279,6 +279,9 @@ const buttonStyle = `
 
 const themes = ['lycee', 'agri', '18', '28', '36', '37', '41', '45']
 let currentTheme = 0
+const lsTheme = localStorage.getItem('theme')
+if (lsTheme !== null)
+  currentTheme = JSON.parse(lsTheme).currentTheme
 body?.classList.add(`dom-${themes[currentTheme]}`)
 
 const themeButton = document.createElement('button')
@@ -313,6 +316,7 @@ function switchTheme(): void {
     currentTheme = 0
     newTheme = themes[currentTheme]
   }
+  localStorage.setItem('theme', JSON.stringify({ currentTheme }))
   body?.classList.replace(`dom-${oldTheme}`, `dom-${newTheme}`)
   themeButton.textContent = newTheme
 }
