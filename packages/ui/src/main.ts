@@ -90,6 +90,16 @@ document.querySelectorAll<HTMLButtonElement>('button.service-more').forEach((but
   })
 })
 
+// Bottom sheet favorites
+const bottomSheetFavorites = document.querySelector<HTMLElement>('#bottom-sheet-favorites')
+let isBottomSheetFavorites = false
+bottomSheetFavorites?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => {
+  isBottomSheetFavorites = toggleBottomSheet(bottomSheetFavorites, isBottomSheetFavorites)
+})
+bottomSheetFavorites?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
+  isBottomSheetFavorites = toggleBottomSheet(bottomSheetFavorites, isBottomSheetFavorites)
+})
+
 /**
  * Extended Uportal Header
  */
@@ -168,6 +178,11 @@ function toggleDrawer() {
   drawer.classList.toggle('expended')
 }
 
+function closeDrawer() {
+  isDrawerExpended = true
+  toggleDrawer()
+}
+
 extendedUportalHeader?.querySelector<HTMLButtonElement>('button.drawer-toggle')?.addEventListener('click', () => toggleDrawer())
 
 // Dropdown favorite
@@ -177,10 +192,16 @@ const favoriteButton = favorite?.querySelector<HTMLButtonElement>('button')
 let isDropdownFavorite = false
 
 function toggleFavorites() {
-  isDropdownFavorite = !isDropdownFavorite
-  favoriteButton?.classList.toggle('active')
-  const menu = drawer?.querySelector<HTMLElement>('.dropdown-favorites > div')
-  menu && (menu.style.display = isDropdownFavorite ? '' : 'none')
+  if (currentBreakpoint < gridBreakpoints.get('md')!) {
+    closeDrawer()
+    isBottomSheetFavorites = toggleBottomSheet(bottomSheetFavorites, isBottomSheetFavorites)
+  }
+  else {
+    isDropdownFavorite = !isDropdownFavorite
+    favoriteButton?.classList.toggle('active')
+    const menu = drawer?.querySelector<HTMLElement>('.dropdown-favorites > div')
+    menu && (menu.style.display = isDropdownFavorite ? '' : 'none')
+  }
 }
 
 favoriteButton?.addEventListener('click', () => toggleFavorites())
