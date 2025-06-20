@@ -15,7 +15,7 @@
     }
   }
 
-  .news-tiles {
+  > div > .news-tiles {
     @extend .container;
     list-style: none;
     display: flex;
@@ -114,16 +114,16 @@
       }
     }
 
-    .news-tiles {
+    > div > .news-tiles {
       flex-direction: row;
       flex-wrap: nowrap;
       overflow-x: auto;
       scrollbar-width: none;
       scroll-behavior: smooth;
-      margin-top: -1.5rem;
-      margin-bottom: -1.5rem;
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
+      margin-top: -1.25rem;
+      margin-bottom: -1.25rem;
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
 
       > li {
         display: revert !important;
@@ -141,6 +141,81 @@
 
     > footer {
       display: none;
+    }
+  }
+}
+
+%action {
+  display: none;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.news {
+  &-carousel {
+    > .carousel {
+      &-action {
+        &-back {
+          @extend %action;
+          left: 0;
+          padding-left: 16px;
+          padding-right: 16px;
+          background: linear-gradient(90deg, var(--#{$prefix}body-bg) 60%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        &-next {
+          @extend %action;
+          right: 0;
+          padding-right: 16px;
+          padding-left: 16px;
+          background: linear-gradient(270deg, var(--#{$prefix}body-bg) 60%, rgba(255, 255, 255, 0) 100%);
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    &-carousel {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      position: relative;
+      @each $name, $value in $grid-breakpoints {
+        @if $value != 0 {
+          @media screen and (width >= $value) {
+            max-width: map.get($container-max-widths, $name) + 2 * (44 + 16);
+          }
+        }
+      }
+
+      > .carousel {
+        &-action {
+          &-back,
+          &-next {
+            display: flex;
+          }
+        }
+
+        &-container {
+          padding-right: unset;
+          padding-left: unset;
+          max-width: unset !important;
+
+          > li {
+            &:first-child {
+              margin-left: 44px + 2 * 16;
+            }
+
+            &:last-child {
+              margin-right: 44px + 2 * 16;
+            }
+          }
+        }
+      }
     }
   }
 }
