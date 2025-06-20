@@ -24,7 +24,7 @@
       <p>Espaces de stockage Nextcloud inaccessible du 13/04 au 15/04.</p>
       <a href="#" class="alert-link">En savoir plus</a>
     </div>
-    <button class="alert-close">
+    <button class="alert-close" aria-label="Fermer l'alerte">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
@@ -107,13 +107,13 @@
       <div class="news-carousel">
         <ul class="carousel-container news-tiles">
           <li>
-            <button class="news-tile">
+            <button class="news-tile" aria-label='Ouvrir l&#39;actualité : "Une sécurité sanitaire assurée dans les collèges"'>
               <div class="news-tile-image">
                 <img src="https://placehold.co/92x140" alt="" />
               </div>
               <div class="news-tile-content">
                 <header>
-                  <h3 class="h4">Une sécurité sanitaire assurée dans les collèges </h3>
+                  <h3 class="h4">Une sécurité sanitaire assurée dans les collèges</h3>
                   <span class="context">Collectivité</span>
                 </header>
                 <p>En cette nouvelle rentrée scolaire, dans le contexte particulier de la ...</p>
@@ -121,7 +121,7 @@
             </button>
           </li>
           <li>
-            <button class="news-tile">
+            <button class="news-tile" aria-label='Ouvrir l&#39;actualité : "Une restauration locale de qualité"'>
               <div class="news-tile-image">
                 <img src="https://placehold.co/92x140" alt="" />
               </div>
@@ -135,7 +135,7 @@
             </button>
           </li>
           <li>
-            <button class="news-tile">
+            <button class="news-tile" aria-label='Ouvrir l&#39;actualité : "Un fonds d&#39;aide à la restauration"'>
               <div class="news-tile-image">
                 <img src="https://placehold.co/92x140" alt="" />
               </div>
@@ -150,10 +150,14 @@
           </li>
         </ul>
         <div class="carousel-action-back">
-          <button class="btn-primary circle" disabled><i class="fa-solid fa-arrow-left"></i></button>
+          <button class="btn-primary circle" disabled aria-label="Défiler les actualités vers la gauche">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
         </div>
         <div class="carousel-action-next">
-          <button class="btn-primary circle"><i class="fa-solid fa-arrow-right"></i></button>
+          <button class="btn-primary circle" aria-label="Défiler les actualités vers la droite">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
         </div>
       </div>
       <footer>

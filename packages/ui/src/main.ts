@@ -247,6 +247,7 @@ document.querySelectorAll<HTMLElement>('.widget-tile').forEach((widget) => {
 document.querySelectorAll<HTMLButtonElement>('.service-favorite > button').forEach((button) => {
   button?.addEventListener('click', () => {
     const svg = button.firstElementChild as HTMLElement
+    button.setAttribute('aria-label', button.getAttribute('aria-label') === 'Ajouter aux favoris' ? 'Retirer des favoris' : 'Ajouter aux favoris')
     svg.setAttribute('data-prefix', svg.getAttribute('data-prefix') === 'fas' ? 'far' : 'fas')
     svg.classList.toggle('marked')
   })
