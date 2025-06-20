@@ -185,6 +185,16 @@ function toggleFavorites() {
 
 favoriteButton?.addEventListener('click', () => toggleFavorites())
 
+document.querySelectorAll<HTMLElement>('.favorite-layout').forEach((layout) => {
+  const actions = layout.querySelectorAll<HTMLElement>('.actions')
+  const button = layout.querySelector<HTMLElement>('button')
+  button?.addEventListener('click', () => {
+    actions.forEach((action) => {
+      action.classList.toggle('disabled')
+    })
+  })
+})
+
 /**
  * Widgets
  */
