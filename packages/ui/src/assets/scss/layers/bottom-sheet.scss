@@ -1,6 +1,26 @@
 @use 'sass:map';
 @use '../recia-style' as *;
 
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
+
 .bottom-sheet {
   position: fixed;
   inset: 0;
@@ -16,6 +36,7 @@
     flex-direction: column;
     overflow-y: auto;
     scrollbar-width: none;
+    scroll-behavior: smooth;
 
     &:focus-visible {
       outline: none;
@@ -34,6 +55,7 @@
       margin-top: 54px;
       padding: 16px;
       box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+      animation: slide-up 0.3s ease-out forwards;
 
       > .dragable {
         align-self: center;
@@ -60,8 +82,16 @@
         }
       }
 
+      &.slide-down {
+        animation: slide-down 0.3s ease-in forwards;
+      }
+
       &.no-padding {
         padding: 0 !important;
+
+        > .dragable {
+          margin-top: 16px;
+        }
       }
     }
   }
