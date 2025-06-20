@@ -58,6 +58,7 @@
   }
 
   & > &-icon {
+    flex: 0 0 auto;
     order: 0;
     height: 40px;
     width: 40px;
@@ -66,6 +67,7 @@
   }
 
   & > &-name {
+    flex: 0 0 auto;
     @include link-unstyled;
     order: 2;
 
@@ -73,7 +75,7 @@
       margin: 0;
     }
 
-    > span {
+    > span[aria-hidden="true"] {
       position: absolute;
       inset: -11px 0 0;
       border-radius: 10px;
@@ -85,6 +87,7 @@
   }
 
   & > &-category {
+    flex: 0 0 auto;
     order: 1;
     margin-top: 8px;
     font-size: var(--#{$prefix}font-size-xxs);
