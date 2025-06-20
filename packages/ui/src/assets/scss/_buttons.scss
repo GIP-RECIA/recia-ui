@@ -157,7 +157,7 @@
 
   &.active {
     background-color: var(--#{$prefix}basic-black);
-    color: white;
+    color:$white;
 
     &:hover {
       background-color: var(--#{$prefix}primary);
