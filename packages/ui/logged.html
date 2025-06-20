@@ -50,88 +50,110 @@
             </button>
             <div style="display: none;">
               <div class="active-indicator"></div>
-              <header>
-                <h2>Vos favoris</h2>
-                <button class="btn-secondary circle small"><i class="fa-solid fa-plus"></i></button>
-                <div class="grow-1"></div>
-                <button class="btn-secondary small">Gérer<i class="fa-solid fa-gear"></i></button>
-              </header>
-              <ul>
-                <li>
-                  <header>
-                    <span>Services</span>
-                  </header>
-                  <ul>
-                    <li>
-                      <a href="#" class="favorite apprentissage">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#carte-mentale"></use>
-                        </svg>
-                        <p class="favorite-name">Carte mentale</p>
-                        <p class="favorite-category">Apprentissage</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="favorite apprentissage">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#capytale"></use>
-                        </svg>
-                        <p class="favorite-name">Capytale</p>
-                        <p class="favorite-category">Apprentissage</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="favorite collaboratif">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#nextcloud"></use>
-                        </svg>
-                        <p class="favorite-name">Espaces Nextcloud</p>
-                        <p class="favorite-category">Espace collaboratif</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="favorite documentation">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#POD"></use>
-                        </svg>
-                        <p class="favorite-name">Plateforme vidéo</p>
-                        <p class="favorite-category">Documentation</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <header>
-                    <span>Mediacentre</span>
-                  </header>
-                  <ul>
-                    <li>
-                      <a href="#" class="favorite">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#NOC-simple"></use>
-                        </svg>
-                        <p class="favorite-name">Pix</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="favorite">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#NOC-simple"></use>
-                        </svg>
-                        <p class="favorite-name">Peraltrees</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="favorite">
-                        <svg class="favorite-icon" aria-hidden="true">
-                          <use xlink:href="/spritemap.svg#NOC-simple"></use>
-                        </svg>
-                        <p class="favorite-name">EduMalin</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+              <div class="favorite-layout">
+                <header>
+                  <h2>Vos favoris</h2>
+                  <div class="grow-1"></div>
+                  <button class="btn-secondary small">Gérer<i class="fa-solid fa-gear"></i></button>
+                </header>
+                <ul>
+                  <li>
+                    <header>
+                      <span>Services</span>
+                    </header>
+                    <ul>
+                      <li>
+                        <div class="favorite apprentissage">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#carte-mentale"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>Carte mentale</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="favorite-category">Apprentissage</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite apprentissage">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#capytale"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>Capytale</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="favorite-category">Apprentissage</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite collaboratif">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#nextcloud"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>Espaces Nextcloud</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="favorite-category">Espace collaboratif</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite documentation">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#POD"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>Plateforme vidéo</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="favorite-category">Documentation</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <header>
+                      <span>Mediacentre</span>
+                    </header>
+                    <ul>
+                      <li>
+                        <div class="favorite">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#NOC-simple"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>Pix</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#NOC-simple"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>Peraltrees</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <svg class="favorite-icon" aria-hidden="true">
+                            <use xlink:href="/spritemap.svg#NOC-simple"></use>
+                          </svg>
+                          <a href="#" class="favorite-name">
+                            <span>EduMalin</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
           </li>
           <li>
