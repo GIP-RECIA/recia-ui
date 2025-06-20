@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+#services-layout {
+  position: fixed;
+  inset: $header-height + 2 * 16 0 0 0;
+  color: var(--#{$prefix}body);
+  overflow-y: auto;
+  background-color: var(--#{$prefix}body-bg);
+  margin-left: 72px; // TODO: drawer width if visible
+
+  > div {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: grid;
+    gap: 48px;
+
+    > header {
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+
+      > h1 {
+        margin: 0;
+      }
+
+      > .sort {
+        display: none;
+      }
+    }
+
+    > .filters {
+      display: none;
+    }
+
+    > .service-tiles {
+      @include list-unstyled;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 16px;
+
+      > li > a {
+        @include link-unstyled;
+      }
+    }
+  }
+}

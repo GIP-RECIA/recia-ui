@@ -2,6 +2,10 @@
 @use '../recia-style' as *;
 
 .service {
+  --#{$prefix}service: #cccccc;
+  --#{$prefix}service-hover: var(--#{$prefix}stroke);
+  --#{$prefix}service-hover-shadow: var(--#{$prefix}service);
+
   border-radius: 10px;
   border-top: 11px solid var(--#{$prefix}service);
   background-color: var(--#{$prefix}body-bg);

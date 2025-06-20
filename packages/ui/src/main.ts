@@ -216,6 +216,21 @@ document.querySelectorAll<HTMLElement>('.favorite-layout').forEach((layout) => {
   })
 })
 
+// Dropdown services
+const servicesButton = drawer?.querySelector<HTMLButtonElement>('.dropdown-services button')
+
+let isDropdownServices = false
+
+function toggleServices() {
+  isDropdownServices = !isDropdownServices
+  document.documentElement.style.overflowY = isDropdownServices ? 'hidden' : ''
+  isDropdownServices ? servicesButton?.classList.add('active') : servicesButton?.classList.remove('active')
+  const menu = extendedUportalHeader?.querySelector<HTMLElement>('#services-layout')
+  menu && (menu.style.display = isDropdownServices ? '' : 'none')
+}
+
+servicesButton?.addEventListener('click', () => toggleServices())
+
 /**
  * Widgets
  */

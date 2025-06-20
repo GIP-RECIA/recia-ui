@@ -20,8 +20,10 @@
     align-items: center;
     column-gap: 12px;
     border-radius: 50px;
+    // max-width: 235px; TODO
 
     > .picture {
+      flex: 0 0 auto;
       height: 46px;
       width: 46px;
       border-radius: 50%;
@@ -29,9 +31,13 @@
     }
 
     > .info {
+      flex: 0 1 auto;
       display: none;
       align-items: baseline;
       flex-direction: column;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
       > .displayname {
         font-size: var(--#{$prefix}font-size-md);
@@ -44,6 +50,7 @@
     }
 
     > svg {
+      flex: 0 0 auto;
       display: none;
       opacity: .3;
       margin-right: 12px;
