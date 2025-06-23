@@ -507,38 +507,45 @@
             </div>
           </header>
           <div class="filters">
-            <button>
+            <header>
+              <button aria-expanded="false" aria-controls="services-filter">
+                <span>Filtres</span>
+                <div class="grow-1"></div>
+                <i class="folded-indicator fa-solid fa-chevron-down"></i>
+              </button>
               <span>Filtres</span>
-              <div class="grow-1"></div>
-              <i class="folded-indicator fa-solid fa-chevron-down"></i>
-            </button>
-            <ul>
+            </header>
+            <ul id="services-filter">
               <li>
-                <button>Tous les services</button>
-              </li>
-              <li>
-                <button>nouveautés</button>
-              </li>
-              <li>
-                <button>Espace collaboratif</button>
-              </li>
-              <li>
-                <button>Apprentissage</button>
-              </li>
-              <li>
-                <button>Communication</button>
-              </li>
-              <li>
-                <button>Documentation</button>
-              </li>
-              <li>
-                <button>Vie scolaire</button>
-              </li>
-              <li>
-                <button>Outils et assistance</button>
-              </li>
-              <li>
-                <button>Orientation</button>
+                <ul>
+                  <li>
+                    <button class="tag active">Tous les services</button>
+                  </li>
+                  <li>
+                    <button class="tag">Nouveautés</button>
+                  </li>
+                  <li>
+                    <button class="tag">Collaboratif</button>
+                  </li>
+                  <li>
+                    <button class="tag">Apprentissage</button>
+                  </li>
+                  <li>
+                    <button class="tag">Communication</button>
+                  </li>
+                  <li>
+                    <button class="tag">Documentation</button>
+                  </li>
+                  <li>
+                    <button class="tag">Vie scolaire</button>
+                  </li>
+                  <li>
+                    <button class="tag">Paramètres</button>
+                  </li>
+                  <li>
+                    <button class="tag">Orientation</button>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>

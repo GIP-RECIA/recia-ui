@@ -13,7 +13,7 @@
     margin-top: 32px;
     margin-bottom: 32px;
     display: grid;
-    gap: 48px;
+    gap: 32px;
 
     > header {
       display: flex;
@@ -29,10 +29,6 @@
       }
     }
 
-    > .filters {
-      display: none;
-    }
-
     > .service-tiles {
       @include list-unstyled;
       display: grid;
@@ -43,6 +39,12 @@
       > li > a {
         @include link-unstyled;
       }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > div {
+      gap: 48px;
     }
   }
 }
