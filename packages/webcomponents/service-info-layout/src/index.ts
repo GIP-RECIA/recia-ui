@@ -195,7 +195,7 @@ export class ReciaServiceInfoLayout extends LitElement {
               ${
                 this.category && Object.values(CategoryType).includes(this.category)
                   ? html`
-                      <span class="category ${this.category}">${ReciaServiceInfoLayout.i18nCategory()[this.category]}</span>
+                      <span class="tag-category ${this.category}">${ReciaServiceInfoLayout.i18nCategory()[this.category]}</span>
                     `
                   : nothing
               }

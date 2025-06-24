@@ -1,5 +1,6 @@
 @use 'sass:map';
-@use '../../button/src/style';
+@use '../../button/src/style' as *;
+@use '../../tag/src/style' as *;
 @use '../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -35,21 +36,8 @@
             line-height: 150%;
           }
 
-          > .category {
+          > .tag-category {
             margin-top: 9px;
-            display: inline-flex;
-            font-size: var(--#{$prefix}font-size-xs);
-            font-weight: 500;
-            padding: 4px 10px;
-            border-radius: 13px;
-            background-color: var(--#{$prefix}stroke);
-
-            @each $type, $values in $categories {
-              &.#{$type} {
-                background-color: var(--#{$prefix}#{$type});
-                color: var(--#{$prefix}#{$type}-text);
-              }
-            }
           }
         }
       }
