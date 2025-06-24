@@ -3,21 +3,8 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-%button-and-tag {
-  @include link-unstyled;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 8px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 50px;
-}
-
 button.tag {
-  @extend %button-and-tag;
+  @include button-and-tag;
   padding: 8px 16px;
   font-family: $dm-sans;
   font-weight: 500;
@@ -82,7 +69,7 @@ button.tag {
 }
 
 :not(button).tag {
-  @extend %button-and-tag;
+  @include button-and-tag;
   cursor: inherit;
   padding: 8px 16px;
   font-family: $dm-sans;
@@ -116,7 +103,7 @@ button.tag {
 }
 
 :not(button).tag-category {
-  @extend %button-and-tag;
+  @include button-and-tag;
   cursor: inherit;
   padding: 4px 10px;
   font-family: $dm-sans;

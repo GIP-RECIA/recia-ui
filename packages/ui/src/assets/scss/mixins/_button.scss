@@ -1,0 +1,14 @@
+@use 'link' as *;
+
+@mixin button-and-tag {
+  @include link-unstyled;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50px;
+}

@@ -43,7 +43,7 @@
     column-gap: 16px;
 
     > .search-button {
-      @extend %button-and-tag;
+      @include button-and-tag;
       font-family: $sora;
       font-weight: 600;
       font-size: var(--#{$prefix}font-size-md);

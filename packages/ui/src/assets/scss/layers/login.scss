@@ -44,7 +44,7 @@
     gap: 12px;
 
     > button {
-      @extend %button-and-tag;
+      @include button-and-tag;
       text-align: unset;
       justify-content: unset;
       font-weight: 500;

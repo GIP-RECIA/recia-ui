@@ -2,7 +2,7 @@
 @use '../recia-style' as *;
 
 %action-button {
-  @extend %button-and-tag;
+  @include button-and-tag;
   border-radius: 9px;
   height: 32px;
   width: 32px;

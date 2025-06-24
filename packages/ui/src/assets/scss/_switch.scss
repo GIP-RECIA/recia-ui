@@ -3,19 +3,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-%button-and-tag {
-  @include link-unstyled;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 8px;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 50px;
-}
-
 ul.switch {
   @include list-unstyled;
   display: flex;
@@ -29,7 +16,7 @@ ul.switch {
     opacity: 0;
 
     ~ label {
-      @extend %button-and-tag;
+      @include button-and-tag;
       padding: 8px 16px;
       font-family: $dm-sans;
       font-weight: 500;
