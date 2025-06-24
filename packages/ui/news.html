@@ -23,7 +23,7 @@
         </div>
         <ul>
           <li>
-            <a href="#" title="Accueil" aria-label="Retourer à l'accueil" class="back-home active">
+            <a href="logged.html" title="Accueil" aria-label="Retourer à l'accueil" class="back-home">
               <div class="active-indicator"></div>
               <div class="icon">
                 <i class="fa-solid fa-house"></i>
@@ -799,357 +799,99 @@
   </div>
 
   <main>
-    <div class="container">
+    <div class="container page-layout">
       <header>
-        <h1>Bienvenue sur votre ENT, Anaïs</h1>
+        <div class="heading">
+          <button class="btn-tertiary circle" title="Revenir en arrière d'une page"><i class="fa-solid fa-arrow-left"></i></button>
+          <h1>Toutes les actualités</h1>
+        </div>
+        <ul class="switch">
+          <li>
+            <input id="news-read-state-all" type="radio" name="news-read-state-switch" checked>
+            <label for="news-read-state-all">Toutes</label>
+          </li>
+          <li>
+            <input id="news-read-state-readed" type="radio" name="news-read-state-switch">
+            <label for="news-read-state-readed">Lues</label>
+          </li>
+          <li>
+            <input id="news-read-state-unread" type="radio" name="news-read-state-switch">
+            <label for="news-read-state-unread">Non lues</label>
+          </li>
+        </ul>
       </header>
-      <section class="widget">
+      <section class="filters">
         <header>
-          <h2 class="sr-only">Accès rapides</h2>
+          <button aria-expanded="false" aria-controls="services-filter">
+            <span>Filtres</span>
+            <div class="grow-1"></div>
+            <i class="folded-indicator fa-solid fa-chevron-down"></i>
+          </button>
+          <span>Filtres</span>
         </header>
-        <ul class="widget-tiles">
-          <li class="widget-tile">
+        <ul id="services-filter">
+          <li>
             <header>
-              <button aria-expanded="false" aria-controls="widget-pronote-menu" aria-label="Widget espace vie scolaire">
-                <div class="heading">
-                  <h3>Espace vie scolaire</h3>
-                </div>
-                <div class="grow-1"></div>
-                <span class="counter">6<span class="sr-only"> notifications</span></span>
-                <i class="folded-indicator fa-solid fa-chevron-down"></i>
-              </button>
-              <div>
-                <a href="#">
-                  <i class="focus-indicator fa-solid fa-angles-right"></i>
-                  <div class="heading">
-                    <h3>Espace vie scolaire</h3>
-                  </div>
-                </a>
-                <div class="grow-1"></div>
-                <span class="counter">6<span class="sr-only"> notifications</span></span>
-              </div>
+              <span>Par source :</span>
             </header>
-            <div id="widget-pronote-menu" class="widget-menu" style="display: none;">
-              <div class="empty">
-                <i class="empty-icon fa-solid fa-bell-slash"></i>
-                <span class="empty-text">
-                  Vous n'avez<span class="large">Aucune nouvelle notification</span>
-                </span>
-              </div>
-            </div>
+            <ul>
+              <li>
+                <button class="tag active">Toures les sources</button>
+              </li>
+              <li>
+                <button class="tag">Lycée international de Palaiseau</button>
+              </li>
+              <li>
+                <button class="tag">Département d'Eure-et-Loir</button>
+              </li>
+              <li>
+                <button class="tag">Région Centre-Val de Loire</button>
+              </li>
+            </ul>
           </li>
-          <li class="widget-tile">
+          <li>
             <header>
-              <button aria-expanded="false" aria-controls="widget-favorites-menu" aria-label="Widget favoris">
-                <div class="heading">
-                  <h3>Favoris</h3>
-                </div>
-                <div class="grow-1"></div>
-                <i class="folded-indicator fa-solid fa-chevron-down"></i>
-              </button>
-              <div>
-                <a href="#">
-                  <i class="focus-indicator fa-solid fa-angles-right"></i>
-                  <div class="heading">
-                    <h3>Favoris</h3>
-                  </div>
-                </a>
-                <div class="grow-1"></div>
-              </div>
+              <span>Par rubrique :</span>
             </header>
-            <div id="widget-favorites-menu" class="widget-menu" style="display: none;">
-              <ul>
-                <li>
-                  <a href="#">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="/spritemap.svg#carte-mentale"></use>
-                    </svg>
-                    <span>Carte mentale</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="/spritemap.svg#capytale"></use>
-                    </svg>
-                    <span>Capytale</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="/spritemap.svg#nextcloud"></use>
-                    </svg>
-                    <span>Espaces Nextcloud</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="/spritemap.svg#POD"></use>
-                    </svg>
-                    <span>Platforme vidéo</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="widget-tile">
-            <header>
-              <button aria-expanded="false" aria-controls="widget-mediacentre-menu" aria-label="Widget Médiacentre">
-                <div class="heading">
-                  <h3>Médiacentre</h3>
-                  <span class="heading-subtitle">Consulté récement</span>
-                </div>
-                <div class="grow-1"></div>
-                <i class="folded-indicator fa-solid fa-chevron-down"></i>
-              </button>
-              <div>
-                <a href="#" aria-label="Médiacentre">
-                  <i class="focus-indicator fa-solid fa-angles-right"></i>
-                  <div class="heading">
-                    <h3>Médiacentre</h3>
-                    <span class="heading-subtitle">Consulté récement</span>
-                  </div>
-                </a>
-                <div class="grow-1"></div>
-              </div>
-            </header>
-            <div id="widget-mediacentre-menu" class="widget-menu" style="display: none;">
-              <ul>
-                <li>
-                  <a href="#">
-                    <i class="icon fa-solid fa-thumbtack"></i>
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span>Titre-du-document.pdf</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <ul>
+              <li>
+                <button class="tag active">Toures les rubriques</button>
+              </li>
+              <li>
+                <button class="tag">Vie scolaire</button>
+              </li>
+              <li>
+                <button class="tag">Pédagogie</button>
+              </li>
+              <li>
+                <button class="tag">Direction</button>
+              </li>
+              <li>
+                <button class="tag">Services et gestion</button>
+              </li>
+              <li>
+                <button class="tag">Sport et culture</button>
+              </li>
+              <li>
+                <button class="tag">CDI</button>
+              </li>
+              <li>
+                <button class="tag">Santé et social</button>
+              </li>
+              <li>
+                <button class="tag">Documentation</button>
+              </li>
+              <li>
+                <button class="tag">Autre</button>
+              </li>
+            </ul>
           </li>
         </ul>
       </section>
+      <section>
+
+      </section>
     </div>
-
-    <section class="news">
-      <header>
-        <h2>Actualités</h2>
-        <div class="grow-1"></div>
-        <a href="news.html" class="btn-tertiary">Voir toutes les actualités<i class="fa-solid fa-arrow-right"></i></a>
-      </header>
-      <div class="news-carousel">
-        <ul class="carousel-container news-tiles">
-          <li>
-            <button class="news-tile" aria-label='Ouvrir l&#39;actualité : "Une sécurité sanitaire assurée dans les collèges"'>
-              <div class="news-tile-image">
-                <img src="https://placehold.co/92x140" alt="" />
-              </div>
-              <div class="news-tile-content">
-                <header>
-                  <h3 class="h4">Une sécurité sanitaire assurée dans les collèges </h3>
-                  <span class="context">Collectivité</span>
-                </header>
-                <p>En cette nouvelle rentrée scolaire, dans le contexte particulier de la ...</p>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button class="news-tile" aria-label='Ouvrir l&#39;actualité : "Une restauration locale de qualité"'>
-              <div class="news-tile-image">
-                <img src="https://placehold.co/92x140" alt="" />
-              </div>
-              <div class="news-tile-content">
-                <header>
-                  <h3 class="h4">Une restauration locale de qualité</h3>
-                  <span class="context">Établissement</span>
-                </header>
-                <p>Le conseil départemental s'engage à proposer des aliments de qualité et ...</p>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button class="news-tile" aria-label='Ouvrir l&#39;actualité : "Un fonds d&#39;aide à la restauration"'>
-              <div class="news-tile-image">
-                <img src="https://placehold.co/92x140" alt="" />
-              </div>
-              <div class="news-tile-content">
-                <header>
-                  <h3 class="h4">Un fonds d'aide à la restauration</h3>
-                  <span class="context">Rectorat</span>
-                </header>
-                <p>Le département dispose d'un fonds d'aide à la restauration de 100 000 €...</p>
-              </div>
-            </button>
-          </li>
-        </ul>
-        <div class="carousel-action-back">
-          <button class="btn-primary circle" disabled aria-label="Défiler les actualités vers la gauche">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-        </div>
-        <div class="carousel-action-next">
-          <button class="btn-primary circle" aria-label="Défiler les actualités vers la droite">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-      <footer>
-        <div class="grow-1"></div>
-        <a href="news.html" class="btn-tertiary">Voir toutes les actualités<i class="fa-solid fa-arrow-right"></i></a>
-      </footer>
-    </section>
-
-    <section class="suggestion">
-      <header>
-        <h2>Populaire auprès de vos pairs</h2>
-        <div class="grow-1"></div>
-        <a href="#" class="btn-tertiary">Voir tous les services<i class="fa-solid fa-arrow-right"></i></a>
-      </header>
-      <ul class="suggestion-tiles">
-        <li>
-          <div class="service collaboratif">
-            <div class="service-new">
-              <span class="new">nouveau</span>
-            </div>
-            <svg class="service-icon" aria-hidden="true">
-              <use xlink:href="/spritemap.svg#nextcloud"></use>
-            </svg>
-            <a href="#" class="service-name">
-              <h3>Espaces Nextcloud</h3>
-              <span aria-hidden="true"></span>
-            </a>
-            <span class="service-category">Espace collaboratif</span>
-            <div class="service-favorite">
-              <button aria-label="Retirer des favoris">
-                <i class="fa-solid fa-star marked"></i>
-              </button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="service communication">
-            <svg class="service-icon" aria-hidden="true">
-              <use xlink:href="/spritemap.svg#actualites"></use>
-            </svg>
-            <a href="#" class="service-name">
-              <h3>Actualités</h3>
-              <span aria-hidden="true"></span>
-            </a>
-            <span class="service-category">Communication</span>
-            <div class="service-favorite">
-              <button aria-label="Ajouter aux favoris">
-                <i class="fa-regular fa-star"></i>
-              </button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="service apprentissage">
-            <div class="service-new">
-              <span class="new">nouveau</span>
-            </div>
-            <svg class="service-icon" aria-hidden="true">
-              <use xlink:href="/spritemap.svg#carte-mentale"></use>
-            </svg>
-            <a href="#" class="service-name">
-              <h3>Carte mentale</h3>
-              <span aria-hidden="true"></span>
-            </a>
-            <span class="service-category">Apprentissage</span>
-            <div class="service-favorite">
-              <button aria-label="Retirer des favoris">
-                <i class="fa-solid fa-star marked"></i>
-              </button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="service apprentissage">
-            <svg class="service-icon" aria-hidden="true">
-              <use xlink:href="/spritemap.svg#capytale"></use>
-            </svg>
-            <a href="#" class="service-name">
-              <h3>Capytale</h3>
-              <span aria-hidden="true"></span>
-            </a>
-            <span class="service-category">Apprentissage</span>
-            <div class="service-favorite">
-              <button aria-label="Ajouter aux favoris">
-                <i class="fa-regular fa-star"></i>
-              </button>
-            </div>
-            <button class="service-more">En savoir plus</button>
-          </div>
-        </li>
-        <li>
-          <div class="service communication">
-            <svg class="service-icon" aria-hidden="true">
-              <use xlink:href="/spritemap.svg#mail"></use>
-            </svg>
-            <a href="#" class="service-name">
-              <h3>Messagerie</h3>
-              <span aria-hidden="true"></span>
-            </a>
-            <span class="service-category">Communication</span>
-            <div class="service-favorite">
-              <button aria-label="Ajouter aux favoris">
-                <i class="fa-regular fa-star"></i>
-              </button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="service documentation">
-            <svg class="service-icon" aria-hidden="true">
-              <use xlink:href="/spritemap.svg#POD"></use>
-            </svg>
-            <a href="#" class="service-name">
-              <h3>Plateforme vidéo</h3>
-              <span aria-hidden="true"></span>
-            </a>
-            <span class="service-category">Documentation</span>
-            <div class="service-favorite">
-              <button aria-label="Retirer des favoris">
-                <i class="fa-solid fa-star marked"></i>
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <footer>
-        <div class="grow-1"></div>
-        <a href="#" class="btn-tertiary">Voir tous les services<i class="fa-solid fa-arrow-right"></i></a>
-      </footer>
-    </section>
   </main>
 
   <div id="bottom-sheet-info" class="bottom-sheet" role="dialog" aria-modal="true" style="display: none;">

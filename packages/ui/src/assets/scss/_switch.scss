@@ -1,0 +1,115 @@
+@use 'sass:map';
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
+
+%button-and-tag {
+  @include link-unstyled;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50px;
+}
+
+ul.switch {
+  @include list-unstyled;
+  display: flex;
+  column-gap: 8px;
+  background-color: HEXToRGBA(var(--#{$prefix}btn-primary-bg), .05);
+  padding: 4px;
+  border-radius: 50px;
+
+  > li > input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+
+    ~ label {
+      @extend %button-and-tag;
+      padding: 8px 16px;
+      font-family: $dm-sans;
+      font-weight: 500;
+      font-size: var(--#{$prefix}font-size-sm);
+      height: 100%;
+    }
+
+    &:hover,
+    &:focus-visible {
+      ~ label {
+        background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+        color: var(--#{$prefix}primary);
+      }
+    }
+
+    &:focus-visible {
+      ~ label {
+        outline: 3px solid var(--#{$prefix}primary);
+      }
+    }
+
+    &:checked {
+      ~ label {
+        background-color: var(--#{$prefix}btn-primary-bg);
+        color: var(--#{$prefix}btn-primary);
+        box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
+      }
+
+      &:hover,
+      &:focus-visible {
+        ~ label {
+          background-color: var(--#{$prefix}primary);
+        }
+      }
+
+      &:focus-visible {
+        ~ label {
+          outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
+        }
+      }
+    }
+
+    &:disabled,
+    &.disabled {
+      ~ label {
+        opacity: 0.33;
+        pointer-events: none;
+      }
+    }
+
+    &.circle {
+      ~ label {
+        border-radius: 50%;
+        width: 34px;
+        height: 34px;
+        padding: 8px;
+      }
+    }
+  }
+
+  @media (hover: none) or (pointer: coarse) {
+    > li > input[type="radio"] ~ label {
+      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      color: var(--#{$prefix}primary);
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > li > input[type="radio"] {
+      ~ label {
+        padding: 4px 12px;
+      }
+
+      &.circle {
+        ~ label {
+          width: 26px;
+          height: 26px;
+          padding: 4px;
+        }
+      }
+    }
+  }
+}
