@@ -37,29 +37,20 @@
           padding: 16px 12px;
           text-align: start;
 
-          > a {
-            @include link-unstyled;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+          > a,
+          & {
+            > .heading {
+              @include link-unstyled;
 
-            > .focus-indicator {
-              display: none;
-            }
-          }
+              > h3 {
+                font-size: var(--#{$prefix}font-size-sm);
+                margin-bottom: 0;
+              }
 
-          > .heading,
-           > a > .heading {
-            @include link-unstyled;
-
-            > h3 {
-              font-size: var(--#{$prefix}font-size-sm);
-              margin-bottom: 0;
-            }
-
-            > .heading-subtitle {
-              font-size: var(--#{$prefix}font-size-xxs);
-              color: var(--#{$prefix}basic-black-lighter);
+              > .heading-subtitle {
+                font-size: var(--#{$prefix}font-size-xxs);
+                color: var(--#{$prefix}basic-black-lighter);
+              }
             }
           }
 
@@ -71,34 +62,44 @@
             font-size: var(--#{$prefix}font-size-md);
             font-weight: bold;
           }
-
-          > a > .focus-indicator,
-          > .folded-indicator {
-            font-size: 16px;
-            margin: 4px;
-            transition: rotate .2s ease-in-out;
-          }
         }
 
         > div {
           display: none !important;
 
-          > a:hover,
-          > a:focus-visible {
-            outline: none;
+          > a {
+            @include link-unstyled;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
 
             > .focus-indicator {
-              display: unset;
-              color: var(--#{$prefix}primary);
+              display: none;
             }
 
-            > .heading > h3 {
-              color: var(--#{$prefix}primary);
+            &:hover,
+            &:focus-visible {
+              outline: none;
+
+              > .focus-indicator {
+                display: unset;
+                color: var(--#{$prefix}primary);
+              }
+
+              > .heading > h3 {
+                color: var(--#{$prefix}primary);
+              }
             }
           }
         }
 
         > button {
+          > .folded-indicator {
+            font-size: 16px;
+            margin: 4px;
+            transition: rotate .2s ease-in-out;
+          }
+
           &:hover,
           &:focus-visible {
             outline: none;
