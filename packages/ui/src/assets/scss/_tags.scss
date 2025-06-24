@@ -80,3 +80,76 @@ button.tag {
     }
   }
 }
+
+:not(button).tag {
+  @extend %button-and-tag;
+  cursor: inherit;
+  padding: 8px 16px;
+  font-family: $dm-sans;
+  font-weight: 500;
+  font-size: var(--#{$prefix}font-size-sm);
+
+  background-color: var(--#{$prefix}btn-primary-bg);
+  color: var(--#{$prefix}btn-primary);
+  box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
+
+  &.disabled {
+    opacity: 0.33;
+  }
+
+  &.circle {
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+  }
+
+  &.small {
+    padding: 4px 12px;
+
+    &.circle {
+      width: 26px;
+      height: 26px;
+      padding: 4px;
+    }
+  }
+}
+
+:not(button).tag-category {
+  @extend %button-and-tag;
+  cursor: inherit;
+  padding: 4px 10px;
+  font-family: $dm-sans;
+  font-weight: 500;
+  font-size: var(--#{$prefix}font-size-xs);
+
+  background-color: var(--#{$prefix}stroke);
+
+  @each $type, $values in $categories {
+    &.#{$type} {
+      background-color: var(--#{$prefix}#{$type});
+      color: var(--#{$prefix}#{$type}-text);
+    }
+  }
+
+  &.disabled {
+    opacity: 0.33;
+  }
+
+  &.circle {
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+  }
+
+  &.small {
+    padding: 4px 12px;
+
+    &.circle {
+      width: 26px;
+      height: 26px;
+      padding: 4px;
+    }
+  }
+}

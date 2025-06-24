@@ -126,24 +126,8 @@
     }
   }
 
-  & > &-category {
+  > .tag-category {
     flex: 0 0 auto;
-    display: inline-flex;
-    font-family: $dm-sans;
-    font-size: var(--#{$prefix}font-size-xs);
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 13px;
-    background-color: var(--#{$prefix}stroke);
-  }
-
-  @each $type, $values in $categories {
-    &.#{$type} {
-      > .favorite-category {
-        background-color: var(--#{$prefix}#{$type});
-        color: var(--#{$prefix}#{$type}-text);
-      }
-    }
   }
 
   &:hover,
