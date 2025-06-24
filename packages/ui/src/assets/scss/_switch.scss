@@ -37,18 +37,14 @@ ul.switch {
       height: 100%;
     }
 
-    &:hover,
-    &:focus-visible {
-      ~ label {
-        background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
-        color: var(--#{$prefix}primary);
-      }
+    &:hover ~ label,
+    &:focus-visible ~ label {
+      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      color: var(--#{$prefix}primary);
     }
 
-    &:focus-visible {
-      ~ label {
-        outline: 3px solid var(--#{$prefix}primary);
-      }
+    &:focus-visible ~ label {
+      outline: 3px solid var(--#{$prefix}primary);
     }
 
     &:checked {
@@ -58,35 +54,27 @@ ul.switch {
         box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
       }
 
-      &:hover,
-      &:focus-visible {
-        ~ label {
-          background-color: var(--#{$prefix}primary);
-        }
+      &:hover ~ label,
+      &:focus-visible ~ label {
+        background-color: var(--#{$prefix}primary);
       }
 
-      &:focus-visible {
-        ~ label {
-          outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
-        }
+      &:focus-visible ~ label {
+        outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
       }
     }
 
-    &:disabled,
-    &.disabled {
-      ~ label {
-        opacity: 0.33;
-        pointer-events: none;
-      }
+    &:disabled ~ label,
+    &.disabled ~ label {
+      opacity: 0.33;
+      pointer-events: none;
     }
 
-    &.circle {
-      ~ label {
-        border-radius: 50%;
-        width: 34px;
-        height: 34px;
-        padding: 8px;
-      }
+    &.circle ~ label {
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      padding: 8px;
     }
   }
 
@@ -103,12 +91,10 @@ ul.switch {
         padding: 4px 12px;
       }
 
-      &.circle {
-        ~ label {
-          width: 26px;
-          height: 26px;
-          padding: 4px;
-        }
+      &.circle ~ label {
+        width: 26px;
+        height: 26px;
+        padding: 4px;
       }
     }
   }
