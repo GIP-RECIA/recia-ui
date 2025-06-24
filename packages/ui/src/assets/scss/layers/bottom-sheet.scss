@@ -28,7 +28,6 @@
   background-color: rgba(#000000, .25);
 
   > .scrollable-container {
-    @extend .container;
     position: absolute;
     inset: 0;
     z-index: 1055;

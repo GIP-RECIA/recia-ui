@@ -3,7 +3,6 @@
 
 .news {
   > header {
-    @extend .container;
     margin-bottom: 24px;
 
     > h2 {
@@ -16,7 +15,6 @@
   }
 
   > div > .news-tiles {
-    @extend .container;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -99,7 +97,6 @@
   }
 
   > footer {
-    @extend .container;
     display: flex;
     margin-top: 24px;
   }

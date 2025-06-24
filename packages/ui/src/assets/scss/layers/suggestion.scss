@@ -7,7 +7,6 @@ $service-width: 150px;
 
 .suggestion {
   > header {
-    @extend .container;
     margin-bottom: 24px;
 
     > h2 {
@@ -20,7 +19,6 @@ $service-width: 150px;
   }
 
   > .suggestion-tiles {
-    @extend .container;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
@@ -32,7 +30,6 @@ $service-width: 150px;
   }
 
   > footer {
-    @extend .container;
     display: flex;
     margin-top: 24px;
   }
