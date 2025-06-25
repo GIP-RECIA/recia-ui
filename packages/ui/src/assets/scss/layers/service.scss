@@ -9,7 +9,7 @@
   border-radius: 10px;
   border-top: 11px solid var(--#{$prefix}service);
   background-color: var(--#{$prefix}body-bg);
-  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
   padding: 5px 16px 16px;
   position: relative;
   display: flex;
@@ -25,7 +25,7 @@
     padding: 6px 10px;
     border-radius: 4px;
     background-color: var(--#{$prefix}system-red);
-    color: var(--#{$prefix}white);
+    color: $white;
     font-size: var(--#{$prefix}font-size-xxs);
     font-weight: bold;
   }

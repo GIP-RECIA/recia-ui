@@ -6,7 +6,7 @@
   align-items: center;
   column-gap: 8px;
   background-color: var(--#{$prefix}system-blue);
-  color: var(--#{$prefix}white);
+  color: $white;
   padding: 14px 16px;
   height: 60px;
 
@@ -61,7 +61,7 @@
     }
 
     &:focus-visible {
-      outline: 3px solid var(--#{$prefix}white);
+      outline: 3px solid $white;
     }
   }
 

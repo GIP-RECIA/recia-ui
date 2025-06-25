@@ -96,7 +96,7 @@
     &:hover,
     &:has(:focus-visible) {
       outline: none;
-      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
     }
   }
 

@@ -53,7 +53,7 @@
       border-radius: 8px 8px 0 0;
       margin-top: 54px;
       padding: 16px;
-      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
       animation: slide-up 0.3s ease-out forwards;
 
       > .dragable {

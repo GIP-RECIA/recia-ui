@@ -3,7 +3,7 @@
 
 .filters {
   border-radius: 10px;
-  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
 
   > header {
     > button {

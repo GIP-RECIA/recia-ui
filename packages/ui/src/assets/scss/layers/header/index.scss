@@ -12,7 +12,7 @@
   top: 0;
   z-index: 1030;
   background-color: var(--#{$prefix}body-bg);
-  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
   padding: 16px;
   display: flex;
   flex-direction: column;

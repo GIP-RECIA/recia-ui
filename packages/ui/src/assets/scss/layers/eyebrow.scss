@@ -27,7 +27,7 @@
       height: 46px;
       width: 46px;
       border-radius: 50%;
-      // box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA(var(--#{$prefix}black), .2);
+      // box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
     }
 
     > .info {
@@ -78,7 +78,7 @@
     max-width: calc(100vw - 32px);
     background-color: var(--#{$prefix}body-bg);
     border-radius: 8px;
-    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA(var(--#{$prefix}black), .1);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
     overflow: hidden;
     z-index: 1000;
 
@@ -155,7 +155,7 @@
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid HEXToRGBA(var(--#{$prefix}black), .1);
+        border-bottom: 1px solid HEXToRGBA($black, .1);
       }
     }
   }

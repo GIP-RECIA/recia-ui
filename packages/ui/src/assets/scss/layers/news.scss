@@ -30,7 +30,7 @@
         text-align: left;
         border-radius: 10px;
         background-color: var(--#{$prefix}body-bg);
-        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
+        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
         overflow: hidden;
         transition:
           outline .15s ease-out,

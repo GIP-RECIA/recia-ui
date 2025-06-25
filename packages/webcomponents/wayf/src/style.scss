@@ -18,7 +18,7 @@
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
-      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
+      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
       padding: 12px;
       display: inline-block;
       width: 100%;

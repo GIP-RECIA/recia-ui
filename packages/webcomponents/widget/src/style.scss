@@ -6,7 +6,7 @@
 .widget-tile {
   border: 1px solid var(--#{$prefix}stroke);
   border-radius: 10px;
-  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .05);
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
   overflow: hidden;
   height: 100%;
 
@@ -181,7 +181,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA(var(--#{$prefix}black), .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
 
     > header {
       > div {
