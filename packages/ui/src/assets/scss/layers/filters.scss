@@ -28,13 +28,13 @@
       &:focus-visible {
         outline: none;
 
-        > span {
+        > .heading {
           color: var(--#{$prefix}primary);
         }
       }
     }
 
-    > span {
+    > .heading {
       display: none;
       font-size: var(--#{$prefix}font-size-md);
       font-weight: bold;

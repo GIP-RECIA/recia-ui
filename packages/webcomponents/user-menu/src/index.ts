@@ -216,7 +216,7 @@ export class ReciaUserMenu extends LitElement {
               this.notification > 0 ? 'notifications' : 'no-notifications',
               html`
                 <div
-                  class="counter"
+                  class="badge"
                   style="${styleMap({
                     display: this.notification > 0 ? undefined : 'none',
                   })}"

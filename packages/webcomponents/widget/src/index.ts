@@ -113,7 +113,7 @@ export class ReciaWidget extends LitElement {
 
   notificationsTemplate(): TemplateResult | typeof nothing {
     return this.notifications > 0
-      ? html`<span class="counter">${this.notifications}<span class="sr-only"> ${msg(str`notifications`)}</span></span>`
+      ? html`<span class="badge lg">${this.notifications}<span class="sr-only"> ${msg(str`notifications`)}</span></span>`
       : nothing
   }
 

@@ -54,15 +54,6 @@
         }
       }
 
-      > .counter {
-        padding: 2.5px 14px;
-        border-radius: 27px;
-        background-color: var(--#{$prefix}primary);
-        color: var(--#{$prefix}body-inverted);
-        font-size: var(--#{$prefix}font-size-md);
-        font-weight: bold;
-      }
-
       > a > .focus-indicator,
       > .folded-indicator {
         font-size: 16px;

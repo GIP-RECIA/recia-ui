@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 27px;
+  background-color: var(--#{$prefix}primary);
+  color: var(--#{$prefix}body-inverted);
+  font-family: $dm-sans;
+  font-size: var(--#{$prefix}font-size-xs);
+  font-weight: bold;
+
+  &.lg {
+    padding: 2.5px 14px;
+    font-size: var(--#{$prefix}font-size-md);
+  }
+}
