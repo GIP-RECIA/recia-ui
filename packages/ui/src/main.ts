@@ -282,6 +282,12 @@ document.querySelectorAll<HTMLButtonElement>('.service-favorite > button').forEa
   })
 })
 
+document.querySelectorAll<HTMLButtonElement>('button.tag').forEach((button) => {
+  button.addEventListener('click', () => {
+    button.classList.toggle('active')
+  })
+})
+
 /**
  * Dev tools
  */
