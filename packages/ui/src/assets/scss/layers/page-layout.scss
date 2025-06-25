@@ -18,6 +18,10 @@
       align-items: center;
       column-gap: 6px;
 
+      > .btn-tertiary {
+        font-size: var(--#{$prefix}font-size-md);
+      }
+
       > h1 {
         margin: 0;
       }
