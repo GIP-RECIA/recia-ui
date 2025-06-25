@@ -65,13 +65,6 @@ ul.switch {
     }
   }
 
-  @media (hover: none) or (pointer: coarse) {
-    > li > input[type="radio"] ~ label {
-      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
-      color: var(--#{$prefix}primary);
-    }
-  }
-
   @media (width >= map.get($grid-breakpoints, md)) {
     > li > input[type="radio"] {
       ~ label {
