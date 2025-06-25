@@ -5,28 +5,9 @@
   position: relative;
 
   & > &-button {
-    @extend .btn-secondary;
-    background-color: unset;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-
-    &:active {
-      background-color: var(--#{$prefix}primary) !important;
-      color: var(--#{$prefix}body-inverted) !important;
-    }
-
     &.active {
-      color: var(--#{$prefix}body-inverted);
-      background-color: var(--#{$prefix}primary);
-      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
       position: relative;
       z-index: 1055;
-
-      &:focus-visible {
-        outline: 4px solid HEXToRGBA(var(--#{$prefix}primary), .3);
-      }
     }
 
     &:not(.active) {

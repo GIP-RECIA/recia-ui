@@ -100,6 +100,29 @@
     }
   }
 
+  &-secondary-toggle {
+    @extend .btn-secondary;
+    background-color: unset;
+    color: var(--#{$prefix}btn-secondary);
+
+    &.active {
+      background-color: var(--#{$prefix}primary);
+      color: var(--#{$prefix}body-inverted);
+      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+      position: relative;
+      z-index: 1055;
+
+      &:active {
+        background-color: var(--#{$prefix}btn-primary-pressed) !important;
+        color: var(--#{$prefix}btn-primary) !important;
+      }
+
+      &:focus-visible {
+        outline: 4px solid HEXToRGBA(var(--#{$prefix}primary), .3);
+      }
+    }
+  }
+
   &-tertiary {
     @extend .btn;
     padding: 8px 16px;
