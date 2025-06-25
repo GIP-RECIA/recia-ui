@@ -20,6 +20,7 @@
       > .folded-indicator {
         font-size: 16px;
         margin: 8px;
+        color: var(--#{$prefix}basic-black);
         transition: rotate .2s ease-in-out;
       }
 
