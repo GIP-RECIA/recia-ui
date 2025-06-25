@@ -21,6 +21,31 @@ import './assets/scss/main.scss'
 register()
 
 /**
+ * Functions
+ */
+
+function toggleListener(elementSelector: string, menuSelector: string) {
+  document.querySelectorAll<HTMLElement>(elementSelector).forEach((element) => {
+    const button = element.querySelector<HTMLButtonElement>('button')
+
+    let isExpended = false
+
+    function toggle() {
+      if (!button)
+        return
+      isExpended = !isExpended
+      button.ariaExpanded = isExpended.toString()
+      const indicator = button.querySelector<HTMLElement>('.folded-indicator')
+      indicator && (indicator.style.rotate = isExpended ? '180deg' : '')
+      const menu = element.querySelector<HTMLElement>(menuSelector)
+      menu && (menu.style.display = isExpended ? '' : 'none')
+    }
+
+    button?.addEventListener('click', () => toggle())
+  })
+}
+
+/**
  * Grid breakpoints
  */
 
@@ -235,24 +260,13 @@ servicesButton?.addEventListener('click', () => toggleServices())
  * Widgets
  */
 
-document.querySelectorAll<HTMLElement>('.widget-tile').forEach((widget) => {
-  const button = widget.querySelector<HTMLButtonElement>('button')
+toggleListener('.widget-tile', '.widget-menu')
 
-  let isExpended = false
+/**
+ * Filters
+ */
 
-  function toggleWidget() {
-    if (!button)
-      return
-    isExpended = !isExpended
-    button.ariaExpanded = isExpended.toString()
-    const indicator = button.querySelector<HTMLElement>('.folded-indicator')
-    indicator && (indicator.style.rotate = isExpended ? '180deg' : '')
-    const menu = widget.querySelector<HTMLElement>('.widget-menu')
-    menu && (menu.style.display = isExpended ? '' : 'none')
-  }
-
-  button?.addEventListener('click', () => toggleWidget())
-})
+toggleListener('.filters', '.filters-menu')
 
 /**
  * Services

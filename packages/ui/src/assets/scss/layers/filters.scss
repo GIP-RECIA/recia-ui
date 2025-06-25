@@ -17,8 +17,19 @@
       font-size: var(--#{$prefix}font-size-md);
       font-weight: bold;
 
-      > svg {
+      > .folded-indicator {
+        font-size: 16px;
         margin: 8px;
+        transition: rotate .2s ease-in-out;
+      }
+
+      &:hover,
+      &:focus-visible {
+        outline: none;
+
+        > span {
+          color: var(--#{$prefix}primary);
+        }
       }
     }
 
@@ -70,6 +81,10 @@
     }
   }
 
+  &:has(> header > button:focus-visible) {
+    outline: 2px solid var(--#{$prefix}primary);
+  }
+
   @media (width >= map.get($grid-breakpoints, md)) {
     box-shadow: none;
 
@@ -86,7 +101,7 @@
     }
 
     > ul {
-      display: grid;
+      display: grid !important;
       padding: 0;
 
       > li {
