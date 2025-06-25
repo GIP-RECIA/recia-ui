@@ -13,10 +13,12 @@
     margin-top: 32px;
     margin-bottom: 32px;
 
-    > header {
-      > .sort {
-        display: none;
-      }
+    > header > .sort {
+      align-self: flex-end;
+      font-size: var(--#{$prefix}font-size-sm);
+      display: flex;
+      align-items: center;
+      column-gap: 15px
     }
 
     > .service-tiles {

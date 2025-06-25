@@ -1,0 +1,92 @@
+@use 'sass:map';
+@use 'variables' as *;
+@use 'functions' as *;
+
+select {
+  position: relative;
+  appearance: base-select;
+  display: inline-flex;
+  column-gap: 16px;
+  background-color: HEXToRGBA($black, .05);
+  border-radius: 50px;
+  padding: 8px 16px;
+
+  &:hover,
+  &:focus-visible {
+    background-color: HEXToRGBA($black, .1);
+
+    &::picker-icon {
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--#{$prefix}primary);
+  }
+
+  &::picker-icon {
+    // display: none;
+    place-content: center;
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    opacity: .33;
+    transition: rotate .2s ease-in-out;
+  }
+
+  &:open::picker-icon {
+    opacity: 1;
+    rotate: 180deg;
+  }
+
+  &::picker(select) {
+    appearance: base-select;
+    border: none;
+    background-color: var(--recia-body-bg);
+    border-radius: 8px;
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+  }
+
+  > button > selectedcontent {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  > option {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    text-wrap: nowrap;
+    font-size: var(--#{$prefix}font-size-sm);
+    padding: 14px 12px;
+
+    &::checkmark {
+      display: none;
+    }
+
+    > svg {
+      opacity: .3;
+    }
+
+    &:checked {
+      font-weight: 500;
+      background-color: var(--#{$prefix}btn-secondary-hover);
+
+      > svg {
+        opacity: 1;
+      }
+    }
+
+    &:hover,
+    &:focus-visible {
+      font-weight: 500;
+      background-color:var(--#{$prefix}hover);
+      outline: none;
+
+      > svg {
+        opacity: 1;
+      }
+    }
+  }
+}

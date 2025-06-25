@@ -15,7 +15,6 @@
  */
 
 import { register } from './plugings/fontawesome'
-import 'ress/dist/ress.min.css'
 import './assets/scss/main.scss'
 
 register()

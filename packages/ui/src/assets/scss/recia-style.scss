@@ -1,3 +1,8 @@
+@forward 'ress/dist/ress.min.css';
+
+@forward '@fortawesome/fontawesome-free/css/solid.min.css';
+@forward '@fortawesome/fontawesome-free/css/regular.min.css';
+
 @forward 'mixins/banner';
 @forward 'global';
 @forward 'root';
@@ -13,6 +18,7 @@
 @forward 'buttons';
 @forward 'badge';
 @forward 'switch';
+@forward 'select';
 @forward 'tags';
 @forward 'fields';
 @forward 'link';

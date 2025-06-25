@@ -20,10 +20,12 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 import {
   faAnglesRight,
+  faArrowDown,
   faArrowLeft,
   faArrowRight,
   faArrowRightFromBracket,
   faArrowRotateLeft,
+  faArrowUp,
   faAt,
   faBell,
   faBellSlash,
@@ -56,10 +58,12 @@ import {
 function register() {
   library.add(
     faAnglesRight,
+    faArrowDown,
     faArrowLeft,
     faArrowRight,
     faArrowRightFromBracket,
     faArrowRotateLeft,
+    faArrowUp,
     faAt,
     faBell,
     faBellSlash,
