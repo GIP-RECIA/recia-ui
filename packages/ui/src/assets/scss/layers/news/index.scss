@@ -1,0 +1,70 @@
+@use 'sass:map';
+@use '../../recia-style' as *;
+@use 'carousel';
+@use 'news';
+
+.news-layout {
+  > header {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    margin-bottom: 24px;
+
+    > h2 {
+      margin-bottom: 0;
+    }
+
+    > a {
+      display: none
+    }
+  }
+
+  > div > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-weight: normal;
+    line-height: 150%;
+  }
+
+  > footer {
+    display: flex;
+    margin-top: 24px;
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > header > a {
+      display: inline-flex;
+    }
+
+    > div > ul {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      margin-top: -1.25rem;
+      margin-bottom: -1.25rem;
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+
+      > li {
+        display: revert !important;
+        flex: 0 0 292px;
+
+        > .news {
+          height: 175px;
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px dotted var(--#{$prefix}primary);
+      }
+    }
+
+    > footer {
+      display: none;
+    }
+  }
+}

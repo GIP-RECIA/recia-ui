@@ -1,0 +1,75 @@
+@use 'sass:map';
+@use '../../recia-style' as *;
+
+.news {
+  display: flex;
+  width: 100%;
+  height: 140px;
+  text-align: left;
+  border-radius: 10px;
+  background-color: var(--#{$prefix}body-bg);
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+  overflow: hidden;
+  transition:
+    outline .15s ease-out,
+    box-shadow .15s ease-out;
+
+  &-image {
+    flex: 0 0 92px;
+    overflow: hidden;
+
+    > img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      transition: transform .15s ease-out;
+    }
+  }
+
+  &-content {
+    margin: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > header {
+      display: flex;
+      flex-direction: column;
+
+      > h3 {
+        transition: color .15s ease-out;
+      }
+
+      > .context {
+        order: -1;
+        font-weight: 500;
+        color: var(--#{$prefix}basic-black);
+        opacity: .5;
+        margin-bottom: 4px;
+      }
+    }
+
+    > p {
+      line-height: 130%;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    outline: 2px solid var(--#{$prefix}primary);
+    box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+
+    > .news {
+      &-image > img {
+        transform: scale(1.4);
+      }
+
+      &-content > header > h3 {
+        color: var(--#{$prefix}primary);
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    height: 175px;
+  }
+}

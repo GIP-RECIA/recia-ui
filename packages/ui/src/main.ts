@@ -334,7 +334,7 @@ themeButton.addEventListener('click', () => switchTheme())
 const dupNews = document.createElement('button')
 dupNews.textContent = 'Actualités x2'
 dupNews.style = buttonStyle
-dupNews.addEventListener('click', () => duplicate('ul.news-tiles'))
+dupNews.addEventListener('click', () => duplicate('ul.carousel-container'))
 
 const dupSuggest = document.createElement('button')
 dupSuggest.textContent = 'Suggestions x2'
