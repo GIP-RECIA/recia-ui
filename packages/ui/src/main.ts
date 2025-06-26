@@ -25,7 +25,7 @@ register()
 
 function toggleListener(elementSelector: string, menuSelector: string) {
   document.querySelectorAll<HTMLElement>(elementSelector).forEach((element) => {
-    const button = element.querySelector<HTMLButtonElement>('button')
+    const button = element.querySelector<HTMLButtonElement>('button[aria-controls]')
 
     let isExpended = false
 
@@ -260,6 +260,13 @@ servicesButton?.addEventListener('click', () => toggleServices())
  */
 
 toggleListener('.widget-tile', '.widget-menu')
+
+const widgetSection = document.querySelector<HTMLElement>('section.widget')
+widgetSection?.querySelector<HTMLButtonElement>('button')?.addEventListener('click', () => {
+  widgetSection.querySelectorAll('.actions').forEach((action) => {
+    action.classList.toggle('disabled')
+  })
+})
 
 /**
  * Filters

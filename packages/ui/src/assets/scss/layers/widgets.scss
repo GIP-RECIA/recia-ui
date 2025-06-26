@@ -3,6 +3,7 @@
 
 .widget {
   > header {
+    display: flex;
     margin-bottom: 24px;
 
     > h2 {
@@ -16,16 +17,18 @@
     gap: 8px;
 
     > .widget-tile {
+      position: relative;
       border: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
-      overflow: hidden;
       height: 100%;
 
-      &:hover,
-      &:has(:focus-visible) {
-        outline: 2px solid var(--#{$prefix}primary);
-        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+      &:first-child > .actions > .action-back {
+        display: none;
+      }
+
+      &:last-child > .actions > .action-next {
+        display: none;
       }
 
       > header {
@@ -183,6 +186,20 @@
           > button {
             margin-top: 24px;
           }
+        }
+      }
+
+      &:hover,
+      &:has(:focus-visible) {
+        outline: 2px solid var(--#{$prefix}primary);
+        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+      }
+
+      &:has(.actions:not(.disabled)) {
+        &:hover,
+        &:has(:focus-visible) {
+          outline: none;
+          box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
         }
       }
     }
