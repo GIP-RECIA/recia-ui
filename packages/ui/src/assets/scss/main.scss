@@ -2,17 +2,16 @@
 
 @use 'recia-style' as *;
 
-@use 'layers/header';
 @use 'layers/actions';
 @use 'layers/alert';
 @use 'layers/bottom-sheet';
 @use 'layers/discover';
 @use 'layers/dropdown-favorites';
 @use 'layers/dropdown-info';
-@use 'layers/eyebrow';
 @use 'layers/favorite';
 @use 'layers/filters';
 @use 'layers/footer';
+@use 'layers/header';
 @use 'layers/info-etab';
 @use 'layers/login';
 @use 'layers/news';
@@ -22,6 +21,7 @@
 @use 'layers/service';
 @use 'layers/suggestion';
 @use 'layers/tooltip';
+@use 'layers/user-menu';
 @use 'layers/wayf';
 @use 'layers/widgets';
 
