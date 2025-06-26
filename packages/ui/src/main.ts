@@ -259,9 +259,9 @@ servicesButton?.addEventListener('click', () => toggleServices())
  * Widgets
  */
 
-toggleListener('.widget-tile', '.widget-menu')
+toggleListener('.widget', '.menu')
 
-const widgetSection = document.querySelector<HTMLElement>('section.widget')
+const widgetSection = document.querySelector<HTMLElement>('section.widget-layout')
 widgetSection?.querySelector<HTMLButtonElement>('button')?.addEventListener('click', () => {
   widgetSection.querySelectorAll('.actions').forEach((action) => {
     action.classList.toggle('disabled')

@@ -1,0 +1,216 @@
+@use 'sass:map';
+@use '../../recia-style' as *;
+
+.widget {
+  position: relative;
+  border: 1px solid var(--#{$prefix}stroke);
+  border-radius: 10px;
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
+  height: 100%;
+
+  > header {
+    > div,
+    > button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      height: 60px;
+      width: 100%;
+      background-color: var(--#{$prefix}basic-grey);
+      padding: 16px 12px;
+      text-align: start;
+
+      > a,
+      & {
+        > .heading {
+          @include link-unstyled;
+
+          > h3 {
+            font-size: var(--#{$prefix}font-size-sm);
+            margin-bottom: 0;
+          }
+
+          > .heading-subtitle {
+            font-size: var(--#{$prefix}font-size-xxs);
+            color: var(--#{$prefix}basic-black-lighter);
+          }
+        }
+      }
+    }
+
+    > div {
+      display: none !important;
+
+      > a {
+        @include link-unstyled;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+
+        > .focus-indicator {
+          display: none;
+        }
+
+        &:hover,
+        &:focus-visible {
+          outline: none;
+
+          > .focus-indicator {
+            display: unset;
+            color: var(--#{$prefix}primary);
+          }
+
+          > .heading > h3 {
+            color: var(--#{$prefix}primary);
+          }
+        }
+      }
+    }
+
+    > button {
+      > .folded-indicator {
+        font-size: 16px;
+        margin: 4px;
+        color: var(--#{$prefix}basic-black);
+        transition: rotate .2s ease-in-out;
+      }
+
+      &:hover,
+      &:focus-visible {
+        outline: none;
+
+        > .heading > h3 {
+          color: var(--#{$prefix}primary);
+        }
+      }
+    }
+  }
+
+  > .menu {
+    > * {
+      height: 40px * 3;
+    }
+
+    > ul {
+      @include list-unstyled;
+      background-color: var(--#{$prefix}body-bg);
+      overflow-y: auto;
+      outline: none;
+
+      > li {
+        > a,
+        > button {
+          @include link-unstyled;
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px 12px;
+          width: 100%;
+          height: 40px;
+
+          > .icon {
+            flex-shrink: 0;
+            height: 20px;
+            width: 20px;
+          }
+
+          > span {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          &:hover,
+          &:focus-visible {
+            outline: none;
+            color: var(--#{$prefix}primary);
+            background-color: var(--#{$prefix}btn-secondary-hover);
+          }
+        }
+      }
+    }
+
+    > .empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 12px;
+
+      > .empty {
+        &-icon {
+          font-size: 38px;
+          margin-bottom: 14px;
+          opacity: .1;
+        }
+
+        &-text {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          font-size: var(--#{$prefix}font-size-xs);
+
+          > .large {
+            font-size: var(--#{$prefix}font-size-sm);
+            font-weight: bold;
+            letter-spacing: -0.15px;
+          }
+        }
+      }
+
+      > a,
+      > button {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  &:hover,
+  &:has(:focus-visible) {
+    outline: 2px solid var(--#{$prefix}primary);
+    box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+  }
+
+  &:has(.actions:not(.disabled)) {
+    &:hover,
+    &:has(:focus-visible) {
+      outline: none;
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+
+    > header {
+      > div {
+        display: inline-flex !important;
+        height: 58px;
+      }
+
+      > button {
+        display: none;
+      }
+    }
+
+    > .menu {
+      display: block !important;
+
+      > * {
+        height: 50px * 3 + 2px;
+      }
+
+      > ul > li {
+        > a,
+        > button {
+          height: 50px;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--#{$prefix}stroke);
+        }
+      }
+    }
+  }
+}

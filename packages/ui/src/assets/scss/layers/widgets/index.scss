@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use '../../recia-style' as *;
+@use 'widget';
+
+.widget-layout {
+  > header {
+    display: flex;
+    margin-bottom: 24px;
+
+    > h2 {
+      margin-bottom: 0;
+    }
+  }
+
+  > ul {
+    @include list-unstyled;
+    display: grid;
+    gap: 8px;
+
+    > li {
+      &:first-child > .actions > .action-back {
+        display: none;
+      }
+
+      &:last-child > .actions > .action-next {
+        display: none;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > ul {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 16px;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    > ul {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+  }
+}
