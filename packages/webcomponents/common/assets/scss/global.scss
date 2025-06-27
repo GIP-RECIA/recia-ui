@@ -1,12 +1,14 @@
 @use 'ress/dist/ress.min.css';
 
 @forward '../../../../ui/src/assets/scss/mixins/banner';
-@forward '../../../../ui/src/assets/scss/global';
-
-@forward '../../../../ui/src/assets/scss/typo';
 @forward '../../../../ui/src/assets/scss/variables';
-
+@forward '../../../../ui/src/assets/scss/typo';
 @forward '../../../../ui/src/assets/scss/mixins';
 @forward '../../../../ui/src/assets/scss/functions';
+@forward '../../../../ui/src/assets/scss/global';
 
-@forward '../../../../ui/src/assets/scss/link';
+@forward '../../../../ui/src/assets/scss/containers';
+@forward '../../../../ui/src/assets/scss/buttons';
+@forward '../../../../ui/src/assets/scss/badge';
+@forward '../../../../ui/src/assets/scss/select';
+@forward '../../../../ui/src/assets/scss/tags';

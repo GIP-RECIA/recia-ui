@@ -4,15 +4,13 @@
 @forward '@fortawesome/fontawesome-free/css/regular.min.css';
 
 @forward 'mixins/banner';
-@forward 'global';
-@forward 'root';
-
+@forward 'variables';
 @forward 'fonts';
 @forward 'typo';
-@forward 'variables';
-
+@forward 'root';
 @forward 'mixins';
 @forward 'functions';
+@forward 'global';
 
 @forward 'containers';
 @forward 'buttons';
