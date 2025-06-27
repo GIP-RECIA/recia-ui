@@ -151,7 +151,7 @@ function toggleDropdownInfo(): void {
 dropdownInfoButton?.addEventListener('click', () => toggleDropdownInfo())
 
 // Eyebrow
-const eyebrow = document.querySelector<HTMLElement>('.eyebrow')
+const eyebrow = document.querySelector<HTMLElement>('.user-menu')
 const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('button')
 
 let isEyebrowExpended = false
