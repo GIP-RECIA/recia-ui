@@ -1,11 +1,11 @@
 @use 'sass:map';
 @use 'sass:math';
-@use '../recia-style' as *;
-@use 'header/variables' as *;
+@use '../../recia-style' as *;
+@use '../header/variables' as *;
 
 $service-width: 150px;
 
-.suggestion {
+.suggestions-layout {
   > header {
     margin-bottom: 24px;
 
@@ -18,7 +18,7 @@ $service-width: 150px;
     }
   }
 
-  > .suggestion-tiles {
+  > ul {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
@@ -44,7 +44,7 @@ $service-width: 150px;
       }
     }
 
-    > .suggestion-tiles {
+    > ul {
       display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;

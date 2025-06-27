@@ -334,12 +334,12 @@ themeButton.addEventListener('click', () => switchTheme())
 const dupNews = document.createElement('button')
 dupNews.textContent = 'Actualités x2'
 dupNews.style = buttonStyle
-dupNews.addEventListener('click', () => duplicate('ul.carousel-container'))
+dupNews.addEventListener('click', () => duplicate('.news-layout > div > ul'))
 
 const dupSuggest = document.createElement('button')
 dupSuggest.textContent = 'Suggestions x2'
 dupSuggest.style = buttonStyle
-dupSuggest.addEventListener('click', () => duplicate('ul.suggestion-tiles'))
+dupSuggest.addEventListener('click', () => duplicate('.suggestions-layout > ul'))
 
 devContainer.appendChild(themeButton)
 devContainer.appendChild(dupNews)
