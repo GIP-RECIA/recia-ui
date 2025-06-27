@@ -7,7 +7,7 @@
   color: var(--#{$prefix}body);
   overflow-y: auto;
   background-color: var(--#{$prefix}body-bg);
-  margin-left: 72px; // TODO: drawer width if visible
+  transition: margin-left .3s ease-in-out;
 
   > div {
     margin-top: 32px;
