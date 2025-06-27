@@ -60,6 +60,8 @@
 
       &:focus-visible {
         outline: 2px dotted var(--#{$prefix}primary);
+        outline-offset: 4px;
+        border-radius: 10px;
       }
     }
 
