@@ -272,7 +272,7 @@ widgetSection?.querySelector<HTMLButtonElement>('button')?.addEventListener('cli
  * Filters
  */
 
-toggleListener('.filters', '.filters-menu')
+toggleListener('.filters', '.menu')
 
 /**
  * Services

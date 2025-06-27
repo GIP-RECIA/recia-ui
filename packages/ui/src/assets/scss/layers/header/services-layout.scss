@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 
-#services-layout {
+.services-layout {
   position: fixed;
   inset: $header-height + 2 * 16 0 0 0;
   color: var(--#{$prefix}body);
@@ -21,7 +21,7 @@
       column-gap: 15px
     }
 
-    > .service-tiles {
+    > ul {
       @include unstyled-list;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
