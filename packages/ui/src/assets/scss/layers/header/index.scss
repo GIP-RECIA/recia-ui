@@ -2,7 +2,10 @@
 @use 'variables' as *;
 @use 'content';
 @use 'drawer';
+@use 'dropdown-favorites';
+@use 'info-etab';
 @use 'search-container';
+@use 'search';
 @use 'services-layout';
 
 .extended-uportal-header {
