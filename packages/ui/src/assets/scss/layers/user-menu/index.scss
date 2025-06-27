@@ -5,17 +5,7 @@
   position: relative;
   width: fit-content;
 
-  & > &-notification {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;
-    background-color: var(--#{$prefix}primary);
-  }
-
-  & > &-button {
+  > button {
     display: flex;
     align-items: center;
     column-gap: 12px;
@@ -70,7 +60,7 @@
     }
   }
 
-  & > &-menu {
+  > ul {
     @include unstyled-list;
     position: absolute;
     top: calc(100% + 6px);
@@ -129,11 +119,11 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    & > &-notification {
+    > .notification-dot {
       display: none;
     }
 
-    & > &-button {
+    > button {
       > .info {
         display: flex;
       }
@@ -143,7 +133,7 @@
       }
     }
 
-    & > &-menu > li {
+    > ul > li {
       &:has(> button#notification),
       &:has(> button#info-etab) {
         display: none;

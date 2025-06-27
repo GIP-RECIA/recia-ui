@@ -152,7 +152,7 @@ dropdownInfoButton?.addEventListener('click', () => toggleDropdownInfo())
 
 // Eyebrow
 const eyebrow = document.querySelector<HTMLElement>('.eyebrow')
-const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('button.eyebrow-button')
+const eyebrowButton = eyebrow?.querySelector<HTMLButtonElement>('button')
 
 let isEyebrowExpended = false
 
@@ -163,7 +163,7 @@ function toggleEyebrow(): void {
   eyebrowButton.ariaExpanded = isEyebrowExpended.toString()
   const buttonIcon = eyebrowButton.querySelector<HTMLElement>('svg')
   buttonIcon && (buttonIcon.style.rotate = isEyebrowExpended ? '180deg' : '')
-  const eyebrowMenu = eyebrow.querySelector<HTMLElement>('#eyebrow-menu')
+  const eyebrowMenu = eyebrow.querySelector<HTMLElement>('ul')
   eyebrowMenu && (eyebrowMenu.style.display = isEyebrowExpended ? '' : 'none')
 }
 
