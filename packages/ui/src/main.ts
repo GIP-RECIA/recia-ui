@@ -256,6 +256,27 @@ function toggleServices() {
 servicesButton?.addEventListener('click', () => toggleServices())
 
 /**
+ * Notifications drawer
+ */
+const notificationButton = extendedUportalHeader?.querySelector<HTMLButtonElement>('.notification > button[aria-controls]')
+const notificationDrawer = document.querySelector<HTMLElement>('#notification-drawer')
+
+let isNotificationDrawer = false
+
+function toggleNotifications() {
+  isNotificationDrawer = !isNotificationDrawer
+  notificationButton!.ariaExpanded = isNotificationDrawer.toString()
+  notificationDrawer?.classList.toggle('expended')
+}
+
+eyebrow?.querySelector<HTMLButtonElement>('#notification')?.addEventListener('click', () => {
+  toggleEyebrow()
+  toggleNotifications()
+})
+notificationDrawer?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => toggleNotifications())
+notificationButton?.addEventListener('click', () => toggleNotifications())
+
+/**
  * Widgets
  */
 
