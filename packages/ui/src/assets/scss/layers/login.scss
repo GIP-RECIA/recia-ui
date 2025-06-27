@@ -21,7 +21,7 @@
       row-gap: 24px;
 
       > a#password-forgotten {
-        @include link-unstyled;
+        @include unstyled-link;
         align-self: flex-end;
         width: fit-content;
         color: var(--#{$prefix}primary);

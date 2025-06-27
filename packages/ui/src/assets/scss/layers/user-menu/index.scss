@@ -71,7 +71,7 @@
   }
 
   & > &-menu {
-    @include list-unstyled;
+    @include unstyled-list;
     position: absolute;
     top: calc(100% + 6px);
     right: 0;
@@ -86,7 +86,7 @@
     > li {
       > a,
       > button {
-        @include link-unstyled;
+        @include unstyled-link;
         display: inline-flex;
         align-items: center;
         justify-content: space-between;

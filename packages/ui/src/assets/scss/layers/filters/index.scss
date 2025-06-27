@@ -42,7 +42,7 @@
   }
 
   > ul {
-    @include list-unstyled;
+    @include unstyled-list;
     display: flex;
     flex-wrap: wrap;
     gap: 14px 16px;
@@ -74,7 +74,7 @@
 
       > ul {
         position: relative;
-        @include list-unstyled;
+        @include unstyled-list;
         display: flex;
         flex-wrap: wrap;
         gap: 14px 16px;

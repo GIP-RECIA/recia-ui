@@ -59,7 +59,7 @@
   }
 
   &-results {
-    @include list-unstyled;
+    @include unstyled-list;
     position: absolute;
     z-index: 1055;
     top: calc(100% + 8px);
@@ -86,13 +86,13 @@
       }
 
       > ul {
-        @include list-unstyled;
+        @include unstyled-list;
         display: flex;
         flex-direction: column;
         row-gap: 8px;
 
         > li > a {
-          @include link-unstyled;
+          @include unstyled-link;
           display: block;
           background-color: #F8F8F8;
           border-radius: 4px;

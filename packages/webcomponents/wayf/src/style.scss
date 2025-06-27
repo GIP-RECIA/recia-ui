@@ -3,7 +3,7 @@
 
 .wayf {
   &-tiles {
-    @include list-unstyled;
+    @include unstyled-list;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     grid-auto-rows: 1fr;
@@ -14,7 +14,7 @@
     letter-spacing: -.25px;
 
     > li > a {
-      @include link-unstyled;
+      @include unstyled-link;
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);

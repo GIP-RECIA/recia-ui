@@ -72,7 +72,7 @@
 
   & > &-name {
     flex: 0 0 auto;
-    @include link-unstyled;
+    @include unstyled-link;
     order: 2;
 
     > h3 {

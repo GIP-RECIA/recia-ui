@@ -4,7 +4,7 @@
 @use 'functions' as *;
 
 ul.switch {
-  @include list-unstyled;
+  @include unstyled-list;
   display: flex;
   column-gap: 8px;
   background-color: HEXToRGBA(var(--#{$prefix}btn-primary-bg), .05);

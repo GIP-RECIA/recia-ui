@@ -80,7 +80,7 @@
 
       &.tutorials {
         > ul {
-          @include list-unstyled;
+          @include unstyled-list;
 
           > li > a {
             @include list-link;

@@ -1,7 +1,7 @@
 @use '../../common/assets/scss/global' as *;
 
 .btn {
-  @include link-unstyled;
+  @include unstyled-link;
   display: inline-flex;
   align-items: center;
   justify-content: center;

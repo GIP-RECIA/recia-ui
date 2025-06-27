@@ -2,7 +2,7 @@
 @use '../../recia-style' as *;
 
 .wayf-profile {
-  @include link-unstyled;
+  @include unstyled-link;
   outline: 1px solid var(--#{$prefix}stroke);
   border-radius: 10px;
   background-color: var(--#{$prefix}body-bg);

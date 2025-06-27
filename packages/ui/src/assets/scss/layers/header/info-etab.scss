@@ -84,7 +84,7 @@
         margin-right: 8px;
 
         > ul {
-          @include list-unstyled;
+          @include unstyled-list;
           font-size: var(--#{$prefix}font-size-sm);
           font-weight: 500;
 
@@ -100,7 +100,7 @@
             }
 
             > a {
-              @include link-unstyled;
+              @include unstyled-link;
               @include list-link;
             }
 

@@ -19,7 +19,7 @@
   > header {
     > div,
     > button {
-      @include link-unstyled;
+      @include unstyled-link;
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
@@ -31,7 +31,7 @@
       text-align: start;
 
       > a {
-        @include link-unstyled;
+        @include unstyled-link;
         display: inline-flex;
         align-items: center;
         gap: 4px;
@@ -98,7 +98,7 @@
     }
 
     > ul {
-      @include list-unstyled;
+      @include unstyled-list;
       background-color: var(--#{$prefix}body-bg);
       overflow-y: auto;
       outline: none;
@@ -106,7 +106,7 @@
       > li {
         > a,
         > button {
-          @include link-unstyled;
+          @include unstyled-link;
           display: inline-flex;
           align-items: center;
           gap: 12px;

@@ -15,7 +15,7 @@
   }
 
   > ul  {
-    @include list-unstyled;
+    @include unstyled-list;
 
     > li {
       > header {
@@ -29,7 +29,7 @@
       }
 
       > ul  {
-        @include list-unstyled;
+        @include unstyled-list;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
         grid-auto-rows: 1fr;

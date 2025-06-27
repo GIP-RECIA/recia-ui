@@ -24,7 +24,7 @@
 
   & > &-name {
     flex: 0 0 auto;
-    @include link-unstyled;
+    @include unstyled-link;
 
     > span {
       font-size: var(--#{$prefix}font-size-xs);

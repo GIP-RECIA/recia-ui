@@ -1,6 +1,6 @@
 @use '../variables' as *;
 
-@mixin link-unstyled {
+@mixin unstyled-link {
   color: inherit;
   text-decoration: none;
 }

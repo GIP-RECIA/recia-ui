@@ -22,14 +22,14 @@
     }
 
     > .service-tiles {
-      @include list-unstyled;
+      @include unstyled-list;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
       grid-auto-rows: 1fr;
       gap: 16px;
 
       > li > a {
-        @include link-unstyled;
+        @include unstyled-link;
       }
     }
   }

@@ -13,7 +13,7 @@
   }
 
   > ul {
-    @include list-unstyled;
+    @include unstyled-list;
     display: grid;
     gap: 8px;
 

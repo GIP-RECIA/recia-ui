@@ -15,7 +15,7 @@
 
   &-section {
     & > &-nav {
-      @include list-unstyled;
+      @include unstyled-list;
       margin-bottom: 24px;
       display: flex;
       overflow-x: auto;
@@ -46,14 +46,14 @@
     }
 
     & > &-tiles {
-      @include list-unstyled;
+      @include unstyled-list;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
       margin-bottom: 16px;
 
       > li > a {
-        @include link-unstyled;
+        @include unstyled-link;
         outline: 1px solid var(--#{$prefix}stroke);
         border-radius: 10px;
         background-color: var(--#{$prefix}body-bg);
