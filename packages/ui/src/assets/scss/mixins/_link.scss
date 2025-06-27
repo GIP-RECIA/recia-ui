@@ -1,4 +1,35 @@
+@use '../variables' as *;
+
 @mixin link-unstyled {
   color: inherit;
   text-decoration: none;
+}
+
+@mixin list-link {
+  &:hover,
+  &:focus-visible {
+    color: var(--#{$prefix}system-blue);
+  }
+
+  &:focus-visible {
+    outline: 2px dotted var(--#{$prefix}system-blue);
+    padding: 4px 8px;
+    margin: -4px -8px;
+    border-radius: 50px;
+  }
+}
+
+@mixin text-link {
+  color: inherit;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: var(--#{$prefix}system-blue);
+  }
+
+  &:focus-visible {
+    font-weight: bold;
+    text-decoration: underline 2px;
+  }
 }

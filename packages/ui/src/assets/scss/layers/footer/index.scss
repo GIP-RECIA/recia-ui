@@ -29,7 +29,7 @@
 
           > li {
             > a {
-              @extend %list-link;
+              @include list-link;
               color: var(--#{$prefix}system-blue);
             }
           }

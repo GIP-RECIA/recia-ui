@@ -73,7 +73,7 @@
           line-height: 150%;
 
           a {
-            @extend %text-link;
+            @include text-link;
           }
         }
       }
@@ -83,7 +83,7 @@
           @include list-unstyled;
 
           > li > a {
-            @extend %list-link;
+            @include list-link;
             color: var(--#{$prefix}system-blue);
             line-height: 250%;
           }
