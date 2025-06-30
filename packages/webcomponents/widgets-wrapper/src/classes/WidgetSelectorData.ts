@@ -14,26 +14,16 @@
  * limitations under the License.
  */
 
-export class WidgetData {
-  constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string, target: string, rel: string) {
+export class WidgetSelectorData {
+  constructor(name: string, key: string, required: boolean, favorite: boolean) {
     this.name = name
-    this.subtitle = subtitle
-    this.link = link
-    this.emptyDiscover = emptyDiscover
-    this.emptyText = emptyText
-    this.items = items
-    this.target = target
-    this.rel = rel
+    this.key = key
+    this.required = required
+    this.selected = favorite
   }
 
   name: string
-  subtitle: string
-  link: string
-  emptyText: string
-  emptyDiscover: boolean
-  items: string
-  target: string
-  rel: string
-  favorite?: boolean // temp for dev
-  required?: boolean // temp for dev
+  key: string
+  required: boolean
+  selected: boolean
 }
