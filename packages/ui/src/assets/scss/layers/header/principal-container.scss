@@ -30,7 +30,7 @@
 
     > .dropdown-info {
       display: none;
-      transition: margin-left .3s ease-in-out;
+      transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -73,7 +73,7 @@
     > .start {
       > span {
         width: $drawer-expended-width - $drawer-width - 2 * 16;
-        transition: width .3s ease-in-out;
+        transition: width .15s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       > .dropdown-info {
