@@ -76,6 +76,14 @@ export class ReciaWidget extends LitElement {
   @property({ type: Boolean, attribute: 'empty-discover' })
   emptyDiscover = false
 
+  // temp for dev
+  @property({ type: Boolean, attribute: 'favorite' })
+  favorite = false
+
+  // temp for dev
+  @property({ type: Boolean, attribute: 'required' })
+  required = false
+
   @state()
   isExpanded = false
 
@@ -113,8 +121,9 @@ export class ReciaWidget extends LitElement {
   }
 
   headingTemplate(): TemplateResult {
+    // temp for dev
     return html`
-      <h3>${this.name}</h3>
+      <h3>${this.name}${this.favorite ? ' [FAV]' : ''}${this.required ? ' [REQ]' : ''}</h3>
       ${
         this.subtitle && this.subtitle.trim().length > 0
           ? html`<span class="heading-subtitle">${this.subtitle}</span>`
