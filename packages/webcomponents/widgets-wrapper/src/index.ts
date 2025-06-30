@@ -20,7 +20,6 @@ import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { isArray } from 'lodash-es'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -54,39 +53,39 @@ export class ReciaWidgetsWrapper extends LitElement {
 
       // get all widgets keys known/accepted by the adapter
       this.allExistingKeys = window.WidgetAdapter.getKeys()
-
-      let userFavoriteWidgetKeys: Array<string> = await this.getUserFavoriteWidgets()
-
-      const userHasFavorties = userFavoriteWidgetKeys !== undefined && isArray(userFavoriteWidgetKeys) && userFavoriteWidgetKeys.length > 0
-
       const maxWidgets: number = import.meta.env.VITE_WIDGET_COUNT
 
-      if (userHasFavorties) {
-        const favInitialLenght: number = userFavoriteWidgetKeys.length
-        userFavoriteWidgetKeys = userFavoriteWidgetKeys.filter(x => this.allExistingKeys.includes(x))
+      this.filteredRequiredWidgetsKeys = this.widgetKeysString.split(';').filter(x => this.allExistingKeys.includes(x))
+      this.filteredUserFavoriteWidgetsKeys = await this.getUserFavoriteWidgets()
+      const intersection = this.intersect(this.filteredUserFavoriteWidgetsKeys, this.filteredRequiredWidgetsKeys)
+      // if some required are not in the favorite
+      if (intersection.length < this.filteredRequiredWidgetsKeys.length) {
+        const favNotInIntersect = this.filteredUserFavoriteWidgetsKeys.length - intersection.length
+        const reqNotInIntersect = this.filteredRequiredWidgetsKeys.length - intersection.length
 
-        // if user has more favorites than display max reduce favorites to max
-        if (userFavoriteWidgetKeys.length > maxWidgets) {
-          userFavoriteWidgetKeys = userFavoriteWidgetKeys.slice(0, maxWidgets)
+        if (favNotInIntersect + reqNotInIntersect + intersection.length <= maxWidgets) {
+          // order of concat preserves order of favorites
+          this.widgetToDisplayKeyArray = [...new Set(intersection.concat(this.filteredUserFavoriteWidgetsKeys).concat(this.filteredRequiredWidgetsKeys))]
         }
-
-        // if user favorites has been edited by filter and/or slice, update it
-        if (userFavoriteWidgetKeys.length !== favInitialLenght) {
-          this.setUserFavoriteWidgets(userFavoriteWidgetKeys)
+        else {
+          // concat required before favorites
+          this.widgetToDisplayKeyArray = [...new Set(intersection.concat(this.filteredRequiredWidgetsKeys).concat(this.filteredUserFavoriteWidgetsKeys))].slice(0, maxWidgets)
         }
-
-        this.widgetToDisplayKeyArray = userFavoriteWidgetKeys.filter(x => this.allExistingKeys.includes(x))
       }
-      else {
-        // check that keys given in property are in the know keys, then remove keys exceding maximum
-        this.widgetToDisplayKeyArray = this.widgetKeysString.split(';').filter(x => this.allExistingKeys.includes(x)).slice(0, maxWidgets)
-      }
-
-      const soffit: string = await getToken(import.meta.env.VITE_USER_RIGHTS_URI)
+      this.filteredRequiredWidgetsKeys = this.intersect(this.filteredRequiredWidgetsKeys, this.widgetToDisplayKeyArray)
+      this.filteredUserFavoriteWidgetsKeys = this.widgetToDisplayKeyArray
+      await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+      this.soffit = await getToken(import.meta.env.VITE_USER_RIGHTS_URI)
       for (const value of this.widgetToDisplayKeyArray) {
-        this.buildWidget(value, soffit)
+        this.buildWidget(value, this.soffit)
       }
     })
+  }
+
+  soffit: string = ''
+
+  intersect<T>(a: Array<T>, b: Array<T>): Array<T> {
+    return a.filter(value => b.includes(value))
   }
 
   allExistingKeys: Array<string> = []
@@ -124,15 +123,22 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   async resetUserFavoriteWidgets() {
-    await this.setUserFavoriteWidgets([])
+    // temp for dev, must be empty
+    await this.setUserFavoriteWidgets(['Documents', 'Mediacentre'])
   }
 
   @property({ type: String, attribute: 'widget-keys' })
   widgetKeysString = ''
 
   widgetToDisplayKeyArray: Array<string> = []
+  filteredRequiredWidgetsKeys: Array<string> = []
+  filteredUserFavoriteWidgetsKeys: Array<string> = []
 
   async buildWidget(key: string, soffit: string) {
+    // don't rebuild widget if already in map
+    if (this.widgetDataMap.has(key)) {
+      return
+    }
     const itemsAsString: string = await this.getWidgetData(key, soffit)
     const widgetData: WidgetData = JSON.parse(itemsAsString)
     this.widgetDataMap.set(key, widgetData)
