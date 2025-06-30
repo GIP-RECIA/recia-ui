@@ -7,7 +7,7 @@
   & > &-button {
     &.active {
       position: relative;
-      z-index: 1055;
+      z-index: 1056;
     }
 
     &:not(.active) {
@@ -23,7 +23,7 @@
   & > &-mask {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 1050;
     background-color: rgba(#000000, .25);
   }
 
@@ -33,7 +33,7 @@
     border-radius: 10px;
     box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
     overflow: hidden;
-    z-index: 1050;
+    z-index: 1055;
     padding: 32px;
 
     &.top {
