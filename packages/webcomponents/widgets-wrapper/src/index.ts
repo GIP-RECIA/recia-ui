@@ -22,6 +22,7 @@ import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
+import { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -79,6 +80,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       for (const value of this.widgetToDisplayKeyArray) {
         this.buildWidget(value, this.soffit)
       }
+      await this.buildWidgetSelector()
     })
   }
 
@@ -122,6 +124,42 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
+  beginEdit(): void {
+    this.allWidgetsCopy = JSON.parse(JSON.stringify(this.allWidgets))
+    this.editing = true
+    this.requestUpdate()
+  }
+
+  cancelEdit(): void {
+    this.allWidgetsCopy = JSON.parse(JSON.stringify(this.allWidgets))
+    this.editing = false
+    this.requestUpdate()
+  }
+
+  saveEdit(): void {
+    this.allWidgets = JSON.parse(JSON.stringify(this.allWidgetsCopy))
+    this.widgetToDisplayKeyArray = this.allWidgets.filter(x => x.selected).map(x => x.key)
+    this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+    this.editing = false
+    this.requestUpdate()
+    for (const value of this.widgetToDisplayKeyArray) {
+      this.buildWidget(value, this.soffit)
+    }
+  }
+
+  allWidgets: Array<WidgetSelectorData> = []
+  allWidgetsCopy: Array<WidgetSelectorData> = []
+
+  async buildWidgetSelector() {
+    const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames()
+    for (const val of names) {
+      const widgetSelectorData: WidgetSelectorData = new WidgetSelectorData(val.name, val.key, this.filteredRequiredWidgetsKeys.includes(val.key), this.filteredUserFavoriteWidgetsKeys.includes(val.key))
+      this.allWidgets.push(widgetSelectorData)
+    }
+  }
+
+  editing: boolean = false
+
   async resetUserFavoriteWidgets() {
     // temp for dev, must be empty
     await this.setUserFavoriteWidgets(['Documents', 'Mediacentre'])
@@ -141,6 +179,16 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
     const itemsAsString: string = await this.getWidgetData(key, soffit)
     const widgetData: WidgetData = JSON.parse(itemsAsString)
+
+    // values used for display in dev env
+    if (import.meta.env.DEV) {
+      if (this.filteredRequiredWidgetsKeys.includes(key)) {
+        widgetData.required = true
+      }
+      if (this.filteredUserFavoriteWidgetsKeys.includes(key)) {
+        widgetData.favorite = true
+      }
+    }
     this.widgetDataMap.set(key, widgetData)
     this.requestUpdate()
   }
@@ -151,6 +199,34 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   @state()
   widgetDataMap: Map<string, WidgetData> = new Map()
+
+  // temp design for dev
+  getWidgetEditionMenuRender(): TemplateResult {
+    if (!this.editing) {
+      return html` <button @click="${this.beginEdit}">Editer</button>`
+    }
+
+    return html`
+    <p>${import.meta.env.VITE_WIDGET_COUNT}</p>
+    <ul>
+      ${this.allWidgetsCopy.map(wds =>
+        html`<li>${this.getSingleWidgetEditingRender(wds)}</li>`,
+      )}
+    </ul>
+    <button @click="${this.saveEdit}">Sauver</button>
+    <button @click="${this.cancelEdit}">Annuler</button>
+    `
+  }
+
+  // temp design for dev
+  getSingleWidgetEditingRender(wsd: WidgetSelectorData): TemplateResult {
+    return html`
+      <input type="checkbox" ?checked=${wsd.selected} ?disabled=${wsd.required} id="${wsd.key}" @click="${(e: Event) => { this.handleSelectionClick(e, wsd) }}" name="${wsd.key}" value="${wsd.selected}">
+      <label for="${wsd.key}"> ${wsd.name} ${wsd.required ? '[REQ]' : ''}</label><br>
+      <button @click="${() => { this.moveWidgetBack(wsd) }}" ?hidden="${this.allWidgetsCopy.indexOf(wsd) === 0}" >Précédent</button>
+      <button @click="${() => { this.moveWidgetForward(wsd) }}" ?hidden="${this.allWidgetsCopy.indexOf(wsd) === this.allWidgetsCopy.length - 1}">Suivant</button>
+      `
+  }
 
   getWidgetRender(key: string): TemplateResult {
     if (this.widgetDataMap.has(key)) {
@@ -164,6 +240,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         rel="${widgetData.rel}"
         empty-text="${widgetData.emptyText}"
         items=${widgetData.items}
+        ?required=${widgetData.required ?? false} //temp value for dev
+        ?favorite=${widgetData.favorite ?? false} //temp value for dev
         >
       </r-widget>
     `
@@ -200,24 +278,45 @@ export class ReciaWidgetsWrapper extends LitElement {
     return this.allExistingKeys.filter(x => !this.widgetToDisplayKeyArray.includes(x))
   }
 
-  moveWidgetBack(key: string): void {
-    const index = this.widgetToDisplayKeyArray.indexOf(key)
+  moveWidgetBack(wsd: WidgetSelectorData): void {
+    const index = this.allWidgetsCopy.indexOf(wsd)
     if (index === 0) {
       return
     }
     const indexOther = index - 1;
-    [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]] = [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]]
+    [this.allWidgetsCopy[indexOther], this.allWidgetsCopy[index]] = [this.allWidgetsCopy[index], this.allWidgetsCopy[indexOther]]
     this.requestUpdate()
   }
 
-  moveWidgetForward(key: string): void {
-    const index = this.widgetToDisplayKeyArray.indexOf(key)
-    if (index === this.widgetToDisplayKeyArray.length - 1) {
+  moveWidgetForward(wsd: WidgetSelectorData): void {
+    const index = this.allWidgetsCopy.indexOf(wsd)
+    if (index === this.allWidgetsCopy.length - 1) {
       return
     }
     const indexOther = index + 1;
-    [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]] = [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]]
+    [this.allWidgetsCopy[index], this.allWidgetsCopy[indexOther]] = [this.allWidgetsCopy[indexOther], this.allWidgetsCopy[index]]
     this.requestUpdate()
+  }
+
+  handleSelectionClick(e: Event, wsd: WidgetSelectorData): void {
+    if (wsd.selected) { // handle deselection attempt
+      if (wsd.required) {
+        e.stopPropagation()
+        e.preventDefault()
+      }
+      else {
+        wsd.selected = false
+      }
+    }
+    else { // handle selection attempt
+      if (this.allWidgetsCopy.filter(x => x.selected).length >= import.meta.env.VITE_WIDGET_COUNT) {
+        e.stopPropagation()
+        e.preventDefault()
+      }
+      else {
+        wsd.selected = true
+      }
+    }
   }
 
   render(): TemplateResult {
@@ -236,6 +335,13 @@ export class ReciaWidgetsWrapper extends LitElement {
           )}
         </ul>
       </div>
+    ${import.meta.env.DEV
+        ? html`
+      <div>
+        ${this.getWidgetEditionMenuRender()}
+      </div>`
+        : ''
+    }
     `
   }
 
