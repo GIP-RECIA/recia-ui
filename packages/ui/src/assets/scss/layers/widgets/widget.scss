@@ -20,6 +20,8 @@
       background-color: var(--#{$prefix}basic-grey);
       padding: 16px 12px;
       text-align: start;
+      overflow: hidden;
+      border-radius: 10px;
 
       > a,
       & {
@@ -41,6 +43,8 @@
 
     > div {
       display: none !important;
+      border-bottom-left-radius: unset;
+      border-bottom-right-radius: unset;
 
       > a {
         @include unstyled-link;
@@ -74,6 +78,11 @@
         margin: 4px;
         color: var(--#{$prefix}basic-black);
         transition: rotate .2s ease-in-out;
+      }
+
+      &[aria-expanded="true"] {
+        border-bottom-left-radius: unset;
+        border-bottom-right-radius: unset;
       }
 
       &:hover,
