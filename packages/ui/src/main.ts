@@ -128,7 +128,7 @@ bottomSheetFavorites?.querySelector<HTMLButtonElement>('.close')?.addEventListen
  * Extended Uportal Header
  */
 
-const extendedUportalHeader = document.querySelector<HTMLElement>('.extended-uportal-header')
+const extendedUportalHeader = document.querySelector<HTMLElement>('.header')
 
 // Dropdown info
 const dropdownInfo = document.querySelector<HTMLElement>('.dropdown-info')
@@ -191,7 +191,7 @@ extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-b
 search?.querySelector<HTMLButtonElement>('.search-field > .end > button')?.addEventListener('click', () => toggleSearch())
 
 // Drawer
-const drawer = extendedUportalHeader?.querySelector<HTMLElement>('.drawer')
+const drawer = extendedUportalHeader?.querySelector<HTMLElement>('.navigation-drawer')
 
 let isDrawerExpended = false
 

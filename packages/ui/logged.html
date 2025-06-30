@@ -9,14 +9,14 @@
 
 <body class="dev-playground">
   <header>
-    <div class="extended-uportal-header">
+    <div class="header">
       <button class="drawer-toggle" aria-controls="navigation-drawer" aria-label="Tiroir de navigation">
         <svg aria-hidden="true">
           <use xlink:href="/spritemap.svg#NOC-simple"></use>
         </svg>
         <span>Menu</span>
       </button>
-      <div id="navigation-drawer" class="drawer">
+      <div id="navigation-drawer" class="navigation-drawer">
         <div>
           <div class="button-placeholder"></div>
           <span>Lycée international de Palaiseau</span>
@@ -302,196 +302,198 @@
           </li>
         </ul>
       </div>
-      <div class="content">
-        <div class="start">
-          <div class="button-placeholder"></div>
-          <span>Lycée international de Palaiseau</span>
-          <div class="dropdown-info">
-            <button class="btn-secondary-toggle circle dropdown-info-button" aria-expanded="false" aria-controls="dropdown-info-menu" aria-label="Menu fiche établissement">
-              <i class="fa-solid fa-circle-info"></i>
-            </button>
-            <div class="tooltip bottom right">
-              <div class="angle"></div>
-              <span>Fiche établissement</span>
-            </div>
-            <div class="dropdown-info-mask" style="display: none;"></div>
-            <div id="dropdown-info-menu" class="dropdown-info-menu top right no-padding" style="display: none;">
-              <div class="info-etab">
-                <div class="image-container">
-                  <img src="https://placehold.co/600x800" alt="">
-                </div>
-                <div class="content-container">
-                  <header>
-                    <svg aria-hidden="true">
-                      <use xlink:href="/svg/NOC-simple.svg#simple"></use>
-                    </svg>
-                    <div class="heading">
-                      <span class="heading-etab">Lycée international de Palaiseau</span>
-                      <span class="heading-acad">Académie Orléans-Tours</span>
+      <div class="topbar">
+        <div class="principal-container">
+          <div class="start">
+            <div class="button-placeholder"></div>
+            <span>Lycée international de Palaiseau</span>
+            <div class="dropdown-info">
+              <button class="btn-secondary-toggle circle dropdown-info-button" aria-expanded="false" aria-controls="dropdown-info-menu" aria-label="Menu fiche établissement">
+                <i class="fa-solid fa-circle-info"></i>
+              </button>
+              <div class="tooltip bottom right">
+                <div class="angle"></div>
+                <span>Fiche établissement</span>
+              </div>
+              <div class="dropdown-info-mask" style="display: none;"></div>
+              <div id="dropdown-info-menu" class="dropdown-info-menu top right no-padding" style="display: none;">
+                <div class="info-etab">
+                  <div class="image-container">
+                    <img src="https://placehold.co/600x800" alt="">
+                  </div>
+                  <div class="content-container">
+                    <header>
+                      <svg aria-hidden="true">
+                        <use xlink:href="/svg/NOC-simple.svg#simple"></use>
+                      </svg>
+                      <div class="heading">
+                        <span class="heading-etab">Lycée international de Palaiseau</span>
+                        <span class="heading-acad">Académie Orléans-Tours</span>
+                      </div>
+                    </header>
+                    <div class="content">
+                      <div class="image">
+                        <img src="https://placehold.co/600x800" alt="">
+                      </div>
+                      <address>
+                        <ul>
+                          <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            17-19 Cr Pierre Vasseur, 91120 Palaiseau
+                          </li>
+                          <li>
+                            <i class="fa-solid fa-at"></i>
+                            <a href="mailto:ce.0912433a@ac-versailles.fr">ce.0912433a@ac-versailles.fr</a>
+                          </li>
+                          <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+33 (0)1.85.37.13.15">+33 (0)1.85.37.13.15</a>
+                          </li>
+                        </ul>
+                      </address>
                     </div>
-                  </header>
-                  <div class="content">
-                    <div class="image">
-                      <img src="https://placehold.co/600x800" alt="">
-                    </div>
-                    <address>
-                      <ul>
-                        <li>
-                          <i class="fa-solid fa-location-dot"></i>
-                          17-19 Cr Pierre Vasseur, 91120 Palaiseau
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-at"></i>
-                          <a href="mailto:ce.0912433a@ac-versailles.fr">ce.0912433a@ac-versailles.fr</a>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-phone"></i>
-                          <a href="tel:+33 (0)1.85.37.13.15">+33 (0)1.85.37.13.15</a>
-                        </li>
-                      </ul>
-                    </address>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="middle">
-        </div>
-        <div class="end">
-          <button class="search-button" aria-label="Rechercher dans l'ENT">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-          <div class="user-menu">
-            <div class="notification-dot"></div>
-            <button aria-expanded="false" aria-controls="eyebrow-menu" aria-label="Menu mon compte">
-              <img src="https://placehold.co/46x46" alt="" class="picture"/>
-              <div class="info">
-                <span class="displayname">Anaïs Durant</span>
-                <span class="function">Enseignante</span>
-              </div>
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <ul id="eyebrow-menu" style="display: none;">
-              <li>
-                <button id="notification">
-                  <span>Notifications</span>
-                  <div class="badge">4</div>
-                </button>
-              </li>
-              <li>
-                <a href="#" id="settings">
-                  Mon profil
-                  <i class="fa-solid fa-gear"></i>
-                </a>
-              </li>
-              <li>
-                <button id="info-etab">
-                  Infos de l'établissement
-                  <i class="fa-solid fa-info-circle"></i>
-                </button>
-              </li>
-              <li>
-                <button id="change-etab">
-                  Changer d'établissement
-                  <i class="fa-solid fa-right-left"></i>
-                </button>
-              </li>
-              <li>
-                <button id="starter">
-                  Lancer le didacticiel
-                  <i class="fa-solid fa-play"></i>
-                </button>
-              </li>
-              <li>
-                <a href="./index.html" id="logout">
-                  Déconnexion
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </a>
-              </li>
-            </ul>
+          <div class="middle">
           </div>
-          <div class="notification">
-            <div class="notification-dot"></div>
-            <button class="btn-secondary circle" aria-controls="notification-drawer" aria-label="Tiroir de notifications">
-              <i class="fa-solid fa-bell"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="search-container" style="display: none;">
-        <div class="search">
-          <div class="search-mask"></div>
-          <div class="search-field">
-            <div class="start">
+          <div class="end">
+            <button class="search-button" aria-label="Rechercher dans l'ENT">
               <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="user-menu">
+              <div class="notification-dot top right"></div>
+              <button aria-expanded="false" aria-controls="user-menu" aria-label="Menu mon compte">
+                <img src="https://placehold.co/46x46" alt="" class="picture"/>
+                <div class="info">
+                  <span class="displayname">Anaïs Durant</span>
+                  <span class="function">Enseignante</span>
+                </div>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <ul id="user-menu" style="display: none;">
+                <li>
+                  <button id="notification">
+                    <span>Notifications</span>
+                    <div class="badge">4</div>
+                  </button>
+                </li>
+                <li>
+                  <a href="#" id="settings">
+                    Mon profil
+                    <i class="fa-solid fa-gear"></i>
+                  </a>
+                </li>
+                <li>
+                  <button id="info-etab">
+                    Infos de l'établissement
+                    <i class="fa-solid fa-info-circle"></i>
+                  </button>
+                </li>
+                <li>
+                  <button id="change-etab">
+                    Changer d'établissement
+                    <i class="fa-solid fa-right-left"></i>
+                  </button>
+                </li>
+                <li>
+                  <button id="starter">
+                    Lancer le didacticiel
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </li>
+                <li>
+                  <a href="./index.html" id="logout">
+                    Déconnexion
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
-            <div class="middle">
-              <input type="text" placeholder="Rechercher un service" title="Rechercher un service">
-            </div>
-            <div class="end">
-              <button aria-label="Effacer la recherche">
-                <i class="fa-solid fa-xmark"></i>
+            <div class="notification">
+              <div class="notification-dot top right"></div>
+              <button class="btn-secondary circle" aria-controls="notification-drawer" aria-expanded="false" aria-label="Tiroir de notifications">
+                <i class="fa-solid fa-bell"></i>
               </button>
             </div>
           </div>
-          <ul class="search-results">
-            <li>
-              <div class="section-name">
-                <span>Services</span>
+        </div>
+        <div class="search-container" style="display: none;">
+          <div class="search">
+            <div class="search-mask"></div>
+            <div class="search-field">
+              <div class="start">
+                <i class="fa-solid fa-magnifying-glass"></i>
               </div>
-              <ul>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-tag collaboratif">Espace collaboratif</span><span class="result-title">Espaces Nextcloud</span>
-                    </header>
-                    <span>Espaces de <strong>stockage</strong> cloud de l'ENT</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div class="section-name">
-                <span>Médiacentre</span>
+              <div class="middle">
+                <input type="text" placeholder="Rechercher un service" title="Rechercher un service">
               </div>
-              <ul>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-title">Apprendre tous les secrets de Nextcloud</span>
-                    </header>
-                    <span>Les espaces de <strong>stockage</strong> Nextcloud offrent bien plus de fonctionnalités que vous ne le pensiez : ...</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div class="section-name">
-                <span>Actualités</span>
+              <div class="end">
+                <button aria-label="Effacer la recherche">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
               </div>
-              <ul>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-tag">Collectivités</span>
-                      <span class="result-title">Espaces de <strong>stockage</strong> Nextcloud inaccessibles du 13/04 au 15/04</span>
-                    </header>
-                    <span>Ce week-end, les espaces de <strong>stockage</strong> cloud de l'ENT subiront une interruption de maintenance l...</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-tag">Etablissement</span>
-                      <span class="result-title">Attention aux piratage des espaces de <strong>stockage</strong></span>
-                    </header>
-                    <span>Depuis le début de l'année scolaire, plus d'une dizaine de comptes étudiants ont été piratés, résul...</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+            </div>
+            <ul class="search-results">
+              <li>
+                <div class="section-name">
+                  <span>Services</span>
+                </div>
+                <ul>
+                  <li>
+                    <a href="#">
+                      <header>
+                        <span class="result-tag collaboratif">Espace collaboratif</span><span class="result-title">Espaces Nextcloud</span>
+                      </header>
+                      <span>Espaces de <strong>stockage</strong> cloud de l'ENT</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="section-name">
+                  <span>Médiacentre</span>
+                </div>
+                <ul>
+                  <li>
+                    <a href="#">
+                      <header>
+                        <span class="result-title">Apprendre tous les secrets de Nextcloud</span>
+                      </header>
+                      <span>Les espaces de <strong>stockage</strong> Nextcloud offrent bien plus de fonctionnalités que vous ne le pensiez : ...</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="section-name">
+                  <span>Actualités</span>
+                </div>
+                <ul>
+                  <li>
+                    <a href="#">
+                      <header>
+                        <span class="result-tag">Collectivités</span>
+                        <span class="result-title">Espaces de <strong>stockage</strong> Nextcloud inaccessibles du 13/04 au 15/04</span>
+                      </header>
+                      <span>Ce week-end, les espaces de <strong>stockage</strong> cloud de l'ENT subiront une interruption de maintenance l...</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <header>
+                        <span class="result-tag">Etablissement</span>
+                        <span class="result-title">Attention aux piratage des espaces de <strong>stockage</strong></span>
+                      </header>
+                      <span>Depuis le début de l'année scolaire, plus d'une dizaine de comptes étudiants ont été piratés, résul...</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div id="services-layout" class="services-layout" style="display: none;">
