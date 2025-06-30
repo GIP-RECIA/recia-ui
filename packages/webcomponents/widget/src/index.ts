@@ -100,8 +100,10 @@ export class ReciaWidget extends LitElement {
   }
 
   updateItems(): void {
-    const parsedItems = JSON.parse(this.items)
-    this.localItems = parsedItems
+    if (this.items !== undefined && this.items !== '') {
+      const parsedItems = JSON.parse(this.items)
+      this.localItems = parsedItems
+    }
   }
 
   toggleDropdown(e: Event): void {
