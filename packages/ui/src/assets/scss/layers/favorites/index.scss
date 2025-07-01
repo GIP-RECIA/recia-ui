@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
-@use 'favorite';
+@use 'favorite' as *;
 
 .favorite-layout {
   > header {
@@ -36,12 +36,13 @@
         gap: 12px;
 
         > li {
-          &:first-child > .favorite > .actions > .action-back {
+          &:first-child > .favorite > .actions > .action-back,
+          &:last-child > .favorite > .actions > .action-next {
             display: none;
           }
 
-          &:last-child > .favorite > .actions > .action-next {
-            display: none;
+          > .favorite {
+            @include favorite;
           }
         }
       }

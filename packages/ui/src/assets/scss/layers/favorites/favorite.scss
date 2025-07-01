@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
 
-.favorite {
+@mixin favorite {
   border-radius: 10px;
   padding: 12px;
   position: relative;
@@ -15,14 +15,14 @@
   height: 100%;
   min-height: 100px;
 
-  & > &-icon {
+  > .icon {
     flex: 0 0 auto;
     height: 24px;
     width: 24px;
     opacity: .2;
   }
 
-  & > &-name {
+  > .name {
     flex: 0 0 auto;
     @include unstyled-link;
 
