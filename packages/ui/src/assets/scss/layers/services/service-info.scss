@@ -8,34 +8,32 @@
       column-gap: 6px;
       margin-bottom: 16px;
 
-      > .heading {
-        &-logo {
-          flex: 0 0 auto;
-          height: 100px;
-          width: 100px;
-          opacity: .2;
+      > .logo {
+        flex: 0 0 auto;
+        height: 100px;
+        width: 100px;
+        opacity: .2;
 
-          > image {
-            width: 100%;
-            height: 100%;
-          }
+        > image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      > .text {
+        > h1 {
+          margin: 0;
         }
 
-        &-text {
-          > h1 {
-            margin: 0;
-          }
+        > .origin {
+          display: block;
+          font-style: italic;
+          font-size: var(--#{$prefix}font-size-sm);
+          line-height: 150%;
+        }
 
-          > .origin {
-            display: block;
-            font-style: italic;
-            font-size: var(--#{$prefix}font-size-sm);
-            line-height: 150%;
-          }
-
-          > .tag-category {
-            margin-top: 9px;
-          }
+        > .tag-category {
+          margin-top: 9px;
         }
       }
     }
