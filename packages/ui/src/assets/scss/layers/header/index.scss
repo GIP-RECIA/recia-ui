@@ -31,18 +31,6 @@ body {
   top: 0;
   z-index: 1030;
 
-  > .not-logged {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: $header-height;
-
-    > .header-logo {
-      height: 27px;
-      width: auto;
-    }
-  }
-
   > button {
     display: flex;
     flex-direction: column;
@@ -94,6 +82,38 @@ body {
     background-color: var(--#{$prefix}body-bg);
     box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
 
+    > .principal-container,
+    > .not-logged {
+      height: $header-height;
+    }
+
+    > .not-logged {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > .logo {
+        flex: 0 1 auto;
+        height: 27px;
+        width: auto;
+      }
+
+      > button,
+      > a {
+        flex: 0 0 auto;
+        @include button-and-tag;
+        font-family: $sora;
+        padding: 6px 12px;
+        font-weight: 600;
+        font-size: var(--#{$prefix}font-size-md);
+        margin-right: -12px;
+
+        &:focus-visible {
+          outline: 4px solid var(--#{$prefix}primary);
+        }
+      }
+    }
+
     > .principal-container {
       @include principal-container;
     }
@@ -108,7 +128,7 @@ body {
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    > .not-logged {
+    > .topbar > .not-logged {
       justify-content: unset;
     }
   }

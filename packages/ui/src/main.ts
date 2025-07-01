@@ -352,6 +352,13 @@ themeButton.textContent = themes[currentTheme]
 themeButton.style = buttonStyle
 themeButton.addEventListener('click', () => switchTheme())
 
+let isWayf = true
+
+const wayfButton = document.createElement('button')
+wayfButton.textContent = `WAYF : ${isWayf}`
+wayfButton.style = buttonStyle
+wayfButton.addEventListener('click', () => toggleWayf())
+
 const dupNews = document.createElement('button')
 dupNews.textContent = 'Actualités x2'
 dupNews.style = buttonStyle
@@ -363,6 +370,7 @@ dupSuggest.style = buttonStyle
 dupSuggest.addEventListener('click', () => duplicate('.suggestions-layout > ul'))
 
 devContainer.appendChild(themeButton)
+devContainer.appendChild(wayfButton)
 devContainer.appendChild(dupNews)
 devContainer.appendChild(dupSuggest)
 body?.appendChild(devContainer)
@@ -382,6 +390,18 @@ function switchTheme(): void {
   localStorage.setItem('theme', JSON.stringify({ currentTheme }))
   body?.classList.replace(`dom-${oldTheme}`, `dom-${newTheme}`)
   themeButton.textContent = newTheme
+}
+
+function toggleWayf(): void {
+  isWayf = !isWayf
+  const wayf = document.querySelector<HTMLElement>('.wayf-layout')
+  const notLogged = document.querySelector<HTMLElement>('.header > .topbar > .not-logged')
+  const grow = notLogged?.querySelector<HTMLElement>('.grow-1')
+  const link = notLogged?.querySelector<HTMLElement>('a')
+  wayf && (wayf.style.display = isWayf ? '' : 'none')
+  grow && (grow.style.display = !isWayf ? '' : 'none')
+  link && (link.style.display = !isWayf ? '' : 'none')
+  wayfButton.textContent = `WAYF : ${isWayf}`
 }
 
 function duplicate(selector: string): void {
