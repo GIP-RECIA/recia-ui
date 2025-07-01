@@ -48,19 +48,17 @@
       }
 
       > .heading {
-        > .heading {
-          &-etab {
-            display: block;
-            font-size: var(--#{$prefix}font-size-lg);
-            font-weight: bold;
-          }
+        > .etab {
+          display: block;
+          font-size: var(--#{$prefix}font-size-lg);
+          font-weight: bold;
+        }
 
-          &-acad {
-            display: block;
-            font-size: var(--#{$prefix}font-size-xs);
-            font-weight: 600;
-            color: var(--#{$prefix}primary);
-          }
+        > .acad {
+          display: block;
+          font-size: var(--#{$prefix}font-size-xs);
+          font-weight: 600;
+          color: var(--#{$prefix}primary);
         }
       }
     }
@@ -121,14 +119,14 @@
     }
 
     &.padding {
-    > .content-container {
-      padding-right: 0;
+      > .content-container {
+        padding-right: 0;
 
-      > header > .heading {
-        text-wrap: unset;
+        > header > .heading {
+          text-wrap: unset;
+        }
       }
     }
-  }
 
     > .content-container {
       padding: 32px;
