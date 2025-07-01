@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-import { defineConfig } from 'vite'
+/* eslint-disable node/prefer-global/process */
+import type { ConfigEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { svgSpritemap } from 'vite-plugin-svg-spritemap'
 
 // https://vitejs.dev/config/
-export default () => {
+export default ({ mode }: ConfigEnv) => {
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+
   return defineConfig({
+    base: mode === 'development' ? undefined : '/commun/new-ui',
     plugins: [
       svgSpritemap({
         pattern: 'src/icons/**/*.svg',
@@ -29,6 +34,12 @@ export default () => {
     build: {
       sourcemap: true,
       rollupOptions: {
+        input: {
+          main: './index.html',
+          login: './login.html',
+          logged: './logged.html',
+          news: './news.html',
+        },
         output: {
           assetFileNames: 'assets/[name].[ext]',
           entryFileNames: 'assets/[name].js',
