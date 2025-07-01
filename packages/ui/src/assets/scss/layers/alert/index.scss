@@ -8,6 +8,7 @@
   background-color: var(--#{$prefix}system-blue);
   color: $white;
   padding: 14px 16px;
+  min-height: 60px;
 
   > .icon,
   > .close {
