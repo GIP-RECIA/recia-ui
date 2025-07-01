@@ -50,7 +50,6 @@ import {
   faPlus,
   faRightLeft,
   faStar,
-  faStepForward,
   faThumbtack,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -88,7 +87,6 @@ function register() {
     faPlus,
     faRightLeft,
     faStar,
-    faStepForward,
     faThumbtack,
     faXmark,
   )
