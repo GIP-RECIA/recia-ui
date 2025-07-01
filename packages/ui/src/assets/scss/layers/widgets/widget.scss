@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
+@use '../actions' as *;
 
 @mixin widget {
   position: relative;
@@ -7,6 +8,10 @@
   border-radius: 10px;
   box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
   height: 100%;
+
+  > .actions {
+    @include actions;
+  }
 
   > header {
     > div,
