@@ -1,13 +1,28 @@
 @use 'sass:map';
 @use 'variables' as *;
-@use 'dropdown-favorites';
 @use 'info-etab';
-@use 'navigation-drawer';
-@use 'notification-drawer';
-@use 'principal-container';
+@use 'navigation-drawer' as *;
+@use 'notification-drawer' as *;
+@use 'principal-container' as *;
 @use 'search-container';
 @use 'search';
-@use 'services-layout';
+@use 'services-layout' as *;
+
+body {
+  &,
+  .header > .services-layout {
+    transition: margin-left .3s ease-in-out;
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    &:has(.header .navigation-drawer) {
+      &,
+      .header > .services-layout {
+        margin-left: 72px;
+      }
+    }
+  }
+}
 
 .header {
   position: fixed;
@@ -66,14 +81,30 @@
     }
   }
 
+  > .navigation-drawer {
+    @include navigation-drawer;
+  }
+
   > .topbar {
     position: relative;
     display: flex;
     flex-direction: column;
-    row-gap: 24px;
+    row-gap: 32px;
     padding: 16px;
     background-color: var(--#{$prefix}body-bg);
     box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+
+    > .principal-container {
+      @include principal-container;
+    }
+  }
+
+  > .notification-drawer {
+    @include notification-drawer;
+  }
+
+  > .services-layout {
+    @include services-layout;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {

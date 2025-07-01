@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 
-.principal-container {
+@mixin principal-container {
   height: $header-height;
   display: flex;
   align-items: center;

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 
-.notification-drawer {
+@mixin notification-drawer {
   position: fixed;
   top: $header-height + 2 * 16;
   bottom: 0;

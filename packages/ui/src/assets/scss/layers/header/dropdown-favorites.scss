@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 
-.dropdown-favorites {
+@mixin dropdown-favorites {
   position: relative;
 
   > div {

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'variables' as *;
 
-.services-layout {
+@mixin services-layout {
   position: fixed;
   inset: $header-height + 2 * 16 0 0 0;
   z-index: -1;

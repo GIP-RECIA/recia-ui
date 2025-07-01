@@ -1,7 +1,8 @@
 @use 'sass:map';
 @use 'variables' as *;
+@use 'dropdown-favorites' as *;
 
-.navigation-drawer {
+@mixin navigation-drawer {
   display: flex;
   flex-direction: column;
   transform: translateX(-$drawer-width);
@@ -131,6 +132,10 @@
           color: #FFF;
           background-color: var(--#{$prefix}primary-dark);
         }
+      }
+
+      &.dropdown-favorites {
+        @include dropdown-favorites;
       }
     }
   }
