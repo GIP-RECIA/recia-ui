@@ -15,9 +15,6 @@
   background-color: var(--#{$prefix}lighter-black);
   color: #FFF;
   font-size: var(--#{$prefix}font-size-sm);
-  transition:
-    width .15s cubic-bezier(0.4, 0, 0.2, 1),
-    transform .15s cubic-bezier(0.4, 0, 0.2, 1);
   --#{$prefix}drawer-width: #{$drawer-width};
 
   > div {

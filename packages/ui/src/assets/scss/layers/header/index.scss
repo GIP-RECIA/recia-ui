@@ -9,16 +9,31 @@
 @use 'services-layout' as *;
 
 body {
-  &,
-  .header > .services-layout {
-    transition: margin-left .3s ease-in-out;
+  &.transition-active {
+    transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &.transition-active .header {
+    > .navigation-drawer {
+      transition:
+        transform .15s cubic-bezier(0.4, 0, 0.2, 1),
+        width .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    > .services-layout {
+      transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    > .notification-drawer {
+      transition: transform .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
     &:has(.header .navigation-drawer) {
       &,
       .header > .services-layout {
-        margin-left: 72px;
+        margin-left: $drawer-width;
       }
     }
   }

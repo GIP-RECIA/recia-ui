@@ -19,6 +19,10 @@ import './assets/scss/main.scss'
 
 register()
 
+window.addEventListener('load', () => {
+  document.body.classList.add('transition-active')
+})
+
 /**
  * Functions
  */

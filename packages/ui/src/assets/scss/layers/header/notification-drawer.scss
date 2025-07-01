@@ -14,7 +14,6 @@
   clip-path: inset(0 0 0 -32px);
   padding: 16px;
   transform: translateX(320px + 32);
-  transition: transform .15s cubic-bezier(0.4, 0, 0.2, 1);
 
   > .close {
     position: absolute;
