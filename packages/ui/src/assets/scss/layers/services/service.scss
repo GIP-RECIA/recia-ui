@@ -18,7 +18,7 @@
   text-align: center;
   width: 100%;
 
-  & > &-new {
+  > .new {
     position: absolute;
     top: 5px;
     left: -6px;
@@ -30,7 +30,7 @@
     font-weight: bold;
   }
 
-  & > &-favorite {
+  > .favorite {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -61,7 +61,7 @@
     }
   }
 
-  & > &-icon {
+  > .icon {
     flex: 0 0 auto;
     order: 0;
     height: 40px;
@@ -70,7 +70,7 @@
     transition: color .3s ease-out;
   }
 
-  & > &-name {
+  > .name {
     flex: 0 0 auto;
     @include unstyled-link;
     order: 2;
@@ -90,7 +90,7 @@
     }
   }
 
-  & > &-category {
+  > .category {
     flex: 0 0 auto;
     order: 1;
     margin-top: 8px;
@@ -99,7 +99,7 @@
     margin-bottom: 4px;
   }
 
-  & > &-more {
+  > .more {
     z-index: 1;
     order: 3;
     padding: 4px 8px;
@@ -136,42 +136,40 @@
     border-top-color: var(--#{$prefix}service-hover);
     box-shadow: var(--#{$prefix}shadow-strong) var(--#{$prefix}service-hover-shadow);
 
-    > .service {
-      &-favorite {
-        opacity: 1 !important;
-      }
+    > .favorite {
+      opacity: 1 !important;
+    }
 
-      &-icon {
-        color: var(--#{$prefix}service-hover);
-      }
+    > .icon {
+      color: var(--#{$prefix}service-hover);
+    }
 
-      &-more {
-        max-height: 2em;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        margin-top: 4px;
-      }
+    > .more {
+      max-height: 2em;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      margin-top: 4px;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
     padding: 17px 16px 24px;
 
-    & > &-category {
+    > .category {
       font-size: var(--#{$prefix}font-size-xs);
     }
 
-    & > &-name {
+    > .name {
       font-size: var(--#{$prefix}font-size-md);
     }
   }
 
   @media (hover: hover) and (pointer: fine) {
-    & > &-favorite:not(:has(.marked)) {
+    > .favorite:not(:has(.marked)) {
       opacity: 0;
     }
 
-    & > &-more {
+    > .more {
       max-height: 0;
       padding-top: 0;
       padding-bottom: 0;

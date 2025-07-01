@@ -107,7 +107,7 @@ bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')?.addEventLis
 bottomSheetInfoServiceMore?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
   isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
 })
-document.querySelectorAll<HTMLButtonElement>('button.service-more').forEach((button) => {
+document.querySelectorAll<HTMLButtonElement>('.service > button.more').forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault()
     isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
