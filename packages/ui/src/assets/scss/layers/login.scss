@@ -2,80 +2,78 @@
 @use '../recia-style' as *;
 
 .login-layout {
-  > .login {
-    &-card {
+  > .card {
+    outline: 1px solid var(--#{$prefix}stroke);
+    border-radius: 10px;
+    background-color: var(--#{$prefix}body-bg);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    padding: 25px 20px;
+    margin-bottom: 16px;
+
+    > p {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    > form {
+      display: flex;
+      flex-direction: column;
+      row-gap: 24px;
+
+      > a#password-forgotten {
+        @include unstyled-link;
+        align-self: flex-end;
+        width: fit-content;
+        color: var(--#{$prefix}primary);
+        font-style: italic;
+        font-size: var(--#{$prefix}font-size-xs);
+        margin-top: -24px + 8px;
+
+        &:hover,
+        &:focus-visible {
+          text-decoration: underline;
+          outline: none;
+        }
+      }
+    }
+  }
+
+  > .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    > a,
+    > button {
+      @include button-and-tag;
+      text-align: unset;
+      justify-content: unset;
+      font-weight: 500;
+      letter-spacing: -.25px;
+      font-size: var(--#{$prefix}font-size-sm);
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
       box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
-      padding: 25px 20px;
-      margin-bottom: 16px;
+      padding: 16px;
+      flex: 1;
+      transition:
+        outline .15s ease-in,
+        box-shadow .15s ease-in;
 
-      > p {
-        margin-top: 24px;
-        margin-bottom: 24px;
+      > svg {
+        font-size: 46px;
+        margin: 0 8px;
+        transition: color .15s ease-in;
       }
 
-      > form {
-        display: flex;
-        flex-direction: column;
-        row-gap: 24px;
-
-        > a#password-forgotten {
-          @include unstyled-link;
-          align-self: flex-end;
-          width: fit-content;
-          color: var(--#{$prefix}primary);
-          font-style: italic;
-          font-size: var(--#{$prefix}font-size-xs);
-          margin-top: -24px + 8px;
-
-          &:hover,
-          &:focus-visible {
-            text-decoration: underline;
-            outline: none;
-          }
-        }
-      }
-    }
-
-    &-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-
-      > a,
-      > button {
-        @include button-and-tag;
-        text-align: unset;
-        justify-content: unset;
-        font-weight: 500;
-        letter-spacing: -.25px;
-        font-size: var(--#{$prefix}font-size-sm);
-        outline: 1px solid var(--#{$prefix}stroke);
-        border-radius: 10px;
-        background-color: var(--#{$prefix}body-bg);
-        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
-        padding: 16px;
-        flex: 1;
-        transition:
-          outline .15s ease-in,
-          box-shadow .15s ease-in;
+      &:hover,
+      &:focus-visible {
+        outline: 2px solid var(--#{$prefix}primary);
+        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
 
         > svg {
-          font-size: 46px;
-          margin: 0 8px;
-          transition: color .15s ease-in;
-        }
-
-        &:hover,
-        &:focus-visible {
-          outline: 2px solid var(--#{$prefix}primary);
-          box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
-
-          > svg {
-            color: var(--#{$prefix}primary);
-          }
+          color: var(--#{$prefix}primary);
         }
       }
     }
@@ -86,28 +84,26 @@
     flex-direction: column;
     align-items: center;
 
-    > .login {
-      &-card {
-        padding: 25px 40px;
-        margin-bottom: 24px;
-        max-width: 432px;
+    > .card {
+      padding: 25px 40px;
+      margin-bottom: 24px;
+      max-width: 432px;
 
-        > form > button[type="submit"] {
-          align-self: flex-end;
-          width: fit-content;
-        }
+      > form > button[type="submit"] {
+        align-self: flex-end;
+        width: fit-content;
       }
+    }
 
-      &-actions {
-        flex-direction: row;
-        column-gap: 24px;
-        max-width: 512px;
-      }
+    > .actions {
+      flex-direction: row;
+      column-gap: 24px;
+      max-width: 512px;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, lg)) {
-    .login-actions > button {
+    > .actions > button {
       font-size: var(--#{$prefix}font-size-md);
     }
   }
