@@ -11,7 +11,7 @@
   margin-bottom: auto;
 }
 
-.news-carousel {
+@mixin carousel {
   > .carousel {
     &-action {
       &-back {

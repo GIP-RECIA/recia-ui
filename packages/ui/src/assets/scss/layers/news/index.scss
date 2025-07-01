@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
-@use 'carousel';
-@use 'news';
+@use 'carousel' as *;
+@use 'news' as *;
 
 .news-layout {
   > header {
@@ -19,13 +19,21 @@
     }
   }
 
-  > div > ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    font-weight: normal;
-    line-height: 150%;
+  > div {
+    @include carousel;
+
+    > ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-weight: normal;
+      line-height: 150%;
+
+      > li > button {
+        @include news;
+      }
+    }
   }
 
   > footer {
@@ -53,7 +61,7 @@
         display: revert !important;
         flex: 0 0 292px;
 
-        > .news {
+        > button {
           height: 175px;
         }
       }
