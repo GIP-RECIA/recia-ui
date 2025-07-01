@@ -132,7 +132,7 @@ const extendedUportalHeader = document.querySelector<HTMLElement>('.header')
 
 // Dropdown info
 const dropdownInfo = document.querySelector<HTMLElement>('.dropdown-info')
-const dropdownInfoButton = dropdownInfo?.querySelector<HTMLButtonElement>('button.dropdown-info-button')
+const dropdownInfoButton = dropdownInfo?.querySelector<HTMLButtonElement>('button')
 
 let isDropdownInfoExpended = false
 
@@ -142,7 +142,7 @@ function toggleDropdownInfo(): void {
   isDropdownInfoExpended = !isDropdownInfoExpended
   dropdownInfoButton.ariaExpanded = isDropdownInfoExpended.toString()
   dropdownInfoButton.classList.toggle('active')
-  const dropdownInfoMask = dropdownInfo?.querySelector<HTMLElement>('.dropdown-info-mask')
+  const dropdownInfoMask = dropdownInfo?.querySelector<HTMLElement>('.mask')
   dropdownInfoMask && (dropdownInfoMask.style.display = isDropdownInfoExpended ? '' : 'none')
   const dropdownInfoMenu = dropdownInfo?.querySelector<HTMLElement>('#dropdown-info-menu')
   dropdownInfoMenu && (dropdownInfoMenu.style.display = isDropdownInfoExpended ? '' : 'none')
