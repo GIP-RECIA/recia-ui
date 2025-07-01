@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
-@use 'profile';
+@use 'profile' as *;
 
 .wayf-layout {
   > header > h1 > span {
@@ -20,6 +20,10 @@
     font-size: var(--#{$prefix}font-size-xxs);
     font-weight: 500;
     letter-spacing: -.25px;
+
+    li > a {
+      @include profile;
+    }
   }
 
   @media (width >= map.get($grid-breakpoints, sm)) {

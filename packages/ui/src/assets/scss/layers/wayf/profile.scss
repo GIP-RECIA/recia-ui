@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
 
-.wayf-profile {
+@mixin profile {
   @include unstyled-link;
   outline: 1px solid var(--#{$prefix}stroke);
   border-radius: 10px;
