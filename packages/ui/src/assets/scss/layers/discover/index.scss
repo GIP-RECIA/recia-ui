@@ -2,7 +2,7 @@
 @use '../../recia-style' as *;
 
 .discover {
-  & > &-video {
+  > .video {
     display: flex;
     align-items: center;
     margin-bottom: 32px;
@@ -13,8 +13,8 @@
     }
   }
 
-  &-section {
-    & > &-nav {
+  > .section {
+    > .nav {
       @include unstyled-list;
       margin-bottom: 24px;
       display: flex;
@@ -45,7 +45,7 @@
       margin-bottom: 24px;
     }
 
-    & > &-tiles {
+    > .tiles {
       @include unstyled-list;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -88,7 +88,7 @@
     grid-template-columns: auto 1fr;
     column-gap: 24px;
 
-    & > &-video {
+    > .video {
       margin-bottom: unset;
 
       > * {
@@ -96,13 +96,13 @@
       }
     }
 
-    &-section-tiles > li > a > svg {
+    > .section > .tiles > li > a > svg {
       display: none;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, xl)) {
-    & > &-video > * {
+    > .video > * {
       max-width: 345px;
     }
   }
