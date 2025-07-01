@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../recia-style' as *;
-@use 'widget';
+@use 'widget' as *;
 
 .widget-layout {
   > header {
@@ -18,10 +18,9 @@
     gap: 8px;
 
     > li {
-      &:first-child > .actions > .action-back {
-        display: none;
-      }
+      @include widget;
 
+      &:first-child > .actions > .action-back,
       &:last-child > .actions > .action-next {
         display: none;
       }
