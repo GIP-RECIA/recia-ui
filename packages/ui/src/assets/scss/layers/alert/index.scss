@@ -10,8 +10,8 @@
   padding: 14px 16px;
   height: 60px;
 
-  & > &-icon,
-  & > &-close {
+  > .icon,
+  > .close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +30,7 @@
     opacity: .5;
   }
 
-  & > &-text {
+  > .text {
     flex-grow: 1;
     font-family: $dm-sans;
     font-weight: bold;
@@ -39,7 +39,7 @@
       display: inline;
     }
 
-    > .alert-link {
+    > .link {
       color: inherit;
       font-weight: normal;
       text-wrap: nowrap;
@@ -52,7 +52,7 @@
     }
   }
 
-  & > &-close {
+  > .close {
     cursor: pointer;
 
     &:hover,
@@ -69,7 +69,7 @@
     column-gap: 34px;
     padding: 16px 34px;
 
-    & > &-text {
+    > .text {
       display: flex;
       justify-content: space-between;
       column-gap: 8px;
