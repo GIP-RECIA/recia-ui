@@ -328,8 +328,31 @@ devContainer.style = `
   margin: 0 16px 16px 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 16px;
   z-index: 9999;
+`
+
+let isDevTools = false
+
+const devToolsButton = document.createElement('button')
+devToolsButton.textContent = 'DT'
+devToolsButton.style = `
+  background-color: var(--recia-primary, bisque);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  height: 24px;
+  width: 24px;
+`
+devToolsButton.addEventListener('click', () => toggleDevTools())
+
+const devItems = document.createElement('div')
+devItems.style = `
+  display: none;
+  flex-direction: column;
+  gap: 16px;
 `
 
 const buttonStyle = `
@@ -369,11 +392,18 @@ dupSuggest.textContent = 'Suggestions x2'
 dupSuggest.style = buttonStyle
 dupSuggest.addEventListener('click', () => duplicate('.suggestions-layout > ul'))
 
-devContainer.appendChild(themeButton)
-devContainer.appendChild(wayfButton)
-devContainer.appendChild(dupNews)
-devContainer.appendChild(dupSuggest)
+devContainer.appendChild(devItems)
+devContainer.appendChild(devToolsButton)
+devItems.appendChild(themeButton)
+devItems.appendChild(wayfButton)
+devItems.appendChild(dupNews)
+devItems.appendChild(dupSuggest)
 body?.appendChild(devContainer)
+
+function toggleDevTools(): void {
+  isDevTools = !isDevTools
+  devItems.style.display = isDevTools ? 'flex' : 'none'
+}
 
 function switchTheme(): void {
   let oldTheme, newTheme
