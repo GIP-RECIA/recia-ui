@@ -111,8 +111,7 @@
     max-height: 2em;
     overflow: hidden;
     transition:
-      visibility .25s ease-out,
-      max-height .25s ease-out,
+      max-height .3s ease-out,
       padding-top .3s ease-out,
       padding-bottom .3s ease-out,
       margin-top .3s ease-out;
@@ -147,7 +146,6 @@
       }
 
       &-more {
-        visibility: visible;
         max-height: 2em;
         padding-top: 4px;
         padding-bottom: 4px;
