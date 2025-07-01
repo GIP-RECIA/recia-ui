@@ -316,6 +316,27 @@ document.querySelectorAll<HTMLButtonElement>('button.tag').forEach((button) => {
 })
 
 /**
+ * Alert
+ */
+
+let isAlert = true
+const lsAlert = localStorage.getItem('alert')
+if (lsAlert !== null)
+  isAlert = JSON.parse(lsAlert).isAlert
+
+const alert = document.querySelector<HTMLElement>('.alert')
+alert?.querySelector<HTMLButtonElement>('button.close')?.addEventListener('click', () => toggleAlert())
+toggleAlert(false)
+
+function toggleAlert(save: boolean = true): void {
+  if (save) {
+    isAlert = !isAlert
+    localStorage.setItem('alert', JSON.stringify({ isAlert }))
+  }
+  alert && (alert.style.display = isAlert ? '' : 'none')
+}
+
+/**
  * Dev tools
  */
 
@@ -382,6 +403,14 @@ wayfButton.textContent = `WAYF : ${isWayf}`
 wayfButton.style = buttonStyle
 wayfButton.addEventListener('click', () => toggleWayf())
 
+const alertButton = document.createElement('button')
+alertButton.textContent = `Alert : ${isAlert}`
+alertButton.style = buttonStyle
+alertButton.addEventListener('click', () => {
+  toggleAlert()
+  alertButton.textContent = `Alert : ${isAlert}`
+})
+
 const dupNews = document.createElement('button')
 dupNews.textContent = 'Actualités x2'
 dupNews.style = buttonStyle
@@ -396,6 +425,7 @@ devContainer.appendChild(devItems)
 devContainer.appendChild(devToolsButton)
 devItems.appendChild(themeButton)
 devItems.appendChild(wayfButton)
+devItems.appendChild(alertButton)
 devItems.appendChild(dupNews)
 devItems.appendChild(dupSuggest)
 body?.appendChild(devContainer)
