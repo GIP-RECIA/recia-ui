@@ -43,7 +43,7 @@
     left: 0;
     background-color: var(--#{$prefix}lighter-black);
     color: #FFF;
-    z-index: 3;
+    z-index: 2;
 
     > svg {
       height: 28px;
@@ -68,7 +68,6 @@
 
   > .topbar {
     position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     row-gap: 24px;

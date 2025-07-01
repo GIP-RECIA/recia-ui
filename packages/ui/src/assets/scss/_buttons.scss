@@ -109,8 +109,6 @@
       background-color: var(--#{$prefix}primary);
       color: var(--#{$prefix}body-inverted);
       box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
-      position: relative;
-      z-index: 1055;
 
       &:active {
         background-color: var(--#{$prefix}btn-primary-pressed) !important;
