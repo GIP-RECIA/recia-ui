@@ -84,8 +84,21 @@ function toggleBottomSheet(element: HTMLElement | null, state: boolean): boolean
   if (!element)
     return state
   state = !state
-  document.documentElement.style.overflowY = state ? 'hidden' : ''
-  element.style.display = state ? '' : 'none'
+  if (state) {
+    document.documentElement.style.overflowY = 'hidden'
+    element.style.display = ''
+  }
+  else {
+    const container = element.querySelector('.scrollable-container')
+    container && (container.scrollTop = 0)
+    const sheet = element.querySelector('.sheet')
+    sheet && (sheet.classList.toggle('slide-down'))
+    setTimeout(() => {
+      document.documentElement.style.overflowY = ''
+      element.style.display = 'none'
+      sheet && (sheet.classList.toggle('slide-down'))
+    }, 300)
+  }
 
   return state
 }
@@ -94,26 +107,23 @@ function toggleBottomSheet(element: HTMLElement | null, state: boolean): boolean
 const bottomSheetInfo = document.querySelector<HTMLElement>('#bottom-sheet-info')
 let isBottomSheetInfo = false
 
-bottomSheetInfo?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => {
-  isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
-})
-bottomSheetInfo?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
-  isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
+bottomSheetInfo?.querySelectorAll<HTMLElement>('.close, .dragable').forEach((el) => {
+  el.addEventListener('click', () => {
+    isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
+  })
 })
 
 // Bottom sheet service more
 const bottomSheetInfoServiceMore = document.querySelector<HTMLElement>('#bottom-sheet-service-more')
 let isBottomSheetInfoServiceMore = false
 
-bottomSheetInfoServiceMore?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => {
-  isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
+document?.querySelectorAll<HTMLElement>('.service > button.more').forEach((el) => {
+  el.addEventListener('click', () => {
+    isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
+  })
 })
-bottomSheetInfoServiceMore?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
-  isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
-})
-document.querySelectorAll<HTMLButtonElement>('.service > button.more').forEach((button) => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault()
+bottomSheetInfoServiceMore?.querySelectorAll<HTMLElement>('.close, .dragable').forEach((el) => {
+  el.addEventListener('click', () => {
     isBottomSheetInfoServiceMore = toggleBottomSheet(bottomSheetInfoServiceMore, isBottomSheetInfoServiceMore)
   })
 })
@@ -121,11 +131,11 @@ document.querySelectorAll<HTMLButtonElement>('.service > button.more').forEach((
 // Bottom sheet favorites
 const bottomSheetFavorites = document.querySelector<HTMLElement>('#bottom-sheet-favorites')
 let isBottomSheetFavorites = false
-bottomSheetFavorites?.querySelector<HTMLElement>('.dragable')?.addEventListener('click', () => {
-  isBottomSheetFavorites = toggleBottomSheet(bottomSheetFavorites, isBottomSheetFavorites)
-})
-bottomSheetFavorites?.querySelector<HTMLButtonElement>('.close')?.addEventListener('click', () => {
-  isBottomSheetFavorites = toggleBottomSheet(bottomSheetFavorites, isBottomSheetFavorites)
+
+bottomSheetFavorites?.querySelectorAll<HTMLElement>('.close, .dragable').forEach((el) => {
+  el.addEventListener('click', () => {
+    isBottomSheetFavorites = toggleBottomSheet(bottomSheetFavorites, isBottomSheetFavorites)
+  })
 })
 
 /**
