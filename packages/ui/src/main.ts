@@ -373,6 +373,27 @@ document.querySelector<HTMLButtonElement>('.news-layout > div > ul > li > button
 })
 
 /**
+ * iframe
+ */
+
+const params = new URLSearchParams(window.location.search)
+const iframe = document.querySelector<HTMLIFrameElement>('iframe')
+iframe && (iframe!.src = params.get('service') || '#')
+iframe?.addEventListener('load', () => {
+  const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document
+  if (!iframeDoc)
+    return
+  const style = document.createElement('style')
+  style.textContent = `
+    extended-uportal-header,
+    extended-uportal-footer {
+      display: none;
+    }
+  `
+  iframeDoc.head.prepend(style)
+})
+
+/**
  * Dev tools
  */
 

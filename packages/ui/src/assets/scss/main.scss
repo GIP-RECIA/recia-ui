@@ -243,6 +243,10 @@ body {
       }
     }
 
+    > iframe {
+      grid-area: main;
+    }
+
     > footer {
       grid-area: footer;
     }

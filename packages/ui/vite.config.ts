@@ -39,6 +39,7 @@ export default ({ mode }: ConfigEnv) => {
           login: './login.html',
           logged: './logged.html',
           news: './news.html',
+          service: './service.html',
         },
         output: {
           assetFileNames: 'assets/[name].[ext]',
