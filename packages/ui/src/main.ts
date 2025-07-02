@@ -149,7 +149,7 @@ bottomSheetNews?.querySelectorAll<HTMLElement>('.close, .dragable').forEach((el)
 })
 
 /**
- * Extended Uportal Header
+ * Header
  */
 
 const extendedUportalHeader = document.querySelector<HTMLElement>('.header')
@@ -214,7 +214,10 @@ function toggleSearch(): void {
 extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-button'))?.addEventListener('click', () => toggleSearch())
 search?.querySelector<HTMLButtonElement>('.search-field > .end > button')?.addEventListener('click', () => toggleSearch())
 
-// Drawer
+/**
+ * Navigation drawer
+ */
+
 const drawer = extendedUportalHeader?.querySelector<HTMLElement>('.navigation-drawer')
 
 let isDrawerExpended = false
@@ -282,6 +285,7 @@ servicesButton?.addEventListener('click', () => toggleServices())
 /**
  * Notifications drawer
  */
+
 const notificationButton = extendedUportalHeader?.querySelector<HTMLButtonElement>('.notification > button[aria-controls]')
 const notificationDrawer = document.querySelector<HTMLElement>('#notification-drawer')
 
