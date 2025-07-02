@@ -138,6 +138,16 @@ bottomSheetFavorites?.querySelectorAll<HTMLElement>('.close, .dragable').forEach
   })
 })
 
+// Bottom sheet news
+const bottomSheetNews = document.querySelector<HTMLElement>('#bottom-sheet-news')
+let isBottomSheetNews = false
+
+bottomSheetNews?.querySelectorAll<HTMLElement>('.close, .dragable').forEach((el) => {
+  el.addEventListener('click', () => {
+    isBottomSheetNews = toggleBottomSheet(bottomSheetNews, isBottomSheetNews)
+  })
+})
+
 /**
  * Extended Uportal Header
  */
@@ -349,6 +359,14 @@ function toggleAlert(save: boolean = true): void {
   }
   alert && (alert.style.display = isAlert ? '' : 'none')
 }
+
+/**
+ * News
+ */
+
+document.querySelector<HTMLButtonElement>('.news-layout > div > ul > li > button')?.addEventListener('click', () => {
+  isBottomSheetNews = toggleBottomSheet(bottomSheetNews, isBottomSheetNews)
+})
 
 /**
  * Dev tools
