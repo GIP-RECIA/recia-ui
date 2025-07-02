@@ -161,7 +161,9 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    transform: translateX(0);
+    &.visible {
+      transform: translateX(0);
+    }
 
     &.expended {
       ~ .topbar > .principal-container > .start {

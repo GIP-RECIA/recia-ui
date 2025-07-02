@@ -30,7 +30,7 @@ body {
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    &:has(.header .navigation-drawer) {
+    &:has(.header .navigation-drawer.visible) {
       &,
       .header > .services-layout {
         margin-left: $drawer-width;
