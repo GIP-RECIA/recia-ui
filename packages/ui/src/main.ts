@@ -284,7 +284,7 @@ notificationButton?.addEventListener('click', () => toggleNotifications())
  * Widgets
  */
 
-toggleListener('.widget', '.menu')
+toggleListener('.widget-layout > ul > li', '.menu')
 
 const widgetSection = document.querySelector<HTMLElement>('section.widget-layout')
 widgetSection?.querySelector<HTMLButtonElement>('button')?.addEventListener('click', () => {
@@ -304,7 +304,7 @@ toggleListener('.filters', '.menu')
  */
 
 // Favorite
-document.querySelectorAll<HTMLButtonElement>('.service-favorite > button').forEach((button) => {
+document.querySelectorAll<HTMLButtonElement>('.service > .favorite > button').forEach((button) => {
   button?.addEventListener('click', () => {
     const svg = button.firstElementChild as HTMLElement
     button.setAttribute('aria-label', button.getAttribute('aria-label') === 'Ajouter aux favoris' ? 'Retirer des favoris' : 'Ajouter aux favoris')
