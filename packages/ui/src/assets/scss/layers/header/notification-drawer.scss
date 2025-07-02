@@ -36,13 +36,13 @@
     justify-content: center;
     margin-top: 64px;
 
-    > svg {
+    > .icon {
       font-size: 38px;
       margin-bottom: 14px;
       opacity: 0.1;
     }
 
-    > .empty-text {
+    > .text {
       display: flex;
       flex-direction: column;
       text-align: center;
