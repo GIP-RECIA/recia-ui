@@ -255,7 +255,10 @@ function toggleFavorites() {
   }
 }
 
-favoriteButton?.addEventListener('click', () => toggleFavorites())
+favoriteButton?.addEventListener('click', () => {
+  isDrawerExpended === true && toggleDrawer()
+  toggleFavorites()
+})
 
 document.querySelectorAll<HTMLElement>('.favorite-layout').forEach((layout) => {
   const actions = layout.querySelectorAll<HTMLElement>('.actions')
@@ -280,7 +283,10 @@ function toggleServices() {
   menu && (menu.style.display = isDropdownServices ? '' : 'none')
 }
 
-servicesButton?.addEventListener('click', () => toggleServices())
+servicesButton?.addEventListener('click', () => {
+  isDrawerExpended === true && toggleDrawer()
+  toggleServices()
+})
 
 /**
  * Notifications drawer
