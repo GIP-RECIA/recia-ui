@@ -3,7 +3,7 @@
 
 @mixin notification-drawer {
   position: fixed;
-  top: $header-height + 2 * 16;
+  top: $header-height;
   bottom: 0;
   right: 0;
   width: 320px;

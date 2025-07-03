@@ -59,7 +59,7 @@ body {
     align-items: center;
     justify-content: center;
     color: inherit;
-    height: $header-height + 2 * 16;
+    height: $header-height;
     width: 72px;
     font-size: var(--#{$prefix}font-size-xxs);
     position: absolute;
@@ -96,16 +96,16 @@ body {
 
   > .topbar {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    row-gap: 32px;
-    padding: 16px;
     background-color: var(--#{$prefix}body-bg);
     box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
 
-    > .principal-container,
-    > .not-logged {
-      height: $header-height;
+    > * {
+      padding: 16px;
+
+      &.not-logged,
+      &.principal-container {
+        height: $header-height;
+      }
     }
 
     > .not-logged {
@@ -156,6 +156,12 @@ body {
   @media (width >= map.get($grid-breakpoints, md)) {
     > .topbar > .not-logged {
       justify-content: unset;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    > .topbar > .search-container {
+      display: none;
     }
   }
 }

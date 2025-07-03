@@ -10,6 +10,7 @@
 @use 'layers/favorites';
 @use 'layers/filters';
 @use 'layers/footer';
+@use 'layers/header/variables' as *;
 @use 'layers/header';
 @use 'layers/login';
 @use 'layers/news';
@@ -223,7 +224,7 @@ body {
 
     > header {
       grid-area: header;
-      height: 36px + 2 * 16;
+      height: $header-height;
     }
 
     > .alert {

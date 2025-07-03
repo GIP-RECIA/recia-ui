@@ -6,15 +6,12 @@
   align-items: center;
   justify-content: space-between;
   column-gap: 16px;
+  margin-left: $drawer-width;
 
   > .start {
     display: flex;
     column-gap: 16px;
     align-items: center;
-
-    > .button-placeholder {
-      flex: 0 0 $drawer-width - 16;
-    }
 
     > span {
       flex: 0 1 $drawer-expended-width - $drawer-width - 2 * 16;
@@ -29,7 +26,6 @@
 
     > .dropdown-info {
       display: none;
-      transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -69,15 +65,8 @@
       display: unset;
     }
 
-    > .start {
-      > span {
-        width: $drawer-expended-width - $drawer-width - 2 * 16;
-        transition: width .15s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      > .dropdown-info {
-        display: unset;
-      }
+    > .start > .dropdown-info {
+      display: unset;
     }
   }
 

@@ -20,12 +20,10 @@
   > div {
     flex: 0 0 auto;
     display: flex;
-    height: $header-height + 2 * 16;
+    align-items: center;
+    height: $header-height;
     overflow: hidden;
-
-    > .button-placeholder {
-      flex: 0 0 $drawer-width;
-    }
+    margin-left: $drawer-width;
 
     > span {
       flex: 0 0 $drawer-expended-width - $drawer-width - 2 * 16;
@@ -163,18 +161,6 @@
   @media (width >= map.get($grid-breakpoints, md)) {
     &.visible {
       transform: translateX(0);
-    }
-
-    &.expended {
-      ~ .topbar > .principal-container > .start {
-        > span {
-          width: $drawer-expended-width - $drawer-width + 16;
-        }
-
-        > .dropdown-info {
-          margin-left: 24px;
-        }
-      }
     }
   }
 }
