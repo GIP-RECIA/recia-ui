@@ -6,6 +6,16 @@ $line-height: 40px;
 $line-height-md: 50px;
 $vivible-items: 3;
 
+@keyframes widget-slide-down {
+  from {
+    max-height: 0;
+  }
+
+  to {
+    max-height: $vivible-items * $line-height;
+  }
+}
+
 @mixin widget {
   position: relative;
   border: 1px solid var(--#{$prefix}stroke);
@@ -108,6 +118,7 @@ $vivible-items: 3;
   > .menu {
     overflow: hidden;
     border-radius: 0 0 10px 10px;
+    animation: widget-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
     > * {
       height: $vivible-items * $line-height;
@@ -215,6 +226,7 @@ $vivible-items: 3;
 
     > .menu {
       display: block !important;
+      animation: none;
 
       > * {
         height: $vivible-items * $line-height-md + $vivible-items - 1;
