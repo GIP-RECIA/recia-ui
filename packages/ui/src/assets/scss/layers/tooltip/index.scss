@@ -8,8 +8,10 @@
   font-size: var(--#{$prefix}font-size-xxs);
   font-weight: bold;
 
-  > .angle {
+  &::before {
+    content: '';
     position: absolute;
+    z-index: 1000;
     height: 0;
     width: 0;
     right: calc(50% - 5px);
@@ -19,6 +21,7 @@
 
   > span {
     position: absolute;
+    z-index: 1000;
     background-color: var(--#{$prefix}basic-black);
     padding: 6px 12px;
     border-radius: 4px;
@@ -26,7 +29,7 @@
   }
 
   &.top {
-    > .angle {
+    &::before {
       bottom: calc(100% + 5px);
       border-top: 5px solid var(--#{$prefix}basic-black);
     }
@@ -45,7 +48,7 @@
   }
 
   &.bottom {
-    > .angle {
+    &::before {
       top: calc(100% + 5px);
       border-bottom: 5px solid var(--#{$prefix}basic-black);
     }
