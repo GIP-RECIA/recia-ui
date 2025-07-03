@@ -2,7 +2,6 @@
 @use 'variables' as *;
 
 @mixin principal-container {
-  height: $header-height;
   display: flex;
   align-items: center;
   justify-content: space-between;

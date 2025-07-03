@@ -4,7 +4,6 @@
 @use 'navigation-drawer' as *;
 @use 'notification-drawer' as *;
 @use 'principal-container' as *;
-@use 'search-container';
 @use 'search';
 @use 'services-layout' as *;
 
@@ -20,6 +19,12 @@ body {
         width .15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    > .topbar {
+      > .search-container {
+        transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
     > .services-layout {
       transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -32,6 +37,7 @@ body {
   @media (width >= map.get($grid-breakpoints, md)) {
     &:has(.header .navigation-drawer.visible) {
       &,
+      .header > .topbar > .search-container,
       .header > .services-layout {
         margin-left: $drawer-width;
       }
@@ -131,6 +137,11 @@ body {
 
     > .principal-container {
       @include principal-container;
+    }
+
+    > .search-container {
+      display: flex;
+      justify-content: center;
     }
   }
 
