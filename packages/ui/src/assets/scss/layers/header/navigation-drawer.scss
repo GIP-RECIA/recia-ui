@@ -33,6 +33,7 @@
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      text-wrap-style: balance;
       overflow: hidden;
       margin: 16px;
     }
