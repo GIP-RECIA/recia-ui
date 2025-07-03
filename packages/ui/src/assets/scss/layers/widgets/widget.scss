@@ -2,6 +2,10 @@
 @use '../../recia-style' as *;
 @use '../actions' as *;
 
+$line-height: 40px;
+$line-height-md: 50px;
+$vivible-items: 3;
+
 @mixin widget {
   position: relative;
   border: 1px solid var(--#{$prefix}stroke);
@@ -106,7 +110,7 @@
     border-radius: 0 0 10px 10px;
 
     > * {
-      height: 40px * 3;
+      height: $vivible-items * $line-height;
     }
 
     > ul {
@@ -124,7 +128,7 @@
           gap: 12px;
           padding: 16px 12px;
           width: 100%;
-          height: 40px;
+          height: $line-height;
 
           > .icon {
             flex-shrink: 0;
@@ -213,7 +217,7 @@
       display: block !important;
 
       > * {
-        height: 50px * 3 + 2px;
+        height: $vivible-items * $line-height-md + $vivible-items - 1;
       }
 
       > ul > li {
