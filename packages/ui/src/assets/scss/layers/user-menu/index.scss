@@ -118,6 +118,12 @@
     }
   }
 
+  @media (width >= map.get($custom-breakpoints, user-info)) {
+    > ul > li:has(> button#search) {
+      display: none;
+    }
+  }
+
   @media (width >= map.get($grid-breakpoints, md)) {
     > .notification-dot {
       display: none;
@@ -134,8 +140,10 @@
     }
 
     > ul > li {
-      &:has(> button#notification),
-      &:has(> button#info-etab) {
+      &:has(
+        > button#notification,
+        > button#info-etab
+      ) {
         display: none;
       }
 

@@ -211,7 +211,7 @@ function toggleSearch(): void {
   extendedUportalHeaderExpended && (extendedUportalHeaderExpended.style.display = isExtendedUportalHeaderExpended ? '' : 'none')
 }
 
-extendedUportalHeader?.querySelector<HTMLButtonElement>(('.end > button.search-button'))?.addEventListener('click', () => toggleSearch())
+extendedUportalHeader?.querySelector<HTMLButtonElement>('button[aria-label="Rechercher dans l\'ENT"]')?.addEventListener('click', () => toggleSearch())
 search?.querySelector<HTMLButtonElement>('.search-field > .end > button')?.addEventListener('click', () => toggleSearch())
 
 /**

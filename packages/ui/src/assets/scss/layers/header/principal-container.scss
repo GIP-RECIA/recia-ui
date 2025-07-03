@@ -31,6 +31,7 @@
   }
 
   > .middle {
+    display: none;
   }
 
   > .end {
@@ -39,20 +40,7 @@
     column-gap: 16px;
 
     > .search-button {
-      @include button-and-tag;
-      font-family: $sora;
-      font-weight: 600;
-      font-size: var(--#{$prefix}font-size-md);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      padding: 12px;
-      border: 1px solid var(--#{$prefix}stroke);
-      background-color: var(--#{$prefix}basic-grey);
-
-      &:focus-visible {
-        outline: 4px solid var(--#{$prefix}primary);
-      }
+      display: none;
     }
 
     > .notification {
@@ -61,12 +49,15 @@
     }
   }
 
-  @media (width >= map.get($grid-breakpoints, md)) {
-    > .end > .notification {
+  @media (width >= map.get($custom-breakpoints, user-info)) {
+    > .end > .search-button {
       display: unset;
     }
+  }
 
-    > .start > .dropdown-info {
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .start > .dropdown-info,
+    > .end > .notification {
       display: unset;
     }
   }
