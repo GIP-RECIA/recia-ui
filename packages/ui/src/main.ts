@@ -197,23 +197,6 @@ eyebrow?.querySelector<HTMLButtonElement>('button#info-etab')?.addEventListener(
   isBottomSheetInfo = toggleBottomSheet(bottomSheetInfo, isBottomSheetInfo)
 })
 
-// Search
-const search = extendedUportalHeader?.querySelector<HTMLElement>('.search-container .search')
-
-let isExtendedUportalHeaderExpended = false
-
-function toggleSearch(): void {
-  if (!extendedUportalHeader)
-    return
-  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
-  document.documentElement.style.overflowY = isExtendedUportalHeaderExpended ? 'hidden' : ''
-  const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.search-container')
-  extendedUportalHeaderExpended && (extendedUportalHeaderExpended.style.display = isExtendedUportalHeaderExpended ? '' : 'none')
-}
-
-extendedUportalHeader?.querySelector<HTMLButtonElement>('button[aria-label="Rechercher dans l\'ENT"]')?.addEventListener('click', () => toggleSearch())
-search?.querySelector<HTMLButtonElement>('.search-field > .end > button')?.addEventListener('click', () => toggleSearch())
-
 /**
  * Navigation drawer
  */
@@ -286,6 +269,69 @@ function toggleServices() {
 servicesButton?.addEventListener('click', () => {
   isDrawerExpended === true && toggleDrawer()
   toggleServices()
+})
+
+/**
+ * Search
+ */
+
+const searchButtons = extendedUportalHeader?.querySelectorAll<HTMLButtonElement>('button[aria-label="Rechercher dans l\'ENT"]')
+const searchLayout = extendedUportalHeader?.querySelector<HTMLElement>('.topbar > .principal-container > .middle')
+const searchMask = extendedUportalHeader?.querySelector<HTMLElement>('.mask')
+const searchLayout2 = searchLayout?.querySelector('.search')
+const searchInput = searchLayout2?.querySelector<HTMLInputElement>('input')
+const searchResults = searchLayout2?.querySelector<HTMLElement>('.search-results')
+const searchClear = searchLayout2?.querySelector<HTMLButtonElement>('button')
+
+let isExtendedUportalHeaderExpended = false
+
+function toggleSearch(): void {
+  if (!extendedUportalHeader)
+    return
+  isExtendedUportalHeaderExpended = !isExtendedUportalHeaderExpended
+  // const extendedUportalHeaderExpended = extendedUportalHeader?.querySelector<HTMLElement>('.search-container')
+  // extendedUportalHeaderExpended && (extendedUportalHeaderExpended.style.display = isExtendedUportalHeaderExpended ? '' : 'none')
+  searchLayout && (searchLayout.classList.toggle('visible'))
+  searchButtons && searchButtons[0] && (searchButtons[0].style.display = isExtendedUportalHeaderExpended ? 'none' : '')
+  if (!isExtendedUportalHeaderExpended) {
+    searchInput!.value = ''
+    toggleResults(false)
+    toggleClear(false)
+  }
+}
+
+function toggleResults(val: boolean): void {
+  searchLayout2?.classList.toggle('searching', val)
+  searchMask!.style.display = val ? '' : 'none'
+  searchResults!.style.display = val ? '' : 'none'
+  document.documentElement.style.overflowY = val ? 'hidden' : ''
+}
+
+function toggleClear(val: boolean): void {
+  searchClear!.style.display = val ? '' : 'none'
+}
+
+searchButtons?.forEach((button) => {
+  button.addEventListener('click', () => toggleSearch())
+})
+
+searchInput?.addEventListener('input', (e) => {
+  const inputValue = (e.target as HTMLInputElement).value
+  toggleResults(inputValue.length >= 3)
+  toggleClear(inputValue.length > 0)
+})
+
+searchClear?.addEventListener('click', () => {
+  if (!isExtendedUportalHeaderExpended)
+    isExtendedUportalHeaderExpended = true
+  toggleSearch()
+})
+
+searchLayout?.addEventListener('click', (e) => {
+  if (!e.composedPath().includes(searchLayout2 as EventTarget)) {
+    if (isExtendedUportalHeaderExpended)
+      toggleSearch()
+  }
 })
 
 /**

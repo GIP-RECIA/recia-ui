@@ -19,10 +19,10 @@ body {
         width .15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    > .topbar {
-      > .search-container {
-        transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
-      }
+    > .topbar > .principal-container > .middle {
+      transition:
+        margin-left .15s cubic-bezier(0.4, 0, 0.2, 1),
+        transform .15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     > .services-layout {
@@ -37,7 +37,7 @@ body {
   @media (width >= map.get($grid-breakpoints, md)) {
     &:has(.header .navigation-drawer.visible) {
       &,
-      .header > .topbar > .search-container,
+      .header > .topbar > .principal-container > .middle,
       .header > .services-layout {
         margin-left: $drawer-width;
       }
@@ -51,6 +51,13 @@ body {
   right: 0;
   top: 0;
   z-index: 1030;
+
+  > .mask {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background-color: rgba(#000000, .25);
+  }
 
   > button {
     display: flex;
@@ -139,9 +146,15 @@ body {
       @include principal-container;
     }
 
-    > .search-container {
-      display: flex;
-      justify-content: center;
+    &::after {
+      content: '';
+      display: block;
+      height: 0;
+      transition: height .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:has(> .principal-container > .middle.visible)::after {
+      height: calc(var(--recia-font-size-md) + #{2 * (8.5 + 16) + 5}px);
     }
   }
 
@@ -154,14 +167,20 @@ body {
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    > .topbar > .not-logged {
-      justify-content: unset;
+    > .topbar {
+      > .not-logged {
+        justify-content: unset;
+      }
+
+      &:has(> .principal-container > .middle.visible)::after {
+        height: calc(var(--recia-font-size-md) + #{2 * (11 + 16) + 5}px);
+      }
     }
   }
 
   @media (width >= map.get($grid-breakpoints, lg)) {
-    > .topbar > .search-container {
-      display: none;
+    > .topbar:has(> .principal-container > .middle.visible)::after {
+      height: 0;
     }
   }
 }

@@ -1,6 +1,23 @@
 @use 'sass:map';
 @use 'variables' as *;
 
+@keyframes search-slide-down {
+  from {
+    transform: translateY(0);
+  }
+
+  15% {
+    z-index: -1;
+    opacity: 0;
+  }
+
+  to {
+    z-index: 4;
+    transform: translateY($header-height);
+    opacity: 1;
+  }
+}
+
 @mixin principal-container {
   display: flex;
   align-items: center;
@@ -31,7 +48,25 @@
   }
 
   > .middle {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    visibility: hidden;
+
+    &.visible {
+      visibility: visible;
+      animation: search-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    > div {
+      width: 100%;
+      padding: 16px;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 600px;
+    }
   }
 
   > .end {
@@ -63,6 +98,26 @@
   }
 
   @media (width >= map.get($grid-breakpoints, lg)) {
+    > .middle {
+      flex: 1 1 auto;
+      position: unset;
+      opacity: 1;
+      z-index: 4;
+      transform: translateY(0) !important;
+      margin: 0 !important;
+      visibility: visible;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        width: unset;
+        padding: unset;
+        margin-right: 32px;
+        margin-left: 32px;
+        max-width: unset;
+      }
+    }
+
     > .end > .search-button {
       display: none;
     }
