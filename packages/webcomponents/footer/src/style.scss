@@ -15,8 +15,11 @@
       padding-bottom: 16px;
 
       > .logo {
-        height: 45px;
-        width: auto;
+        > img {
+          max-height: 45px;
+          width: auto;
+          max-width: 100%;
+        }
       }
 
       > .links {
@@ -49,6 +52,7 @@
           > a {
             flex: 0 0 auto;
             display: inline-block;
+            max-width: 100%;
 
             > img {
               display: block;
@@ -128,6 +132,8 @@
 
       > .logo {
         flex: 0 0 100%;
+        display: flex;
+        justify-content: center;
       }
 
       > .links {
@@ -141,7 +147,7 @@
 
       > .parteners {
         flex: 0 0 auto;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 70px);
         grid-auto-rows: 36px;
         gap: 16px;
         padding: unset;
@@ -169,14 +175,18 @@
       }
 
       > .parteners {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 70px);
       }
     }
   }
 
   @media (width >= map.get($grid-breakpoints, xl)) {
-    > .top > .container > .logo {
-      flex-basis: auto;
+    > .top > .container {
+      flex-wrap: nowrap;
+
+      > .logo {
+        flex: 0 1 auto;
+      }
     }
   }
 }

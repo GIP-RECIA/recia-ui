@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
+import type { LinkType } from './types/LinkType.ts'
+import type { template } from './types/TemplateType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
+import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
+import templateService from './services/templateService.ts'
 import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -42,6 +45,12 @@ export class ReciaFooter extends LitElement {
   @property({ type: String, attribute: 'template-api-url' })
   templateApiUrl = ''
 
+  @property({ type: Array })
+  links: Array<LinkType> = []
+
+  @state()
+  template: template | null = null
+
   constructor() {
     super()
     library.add(
@@ -53,51 +62,83 @@ export class ReciaFooter extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
-  render(): TemplateResult {
-    return html`
-      <div class="footer">
-        <div class="top">
-          <div class="container">
-            <img src="./svg/netocentre.svg" class="logo" alt="">
-            <ul class="links">
-              ${
-                repeat(['Découvrir l\'ENT', 'Toute l\'actualité', 'Signaler un bug', 'Plan du site', 'Mentions légales et CGU', 'Accessibilité : partiellement conforme'], link => link, link => html`
-                  <li>
-                    <a href="#">${link}</a>
-                  </li>
-                `)
-              }
-            </ul>
-            <ul class="parteners">
-              ${
-                repeat(['', '', '', '', ''], parnter => parnter, partner => html`
-                  <li>
-                    <a href="#" target="_blank">
-                      <img src="https://placehold.co/69x59" alt="" />
-                    </a>
-                  </li>
-                `)
-              }
-            </ul>
+  protected shouldUpdate(_changedProperties: PropertyValues): boolean {
+    if (
+      _changedProperties.has('domain')
+      || _changedProperties.has('portalPath')
+      || _changedProperties.has('templateApiUrl')
+    ) {
+      this._getTemplate()
+      return false
+    }
+    if (_changedProperties.has('template') && this.template !== null) {
+      return true
+    }
+    return false
+  }
+
+  private async _getTemplate() {
+    const template = await templateService.get(this.templateApiUrl, this.domain)
+    if (template !== null) {
+      this.template = template
+    }
+  }
+
+  render(): TemplateResult | typeof nothing {
+    return this.template
+      ? html`
+          <div class="footer">
+            <div class="top">
+              <div class="container">
+                <div class="logo">
+                  <img src="${this.template.logoPath}" alt="${this.template.name}">
+                </div>
+                <ul class="links">
+                  ${
+                    repeat(['Mentions légales et CGU', 'Accessibilité : partiellement conforme'], link => link, link => html`
+                      <li>
+                        <a href="#">${link}</a>
+                      </li>
+                    `)
+                  }
+                </ul>
+                <ul class="parteners">
+                  ${
+                    repeat(this.template.sponsors || [], parnter => parnter, partner => html`
+                      <li>
+                        <a href="${partner.url}" target="_blank">
+                          <img src="${partner.logoPath}" title="${partner.name}" />
+                        </a>
+                      </li>
+                    `)
+                  }
+                </ul>
+              </div>
+            </div>
+            <div class="bottom">
+              <div class="container">
+                <ul class="links">
+                  ${
+                    repeat(this.links, link => link, link => html`
+                      <li>
+                        <a
+                          href="${link.href}"
+                          target="${link.target ?? nothing}"
+                          rel="${link.rel ?? nothing}"
+                        >
+                          ${link.name}
+                        </a>
+                      </li>
+                    `)
+                  }
+                  <li>©${new Date().getFullYear()} - ${this.template.name}</li>
+                </ul>
+                <span class="made-by">${getIcon(faHeart)} ${msg(str`Fait avec amour par le ${'GIP RECIA'}`)}</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="bottom">
-          <div class="container">
-            <ul class="links">
-              ${
-                repeat(['Apereo.org', 'ESUP-Portail'], link => link, link => html`
-                  <li>
-                    <a href="#">${link}</a>
-                  </li>
-                `)
-              }
-              <li>©${new Date().getFullYear()} - Net O'Centre</li>
-            </ul>
-            <span class="made-by">${getIcon(faHeart)} ${msg(str`Fait avec amour par le ${'GIP RECIA'}`)}</span>
-          </div>
-        </div>
-      </div>
-    `
+        `
+      : nothing
   }
 
   static styles = css`${unsafeCSS(styles)}`
