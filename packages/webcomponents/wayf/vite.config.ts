@@ -25,7 +25,13 @@ import { name } from './package.json'
 export default ({ mode }: ConfigEnv) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
+  const { VITE_BASE_URI, VITE_ALLOWED_HOSTS } = process.env
+
   return defineConfig({
+    base: mode === 'development' ? VITE_BASE_URI : undefined,
+    server: {
+      allowedHosts: JSON.parse(VITE_ALLOWED_HOSTS ?? ''),
+    },
     publicDir: mode === 'development' ? undefined : false,
     plugins: [
       svgSpritemap({
