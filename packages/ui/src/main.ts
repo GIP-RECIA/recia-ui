@@ -77,6 +77,22 @@ handleBreakpoints()
 window.addEventListener('resize', () => handleBreakpoints())
 
 /**
+ * Login
+ */
+
+const togglePasswordButton = document.querySelector<HTMLButtonElement>('#toggle-password-visibility')
+const passwordInput = document.querySelector<HTMLInputElement>('#password')
+togglePasswordButton?.addEventListener('click', () => {
+  if (!passwordInput)
+    return
+
+  passwordInput.type = passwordInput.type === 'text' ? 'password' : 'text'
+  const svg = togglePasswordButton.querySelector('svg')
+  svg?.classList.toggle('fa-eye')
+  svg?.classList.toggle('fa-eye-slash')
+})
+
+/**
  * Bottom sheet
  */
 
