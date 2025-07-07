@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-export interface templateApiResponse {
+export interface TemplateApiResponse {
   version: string
-  data: Array<templateApiData>
+  data: Array<TemplateApiData>
 }
 
-interface templateApiData {
+interface TemplateApiData {
   identity: {
     Id: string
     name: string

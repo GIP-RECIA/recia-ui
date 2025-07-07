@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface template {
+export interface Template {
   name: string
   logoPath: string
   color: string

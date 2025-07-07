@@ -15,8 +15,8 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { LinkType } from './types/LinkType.ts'
-import type { template } from './types/TemplateType.ts'
+import type { Link } from './types/LinkType.ts'
+import type { Template } from './types/TemplateType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -46,10 +46,10 @@ export class ReciaFooter extends LitElement {
   templateApiUrl = ''
 
   @property({ type: Array })
-  links: Array<LinkType> = []
+  links: Array<Link> = []
 
   @state()
-  template: template | null = null
+  template: Template | null = null
 
   constructor() {
     super()

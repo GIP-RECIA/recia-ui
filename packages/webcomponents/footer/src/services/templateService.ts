@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import type { templateApiResponse } from '../types/TemplateApiResponseType.ts'
-import type { template } from '../types/TemplateType.ts'
+import type { TemplateApiResponse } from '../types/TemplateApiResponseType.ts'
+import type { Template } from '../types/TemplateType.ts'
 
 export default class templateService {
   static async get(
     templateApiUrl: string,
     domain: string,
-  ): Promise<template | null> {
+  ): Promise<Template | null> {
     try {
       const options = {
         method: 'GET',
@@ -33,7 +33,7 @@ export default class templateService {
         throw new Error(response.statusText)
       }
 
-      const templates: templateApiResponse = await response.json()
+      const templates: TemplateApiResponse = await response.json()
 
       if (templates.data) {
         const currenTemplate = templates.data?.find(
@@ -52,7 +52,7 @@ export default class templateService {
               }
             })
           if (logo && color) {
-            const template: template = {
+            const template: Template = {
               name,
               logoPath: logo?.path ?? '',
               color,
