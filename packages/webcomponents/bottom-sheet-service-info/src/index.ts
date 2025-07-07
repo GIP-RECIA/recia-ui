@@ -15,30 +15,49 @@
  */
 
 import type { ReciaBottomSheet } from 'bottom-sheet/src'
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
+import type { ServiceInfoLayout } from './types/ServiceInfoLayoutType.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
+import { spreadAttributes } from './directives/spreadAttributesDirective.ts'
 import langHelper from './helpers/langHelper.ts'
+import infoService from './services/infoService.ts'
+import portalService from './services/portalService.ts'
 import styles from './style.scss?inline'
 import { setLocale } from './utils/localizationUtils.ts'
 import 'bottom-sheet/dist/r-bottom-sheet.js'
 import 'service-info-layout/dist/r-service-info-layout.js'
+import pathHelper from './helpers/pathHelper.ts'
 
 const tagName = componentName(name)
 
 @localized()
 @customElement(tagName)
 export class ReciaBottomSheetServiceInfo extends LitElement {
+  @property({ type: String })
+  domain = window.location.hostname
+
+  @property({ type: String, attribute: 'portal-path' })
+  portalPath = ''
+
   @property({ type: String, attribute: 'portal-info-api-url' })
   portalInfoApiUrl?: string
 
   @property({ type: String, attribute: 'service-info-api-url' })
   serviceInfoApiUrl?: string
+
+  @state()
+  data: ServiceInfoLayout | null = null
+
+  @state()
+  loading = false
+
+  lastfname?: string
 
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
@@ -60,6 +79,15 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     this.removeEventListener('service-info', this.handleEvent.bind(this))
   }
 
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('portalPath')) {
+      if (!this.portalPath || this.portalPath === '') {
+        this.portalPath = import.meta.env.VITE_PORTAL_BASE_URL
+      }
+    }
+    return true
+  }
+
   open(): void {
     this.bottomSheetRef.value!.open()
   }
@@ -68,12 +96,38 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     this.bottomSheetRef.value!.close()
   }
 
-  handleEvent(e: Event): void {
-    const event = e as CustomEvent
-    if (!event.detail.fname)
+  async handleEvent(e: Event): Promise<void> {
+    const { fname } = (e as CustomEvent).detail ?? {}
+    if (!fname)
       return
 
-    this.open()
+    if (fname !== this.lastfname) {
+      this.data = null
+      this.lastfname = fname
+      this.loading = true
+      this.open()
+    }
+    else {
+      this.open()
+      return
+    }
+
+    const [portlet, info] = await Promise.all([
+      portalService.get(
+        pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain),
+        this.domain,
+        this.portalPath,
+      ),
+      infoService.get(pathHelper.getUrl(`${this.serviceInfoApiUrl}/${fname}`, this.domain)),
+    ])
+
+    if (!portlet || !info) {
+      this.loading = false
+      return
+    }
+
+    this.data = { ...portlet, ...info }
+    this.loading = false
   }
 
   render(): TemplateResult {
@@ -82,6 +136,8 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
         ${ref(this.bottomSheetRef)}
       >
         <r-service-info-layout
+          ${spreadAttributes(this.data as Record<string, unknown> | null, new Set(['data-', 'aria-', 'loading']))}
+          ?loading="${this.loading}"
           @close="${() => this.close()}"
         >
         </r-service-info-layout>
