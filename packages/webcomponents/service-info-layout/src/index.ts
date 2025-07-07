@@ -15,7 +15,7 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { LinkType } from './types/LinkType.ts'
+import type { Link } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -29,8 +29,8 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-import { CategoryType } from './types/CategoryType.ts'
-import { OriginType } from './types/OriginType.ts'
+import { Category } from './types/CategoryType.ts'
+import { Origin } from './types/OriginType.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
@@ -46,10 +46,10 @@ export class ReciaServiceInfoLayout extends LitElement {
   name = ''
 
   @property({ type: String })
-  origin?: OriginType
+  origin?: Origin
 
   @property({ type: String })
-  category?: CategoryType
+  category?: Category
 
   @property({ type: Boolean, attribute: 'favorite', reflect: true })
   isFavorite = false
@@ -61,13 +61,13 @@ export class ReciaServiceInfoLayout extends LitElement {
   video = ''
 
   @property({ type: Array })
-  tutorials: Array<LinkType> = []
+  tutorials: Array<Link> = []
 
   @property({ type: Object, attribute: 'tutorials-link' })
-  tutorialsLink?: LinkType
+  tutorialsLink?: Link
 
   @property({ type: Object, attribute: 'launch-link' })
-  launchLink?: LinkType
+  launchLink?: Link
 
   constructor() {
     super()
@@ -91,22 +91,22 @@ export class ReciaServiceInfoLayout extends LitElement {
     return true
   }
 
-  static i18nOrigin(): Record<OriginType, string> {
+  static i18nOrigin(): Record<Origin, string> {
     return {
-      [OriginType.native]: msg(str`Sercice natif`),
-      [OriginType.external]: msg(str`Service externe`),
+      [Origin.native]: msg(str`Sercice natif`),
+      [Origin.external]: msg(str`Service externe`),
     }
   }
 
-  static i18nCategory(): Record<CategoryType, string> {
+  static i18nCategory(): Record<Category, string> {
     return {
-      [CategoryType.documentation]: msg(str`Documentation`),
-      [CategoryType.collaboratif]: msg(str`Collaboratif`),
-      [CategoryType.apprentissage]: msg(str`Apprentissage`),
-      [CategoryType.vieScolaire]: msg(str`Vie scolaire`),
-      [CategoryType.orientation]: msg(str`Orientation`),
-      [CategoryType.parametres]: msg(str`Paramètres`),
-      [CategoryType.communication]: msg(str`Communication`),
+      [Category.documentation]: msg(str`Documentation`),
+      [Category.collaboratif]: msg(str`Collaboratif`),
+      [Category.apprentissage]: msg(str`Apprentissage`),
+      [Category.vieScolaire]: msg(str`Vie scolaire`),
+      [Category.orientation]: msg(str`Orientation`),
+      [Category.parametres]: msg(str`Paramètres`),
+      [Category.communication]: msg(str`Communication`),
     }
   }
 
@@ -193,7 +193,7 @@ export class ReciaServiceInfoLayout extends LitElement {
             <div class="heading-text">
               <h1>${this.name}</h1>
               ${
-                this.origin && Object.values(OriginType).includes(this.origin)
+                this.origin && Object.values(Origin).includes(this.origin)
                   ? html`
                       <span class="origin">
                         ${ReciaServiceInfoLayout.i18nOrigin()[this.origin]}
@@ -202,7 +202,7 @@ export class ReciaServiceInfoLayout extends LitElement {
                   : nothing
               }
               ${
-                this.category && Object.values(CategoryType).includes(this.category)
+                this.category && Object.values(Category).includes(this.category)
                   ? html`
                       <span class="tag-category ${this.category}">${ReciaServiceInfoLayout.i18nCategory()[this.category]}</span>
                     `

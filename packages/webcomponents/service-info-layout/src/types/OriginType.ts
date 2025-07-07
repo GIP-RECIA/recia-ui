@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export enum OriginType {
+export enum Origin {
   native = 'native',
   external = 'external',
 }
