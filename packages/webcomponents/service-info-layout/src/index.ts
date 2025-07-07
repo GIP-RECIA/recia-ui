@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
 import type { LinkType } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
@@ -80,6 +80,15 @@ export class ReciaServiceInfoLayout extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
+  }
+
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('tutorials')) {
+      if (!Array.isArray(this.tutorials) || this.tutorials.length === 0) {
+        this.tutorials = []
+      }
+    }
+    return true
   }
 
   static i18nOrigin(): Record<OriginType, string> {
