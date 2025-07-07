@@ -52,6 +52,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         await this.resetUserFavoriteWidgets()
       }
 
+      await this.setupLocalization()
+
       // get all widgets keys known/accepted by the adapter
       this.allExistingKeys = window.WidgetAdapter.getKeys()
       const maxWidgets: number = import.meta.env.VITE_WIDGET_COUNT
@@ -85,6 +87,26 @@ export class ReciaWidgetsWrapper extends LitElement {
       }
       await this.buildWidgetSelector()
     })
+  }
+
+  @property({ type: String, attribute: 'localization-uri' })
+  localizationUri = ''
+
+  async setupLocalization() {
+    const version: string = window.WidgetAdapter.getVersion()
+    const url = `${this.localizationUri}?v=${version}`
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`)
+      }
+
+      const json = await response.json()
+      langHelper.setReference(json)
+    }
+    catch (error: any) {
+      console.error(error.message)
+    }
   }
 
   soffit: string = ''
@@ -180,8 +202,24 @@ export class ReciaWidgetsWrapper extends LitElement {
     if (this.widgetDataMap.has(key)) {
       return
     }
-    const itemsAsString: string = await this.getWidgetData(key, soffit)
+
+    let itemsAsString: string = await this.getWidgetData(key, soffit)
+    const regexForPartToLocalize = /I18N\$([A-Za-z0-9]+)\$/g
+    let execArray
+    const replaceMap: Map<string, string> = new Map()
+    // eslint-disable-next-line no-cond-assign
+    while ((execArray = regexForPartToLocalize.exec(itemsAsString)) !== null) {
+      if (!replaceMap.has(execArray[0])) {
+        replaceMap.set(execArray[0], this.t(`items.${execArray[1]}`, execArray[1]))
+      }
+    }
+    replaceMap.forEach((value: string, key: string) => {
+      itemsAsString = itemsAsString.replaceAll(key, value)
+    })
     const widgetData: WidgetData = JSON.parse(itemsAsString)
+
+    const emptyText = this.t(`empty-text.${key}`, widgetData.emptyText)
+    widgetData.emptyText = emptyText
 
     // values used for display in dev env
     if (import.meta.env.DEV) {
@@ -194,6 +232,10 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
     this.widgetDataMap.set(key, widgetData)
     this.requestUpdate()
+  }
+
+  t(key: string, defaultString?: string): string {
+    return langHelper.localTranslation(`message.${key}`, defaultString ?? 'Missing localization')
   }
 
   async getWidgetData(key: string, soffit: string): Promise<string> {
