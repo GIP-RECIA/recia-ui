@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export enum IdpIdType {
+export enum IdpId {
   ParentEleveEN = 'parentEleveEN-IdP',
   ElevesParents = 'eleves-parents',
   Catel = 'catel-IdP',

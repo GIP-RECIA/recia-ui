@@ -23,7 +23,7 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-import { IdpIdType } from './types/IdpIdType.ts'
+import { IdpId } from './types/IdpIdType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
 const tagName = componentName(name)
@@ -35,7 +35,7 @@ export class ReciaWayf extends LitElement {
   casUrl?: string
 
   @property({ type: Array, attribute: 'idp-ids' })
-  idpIds: Array<IdpIdType> = []
+  idpIds: Array<IdpId> = []
 
   @property({ type: String, attribute: 'svg-url' })
   svgUrl: string = './wayf.spritemap.svg'
@@ -48,14 +48,14 @@ export class ReciaWayf extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
-  static i18n(): Record<IdpIdType, string> {
+  static i18n(): Record<IdpId, string> {
     return {
-      [IdpIdType.ParentEleveEN]: msg(str`Élève ou parent\n(éducation nationale)`),
-      [IdpIdType.ElevesParents]: msg(str`Élève ou parent\n(enseignement agricole)`),
-      [IdpIdType.Catel]: msg(str`Personnel\n(éducation nationale)`),
-      [IdpIdType.Agri]: msg(str`Personnel\n(enseignement agricole)`),
-      [IdpIdType.RCVL]: msg(str`Personnel\n(Région Centre-Val de Loire)`),
-      [IdpIdType.AutresPublics]: msg(str`Autre public\n(utilisateur local, entreprise,...)`),
+      [IdpId.ParentEleveEN]: msg(str`Élève ou parent\n(éducation nationale)`),
+      [IdpId.ElevesParents]: msg(str`Élève ou parent\n(enseignement agricole)`),
+      [IdpId.Catel]: msg(str`Personnel\n(éducation nationale)`),
+      [IdpId.Agri]: msg(str`Personnel\n(enseignement agricole)`),
+      [IdpId.RCVL]: msg(str`Personnel\n(Région Centre-Val de Loire)`),
+      [IdpId.AutresPublics]: msg(str`Autre public\n(utilisateur local, entreprise,...)`),
     }
   }
 
@@ -64,7 +64,7 @@ export class ReciaWayf extends LitElement {
       <ul>
         ${
           repeat(
-            this.idpIds.filter(idpId => Object.values(IdpIdType).includes(idpId)),
+            this.idpIds.filter(idpId => Object.values(IdpId).includes(idpId)),
             idpId => idpId,
             idpId => html`
               <li>
