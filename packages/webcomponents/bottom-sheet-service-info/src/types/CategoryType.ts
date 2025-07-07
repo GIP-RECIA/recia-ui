@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export enum CategoryType {
+export enum Category {
   documentation = 'documentation',
   collaboratif = 'collaboratif',
   apprentissage = 'apprentissage',

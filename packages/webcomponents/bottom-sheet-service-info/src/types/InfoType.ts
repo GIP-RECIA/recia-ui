@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import type { CategoryType } from './CategoryType.ts'
+import type { Category } from './CategoryType.ts'
 import type { Link } from './LinkType.ts'
 
 export interface Info {
   description: string
   video_link?: string
-  categorie_principale?: CategoryType
+  categorie_principale?: Category
   tutorials?: Array<Link>
   resource_link?: string
   populations_cible?: Array<string>
