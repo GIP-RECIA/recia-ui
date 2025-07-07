@@ -102,12 +102,18 @@ export default class langHelper {
   }
 
   static localTranslation(stringId: string, defaultString: string): string {
-    const currentRef = this.reference?.find(ref =>
-      ref.locales.includes(this.locale),
-    )
-    const currentMessages = currentRef?.messages
-    return currentMessages
-      ? get(currentMessages as unknown, stringId, defaultString)
-      : defaultString
+    try {
+      const currentRef = this.reference?.find(ref =>
+        ref.locales.includes(this.locale),
+      )
+      const currentMessages = currentRef?.messages
+      return currentMessages
+        ? get(currentMessages as unknown, stringId, defaultString)
+        : defaultString
+    }
+    catch (error) {
+      console.error(error)
+      return defaultString
+    }
   }
 }
