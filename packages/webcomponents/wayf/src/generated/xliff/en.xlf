@@ -2,10 +2,10 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="s0125c06ad08c527e">
-  <source>Élèves ou parent
+<trans-unit id="sc974ce9fa0aac9c1">
+  <source>Élève ou parent
 (éducation nationale)</source>
-  <target>Students or parents
+  <target>Student or parents
 (national education)</target>
 </trans-unit>
 <trans-unit id="s92bd5fa4e899fd8a">

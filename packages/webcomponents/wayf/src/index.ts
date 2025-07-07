@@ -38,7 +38,7 @@ export class ReciaWayf extends LitElement {
   idpIds: Array<IdpIdType> = []
 
   @property({ type: String, attribute: 'svg-url' })
-  svgUrl: string = '/wayf.spritemap.svg'
+  svgUrl: string = './wayf.spritemap.svg'
 
   constructor() {
     super()
@@ -50,7 +50,7 @@ export class ReciaWayf extends LitElement {
 
   static i18n(): Record<IdpIdType, string> {
     return {
-      [IdpIdType.ParentEleveEN]: msg(str`Élèves ou parent\n(éducation nationale)`),
+      [IdpIdType.ParentEleveEN]: msg(str`Élève ou parent\n(éducation nationale)`),
       [IdpIdType.ElevesParents]: msg(str`Élève ou parent\n(enseignement agricole)`),
       [IdpIdType.Catel]: msg(str`Personnel\n(éducation nationale)`),
       [IdpIdType.Agri]: msg(str`Personnel\n(enseignement agricole)`),
@@ -61,7 +61,7 @@ export class ReciaWayf extends LitElement {
 
   render(): TemplateResult {
     return html`
-      <ul class="wayf-tiles">
+      <ul>
         ${
           repeat(
             this.idpIds.filter(idpId => Object.values(IdpIdType).includes(idpId)),
