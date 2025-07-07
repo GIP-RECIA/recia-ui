@@ -16,8 +16,8 @@
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { ConfigType } from './types/ConfigType.ts'
-import type { LinkType } from './types/LinkType.ts'
+import type { Config } from './types/ConfigType.ts'
+import type { Link } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faArrowRightFromBracket,
@@ -38,7 +38,7 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-import { ItemType } from './types/ItemType.ts'
+import { Item } from './types/ItemType.ts'
 import { getIcon, getIconWithStyle } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
@@ -69,27 +69,27 @@ export class ReciaUserMenu extends LitElement {
   isExpanded = false
 
   @state()
-  localConfig: ConfigType = {
-    [ItemType.Notification]: {},
-    [ItemType.Settings]: {
+  localConfig: Config = {
+    [Item.Notification]: {},
+    [Item.Settings]: {
       icon: faGear,
       link: {
         href: '',
       },
     },
-    [ItemType.InfoEtab]: {
+    [Item.InfoEtab]: {
       icon: faInfoCircle,
     },
-    [ItemType.ChangeEtab]: {
+    [Item.ChangeEtab]: {
       icon: faRightLeft,
       link: {
         href: '/uPortal/p/switchStruct/',
       },
     },
-    [ItemType.Starter]: {
+    [Item.Starter]: {
       icon: faPlay,
     },
-    [ItemType.Logout]: {
+    [Item.Logout]: {
       icon: faArrowRightFromBracket,
       link: {
         href: '/uPortal/Logout',
@@ -136,10 +136,10 @@ export class ReciaUserMenu extends LitElement {
   }
 
   mergeConfig(): void {
-    const parsedConfig = JSON.parse(this.config) as ConfigType
-    const merged: ConfigType = { ...this.localConfig }
+    const parsedConfig = JSON.parse(this.config) as Config
+    const merged: Config = { ...this.localConfig }
 
-    for (const key of Object.keys(parsedConfig) as ItemType[]) {
+    for (const key of Object.keys(parsedConfig) as Item[]) {
       const value = parsedConfig[key]
       if (value === false) {
         merged[key] = false
@@ -196,22 +196,22 @@ export class ReciaUserMenu extends LitElement {
     }))
   }
 
-  static i18n(): Record<ItemType, string> {
+  static i18n(): Record<Item, string> {
     return {
-      [ItemType.Notification]: msg(str`Notifications`),
-      [ItemType.Settings]: msg(str`Mon profil`),
-      [ItemType.InfoEtab]: msg(str`Infos de l\'établissement`),
-      [ItemType.ChangeEtab]: msg(str`Changer d\'établissement`),
-      [ItemType.Starter]: msg(str`Lancer le didacticiel`),
-      [ItemType.Logout]: msg(str`Déconnexion`),
+      [Item.Notification]: msg(str`Notifications`),
+      [Item.Settings]: msg(str`Mon profil`),
+      [Item.InfoEtab]: msg(str`Infos de l\'établissement`),
+      [Item.ChangeEtab]: msg(str`Changer d\'établissement`),
+      [Item.Starter]: msg(str`Lancer le didacticiel`),
+      [Item.Logout]: msg(str`Déconnexion`),
     }
   }
 
-  itemTemplate(item: { id: ItemType, icon?: IconDefinition, link?: LinkType | null }): TemplateResult {
+  itemTemplate(item: { id: Item, icon?: IconDefinition, link?: Link | null }): TemplateResult {
     const content = html`
       ${ReciaUserMenu.i18n()[item.id]}
       ${
-        item.id === ItemType.Notification
+        item.id === Item.Notification
           ? keyed(
               this.notification > 0 ? 'notifications' : 'no-notifications',
               html`
@@ -311,10 +311,10 @@ export class ReciaUserMenu extends LitElement {
           ${
             repeat(
               Object.entries(this.localConfig)?.filter(([key, value]) => {
-                return Object.values(ItemType).includes(key as ItemType) && value !== false
+                return Object.values(Item).includes(key as Item) && value !== false
               }),
               ([key, _]) => key,
-              ([key, value]) => this.itemTemplate({ id: key as ItemType, ...value }),
+              ([key, value]) => this.itemTemplate({ id: key as Item, ...value }),
             )
           }
         </ul>

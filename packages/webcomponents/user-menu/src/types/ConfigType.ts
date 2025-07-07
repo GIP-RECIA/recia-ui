@@ -15,13 +15,13 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { ItemType } from './ItemType'
-import type { LinkType } from './LinkType'
+import type { Item } from './ItemType'
+import type { Link } from './LinkType'
 
-export type ConfigType = Record<
-  ItemType,
+export type Config = Record<
+  Item,
   false | {
     icon?: IconDefinition
-    link?: LinkType | null
+    link?: Link | null
   }
 >

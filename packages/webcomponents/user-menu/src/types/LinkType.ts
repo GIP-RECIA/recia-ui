@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface LinkType {
+export interface Link {
   name?: string
   href: string
   target?: string

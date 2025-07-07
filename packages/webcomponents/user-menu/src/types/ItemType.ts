@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export enum ItemType {
+export enum Item {
   Notification = 'notification',
   Settings = 'settings',
   InfoEtab = 'info-etab',
