@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use '../../variables' as *;
+
+.notification-drawer {
+  position: fixed;
+  top: $header-height;
+  bottom: 0;
+  right: 0;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--#{$prefix}body-bg);
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+  clip-path: inset(0 0 0 -32px);
+  padding: 16px;
+  transform: translateX(320px + 32);
+
+  > .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    opacity: .5;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+      color: inherit;
+    }
+  }
+
+  > .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 64px;
+
+    > .icon {
+      font-size: 38px;
+      margin-bottom: 14px;
+      opacity: 0.1;
+    }
+
+    > .text {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      font-size: var(--recia-font-size-xs);
+
+      > .large {
+        font-size: var(--recia-font-size-sm);
+        font-weight: bold;
+        letter-spacing: -0.15px;
+      }
+    }
+  }
+
+  &.expended {
+    transform: translateX(0);
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .close {
+      display: none;
+    }
+  }
+}

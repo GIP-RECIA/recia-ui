@@ -1,0 +1,178 @@
+@use 'sass:map';
+@use '../../variables' as *;
+
+.search {
+  flex: 0 1 434px;
+  position: relative;
+  transition: flex-basis .15s ease-out;
+
+  &:hover,
+  &:has(
+    :focus-visible,
+    input:not(:placeholder-shown)
+  ) {
+    flex-basis: 600px;
+  }
+
+  &-field {
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    background-color: var(--#{$prefix}basic-grey);
+    outline: 1px solid var(--#{$prefix}stroke);
+
+    > .start {
+      display: inline-flex;
+      margin-left: 12px;
+      opacity: .7;
+
+      > svg {
+        font-size: 16px;
+      }
+    }
+
+    > .middle {
+      flex: 1 1 0;
+      margin-inline: 8px;
+
+      > input {
+        width: 100%;
+        padding-top: 8.5px;
+        padding-bottom: 8.5px;
+        outline: unset;
+        font-size: var(--#{$prefix}font-size-md);
+      }
+    }
+
+    > .end {
+      display: inline-flex;
+      margin-right: 3px;
+      opacity: .7;
+
+      > button {
+        display: inline-flex;
+
+        > svg {
+          color: var(--#{$prefix}basic-black);
+          font-size: 16px;
+        }
+      }
+    }
+
+    &:hover,
+    &:has(input:focus-visible) {
+      outline: 2px solid var(--#{$prefix}primary);
+      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+
+      > .start > svg {
+        color: var(--#{$prefix}primary);
+      }
+    }
+  }
+
+  &-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    @include unstyled-list;
+    width: 100%;
+    background-color: var(--#{$prefix}body-bg);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    border-radius: 8px;
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    max-height: calc(100vh - 126px);
+    overflow-y: auto;
+
+    > li {
+      > .section-name {
+        color: var(--#{$prefix}basic-black-lighter);
+        display: block;
+        font-weight: 500;
+        font-style: italic;
+        border-bottom: 1px solid var(--#{$prefix}stroke);
+        margin-bottom: 8px;
+        padding: 4px 10px;
+      }
+
+      > ul {
+        @include unstyled-list;
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+
+        > li > a {
+          @include unstyled-link;
+          display: block;
+          background-color: #F8F8F8;
+          border-radius: 4px;
+          padding: 8px 10px;
+          outline: none;
+
+          > header {
+            > .result-title {
+              font-family: $sora;
+              font-size: var(--#{$prefix}font-size-sm);
+              line-height: 140%;
+              margin-bottom: 4px;
+            }
+
+            > .result-tag {
+              display: inline-flex;
+              font-family: $dm-sans;
+              font-size: var(--#{$prefix}font-size-xs);
+              font-weight: 500;
+              margin-right: 4px;
+              padding: 4px 10px;
+              border-radius: 13px;
+              background-color: var(--#{$prefix}stroke);
+
+              @each $type, $values in $categories {
+                &.#{$type} {
+                  background-color: var(--#{$prefix}#{$type});
+                  color: var(--#{$prefix}#{$type}-text);
+                }
+              }
+            }
+          }
+
+          > span {
+            line-height: 150%;
+          }
+
+          &:hover,
+          &:focus-visible {
+            background-color: #F0F0F0;
+
+            > header > .result-title {
+              color: var(--#{$prefix}primary);
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    &-field {
+      > .start {
+        margin-left: 18px;
+      }
+
+      > .middle {
+        margin-inline: 16px;
+
+        > input {
+          padding-top: 11px;
+          padding-bottom: 11px;
+        }
+      }
+
+      > .end {
+        margin-right: 5px;
+      }
+    }
+  }
+}

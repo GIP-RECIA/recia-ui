@@ -1,0 +1,123 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+body {
+  &.transition-active {
+    transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &.transition-active .header {
+    > .navigation-drawer {
+      transition:
+        transform .15s cubic-bezier(0.4, 0, 0.2, 1),
+        width .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    > .topbar > .principal-container > .middle {
+      transition:
+        margin-left .15s cubic-bezier(0.4, 0, 0.2, 1),
+        transform .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    > .services-layout {
+      transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    > .notification-drawer {
+      transition: transform .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    &:has(.header .navigation-drawer.visible) {
+      &,
+      .header > .topbar > .principal-container > .middle,
+      .header > .services-layout {
+        margin-left: $drawer-width;
+      }
+    }
+  }
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1030;
+
+  > .mask {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background-color: rgba(#000000, .25);
+  }
+
+  > .topbar {
+    position: relative;
+    background-color: var(--#{$prefix}body-bg);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+
+    > * {
+      display: block;
+      height: $header-height;
+      padding: 16px;
+    }
+
+    > .not-logged {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > .logo {
+        flex: 0 1 auto;
+        height: 27px;
+        width: auto;
+      }
+
+      > button,
+      > a {
+        flex: 0 0 auto;
+        @include button-and-tag;
+        font-family: $sora;
+        padding: 6px 12px;
+        font-weight: 600;
+        font-size: var(--#{$prefix}font-size-md);
+        margin-right: -12px;
+
+        &:focus-visible {
+          outline: 4px solid var(--#{$prefix}primary);
+        }
+      }
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 0;
+      transition: height .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:has(> .principal-container > .middle.visible)::after {
+      height: calc(var(--recia-font-size-md) + #{2 * (8.5 + 16) + 5}px);
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .topbar {
+      > .not-logged {
+        justify-content: unset;
+      }
+
+      &:has(> .principal-container > .middle.visible)::after {
+        height: calc(var(--recia-font-size-md) + #{2 * (11 + 16) + 5}px);
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    > .topbar:has(> .principal-container > .middle.visible)::after {
+      height: 0;
+    }
+  }
+}

@@ -1,0 +1,125 @@
+@use 'sass:map';
+@use '../../variables' as *;
+
+@keyframes search-slide-down {
+  from {
+    transform: translateY(0);
+  }
+
+  15% {
+    z-index: -1;
+    opacity: 0;
+  }
+
+  to {
+    z-index: 4;
+    transform: translateY($header-height);
+    opacity: 1;
+  }
+}
+
+.principal-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+  margin-left: $drawer-width;
+
+  > .start {
+    display: flex;
+    column-gap: 16px;
+    align-items: center;
+
+    > span {
+      flex: 0 1 $drawer-expended-width - $drawer-width - 2 * 16;
+      font-family: $sora;
+      font-size: var(--#{$prefix}font-size-sm);
+      font-weight: 600;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-wrap-style: balance;
+      overflow: hidden;
+    }
+
+    > .dropdown-info {
+      display: none;
+    }
+  }
+
+  > .middle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    visibility: hidden;
+
+    &.visible {
+      visibility: visible;
+      animation: search-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    > div {
+      width: 100%;
+      padding: 16px;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 600px;
+    }
+  }
+
+  > .end {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+
+    > .search-button {
+      display: none;
+    }
+
+    > .notification {
+      display: none;
+      position: relative;
+    }
+  }
+
+  @media (width >= map.get($custom-breakpoints, user-info)) {
+    > .end > .search-button {
+      display: unset;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .start > .dropdown-info,
+    > .end > .notification {
+      display: unset;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    > .middle {
+      flex: 1 1 auto;
+      position: unset;
+      opacity: 1;
+      z-index: 4;
+      transform: translateY(0) !important;
+      margin: 0 !important;
+      visibility: visible;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        width: unset;
+        padding: unset;
+        margin-right: 32px;
+        margin-left: 32px;
+        max-width: unset;
+      }
+    }
+
+    > .end > .search-button {
+      display: none;
+    }
+  }
+}
