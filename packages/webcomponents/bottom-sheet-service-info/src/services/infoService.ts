@@ -15,7 +15,7 @@
  */
 
 import type { Info } from '../types/InfoType.ts'
-import { ServiceInfoLayout } from '../types/ServiceInfoLayoutType.ts'
+import type { ServiceInfoLayout } from '../types/ServiceInfoLayoutType.ts'
 
 export default class infoService {
   static async get(serviceInfoApiUrl: string): Promise<Partial<ServiceInfoLayout> | null> {

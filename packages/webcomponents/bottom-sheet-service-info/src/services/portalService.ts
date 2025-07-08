@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import pathHelper from '../helpers/pathHelper.ts'
 import type { Portlet } from '../types/PortletType.ts'
-import { ServiceInfoLayout } from '../types/ServiceInfoLayoutType.ts'
+import type { ServiceInfoLayout } from '../types/ServiceInfoLayoutType.ts'
+import pathHelper from '../helpers/pathHelper.ts'
 
 export default class portalService {
   static async get(
@@ -42,7 +42,7 @@ export default class portalService {
           title,
           iconUrl,
           fname,
-          parameters: { alternativeMaximizedLink, alternativeMaximizedLinkTarget }
+          parameters: { alternativeMaximizedLink, alternativeMaximizedLinkTarget },
         } = data.portlet
 
         return {
@@ -51,8 +51,8 @@ export default class portalService {
           'launch-link': {
             href: alternativeMaximizedLink ?? pathHelper.getUrl(`${portalPath}/p/${fname}`, domain),
             target: alternativeMaximizedLinkTarget ?? '_self',
-            rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined
-          }
+            rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined,
+          },
         }
       }
       else {

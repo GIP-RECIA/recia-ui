@@ -153,42 +153,42 @@ export class ReciaWidget extends LitElement {
           ${
             this.localItems.length > 0
               ? html`
-                <ul>
-                  ${
-                    repeat(this.localItems, item => item.name, item => html`
-                      <li>
-                        <a href="${item.link}" title="${item.name}">
-                          ${unsafeSVG(item.icon)}
-                          <span>${item.name}</span>
-                        </a>
-                      </li>
-                    `)
-                  }
-                </ul>
-              `
-              : html`
-                <div class="empty">
-                  ${
-                    !this.emptyDiscover
-                      ? this.emptyIcon
-                        ? unsafeSVG(this.emptyIcon)
-                        : getIconWithStyle(faInfoCircle, {}, { 'empty-icon': true })
-                      : nothing
-                  }
-                  <span class="empty-text">
-                    ${msg(str`Vous n'avez`)}<span class="large">${this.emptyText}</span>
-                  </span>
-                  ${
-                    this.emptyDiscover
-                      ? html`
-                          <a href="${this.link}" class="btn-secondary small">
-                            ${msg(str`Découvrir`)}${getIcon(faArrowRight)}
+                  <ul>
+                    ${
+                      repeat(this.localItems, item => item.name, item => html`
+                        <li>
+                          <a href="${item.link}" title="${item.name}">
+                            ${unsafeSVG(item.icon)}
+                            <span>${item.name}</span>
                           </a>
-                        `
-                      : nothing
-                  }
-                </div>
-              `
+                        </li>
+                      `)
+                    }
+                  </ul>
+                `
+              : html`
+                  <div class="empty">
+                    ${
+                      !this.emptyDiscover
+                        ? this.emptyIcon
+                          ? unsafeSVG(this.emptyIcon)
+                          : getIconWithStyle(faInfoCircle, {}, { 'empty-icon': true })
+                        : nothing
+                    }
+                    <span class="empty-text">
+                      ${msg(str`Vous n'avez`)}<span class="large">${this.emptyText}</span>
+                    </span>
+                    ${
+                      this.emptyDiscover
+                        ? html`
+                            <a href="${this.link}" class="btn-secondary small">
+                              ${msg(str`Découvrir`)}${getIcon(faArrowRight)}
+                            </a>
+                          `
+                        : nothing
+                    }
+                  </div>
+                `
           }
         </div>
       </li>

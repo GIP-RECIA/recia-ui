@@ -15,11 +15,11 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import { Link } from './LinkType'
-import { Item } from './ItemType'
+import type { Item } from './ItemType'
+import type { Link } from './LinkType'
 
 export interface Information {
-  id: Item,
+  id: Item
   icon?: IconDefinition
   link?: Link | null
   value?: string

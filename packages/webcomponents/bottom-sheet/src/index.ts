@@ -208,14 +208,14 @@ export class ReciaBottomSheet extends LitElement {
             ${
               !this.closeIcon
                 ? html`
-                  <button
-                    class="btn-tertiary circle close"
-                    aria-label="Fermer la modale"
-                    @click="${this.close}"
-                  >
-                    ${getIcon(faTimes)}
-                  </button>
-                `
+                    <button
+                      class="btn-tertiary circle close"
+                      aria-label="Fermer la modale"
+                      @click="${this.close}"
+                    >
+                      ${getIcon(faTimes)}
+                    </button>
+                  `
                 : nothing
             }
             <slot></slot>

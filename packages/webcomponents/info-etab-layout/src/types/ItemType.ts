@@ -15,8 +15,8 @@
  */
 
 export enum Item {
-  Adress= 'adress',
+  Adress = 'adress',
   Mail = 'mail',
   Phone = 'phone',
-  Website = 'website'
+  Website = 'website',
 }

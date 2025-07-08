@@ -25,6 +25,6 @@ export default class pathHelper {
     if (baseUrl !== '' && !baseUrl.startsWith('http'))
       baseUrl = `${debug ? 'http' : 'https'}://${baseUrl}`
 
-    return baseUrl + path;
+    return baseUrl + path
   }
 }

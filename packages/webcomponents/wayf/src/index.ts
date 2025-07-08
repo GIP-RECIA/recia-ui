@@ -75,7 +75,7 @@ export class ReciaWayf extends LitElement {
                   <span>${ReciaWayf.i18n()[idpId]}</span>
                 </a>
               </li>
-          `,
+            `,
           )
         }
       </ul>

@@ -237,24 +237,24 @@ export class ReciaUserMenu extends LitElement {
             `${item.id}-${item.link && item.link.href.trim() !== '' ? 'link' : 'button'}`,
             item.link && item.link.href.trim() !== ''
               ? html`
-              <a
-                id="${item.id}"
-                href="${item.link.href}"
-                target="${item.link.target ?? nothing}"
-                rel="${item.link.rel ?? nothing}"
-                @click="${this.closeDropdown}"
-              >
-                ${content}
-              </a>
-            `
+                  <a
+                    id="${item.id}"
+                    href="${item.link.href}"
+                    target="${item.link.target ?? nothing}"
+                    rel="${item.link.rel ?? nothing}"
+                    @click="${this.closeDropdown}"
+                  >
+                    ${content}
+                  </a>
+                `
               : html`
-              <button
-                id="${item.id}"
-                @click="${(e: Event) => this.emitEvent(e, item.id)}"
-              >
-                ${content}
-              </button>
-            `,
+                  <button
+                    id="${item.id}"
+                    @click="${(e: Event) => this.emitEvent(e, item.id)}"
+                  >
+                    ${content}
+                  </button>
+                `,
           )
         }
       </li>

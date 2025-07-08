@@ -118,18 +118,18 @@ export class ReciaServiceInfoLayout extends LitElement {
   videoTemplate(): TemplateResult | typeof nothing {
     return this.video
       ? html`
-        <section class="first-step">
-          <h2 class="h3">${msg(str`Premiers pas avec le service`)}</h2>
-          <div class="video">
-            <iframe
-              src="${this.video}"
-              width="640"
-              height="360"
-              allowfullscreen
-            >
-            </iframe>
-          </div>
-        </section>
+          <section class="first-step">
+            <h2 class="h3">${msg(str`Premiers pas avec le service`)}</h2>
+            <div class="video">
+              <iframe
+                src="${this.video}"
+                width="640"
+                height="360"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+          </section>
         `
       : nothing
   }
@@ -161,14 +161,14 @@ export class ReciaServiceInfoLayout extends LitElement {
           ${
             this.tutorialsLink
               ? html`
-                <a
-                  href="${this.tutorialsLink.href}"
-                  class="btn-secondary small"
-                >
-                  ${msg(str`Voir tous les tutoriels`)}
-                  ${getIcon(faArrowRight)}
-                </a>
-              `
+                  <a
+                    href="${this.tutorialsLink.href}"
+                    class="btn-secondary small"
+                  >
+                    ${msg(str`Voir tous les tutoriels`)}
+                    ${getIcon(faArrowRight)}
+                  </a>
+                `
               : nothing
           }
         </section>
@@ -219,12 +219,12 @@ export class ReciaServiceInfoLayout extends LitElement {
                 this.isFavorite,
                 this.isFavorite
                   ? html`
-                    ${getIcon(faStar)}
-                    ${msg(str`Retirer des favoris`)}
+                      ${getIcon(faStar)}
+                      ${msg(str`Retirer des favoris`)}
                     `
                   : html`
-                    ${getIcon(farStar)}
-                    ${msg(str`Ajouter aux favoris`)}
+                      ${getIcon(farStar)}
+                      ${msg(str`Ajouter aux favoris`)}
                     `,
               )
             }
@@ -248,15 +248,15 @@ export class ReciaServiceInfoLayout extends LitElement {
           ${
             this.launchLink
               ? html`
-                <a href="${this.launchLink.href}"
-                  target="${this.launchLink.target ?? nothing}"
-                  rel="${this.launchLink.rel ?? nothing}"
-                  class="btn-primary launch"
-                >
-                  ${msg(str`Lancer le service`)}
-                  ${getIcon(faArrowRight)}
-                </a>
-              `
+                  <a href="${this.launchLink.href}"
+                    target="${this.launchLink.target ?? nothing}"
+                    rel="${this.launchLink.rel ?? nothing}"
+                    class="btn-primary launch"
+                  >
+                    ${msg(str`Lancer le service`)}
+                    ${getIcon(faArrowRight)}
+                  </a>
+                `
               : nothing
           }
         </footer>

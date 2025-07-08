@@ -26,13 +26,13 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import { spreadAttributes } from './directives/spreadAttributesDirective.ts'
 import langHelper from './helpers/langHelper.ts'
+import pathHelper from './helpers/pathHelper.ts'
 import infoService from './services/infoService.ts'
 import portalService from './services/portalService.ts'
 import styles from './style.scss?inline'
 import { setLocale } from './utils/localizationUtils.ts'
 import 'bottom-sheet/dist/r-bottom-sheet.js'
 import 'service-info-layout/dist/r-service-info-layout.js'
-import pathHelper from './helpers/pathHelper.ts'
 
 const tagName = componentName(name)
 
