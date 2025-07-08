@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use '../../tooltip/src/style';
+@use '../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+
+.dropdown-info {
+  position: relative;
+  display: inline-block;
+
+  > button.active {
+    position: relative;
+    z-index: 1056;
+  }
+
+  > .mask {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background-color: rgba(#000000, .25);
+  }
+
+  > .menu {
+    position: absolute;
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 10px;
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    overflow: hidden;
+    z-index: 1055;
+    padding: 32px;
+
+    &.top {
+      bottom: -8px;
+
+      &.right {
+        left: -8px;
+        padding-left: 58px;
+        border-bottom-left-radius: 20px;
+      }
+
+      &.left {
+        right: -8px;
+        padding-right: 58px;
+        border-bottom-right-radius: 20px;
+      }
+    }
+
+    &.bottom {
+      top: -8px;
+
+      &.right {
+        left: -8px;
+        padding-left: 58px;
+        border-top-left-radius: 20px;
+      }
+
+      &.left {
+        right: -8px;
+        padding-right: 58px;
+        border-top-right-radius: 20px;
+      }
+    }
+
+    &.no-padding {
+      padding: 0 !important;
+    }
+  }
+}
