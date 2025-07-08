@@ -36,7 +36,10 @@ const tagName = componentName(name)
 @customElement(tagName)
 export class ReciaDropdownInfo extends LitElement {
   @property({ type: String })
-  location: Location = Location.BottomRight
+  location?: Location = Location.BottomRight
+
+  @property({ type: String })
+  label?: string = ''
 
   @property({ type: Boolean, attribute: 'no-padding' })
   noPadding = false
@@ -58,10 +61,29 @@ export class ReciaDropdownInfo extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener('keyup', this.handleKeyPress.bind(this))
+    window.addEventListener('keyup', this.handleOutsideEvents.bind(this))
+    window.addEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.removeEventListener('keyup', this.handleKeyPress.bind(this))
+    window.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
+    window.removeEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('location')) {
-      if (!Object.values(Location).includes(this.location)) {
+      if (!this.location || !Object.values(Location).includes(this.location)) {
         this.location = Location.BottomRight
+      }
+    }
+    if (_changedProperties.has('label')) {
+      if (!this.label || this.label.trim().length === 0) {
+        this.label = ''
       }
     }
     return true
@@ -73,16 +95,41 @@ export class ReciaDropdownInfo extends LitElement {
     this.isExpanded = !this.isExpanded
   }
 
+  closeDropdown(e: Event, resetFocus: boolean = true): void {
+    e.stopPropagation()
+    this.isExpanded = false
+    if (resetFocus)
+      this.shadowRoot?.getElementById('dropdown-info-button')?.focus()
+  }
+
+  handleKeyPress(e: KeyboardEvent): void {
+    if (this.isExpanded && e.key === 'Escape') {
+      e.preventDefault()
+      this.closeDropdown(e)
+    }
+  }
+
+  handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
+    if (
+      this.isExpanded
+      && e.target instanceof HTMLElement
+      && !(this.contains(e.target) || e.composedPath().includes(this))
+    ) {
+      this.isExpanded = false
+    }
+  }
+
   render(): TemplateResult {
     return html`
       <div class="dropdown-info">
         <button
+          id="dropdown-info-button"
           class="${classMap({
             active: this.isExpanded,
           })}btn-secondary-toggle circle"
           aria-expanded="${this.isExpanded}"
           aria-controls="dropdown-info-menu"
-          aria-label="${msg(str`Menu TODO`)}"
+          aria-label="${msg(str`Menu ${this.label}`)}"
           @click="${this.toggleDropdown}"
         >
           ${getIcon(faCircleInfo)}
@@ -104,7 +151,7 @@ export class ReciaDropdownInfo extends LitElement {
           id="dropdown-info-menu"
           class="${classMap({
             'no-padding': this.noPadding,
-            [this.location]: true,
+            [this.location!]: true,
           })}menu"
           style="${styleMap({
             display: this.isExpanded ? undefined : 'none',

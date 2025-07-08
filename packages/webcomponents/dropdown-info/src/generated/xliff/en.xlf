@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
-<body/>
+<body>
+<trans-unit id="s0b1729a212cce6d0">
+  <source>Menu <x id="0" equiv-text="${this.label}"/></source>
+  <target><x id="0" equiv-text="${this.label}"/> menu</target>
+</trans-unit>
+</body>
 </file>
 </xliff>
