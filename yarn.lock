@@ -2162,6 +2162,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bottom-sheet-esidoc-search@workspace:packages/webcomponents/bottom-sheet-esidoc-search":
+  version: 0.0.0-use.local
+  resolution: "bottom-sheet-esidoc-search@workspace:packages/webcomponents/bottom-sheet-esidoc-search"
+  dependencies:
+    "@antfu/eslint-config": "npm:^5.4.1"
+    "@lit/localize": "npm:^0.12.2"
+    "@lit/localize-tools": "npm:^0.8.0"
+    "@types/lodash-es": "npm:^4"
+    bottom-sheet: "workspace:^"
+    eslint: "npm:^9.36.0"
+    eslint-plugin-format: "npm:^1.0.1"
+    lit: "npm:^3.3.1"
+    lodash-es: "npm:^4.17.21"
+    ress: "npm:^5.0.2"
+    sass: "npm:^1.93.0"
+    typescript: "npm:^5.9.2"
+    vite: "npm:^7.1.6"
+    vite-plugin-dts: "npm:^4.5.4"
+  languageName: unknown
+  linkType: soft
+
 "bottom-sheet@workspace:^, bottom-sheet@workspace:packages/webcomponents/bottom-sheet":
   version: 0.0.0-use.local
   resolution: "bottom-sheet@workspace:packages/webcomponents/bottom-sheet"
