@@ -73,6 +73,9 @@ export class ReciaWidgetsWrapper extends LitElement {
           this.widgetToDisplayKeyArray = [...new Set(intersection.concat(this.filteredRequiredWidgetsKeys).concat(this.filteredUserFavoriteWidgetsKeys))].slice(0, maxWidgets)
         }
       }
+      else {
+        this.widgetToDisplayKeyArray = intersection
+      }
       this.filteredRequiredWidgetsKeys = this.intersect(this.filteredRequiredWidgetsKeys, this.widgetToDisplayKeyArray)
       this.filteredUserFavoriteWidgetsKeys = this.widgetToDisplayKeyArray
       await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
