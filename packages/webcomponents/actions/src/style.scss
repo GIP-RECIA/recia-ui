@@ -1,0 +1,78 @@
+@use '../../common/assets/scss/global' as *;
+
+%action-button {
+  @include button-and-tag;
+  border-radius: 9px;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+  font-size: var(--#{$prefix}font-size-md);
+  outline: none;
+}
+
+@mixin actions {
+  position: absolute;
+  inset: 0 -14px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+
+  > .action {
+    &-delete {
+      position: absolute;
+      top: 6px;
+      right: 6px + 14px;
+
+      > button {
+        @extend %action-button;
+        background-color: unset;
+        color: var(--#{$prefix}system-red);
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--#{$prefix}system-red);
+          color: $white;
+        }
+      }
+    }
+
+    &-back,
+    &-next {
+      opacity: 0;
+
+      > button {
+        @extend %action-button;
+        background-color: var(--#{$prefix}btn-primary-bg);
+        color: var(--#{$prefix}btn-primary);
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--#{$prefix}primary);
+        }
+
+        &:disabled {
+          background-color: var(--#{$prefix}stroke);
+          color: HEXToRGBA(var(--#{$prefix}basic-black), .3);
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    display: none;
+  }
+
+  &:hover,
+  &:has(:focus-visible) {
+    z-index: 2;
+
+    > .action {
+      &-back,
+      &-next {
+        opacity: 1;
+      }
+    }
+  }
+}
