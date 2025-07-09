@@ -14,40 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -euo pipefail
+excludes=()
+for name in $(yarn workspaces list --json | jq -r 'select(.location | startswith("packages/webcomponents/") | not) | .name'); do
+  excludes+=(--exclude "$name")
+done
+
+yarn workspaces foreach -A --topological-dev "${excludes[@]}" run build
 
 ROOT_DIR=$(pwd)
 SOURCE_DIR="$ROOT_DIR/packages/webcomponents"
 TARGET_DIR="$ROOT_DIR/packages/ui-webcomponents"
 PREFIX="r-"
 
-error=false
-
-echo "🚀 Démarrage du build des webcomponents..."
-
 mkdir -p "$TARGET_DIR/dist" "$TARGET_DIR/docs"
 rm -rf "$TARGET_DIR/dist"/* "$TARGET_DIR/docs"/*
 
 for dir in "$SOURCE_DIR"/*/; do
   if [ -f "${dir}package.json" ]; then
-    echo ""
-    echo "📦 Build de $(basename "$dir")"
-
-    pushd "$dir" > /dev/null
-    if yarn build; then
-      cp dist/*.js* "$TARGET_DIR/dist" 2>/dev/null
-      cp README.md "$TARGET_DIR/docs/$PREFIX$(basename "$dir").md" 2>/dev/null
-    else
-      error=true
-    fi
-    popd > /dev/null
+    cp "$dir"/dist/*.js* "$TARGET_DIR/dist" 2>/dev/null
+    cp "$dir"/README.md "$TARGET_DIR/docs/$PREFIX$(basename "$dir").md" 2>/dev/null
   fi
 done
-
-echo ""
-if $error; then
-  echo "❌️ Echec du build pour un ou plusieurs packages"
-  exit 1
-else
-  echo "✅ Build terminé avec succès"
-fi
