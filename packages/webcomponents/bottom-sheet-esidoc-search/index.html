@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="/index.ts"></script>
+  <link rel="stylesheet" href="/assets/index.css" />
+</head>
+
+<body class="container">
+  <section>
+    <div id="buttons" style="display: flex; gap: 4px;">
+    </div>
+        <r-bottom-sheet-esidoc-search istest escouaicouranttest="%VITE_ESCOUAI_TEST%" eventName="%VITE_EVENT_OPEN%" esidocUriRecherche="%VITE_ESIDOC_RECHERCHE_URI%" soffitUri="%VITE_SOFFIT_URI%">
+    </r-bottom-sheet-esidoc-search>
+  </section>
+<!--    -->
+  <script>
+     const fname = 'Open'
+    const buttonsRoot = document.querySelector('#buttons')
+    const bottomSheet = document.querySelector('r-bottom-sheet-esidoc-search')
+
+      const button = document.createElement('button')
+      button.innerText = fname
+      button.addEventListener('click', () => {
+        console.log('%VITE_EVENT_OPEN%')
+        window.dispatchEvent(new CustomEvent('%VITE_EVENT_OPEN%'))
+      })
+      buttonsRoot.appendChild(button)
+      setTimeout(()=>{button.click()}, 1000);
+
+  </script>
+</body>
+
+</html>

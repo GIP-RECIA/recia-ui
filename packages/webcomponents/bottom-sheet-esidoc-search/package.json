@@ -36,16 +36,21 @@
   },
   "dependencies": {
     "@lit/localize": "^0.12.2",
-    "lit": "^3.3.1"
+    "axios": "^1.10.0",
+    "lit": "^3.3.1",
+    "query-selector-shadow-dom": "^1.0.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
     "@lit/localize-tools": "^0.8.0",
     "@types/lodash-es": "^4",
+    "@types/regenerator-runtime": "^0",
+    "@uportal/open-id-connect": "^1.40.2",
     "bottom-sheet": "workspace:^",
     "eslint": "^9.36.0",
     "eslint-plugin-format": "^1.0.1",
     "lodash-es": "^4.17.21",
+    "regenerator-runtime": "^0.14.1",
     "ress": "^5.0.2",
     "sass": "^1.93.0",
     "typescript": "^5.9.2",
