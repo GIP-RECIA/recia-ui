@@ -1,0 +1,168 @@
+@use 'sass:map';
+@use '../../../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+.info-etab-layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  > .image-container {
+    flex: 0 0 244px;
+    display: none;
+    position: relative;
+    width: 244px;
+    overflow: hidden;
+
+    > img  {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &.padding {
+    > .image-container {
+      border-radius: 4px;
+    }
+  }
+
+  > .content-container {
+    flex: 0 1 auto;
+
+    > header {
+      display: flex;
+      align-items: center;
+      column-gap: 16px;
+      margin-bottom: 16px;
+      font-family: $sora;
+
+      > svg {
+        flex-shrink: 0;
+        height: 36px;
+        width: 36px;
+        margin: -4px;
+        --logo-simple-color: var(--#{$prefix}primary);
+      }
+
+      > .heading {
+        > .etab {
+          display: block;
+          font-size: var(--#{$prefix}font-size-lg);
+          font-weight: bold;
+        }
+
+        > .acad {
+          display: block;
+          font-size: var(--#{$prefix}font-size-xs);
+          font-weight: 600;
+          color: var(--#{$prefix}primary);
+        }
+      }
+    }
+
+    > .content {
+      > .image {
+        height: 141px;
+        overflow: hidden;
+        margin-bottom: 24px;
+        border-radius: 4px;
+
+        > img  {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      > address {
+        font-style: unset;
+        margin-right: 8px;
+
+        > ul {
+          @include unstyled-list;
+          font-size: var(--#{$prefix}font-size-sm);
+          font-weight: 500;
+
+          > li {
+            display: flex;
+            column-gap: 12px;
+            align-items: center;
+
+            > svg {
+              font-size: var(--#{$prefix}font-size-md);
+              width: 22px;
+              opacity: .3;
+            }
+
+            > a {
+              @include unstyled-link;
+              @include list-link;
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    flex-direction: row;
+
+    > .image-container {
+      display: unset;
+    }
+
+    &.padding {
+      > .content-container {
+        padding-right: 0;
+
+        > header > .heading {
+          text-wrap: unset;
+        }
+      }
+    }
+
+    > .content-container {
+      padding: 32px;
+
+      > header {
+        margin-bottom: 32px;
+
+        > .heading {
+          text-wrap: nowrap;
+        }
+      }
+
+      > .content {
+        > .image {
+          display: none;
+        }
+
+        > address > ul {
+          font-weight: unset;
+          font-size: var(--#{$prefix}font-size-md);
+          line-height: 24px;
+          opacity: .8;
+
+          > li {
+            > svg {
+              font-size: var(--#{$prefix}font-size-xl);
+              width: 32px;
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
