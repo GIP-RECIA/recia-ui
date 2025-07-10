@@ -204,7 +204,9 @@ export class ReciaServiceInfoLayout extends LitElement {
               ${
                 this.category && Object.values(Category).includes(this.category)
                   ? html`
-                      <span class="tag-category ${this.category}">${ReciaServiceInfoLayout.i18nCategory()[this.category]}</span>
+                      <span class="tag-category ${this.category}">
+                        ${ReciaServiceInfoLayout.i18nCategory()[this.category]}
+                      </span>
                     `
                   : nothing
               }
@@ -248,7 +250,8 @@ export class ReciaServiceInfoLayout extends LitElement {
           ${
             this.launchLink
               ? html`
-                  <a href="${this.launchLink.href}"
+                  <a
+                    href="${this.launchLink.href}"
                     target="${this.launchLink.target ?? nothing}"
                     rel="${this.launchLink.rel ?? nothing}"
                     class="btn-primary launch"
