@@ -192,7 +192,7 @@ export class ReciaBottomSheet extends LitElement {
         class="bottom-sheet"
         style="${styleMap({ display: this.show ? undefined : 'none' })}"
       >
-        <div ${ref(this.containerRef)} tabindex="-1" class="scrollable-container">
+        <div ${ref(this.containerRef)} tabindex="-1" class="container">
           <div ${ref(this.growRef)} class="grow-1"></div>
           <div
             ${ref(this.sheetRef)}

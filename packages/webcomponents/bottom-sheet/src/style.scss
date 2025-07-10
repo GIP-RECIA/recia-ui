@@ -1,22 +1,5 @@
 @use 'sass:map';
-@use '../../button/src/style';
 @use '../../common/assets/scss/global' as *;
-
-.container {
-  width: 100%;
-  padding-right: 16px;
-  padding-left: 16px;
-  margin-right: auto;
-  margin-left: auto;
-
-  @each $name, $value in $grid-breakpoints {
-    @if $value != 0 {
-      @media screen and (width >= $value) {
-        max-width: map.get($container-max-widths, $name);
-      }
-    }
-  }
-}
 
 @keyframes slide-up {
   from {
@@ -44,8 +27,7 @@
   z-index: 1050;
   background-color: rgba(#000000, .25);
 
-  > .scrollable-container {
-    @extend .container;
+  > .container {
     position: absolute;
     inset: 0;
     z-index: 1055;
@@ -114,7 +96,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    > .scrollable-container > .sheet {
+    > .container > .sheet {
       padding: 32px;
 
       > .dragable {
