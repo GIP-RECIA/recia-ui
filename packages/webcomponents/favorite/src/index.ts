@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
+export * from './components/bottom-sheet/index.ts'
+export * from './components/dropdown/index.ts'
 export * from './components/layout/index.ts'

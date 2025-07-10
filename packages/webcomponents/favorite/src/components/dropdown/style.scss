@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use '../../../../common/assets/scss/global' as *;
+
+.dropdown-favorites {
+  position: relative;
+
+  > div {
+    position: absolute;
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 0 8px 8px 0;
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    overflow: hidden;
+    top: 0;
+    left: 100%;
+    width: 734px;
+    max-width: calc(100vw - calc(var(--#{$prefix}drawer-width) + 16px));
+    padding: 22px 34px;
+    color: var(--#{$prefix}body);
+    transition: max-width .3s ease-in-out;
+
+    > .active-indicator {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      border-left: 11px solid var(--#{$prefix}primary);
+    }
+  }
+}

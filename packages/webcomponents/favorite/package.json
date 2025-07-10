@@ -25,6 +25,7 @@
     "@antfu/eslint-config": "^4.16.2",
     "@lit/localize-tools": "^0.8.0",
     "@types/lodash-es": "^4",
+    "bottom-sheet": "workspace:^",
     "eslint": "^9.30.1",
     "eslint-plugin-format": "^1.0.1",
     "lodash-es": "^4.17.21",

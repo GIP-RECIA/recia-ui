@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script type="module" src="/index.ts"></script>
   <link rel="stylesheet" href="/assets/index.css" />
+  <style>
+    r-favorite-dropdown {
+      display: inline-block;
+    }
+  </style>
 </head>
 
 <body class="container">
@@ -16,11 +21,29 @@
       <r-favorite-layout>
       </r-favorite-layout>
     </section>
+
+    <section>
+      <h2>r-favorite-bottom-sheet</h2>
+
+      <button>Open</button>
+
+      <r-favorite-bottom-sheet>
+      </r-favorite-bottom-sheet>
+    </section>
+    <section>
+      <h2>r-favorite-dropdown</h2>
+
+      <r-favorite-dropdown>
+        <span>Favoris</span>
+      </r-favorite-dropdown>
+    </section>
   </section>
 
   <script>
     const layout = document.querySelector('r-favorite-layout')
-    layout.data = [
+    const dropdown = document.querySelector('r-favorite-dropdown')
+    const bottomSheet = document.querySelector('r-favorite-bottom-sheet')
+    const data = [
       {
         "id": "services",
         "name": "Services",
@@ -94,6 +117,10 @@
         ]
       }
     ]
+    layout.data = data;
+    document.querySelector('button').addEventListener('click', () => {
+      bottomSheet.open()
+    })
   </script>
 </body>
 
