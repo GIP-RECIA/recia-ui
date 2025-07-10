@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="/index.ts"></script>
+  <link rel="stylesheet" href="/assets/index.css" />
+</head>
+
+<body class="container">
+  <section>
+    <section>
+      <h2>r-service-info-layout</h2>
+
+      <r-service-info-layout>
+      </r-service-info-layout>
+    </section>
+    <section>
+      <h2>r-service-info-bottom-sheet</h2>
+
+      <div id="buttons" style="display: flex; gap: 4px;">
+        <button>null</button>
+      </div>
+
+      <r-service-info-bottom-sheet
+        portal-info-api-url="/portail/api/portlet"
+        service-info-api-url="/service-info-api/api/serviceInfo"
+      >
+      </r-service-info-bottom-sheet>
+    </section>
+  </section>
+
+  <script>
+    function logEvents(element, eventType) {
+      element.addEventListener(eventType, (e) => {
+        console.log(eventType, e.detail)
+      })
+    }
+
+    const layout = document.querySelector('r-service-info-layout')
+    const data = {
+      "icon-url": "/spritemap.svg#capytale",
+      "name": "Capytale",
+      "origin": "external",
+      "category": "apprentissage",
+      "description": '<p>Capytale est un service web proposé par l&#39;académie de Paris en lien avec la Drane Orléans-Tours. Il permet la création et le partage entre enseignants et élèves d&#39;activités utilisant les langages Python, HTML/CSS/JS, SQL ou les blocs de <a href="#">Scratch</a>.</p><p>Capytale est un environnement de travail en ligne destiné aux enseignants (essentiellement en <a href="#">SNT</a>, NSI, mathématiques, STI, technologie, informatique) et à leurs élèves des niveaux collèges et lycées (classes préparatoires incluses).</p>',
+      "video": "https://pod.recia.fr/video/0239-presentation-du-tableau-blanc-collaboratif-ent/?is_iframe=true",
+      "tutorials": [
+        {
+          "name": "Ajouter des documents à un dossier",
+          "href": "#"
+        },
+        {
+          "name": "Partager l'accès à un document",
+          "href": "#"
+        },
+        {
+          "name": "Retrouver une version de fichier dans les logs",
+          "href": "#"
+        },
+        {
+          "name": "Structurer son arborescence de dossiers",
+          "href": "#"
+        }
+      ],
+      "tutorials-link": {
+        "href": "#"
+      },
+      "launch-link": {
+        "href": "#"
+      }
+    }
+    Object.entries(data).forEach(([key, value]) => {
+      layout.setAttribute(key, typeof value == "object" ? JSON.stringify(value) : value)
+    })
+    logEvents(layout, 'toggle-favorite')
+    logEvents(layout, 'close')
+
+    const fnames = ['Mediacentre', 'CollabSoft', 'Nextcloud']
+    const buttonsRoot = document.querySelector('#buttons')
+    const bottomSheet = document.querySelector('r-service-info-bottom-sheet')
+    fnames.forEach((fname) => {
+      const button = document.createElement('button')
+      button.innerText = fname
+      button.addEventListener('click', () => {
+        bottomSheet.dispatchEvent(new CustomEvent('service-info', { detail: { fname } }))
+      })
+      buttonsRoot.appendChild(button)
+    })
+  </script>
+</body>
+
+</html>

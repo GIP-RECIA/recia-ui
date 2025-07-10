@@ -15,7 +15,7 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Link } from './types/LinkType.ts'
+import type { Link } from '../../types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -25,16 +25,16 @@ import { customElement, property } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { componentName } from '../../common/config.ts'
-import { name } from '../package.json'
-import langHelper from './helpers/langHelper.ts'
+import { componentName } from '../../../../common/config.ts'
+import { name } from '../../../package.json'
+import langHelper from '../../helpers/langHelper.ts'
+import { Category } from '../../types/CategoryType.ts'
+import { Origin } from '../../types/OriginType.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import { Category } from './types/CategoryType.ts'
-import { Origin } from './types/OriginType.ts'
-import { getIcon } from './utils/fontawesomeUtils.ts'
-import { setLocale } from './utils/localizationUtils.ts'
 
-const tagName = componentName(name)
+const tagName = componentName(`${name}-layout`)
 
 @localized()
 @customElement(tagName)

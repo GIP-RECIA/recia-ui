@@ -1770,27 +1770,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bottom-sheet-service-info@workspace:packages/webcomponents/bottom-sheet-service-info":
-  version: 0.0.0-use.local
-  resolution: "bottom-sheet-service-info@workspace:packages/webcomponents/bottom-sheet-service-info"
-  dependencies:
-    "@antfu/eslint-config": "npm:^4.16.2"
-    "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.0"
-    "@types/lodash-es": "npm:^4"
-    bottom-sheet: "workspace:^"
-    eslint: "npm:^9.30.1"
-    eslint-plugin-format: "npm:^1.0.1"
-    lit: "npm:^3.3.0"
-    lodash-es: "npm:^4.17.21"
-    ress: "npm:^5.0.2"
-    sass: "npm:^1.89.2"
-    service-info-layout: "workspace:^"
-    typescript: "npm:^5.8.3"
-    vite: "npm:^7.0.2"
-  languageName: unknown
-  linkType: soft
-
 "bottom-sheet@workspace:^, bottom-sheet@workspace:packages/webcomponents/bottom-sheet":
   version: 0.0.0-use.local
   resolution: "bottom-sheet@workspace:packages/webcomponents/bottom-sheet"
@@ -6569,14 +6548,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"service-info-layout@workspace:^, service-info-layout@workspace:packages/webcomponents/service-info-layout":
+"service-info@workspace:packages/webcomponents/service-info":
   version: 0.0.0-use.local
-  resolution: "service-info-layout@workspace:packages/webcomponents/service-info-layout"
+  resolution: "service-info@workspace:packages/webcomponents/service-info"
   dependencies:
     "@antfu/eslint-config": "npm:^4.16.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
+    bottom-sheet: "workspace:^"
     eslint: "npm:^9.30.1"
     eslint-plugin-format: "npm:^1.0.1"
     lit: "npm:^3.3.0"

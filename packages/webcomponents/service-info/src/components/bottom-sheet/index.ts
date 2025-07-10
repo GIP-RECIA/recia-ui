@@ -17,24 +17,24 @@
 import type { ReciaBottomSheet } from 'bottom-sheet/src'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { ServiceInfoLayout } from './types/ServiceInfoLayoutType.ts'
+import type { ServiceInfoLayout } from '../../types/ServiceInfoLayoutType.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
-import { componentName } from '../../common/config.ts'
-import { name } from '../package.json'
-import { spreadAttributes } from './directives/spreadAttributesDirective.ts'
-import langHelper from './helpers/langHelper.ts'
-import pathHelper from './helpers/pathHelper.ts'
-import infoService from './services/infoService.ts'
-import portalService from './services/portalService.ts'
+import { componentName } from '../../../../common/config.ts'
+import { name } from '../../../package.json'
+import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
+import langHelper from '../../helpers/langHelper.ts'
+import pathHelper from '../../helpers/pathHelper.ts'
+import infoService from '../../services/infoService.ts'
+import portalService from '../../services/portalService.ts'
+import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import { setLocale } from './utils/localizationUtils.ts'
 import 'bottom-sheet/dist/r-bottom-sheet.js'
-import 'service-info-layout/dist/r-service-info-layout.js'
+import '../layout/index.ts'
 
-const tagName = componentName(name)
+const tagName = componentName(`${name}-bottom-sheet`)
 
 @localized()
 @customElement(tagName)
