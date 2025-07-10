@@ -15,8 +15,8 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { Item } from './ItemType'
-import type { Link } from './LinkType'
+import type { Item } from './ItemType.ts'
+import type { Link } from './LinkType.ts'
 
 export interface Information {
   id: Item

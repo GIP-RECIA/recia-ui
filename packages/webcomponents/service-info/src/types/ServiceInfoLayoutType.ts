@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Link } from './LinkType'
+import type { Link } from './LinkType.ts'
 
 export interface ServiceInfoLayout {
   'icon-url'?: string

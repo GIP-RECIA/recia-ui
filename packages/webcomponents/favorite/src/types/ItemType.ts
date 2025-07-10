@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import type { Category } from './CategoryType'
-import type { Link } from './LinkType'
+import type { Category } from './CategoryType.ts'
+import type { Link } from './LinkType.ts'
 
 export interface Item {
   id: string

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Item } from './ItemType'
+import type { Item } from './ItemType.ts'
 
 export interface Section {
   id: string
