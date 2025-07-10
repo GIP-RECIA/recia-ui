@@ -189,7 +189,6 @@ export class ReciaBottomSheet extends LitElement {
   render(): TemplateResult {
     return html`
       <div
-        id="bottom-sheet-service-more"
         class="bottom-sheet"
         style="${styleMap({ display: this.show ? undefined : 'none' })}"
       >
