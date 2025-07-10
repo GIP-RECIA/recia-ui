@@ -128,7 +128,7 @@ export class ReciaFavoriteLayout extends LitElement {
                   <div class="actions">
                     <div class="action-delete">
                       <button
-                        aria-label="${msg(str`Supprimer le favoris`)}"
+                        aria-label="${msg(str`Supprimer le favori`)}"
                         @click="${() => this.deleteItem(sectionId, item)}"
                       >
                         ${getIcon(faTimes)}
