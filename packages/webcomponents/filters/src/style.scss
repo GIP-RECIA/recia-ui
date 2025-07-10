@@ -1,0 +1,157 @@
+@use 'sass:map';
+@use '../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+.filters {
+  border-radius: 10px;
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+
+  > header {
+    > button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 60px;
+      width: 100%;
+      padding: 12px 16px;
+      text-align: start;
+      font-size: var(--#{$prefix}font-size-md);
+      font-weight: bold;
+
+      > .folded-indicator {
+        font-size: 16px;
+        margin: 8px;
+        color: var(--#{$prefix}basic-black);
+        transition: rotate .2s ease-in-out;
+      }
+
+      &:hover,
+      &:focus-visible {
+        outline: none;
+
+        > .heading {
+          color: var(--#{$prefix}primary);
+        }
+      }
+    }
+
+    > .heading {
+      display: none;
+      font-size: var(--#{$prefix}font-size-md);
+      font-weight: bold;
+    }
+  }
+
+  > ul {
+    @include unstyled-list;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+
+    > li {
+      position: relative;
+
+      &:not(:last-child) {
+        padding-bottom: 15.5px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: -16px;
+          right: -16px;
+          bottom: 0;
+          border-bottom: 1px solid var(--#{$prefix}stroke);
+        }
+      }
+
+      > header {
+        position: relative;
+        margin-bottom: 16px;
+        font-size: var(--#{$prefix}font-size-sm)
+      }
+
+      > fieldset {
+        border: none;
+
+        > ul {
+          position: relative;
+          @include unstyled-list;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px 16px;
+        }
+      }
+    }
+  }
+
+  &:has(> header > button:focus-visible) {
+    outline: 2px solid var(--#{$prefix}primary);
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    box-shadow: none;
+
+    > header {
+      margin-bottom: 8px;
+
+      > button {
+        display: none;
+      }
+
+      > span {
+        display: unset;
+      }
+    }
+
+    > ul {
+      display: grid !important;
+      padding: 0;
+
+      > li {
+        display: contents;
+
+        > header {
+          grid-column: 1;
+          margin: 0;
+          margin-top: 8px;
+          font-size: var(--#{$prefix}font-size-xs);
+        }
+
+        &:has(> header) > fieldset {
+          grid-column: 2;
+        }
+
+        > fieldset > ul > li {
+          gap: 14px;
+        }
+
+        &:not(:last-child){
+          &::after {
+            content: none;
+          }
+
+          > header,
+          > fieldset > ul {
+            padding-bottom: 15.5px;
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              border-bottom: 1px solid var(--#{$prefix}stroke);
+            }
+          }
+
+          > header::after {
+            right: -16px;
+          }
+        }
+      }
+    }
+  }
+}

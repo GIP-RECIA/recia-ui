@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="/index.ts"></script>
+  <link rel="stylesheet" href="/assets/index.css" />
+</head>
+
+<body class="container">
+  <section>
+    <r-filters>
+    </r-filters>
+  </section>
+
+  <script>
+    const filters = document.querySelector('r-filters')
+    const data = [
+      {
+        "id": "source",
+        "name": "Par source :",
+        "type": "checkbox",
+        "items": [
+          {
+            "key": "all",
+            "value": "Toures les sources"
+          },
+          {
+            "key": "lycee-internationnal-palaiseau",
+            "value": "Lycée international de Palaiseau"
+          },
+          {
+            "key": "eure-et-loire",
+            "value": "Département d'Eure-et-Loir"
+          },
+          {
+            "key": "rcvdl",
+            "value": "Région Centre-Val de Loire"
+          }
+        ]
+      },
+      {
+        "id": "rubrique",
+        "name": "Par rubrique :",
+        "type": "radio",
+        "items": [
+          {
+            "key": "all",
+            "value": "Toures les rubriques"
+          },
+          {
+            "key": "vie-scoalire",
+            "value": "Vie scolaire"
+          },
+          {
+            "key": "pedagogie",
+            "value": "Pédagogie"
+          },
+          {
+            "key": "direction",
+            "value": "Direction"
+          },
+          {
+            "key": "services-et-gestion",
+            "value": "Services et gestion"
+          },
+          {
+            "key": "sport-et-culture",
+            "value": "Sport et culture"
+          },
+          {
+            "key": "cdi",
+            "value": "CDI"
+          },
+          {
+            "key": "sante-et-social",
+            "value": "Santé et social"
+          },
+          {
+            "key": "documentation",
+            "value": "Documentation"
+          },
+          {
+            "key": "autre",
+            "value": "Autre"
+          }
+        ]
+      }
+    ]
+    filters.data = data;
+  </script>
+</body>
+
+</html>
