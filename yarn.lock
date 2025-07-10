@@ -3496,9 +3496,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"favorite-layout@workspace:packages/webcomponents/favorite-layout":
+"favorite@workspace:packages/webcomponents/favorite":
   version: 0.0.0-use.local
-  resolution: "favorite-layout@workspace:packages/webcomponents/favorite-layout"
+  resolution: "favorite@workspace:packages/webcomponents/favorite"
   dependencies:
     "@antfu/eslint-config": "npm:^4.16.2"
     "@lit/localize": "npm:^0.12.2"

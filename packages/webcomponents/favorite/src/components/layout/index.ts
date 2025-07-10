@@ -15,23 +15,23 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Item } from './types/ItemType.ts'
-import type { Section } from './types/SectionType.ts'
+import type { Item } from '../../types/ItemType.ts'
+import type { Section } from '../../types/SectionType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft, faArrowRight, faFloppyDisk, faGear, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { componentName } from '../../common/config.ts'
-import { name } from '../package.json'
-import langHelper from './helpers/langHelper.ts'
+import { componentName } from '../../../../common/config.ts'
+import { name } from '../../../package.json'
+import langHelper from '../../helpers/langHelper.ts'
+import { Category } from '../../types/CategoryType.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import { Category } from './types/CategoryType.ts'
-import { getIcon } from './utils/fontawesomeUtils.ts'
-import { setLocale } from './utils/localizationUtils.ts'
 
-const tagName = componentName(name)
+const tagName = componentName(`${name}-layout`)
 
 @localized()
 @customElement(tagName)
