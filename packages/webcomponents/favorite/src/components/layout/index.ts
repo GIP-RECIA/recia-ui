@@ -118,43 +118,70 @@ export class ReciaFavoriteLayout extends LitElement {
     })
   }
 
-  itemTemplate(sectionId: string, item: Item): TemplateResult {
-    return html`
-      <li>
-        <div class="favorite">
+  manageTemplate(): TemplateResult | typeof nothing {
+    return this.data
+      ? html`
+          <div class="grow-1"></div>
           ${
             this.manage
               ? html`
-                  <div class="actions">
-                    <div class="action-delete">
-                      <button
-                        aria-label="${msg(str`Supprimer le favori`)}"
-                        @click="${() => this.deleteItem(sectionId, item)}"
-                      >
-                        ${getIcon(faTimes)}
-                      </button>
-                    </div>
-                    <div class="action-back">
-                      <button
-                        aria-label="${msg(str`Réordonner vers la gauche`)}"
-                        @click="${() => this.moveItem(sectionId, item, '-1')}"
-                      >
-                        ${getIcon(faArrowLeft)}
-                      </button>
-                    </div>
-                    <div class="grow-1"></div>
-                    <div class="action-next">
-                      <button
-                        aria-label="${msg(str`Réordonner vers la droite`)}"
-                        @click="${() => this.moveItem(sectionId, item, '+1')}"
-                      >
-                        ${getIcon(faArrowRight)}
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    class="btn-secondary small"
+                    @click="${() => this.toggleManage()}"
+                  >
+                    ${msg(str`Annuler`)}${getIcon(faTimes)}
+                  </button>
                 `
               : nothing
           }
+          <button
+            class="btn-secondary small"
+            @click="${() => this.toggleManage(true)}"
+          >
+            ${!this.manage ? msg(str`Gérer`) : msg(str`Enregistrer`)}
+            ${getIcon(!this.manage ? faGear : faFloppyDisk)}
+          </button>
+        `
+      : nothing
+  }
+
+  itemTemplate(sectionId: string, item: Item): TemplateResult {
+    const actionTemplate: TemplateResult | typeof nothing = this.manage
+      ? html`
+          <div class="actions">
+            <div class="action-delete">
+              <button
+                aria-label="${msg(str`Supprimer le favori`)}"
+                @click="${() => this.deleteItem(sectionId, item)}"
+              >
+                ${getIcon(faTimes)}
+              </button>
+            </div>
+            <div class="action-back">
+              <button
+                aria-label="${msg(str`Réordonner vers la gauche`)}"
+                @click="${() => this.moveItem(sectionId, item, '-1')}"
+              >
+                ${getIcon(faArrowLeft)}
+              </button>
+            </div>
+            <div class="grow-1"></div>
+            <div class="action-next">
+              <button
+                aria-label="${msg(str`Réordonner vers la droite`)}"
+                @click="${() => this.moveItem(sectionId, item, '+1')}"
+              >
+                ${getIcon(faArrowRight)}
+              </button>
+            </div>
+          </div>
+        `
+      : nothing
+
+    return html`
+      <li>
+        <div class="favorite">
+          ${actionTemplate}
           <svg class="icon" aria-hidden="true">
             <use href="${item.iconUrl}"></use>
           </svg>
@@ -163,6 +190,7 @@ export class ReciaFavoriteLayout extends LitElement {
             target="${item.link.target ?? nothing}"
             rel="${item.link.rel ?? nothing}"
             class="name"
+            tabindex="${this.manage ? -1 : nothing}"
           >
             <span>${item.name}</span>
             <span aria-hidden="true"></span>
@@ -186,26 +214,7 @@ export class ReciaFavoriteLayout extends LitElement {
       <div class="favorite-layout">
         <header>
           <h2>${msg(str`Vos favoris`)}</h2>
-          <div class="grow-1"></div>
-          ${
-            this.manage
-              ? html`
-                  <button
-                    class="btn-secondary small"
-                    @click="${() => this.toggleManage()}"
-                  >
-                    ${msg(str`Annuler`)}${getIcon(faTimes)}
-                  </button>
-                `
-              : nothing
-          }
-          <button
-            class="btn-secondary small"
-            @click="${() => this.toggleManage(true)}"
-          >
-            ${!this.manage ? msg(str`Gérer`) : msg(str`Enregistrer`)}
-            ${getIcon(!this.manage ? faGear : faFloppyDisk)}
-          </button>
+          ${this.manageTemplate()}
         </header>
         <ul>
           ${
