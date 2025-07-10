@@ -6,7 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script type="module" src="/index.ts"></script>
   <link rel="stylesheet" href="/assets/index.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    section > section {
+      display: flex;
+    }
+
+    .grow-1 {
+      flex-grow: 1;
+    }
+  </style>
 </head>
 
 <body class="container">
@@ -16,9 +24,9 @@
     <span id="eybrow-notification">0</span>
     <button id="eybrow-notification-increase">+</button>
 
-    <section class="flex flex-row items-start">
+    <section>
       <div class="grow-1"></div>
-      <r-eyebrow
+      <r-user-menu
         picture="https://placehold.co/46x46"
         display-name="Anaïs Durant"
         config='{
@@ -42,12 +50,12 @@
         notification="0"
         avatar-size="28px"
       >
-      </r-eyebrow>
+      </r-user-menu>
     </section>
 
-    <section class="flex flex-row items-start">
+    <section>
       <div class="grow-1"></div>
-      <r-eyebrow
+      <r-user-menu
         picture="https://placehold.co/46x46"
         display-name="Anaïs Durant"
         function="Enseignante"
@@ -70,7 +78,7 @@
         }'
         notification="0"
       >
-      </r-eyebrow>
+      </r-user-menu>
     </section>
   </section>
 
@@ -79,18 +87,18 @@
       console.log("launch", e.detail)
     });
 
-    const eyebrows = document.querySelectorAll('r-eyebrow')
+    const userMenus = document.querySelectorAll('r-user-menu')
     const value = document.querySelector('#eybrow-notification')
     let notification = 0
     document.querySelector('#eybrow-notification-increase').addEventListener('click', () => {
       notification++
       value.textContent = notification
-      eyebrows.forEach(eyebrow => eyebrow.setAttribute('notification', notification))
+      userMenus.forEach(eyebrow => eyebrow.setAttribute('notification', notification))
     })
     document.querySelector('#eybrow-notification-decrease').addEventListener('click', () => {
       notification - 1 >= 0 ? notification-- : notification
       value.textContent = notification
-      eyebrows.forEach(eyebrow => eyebrow.setAttribute('notification', notification))
+      userMenus.forEach(eyebrow => eyebrow.setAttribute('notification', notification))
     })
   </script>
 </body>
