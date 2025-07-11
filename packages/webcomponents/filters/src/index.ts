@@ -20,7 +20,7 @@ import type { Section } from './types/SectionType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -41,6 +41,9 @@ export class ReciaFilters extends LitElement {
 
   @state()
   checked: Map<string, Array<string>> = new Map()
+
+  @state()
+  activeFilters?: number
 
   @state()
   isExpanded = false
@@ -66,6 +69,13 @@ export class ReciaFilters extends LitElement {
 
         this.checked.set(section.id, checked)
       })
+    }
+    if (_changedProperties.has('checked')) {
+      this.activeFilters = [...this.checked.entries()].map(([key, value]) => {
+        const firstKey = this.data?.find(section => section.id === key)?.items[0].key
+
+        return value.filter(it => it !== firstKey)
+      }).flat().length
     }
     return true
   }
@@ -155,7 +165,13 @@ export class ReciaFilters extends LitElement {
             @click="${this.toggleDropdown}"
           >
             <span class="heading">${msg(str`Filtres`)}</span>
-            <span class="badge">1</span>
+            ${
+              this.activeFilters && this.activeFilters > 0
+                ? html`
+                    <span class="badge">${this.activeFilters}</span>
+                  `
+                : nothing
+            }
             <div class="grow-1"></div>
             ${getIconWithStyle(
                 faChevronDown,
