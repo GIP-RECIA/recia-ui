@@ -41,6 +41,8 @@ interface Item {
   rel: string
   event: string
   eventpayload: string
+  eventDNMA: string
+  eventpayloadDNMA: string
 }
 
 @localized()
@@ -83,6 +85,12 @@ export class ReciaWidget extends LitElement {
   // temp for dev
   @property({ type: Boolean, attribute: 'required' })
   required = false
+
+  @property({ type: String, attribute: 'event-dnma' })
+  eventDNMA?: string
+
+  @property({ type: String, attribute: 'event-payload-dnma' })
+  eventpayloadDNMA?: string
 
   @state()
   isExpanded = false
@@ -142,6 +150,14 @@ export class ReciaWidget extends LitElement {
     window.dispatchEvent(new CustomEvent(item.event, { detail: JSON.parse(item.eventpayload) }))
   }
 
+  DNMAHandle(eventDNMA: string, eventpayloadDNMA: string): void {
+    if (eventDNMA.length < 1) {
+      return
+    }
+    const eventToSend: CustomEvent = new CustomEvent(eventDNMA, { detail: JSON.parse(eventpayloadDNMA) })
+    document.dispatchEvent(eventToSend)
+  }
+
   itemTemplate(item: Item): TemplateResult {
     const content: TemplateResult = html`
       ${unsafeSVG(item.icon)}
@@ -158,7 +174,7 @@ export class ReciaWidget extends LitElement {
     }
     return html`
     <li>
-      <a href="${item.link}" title="${item.name}" target="${item.target}" rel="${item.rel}">
+      <a href="${item.link}" @click="${() => { this.DNMAHandle(item.eventDNMA, item.eventpayloadDNMA) }}" title="${item.name}" target="${item.target}" rel="${item.rel}">
         ${content}
       </a>
     </li>
@@ -189,7 +205,7 @@ export class ReciaWidget extends LitElement {
             ${
               this.link.length > 0
                 ? html`
-                <a href="${this.link}" aria-label="${this.name}" target="${this.target}" rel="${this.rel}">
+                <a href="${this.link}" aria-label="${this.name}" target="${this.target}" rel="${this.rel}" @click="${() => { this.DNMAHandle(this.eventDNMA ?? '', this.eventpayloadDNMA ?? '') }}">
                   ${getIconWithStyle(faAnglesRight, {}, { 'focus-indicator': true })}
                   <div class="heading">${this.headingTemplate()}</div>
                 </a>

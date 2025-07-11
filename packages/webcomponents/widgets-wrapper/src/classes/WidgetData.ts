@@ -15,7 +15,7 @@
  */
 
 export class WidgetData {
-  constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string, target: string, rel: string) {
+  constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string, target: string, rel: string, eventDNMA: string, eventpayloadDNMA: string) {
     this.name = name
     this.subtitle = subtitle
     this.link = link
@@ -24,6 +24,8 @@ export class WidgetData {
     this.items = items
     this.target = target
     this.rel = rel
+    this.eventDNMA = eventDNMA
+    this.eventpayloadDNMA = eventpayloadDNMA
   }
 
   name: string
@@ -34,6 +36,8 @@ export class WidgetData {
   items: string
   target: string
   rel: string
+  eventDNMA: string
+  eventpayloadDNMA: string
   favorite?: boolean // temp for dev
   required?: boolean // temp for dev
 }
