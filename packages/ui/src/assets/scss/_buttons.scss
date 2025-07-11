@@ -3,15 +3,17 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-.btn {
+%primary-secondary {
   @include button-and-tag;
   padding: 12px 24px;
   font-family: $sora;
   font-weight: 600;
   font-size: var(--#{$prefix}font-size-md);
+}
 
+.btn {
   &-primary {
-    @extend .btn;
+    @extend %primary-secondary;
     background-color: var(--#{$prefix}btn-primary-bg);
     color: var(--#{$prefix}btn-primary);
 
@@ -55,7 +57,7 @@
   }
 
   &-secondary {
-    @extend .btn;
+    @extend %primary-secondary;
     background-color: var(--#{$prefix}btn-secondary-bg);
     color: var(--#{$prefix}btn-secondary);
 
