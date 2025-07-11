@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
+import type { Item } from './types/ItemType.ts'
 import type { Section } from './types/SectionType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
@@ -29,7 +30,6 @@ import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
-import { Item } from './types/ItemType.ts'
 
 const tagName = componentName(name)
 
@@ -38,6 +38,9 @@ const tagName = componentName(name)
 export class ReciaFilters extends LitElement {
   @state()
   data: Array<Section> | null = null
+
+  @state()
+  checked: Map<string, Array<string>> = new Map()
 
   @state()
   isExpanded = false
@@ -53,25 +56,89 @@ export class ReciaFilters extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('data')) {
+      this.data?.forEach((section) => {
+        let checkedItems = section.items.filter(item => item.checked)
+        if (section.type === 'radio')
+          checkedItems = checkedItems[0] ? [checkedItems[0]] : []
+        const checked = checkedItems.length > 0 ? checkedItems.map(item => item.key) : [section.items[0].key]
+
+        this.checked.set(section.id, checked)
+      })
+    }
+    return true
+  }
+
   toggleDropdown(e: Event): void {
     e.preventDefault()
     e.stopPropagation()
     this.isExpanded = !this.isExpanded
   }
 
+  handleFormChange(e: Event, section: Section): void {
+    const target = e.target as HTMLInputElement
+
+    if (section.type === 'radio') {
+      this.checked = new Map([...this.checked, [section.id, [target.value]]])
+      return
+    }
+
+    const form = target.closest('form')!
+    const checkboxes = Array.from(form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'))
+
+    const firstCb = checkboxes[0]
+    const otherCbs = checkboxes.slice(1)
+    const isFirst = target === firstCb
+
+    let newCheckedValues: string[] = []
+
+    if (checkboxes.every(cb => !cb.checked)) { // No one checked
+      firstCb.checked = true
+      newCheckedValues = [section.items[0].key]
+    }
+    else if (otherCbs.every(cb => cb.checked)) { // All others checked
+      firstCb.checked = true
+      otherCbs.forEach(cb => cb.checked = false)
+      newCheckedValues = [section.items[0].key]
+    }
+    else if (isFirst && otherCbs.some(cb => cb.checked)) { // First triggerd and other checked
+      otherCbs.forEach(cb => cb.checked = false)
+      newCheckedValues = [section.items[0].key]
+    }
+    else if (!isFirst) { // Other triggered
+      firstCb.checked = false
+      const currentChecked = this.checked.get(section.id)?.filter(k => k !== section.items[0].key) ?? []
+      const index = currentChecked.indexOf(target.value)
+
+      if (target.checked) {
+        if (index === -1)
+          currentChecked.push(target.value)
+      }
+      else {
+        if (index > -1)
+          currentChecked.splice(index, 1)
+      }
+
+      newCheckedValues = currentChecked
+    }
+
+    this.checked = new Map([...this.checked, [section.id, newCheckedValues]])
+  }
+
   itemTemplate(section: Section, item: Item): TemplateResult {
-    const { id, type } = section
     const { key, value } = item
-    const inputId = type === 'radio' ? `${id}-${key}` : key
-    const name = type === 'radio' ? id : key
+    const inputId = section.type === 'radio' ? `${section.id}-${key}` : key
 
     return html`
         <li>
           <input
             id="${inputId}"
-            type="${type}"
-            name="${name}"
+            type="${section.type}"
+            name="${section.type === 'radio' ? section.id : key}"
             value="${key}"
+            class="tag"
+            ?checked="${this.checked.get(section.id)?.includes(key) ?? false}"
           >
           <label for="${inputId}">${value}</label>
         </li>
@@ -90,7 +157,12 @@ export class ReciaFilters extends LitElement {
             <span class="heading">${msg(str`Filtres`)}</span>
             <span class="badge">1</span>
             <div class="grow-1"></div>
-            ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : undefined }, { 'folded-indicator': true })}
+            ${getIconWithStyle(
+                faChevronDown,
+                { rotate: this.isExpanded ? '180deg' : undefined },
+                { 'folded-indicator': true },
+              )
+            }
           </button>
           <span class="heading">${msg(str`Filtres`)}</span>
         </header>
@@ -110,18 +182,20 @@ export class ReciaFilters extends LitElement {
                   <header aria-hidden="true">
                     <span>${section.name}</span>
                   </header>
-                  <fieldset>
-                    <legend class="sr-only">${section.name}</legend>
-                    <ul>
-                      ${
-                        repeat(
-                          section.items,
-                          item => item.id,
-                          item => this.itemTemplate(section, item)
-                        )
-                      }
-                    </ul>
-                  </fieldset>
+                  <form @change="${(e: Event) => this.handleFormChange(e, section)}">
+                    <fieldset>
+                      <legend class="sr-only">${section.name}</legend>
+                      <ul>
+                        ${
+                          repeat(
+                            section.items,
+                            item => item.key,
+                            item => this.itemTemplate(section, item),
+                          )
+                        }
+                      </ul>
+                    </fieldset>
+                  </form>
                 </li>
               `,
             )

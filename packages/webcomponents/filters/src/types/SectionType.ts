@@ -19,5 +19,6 @@ import type { Item } from './ItemType.ts'
 export interface Section {
   id: string
   name: string
+  type: 'checkbox' | 'radio'
   items: Array<Item>
 }

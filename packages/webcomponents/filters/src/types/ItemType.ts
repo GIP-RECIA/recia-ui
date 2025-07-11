@@ -15,5 +15,7 @@
  */
 
 export interface Item {
-  name: string
+  key: string
+  value: string
+  checked?: boolean
 }

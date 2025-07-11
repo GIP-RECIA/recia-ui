@@ -73,7 +73,7 @@
         font-size: var(--#{$prefix}font-size-sm)
       }
 
-      > fieldset {
+      > form > fieldset {
         border: none;
 
         > ul {
@@ -120,11 +120,11 @@
           font-size: var(--#{$prefix}font-size-xs);
         }
 
-        &:has(> header) > fieldset {
+        &:has(> header) > form {
           grid-column: 2;
         }
 
-        > fieldset > ul > li {
+        > form > fieldset > ul > li {
           gap: 14px;
         }
 
@@ -134,7 +134,7 @@
           }
 
           > header,
-          > fieldset > ul {
+          > form > fieldset > ul {
             padding-bottom: 15.5px;
 
             &::after {
