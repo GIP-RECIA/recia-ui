@@ -287,6 +287,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         items=${widgetData.items}
         ?required=${widgetData.required ?? false} //temp value for dev
         ?favorite=${widgetData.favorite ?? false} //temp value for dev
+        event-dnma="${widgetData.eventDNMA}"
+        event-payload-dnma="${widgetData.eventpayloadDNMA}"
         >
       </r-widget>
     `
