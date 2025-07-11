@@ -92,6 +92,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   @property({ type: String, attribute: 'localization-uri' })
   localizationUri = ''
 
+  @property({ type: Boolean, attribute: 'dev-edit' })
+  allowDevEdit = false
+
   async setupLocalization() {
     const version: string = window.WidgetAdapter.getVersion()
     const url = `${this.localizationUri}?v=${version}`
@@ -383,7 +386,7 @@ export class ReciaWidgetsWrapper extends LitElement {
           )}
         </ul>
       </div>
-    ${import.meta.env.DEV
+    ${this.allowDevEdit
         ? html`
       <div>
         ${this.getWidgetEditionMenuRender()}
