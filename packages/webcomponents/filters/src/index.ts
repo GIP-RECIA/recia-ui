@@ -197,9 +197,15 @@ export class ReciaFilters extends LitElement {
               section => section,
               section => html`
                 <li>
-                  <header aria-hidden="true">
-                    <span>${section.name}</span>
-                  </header>
+                  ${
+                    this.data && this.data?.length > 1
+                      ? html`
+                          <header aria-hidden="true">
+                            <span>${section.name}</span>
+                          </header>
+                        `
+                      : nothing
+                  }
                   <form @change="${(e: Event) => this.handleFormChange(e, section)}">
                     <fieldset>
                       <legend class="sr-only">${section.name}</legend>
