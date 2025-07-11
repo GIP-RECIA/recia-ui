@@ -89,6 +89,9 @@
       }
     ]
     filters.data = data;
+    filters.addEventListener('update-filters', (e) => {
+      console.table(e.detail.activeFilters)
+    })
   </script>
 </body>
 

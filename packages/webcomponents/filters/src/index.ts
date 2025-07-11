@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
@@ -36,7 +36,7 @@ const tagName = componentName(name)
 @localized()
 @customElement(tagName)
 export class ReciaFilters extends LitElement {
-  @state()
+  @property({ type: Array })
   data: Array<Section> | null = null
 
   @state()
@@ -71,11 +71,13 @@ export class ReciaFilters extends LitElement {
       })
     }
     if (_changedProperties.has('checked')) {
-      this.activeFilters = [...this.checked.entries()].map(([key, value]) => {
+      const activeFilters = [...this.checked.entries()].map(([key, value]) => {
         const firstKey = this.data?.find(section => section.id === key)?.items[0].key
 
-        return value.filter(it => it !== firstKey)
-      }).flat().length
+        return { id: key, checked: value.filter(it => it !== firstKey) }
+      })
+      this.dispatchEvent(new CustomEvent('update-filters', { detail: { activeFilters } }))
+      this.activeFilters = activeFilters.map(item => item.checked).flat().length
     }
     return true
   }
