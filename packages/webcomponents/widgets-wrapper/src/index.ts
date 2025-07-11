@@ -190,7 +190,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     await this.setUserFavoriteWidgets(['Documents', 'Mediacentre'])
   }
 
-  @property({ type: String, attribute: 'widget-keys' })
+  @property({ type: String, attribute: 'widget-keys-required' })
   widgetKeysString = ''
 
   widgetToDisplayKeyArray: Array<string> = []
