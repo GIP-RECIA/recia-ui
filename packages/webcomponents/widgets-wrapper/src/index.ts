@@ -47,7 +47,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
 
-    addEventListener('DOMContentLoaded', async () => {
+    document.addEventListener('WIDGETS-BEGIN', async () => {
       if (import.meta.env.DEV) {
         await this.resetUserFavoriteWidgets()
       }
