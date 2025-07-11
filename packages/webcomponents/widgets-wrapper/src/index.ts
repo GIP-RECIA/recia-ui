@@ -280,6 +280,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       <r-widget
         role="listitem"
         name="${widgetData.name}"
+        subtitle="${widgetData.subtitle}"
         link="${widgetData.link}"
         target="${widgetData.target}"
         rel="${widgetData.rel}"
