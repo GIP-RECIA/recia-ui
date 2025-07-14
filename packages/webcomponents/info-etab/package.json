@@ -27,7 +27,7 @@
     "@types/lodash-es": "^4",
     "bottom-sheet": "workspace:^",
     "dropdown-info": "workspace:^",
-    "eslint": "^9.30.1",
+    "eslint": "^9.31.0",
     "eslint-plugin-format": "^1.0.1",
     "lodash-es": "^4.17.21",
     "ress": "^5.0.2",
