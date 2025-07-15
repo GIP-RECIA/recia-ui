@@ -294,6 +294,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         target="${widgetData.target}"
         rel="${widgetData.rel}"
         empty-text="${widgetData.emptyText}"
+        ?empty-discover=${widgetData.emptyDiscover ?? false}
         items=${widgetData.items}
         ?required=${widgetData.required ?? false} //temp value for dev
         ?favorite=${widgetData.favorite ?? false} //temp value for dev
