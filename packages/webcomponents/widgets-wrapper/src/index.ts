@@ -185,8 +185,9 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async buildWidgetSelector() {
     const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames()
-    for (const val of names) {
-      const widgetSelectorData: WidgetSelectorData = new WidgetSelectorData(val.name, val.key, this.filteredRequiredWidgetsKeys.includes(val.key), this.filteredUserFavoriteWidgetsKeys.includes(val.key))
+    const namesWithDisplayedSortedOnTop = this.union(this.widgetToDisplayKeyArray, names.map(x => x.key))
+    for (const val of namesWithDisplayedSortedOnTop) {
+      const widgetSelectorData: WidgetSelectorData = new WidgetSelectorData(val, val, this.filteredRequiredWidgetsKeys.includes(val), this.widgetToDisplayKeyArray.includes(val), this.filteredDefaultWidgetsKeys.includes(val))
       this.allWidgets.push(widgetSelectorData)
     }
   }
@@ -274,7 +275,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   // temp design for dev
   getSingleWidgetEditingRender(wsd: WidgetSelectorData): TemplateResult {
     return html`
-      <input type="checkbox" ?checked=${wsd.selected} ?disabled=${wsd.required} id="${wsd.key}" @click="${(e: Event) => { this.handleSelectionClick(e, wsd) }}" name="${wsd.key}" value="${wsd.selected}">
+      <input type="checkbox" ?checked=${wsd.displayed} ?disabled=${wsd.required} id="${wsd.key}" @click="${(e: Event) => { this.handleSelectionClick(e, wsd) }}" name="${wsd.key}" value="${wsd.displayed}">
       <label for="${wsd.key}"> ${wsd.name} ${wsd.required ? '[REQ]' : ''}</label><br>
       <button @click="${() => { this.moveWidgetBack(wsd) }}" ?hidden="${this.allWidgetsCopy.indexOf(wsd) === 0}" >Précédent</button>
       <button @click="${() => { this.moveWidgetForward(wsd) }}" ?hidden="${this.allWidgetsCopy.indexOf(wsd) === this.allWidgetsCopy.length - 1}">Suivant</button>
