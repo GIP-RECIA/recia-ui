@@ -30,7 +30,8 @@
 
 <body class="container">
   <section>
-    <button>Gérer</button>
+    <button id="manage">Gérer</button>
+    <button id="loading">Loading</button>
 
     <section>
       <r-widget
@@ -106,10 +107,18 @@
 
     const widgets = document.querySelectorAll('r-widget')
     let manage = false
-    document.querySelector('button').addEventListener('click', () => {
+    document.querySelector('button#manage').addEventListener('click', () => {
       manage = !manage
       widgets.forEach((widget) => {
         widget.manage = manage
+      })
+    })
+
+    let loading = false
+    document.querySelector('button#loading').addEventListener('click', () => {
+      loading = !loading
+      widgets.forEach((widget) => {
+        widget.loading = loading
       })
     })
 

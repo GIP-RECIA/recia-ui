@@ -84,6 +84,9 @@ export class ReciaWidget extends LitElement {
   @property({ type: Boolean, attribute: 'no-next' })
   noNext: boolean = false
 
+  @property({ type: Boolean })
+  loading: boolean = false
+
   @state()
   isExpanded: boolean = false
 
@@ -235,8 +238,15 @@ export class ReciaWidget extends LitElement {
 
     return html`
       <div class="widget">
+        ${
+          this.loading
+            ? html`
+                <div class="skeleton"></div>
+              `
+            : nothing
+        }
         ${actionTemplate}
-        <header ?inert="${this.manage}">
+        <header ?inert="${this.manage || this.loading}">
           <button
             aria-expanded="${this.isExpanded}"
             aria-controls="widget-${slug}-menu"
@@ -280,7 +290,7 @@ export class ReciaWidget extends LitElement {
           style="${styleMap({
             display: this.isExpanded ? undefined : 'none',
           })}"
-          ?inert="${this.manage}"
+          ?inert="${this.manage || this.loading}"
         >
           ${
             this.items && this.items.length > 0
