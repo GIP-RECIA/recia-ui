@@ -18,6 +18,18 @@
   <source>Découvrir</source>
   <target>Discover</target>
 </trans-unit>
+<trans-unit id="s0e86522d5b18fdc1">
+  <source>Supprimer le widget</source>
+  <target>Delete widget</target>
+</trans-unit>
+<trans-unit id="s1c703460a5da79b1">
+  <source>Réordonner vers la gauche</source>
+  <target>Rorder to the left</target>
+</trans-unit>
+<trans-unit id="se831b27916e38e5f">
+  <source>Réordonner vers la droite</source>
+  <target>Rorder to the right</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
