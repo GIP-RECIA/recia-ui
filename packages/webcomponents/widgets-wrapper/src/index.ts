@@ -166,7 +166,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   saveEdit(): void {
     this.allWidgets = JSON.parse(JSON.stringify(this.allWidgetsCopy))
-    this.widgetToDisplayKeyArray = this.allWidgets.filter(x => x.selected).map(x => x.key)
+    this.widgetToDisplayKeyArray = this.allWidgets.filter(x => x.displayed).map(x => x.key)
     this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
     this.editing = false
     this.requestUpdate()
@@ -359,22 +359,22 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   handleSelectionClick(e: Event, wsd: WidgetSelectorData): void {
-    if (wsd.selected) { // handle deselection attempt
+    if (wsd.displayed) { // handle deselection attempt
       if (wsd.required) {
         e.stopPropagation()
         e.preventDefault()
       }
       else {
-        wsd.selected = false
+        wsd.displayed = false
       }
     }
     else { // handle selection attempt
-      if (this.allWidgetsCopy.filter(x => x.selected).length >= import.meta.env.VITE_WIDGET_COUNT) {
+      if (this.allWidgetsCopy.filter(x => x.displayed).length >= this.getMaxWidgetsCount()) {
         e.stopPropagation()
         e.preventDefault()
       }
       else {
-        wsd.selected = true
+        wsd.displayed = true
       }
     }
   }
