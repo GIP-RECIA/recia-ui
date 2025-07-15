@@ -97,7 +97,7 @@ export class ReciaFilters extends LitElement {
     }
 
     const form = target.closest('form')!
-    const checkboxes = Array.from(form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'))
+    const checkboxes = [...form.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')]
 
     const firstCb = checkboxes[0]
     const otherCbs = checkboxes.slice(1)
