@@ -24,7 +24,7 @@
   @each $type, $values in $categories {
     --#{$prefix}#{$type}: #{map.get($values, color)};
     --#{$prefix}#{$type}-hover: #{map.get($values, hover, color)};
-    --#{$prefix}#{$type}-hover-shadow: #{HEXToRGBA(var(--#{$prefix}#{$type}-hover), map.get($values, hover, shadow))};
+    --#{$prefix}#{$type}-hover-shadow: #{HEXToRGBA(map.get($values, hover, shadow, color), map.get($values, hover, shadow, opacity))};
     --#{$prefix}#{$type}-text: #{map.get($values, text)};
   }
 

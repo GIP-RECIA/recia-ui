@@ -47,7 +47,10 @@ $categories: (
     color: #AB47BC,
     hover: (
       color: #C400F3,
-      shadow: .1,
+      shadow: (
+        color: #C400F3,
+        opacity: .1,
+      ),
     ),
     text: $white
   ),
@@ -55,7 +58,10 @@ $categories: (
     color: #5747BC,
     hover: (
       color: #665BE7,
-      shadow: .15,
+      shadow: (
+        color: #665BE7,
+        opacity: .15,
+      ),
     ),
     text: $white
   ),
@@ -63,7 +69,10 @@ $categories: (
     color: #FFAC2F,
     hover: (
       color: #F5C72E,
-      shadow: .15,
+      shadow: (
+        color: #9D7A06,
+        opacity: .15,
+      ),
     ),
     text: $black
   ),
@@ -71,7 +80,10 @@ $categories: (
     color: #858585,
     hover: (
       color: #5B5B5B,
-      shadow: .15,
+      shadow: (
+        color: #161616,
+        opacity: .15,
+      ),
     ),
     text: $black
   ),
@@ -79,7 +91,10 @@ $categories: (
     color: #26C6DA,
     hover: (
       color: #70EAF5,
-      shadow: .15,
+      shadow: (
+        color: #06829D,
+        opacity: .15,
+      ),
     ),
     text: $black
   ),
@@ -87,7 +102,10 @@ $categories: (
     color: #66BB6A,
     hover: (
       color: #4EF186,
-      shadow: .15,
+      shadow: (
+        color: #069D28,
+        opacity: .15,
+      ),
     ),
     text: $black
   ),
@@ -95,7 +113,10 @@ $categories: (
     color: #EC407A,
     hover: (
       color: #F60086,
-      shadow: .2,
+      shadow: (
+        color: #EC407A,
+        opacity: .2,
+      ),
     ),
     text: $black
   ),
