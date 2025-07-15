@@ -3543,7 +3543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"filters@workspace:packages/webcomponents/filters":
+"filters@workspace:^, filters@workspace:packages/webcomponents/filters":
   version: 0.0.0-use.local
   resolution: "filters@workspace:packages/webcomponents/filters"
   dependencies:
@@ -3985,6 +3985,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.31.0"
     eslint-plugin-format: "npm:^1.0.1"
+    filters: "workspace:^"
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"

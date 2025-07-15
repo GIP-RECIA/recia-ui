@@ -23,6 +23,7 @@ import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
+import 'filters/dist/r-filters.js'
 
 const tagName = componentName('services-layout')
 
@@ -61,49 +62,54 @@ export class ReciaServicesLayout extends LitElement {
               </select>
             </div>
           </header>
-          <div class="filters">
-            <header>
-              <button aria-expanded="false" aria-controls="services-filters">
-                <span class="heading">Filtres</span>
-                <div class="grow-1"></div>
-                <i class="folded-indicator fa-solid fa-chevron-down"></i>
-              </button>
-              <span class="heading">Filtres</span>
-            </header>
-            <ul id="services-filters" class="menu" style="display: none;">
-              <li>
-                <ul>
-                  <li>
-                    <button class="tag active">Tous les services</button>
-                  </li>
-                  <li>
-                    <button class="tag">Nouveautés</button>
-                  </li>
-                  <li>
-                    <button class="tag">Collaboratif</button>
-                  </li>
-                  <li>
-                    <button class="tag">Apprentissage</button>
-                  </li>
-                  <li>
-                    <button class="tag">Communication</button>
-                  </li>
-                  <li>
-                    <button class="tag">Documentation</button>
-                  </li>
-                  <li>
-                    <button class="tag">Vie scolaire</button>
-                  </li>
-                  <li>
-                    <button class="tag">Paramètres</button>
-                  </li>
-                  <li>
-                    <button class="tag">Orientation</button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+          <r-filters
+            data='[
+              {
+                "id": "category",
+                "name": "Par catégorie :",
+                "type": "radio",
+                "items": [
+                  {
+                    "key": "all",
+                    "value": "Tous les services"
+                  },
+                  {
+                    "key": "new",
+                    "value": "Nouveautés"
+                  },
+                  {
+                    "key": "collaboratif",
+                    "value": "Collaboratif"
+                  },
+                  {
+                    "key": "appresntissage",
+                    "value": "Apprentissage"
+                  },
+                  {
+                    "key": "communication",
+                    "value": "Communication"
+                  },
+                  {
+                    "key": "documentation",
+                    "value": "Documentation"
+                  },
+                  {
+                    "key": "vie-scolaire",
+                    "value": "Vie scolaire"
+                  },
+                  {
+                    "key": "parametres",
+                    "value": "Paramètres"
+                  },
+                  {
+                    "key": "orientation",
+                    "value": "Orientation"
+                  }
+                ]
+              }
+            ]'
+          >
+          </r-filters>
           <ul>
             <li>
               <div class="service collaboratif">
