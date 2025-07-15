@@ -18,6 +18,7 @@ import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -25,8 +26,10 @@ import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
+import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
+import { setLocale } from './utils/localizationUtils.ts'
 
 const tagName = componentName(name)
 
@@ -63,6 +66,10 @@ export class ReciaBottomSheet extends LitElement {
     library.add(
       faTimes,
     )
+    const lang = langHelper.getPageLang()
+    setLocale(lang)
+    langHelper.setLocale(lang)
+    updateWhenLocaleChanges(this)
   }
 
   connectedCallback(): void {
@@ -209,7 +216,7 @@ export class ReciaBottomSheet extends LitElement {
                 ? html`
                     <button
                       class="btn-tertiary circle close"
-                      aria-label="Fermer la modale"
+                      aria-label="${msg(str`Fermer la modale`)}"
                       @click="${this.close}"
                     >
                       ${getIcon(faTimes)}
