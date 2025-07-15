@@ -17,6 +17,9 @@
   align-items: center;
   text-align: center;
   width: 100%;
+  transition:
+    border-color .3s ease-out,
+    box-shadow .3s ease-out;
 
   > .new {
     position: absolute;
