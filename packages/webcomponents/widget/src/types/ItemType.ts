@@ -17,6 +17,7 @@
 import type { Link } from './LinkType.ts'
 
 export interface Item {
+  id: string
   name: string
   icon?: string
   link?: Link

@@ -18,7 +18,14 @@ import type { TemplateResult } from 'lit'
 import type { Item } from './types/ItemType.ts'
 import type { Link } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAnglesRight, faArrowRight, faChevronDown, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAnglesRight,
+  faArrowLeft,
+  faArrowRight,
+  faChevronDown,
+  faInfoCircle,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
@@ -38,6 +45,9 @@ const tagName = componentName(name)
 @localized()
 @customElement(tagName)
 export class ReciaWidget extends LitElement {
+  @property({ type: String })
+  uid?: string
+
   @property({ type: String })
   name?: string
 
@@ -62,6 +72,18 @@ export class ReciaWidget extends LitElement {
   @property({ type: Boolean, attribute: 'empty-discover' })
   emptyDiscover: boolean = false
 
+  @property({ type: Boolean })
+  manage: boolean = false
+
+  @property({ type: Boolean })
+  deletable: boolean = false
+
+  @property({ type: Boolean, attribute: 'no-previous' })
+  noPrevious: boolean = false
+
+  @property({ type: Boolean, attribute: 'no-next' })
+  noNext: boolean = false
+
   @state()
   isExpanded: boolean = false
 
@@ -69,9 +91,11 @@ export class ReciaWidget extends LitElement {
     super()
     library.add(
       faAnglesRight,
+      faArrowLeft,
       faArrowRight,
       faChevronDown,
       faInfoCircle,
+      faTimes,
     )
     const lang = langHelper.getPageLang()
     setLocale(lang)
@@ -85,8 +109,17 @@ export class ReciaWidget extends LitElement {
     this.isExpanded = !this.isExpanded
   }
 
+  deleteWidget(): void {
+    this.dispatchEvent(new CustomEvent('delete', { detail: { uid: this.uid } }))
+  }
+
+  moveWidget(newPosition: '-1' | '+1'): void {
+    this.dispatchEvent(new CustomEvent('move', { detail: { uid: this.uid, newPosition } }))
+  }
+
   clickOnItem(item: Item): void {
-    this.dispatchEvent(new CustomEvent('click-on-item', { detail: { item } }))
+    const { id } = item
+    this.dispatchEvent(new CustomEvent('click-on-item', { detail: { uid: this.uid, id } }))
   }
 
   headingTemplate(): TemplateResult {
@@ -145,14 +178,65 @@ export class ReciaWidget extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
-    if (!this.name)
+    if (!this.uid || !this.name)
       return nothing
 
     const slug = slugify(this.name)
 
+    const actionTemplate: TemplateResult | typeof nothing = this.manage
+      ? html`
+          <div class="actions">
+            ${
+              this.deletable
+                ? html`
+                    <div class="action-delete">
+                      <button
+                        aria-label="${msg(str`Supprimer le widget`)}"
+                        @click="${() => this.deleteWidget()}"
+                      >
+                        ${getIcon(faTimes)}
+                      </button>
+                    </div>
+                  `
+                : nothing
+            }
+            ${
+              !this.noPrevious
+                ? html`
+                    <div class="action-back">
+                      <button
+                        aria-label="${msg(str`Réordonner vers la gauche`)}"
+                        @click="${() => this.moveWidget('-1')}"
+                      >
+                        ${getIcon(faArrowLeft)}
+                      </button>
+                    </div>
+                  `
+                : nothing
+            }
+            <div class="grow-1"></div>
+            ${
+              !this.noNext
+                ? html`
+                    <div class="action-next">
+                      <button
+                        aria-label="${msg(str`Réordonner vers la droite`)}"
+                        @click="${() => this.moveWidget('+1')}"
+                      >
+                        ${getIcon(faArrowRight)}
+                      </button>
+                    </div>
+                  `
+                : nothing
+            }
+          </div>
+        `
+      : nothing
+
     return html`
       <div class="widget">
-        <header>
+        ${actionTemplate}
+        <header ?inert="${this.manage}">
           <button
             aria-expanded="${this.isExpanded}"
             aria-controls="widget-${slug}-menu"
@@ -196,6 +280,7 @@ export class ReciaWidget extends LitElement {
           style="${styleMap({
             display: this.isExpanded ? undefined : 'none',
           })}"
+          ?inert="${this.manage}"
         >
           ${
             this.items && this.items.length > 0
