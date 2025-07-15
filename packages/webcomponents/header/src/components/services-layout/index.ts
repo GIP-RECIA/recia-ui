@@ -26,6 +26,7 @@ import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'filters/dist/r-filters.js'
+import '../service/index.ts'
 
 const tagName = componentName('services-layout')
 
