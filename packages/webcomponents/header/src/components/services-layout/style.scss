@@ -1,6 +1,42 @@
 @use 'sass:map';
 @use '../../variables' as *;
 
+.page-layout {
+  display: grid;
+  gap: 32px;
+
+  > header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+
+    > .heading {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      column-gap: 6px;
+
+      > .btn-tertiary {
+        font-size: var(--#{$prefix}font-size-md);
+      }
+
+      > h1 {
+        margin: 0;
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    gap: 48px;
+
+    > header {
+      flex-direction: row;
+    }
+  }
+}
+
 .services-layout {
   position: fixed;
   inset: $header-height 0 0 0;

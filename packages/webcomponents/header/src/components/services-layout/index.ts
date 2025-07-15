@@ -16,11 +16,13 @@
 
 import type { TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'filters/dist/r-filters.js'
@@ -33,6 +35,7 @@ export class ReciaServicesLayout extends LitElement {
   constructor() {
     super()
     library.add(
+      faArrowLeft,
     )
     const lang = langHelper.getPageLang()
     setLocale(lang)
@@ -46,8 +49,8 @@ export class ReciaServicesLayout extends LitElement {
         <div class="container page-layout">
           <header>
             <div class="heading">
-              <button class="btn-tertiary circle"><i class="fa-solid fa-arrow-left"></i></button>
-              <h1>Toutes les services</h1>
+              <button class="btn-tertiary circle">${getIcon(faArrowLeft)}</button>
+              <h1>${msg(str`Toutes les services`)}</h1>
             </div>
             <div class="sort">
               <label for="services-sort">Trier par :</label>
