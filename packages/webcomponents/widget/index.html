@@ -33,27 +33,26 @@
     <section>
       <r-widget
         name="Favoris"
-        link="#1"
         items='[
           {
             "name": "Carte mentale",
             "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"./spritemap.svg#carte-mentale\"></use></svg>",
-            "link": "#A"
+            "link": { "href": "#A" }
           },
           {
             "name": "Capytale",
             "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"./spritemap.svg#capytale\"></use></svg>",
-            "link": "#B"
+            "link": { "href": "#B" }
           },
           {
             "name": "Espaces Nextcloud",
             "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"./spritemap.svg#nextcloud\"></use></svg>",
-            "link": "#C"
+            "link": { "href": "#C" }
           },
           {
             "name": "Platforme vidéo",
             "icon": "<svg class=\"icon\" aria-hidden=\"true\"><use xlink:href=\"./spritemap.svg#POD\"></use></svg>",
-            "link": "#D"
+            "link": { "href": "#D" }
           }
         ]'
       >
@@ -61,14 +60,14 @@
 
       <r-widget
         name="Espace vie scolaire"
-        link="#2"
+        link='{ "href" : "#2" }'
       >
       </r-widget>
 
       <r-widget
         name="Cartes mentales"
-        link="#3"
-        empty-icon='<svg class="empty-icon svg-inline--fa" aria-hidden="true"><use xlink:href="./spritemap.svg#carte-mentale"></use></svg>'
+        link='{ "href" : "#3" }'
+        empty-icon='<svg class="icon svg-inline--fa" aria-hidden="true"><use xlink:href="./spritemap.svg#carte-mentale"></use></svg>'
         empty-text="Aucune carte mentale"
       >
       </r-widget>
@@ -77,7 +76,7 @@
         name="Médiacentre"
         subtitle="Consulté récement"
         notifications="6"
-        link="#4"
+        link='{ "href" : "#4" }'
         empty-discover
       >
       </r-widget>

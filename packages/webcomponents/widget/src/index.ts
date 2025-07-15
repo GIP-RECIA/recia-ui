@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import type { PropertyValues, TemplateResult } from 'lit'
+import type { TemplateResult } from 'lit'
+import type { Item } from './types/ItemType.ts'
+import type { Link } from './types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAnglesRight, faArrowRight, faChevronDown, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -33,48 +35,43 @@ import { slugify } from './utils/stringUtils.ts'
 
 const tagName = componentName(name)
 
-interface Item {
-  name: string
-  icon?: string
-  link: string
-}
-
 @localized()
 @customElement(tagName)
 export class ReciaWidget extends LitElement {
   @property({ type: String })
-  name = ''
+  name?: string
 
   @property({ type: String })
   subtitle?: string
 
   @property({ type: Number })
-  notifications = 0
+  notifications?: number
 
-  @property({ type: String })
-  link = ''
+  @property({ type: Object })
+  link?: Link
 
-  @property({ type: String })
-  items = '[]'
+  @property({ type: Array })
+  items?: Array<Item>
 
   @property({ type: String, attribute: 'empty-icon' })
   emptyIcon?: string
 
   @property({ type: String, attribute: 'empty-text' })
-  emptyText = msg(str`Aucun élément`)
+  emptyText: string = msg(str`Aucun élément`)
 
   @property({ type: Boolean, attribute: 'empty-discover' })
-  emptyDiscover = false
+  emptyDiscover: boolean = false
 
   @state()
-  isExpanded = false
-
-  @state()
-  localItems: Array<Item> = []
+  isExpanded: boolean = false
 
   constructor() {
     super()
     library.add(
+      faAnglesRight,
+      faArrowRight,
+      faChevronDown,
+      faInfoCircle,
     )
     const lang = langHelper.getPageLang()
     setLocale(lang)
@@ -82,22 +79,14 @@ export class ReciaWidget extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
-  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('items')) {
-      this.updateItems()
-    }
-    return true
-  }
-
-  updateItems(): void {
-    const parsedItems = JSON.parse(this.items)
-    this.localItems = parsedItems
-  }
-
   toggleDropdown(e: Event): void {
     e.preventDefault()
     e.stopPropagation()
     this.isExpanded = !this.isExpanded
+  }
+
+  clickOnItem(item: Item): void {
+    this.dispatchEvent(new CustomEvent('click-on-item', { detail: { item } }))
   }
 
   headingTemplate(): TemplateResult {
@@ -112,16 +101,57 @@ export class ReciaWidget extends LitElement {
   }
 
   notificationsTemplate(): TemplateResult | typeof nothing {
-    return this.notifications > 0
-      ? html`<span class="badge lg">${this.notifications}<span class="sr-only"> ${msg(str`notifications`)}</span></span>`
+    return this.notifications && this.notifications > 0
+      ? html`
+          <span class="badge lg">
+            ${this.notifications}
+            <span class="sr-only">${msg(str`notifications`)}</span>
+          </span>
+        `
       : nothing
   }
 
-  render(): TemplateResult {
+  itemTemplate(item: Item): TemplateResult {
+    const content: TemplateResult = html`
+      ${unsafeSVG(item.icon)}
+      <span>${item.name}</span>
+    `
+
+    return html`
+      <li>
+        ${
+          item.link
+            ? html`
+                <a
+                  href="${item.link.href}"
+                  target="${item.link.target ?? nothing}"
+                  rel="${item.link.rel ?? nothing}"
+                  title="${item.name}"
+                >
+                  ${content}
+                </a>
+              `
+            : html`
+                <button
+                  title="${item.name}"
+                  @click="${() => this.clickOnItem(item)}"
+                >
+                  ${content}
+                </button>
+              `
+        }
+      </li>
+    `
+  }
+
+  render(): TemplateResult | typeof nothing {
+    if (!this.name)
+      return nothing
+
     const slug = slugify(this.name)
 
     return html`
-      <li class="widget-tile">
+      <div class="widget">
         <header>
           <button
             aria-expanded="${this.isExpanded}"
@@ -132,37 +162,51 @@ export class ReciaWidget extends LitElement {
             <div class="heading">${this.headingTemplate()}</div>
             <div class="grow-1"></div>
             ${this.notificationsTemplate()}
-            ${getIconWithStyle(faChevronDown, { rotate: this.isExpanded ? '180deg' : undefined }, { 'folded-indicator': true })}
+            ${
+              getIconWithStyle(
+                faChevronDown,
+                { rotate: this.isExpanded ? '180deg' : undefined },
+                { 'folded-indicator': true },
+              )
+            }
           </button>
           <div>
-            <a href="${this.link}" aria-label="${this.name}">
-              ${getIconWithStyle(faAnglesRight, {}, { 'focus-indicator': true })}
-              <div class="heading">${this.headingTemplate()}</div>
-            </a>
+            ${
+              this.link
+                ? html`
+                    <a
+                      href="${this.link.href}"
+                      target="${this.link.target ?? nothing}"
+                      rel="${this.link.rel ?? nothing}"
+                      aria-label="${this.name}"
+                    >
+                      ${getIconWithStyle(faAnglesRight, undefined, { 'focus-indicator': true })}
+                      <div class="heading">${this.headingTemplate()}</div>
+                    </a>
+                  `
+                : html`<div class="heading">${this.headingTemplate()}</div>`
+            }
             <div class="grow-1"></div>
             ${this.notificationsTemplate()}
           </div>
         </header>
         <div
           id="widget-${slug}-menu"
-          class="widget-menu"
+          class="menu"
           style="${styleMap({
             display: this.isExpanded ? undefined : 'none',
           })}"
         >
           ${
-            this.localItems.length > 0
+            this.items && this.items.length > 0
               ? html`
                   <ul>
                     ${
-                      repeat(this.localItems, item => item.name, item => html`
-                        <li>
-                          <a href="${item.link}" title="${item.name}">
-                            ${unsafeSVG(item.icon)}
-                            <span>${item.name}</span>
-                          </a>
-                        </li>
-                      `)
+                      repeat(
+                        this.items,
+                        item => item,
+                        item => this.itemTemplate(item),
+                      )
                     }
                   </ul>
                 `
@@ -172,16 +216,22 @@ export class ReciaWidget extends LitElement {
                       !this.emptyDiscover
                         ? this.emptyIcon
                           ? unsafeSVG(this.emptyIcon)
-                          : getIconWithStyle(faInfoCircle, {}, { 'empty-icon': true })
+                          : getIconWithStyle(faInfoCircle, undefined, { icon: true })
                         : nothing
                     }
-                    <span class="empty-text">
-                      ${msg(str`Vous n'avez`)}<span class="large">${this.emptyText}</span>
+                    <span class="text">
+                      ${msg(str`Vous n'avez`)}
+                      <span class="large">${this.emptyText}</span>
                     </span>
                     ${
-                      this.emptyDiscover
+                      this.emptyDiscover && this.link
                         ? html`
-                            <a href="${this.link}" class="btn-secondary small">
+                            <a
+                              href="${this.link.href}"
+                              target="${this.link.target ?? nothing}"
+                              rel="${this.link.rel ?? nothing}"
+                              class="btn-secondary small"
+                            >
                               ${msg(str`Découvrir`)}${getIcon(faArrowRight)}
                             </a>
                           `
@@ -191,7 +241,7 @@ export class ReciaWidget extends LitElement {
                 `
           }
         </div>
-      </li>
+      </div>
     `
   }
 
