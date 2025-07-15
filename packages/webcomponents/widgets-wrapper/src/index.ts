@@ -175,6 +175,11 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
+  applyEdit(): void {
+    this.widgetToDisplayKeyArray = this.allWidgetsCopy.filter(x => x.displayed).map(x => x.key)
+    this.requestUpdate()
+  }
+
   allWidgets: Array<WidgetSelectorData> = []
   allWidgetsCopy: Array<WidgetSelectorData> = []
 
@@ -337,6 +342,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     const indexOther = index - 1;
     [this.allWidgetsCopy[indexOther], this.allWidgetsCopy[index]] = [this.allWidgetsCopy[index], this.allWidgetsCopy[indexOther]]
     this.requestUpdate()
+    this.applyEdit()
   }
 
   moveWidgetForward(wsd: WidgetSelectorData): void {
@@ -347,6 +353,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     const indexOther = index + 1;
     [this.allWidgetsCopy[index], this.allWidgetsCopy[indexOther]] = [this.allWidgetsCopy[indexOther], this.allWidgetsCopy[index]]
     this.requestUpdate()
+    this.applyEdit()
   }
 
   handleSelectionClick(e: Event, wsd: WidgetSelectorData): void {
