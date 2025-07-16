@@ -15,20 +15,52 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { Link } from '../../types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
+import { faBookOpen, faGrip, faHouse, faMessage } from '@fortawesome/free-solid-svg-icons'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
+import { customElement, property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import pathHelper from '../../helpers/pathHelper.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
+import { DrawerItem } from '../../types/DrawerItemType.ts'
 
 const tagName = componentName('navigation-drawer')
 
 @localized()
 @customElement(tagName)
 export class ReciaNavigationDrawer extends LitElement {
+  @property({ type: String })
+  logo?: string
+
+  @property({ type: String })
+  name?: string
+
+  @property({ type: Object, attribute: 'home-link' })
+  homeLink?: Link
+
+  @property({ type: Boolean })
+  vivible: boolean = false
+
+  @property({ type: Array })
+  items?: Array<DrawerItem>
+
+  @state()
+  isExpanded: boolean = false
+
+  @state()
+  isServicesActive: boolean = false
+
+  @state()
+  isFavoriteActive: boolean = false
+
   constructor() {
     super()
     library.add(
@@ -39,64 +71,164 @@ export class ReciaNavigationDrawer extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    window.addEventListener('keyup', this.handleOutsideEvents.bind(this))
+    window.addEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    window.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
+    window.removeEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
+  handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
+    if (
+      this.isExpanded
+      && e.target instanceof HTMLElement
+      && !(this.contains(e.target) || e.composedPath().includes(this))
+    ) {
+      this.closeDrawer()
+    }
+  }
+
+  toggleDrawer(_: Event): void {
+    this.isExpanded = !this.isExpanded
+  }
+
+  closeDrawer(_: Event | undefined = undefined): void {
+    this.isExpanded = false
+  }
+
+  toggleServices(_: Event): void {
+    this.closeDrawer()
+    this.isServicesActive = !this.isServicesActive
+  }
+
+  toggleFavorite(_: Event): void {
+    this.closeDrawer()
+    this.isFavoriteActive = !this.isFavoriteActive
+  }
+
+  emitEvent(_: Event): void {
+    this.closeDrawer()
+    this.dispatchEvent(new CustomEvent('launch', { detail: { } }))
+  }
+
+  itemTemplate(item: DrawerItem): TemplateResult {
+    const content: TemplateResult = html`
+      <div class="active-indicator"></div>
+      <div class="icon">
+        ${getIcon(item.icon)}
+      </div>
+      <span class="text">${item.name}</span>
+    `
+
+    return item.link
+      ? html`
+          <li>
+            <a
+              href="${item.link.href}"
+              target="${item.link.target ?? nothing}"
+              rel="${item.link.rel ?? nothing}"
+              title="${item.name}"
+              aria-label="${item.ariaLabel ?? nothing}"
+              class="${classMap({
+                active: pathHelper.isCurrentPage(item.link.href),
+              })}"
+              aria-current="${pathHelper.isCurrentPage(item.link.href) ?? nothing}"
+              @click="${this.closeDrawer}"
+            >
+              ${content}
+            </a>
+          </li>
+        `
+      : html`
+          <li>
+            <button
+              title="${item.name}"
+              aria-label="${item.ariaLabel ?? nothing}"
+              @click="${(e: Event) => {
+                this.emitEvent(e)
+                this.closeDrawer()
+              }}"
+            >
+              ${content}
+            </button>
+          </li>
+        `
+  }
+
   render(): TemplateResult {
     return html`
-      <button class="drawer-toggle" aria-controls="navigation-drawer" aria-label="Tiroir de navigation">
+      <button
+        class="drawer-toggle"
+        aria-controls="navigation-drawer"
+        aria-label="${msg(str`Tiroir de navigation`)}"
+        @click="${this.toggleDrawer}"
+      >
         <svg aria-hidden="true">
-          <use xlink:href="./spritemap.svg#NOC-simple"></use>
+          <use href="${this.logo}"></use>
         </svg>
-        <span>Menu</span>
+        <span>${msg(str`Menu`)}</span>
       </button>
-      <div id="navigation-drawer" class="navigation-drawer visible">
+      <div
+        id="navigation-drawer"
+        class="${classMap({
+          visible: this.vivible,
+          expended: this.isExpanded,
+        })}navigation-drawer"
+      >
         <div>
-          <span>Lycée international de Palaiseau</span>
+          <span>${this.name}</span>
         </div>
         <ul>
+          ${this.itemTemplate({
+            name: msg(str`Accueil`),
+            ariaLabel: msg(str`Retourer à l'accueil`),
+            icon: faHouse,
+            link: this.homeLink,
+          })}
           <li>
-            <a href="#" title="Accueil" aria-label="Retourer à l'accueil" class="back-home active">
+            <button
+              title="${msg(str`Tous les services`)}"
+              aria-label=""
+              class="${classMap({
+                active: this.isServicesActive
+              })}"
+              @click="${this.toggleServices}"
+            >
               <div class="active-indicator"></div>
               <div class="icon">
-                <i class="fa-solid fa-house"></i>
+                ${getIcon(faGrip)}
               </div>
-              <span class="text">Accueil</span>
-            </a>
-          </li>
-          <li class="dropdown-services">
-            <button title="Tous les services">
-              <div class="active-indicator"></div>
-              <div class="icon">
-                <i class="fa-solid fa-grip"></i>
-              </div>
-              <span class="text">Tous les services</span>
-            </button>
-          </li>
-          <li class="dropdown-favorites">
-            <button title="Favoris">
-              <div class="active-indicator"></div>
-              <div class="icon">
-                <i class="fa-regular fa-star"></i>
-              </div>
-              <span class="text">Favoris</span>
+              <span class="text">${msg(str`Tous les services`)}</span>
             </button>
           </li>
           <li>
-            <a href="#" title="Mediacentre">
+            <button
+              title="${msg(str`Favoris`)}"
+              aria-label=""
+              class="${classMap({
+                active: this.isFavoriteActive
+              })}"
+              @click="${this.toggleFavorite}"
+            >
               <div class="active-indicator"></div>
               <div class="icon">
-                <i class="fa-solid fa-book-open"></i>
+                ${getIcon(farStar)}
               </div>
-              <span class="text">Mediacentre</span>
-            </a>
+              <span class="text">${msg(str`Favoris`)}</span>
+            </button>
           </li>
-          <li>
-            <a href="#" title="Tutoriels">
-              <div class="active-indicator"></div>
-              <div class="icon">
-                <i class="fa-solid fa-message"></i>
-              </div>
-              <span class="text">Tutoriels</span>
-            </a>
-          </li>
+          ${
+            repeat(
+              this.items ?? [],
+              item => item,
+              item => this.itemTemplate(item),
+            )
+          }
         </ul>
       </div>
     `
