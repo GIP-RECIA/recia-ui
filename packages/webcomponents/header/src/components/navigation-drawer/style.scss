@@ -52,7 +52,9 @@ button.drawer-toggle {
   background-color: var(--#{$prefix}lighter-black);
   color: #FFF;
   font-size: var(--#{$prefix}font-size-sm);
-  --#{$prefix}drawer-width: #{$drawer-width};
+  transition:
+    transform .15s cubic-bezier(0.4, 0, 0.2, 1),
+    width .15s cubic-bezier(0.4, 0, 0.2, 1);
 
   > div {
     flex: 0 0 auto;
@@ -172,7 +174,6 @@ button.drawer-toggle {
   &.expended {
     width: $drawer-expended-width;
     transform: translateX(0);
-    --#{$prefix}drawer-width: #{$drawer-expended-width};
 
     > button {
       background-color: var(--#{$prefix}primary);
