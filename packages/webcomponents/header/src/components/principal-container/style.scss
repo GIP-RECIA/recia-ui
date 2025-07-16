@@ -24,6 +24,8 @@
   justify-content: space-between;
   column-gap: 16px;
   margin-left: $drawer-width;
+  height: $header-height;
+  padding: 16px;
 
   > .start {
     display: flex;

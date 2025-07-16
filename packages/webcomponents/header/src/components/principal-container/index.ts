@@ -16,11 +16,13 @@
 
 import type { TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../search'
@@ -31,9 +33,17 @@ const tagName = componentName('principal-container')
 @localized()
 @customElement(tagName)
 export class ReciaPrincipalContainer extends LitElement {
+  @property({ type: String })
+  name?: string
+
+  @property({ type: Boolean, attribute: 'search' })
+  searchEnabled: boolean = false
+
   constructor() {
     super()
     library.add(
+      faBell,
+      faMagnifyingGlass,
     )
     const lang = langHelper.getPageLang()
     setLocale(lang)
@@ -45,26 +55,53 @@ export class ReciaPrincipalContainer extends LitElement {
     return html`
       <div class="principal-container">
         <div class="start">
-          <span>Lycée international de Palaiseau</span>
+          <span>${this.name}</span>
         </div>
-        <div class="middle">
-          <div>
-            <r-search>
-            </r-search>
-          </div>
-        </div>
+        ${
+          this.searchEnabled
+            ? html`
+              <div class="middle">
+                <div>
+                  <r-search>
+                  </r-search>
+                </div>
+              </div>
+            `
+            : nothing
+        }
         <div class="end">
-          <button class="btn-secondary circle search-button" aria-label="Rechercher dans l'ENT">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-          <r-user-menu>
+          ${
+            this.searchEnabled
+              ? html`
+                  <button
+                    class="btn-secondary circle search-button"
+                    aria-label="${msg(str`Rechercher dans l'ENT`)}"
+                  >
+                    ${getIcon(faMagnifyingGlass)}
+                  </button>
+                `
+              : nothing
+          }
+          <r-user-menu
+          >
           </r-user-menu>
-          <div class="notification">
-            <div class="notification-dot top right"></div>
-            <button class="btn-secondary circle" aria-controls="notification-drawer" aria-expanded="false" aria-label="Tiroir de notifications">
-              <i class="fa-solid fa-bell"></i>
-            </button>
-          </div>
+          ${
+            false
+              ? html`
+                  <div class="notification">
+                    <div class="notification-dot top right"></div>
+                    <button
+                      class="btn-secondary circle"
+                      aria-controls="notification-drawer"
+                      aria-expanded="false"
+                      aria-label="${msg(str`Tiroir de notifications`)}"
+                    >
+                      ${getIcon(faBell)}
+                    </button>
+                  </div>
+                `
+              : nothing
+          }
         </div>
       </div>
     `

@@ -58,12 +58,6 @@ body {
     background-color: var(--#{$prefix}body-bg);
     box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
 
-    > * {
-      display: block;
-      height: $header-height;
-      padding: 16px;
-    }
-
     > .not-logged {
       display: flex;
       align-items: center;
