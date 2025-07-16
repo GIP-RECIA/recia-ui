@@ -47,7 +47,7 @@ export class ReciaNavigationDrawer extends LitElement {
   homeLink?: Link
 
   @property({ type: Boolean })
-  vivible: boolean = false
+  visible: boolean = false
 
   @property({ type: Array })
   items?: Array<DrawerItem>
@@ -55,8 +55,8 @@ export class ReciaNavigationDrawer extends LitElement {
   @state()
   isExpanded: boolean = false
 
-  @state()
-  isServicesActive: boolean = false
+  @property({ type: Boolean, attribute: 'services-layout-state' })
+  isServicesLayout: boolean = false
 
   @state()
   isFavoriteActive: boolean = false
@@ -108,7 +108,7 @@ export class ReciaNavigationDrawer extends LitElement {
 
   toggleServices(_: Event): void {
     this.closeDrawer()
-    this.isServicesActive = !this.isServicesActive
+    this.dispatchEvent(new CustomEvent('toggle-services-layout', { detail: { show: !this.isServicesLayout } }))
   }
 
   toggleFavorite(_: Event): void {
@@ -181,7 +181,7 @@ export class ReciaNavigationDrawer extends LitElement {
       <div
         id="navigation-drawer"
         class="${classMap({
-          visible: this.vivible,
+          visible: this.visible,
           expended: this.isExpanded,
         })}navigation-drawer"
       >
@@ -200,7 +200,7 @@ export class ReciaNavigationDrawer extends LitElement {
               title="${msg(str`Tous les services`)}"
               aria-label=""
               class="${classMap({
-                active: this.isServicesActive,
+                active: this.isServicesLayout,
               })}"
               @click="${this.toggleServices}"
             >

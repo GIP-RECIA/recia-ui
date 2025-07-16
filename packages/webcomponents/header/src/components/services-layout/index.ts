@@ -20,8 +20,8 @@ import type { Service } from '../../types/ServiceType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
@@ -37,14 +37,14 @@ const tagName = componentName('services-layout')
 @localized()
 @customElement(tagName)
 export class ReciaServicesLayout extends LitElement {
+  @property({ type: Boolean })
+  show: boolean = false
+
   @property({ type: Array })
   filters?: Array<Section>
 
   @property({ type: Array })
   services?: Array<Service>
-
-  @state()
-  isExpanded: boolean = false
 
   private activeElement: HTMLElement | undefined
 
@@ -61,39 +61,29 @@ export class ReciaServicesLayout extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.addEventListener('open-menu', this.handleEvent.bind(this))
     this.addEventListener('keyup', this.handleKeyPress.bind(this))
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
-    this.removeEventListener('open-menu', this.handleEvent.bind(this))
     this.removeEventListener('keyup', this.handleKeyPress.bind(this))
   }
 
-  handleEvent(e: Event): void {
-    const { activeElement } = (e as CustomEvent).detail ?? {}
-
-    this.activeElement = activeElement
-    this.isExpanded = true
-  }
-
-  closeMenu(e: Event, resetFocus: boolean = true): void {
-    e.stopPropagation()
-    this.isExpanded = false
+  closeMenu(_: Event, resetFocus: boolean = true): void {
+    this.dispatchEvent(new CustomEvent('close', { detail: { show: false } }))
     if (resetFocus)
       this.activeElement?.focus()
   }
 
   handleKeyPress(e: KeyboardEvent): void {
-    if (this.isExpanded && e.key === 'Escape') {
+    if (this.show && e.key === 'Escape') {
       e.preventDefault()
       this.closeMenu(e)
     }
   }
 
   updateFilters(e: CustomEvent): void {
-    const { id, checked } = e.detail.activeFilters[0]
+    const { id, checked } = e.detail.activeFilters[0] ?? {}
   }
 
   render(): TemplateResult {
@@ -102,7 +92,7 @@ export class ReciaServicesLayout extends LitElement {
         id="services-layout"
         class="services-layout"
         style="${styleMap({
-          display: this.isExpanded ? '' : 'none',
+          display: this.show ? undefined : 'none',
         })}"
         tabindex="-1"
       >
@@ -116,20 +106,26 @@ export class ReciaServicesLayout extends LitElement {
               >
                 ${getIcon(faArrowLeft)}
               </button>
-              <h1>${msg(str`Toutes les services`)}</h1>
+              <h1>${msg(str`Tous les services`)}</h1>
             </div>
-            <div class="sort">
-              <label for="services-sort">Trier par :</label>
-              <select name="" id="services-sort">
-                <button>
-                  <selectedcontent></selectedcontent>
-                </button>
-                <option value="pop-up">Popularité<i class="fa-solid fa-arrow-up"></i></option>
-                <option value="pop-down">Popularité<i class="fa-solid fa-arrow-down"></i></option>
-                <option value="pop-up">Alphabétique<i class="fa-solid fa-arrow-up"></i></option>
-                <option value="pop-down">Alphabétique<i class="fa-solid fa-arrow-down"></i></option>
-              </select>
-            </div>
+            ${
+              false
+                ? html`
+                    <div class="sort">
+                      <label for="services-sort">Trier par :</label>
+                      <select name="" id="services-sort">
+                        <button>
+                          <selectedcontent></selectedcontent>
+                        </button>
+                        <option value="pop-up">Popularité<i class="fa-solid fa-arrow-up"></i></option>
+                        <option value="pop-down">Popularité<i class="fa-solid fa-arrow-down"></i></option>
+                        <option value="pop-up">Alphabétique<i class="fa-solid fa-arrow-up"></i></option>
+                        <option value="pop-down">Alphabétique<i class="fa-solid fa-arrow-down"></i></option>
+                      </select>
+                    </div>
+                  `
+                : nothing
+            }
           </header>
           <r-filters
             .data="${this.filters}"
