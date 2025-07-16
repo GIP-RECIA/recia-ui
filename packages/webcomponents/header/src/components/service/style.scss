@@ -1,5 +1,7 @@
 @use 'sass:map';
 @use '../../variables' as *;
+@use '../../../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .service {
   --#{$prefix}service: #cccccc;

@@ -1,5 +1,7 @@
 @use 'sass:map';
 @use '../../variables' as *;
+@use '../../../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .page-layout {
   display: grid;
@@ -44,7 +46,7 @@
   color: var(--#{$prefix}body);
   overflow-y: auto;
   background-color: var(--#{$prefix}body-bg);
-  transition: margin-left .3s ease-in-out;
+  transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
 
   > div {
     margin-top: 32px;
@@ -68,6 +70,12 @@
       > li > a {
         @include unstyled-link;
       }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    &.navigation-drawer-visible {
+      margin-left: $drawer-width;
     }
   }
 }

@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use '../../variables' as *;
+@use '../../../../../ui/src/assets/scss/variables' as *;
+
+body {
+  &.auto-margin-top {
+    margin-top: $header-height;
+  }
+
+  &.transition-active {
+    transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    &.navigation-drawer-visible {
+      margin-left: $drawer-width;
+    }
+  }
+}

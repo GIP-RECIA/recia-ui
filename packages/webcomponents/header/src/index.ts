@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBookOpen, faGrip, faHouse, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -31,6 +31,7 @@ import './components/navigation-drawer'
 import './components/notification-drawer'
 import './components/principal-container'
 import './components/services-layout'
+import injectedStyle from './assets/css/injectedStyle.css?raw'
 
 const tagName = componentName(name)
 
@@ -218,9 +219,6 @@ export class ReciaHeader extends LitElement {
   }
 
   @state()
-  isNavigationDrawerVisible: boolean = true
-
-  @state()
   isNavigationDrawerExpended: boolean = false
 
   @state()
@@ -239,7 +237,27 @@ export class ReciaHeader extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
-  toggleServicesLayout(e: CustomEvent) {
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    this.injectStyle()
+    document.body.classList.add(this.data.visible ? 'navigation-drawer-visible' : '', 'auto-margin-top')
+    return true
+  }
+
+  injectStyle(): void {
+    let style = document.head.querySelector<HTMLStyleElement>(`style#${tagName}`)
+    if (style)
+      return
+
+    style = document.createElement('style')
+    style.id = tagName
+    style.textContent = injectedStyle
+    document.head.appendChild(style)
+    window.addEventListener('load', () => {
+      document.body.classList.add('transition-active')
+    })
+  }
+
+  toggleServicesLayout(e: CustomEvent): void {
     const { show } = e.detail
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
@@ -274,6 +292,7 @@ export class ReciaHeader extends LitElement {
         </div>
         <r-services-layout
           ?show="${this.isServicesLayout}"
+          ?navigation-drawer-visible="${this.data.visible}"
           .filters="${this.data.filters}"
           .services="${this.data.services}"
           @close="${this.toggleServicesLayout}"

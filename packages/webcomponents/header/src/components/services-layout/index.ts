@@ -22,6 +22,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
@@ -39,6 +40,9 @@ const tagName = componentName('services-layout')
 export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean })
   show: boolean = false
+
+  @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
+  isNavigationDrawerVisible: boolean = false
 
   @property({ type: Array })
   filters?: Array<Section>
@@ -90,7 +94,9 @@ export class ReciaServicesLayout extends LitElement {
     return html`
       <div
         id="services-layout"
-        class="services-layout"
+        class="${classMap({
+          'navigation-drawer-visible': this.isNavigationDrawerVisible,
+        })}services-layout"
         style="${styleMap({
           display: this.show ? undefined : 'none',
         })}"
