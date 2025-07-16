@@ -56,35 +56,30 @@ export class ReciaWidgetsWrapper extends LitElement {
 
       // get all widgets keys known/accepted by the adapter
       this.allExistingKeys = window.WidgetAdapter.getKeys()
-      const maxWidgets: number = import.meta.env.VITE_WIDGET_COUNT
 
-      this.filteredRequiredWidgetsKeys = this.widgetKeysString.split(';').filter(x => this.allExistingKeys.includes(x))
-      this.filteredUserFavoriteWidgetsKeys = await this.getUserFavoriteWidgets()
-      const intersection = this.intersect(this.filteredUserFavoriteWidgetsKeys, this.filteredRequiredWidgetsKeys)
-      // if some required are not in the favorite
-      if (intersection.length < this.filteredRequiredWidgetsKeys.length) {
-        const favNotInIntersect = this.filteredUserFavoriteWidgetsKeys.length - intersection.length
-        const reqNotInIntersect = this.filteredRequiredWidgetsKeys.length - intersection.length
+      // FILTERED PROPERTIES
+      this.filteredRequiredWidgetsKeys = this.widgetRequiredKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
+      this.filteredDefaultWidgetsKeys = this.widgetDefaultKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
 
-        if (favNotInIntersect + reqNotInIntersect + intersection.length <= maxWidgets) {
-          // order of concat preserves order of favorites
-          this.widgetToDisplayKeyArray = [...new Set(intersection.concat(this.filteredUserFavoriteWidgetsKeys).concat(this.filteredRequiredWidgetsKeys))]
-        }
-        else {
-          // concat required before favorites
-          this.widgetToDisplayKeyArray = [...new Set(intersection.concat(this.filteredRequiredWidgetsKeys).concat(this.filteredUserFavoriteWidgetsKeys))].slice(0, maxWidgets)
-        }
+      const prefs = await this.getUserFavoriteWidgets()
+      const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
+      const preferedKeys: Array<string> = hasPrefs ? [...prefs!.prefs.filter(x => this.allExistingKeys.includes(x))] : [...this.filteredDefaultWidgetsKeys]
+
+      const missingRequiredKeys: Array<string> = this.except(this.filteredRequiredWidgetsKeys, preferedKeys)
+
+      if (missingRequiredKeys.length > 0) {
+        this.widgetToDisplayKeyArray = this.filteredRequiredWidgetsKeys.concat(this.except(preferedKeys, this.filteredRequiredWidgetsKeys)).splice(this.getMaxWidgetsCount(), Infinity)
       }
       else {
-        this.widgetToDisplayKeyArray = intersection
+        this.widgetToDisplayKeyArray = preferedKeys
       }
-      this.filteredRequiredWidgetsKeys = this.intersect(this.filteredRequiredWidgetsKeys, this.widgetToDisplayKeyArray)
-      this.filteredUserFavoriteWidgetsKeys = this.widgetToDisplayKeyArray
+
       await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
       this.soffit = await getToken(import.meta.env.VITE_USER_RIGHTS_URI)
       for (const value of this.widgetToDisplayKeyArray) {
         this.buildWidget(value, this.soffit)
       }
+      this.requestUpdate()
       await this.buildWidgetSelector()
     })
   }
@@ -94,6 +89,10 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   @property({ type: Boolean, attribute: 'dev-edit' })
   allowDevEdit = false
+
+  getMaxWidgetsCount(): number {
+    return Math.max(import.meta.env.VITE_WIDGET_COUNT, this.filteredRequiredWidgetsKeys.length)
+  }
 
   async setupLocalization() {
     const version: string = window.WidgetAdapter.getVersion()
@@ -118,9 +117,17 @@ export class ReciaWidgetsWrapper extends LitElement {
     return a.filter(value => b.includes(value))
   }
 
+  union<T>(a: Array<T>, b: Array<T>): Array<T> {
+    return [...new Set([...a, ...b])]
+  }
+
+  except<T>(a: Array<T>, b: Array<T>): Array<T> {
+    return a.filter(x => !b.includes(x))
+  }
+
   allExistingKeys: Array<string> = []
 
-  async getUserFavoriteWidgets() {
+  async getUserFavoriteWidgets(): Promise<{ prefs: Array<string>, noStoredPrefs: boolean } | undefined> {
     const url = import.meta.env.VITE_USER_FAVORITE_WIDGETS_URI
     try {
       const response = await fetch(url)
@@ -129,10 +136,15 @@ export class ReciaWidgetsWrapper extends LitElement {
       }
 
       const json = await response.json()
-      return json.favorites
+
+      return {
+        prefs: json.displayedKeys !== undefined ? json.displayedKeys : [],
+        noStoredPrefs: json.displayedKeys === undefined,
+      }
     }
     catch (error: any) {
       console.error(error.message)
+      return undefined
     }
   }
 
@@ -141,7 +153,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     try {
       const response = await fetch(url, {
         method: 'PUT',
-        body: JSON.stringify({ favorites: keys }),
+        body: JSON.stringify({ displayedKeys: keys }),
       })
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`)
@@ -200,14 +212,16 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   @property({ type: String, attribute: 'widget-keys-required' })
-  widgetKeysString = ''
+  widgetRequiredKeysAsString = ''
+
+  @property({ type: String, attribute: 'widget-keys-default' })
+  widgetDefaultKeysAsString = ''
 
   widgetToDisplayKeyArray: Array<string> = []
   filteredRequiredWidgetsKeys: Array<string> = []
-  filteredUserFavoriteWidgetsKeys: Array<string> = []
+  filteredDefaultWidgetsKeys: Array<string> = []
 
   async buildWidget(key: string, soffit: string) {
-    // don't rebuild widget if already in map
     if (this.widgetDataMap.has(key)) {
       return
     }
@@ -235,9 +249,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       if (this.filteredRequiredWidgetsKeys.includes(key)) {
         widgetData.required = true
       }
-      if (this.filteredUserFavoriteWidgetsKeys.includes(key)) {
-        widgetData.favorite = true
-      }
     }
     this.widgetDataMap.set(key, widgetData)
     this.requestUpdate()
@@ -261,7 +272,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
 
     return html`
-    <p>${import.meta.env.VITE_WIDGET_COUNT}</p>
+    <p>${this.getMaxWidgetsCount()}</p>
     <ul>
       ${this.allWidgetsCopy.map(wds =>
         html`<li>${this.getSingleWidgetEditingRender(wds)}</li>`,
@@ -296,8 +307,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         empty-text="${widgetData.emptyText}"
         ?empty-discover=${widgetData.emptyDiscover ?? false}
         items=${widgetData.items}
-        ?required=${widgetData.required ?? false} //temp value for dev
-        ?favorite=${widgetData.favorite ?? false} //temp value for dev
+        ?required=${widgetData.required ?? false}
+        ?favorite=${widgetData.favorite ?? false}
         event-dnma="${widgetData.eventDNMA}"
         event-payload-dnma="${widgetData.eventpayloadDNMA}"
         >
@@ -330,10 +341,6 @@ export class ReciaWidgetsWrapper extends LitElement {
             ]'
           >
           </r-widget>`
-  }
-
-  getAllKeysNotDisplayed(): Array<string> {
-    return this.allExistingKeys.filter(x => !this.widgetToDisplayKeyArray.includes(x))
   }
 
   moveWidgetBack(wsd: WidgetSelectorData): void {
