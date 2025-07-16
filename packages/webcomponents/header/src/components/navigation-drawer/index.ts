@@ -15,6 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { DrawerItem } from '../../types/DrawerItemType.ts'
 import type { Link } from '../../types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
@@ -30,7 +31,6 @@ import pathHelper from '../../helpers/pathHelper.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import { DrawerItem } from '../../types/DrawerItemType.ts'
 
 const tagName = componentName('navigation-drawer')
 
@@ -64,6 +64,11 @@ export class ReciaNavigationDrawer extends LitElement {
   constructor() {
     super()
     library.add(
+      faBookOpen,
+      faGrip,
+      faHouse,
+      faMessage,
+      farStar,
     )
     const lang = langHelper.getPageLang()
     setLocale(lang)
@@ -195,7 +200,7 @@ export class ReciaNavigationDrawer extends LitElement {
               title="${msg(str`Tous les services`)}"
               aria-label=""
               class="${classMap({
-                active: this.isServicesActive
+                active: this.isServicesActive,
               })}"
               @click="${this.toggleServices}"
             >
@@ -211,7 +216,7 @@ export class ReciaNavigationDrawer extends LitElement {
               title="${msg(str`Favoris`)}"
               aria-label=""
               class="${classMap({
-                active: this.isFavoriteActive
+                active: this.isFavoriteActive,
               })}"
               @click="${this.toggleFavorite}"
             >
