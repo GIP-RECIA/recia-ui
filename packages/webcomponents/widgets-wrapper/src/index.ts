@@ -15,42 +15,58 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { WidgetData } from './classes/WidgetData.ts'
+import type { Item } from 'widget/src/types/ItemType'
+import type { WidgetDataDTO } from './classes/WidgetDataDTO.ts'
+import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
+import type { ItemDTO } from './types/ItemDTOType.ts'
+import type { WidgetData } from './types/WidgetDataType.ts'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faAnglesRight,
+  faArrowLeft,
+  faArrowRight,
+  faChevronDown,
+  faCog,
+  faInfoCircle,
+  faPlus,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
-import { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
+
+import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
 import 'widget/dist/r-widget.js'
 
 const tagName = componentName(name)
 
-declare global {
-  interface Window {
-    WidgetAdapter: any
-  }
-}
-
 @localized()
 @customElement(tagName)
 export class ReciaWidgetsWrapper extends LitElement {
   constructor() {
     super()
+    library.add(
+      faAnglesRight,
+      faArrowLeft,
+      faArrowRight,
+      faChevronDown,
+      faInfoCircle,
+      faPlus,
+      faTimes,
+    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
 
     document.addEventListener('WIDGETS-BEGIN', async () => {
-      if (import.meta.env.DEV) {
-        await this.resetUserFavoriteWidgets()
-      }
 
       await this.setupLocalization()
 
@@ -68,30 +84,96 @@ export class ReciaWidgetsWrapper extends LitElement {
       const missingRequiredKeys: Array<string> = this.except(this.filteredRequiredWidgetsKeys, preferedKeys)
 
       if (missingRequiredKeys.length > 0) {
-        this.widgetToDisplayKeyArray = this.filteredRequiredWidgetsKeys.concat(this.except(preferedKeys, this.filteredRequiredWidgetsKeys)).splice(this.getMaxWidgetsCount(), Infinity)
+        this.widgetToDisplayKeyArray = this.filteredRequiredWidgetsKeys.concat(this.except(preferedKeys, this.filteredRequiredWidgetsKeys)).toSpliced(this.getMaxWidgetsCount(), Infinity)
       }
       else {
         this.widgetToDisplayKeyArray = preferedKeys
       }
 
       await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
-      this.soffit = await getToken(import.meta.env.VITE_USER_RIGHTS_URI)
+      await this.fetchSoffit()
       for (const value of this.widgetToDisplayKeyArray) {
         this.buildWidget(value, this.soffit)
       }
       this.requestUpdate()
-      await this.buildWidgetSelector()
+      this.fetchKeyToNameMap()
     })
   }
+
+  // #region PROPERTIES
 
   @property({ type: String, attribute: 'localization-uri' })
   localizationUri = ''
 
-  @property({ type: Boolean, attribute: 'dev-edit' })
-  allowDevEdit = false
+  @property({ type: String, attribute: 'widget-keys-required' })
+  widgetRequiredKeysAsString = ''
+
+  @property({ type: String, attribute: 'widget-keys-default' })
+  widgetDefaultKeysAsString = ''
+
+  @property({ type: Number, attribute: 'widget-max-count' })
+  widgetMaxCount = 3
+
+  @property({ type: String, attribute: 'soffit-uri' })
+  soffitUri = ''
+
+  @property({ type: String, attribute: 'get-prefs-uri' })
+  getPrefsUri = ''
+
+  @property({ type: String, attribute: 'put-prefs-uri' })
+  putPrefsUri = ''
+
+  // #endregion PROPERTIES
+
+  // #region VARIABLES
+
+  soffit: string = ''
+  allWidgets: Array<WidgetSelectorData> = []
+  keyToNameMap: Map<string, string> = new Map()
+
+  @state()
+  isEditingWidgetsPrefs: boolean = false
+
+  @state()
+  widgetDataMap: Map<string, WidgetData> = new Map()
+
+  @state()
+  widgetToDisplayKeyArray: Array<string> = []
+
+  // used for cancel changes
+  widgetToDisplayKeyArrayBackup: Array<string> = []
+
+  allExistingKeys: Array<string> = []
+
+  filteredRequiredWidgetsKeys: Array<string> = []
+
+  // could be a local const
+  filteredDefaultWidgetsKeys: Array<string> = []
+
+  dropdownOpen: boolean = false
+
+  itemByWidgetNestedMap: Map<string, Map<string, Item>> = new Map()
+
+  // store the bounded event used for listenning for click, and removing it when the dropdown is closed
+  boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
+
+  // #endregion VARIABLES
+
+  async fetchSoffit() {
+    this.soffit = await getToken(this.soffitUri)
+  }
+
+  async fetchKeyToNameMap() {
+    const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames()
+    names.forEach((value) => {
+      this.keyToNameMap.set(value.key, value.name)
+    })
+    console.log(this.keyToNameMap)
+    this.requestUpdate()
+  }
 
   getMaxWidgetsCount(): number {
-    return Math.max(import.meta.env.VITE_WIDGET_COUNT, this.filteredRequiredWidgetsKeys.length)
+    return Math.max(this.widgetMaxCount, this.filteredRequiredWidgetsKeys.length)
   }
 
   async setupLocalization() {
@@ -102,7 +184,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`)
       }
-
       const json = await response.json()
       langHelper.setReference(json)
     }
@@ -110,8 +191,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       console.error(error.message)
     }
   }
-
-  soffit: string = ''
 
   intersect<T>(a: Array<T>, b: Array<T>): Array<T> {
     return a.filter(value => b.includes(value))
@@ -125,10 +204,12 @@ export class ReciaWidgetsWrapper extends LitElement {
     return a.filter(x => !b.includes(x))
   }
 
-  allExistingKeys: Array<string> = []
+  removeItem<T>(a: Array<T>, b: T): Array<T> {
+    return a.filter(x => x !== b)
+  }
 
   async getUserFavoriteWidgets(): Promise<{ prefs: Array<string>, noStoredPrefs: boolean } | undefined> {
-    const url = import.meta.env.VITE_USER_FAVORITE_WIDGETS_URI
+    const url = this.getPrefsUri
     try {
       const response = await fetch(url)
       if (!response.ok) {
@@ -149,7 +230,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   async setUserFavoriteWidgets(keys: Array<string>) {
-    const url = import.meta.env.VITE_USER_SET_FAVORITES_WIDGETS_URI
+    const url = this.putPrefsUri
     try {
       const response = await fetch(url, {
         method: 'PUT',
@@ -164,93 +245,190 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  beginEdit(): void {
-    this.allWidgetsCopy = JSON.parse(JSON.stringify(this.allWidgets))
-    this.editing = true
-    this.requestUpdate()
-  }
-
-  cancelEdit(): void {
-    this.allWidgetsCopy = JSON.parse(JSON.stringify(this.allWidgets))
-    this.editing = false
-    this.requestUpdate()
-  }
-
-  saveEdit(): void {
-    this.allWidgets = JSON.parse(JSON.stringify(this.allWidgetsCopy))
-    this.widgetToDisplayKeyArray = this.allWidgets.filter(x => x.displayed).map(x => x.key)
-    this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
-    this.editing = false
-    this.requestUpdate()
-    for (const value of this.widgetToDisplayKeyArray) {
-      this.buildWidget(value, this.soffit)
-    }
-  }
-
-  applyEdit(): void {
-    this.widgetToDisplayKeyArray = this.allWidgetsCopy.filter(x => x.displayed).map(x => x.key)
-    this.requestUpdate()
-  }
-
-  allWidgets: Array<WidgetSelectorData> = []
-  allWidgetsCopy: Array<WidgetSelectorData> = []
-
-  async buildWidgetSelector() {
-    const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames()
-    const namesWithDisplayedSortedOnTop = this.union(this.widgetToDisplayKeyArray, names.map(x => x.key))
-    for (const val of namesWithDisplayedSortedOnTop) {
-      const widgetSelectorData: WidgetSelectorData = new WidgetSelectorData(val, val, this.filteredRequiredWidgetsKeys.includes(val), this.widgetToDisplayKeyArray.includes(val), this.filteredDefaultWidgetsKeys.includes(val))
-      this.allWidgets.push(widgetSelectorData)
-    }
-  }
-
-  editing: boolean = false
-
   async resetUserFavoriteWidgets() {
-    // temp for dev, must be empty
-    await this.setUserFavoriteWidgets(['Documents', 'Mediacentre'])
+    await this.setUserFavoriteWidgets([])
   }
 
-  @property({ type: String, attribute: 'widget-keys-required' })
-  widgetRequiredKeysAsString = ''
+  handleClickOnItem(e: CustomEvent) {
+    const id: string = e.detail.id
+    const uid: string = e.detail.uid
+    const item: Item | undefined = this.itemByWidgetNestedMap.get(uid)?.get(id)
+    if (item === undefined) {
+      return
+    }
 
-  @property({ type: String, attribute: 'widget-keys-default' })
-  widgetDefaultKeysAsString = ''
+    if (item.eventDNMA) {
+      document.dispatchEvent(
+        new CustomEvent(
+          item.eventDNMA,
+          {
+            detail: JSON.stringify(item.eventDNMApayload),
+          },
+        ),
+      )
+    }
 
-  widgetToDisplayKeyArray: Array<string> = []
-  filteredRequiredWidgetsKeys: Array<string> = []
-  filteredDefaultWidgetsKeys: Array<string> = []
+    if (item.event) {
+      document.dispatchEvent(
+        new CustomEvent(
+          item.event,
+          {
+            detail: JSON.stringify(item.eventpayload),
+          },
+        ),
+      )
+    }
+  }
+
+  handleMove(e: CustomEvent) {
+    const newPosition: string = e.detail.newPosition
+    const uid: string = e.detail.uid
+    if (!this.widgetToDisplayKeyArray.includes(uid)) {
+      return
+    }
+    if (newPosition === '+1') {
+      this.moveWidgetForward(uid)
+    }
+    else if (newPosition === '-1') {
+      this.moveWidgetBack(uid)
+    }
+  }
+
+  moveWidgetBack(uid: string): void {
+    const index = this.widgetToDisplayKeyArray.indexOf(uid)
+    if (index === 0) {
+      return
+    }
+    const indexOther = index - 1;
+    [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]] = [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]]
+    this.requestUpdate()
+  }
+
+  moveWidgetForward(uid: string): void {
+    const index = this.widgetToDisplayKeyArray.indexOf(uid)
+    if (index === this.widgetToDisplayKeyArray.length - 1) {
+      return
+    }
+    const indexOther = index + 1;
+    [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]] = [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]]
+    this.requestUpdate()
+  }
+
+  clickOnGerer() {
+    this.isEditingWidgetsPrefs = true
+    // create a copy of array, because original will be modified to reflect the change instantly, and this one will be used if cancel is pressed
+    this.widgetToDisplayKeyArrayBackup = [...this.widgetToDisplayKeyArray]
+  }
+
+  clickOnAnnuler() {
+    this.isEditingWidgetsPrefs = false
+    this.dropdownOpen = false
+    this.widgetToDisplayKeyArray = [...this.widgetToDisplayKeyArrayBackup]
+  }
+
+  clickOnSauvegarder() {
+    this.isEditingWidgetsPrefs = false
+    this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+  }
+
+  handleAddWidget(key: string) {
+    if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()) {
+      return
+    }
+
+    // avoid duplicated display, should not happen but check is just in case
+    if (this.widgetToDisplayKeyArray.includes(key)) {
+      return
+    }
+
+    this.buildWidget(key, this.soffit)
+    this.widgetToDisplayKeyArray.push(key)
+  }
+
+  handleRemoveWidget(e: CustomEvent) {
+    this.widgetToDisplayKeyArray = this.removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
+  }
 
   async buildWidget(key: string, soffit: string) {
     if (this.widgetDataMap.has(key)) {
       return
     }
 
-    let itemsAsString: string = await this.getWidgetData(key, soffit)
-    const regexForPartToLocalize = /I18N\$([A-Za-z0-9]+)\$/g
-    let execArray
-    const replaceMap: Map<string, string> = new Map()
-    // eslint-disable-next-line no-cond-assign
-    while ((execArray = regexForPartToLocalize.exec(itemsAsString)) !== null) {
-      if (!replaceMap.has(execArray[0])) {
-        replaceMap.set(execArray[0], this.t(`items.${execArray[1]}`, execArray[1]))
-      }
+    const widgetData: WidgetData = {
+      name: key,
+      uid: key,
+      emptyDiscover: false,
+      emptyText: '',
+      loading: true,
+      deletable: !this.filteredRequiredWidgetsKeys.includes(key),
     }
-    replaceMap.forEach((value: string, key: string) => {
-      itemsAsString = itemsAsString.replaceAll(key, value)
-    })
-    const widgetData: WidgetData = JSON.parse(itemsAsString)
 
-    const emptyText = this.t(`empty-text.${key}`, widgetData.emptyText)
-    widgetData.emptyText = emptyText
-
-    // values used for display in dev env
-    if (import.meta.env.DEV) {
-      if (this.filteredRequiredWidgetsKeys.includes(key)) {
-        widgetData.required = true
-      }
-    }
     this.widgetDataMap.set(key, widgetData)
+    this.requestUpdate()
+
+    try {
+      let itemsAsString: string = await this.getWidgetData(key, soffit)
+      const regexForPartToLocalize = /I18N\$([A-Za-z0-9]+)\$/g
+      let execArray
+      const replaceMap: Map<string, string> = new Map()
+      // eslint-disable-next-line no-cond-assign
+      while ((execArray = regexForPartToLocalize.exec(itemsAsString)) !== null) {
+        if (!replaceMap.has(execArray[0])) {
+          replaceMap.set(execArray[0], this.t(`items.${execArray[1]}`, execArray[1]))
+        }
+      }
+      replaceMap.forEach((value: string, key: string) => {
+        itemsAsString = itemsAsString.replaceAll(key, value)
+      })
+
+      const widgetDataDTO: WidgetDataDTO = JSON.parse(itemsAsString)
+
+      const emptyText = this.t(`empty-text.${key}`, widgetDataDTO.emptyText)
+
+      widgetData.loading = false
+      widgetData.name = widgetDataDTO.name
+      widgetData.subtitle = widgetDataDTO.subtitle
+      widgetData.emptyText = emptyText
+      widgetData.emptyDiscover = widgetDataDTO.emptyDiscover
+      widgetData.link = widgetDataDTO.link
+        ? {
+            href: widgetDataDTO.link,
+            target: widgetDataDTO.target,
+            rel: widgetDataDTO.rel,
+          }
+        : undefined
+
+      const itemDTOs: Array<ItemDTO> = widgetDataDTO.items ? JSON.parse(widgetDataDTO.items) : undefined
+
+      if (itemDTOs !== undefined) {
+        const items: Array<Item> = itemDTOs.map(x => (
+          {
+            name: x.name,
+            icon: x.icon,
+            link: x.link
+              ? {
+                  href: x.link,
+                  target: x.target,
+                  rel: x.rel,
+                }
+              : undefined,
+            id: x.id,
+            event: x.event,
+            eventpayload: x.eventpayload,
+            eventDNMA: x.eventDNMA,
+            eventDNMApayload: x.eventpayloadDNMA,
+          }),
+        )
+        widgetData.items = items
+        this.itemByWidgetNestedMap.set(key, new Map())
+        items.forEach((value: Item) => {
+          this.itemByWidgetNestedMap.get(key)?.set(value.id, value)
+        })
+      }
+    }
+    catch (error) {
+
+    }
     this.requestUpdate()
   }
 
@@ -259,156 +437,131 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   async getWidgetData(key: string, soffit: string): Promise<string> {
-    return await window.WidgetAdapter.getJsonForWidget(key, soffit)
-  }
-
-  @state()
-  widgetDataMap: Map<string, WidgetData> = new Map()
-
-  // temp design for dev
-  getWidgetEditionMenuRender(): TemplateResult {
-    if (!this.editing) {
-      return html` <button @click="${this.beginEdit}">Editer</button>`
+    try {
+      return await window.WidgetAdapter.getJsonForWidget(key, soffit)
     }
-
-    return html`
-    <p>${this.getMaxWidgetsCount()}</p>
-    <ul>
-      ${this.allWidgetsCopy.map(wds =>
-        html`<li>${this.getSingleWidgetEditingRender(wds)}</li>`,
-      )}
-    </ul>
-    <button @click="${this.saveEdit}">Sauver</button>
-    <button @click="${this.cancelEdit}">Annuler</button>
-    `
+    catch (error) {
+      console.error(`${error} from get widget data`)
+      throw error
+    }
   }
 
-  // temp design for dev
-  getSingleWidgetEditingRender(wsd: WidgetSelectorData): TemplateResult {
-    return html`
-      <input type="checkbox" ?checked=${wsd.displayed} ?disabled=${wsd.required} id="${wsd.key}" @click="${(e: Event) => { this.handleSelectionClick(e, wsd) }}" name="${wsd.key}" value="${wsd.displayed}">
-      <label for="${wsd.key}"> ${wsd.name} ${wsd.required ? '[REQ]' : ''}</label><br>
-      <button @click="${() => { this.moveWidgetBack(wsd) }}" ?hidden="${this.allWidgetsCopy.indexOf(wsd) === 0}" >Précédent</button>
-      <button @click="${() => { this.moveWidgetForward(wsd) }}" ?hidden="${this.allWidgetsCopy.indexOf(wsd) === this.allWidgetsCopy.length - 1}">Suivant</button>
-      `
+  handleClickAjouter() {
+    this.dropdownOpen = !this.dropdownOpen
+    this.requestUpdate()
+
+    this.boundClickEventOnPage = this.handleClickEventOnPageIfDropdownIsOpen.bind(this)
+
+    // required, if not present the created event listener will detect the current event
+    setTimeout(() => {
+      window.addEventListener('click', this.boundClickEventOnPage!)
+    }, 0)
   }
 
-  getWidgetRender(key: string): TemplateResult {
+  handleClickEventOnPageIfDropdownIsOpen(e: Event): void {
+    const dropdownContent = this.shadowRoot!.querySelector('#dropdown-content')
+    const clickIsInside: boolean = e.composedPath().includes(dropdownContent as EventTarget)
+    if (!clickIsInside) {
+      this.dropdownOpen = false
+      window.removeEventListener('click', this.boundClickEventOnPage!) // this.removeEvent()
+      this.requestUpdate()
+    }
+  }
+
+  removeClickEvent() {
+    window.removeEventListener('click', this.boundClickEventOnPage!)
+  }
+
+  getWidgetRender(key: string, index: number): TemplateResult {
     if (this.widgetDataMap.has(key)) {
       const widgetData: WidgetData = this.widgetDataMap.get(key)!
       return html`
       <r-widget
         role="listitem"
+        uid="${widgetData.uid}"
         name="${widgetData.name}"
         subtitle="${widgetData.subtitle}"
-        link="${widgetData.link}"
-        target="${widgetData.target}"
-        rel="${widgetData.rel}"
+        .link="${widgetData.link}"
         empty-text="${widgetData.emptyText}"
         ?empty-discover=${widgetData.emptyDiscover ?? false}
-        items=${widgetData.items}
-        ?required=${widgetData.required ?? false}
-        ?favorite=${widgetData.favorite ?? false}
-        event-dnma="${widgetData.eventDNMA}"
-        event-payload-dnma="${widgetData.eventpayloadDNMA}"
-        >
-      </r-widget>
+        .items=${widgetData.items}
+        ?deletable="${widgetData.deletable}"
+        ?no-previous="${index === 0}"
+        ?no-next="${index === this.widgetToDisplayKeyArray.length - 1}"
+        ?loading="${widgetData.loading}"
+        ?manage="${this.isEditingWidgetsPrefs}"
+        @click-on-item="${this.handleClickOnItem}"
+        @move="${this.handleMove}"
+        @delete="${this.handleRemoveWidget}"
+        ></r-widget>
     `
     }
-    // valeur par défaut temporaire
+    return html``
+  }
+
+  dropdownRender(): TemplateResult {
+    const nonUsedKeys = this.except(this.allExistingKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
+    if (nonUsedKeys.length === 0) {
+      return html``
+    }
     return html`
-          <r-widget
-            role="listitem"
-            name="Favoris"
-            link="#1"
-            items='[
-              {
-                "name": "Carte mentale",
-                "link": "#A"
-              },
-              {
-                "name": "Capytale",
-                "link": "#B"
-              },
-              {
-                "name": "Espaces Nextcloud",
-                "link": "#C"
-              },
-              {
-                "name": "Platforme vidéo",
-                "link": "#D"
-              }
-            ]'
-          >
-          </r-widget>`
+      <button ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" class="btn-secondary" @click="${this.handleClickAjouter}}">Ajouter</button>
+      <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen ? 'display:none' : nothing}">
+       ${repeat(
+          nonUsedKeys,
+          (widgetKey: string) => widgetKey,
+          (widgetKey: string) => html`
+            <button ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" @click="${() => { this.handleAddWidget(widgetKey) }}">${this.keyToNameMap.get(widgetKey)}</button>
+            `,
+        )}
+      </div>
+    `
   }
 
-  moveWidgetBack(wsd: WidgetSelectorData): void {
-    const index = this.allWidgetsCopy.indexOf(wsd)
-    if (index === 0) {
-      return
-    }
-    const indexOther = index - 1;
-    [this.allWidgetsCopy[indexOther], this.allWidgetsCopy[index]] = [this.allWidgetsCopy[index], this.allWidgetsCopy[indexOther]]
-    this.requestUpdate()
-    this.applyEdit()
-  }
-
-  moveWidgetForward(wsd: WidgetSelectorData): void {
-    const index = this.allWidgetsCopy.indexOf(wsd)
-    if (index === this.allWidgetsCopy.length - 1) {
-      return
-    }
-    const indexOther = index + 1;
-    [this.allWidgetsCopy[index], this.allWidgetsCopy[indexOther]] = [this.allWidgetsCopy[indexOther], this.allWidgetsCopy[index]]
-    this.requestUpdate()
-    this.applyEdit()
-  }
-
-  handleSelectionClick(e: Event, wsd: WidgetSelectorData): void {
-    if (wsd.displayed) { // handle deselection attempt
-      if (wsd.required) {
-        e.stopPropagation()
-        e.preventDefault()
-      }
-      else {
-        wsd.displayed = false
-      }
-    }
-    else { // handle selection attempt
-      if (this.allWidgetsCopy.filter(x => x.displayed).length >= this.getMaxWidgetsCount()) {
-        e.stopPropagation()
-        e.preventDefault()
-      }
-      else {
-        wsd.displayed = true
-      }
-    }
+  widgetCountRender(): TemplateResult {
+    // TODO : localize
+    return html`Widgets actifs : ${this.widgetToDisplayKeyArray.length}/${this.getMaxWidgetsCount()}`
   }
 
   render(): TemplateResult {
+    console.log('render')
     return html`
       <div class="widget">
         <header>
           <h2 class="sr-only">Accès rapides</h2>
+          ${
+            this.isEditingWidgetsPrefs === false
+              ? html`
+               <div class="to-right">
+                  <button class="btn-secondary" @click="${this.clickOnGerer}">Gérer ${getIcon(faCog)}</button>
+                </div>
+              `
+              : html`
+              <div class="to-right">
+               ${this.dropdownRender()}
+              <button class="btn-secondary" @click="${this.clickOnAnnuler}">Annuler</button>
+              <button class="btn-secondary" @click="${this.clickOnSauvegarder}">Sauvegarder</button>
+            </div>
+            <p class="no-mobile">    ${this.widgetCountRender()}</p>
+
+            `
+          }
+
         </header>
         <ul class="widget-tiles">
           ${repeat(
             this.widgetToDisplayKeyArray,
             (widgetKey: string) => widgetKey,
-            (widgetKey: string) => html`
-            ${this.getWidgetRender(widgetKey)}
+            (widgetKey: string, index: number) => html`
+            ${this.getWidgetRender(widgetKey, index)}
             `,
           )}
+
         </ul>
+        <p class="mobile-only">
+        ${this.isEditingWidgetsPrefs ? this.widgetCountRender() : nothing}
+        </p>
       </div>
-    ${this.allowDevEdit
-        ? html`
-      <div>
-        ${this.getWidgetEditionMenuRender()}
-      </div>`
-        : ''
-    }
     `
   }
 
@@ -416,6 +569,9 @@ export class ReciaWidgetsWrapper extends LitElement {
 }
 
 declare global {
+  interface Window {
+    WidgetAdapter: any
+  }
   interface HTMLElementTagNameMap {
     [tagName]: ReciaWidgetsWrapper
   }

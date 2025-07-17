@@ -15,17 +15,17 @@
  */
 
 export class WidgetSelectorData {
-  constructor(name: string, key: string, required: boolean, displayed: boolean, isDefault: boolean) {
+  constructor(name: string, key: string/*, required: boolean, displayed: boolean, isDefault: boolean*/) {
     this.name = name
     this.key = key
-    this.required = required
-    this.displayed = displayed
-    this.isDefault = isDefault
+    // this.required = required
+    // this.displayed = displayed
+    // this.isDefault = isDefault
   }
 
   name: string
   key: string
-  required: boolean
-  displayed: boolean
-  isDefault: boolean
+  // required: boolean
+  // displayed: boolean
+  // isDefault: boolean
 }

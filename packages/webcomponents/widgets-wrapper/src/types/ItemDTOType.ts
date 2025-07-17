@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import type { Link } from './LinkType.ts'
-
-export interface Item {
-  id: string
+export interface ItemDTO {
   name: string
-  icon?: string
-  link?: Link
+  icon: string
+  link: string
+  target: string
+  rel: string
   event: string
   eventpayload: string
   eventDNMA: string
-  eventDNMApayload: string
+  eventpayloadDNMA: string
+  id: string
 }
