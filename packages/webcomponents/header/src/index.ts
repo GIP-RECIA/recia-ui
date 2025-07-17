@@ -16,13 +16,14 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBookOpen, faGrip, faHouse, faMessage } from '@fortawesome/free-solid-svg-icons'
+import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
+import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { Category } from './types/CategoryType.ts'
@@ -31,7 +32,6 @@ import './components/navigation-drawer'
 import './components/notification-drawer'
 import './components/principal-container'
 import './components/services-layout'
-import injectedStyle from './assets/css/injectedStyle.css?raw'
 
 @localized()
 export class ReciaHeader extends LitElement {
@@ -241,12 +241,13 @@ export class ReciaHeader extends LitElement {
   }
 
   injectStyle(): void {
-    let style = document.head.querySelector<HTMLStyleElement>(`style#${tagName}`)
+    const id = name
+    let style = document.head.querySelector<HTMLStyleElement>(`style#${id}`)
     if (style)
       return
 
     style = document.createElement('style')
-    style.id = tagName
+    style.id = id
     style.textContent = injectedStyle
     document.head.appendChild(style)
     window.addEventListener('load', () => {
