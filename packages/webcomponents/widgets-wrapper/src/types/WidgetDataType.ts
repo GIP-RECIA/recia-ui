@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-import type { Link } from './LinkType.ts'
+import type { Item } from 'widget/src/types/ItemType'
+import type { Link } from 'widget/src/types/LinkType'
 
-export interface Item {
-  id: string
+export interface WidgetData {
+  uid: string
   name: string
-  icon?: string
+  subtitle?: string
+  notifications?: number
   link?: Link
-  event: string
-  eventpayload: string
-  eventDNMA: string
-  eventDNMApayload: string
+  items?: Array<Item>
+  emptyIcon?: string
+  emptyText: string
+  emptyDiscover: boolean
+  deletable: boolean
+  loading: boolean
 }
