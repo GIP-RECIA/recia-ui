@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -33,10 +33,7 @@ import styles from './style.scss?inline'
 import 'filters/dist/r-filters.js'
 import '../service/index.ts'
 
-const tagName = componentName('services-layout')
-
 @localized()
-@customElement(tagName)
 export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean })
   show: boolean = false
@@ -166,6 +163,12 @@ export class ReciaServicesLayout extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName('services-layout')
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaServicesLayout)
 }
 
 declare global {

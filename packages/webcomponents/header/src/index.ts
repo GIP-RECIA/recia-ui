@@ -19,7 +19,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBookOpen, faGrip, faHouse, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { state } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
@@ -33,10 +33,7 @@ import './components/principal-container'
 import './components/services-layout'
 import injectedStyle from './assets/css/injectedStyle.css?raw'
 
-const tagName = componentName(name)
-
 @localized()
-@customElement(tagName)
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
@@ -305,6 +302,12 @@ export class ReciaHeader extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(name)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaHeader)
 }
 
 declare global {

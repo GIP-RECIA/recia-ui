@@ -19,7 +19,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
@@ -28,10 +28,7 @@ import styles from './style.scss?inline'
 import '../search'
 import 'user-menu/dist/r-user-menu.js'
 
-const tagName = componentName('principal-container')
-
 @localized()
-@customElement(tagName)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: String })
   name?: string
@@ -108,6 +105,12 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName('principal-container')
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaPrincipalContainer)
 }
 
 declare global {

@@ -20,7 +20,7 @@ import type { Ref } from 'lit/directives/ref.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -31,10 +31,7 @@ import styles from './style.scss?inline'
 import 'bottom-sheet/dist/r-bottom-sheet.js'
 import '../layout/index.ts'
 
-const tagName = componentName(`${name}-bottom-sheet`)
-
 @localized()
-@customElement(tagName)
 export class ReciaInfoEtabBottomSheet extends LitElement {
   @state()
   data: any | null = null
@@ -73,6 +70,12 @@ export class ReciaInfoEtabBottomSheet extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-bottom-sheet`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaInfoEtabBottomSheet)
 }
 
 declare global {

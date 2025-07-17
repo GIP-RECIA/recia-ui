@@ -20,7 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAt, faEnvelope, faGlobe, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -29,8 +29,6 @@ import { Item } from '../../types/ItemType.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-
-const tagName = componentName(`${name}-layout`)
 
 const defaultInformation: Partial<InformationConfig> = {
   [Item.Adress]: {
@@ -48,7 +46,6 @@ const defaultInformation: Partial<InformationConfig> = {
 }
 
 @localized()
-@customElement(tagName)
 export class ReciaInfoEtabLayout extends LitElement {
   @property({ type: String, attribute: 'image-url' })
   imageUrl?: string
@@ -194,6 +191,12 @@ export class ReciaInfoEtabLayout extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-layout`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaInfoEtabLayout)
 }
 
 declare global {

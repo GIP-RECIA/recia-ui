@@ -17,7 +17,7 @@
 import type { TemplateResult } from 'lit'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
@@ -26,10 +26,7 @@ import styles from './style.scss?inline'
 import { IdpId } from './types/IdpIdType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
-const tagName = componentName(name)
-
 @localized()
-@customElement(tagName)
 export class ReciaWayf extends LitElement {
   @property({ type: String, attribute: 'cas-url' })
   casUrl?: string
@@ -83,6 +80,12 @@ export class ReciaWayf extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(name)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaWayf)
 }
 
 declare global {

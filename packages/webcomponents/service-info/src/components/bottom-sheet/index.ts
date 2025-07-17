@@ -20,7 +20,7 @@ import type { Ref } from 'lit/directives/ref.js'
 import type { ServiceInfoLayout } from '../../types/ServiceInfoLayoutType.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -34,10 +34,7 @@ import styles from './style.scss?inline'
 import 'bottom-sheet/dist/r-bottom-sheet.js'
 import '../layout/index.ts'
 
-const tagName = componentName(`${name}-bottom-sheet`)
-
 @localized()
-@customElement(tagName)
 export class ReciaBottomSheetServiceInfo extends LitElement {
   @property({ type: String })
   domain = window.location.hostname
@@ -146,6 +143,12 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-bottom-sheet`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaBottomSheetServiceInfo)
 }
 
 declare global {

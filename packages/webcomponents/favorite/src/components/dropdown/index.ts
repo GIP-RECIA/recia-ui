@@ -17,7 +17,7 @@
 import type { TemplateResult } from 'lit'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { state } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -26,10 +26,7 @@ import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../layout/index.ts'
 
-const tagName = componentName(`${name}-dropdown`)
-
 @localized()
-@customElement(tagName)
 export class ReciaFavoriteDropdown extends LitElement {
   @state()
   isExpanded = false
@@ -115,6 +112,12 @@ export class ReciaFavoriteDropdown extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-dropdown`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaFavoriteDropdown)
 }
 
 declare global {

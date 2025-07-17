@@ -18,16 +18,12 @@ import type { TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
-const tagName = componentName('notification-drawer')
-
 @localized()
-@customElement(tagName)
 export class ReciaNotificationDrawer extends LitElement {
   constructor() {
     super()
@@ -56,6 +52,12 @@ export class ReciaNotificationDrawer extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName('notification-drawer')
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaNotificationDrawer)
 }
 
 declare global {

@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
@@ -31,10 +31,7 @@ import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
-const tagName = componentName(name)
-
 @localized()
-@customElement(tagName)
 export class ReciaFilters extends LitElement {
   @property({ type: Array })
   data: Array<Section> | null = null
@@ -230,6 +227,12 @@ export class ReciaFilters extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(name)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaFilters)
 }
 
 declare global {

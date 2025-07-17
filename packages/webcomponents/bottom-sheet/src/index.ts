@@ -20,7 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -31,9 +31,6 @@ import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
-const tagName = componentName(name)
-
-@customElement(tagName)
 export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean, attribute: 'open', reflect: true })
   isOpen = false
@@ -232,6 +229,12 @@ export class ReciaBottomSheet extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(name)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaBottomSheet)
 }
 
 declare global {

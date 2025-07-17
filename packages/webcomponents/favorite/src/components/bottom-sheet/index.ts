@@ -19,7 +19,6 @@ import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -29,10 +28,7 @@ import styles from './style.scss?inline'
 import 'bottom-sheet/dist/r-bottom-sheet.js'
 import '../layout/index.ts'
 
-const tagName = componentName(`${name}-bottom-sheet`)
-
 @localized()
-@customElement(tagName)
 export class ReciaFavoriteBottomSheet extends LitElement {
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
@@ -64,6 +60,12 @@ export class ReciaFavoriteBottomSheet extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-bottom-sheet`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaFavoriteBottomSheet)
 }
 
 declare global {

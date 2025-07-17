@@ -21,7 +21,7 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -34,10 +34,7 @@ import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
-const tagName = componentName(`${name}-layout`)
-
 @localized()
-@customElement(tagName)
 export class ReciaServiceInfoLayout extends LitElement {
   @property({ type: String, attribute: 'icon-url' })
   iconUrl?: string
@@ -268,6 +265,12 @@ export class ReciaServiceInfoLayout extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-layout`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaServiceInfoLayout)
 }
 
 declare global {

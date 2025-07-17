@@ -22,7 +22,7 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faBookOpen, faGrip, faHouse, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
@@ -32,10 +32,7 @@ import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
-const tagName = componentName('navigation-drawer')
-
 @localized()
-@customElement(tagName)
 export class ReciaNavigationDrawer extends LitElement {
   @property({ type: String })
   logo?: string
@@ -240,6 +237,12 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName('navigation-drawer')
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaNavigationDrawer)
 }
 
 declare global {

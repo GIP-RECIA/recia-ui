@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft, faArrowRight, faFloppyDisk, faGear, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -31,10 +31,7 @@ import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
-const tagName = componentName(`${name}-layout`)
-
 @localized()
-@customElement(tagName)
 export class ReciaFavoriteLayout extends LitElement {
   @state()
   data: Array<Section> | null = null
@@ -245,6 +242,12 @@ export class ReciaFavoriteLayout extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-layout`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaFavoriteLayout)
 }
 
 declare global {

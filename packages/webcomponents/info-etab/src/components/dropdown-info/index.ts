@@ -18,7 +18,7 @@ import type { TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { state } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
@@ -28,10 +28,7 @@ import styles from './style.scss?inline'
 import 'dropdown-info/dist/r-dropdown-info.js'
 import '../layout/index.ts'
 
-const tagName = componentName(`${name}-dropdown-info`)
-
 @localized()
-@customElement(tagName)
 export class ReciaInfoEtabDropdownInfo extends LitElement {
   @state()
   data: any | null = null
@@ -60,6 +57,12 @@ export class ReciaInfoEtabDropdownInfo extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(`${name}-dropdown-info`)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaInfoEtabDropdownInfo)
 }
 
 declare global {
