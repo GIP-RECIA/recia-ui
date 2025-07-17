@@ -3484,7 +3484,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"favorite@workspace:packages/webcomponents/favorite":
+"favorite@workspace:^, favorite@workspace:packages/webcomponents/favorite":
   version: 0.0.0-use.local
   resolution: "favorite@workspace:packages/webcomponents/favorite"
   dependencies:
@@ -3985,11 +3985,14 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.31.0"
     eslint-plugin-format: "npm:^1.0.1"
+    favorite: "workspace:^"
     filters: "workspace:^"
+    info-etab: "workspace:^"
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.89.2"
+    service-info: "workspace:^"
     typescript: "npm:^5.8.3"
     user-menu: "workspace:^"
     vite: "npm:^7.0.4"
@@ -4125,7 +4128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"info-etab@workspace:packages/webcomponents/info-etab":
+"info-etab@workspace:^, info-etab@workspace:packages/webcomponents/info-etab":
   version: 0.0.0-use.local
   resolution: "info-etab@workspace:packages/webcomponents/info-etab"
   dependencies:
@@ -6597,7 +6600,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"service-info@workspace:packages/webcomponents/service-info":
+"service-info@workspace:^, service-info@workspace:packages/webcomponents/service-info":
   version: 0.0.0-use.local
   resolution: "service-info@workspace:packages/webcomponents/service-info"
   dependencies:
