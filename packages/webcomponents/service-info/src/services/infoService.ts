@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
+import type { ReciaServiceInfoLayout } from '../components/layout/index.ts'
 import type { Info } from '../types/InfoType.ts'
-import type { ServiceInfoLayout } from '../types/ServiceInfoLayoutType.ts'
 
 export default class infoService {
-  static async get(serviceInfoApiUrl: string): Promise<Partial<ServiceInfoLayout> | null> {
+  static async get(serviceInfoApiUrl: string): Promise<Partial<ReciaServiceInfoLayout> | null> {
     try {
       const options = {
         method: 'GET',
@@ -33,13 +33,14 @@ export default class infoService {
       const data: Info = await response.json()
 
       if (data) {
-        const { description, video_link, tutorials, resource_link } = data
+        const { description, video_link, categorie_principale, tutorials, resource_link } = data
 
         return {
           description,
           'video': video_link,
-          tutorials,
-          'tutorials-link': resource_link ? { href: resource_link } : undefined,
+          'category': categorie_principale,
+          'ressources': tutorials,
+          'ressources-link': resource_link ? { href: resource_link } : undefined,
         }
       }
       else {

@@ -12,18 +12,19 @@
 
 ## Propriétés
 
-| Nom              |                   Type                    | Obligatoire |   Default   | Description                                                            |
-| ---------------- | :---------------------------------------: | :---------: | :---------: | ---------------------------------------------------------------------- |
-| `icon-url`       |                 `string`                  |   `false`   | `undefined` | URL du SVG (le svg doit contenir un id. ex: `/spritemap.svg#capytale`) |
-| `name`           |                 `string`                  |   `false`   |    `''`     | Nom du service                                                         |
-| `origin`         |   [`Origin`](./src/types/OriginType.ts)   |   `false`   | `undefined` | Origine du service                                                     |
-| `category`       | [`Category`](./src/types/CategoryType.ts) |   `false`   | `undefined` | Catégorie du service                                                   |
-| `favorite`       |                 `boolean`                 |   `false`   |   `false`   | Le servie est en favoris                                               |
-| `description`    |                 `string`                  |   `false`   |    `''`     | Description du service (HTML en string)                                |
-| `video`          |                 `string`                  |   `false`   |    `''`     | URL de la vidéo de présentation (affichage en iframe)                  |
-| `tutorials`      | [`Array<Link>`](./src/types/LinkType.ts)  |   `false`   |    `[]`     | Liste des tutoriels disponibles (le `name` est requis ici)             |
-| `tutorials-link` |     [`Link`](./src/types/LinkType.ts)     |   `false`   | `undefined` | Lien du bouton `Voir tous les tutoriels`                               |
-| `launch-link`    |     [`Link`](./src/types/LinkType.ts)     |   `false`   | `undefined` | Lien du bouton `Lancer le service`                                     |
+| Nom               |                   Type                    | Obligatoire |   Default   | Description                                                            |
+| ----------------- | :---------------------------------------: | :---------: | :---------: | ---------------------------------------------------------------------- |
+| `icon-url`        |                 `string`                  |   `false`   | `undefined` | URL du SVG (le svg doit contenir un id. ex: `/spritemap.svg#capytale`) |
+| `name`            |                 `string`                  |   `false`   | `undefined` | Nom du service                                                         |
+| `origin`          |   [`Origin`](./src/types/OriginType.ts)   |   `false`   | `undefined` | Origine du service                                                     |
+| `category`        | [`Category`](./src/types/CategoryType.ts) |   `false`   | `undefined` | Catégorie du service                                                   |
+| `favorite-toggle` |                 `boolean`                 |   `false`   |   `false`   | Affiche le bouton de mise/retrait des favoris                          |
+| `favorite`        |                 `boolean`                 |   `false`   |   `false`   | Le servie est en favoris                                               |
+| `description`     |                 `string`                  |   `false`   | `undefined` | Description du service (HTML en string)                                |
+| `video`           |                 `string`                  |   `false`   | `undefined` | URL de la vidéo de présentation (affichage en iframe)                  |
+| `ressources`      | [`Array<Link>`](./src/types/LinkType.ts)  |   `false`   | `undefined` | Liste des tutoriels disponibles (le `name` est requis ici)             |
+| `ressources-link` |     [`Link`](./src/types/LinkType.ts)     |   `false`   | `undefined` | Lien du bouton `Voir tous les tutoriels`                               |
+| `launch-link`     |     [`Link`](./src/types/LinkType.ts)     |   `false`   | `undefined` | Lien du bouton `Lancer le service`                                     |
 
 ## Évènements
 

@@ -77,10 +77,48 @@
           a {
             @include text-link;
           }
+
+          h1,
+          h2,
+          h3,
+          p,
+          blockquote,
+          .media,
+          ul,
+          ol {
+            &:not(:last-child) {
+              margin-bottom: 1em;
+            }
+          }
+
+          h1,
+          h2,
+          h3 {
+            &:not(:first-child) {
+              margin-top: 1em;
+            }
+          }
+
+          ul,
+          ol {
+            margin-left: 2em;
+
+            > li:not(:last-child) {
+              margin-bottom: 0.5em;
+            }
+          }
+
+          img {
+            max-width: 100%;
+          }
+
+          figure.media iframe {
+            max-width: 100%;
+          }
         }
       }
 
-      &.tutorials {
+      &.ressources {
         > ul {
           @include unstyled-list;
 

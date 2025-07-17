@@ -16,7 +16,6 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Link } from '../../types/LinkType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -40,7 +39,7 @@ export class ReciaServiceInfoLayout extends LitElement {
   iconUrl?: string
 
   @property({ type: String })
-  name = ''
+  name?: string
 
   @property({ type: String })
   origin?: Origin
@@ -48,31 +47,29 @@ export class ReciaServiceInfoLayout extends LitElement {
   @property({ type: String })
   category?: Category
 
+  @property({ type: Boolean, attribute: 'favorite-toggle' })
+  canTogglefavorite: boolean = false
+
   @property({ type: Boolean, attribute: 'favorite', reflect: true })
-  isFavorite = false
+  isFavorite: boolean = false
 
   @property({ type: String })
-  description = ''
+  description?: string
 
   @property({ type: String })
-  video = ''
+  video?: string
 
   @property({ type: Array })
-  tutorials: Array<Link> = []
+  ressources?: Array<Link>
 
-  @property({ type: Object, attribute: 'tutorials-link' })
-  tutorialsLink?: Link
+  @property({ type: Object, attribute: 'ressources-link' })
+  ressourcesLink?: Link
 
   @property({ type: Object, attribute: 'launch-link' })
   launchLink?: Link
 
   constructor() {
     super()
-    library.add(
-      faStar,
-      faArrowRight,
-      farStar,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
@@ -80,9 +77,9 @@ export class ReciaServiceInfoLayout extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('tutorials')) {
-      if (!Array.isArray(this.tutorials) || this.tutorials.length === 0) {
-        this.tutorials = []
+    if (_changedProperties.has('ressources')) {
+      if (!Array.isArray(this.ressources) || this.ressources.length === 0) {
+        this.ressources = []
       }
     }
     return true
@@ -107,7 +104,7 @@ export class ReciaServiceInfoLayout extends LitElement {
     }
   }
 
-  toggleFavorite(): void {
+  toggleFavorite(_: Event): void {
     this.isFavorite = !this.isFavorite
     this.dispatchEvent(new CustomEvent('toggle-favorite', { detail: { favorite: this.isFavorite } }))
   }
@@ -131,15 +128,15 @@ export class ReciaServiceInfoLayout extends LitElement {
       : nothing
   }
 
-  tutorialsTemplate(): TemplateResult | typeof nothing {
-    return this.tutorials.length > 0
+  ressourcesTemplate(): TemplateResult | typeof nothing {
+    return this.ressources && this.ressources.length > 0
       ? html`
-        <section class="tutorials">
-          <h2 class="h3">${msg(str`Tutoriels disponibles (${this.tutorials.length})`)}</h2>
+        <section class="ressources">
+          <h2 class="h3">${msg(str`Ressources disponibles`)}</h2>
           <ul>
             ${
               repeat(
-                this.tutorials,
+                this.ressources,
                 link => link,
                 link => html`
                   <li>
@@ -156,13 +153,13 @@ export class ReciaServiceInfoLayout extends LitElement {
             }
           </ul>
           ${
-            this.tutorialsLink
+            this.ressourcesLink
               ? html`
                   <a
-                    href="${this.tutorialsLink.href}"
+                    href="${this.ressourcesLink.href}"
                     class="btn-secondary small"
                   >
-                    ${msg(str`Voir tous les tutoriels`)}
+                    ${msg(str`Voir toutes les ressources`)}
                     ${getIcon(faArrowRight)}
                   </a>
                 `
@@ -209,25 +206,31 @@ export class ReciaServiceInfoLayout extends LitElement {
               }
             </div>
           </div>
-          <button
-            class="btn-secondary"
-            @click="${() => this.toggleFavorite()}"
-          >
-            ${
-              keyed(
-                this.isFavorite,
-                this.isFavorite
-                  ? html`
-                      ${getIcon(faStar)}
-                      ${msg(str`Retirer des favoris`)}
-                    `
-                  : html`
-                      ${getIcon(farStar)}
-                      ${msg(str`Ajouter aux favoris`)}
-                    `,
-              )
-            }
-          </button>
+          ${
+            this.canTogglefavorite
+              ? html`
+                  <button
+                    class="btn-secondary"
+                    @click="${this.toggleFavorite}"
+                  >
+                    ${
+                      keyed(
+                        this.isFavorite,
+                        this.isFavorite
+                          ? html`
+                              ${getIcon(faStar)}
+                              ${msg(str`Retirer des favoris`)}
+                            `
+                          : html`
+                              ${getIcon(farStar)}
+                              ${msg(str`Ajouter aux favoris`)}
+                            `,
+                      )
+                    }
+                  </button>
+                `
+              : nothing
+          }
         </header>
         <div class="content">
           <section class="description">
@@ -235,7 +238,7 @@ export class ReciaServiceInfoLayout extends LitElement {
             <div>${unsafeHTML(this.description)}</div>
           </section>
           ${this.videoTemplate()}
-          ${this.tutorialsTemplate()}
+          ${this.ressourcesTemplate()}
         </div>
         <footer>
           <button
