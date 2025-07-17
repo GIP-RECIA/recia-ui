@@ -21,7 +21,7 @@ export default class templateService {
   static async get(
     templateApiUrl: string,
     domain: string,
-  ): Promise<Template | null> {
+  ): Promise<Template | undefined> {
     try {
       const options = {
         method: 'GET',
@@ -72,8 +72,8 @@ export default class templateService {
     }
     catch (err) {
       console.error(err, templateApiUrl)
-      return null
+      return undefined
     }
-    return null
+    return undefined
   }
 }

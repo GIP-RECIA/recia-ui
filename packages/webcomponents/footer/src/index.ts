@@ -17,7 +17,6 @@
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Link } from './types/LinkType.ts'
 import type { Template } from './types/TemplateType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -34,25 +33,25 @@ import { setLocale } from './utils/localizationUtils.ts'
 @localized()
 export class ReciaFooter extends LitElement {
   @property({ type: String })
-  domain = window.location.hostname
+  domain: string = window.location.hostname
 
   @property({ type: String, attribute: 'portal-path' })
-  portalPath = ''
+  portalPath?: string
 
   @property({ type: String, attribute: 'template-api-url' })
-  templateApiUrl = ''
+  templateApiUrl?: string
 
-  @property({ type: Array })
-  links: Array<Link> = []
+  @property({ type: Array, attribute: 'top-links' })
+  topLinks?: Array<Link>
+
+  @property({ type: Array, attribute: 'bottom-links' })
+  bottomLinks?: Array<Link>
 
   @state()
-  template: Template | null = null
+  template?: Template
 
   constructor() {
     super()
-    library.add(
-      faHeart,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
@@ -74,11 +73,25 @@ export class ReciaFooter extends LitElement {
     return false
   }
 
-  private async _getTemplate() {
-    const template = await templateService.get(this.templateApiUrl, this.domain)
-    if (template !== null) {
-      this.template = template
-    }
+  private async _getTemplate(): Promise<void> {
+    if (!this.templateApiUrl)
+      return
+
+    this.template = await templateService.get(this.templateApiUrl, this.domain)
+  }
+
+  linkItemTemplate(link: Link): TemplateResult {
+    return html`
+        <li>
+          <a
+            href="${link.href}"
+            target="${link.target ?? nothing}"
+            rel="${link.rel ?? nothing}"
+          >
+            ${link.name}
+          </a>
+        </li>
+      `
   }
 
   render(): TemplateResult | typeof nothing {
@@ -92,22 +105,26 @@ export class ReciaFooter extends LitElement {
                 </div>
                 <ul class="links">
                   ${
-                    repeat(['Mentions légales et CGU', 'Accessibilité : partiellement conforme'], link => link, link => html`
-                      <li>
-                        <a href="#">${link}</a>
-                      </li>
-                    `)
+                    repeat(
+                      this.topLinks ?? [],
+                      link => link,
+                      link => this.linkItemTemplate(link)
+                    )
                   }
                 </ul>
                 <ul class="parteners">
                   ${
-                    repeat(this.template.sponsors || [], parnter => parnter, partner => html`
-                      <li>
-                        <a href="${partner.url}" target="_blank">
-                          <img src="${partner.logoPath}" title="${partner.name}" />
-                        </a>
-                      </li>
-                    `)
+                    repeat(
+                      this.template.sponsors ?? [],
+                      parnter => parnter,
+                      partner => html`
+                        <li>
+                          <a href="${partner.url}" target="_blank">
+                            <img src="${partner.logoPath}" title="${partner.name}" />
+                          </a>
+                        </li>
+                      `
+                    )
                   }
                 </ul>
               </div>
@@ -116,21 +133,18 @@ export class ReciaFooter extends LitElement {
               <div class="container">
                 <ul class="links">
                   ${
-                    repeat(this.links, link => link, link => html`
-                      <li>
-                        <a
-                          href="${link.href}"
-                          target="${link.target ?? nothing}"
-                          rel="${link.rel ?? nothing}"
-                        >
-                          ${link.name}
-                        </a>
-                      </li>
-                    `)
+                    repeat(
+                      this.bottomLinks ?? [],
+                      link => link,
+                      link => this.linkItemTemplate(link)
+                    )
                   }
                   <li>©${new Date().getFullYear()} - ${this.template.name}</li>
                 </ul>
-                <span class="made-by">${getIcon(faHeart)} ${msg(str`Fait avec amour par le ${'GIP RECIA'}`)}</span>
+                <span class="made-by">
+                  ${getIcon(faHeart)}
+                  ${msg(str`Fait avec amour par le ${'GIP RECIA'}`)}
+                </span>
               </div>
             </div>
           </div>
