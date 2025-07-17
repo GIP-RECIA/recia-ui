@@ -25,7 +25,7 @@
     <section>
       <h2>r-favorite-bottom-sheet</h2>
 
-      <button>Open</button>
+      <button id="bottom-sheet">Open</button>
 
       <r-favorite-bottom-sheet>
       </r-favorite-bottom-sheet>
@@ -33,9 +33,12 @@
     <section>
       <h2>r-favorite-dropdown</h2>
 
-      <r-favorite-dropdown>
-        <span>Favoris</span>
-      </r-favorite-dropdown>
+      <span style="position: relative;">
+        <button id="dropdown">Open</button>
+
+        <r-favorite-dropdown>
+        </r-favorite-dropdown>
+      </span>
     </section>
   </section>
 
@@ -120,8 +123,18 @@
     layout.data = data;
     bottomSheet.data = data;
     dropdown.data = data;
-    document.querySelector('button').addEventListener('click', () => {
+    document.querySelector('button#bottom-sheet').addEventListener('click', () => {
       bottomSheet.open()
+    })
+    let showDropdown = false
+    document.querySelector('button#dropdown').addEventListener('click', (e) => {
+      e.stopPropagation()
+      showDropdown = !showDropdown
+      dropdown.show = showDropdown
+    })
+    dropdown.addEventListener('close', (e) => {
+      showDropdown = e.detail.show
+      dropdown.show = showDropdown
     })
   </script>
 </body>

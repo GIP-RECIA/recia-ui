@@ -45,6 +45,16 @@ export class ReciaFavoriteBottomSheet extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener('open', this.open.bind(this))
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.removeEventListener('open', this.open.bind(this))
+  }
+
   open(): void {
     this.bottomSheetRef.value!.open()
   }

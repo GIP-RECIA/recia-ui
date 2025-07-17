@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
+import type { ReciaFavoriteBottomSheet, ReciaFavoriteDropdown } from 'favorite'
 import type { TemplateResult } from 'lit'
+import type { Ref } from 'lit/directives/ref.js'
 import type { DrawerItem } from '../../types/DrawerItemType.ts'
 import type { Link } from '../../types/LinkType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -24,13 +26,16 @@ import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
+import breakpointsHelper from '../../helpers/breakpointsHelper.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
+import 'favorite'
 
 @localized()
 export class ReciaNavigationDrawer extends LitElement {
@@ -49,6 +54,81 @@ export class ReciaNavigationDrawer extends LitElement {
   @property({ type: Array })
   items?: Array<DrawerItem>
 
+  favorite?: Array<any> = [
+    {
+      id: 'services',
+      name: 'Services',
+      items: [
+        {
+          id: 'Carte mentale',
+          name: 'Carte mentale',
+          iconUrl: './spritemap.svg#carte-mentale',
+          category: 'apprentissage',
+          link: {
+            href: '/wisemapping',
+          },
+        },
+        {
+          id: 'Capytale',
+          name: 'Capytale',
+          iconUrl: './spritemap.svg#capytale',
+          category: 'apprentissage',
+          link: {
+            href: '#',
+          },
+        },
+        {
+          id: 'Espaces Nextcloud',
+          name: 'Espaces Nextcloud',
+          iconUrl: './spritemap.svg#nextcloud',
+          category: 'collaboratif',
+          link: {
+            href: '#',
+          },
+        },
+        {
+          id: 'Plateforme vidéo',
+          name: 'Plateforme vidéo',
+          iconUrl: './spritemap.svg#POD',
+          category: 'documentation',
+          link: {
+            href: '/POD',
+          },
+        },
+      ],
+    },
+    {
+      id: 'mediacentre',
+      name: 'Médiacentre',
+      items: [
+        {
+          id: 'Pix',
+          name: 'Pix',
+          iconUrl: './spritemap.svg#NOC-simple',
+          link: {
+            href: '#',
+          },
+        },
+        {
+          id: 'Peraltrees',
+          name: 'Peraltrees',
+          iconUrl: './spritemap.svg#NOC-simple',
+          link: {
+            href: '#',
+          },
+        },
+        {
+          id: 'EduMalin',
+          name: 'EduMalin',
+          iconUrl: './spritemap.svg#NOC-simple',
+          link: {
+            href: '#',
+          },
+        },
+      ],
+    },
+  ]
+
   @state()
   isExpanded: boolean = false
 
@@ -57,6 +137,8 @@ export class ReciaNavigationDrawer extends LitElement {
 
   @state()
   isFavoriteActive: boolean = false
+
+  favoriteBottomSheetRef: Ref<ReciaFavoriteBottomSheet> = createRef()
 
   constructor() {
     super()
@@ -108,9 +190,20 @@ export class ReciaNavigationDrawer extends LitElement {
     this.dispatchEvent(new CustomEvent('toggle-services-layout', { detail: { show: !this.isServicesLayout } }))
   }
 
-  toggleFavorite(_: Event): void {
+  toggleFavorite(e: Event): void {
+    e.stopPropagation()
     this.closeDrawer()
-    this.isFavoriteActive = !this.isFavoriteActive
+    if (breakpointsHelper.getCurrentBreakpoint() < breakpointsHelper.getBreakpoint('md')) {
+      this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
+    }
+    else {
+      this.isFavoriteActive = !this.isFavoriteActive
+    }
+  }
+
+  closeFavorite(e: CustomEvent): void {
+    const { show } = e.detail
+    this.isFavoriteActive = show
   }
 
   emitEvent(_: Event): void {
@@ -208,10 +301,13 @@ export class ReciaNavigationDrawer extends LitElement {
               <span class="text">${msg(str`Tous les services`)}</span>
             </button>
           </li>
-          <li>
+          <li class="dropdown-favorites">
             <button
+              id="toggle-favorite-button"
               title="${msg(str`Favoris`)}"
-              aria-label=""
+              aria-label="${msg(str`Menu favoris`)}"
+              aria-expanded="${true ? this.isFavoriteActive : nothing as any}"
+              aria-controls="${true ? 'dropdown-favorites-menu' : nothing}"
               class="${classMap({
                 active: this.isFavoriteActive,
               })}"
@@ -223,6 +319,12 @@ export class ReciaNavigationDrawer extends LitElement {
               </div>
               <span class="text">${msg(str`Favoris`)}</span>
             </button>
+            <r-favorite-dropdown
+              ?show="${this.isFavoriteActive}"
+              .data="${this.favorite}"
+              @close="${this.closeFavorite}"
+            >
+            </r-favorite-dropdown>
           </li>
           ${
             repeat(
@@ -232,6 +334,13 @@ export class ReciaNavigationDrawer extends LitElement {
             )
           }
         </ul>
+      </div>
+      <div class="teleport">
+        <r-favorite-bottom-sheet
+          ${ref(this.favoriteBottomSheetRef)}
+          .data="${this.favorite}"
+        >
+        </r-favorite-bottom-sheet>
       </div>
     `
   }

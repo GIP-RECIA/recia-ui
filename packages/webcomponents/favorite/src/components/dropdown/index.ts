@@ -16,9 +16,9 @@
 
 import type { TemplateResult } from 'lit'
 import type { Section } from '../../types/SectionType.ts'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -29,11 +29,11 @@ import '../layout/index.ts'
 
 @localized()
 export class ReciaFavoriteDropdown extends LitElement {
+  @property({ type: Boolean })
+  show: boolean = false
+
   @property({ type: Array })
   data?: Array<Section>
-
-  @state()
-  isExpanded = false
 
   constructor() {
     super()
@@ -57,62 +57,42 @@ export class ReciaFavoriteDropdown extends LitElement {
     window.removeEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
-  toggleDropdown(e: Event): void {
-    e.preventDefault()
-    e.stopPropagation()
-    this.isExpanded = !this.isExpanded
-  }
-
-  closeDropdown(e: Event, resetFocus: boolean = true): void {
-    e.stopPropagation()
-    this.isExpanded = false
-    if (resetFocus)
-      this.shadowRoot?.getElementById('dropdown-favorites-button')?.focus()
+  close(e: Event | undefined = undefined): void {
+    e?.stopPropagation()
+    this.dispatchEvent(new CustomEvent('close', { detail: { show: false } }))
   }
 
   handleKeyPress(e: KeyboardEvent): void {
-    if (this.isExpanded && e.key === 'Escape') {
+    if (this.show && e.key === 'Escape') {
       e.preventDefault()
-      this.closeDropdown(e)
+      this.close()
     }
   }
 
   handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
     if (
-      this.isExpanded
+      this.show
       && e.target instanceof HTMLElement
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
-      this.isExpanded = false
+      this.close()
     }
   }
 
   render(): TemplateResult {
     return html`
-      <div class="dropdown-favorites">
-        <button
-          id="dropdown-favorites-button"
-          aria-expanded="${this.isExpanded}"
-          aria-controls="dropdown-info-menu"
-          aria-label="${msg(str`Menu favoris`)}"
-          @click="${this.toggleDropdown}"
-          title="${msg(str`Favoris`)}"
+      <div
+        id="dropdown-favorites-menu"
+        class="menu"
+        style="${styleMap({
+          display: this.show ? undefined : 'none',
+        })}"
+      >
+        <div class="active-indicator"></div>
+        <r-favorite-layout
+          .data="${this.data}"
         >
-          <slot></slot>
-        </button>
-        <div
-          id="dropdown-favorites-menu"
-          class="menu"
-          style="${styleMap({
-            display: this.isExpanded ? undefined : 'none',
-          })}"
-        >
-          <div class="active-indicator"></div>
-          <r-favorite-layout
-            .data="${this.data}"
-          >
-          </r-favorite-layout>
-        </div>
+        </r-favorite-layout>
       </div>
     `
   }
