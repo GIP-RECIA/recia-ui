@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-favorite.js",
+      "require": "./dist/r-favorite.js"
+    }
+  },
+  "main": "./dist/r-favorite.js",
+  "module": "./dist/r-favorite.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

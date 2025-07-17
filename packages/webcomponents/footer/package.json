@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-footer.js",
+      "require": "./dist/r-footer.js"
+    }
+  },
+  "main": "./dist/r-footer.js",
+  "module": "./dist/r-footer.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-widget.js",
+      "require": "./dist/r-widget.js"
+    }
+  },
+  "main": "./dist/r-widget.js",
+  "module": "./dist/r-widget.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

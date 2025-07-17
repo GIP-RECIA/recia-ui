@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-wayf.js",
+      "require": "./dist/r-wayf.js"
+    }
+  },
+  "main": "./dist/r-wayf.js",
+  "module": "./dist/r-wayf.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-bottom-sheet.js",
+      "require": "./dist/r-bottom-sheet.js"
+    }
+  },
+  "main": "./dist/r-bottom-sheet.js",
+  "module": "./dist/r-bottom-sheet.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

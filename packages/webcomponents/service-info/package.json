@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-service-info.js",
+      "require": "./dist/r-service-info.js"
+    }
+  },
+  "main": "./dist/r-service-info.js",
+  "module": "./dist/r-service-info.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

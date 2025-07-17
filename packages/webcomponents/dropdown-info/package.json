@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-dropdown-info.js",
+      "require": "./dist/r-dropdown-info.js"
+    }
+  },
+  "main": "./dist/r-dropdown-info.js",
+  "module": "./dist/r-dropdown-info.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

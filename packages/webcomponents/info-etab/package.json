@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-info-etab.js",
+      "require": "./dist/r-info-etab.js"
+    }
+  },
+  "main": "./dist/r-info-etab.js",
+  "module": "./dist/r-info-etab.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

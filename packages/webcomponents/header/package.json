@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-header.js",
+      "require": "./dist/r-header.js"
+    }
+  },
+  "main": "./dist/r-header.js",
+  "module": "./dist/r-header.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

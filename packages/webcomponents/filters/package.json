@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-filters.js",
+      "require": "./dist/r-filters.js"
+    }
+  },
+  "main": "./dist/r-filters.js",
+  "module": "./dist/r-filters.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

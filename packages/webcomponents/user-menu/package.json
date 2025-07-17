@@ -11,6 +11,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": "./dist/r-user-menu.js",
+      "require": "./dist/r-user-menu.js"
+    }
+  },
+  "main": "./dist/r-user-menu.js",
+  "module": "./dist/r-user-menu.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
