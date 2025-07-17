@@ -17,8 +17,10 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
+import type { Section } from '../../types/SectionType.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
+import { property } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -30,6 +32,9 @@ import '../layout/index.ts'
 
 @localized()
 export class ReciaFavoriteBottomSheet extends LitElement {
+  @property({ type: Array })
+  data?: Array<Section>
+
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
   constructor() {
@@ -53,7 +58,9 @@ export class ReciaFavoriteBottomSheet extends LitElement {
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
       >
-        <r-favorite-layout>
+        <r-favorite-layout
+          .data="${this.data}"
+        >
         </r-favorite-layout>
       </r-bottom-sheet>
     `

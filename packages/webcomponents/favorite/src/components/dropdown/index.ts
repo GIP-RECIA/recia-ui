@@ -15,9 +15,10 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { Section } from '../../types/SectionType.ts'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -28,6 +29,9 @@ import '../layout/index.ts'
 
 @localized()
 export class ReciaFavoriteDropdown extends LitElement {
+  @property({ type: Array })
+  data?: Array<Section>
+
   @state()
   isExpanded = false
 
@@ -104,7 +108,9 @@ export class ReciaFavoriteDropdown extends LitElement {
           })}"
         >
           <div class="active-indicator"></div>
-          <r-favorite-layout>
+          <r-favorite-layout
+            .data="${this.data}"
+          >
           </r-favorite-layout>
         </div>
       </div>

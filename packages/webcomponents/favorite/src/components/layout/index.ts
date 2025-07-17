@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft, faArrowRight, faFloppyDisk, faGear, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
@@ -33,11 +33,11 @@ import styles from './style.scss?inline'
 
 @localized()
 export class ReciaFavoriteLayout extends LitElement {
-  @state()
-  data: Array<Section> | null = null
+  @property({ type: Array })
+  data?: Array<Section>
 
   @state()
-  tmpData: Array<Section> | null = null
+  tmpData?: Array<Section>
 
   @state()
   manage: boolean = false
@@ -71,12 +71,12 @@ export class ReciaFavoriteLayout extends LitElement {
 
   toggleManage(save: boolean = false): void {
     if (!this.manage) {
-      this.tmpData = this.data ? [...this.data] : null
+      this.tmpData = this.data ? [...this.data] : undefined
     }
     else {
       if (save)
-        this.data = this.tmpData ? [...this.tmpData] : null
-      this.tmpData = null
+        this.data = this.tmpData ? [...this.tmpData] : undefined
+      this.tmpData = undefined
     }
     this.manage = !this.manage
   }
@@ -187,7 +187,7 @@ export class ReciaFavoriteLayout extends LitElement {
             target="${item.link.target ?? nothing}"
             rel="${item.link.rel ?? nothing}"
             class="name"
-            tabindex="${this.manage ? -1 : nothing}"
+            tabindex="${this.manage ? -1 : nothing as any as number}"
           >
             <span>${item.name}</span>
             <span aria-hidden="true"></span>
