@@ -16,8 +16,7 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Information, InformationConfig } from '../../types/InformationType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAt, faEnvelope, faGlobe, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faGlobe, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -59,21 +58,14 @@ export class ReciaInfoEtabLayout extends LitElement {
   @property({ type: String, attribute: 'acad-name' })
   acadName?: string
 
-  @property({ type: String })
-  information?: string
+  @property({ type: Object })
+  information?: Partial<InformationConfig>
 
   @state()
   localInformation?: Partial<InformationConfig>
 
   constructor() {
     super()
-    library.add(
-      faAt,
-      faEnvelope,
-      faGlobe,
-      faLocationDot,
-      faPhone,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
@@ -91,16 +83,15 @@ export class ReciaInfoEtabLayout extends LitElement {
     if (!this.information)
       return
 
-    const parsed = JSON.parse(this.information) as Partial<InformationConfig>
     this.localInformation = Object.fromEntries(
-      Object.entries(parsed).map(([key, value]) => [
+      Object.entries(this.information).map(([key, value]) => [
         key,
         {
           ...defaultInformation[key as Item],
           ...value,
         },
       ]),
-    ) as Partial<InformationConfig>
+    )
   }
 
   static i18n(): Record<Item, string> {
