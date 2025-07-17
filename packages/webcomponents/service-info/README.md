@@ -5,7 +5,7 @@
       - [Retour](#retour)
     - [`close`](#close)
       - [Retour](#retour-1)
-- [r-bottom-sheet-service-info](#r-bottom-sheet-service-info)
+- [r-service-info-bottom-sheet](#r-service-info-bottom-sheet)
   - [Propriétés](#propriétés-1)
 
 # r-service-info-layout
@@ -47,7 +47,7 @@ detail: {
 
 Aucun
 
-# r-bottom-sheet-service-info
+# r-service-info-bottom-sheet
 
 ## Propriétés
 
