@@ -17,7 +17,6 @@
 import type { TemplateResult } from 'lit'
 import type { Item } from './types/ItemType.ts'
 import type { Link } from './types/LinkType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faAnglesRight,
   faArrowLeft,
@@ -89,23 +88,13 @@ export class ReciaWidget extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faAnglesRight,
-      faArrowLeft,
-      faArrowRight,
-      faChevronDown,
-      faInfoCircle,
-      faTimes,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
   }
 
-  toggleDropdown(e: Event): void {
-    e.preventDefault()
-    e.stopPropagation()
+  toggleDropdown(): void {
     this.isExpanded = !this.isExpanded
   }
 
