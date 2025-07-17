@@ -26,7 +26,7 @@ import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../search'
-import 'user-menu/dist/r-user-menu.js'
+import 'user-menu'
 
 @localized()
 export class ReciaPrincipalContainer extends LitElement {

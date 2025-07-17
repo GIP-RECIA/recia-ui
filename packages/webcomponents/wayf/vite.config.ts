@@ -17,6 +17,7 @@
 /* eslint-disable node/prefer-global/process */
 import type { ConfigEnv } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
+import dts from 'vite-plugin-dts'
 import { svgSpritemap } from 'vite-plugin-svg-spritemap'
 import { fileName, libName } from '../common/config.ts'
 import { name } from './package.json'
@@ -34,6 +35,16 @@ export default ({ mode }: ConfigEnv) => {
     },
     publicDir: mode === 'development' ? undefined : false,
     plugins: [
+      dts({
+        entryRoot: './src',
+        insertTypesEntry: true,
+        exclude: [
+          './src/generated/',
+          './src/helpers/',
+          './src/utils/',
+        ],
+        tsconfigPath: './tsconfig.json',
+      }),
       svgSpritemap({
         pattern: 'src/svg/*.svg',
         filename: `${name}.spritemap.svg`,

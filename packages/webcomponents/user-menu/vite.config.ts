@@ -17,6 +17,7 @@
 /* eslint-disable node/prefer-global/process */
 import type { ConfigEnv } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
+import dts from 'vite-plugin-dts'
 import { fileName, libName } from '../common/config.ts'
 import { name } from './package.json'
 
@@ -32,6 +33,18 @@ export default ({ mode }: ConfigEnv) => {
       allowedHosts: JSON.parse(VITE_ALLOWED_HOSTS ?? ''),
     },
     publicDir: mode === 'development' ? undefined : false,
+    plugins: [
+      dts({
+        entryRoot: `./${name}/src`,
+        insertTypesEntry: true,
+        exclude: [
+          './src/generated/',
+          './src/helpers/',
+          './src/utils/',
+        ],
+        tsconfigPath: './tsconfig.json',
+      }),
+    ],
     build: {
       sourcemap: true,
       lib: {

@@ -28,7 +28,7 @@ import { Category } from '../../types/CategoryType.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'filters/dist/r-filters.js'
+import 'filters'
 
 @localized()
 export class ReciaService extends LitElement {

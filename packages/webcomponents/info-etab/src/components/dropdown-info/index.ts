@@ -25,7 +25,7 @@ import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'dropdown-info/dist/r-dropdown-info.js'
+import 'dropdown-info'
 import '../layout/index.ts'
 
 @localized()

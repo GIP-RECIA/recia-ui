@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ReciaBottomSheet } from 'bottom-sheet/src'
+import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ServiceInfoLayout } from '../../types/ServiceInfoLayoutType.ts'
@@ -31,7 +31,7 @@ import infoService from '../../services/infoService.ts'
 import portalService from '../../services/portalService.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'bottom-sheet/dist/r-bottom-sheet.js'
+import 'bottom-sheet'
 import '../layout/index.ts'
 
 @localized()

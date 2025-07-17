@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import type { Section } from 'filters/src/types/SectionType.ts'
 import type { TemplateResult } from 'lit'
+import type { Section } from '../../../../filters/src/types/SectionType.ts'
 import type { Service } from '../../types/ServiceType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -30,7 +30,7 @@ import langHelper from '../../helpers/langHelper.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'filters/dist/r-filters.js'
+import 'filters'
 import '../service/index.ts'
 
 @localized()

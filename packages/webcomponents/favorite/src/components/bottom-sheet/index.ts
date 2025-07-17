@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ReciaBottomSheet } from 'bottom-sheet/src'
+import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
@@ -25,7 +25,7 @@ import { name } from '../../../package.json'
 import langHelper from '../../helpers/langHelper.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'bottom-sheet/dist/r-bottom-sheet.js'
+import 'bottom-sheet'
 import '../layout/index.ts'
 
 @localized()
