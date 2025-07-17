@@ -32,7 +32,7 @@ export class ReciaWayf extends LitElement {
   casUrl?: string
 
   @property({ type: Array, attribute: 'idp-ids' })
-  idpIds: Array<IdpId> = []
+  idpIds?: Array<IdpId>
 
   @property({ type: String, attribute: 'svg-url' })
   svgUrl: string = './wayf.spritemap.svg'
@@ -61,7 +61,7 @@ export class ReciaWayf extends LitElement {
       <ul>
         ${
           repeat(
-            this.idpIds.filter(idpId => Object.values(IdpId).includes(idpId)),
+            (this.idpIds ?? []).filter(idpId => Object.values(IdpId).includes(idpId)),
             idpId => idpId,
             idpId => html`
               <li>
