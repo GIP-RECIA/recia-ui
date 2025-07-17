@@ -41,13 +41,13 @@ export class ReciaDropdownInfo extends LitElement {
   label?: string = ''
 
   @property({ type: Boolean, attribute: 'no-padding' })
-  noPadding = false
+  noPadding: boolean = false
 
   @property({ type: Boolean, attribute: 'no-mask' })
-  noMask = false
+  noMask: boolean = false
 
   @state()
-  isExpanded = false
+  isExpanded: boolean = false
 
   maskRef: Ref<HTMLElement> = createRef()
 
@@ -92,14 +92,11 @@ export class ReciaDropdownInfo extends LitElement {
     return true
   }
 
-  toggleDropdown(e: Event): void {
-    e.preventDefault()
-    e.stopPropagation()
+  toggleDropdown(_: Event): void {
     this.isExpanded = !this.isExpanded
   }
 
-  closeDropdown(e: Event, resetFocus: boolean = true): void {
-    e.stopPropagation()
+  closeDropdown(_: Event | undefined = undefined, resetFocus: boolean = true): void {
     this.isExpanded = false
     if (resetFocus)
       this.shadowRoot?.getElementById('dropdown-info-button')?.focus()
@@ -123,7 +120,7 @@ export class ReciaDropdownInfo extends LitElement {
       && e.target instanceof HTMLElement
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
-      this.isExpanded = false
+      this.closeDropdown(undefined, false)
     }
   }
 
