@@ -17,7 +17,7 @@
 import type { DirectiveResult, ElementPart } from 'lit/directive.js'
 import { directive, Directive, PartType } from 'lit/directive.js'
 
-type AttributeMap = Record<string, unknown> | null
+type AttributeMap = Record<string, unknown> | undefined | null
 type PreserveFilter = Set<string> | ((name: string) => boolean)
 
 class SpreadAttributesDirective extends Directive {
@@ -35,7 +35,7 @@ class SpreadAttributesDirective extends Directive {
       return preserve instanceof Set ? preserve.has(name) : preserve(name)
     }
 
-    if (attrs === null) {
+    if (!attrs) {
       Array.from(el.attributes).forEach((attr) => {
         if (!shouldPreserve(attr.name))
           el.removeAttribute(attr.name)

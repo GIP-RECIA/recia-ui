@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import type { ReciaServiceInfoLayout } from '../components/layout/index.ts'
 import type { Info } from '../types/InfoType.ts'
+import { Layout } from '../types/LayoutType.ts'
 
 export default class infoService {
-  static async get(serviceInfoApiUrl: string): Promise<Partial<ReciaServiceInfoLayout> | null> {
+  static async get(serviceInfoApiUrl: string): Promise<Partial<Layout> | any | null> {
     try {
       const options = {
         method: 'GET',

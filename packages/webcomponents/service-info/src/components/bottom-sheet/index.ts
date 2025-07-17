@@ -17,7 +17,7 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { ServiceInfoLayout } from '../../types/ServiceInfoLayoutType.ts'
+import type { Layout } from '../../types/LayoutType.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -32,7 +32,6 @@ import portalService from '../../services/portalService.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'bottom-sheet'
-import '../layout/index.ts'
 
 @localized()
 export class ReciaBottomSheetServiceInfo extends LitElement {
@@ -49,7 +48,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   serviceInfoApiUrl?: string
 
   @state()
-  data: ServiceInfoLayout | null = null
+  data?: Layout
 
   @state()
   loading = false
@@ -99,7 +98,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
       return
 
     if (fname !== this.lastfname) {
-      this.data = null
+      this.data = undefined
       this.lastfname = fname
       this.loading = true
       this.open()
@@ -133,7 +132,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
         ${ref(this.bottomSheetRef)}
       >
         <r-service-info-layout
-          ${spreadAttributes(this.data as Record<string, unknown> | null, new Set(['data-', 'aria-', 'loading']))}
+          ${spreadAttributes(this.data as Record<string, unknown>, new Set(['data-', 'aria-', 'loading']))}
           ?loading="${this.loading}"
           @close="${() => this.close()}"
         >

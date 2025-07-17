@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ReciaServiceInfoLayout } from '../components/layout/index.ts'
+import type { Layout } from '../types/LayoutType.ts'
 import type { Portlet } from '../types/PortletType.ts'
 import pathHelper from '../helpers/pathHelper.ts'
 
@@ -23,7 +23,7 @@ export default class portalService {
     portalInfoApiUrl: string,
     domain: string,
     portalPath: string,
-  ): Promise<Partial<ReciaServiceInfoLayout> | null> {
+  ): Promise<Partial<Layout> | null> {
     try {
       const options = {
         method: 'GET',
