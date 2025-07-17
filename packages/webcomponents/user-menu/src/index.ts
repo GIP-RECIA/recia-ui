@@ -155,14 +155,11 @@ export class ReciaUserMenu extends LitElement {
     this.localConfig = merged
   }
 
-  toggleDropdown(e: Event): void {
-    e.preventDefault()
-    e.stopPropagation()
+  toggleDropdown(_: Event): void {
     this.isExpanded = !this.isExpanded
   }
 
-  closeDropdown(e: Event, resetFocus: boolean = true): void {
-    e.stopPropagation()
+  closeDropdown(_: Event | undefined = undefined, resetFocus: boolean = true): void {
     this.isExpanded = false
     if (resetFocus)
       this.shadowRoot?.getElementById('eyebrow-button')?.focus()
@@ -181,7 +178,7 @@ export class ReciaUserMenu extends LitElement {
       && e.target instanceof HTMLElement
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
-      this.isExpanded = false
+      this.closeDropdown()
     }
   }
 
