@@ -35,7 +35,7 @@ export class ReciaWayf extends LitElement {
   idpIds?: Array<IdpId>
 
   @property({ type: String, attribute: 'svg-url' })
-  svgUrl: string = './wayf.spritemap.svg'
+  svgUrl?: string = `./${name}.spritemap.svg`
 
   constructor() {
     super()
