@@ -2,36 +2,31 @@
 @use '../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
-.eyebrow {
+.user-menu {
   position: relative;
   width: fit-content;
 
-  & > &-notification {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;
-    background-color: var(--#{$prefix}primary);
-  }
-
-  & > &-button {
+  > button {
     display: flex;
     align-items: center;
     column-gap: 12px;
     border-radius: 50px;
 
     > .picture {
+      flex: 0 0 auto;
       height: 46px;
       width: 46px;
       border-radius: 50%;
     }
 
     > .info {
+      flex: 0 1 auto;
       display: none;
       align-items: baseline;
       flex-direction: column;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
       > .displayname {
         font-size: var(--#{$prefix}font-size-md);
@@ -44,9 +39,11 @@
     }
 
     > svg {
+      flex: 0 0 auto;
       display: none;
       opacity: .3;
       margin-right: 12px;
+      color: var(--#{$prefix}basic-black);
       transition: rotate .2s ease-in-out;
     }
 
@@ -62,7 +59,7 @@
     }
   }
 
-  & > &-menu {
+  > ul {
     @include unstyled-list;
     position: absolute;
     top: calc(100% + 6px);
@@ -120,12 +117,18 @@
     }
   }
 
+  @media (width >= map.get($custom-breakpoints, user-info)) {
+    > ul > li:has(> button#search) {
+      display: none;
+    }
+  }
+
   @media (width >= map.get($grid-breakpoints, md)) {
-    & > &-notification {
+    > .notification-dot {
       display: none;
     }
 
-    & > &-button {
+    > button {
       > .info {
         display: flex;
       }
@@ -135,9 +138,11 @@
       }
     }
 
-    & > &-menu > li {
-      &:has(> button#notification),
-      &:has(> button#info-etab) {
+    > ul > li {
+      &:has(
+        > button#notification,
+        > button#info-etab
+      ) {
         display: none;
       }
 
@@ -147,3 +152,4 @@
     }
   }
 }
+

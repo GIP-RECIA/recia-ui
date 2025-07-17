@@ -30,6 +30,10 @@
   <source>Menu mon compte</source>
   <target>My account menu</target>
 </trans-unit>
+<trans-unit id="s358106e7a82ecfb0">
+  <source>Rechercher</source>
+  <target>Search</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

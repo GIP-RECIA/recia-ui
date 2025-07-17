@@ -10,6 +10,7 @@
 
     export const templates = {
       's0879a675a2208eb0': str`My account menu`,
+'s358106e7a82ecfb0': str`Search`,
 's4c45c541dc69732e': str`Start tutorial`,
 's5be3c6d61cd9182f': str`Notifications`,
 'sb1ae6414f46b7471': str`My profile`,

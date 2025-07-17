@@ -15,6 +15,7 @@
  */
 
 export enum Item {
+  Search = 'search',
   Notification = 'notification',
   Settings = 'settings',
   InfoEtab = 'info-etab',
