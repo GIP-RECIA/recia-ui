@@ -33,29 +33,29 @@ import { setLocale } from './utils/localizationUtils.ts'
 
 export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean, attribute: 'open', reflect: true })
-  isOpen = false
+  isOpen: boolean = false
 
   @property({ type: Boolean, attribute: 'no-close' })
-  closeIcon = false
+  closeIcon: boolean = false
 
   @property({ type: Boolean, attribute: 'no-drag' })
-  dragIcon = false
+  dragIcon: boolean = false
 
   @property({ type: Boolean, attribute: 'no-padding' })
-  noPadding = false
+  noPadding: boolean = false
 
   @state()
-  closeRequested = false
+  closeRequested: boolean = false
 
   private containerRef: Ref<HTMLElement> = createRef()
   private growRef: Ref<HTMLElement> = createRef()
   private sheetRef: Ref<HTMLElement> = createRef()
 
-  private show = false
-  private startY = 0
-  private currentY = 0
-  private growHeight = 0
-  private isDragging = false
+  private show: boolean = false
+  private startY: number = 0
+  private currentY: number = 0
+  private growHeight: number = 0
+  private isDragging: boolean = false
   private activeElement: HTMLElement | undefined
 
   constructor() {
