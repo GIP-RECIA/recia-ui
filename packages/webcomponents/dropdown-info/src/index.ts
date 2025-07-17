@@ -15,12 +15,14 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
+import type { Ref } from 'lit/directives/ref.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
@@ -47,6 +49,8 @@ export class ReciaDropdownInfo extends LitElement {
   @state()
   isExpanded = false
 
+  maskRef: Ref<HTMLElement> = createRef()
+
   constructor() {
     super()
     library.add(
@@ -60,6 +64,7 @@ export class ReciaDropdownInfo extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
+    this.addEventListener('click', this.handleClick.bind(this))
     this.addEventListener('keyup', this.handleKeyPress.bind(this))
     window.addEventListener('keyup', this.handleOutsideEvents.bind(this))
     window.addEventListener('click', this.handleOutsideEvents.bind(this))
@@ -67,6 +72,7 @@ export class ReciaDropdownInfo extends LitElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
+    this.removeEventListener('click', this.handleClick.bind(this))
     this.removeEventListener('keyup', this.handleKeyPress.bind(this))
     window.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
     window.removeEventListener('click', this.handleOutsideEvents.bind(this))
@@ -97,6 +103,11 @@ export class ReciaDropdownInfo extends LitElement {
     this.isExpanded = false
     if (resetFocus)
       this.shadowRoot?.getElementById('dropdown-info-button')?.focus()
+  }
+
+  handleClick(e: MouseEvent): void {
+    if (this.isExpanded && e.composedPath().includes(this.maskRef.value!))
+      this.closeDropdown(e)
   }
 
   handleKeyPress(e: KeyboardEvent): void {
@@ -135,6 +146,7 @@ export class ReciaDropdownInfo extends LitElement {
           !this.noMask
             ? html`
                 <div
+                  ${ref(this.maskRef)}
                   class="mask"
                   style="${styleMap({
                     display: this.isExpanded ? undefined : 'none',
