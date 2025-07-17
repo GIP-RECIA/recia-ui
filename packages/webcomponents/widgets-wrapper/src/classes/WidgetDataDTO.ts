@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export class WidgetData {
+export class WidgetDataDTO {
   constructor(name: string, subtitle: string, link: string, emptyText: string, emptyDiscover: boolean, items: string, target: string, rel: string, eventDNMA: string, eventpayloadDNMA: string) {
     this.name = name
     this.subtitle = subtitle

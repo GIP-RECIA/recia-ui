@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-import type { Link } from './LinkType.ts'
+export class CustomError extends Error {
+  statusCode
 
-export interface Item {
-  id: string
-  name: string
-  icon?: string
-  link?: Link
-  event: string
-  eventpayload: string
-  eventDNMA: string
-  eventDNMApayload: string
+  constructor(message: string, statusCode: number) {
+    super(message)
+    this.statusCode = statusCode
+  }
 }

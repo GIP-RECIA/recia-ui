@@ -11,10 +11,20 @@
 </head>
 
 <body class="container">
+
+
+
   <section>
     <h1>Widgets wrapper</h1>
 
-    <r-widgets-wrapper widget-keys="Favoris;Documents;MonCDI" localization-uri="http://localhost:3000/localisation.json"
+</div>
+    <r-widgets-wrapper
+    widget-keys-required="Favoris;Documents;MonCDI"
+    localization-uri="http://localhost:3000/localisation.json"
+    soffit-uri="/portail/api/v5-1/userinfo?claims=private,ENTPersonGARIdentifiant,ESCOUAICourant,ESCOUAI,ENTPersonProfils,ESCOPersonExternalIds&groups="
+    widget-max-count="4"
+    get-prefs-uri="/portail/api/prefs/getentityonlyprefs/Widgets"
+    put-prefs-uri="/portail/api/prefs/putprefs?fname=Widgets"
     >
     </r-widgets-wrapper>
   </section>
