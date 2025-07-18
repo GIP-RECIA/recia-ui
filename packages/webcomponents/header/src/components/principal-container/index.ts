@@ -15,7 +15,6 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -38,10 +37,6 @@ export class ReciaPrincipalContainer extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faBell,
-      faMagnifyingGlass,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)

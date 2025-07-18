@@ -15,7 +15,6 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
@@ -226,8 +225,6 @@ export class ReciaHeader extends LitElement {
 
   constructor() {
     super()
-    library.add(
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)

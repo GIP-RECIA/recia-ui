@@ -16,7 +16,6 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Link } from '../../types/LinkType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -55,10 +54,6 @@ export class ReciaService extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faStar,
-      farStar,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)

@@ -15,7 +15,6 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { componentName } from '../../../../common/config.ts'
@@ -27,8 +26,6 @@ import styles from './style.scss?inline'
 export class ReciaSearch extends LitElement {
   constructor() {
     super()
-    library.add(
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)

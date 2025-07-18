@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import type { ReciaFavoriteBottomSheet, ReciaFavoriteDropdown } from 'favorite'
+import type { ReciaFavoriteBottomSheet } from 'favorite'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { DrawerItem } from '../../types/DrawerItemType.ts'
 import type { Link } from '../../types/LinkType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { faBookOpen, faGrip, faHouse, faMessage } from '@fortawesome/free-solid-svg-icons'
+import { faGrip, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -142,13 +141,6 @@ export class ReciaNavigationDrawer extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faBookOpen,
-      faGrip,
-      faHouse,
-      faMessage,
-      farStar,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)

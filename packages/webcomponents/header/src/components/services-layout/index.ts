@@ -17,7 +17,6 @@
 import type { TemplateResult } from 'lit'
 import type { Section } from '../../../../filters/src/types/SectionType.ts'
 import type { Service } from '../../types/ServiceType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -51,9 +50,6 @@ export class ReciaServicesLayout extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faArrowLeft,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
