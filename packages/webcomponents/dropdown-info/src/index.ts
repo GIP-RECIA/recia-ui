@@ -39,6 +39,12 @@ export class ReciaDropdownInfo extends LitElement {
   @property({ type: String })
   label?: string = ''
 
+  @property({ type: Boolean })
+  tooltip: boolean = false
+
+  @property({ type: String, attribute: 'tooltip-location' })
+  tooltipLocation?: Location = Location.BottomRight
+
   @property({ type: Boolean, attribute: 'no-padding' })
   noPadding: boolean = false
 
@@ -78,6 +84,11 @@ export class ReciaDropdownInfo extends LitElement {
     if (_changedProperties.has('location')) {
       if (!this.location || !Object.values(Location).includes(this.location)) {
         this.location = Location.BottomRight
+      }
+    }
+    if (_changedProperties.has('tooltipLocation')) {
+      if (!this.tooltipLocation || !Object.values(Location).includes(this.tooltipLocation)) {
+        this.tooltipLocation = Location.BottomRight
       }
     }
     if (_changedProperties.has('label')) {
@@ -135,6 +146,15 @@ export class ReciaDropdownInfo extends LitElement {
         >
           ${getIcon(faCircleInfo)}
         </button>
+        ${
+          this.tooltip && this.label
+            ? html`
+                <div class="${this.tooltipLocation} tooltip">
+                  <span>${this.label}</span>
+                </div>
+              `
+            : nothing
+        }
         ${
           !this.noMask
             ? html`

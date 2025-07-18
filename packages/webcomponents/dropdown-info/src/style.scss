@@ -7,9 +7,20 @@
   position: relative;
   display: inline-block;
 
-  > button.active {
-    position: relative;
-    z-index: 1056;
+  > button {
+    &.active {
+      position: relative;
+      z-index: 1056;
+    }
+
+    &:not(.active) {
+      &:hover,
+      &:focus-visible {
+        ~ .tooltip {
+          display: unset;
+        }
+      }
+    }
   }
 
   > .mask {
