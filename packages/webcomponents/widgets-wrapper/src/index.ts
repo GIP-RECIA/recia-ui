@@ -66,34 +66,21 @@ export class ReciaWidgetsWrapper extends LitElement {
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
 
-    // document.addEventListener('WIDGETS-BEGIN', this.monInit)
+    document.addEventListener('init-widget', () => {
+      this.monInit()
+    })
+  }
 
-    this.monInit()
+  connectedCallback(): void {
+    super.connectedCallback()
+    const versionUpdate = (new Date()).getTime()
+    const scriptAdapter = document.createElement('script')
+    scriptAdapter.type = 'module'
+    scriptAdapter.src = `${this.adapterSourceUri}${versionUpdate}`
+    document.body.appendChild(scriptAdapter)
   }
 
   async monInit() {
-    const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
-    const sleepDurationMilliseconds: number = 100
-    const loopMaxDurationMilliseconds: number = 4000
-    let elapsedDuration: number = 0
-
-    let failed: boolean = false
-
-    while (window.WidgetAdapter === undefined) {
-      await sleep(sleepDurationMilliseconds)
-      elapsedDuration += sleepDurationMilliseconds
-      if (elapsedDuration >= loopMaxDurationMilliseconds) {
-        failed = true
-        break
-      }
-    }
-    if (failed) {
-      // TODO : add error message
-      return
-    }
-
-    // this.initWidgetWrapper()
-
     await this.setupLocalization()
 
     // get all widgets keys known/accepted by the adapter
@@ -126,6 +113,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   // #region PROPERTIES
+
+  @property({ type: String, attribute: 'adapter-source-uri' })
+  adapterSourceUri = ''
 
   @property({ type: String, attribute: 'localization-uri' })
   localizationUri = ''
