@@ -17,8 +17,13 @@
 import type { TemplateResult } from 'lit'
 import type { Item } from '../../types/ItemType.ts'
 import type { Section } from '../../types/SectionType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowLeft, faArrowRight, faFloppyDisk, faGear, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowLeft,
+  faArrowRight,
+  faFloppyDisk,
+  faGear,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -44,13 +49,6 @@ export class ReciaFavoriteLayout extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faArrowLeft,
-      faArrowRight,
-      faFloppyDisk,
-      faGear,
-      faTimes,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)

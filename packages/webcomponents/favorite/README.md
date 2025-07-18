@@ -25,6 +25,7 @@
 
 ## Propriétés
 
-| Nom    |                      Type                      | Obligatoire |   Default   | Description        |
-| ------ | :--------------------------------------------: | :---------: | :---------: | ------------------ |
-| `data` | [`Array<Section>`](./src/types/SectionType.ts) |   `false`   | `undefined` | Liste des sections |
+| Nom    |                      Type                      | Obligatoire |   Default   | Description         |
+| ------ | :--------------------------------------------: | :---------: | :---------: | ------------------- |
+| `show` |                   `boolean`                    |   `false`   |   `false`   | Affiche le dropdown |
+| `data` | [`Array<Section>`](./src/types/SectionType.ts) |   `false`   | `undefined` | Liste des sections  |
