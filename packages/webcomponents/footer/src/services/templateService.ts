@@ -17,7 +17,7 @@
 import type { TemplateApiResponse } from '../types/TemplateApiResponseType.ts'
 import type { Template } from '../types/TemplateType.ts'
 
-export default class templateService {
+export default class TemplateService {
   static async get(
     templateApiUrl: string,
     domain: string,
@@ -42,7 +42,6 @@ export default class templateService {
         if (currenTemplate) {
           const name = currenTemplate?.identity?.name
           const logo = currenTemplate?.images?.find(image => image?.Id === 'logo')
-          const color = currenTemplate?.colors?.find(color => color?.Id === 'light-grey')?.hexa ?? '#cecece'
           const sponsors = currenTemplate?.sponsors?.filter(sponsor => sponsor?.url && sponsor?.logo?.path)
             .map((sponsor) => {
               return {
@@ -51,18 +50,17 @@ export default class templateService {
                 logoPath: sponsor.logo.path!,
               }
             })
-          if (logo && color) {
+          if (logo) {
             const template: Template = {
               name,
               logoPath: logo?.path ?? '',
-              color,
             }
             if (sponsors)
               template.sponsors = sponsors
             return template
           }
           else {
-            console.error('Incorrect template datas', logo, color)
+            console.error('Incorrect template datas', logo)
           }
         }
         else {

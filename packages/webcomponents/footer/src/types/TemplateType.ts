@@ -17,7 +17,6 @@
 export interface Template {
   name: string
   logoPath: string
-  color: string
   sponsors?: Array<{
     name: string
     url: string

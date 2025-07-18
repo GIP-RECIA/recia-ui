@@ -25,7 +25,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
-import templateService from './services/templateService.ts'
+import TemplateService from './services/templateService.ts'
 import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -34,9 +34,6 @@ import { setLocale } from './utils/localizationUtils.ts'
 export class ReciaFooter extends LitElement {
   @property({ type: String })
   domain: string = window.location.hostname
-
-  @property({ type: String, attribute: 'portal-path' })
-  portalPath?: string
 
   @property({ type: String, attribute: 'template-api-url' })
   templateApiUrl?: string
@@ -58,16 +55,12 @@ export class ReciaFooter extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
-  protected shouldUpdate(_changedProperties: PropertyValues): boolean {
-    if (
-      _changedProperties.has('domain')
-      || _changedProperties.has('portalPath')
-      || _changedProperties.has('templateApiUrl')
-    ) {
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('domain') || _changedProperties.has('templateApiUrl')) {
       this._getTemplate()
       return false
     }
-    if (_changedProperties.has('template') && this.template !== null) {
+    if (_changedProperties.has('template') && this.template) {
       return true
     }
     return false
@@ -77,7 +70,7 @@ export class ReciaFooter extends LitElement {
     if (!this.templateApiUrl)
       return
 
-    this.template = await templateService.get(this.templateApiUrl, this.domain)
+    this.template = await TemplateService.get(this.templateApiUrl, this.domain)
   }
 
   linkItemTemplate(link: Link): TemplateResult {
@@ -108,7 +101,7 @@ export class ReciaFooter extends LitElement {
                     repeat(
                       this.topLinks ?? [],
                       link => link,
-                      link => this.linkItemTemplate(link)
+                      link => this.linkItemTemplate(link),
                     )
                   }
                 </ul>
@@ -123,7 +116,7 @@ export class ReciaFooter extends LitElement {
                             <img src="${partner.logoPath}" title="${partner.name}" />
                           </a>
                         </li>
-                      `
+                      `,
                     )
                   }
                 </ul>
@@ -136,7 +129,7 @@ export class ReciaFooter extends LitElement {
                     repeat(
                       this.bottomLinks ?? [],
                       link => link,
-                      link => this.linkItemTemplate(link)
+                      link => this.linkItemTemplate(link),
                     )
                   }
                   <li>©${new Date().getFullYear()} - ${this.template.name}</li>
