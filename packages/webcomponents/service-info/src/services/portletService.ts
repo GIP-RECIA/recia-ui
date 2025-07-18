@@ -18,12 +18,12 @@ import type { Layout } from '../types/LayoutType.ts'
 import type { Portlet } from '../types/PortletType.ts'
 import pathHelper from '../helpers/pathHelper.ts'
 
-export default class portalService {
+export default class PortletService {
   static async get(
     portalInfoApiUrl: string,
     domain: string,
     portalPath: string,
-  ): Promise<Partial<Layout> | null> {
+  ): Promise<Partial<Layout> | undefined> {
     try {
       const options = {
         method: 'GET',
@@ -61,8 +61,8 @@ export default class portalService {
     }
     catch (err) {
       console.error(err, portalInfoApiUrl)
-      return null
+      return undefined
     }
-    return null
+    return undefined
   }
 }

@@ -27,8 +27,8 @@ import { name } from '../../../package.json'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
-import infoService from '../../services/infoService.ts'
-import portalService from '../../services/portalService.ts'
+import InfoService from '../../services/infoService.ts'
+import PortletService from '../../services/portletService.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'bottom-sheet'
@@ -109,12 +109,12 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     }
 
     const [portlet, info] = await Promise.all([
-      portalService.get(
+      PortletService.get(
         pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain),
         this.domain,
         this.portalPath,
       ),
-      infoService.get(pathHelper.getUrl(`${this.serviceInfoApiUrl}/${fname}`, this.domain)),
+      InfoService.get(pathHelper.getUrl(`${this.serviceInfoApiUrl}/${fname}`, this.domain)),
     ])
 
     if (!portlet || !info) {

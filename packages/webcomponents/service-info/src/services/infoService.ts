@@ -15,10 +15,10 @@
  */
 
 import type { Info } from '../types/InfoType.ts'
-import { Layout } from '../types/LayoutType.ts'
+import type { Layout } from '../types/LayoutType.ts'
 
-export default class infoService {
-  static async get(serviceInfoApiUrl: string): Promise<Partial<Layout> | any | null> {
+export default class InfoService {
+  static async get(serviceInfoApiUrl: string): Promise<Partial<Layout> | undefined> {
     try {
       const options = {
         method: 'GET',
@@ -49,8 +49,8 @@ export default class infoService {
     }
     catch (err) {
       console.error(err, serviceInfoApiUrl)
-      return null
+      return undefined
     }
-    return null
+    return undefined
   }
 }
