@@ -18,12 +18,19 @@ import type { PropertyValues, TemplateResult } from 'lit'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
+import pathHelper from './helpers/pathHelper.ts'
+import OrganizationService from './services/organizationService.ts'
+import PortletService from './services/portletService.ts'
+import SessionService from './services/sessionService.ts'
+import SoffitService from './services/soffitService.ts'
+import TemplateService from './services/templateService.ts'
+import UserService from './services/userService.ts'
 import styles from './style.scss?inline'
 import { Category } from './types/CategoryType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -31,6 +38,7 @@ import './components/navigation-drawer'
 import './components/notification-drawer'
 import './components/principal-container'
 import './components/services-layout'
+import 'regenerator-runtime/runtime.js'
 
 @localized()
 export class ReciaHeader extends LitElement {
@@ -214,6 +222,39 @@ export class ReciaHeader extends LitElement {
     ],
   }
 
+  @property({ type: String })
+  domain: string = window.location.hostname
+
+  @property({ type: String, attribute: 'portal-path' })
+  portalPath: string = import.meta.env.VITE_PORTAL_BASE_URL
+
+  @property({ type: String, attribute: 'template-api-url' })
+  templateApiUrl?: string
+
+  @property({ type: String, attribute: 'portal-info-api-url' })
+  portalInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'session-api-url' })
+  sessionApiUrl?: string
+
+  @property({ type: String, attribute: 'user-info-api-url' })
+  userInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'layout-api-url' })
+  layoutApiUrl?: string
+
+  @property({ type: String, attribute: 'user-org-id-attribute-name' })
+  orgAttributeName?: string
+
+  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
+  userAllOrgsIdAttributeName?: string
+
+  @property({ type: String, attribute: 'organization-api-url' })
+  organizationApiUrl?: string
+
+  @state()
+  loaded: boolean = false
+
   @state()
   isNavigationDrawerExpended: boolean = false
 
@@ -232,9 +273,75 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('domain')) {
+      if (!this.domain || this.domain === '') {
+        this.domain = window.location.hostname
+      }
+    }
+    if (_changedProperties.has('portalPath')) {
+      if (!this.portalPath || this.portalPath === '') {
+        this.portalPath = import.meta.env.VITE_PORTAL_BASE_URL
+      }
+    }
+    if (!this.loaded) {
+      this.devCalls()
+    }
     this.injectStyle()
     document.body.classList.add(this.data.visible ? 'navigation-drawer-visible' : '', 'auto-margin-top')
     return true
+  }
+
+  async devCalls(): Promise<void> {
+    if (
+      !this.portalInfoApiUrl
+      || !this.templateApiUrl
+      || !this.sessionApiUrl
+      || !this.userInfoApiUrl
+      || !this.layoutApiUrl
+      || !this.orgAttributeName
+      || !this.userAllOrgsIdAttributeName
+      || !this.organizationApiUrl
+    ) {
+      return
+    }
+
+    const fname = 'Mediacentre'
+
+    const soffit = await SoffitService.get(this.userInfoApiUrl)
+    console.log(soffit)
+
+    if (!soffit)
+      return
+
+    const data = await Promise.all([
+      PortletService.get(pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain)),
+      TemplateService.get(this.templateApiUrl, this.domain),
+      SessionService.get(this.sessionApiUrl),
+      UserService.get(
+        soffit,
+        this.layoutApiUrl,
+        this.orgAttributeName,
+        this.userAllOrgsIdAttributeName,
+      ),
+    ])
+    data.forEach((el) => {
+      console.log(el)
+    })
+
+    if (data[3]) {
+      const data2 = await Promise.all([
+        OrganizationService.get(
+          soffit,
+          this.organizationApiUrl,
+          data[3].orgId ?? '',
+        ),
+      ])
+      data2.forEach((el) => {
+        console.log(el)
+      })
+    }
+
+    this.loaded = true
   }
 
   injectStyle(): void {
