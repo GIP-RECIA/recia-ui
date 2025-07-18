@@ -16,19 +16,17 @@
 
 set -euo pipefail
 
-./scripts/each-wc.sh run build
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $0 <command>"
+  echo "ex: $0 run lit-localize extract"
+  exit 1
+fi
 
-ROOT_DIR=$(pwd)
-SOURCE_DIR="$ROOT_DIR/packages/webcomponents"
-TARGET_DIR="$ROOT_DIR/packages/ui-webcomponents"
-PREFIX="r-"
+command_parts=("$@")
 
-mkdir -p "$TARGET_DIR/dist" "$TARGET_DIR/docs"
-rm -rf "$TARGET_DIR/dist"/* "$TARGET_DIR/docs"/*
-
-for dir in "$SOURCE_DIR"/*/; do
-  if [ -f "${dir}package.json" ]; then
-    cp "$dir"/dist/*.js* "$TARGET_DIR/dist" 2>/dev/null
-    cp "$dir"/README.md "$TARGET_DIR/docs/$PREFIX$(basename "$dir").md" 2>/dev/null
-  fi
+excludes=()
+for name in $(yarn workspaces list --json | jq -r 'select(.location | startswith("packages/webcomponents/") | not) | .name'); do
+  excludes+=(--exclude "$name")
 done
+
+yarn workspaces foreach -A --topological-dev "${excludes[@]}" "${command_parts[@]}"
