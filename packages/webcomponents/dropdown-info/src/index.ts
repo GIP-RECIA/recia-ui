@@ -16,7 +16,6 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -53,9 +52,6 @@ export class ReciaDropdownInfo extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faCircleInfo,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
@@ -92,11 +88,11 @@ export class ReciaDropdownInfo extends LitElement {
     return true
   }
 
-  toggleDropdown(_: Event): void {
+  toggle(_: Event): void {
     this.isExpanded = !this.isExpanded
   }
 
-  closeDropdown(_: Event | undefined = undefined, resetFocus: boolean = true): void {
+  close(_: Event | undefined = undefined, resetFocus: boolean = true): void {
     this.isExpanded = false
     if (resetFocus)
       this.shadowRoot?.getElementById('dropdown-info-button')?.focus()
@@ -104,13 +100,13 @@ export class ReciaDropdownInfo extends LitElement {
 
   handleClick(e: MouseEvent): void {
     if (this.isExpanded && e.composedPath().includes(this.maskRef.value!))
-      this.closeDropdown(e)
+      this.close(e)
   }
 
   handleKeyPress(e: KeyboardEvent): void {
     if (this.isExpanded && e.key === 'Escape') {
       e.preventDefault()
-      this.closeDropdown(e)
+      this.close(e)
     }
   }
 
@@ -120,7 +116,7 @@ export class ReciaDropdownInfo extends LitElement {
       && e.target instanceof HTMLElement
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
-      this.closeDropdown(undefined, false)
+      this.close(undefined, false)
     }
   }
 
@@ -135,7 +131,7 @@ export class ReciaDropdownInfo extends LitElement {
           aria-expanded="${this.isExpanded}"
           aria-controls="dropdown-info-menu"
           aria-label="${msg(str`Menu ${this.label}`)}"
-          @click="${this.toggleDropdown}"
+          @click="${this.toggle}"
         >
           ${getIcon(faCircleInfo)}
         </button>
