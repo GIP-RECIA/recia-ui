@@ -38,6 +38,8 @@
 
     <button id="btn-short">Open short</button>
     <button id="btn-long">Open long</button>
+    <shadow-buttons>
+    </shadow-buttons>
 
     <r-bottom-sheet
       id="short"
@@ -88,6 +90,28 @@
         longBottomSheet.setAttribute('open', '')
       })
     })
+
+    class ShadowButtons extends HTMLElement {
+      constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        shadow.innerHTML = `
+          <div>
+            <button id="btn-short">Shadow open short</button>
+            <button id="btn-long">Shadow open long</button>
+          </div>
+        `;
+
+        shadow.querySelector('#btn-short').addEventListener('click', () => {
+          shortBottomSheet.setAttribute('open', '')
+        })
+        shadow.querySelector('#btn-long').addEventListener('click', () => {
+          longBottomSheet.setAttribute('open', '')
+        })
+      }
+    }
+
+    customElements.define('shadow-buttons', ShadowButtons);
   </script>
 </body>
 

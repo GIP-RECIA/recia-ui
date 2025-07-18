@@ -16,7 +16,6 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -41,6 +40,9 @@ export class ReciaBottomSheet extends LitElement {
   @property({ type: Boolean, attribute: 'no-drag' })
   dragIcon: boolean = false
 
+  @property({ type: Boolean, attribute: 'no-mask' })
+  noMask: boolean = false
+
   @property({ type: Boolean, attribute: 'no-padding' })
   noPadding: boolean = false
 
@@ -51,6 +53,7 @@ export class ReciaBottomSheet extends LitElement {
   private growRef: Ref<HTMLElement> = createRef()
   private sheetRef: Ref<HTMLElement> = createRef()
 
+  private animationDuration: number = 150
   private show: boolean = false
   private startY: number = 0
   private currentY: number = 0
@@ -60,9 +63,6 @@ export class ReciaBottomSheet extends LitElement {
 
   constructor() {
     super()
-    library.add(
-      faTimes,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
@@ -93,27 +93,17 @@ export class ReciaBottomSheet extends LitElement {
     return true
   }
 
-  open(e: Event | undefined = undefined): void {
-    if (e) {
-      e.preventDefault()
-      e.stopPropagation()
-    }
-
+  open(_: Event | undefined = undefined): void {
     this.activeElement = document.activeElement as HTMLElement
     document.documentElement.style.overflowY = 'hidden'
     this.show = true
     this.isOpen = true
     setTimeout(() => {
       this.containerRef.value!.focus()
-    }, 200)
+    }, this.animationDuration)
   }
 
-  close(e: Event | undefined = undefined): void {
-    if (e) {
-      e.preventDefault()
-      e.stopPropagation()
-    }
-
+  close(_: Event | undefined = undefined): void {
     const scrollTop = this.containerRef.value?.scrollTop ?? 0
     const timeout = scrollTop > 0 ? 100 : 0
     scrollTop > 0 && (this.containerRef.value!.scrollTop = 0)
@@ -126,7 +116,7 @@ export class ReciaBottomSheet extends LitElement {
         this.activeElement?.focus()
         this.closeRequested = false
         this.growRef.value!.style.marginTop = ''
-      }, 300)
+      }, this.animationDuration)
     }, timeout)
   }
 
@@ -136,8 +126,10 @@ export class ReciaBottomSheet extends LitElement {
   }
 
   private handleKeyPress(e: KeyboardEvent): void {
-    if (this.show && e.key === 'Escape')
+    if (this.show && e.key === 'Escape') {
+      e.preventDefault()
       this.close(e)
+    }
   }
 
   private handleTouchStart(e: TouchEvent): void {
@@ -196,6 +188,11 @@ export class ReciaBottomSheet extends LitElement {
         class="bottom-sheet"
         style="${styleMap({ display: this.show ? undefined : 'none' })}"
       >
+        ${
+          !this.noMask
+            ? html`<div class="mask"></div>`
+            : nothing
+        }
         <div ${ref(this.containerRef)} tabindex="-1" class="container">
           <div ${ref(this.growRef)} class="grow-1"></div>
           <div
