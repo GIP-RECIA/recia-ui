@@ -30,9 +30,10 @@
   ],
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build",
+    "build": "tsc && build:style && vite build",
     "preview": "vite preview",
-    "test:unit": "echo No tests available"
+    "test:unit": "echo No tests available",
+    "build:style": "sass --style=compressed --error-css src/assets/scss/:src/assets/css/"
   },
   "dependencies": {
     "@lit/localize": "^0.12.2",
