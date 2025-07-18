@@ -193,7 +193,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     names.forEach((value) => {
       this.keyToNameMap.set(value.key, value.name)
     })
-    console.log(this.keyToNameMap)
     this.requestUpdate()
   }
 
@@ -549,7 +548,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   render(): TemplateResult {
-    console.log('render')
     return html`
       <div class="widget">
         <header>
