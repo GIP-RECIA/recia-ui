@@ -32,7 +32,7 @@
 </trans-unit>
 <trans-unit id="scd3518ecedad7590">
   <source>Paramètres</source>
-  <target>Parameters</target>
+  <target>Settings</target>
 </trans-unit>
 <trans-unit id="s47eeeccf4ffc41c3">
   <source>Communication</source>
@@ -41,10 +41,6 @@
 <trans-unit id="sfde5e3a793d980c1">
   <source>Premiers pas avec le service</source>
   <target>First steps with the service</target>
-</trans-unit>
-<trans-unit id="s4812aa6f72fa88df">
-  <source>Tutoriels disponibles (<x id="0" equiv-text="${this.tutorials.length}"/>)</source>
-  <target>Available tutorials (<x id="0" equiv-text="${this.tutorials.length}"/>)</target>
 </trans-unit>
 <trans-unit id="s91fb0e685cae0940">
   <source>Retirer des favoris</source>
@@ -66,9 +62,13 @@
   <source>Lancer le service</source>
   <target>Launch service</target>
 </trans-unit>
-<trans-unit id="sa754c4706bc0af05">
-  <source>Voir tous les tutoriels</source>
-  <target>Show all tutorials</target>
+<trans-unit id="se9bc00ac86dcb50b">
+  <source>Ressources disponibles</source>
+  <target>Available resources</target>
+</trans-unit>
+<trans-unit id="s26883f1a61fd0699">
+  <source>Voir toutes les ressources</source>
+  <target>See all resources</target>
 </trans-unit>
 </body>
 </file>

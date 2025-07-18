@@ -24,7 +24,7 @@
 </trans-unit>
 <trans-unit id="scd3518ecedad7590">
   <source>Paramètres</source>
-  <target>Parameters</target>
+  <target>Settings</target>
 </trans-unit>
 <trans-unit id="s47eeeccf4ffc41c3">
   <source>Communication</source>
@@ -32,7 +32,7 @@
 </trans-unit>
 <trans-unit id="sdb9a884ccc06edf6">
   <source>Supprimer le favori</source>
-  <target>Delete bookmark</target>
+  <target>Delete favorite</target>
 </trans-unit>
 <trans-unit id="s1c703460a5da79b1">
   <source>Réordonner vers la gauche</source>

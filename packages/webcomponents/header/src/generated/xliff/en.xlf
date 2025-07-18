@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
-<body/>
+<body>
+<trans-unit id="sadcdec056ba54dd9">
+  <source>Tiroir de navigation</source>
+  <target>Navigation drawer</target>
+</trans-unit>
+<trans-unit id="s6d8c02aee480af7a">
+  <source>Menu</source>
+  <target>Menu</target>
+</trans-unit>
+<trans-unit id="se627415befeda34d">
+  <source>Accueil</source>
+  <target>Home</target>
+</trans-unit>
+<trans-unit id="s4ac64bd974adacb4">
+  <source>Retourer à l'accueil</source>
+  <target>Back to home</target>
+</trans-unit>
+<trans-unit id="s8c72b686e1d78170">
+  <source>Tous les services</source>
+  <target>All services</target>
+</trans-unit>
+<trans-unit id="s130d574b67f1fd9b">
+  <source>Favoris</source>
+  <target>Favorites</target>
+</trans-unit>
+<trans-unit id="s49283da0ddbeccc2">
+  <source>Menu favoris</source>
+  <target>Favorites menu</target>
+</trans-unit>
+<trans-unit id="sd933c55b5ba171d6">
+  <source>Rechercher dans l'ENT</source>
+  <target>Search ENT</target>
+</trans-unit>
+<trans-unit id="s9d6fd95b48299f31">
+  <source>Tiroir de notifications</source>
+  <target>Notification drawer</target>
+</trans-unit>
+<trans-unit id="s74cb3d66f6a668e1">
+  <source>Documentation</source>
+  <target>Documentation</target>
+</trans-unit>
+<trans-unit id="sde5d5a164cc22567">
+  <source>Collaboratif</source>
+  <target>Collaborative</target>
+</trans-unit>
+<trans-unit id="s4a214cbd6c588dd3">
+  <source>Apprentissage</source>
+  <target>Learning</target>
+</trans-unit>
+<trans-unit id="sc0c87afaac2a5993">
+  <source>Vie scolaire</source>
+  <target>School life</target>
+</trans-unit>
+<trans-unit id="s47ebf3a8fb3b10c1">
+  <source>Orientation</source>
+  <target>Orientation</target>
+</trans-unit>
+<trans-unit id="scd3518ecedad7590">
+  <source>Paramètres</source>
+  <target>Settings</target>
+</trans-unit>
+<trans-unit id="s47eeeccf4ffc41c3">
+  <source>Communication</source>
+  <target>Communication</target>
+</trans-unit>
+<trans-unit id="s91fb0e685cae0940">
+  <source>Retirer des favoris</source>
+  <target>Remove from favorites</target>
+</trans-unit>
+<trans-unit id="s9f48ad36dc7d460f">
+  <source>Ajouter aux favoris</source>
+  <target>Add to favorites</target>
+</trans-unit>
+<trans-unit id="sc9760fd20a454f56">
+  <source>En savoir plus</source>
+  <target>Learn more</target>
+</trans-unit>
+<trans-unit id="s62c4468340ffb130">
+  <source>Fermer le menu</source>
+  <target>Close menu</target>
+</trans-unit>
+<trans-unit id="s1744bdfd2aae7edc">
+  <source>Médiacentre</source>
+  <target>Médiacentre</target>
+</trans-unit>
+<trans-unit id="s82888c1c03352568">
+  <source>Tutoriels</source>
+  <target>Tutorials</target>
+</trans-unit>
+</body>
 </file>
 </xliff>
