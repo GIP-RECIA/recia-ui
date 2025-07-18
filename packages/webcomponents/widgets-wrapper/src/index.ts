@@ -66,38 +66,63 @@ export class ReciaWidgetsWrapper extends LitElement {
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
 
-    document.addEventListener('WIDGETS-BEGIN', async () => {
+    // document.addEventListener('WIDGETS-BEGIN', this.monInit)
 
-      await this.setupLocalization()
+    this.monInit()
+  }
 
-      // get all widgets keys known/accepted by the adapter
-      this.allExistingKeys = window.WidgetAdapter.getKeys()
+  async monInit() {
+    const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
+    const sleepDurationMilliseconds: number = 100
+    const loopMaxDurationMilliseconds: number = 4000
+    let elapsedDuration: number = 0
 
-      // FILTERED PROPERTIES
-      this.filteredRequiredWidgetsKeys = this.widgetRequiredKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
-      this.filteredDefaultWidgetsKeys = this.widgetDefaultKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
+    let failed: boolean = false
 
-      const prefs = await this.getUserFavoriteWidgets()
-      const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
-      const preferedKeys: Array<string> = hasPrefs ? [...prefs!.prefs.filter(x => this.allExistingKeys.includes(x))] : [...this.filteredDefaultWidgetsKeys]
-
-      const missingRequiredKeys: Array<string> = this.except(this.filteredRequiredWidgetsKeys, preferedKeys)
-
-      if (missingRequiredKeys.length > 0) {
-        this.widgetToDisplayKeyArray = this.filteredRequiredWidgetsKeys.concat(this.except(preferedKeys, this.filteredRequiredWidgetsKeys)).toSpliced(this.getMaxWidgetsCount(), Infinity)
+    while (window.WidgetAdapter === undefined) {
+      await sleep(sleepDurationMilliseconds)
+      elapsedDuration += sleepDurationMilliseconds
+      if (elapsedDuration >= loopMaxDurationMilliseconds) {
+        failed = true
+        break
       }
-      else {
-        this.widgetToDisplayKeyArray = preferedKeys
-      }
+    }
+    if (failed) {
+      // TODO : add error message
+      return
+    }
 
-      await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
-      await this.fetchSoffit()
-      for (const value of this.widgetToDisplayKeyArray) {
-        this.buildWidget(value, this.soffit)
-      }
-      this.requestUpdate()
-      this.fetchKeyToNameMap()
-    })
+    // this.initWidgetWrapper()
+
+    await this.setupLocalization()
+
+    // get all widgets keys known/accepted by the adapter
+    this.allExistingKeys = window.WidgetAdapter.getKeys()
+
+    // FILTERED PROPERTIES
+    this.filteredRequiredWidgetsKeys = this.widgetRequiredKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
+    this.filteredDefaultWidgetsKeys = this.widgetDefaultKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
+
+    const prefs = await this.getUserFavoriteWidgets()
+    const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
+    const preferedKeys: Array<string> = hasPrefs ? [...prefs!.prefs.filter(x => this.allExistingKeys.includes(x))] : [...this.filteredDefaultWidgetsKeys]
+
+    const missingRequiredKeys: Array<string> = this.except(this.filteredRequiredWidgetsKeys, preferedKeys)
+
+    if (missingRequiredKeys.length > 0) {
+      this.widgetToDisplayKeyArray = this.filteredRequiredWidgetsKeys.concat(this.except(preferedKeys, this.filteredRequiredWidgetsKeys)).toSpliced(this.getMaxWidgetsCount(), Infinity)
+    }
+    else {
+      this.widgetToDisplayKeyArray = preferedKeys
+    }
+
+    await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+    await this.fetchSoffit()
+    for (const value of this.widgetToDisplayKeyArray) {
+      this.buildWidget(value, this.soffit)
+    }
+    this.requestUpdate()
+    this.fetchKeyToNameMap()
   }
 
   // #region PROPERTIES
