@@ -36,10 +36,10 @@ import 'bottom-sheet'
 @localized()
 export class ReciaBottomSheetServiceInfo extends LitElement {
   @property({ type: String })
-  domain = window.location.hostname
+  domain: string = window.location.hostname
 
   @property({ type: String, attribute: 'portal-path' })
-  portalPath = ''
+  portalPath: string = import.meta.env.VITE_PORTAL_BASE_URL
 
   @property({ type: String, attribute: 'portal-info-api-url' })
   portalInfoApiUrl?: string
@@ -76,6 +76,11 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('domain')) {
+      if (!this.domain || this.domain === '') {
+        this.domain = window.location.hostname
+      }
+    }
     if (_changedProperties.has('portalPath')) {
       if (!this.portalPath || this.portalPath === '') {
         this.portalPath = import.meta.env.VITE_PORTAL_BASE_URL
