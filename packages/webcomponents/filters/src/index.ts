@@ -17,7 +17,6 @@
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Item } from './types/ItemType.ts'
 import type { Section } from './types/SectionType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -37,19 +36,16 @@ export class ReciaFilters extends LitElement {
   data: Array<Section> | null = null
 
   @state()
-  checked: Map<string, Array<string>> = new Map()
+  checked?: Map<string, Array<string>>
 
   @state()
   activeFilters?: number
 
   @state()
-  isExpanded = false
+  isExpanded: boolean = false
 
   constructor() {
     super()
-    library.add(
-      faChevronDown,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
@@ -57,6 +53,8 @@ export class ReciaFilters extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (!this.checked)
+      this.checked = new Map()
     if (_changedProperties.has('data')) {
       this.data?.forEach((section) => {
         let checkedItems = section.items.filter(item => item.checked)
@@ -64,7 +62,7 @@ export class ReciaFilters extends LitElement {
           checkedItems = checkedItems[0] ? [checkedItems[0]] : []
         const checked = checkedItems.length > 0 ? checkedItems.map(item => item.key) : [section.items[0].key]
 
-        this.checked.set(section.id, checked)
+        this.checked!.set(section.id, checked)
       })
     }
     if (_changedProperties.has('checked')) {
@@ -79,9 +77,7 @@ export class ReciaFilters extends LitElement {
     return true
   }
 
-  toggleDropdown(e: Event): void {
-    e.preventDefault()
-    e.stopPropagation()
+  toggle(_: Event): void {
     this.isExpanded = !this.isExpanded
   }
 
@@ -89,7 +85,7 @@ export class ReciaFilters extends LitElement {
     const target = e.target as HTMLInputElement
 
     if (section.type === 'radio') {
-      this.checked = new Map([...this.checked, [section.id, [target.value]]])
+      this.checked = new Map([...this.checked!, [section.id, [target.value]]])
       return
     }
 
@@ -117,7 +113,7 @@ export class ReciaFilters extends LitElement {
     }
     else if (!isFirst) { // Other triggered
       firstCb.checked = false
-      const currentChecked = this.checked.get(section.id)?.filter(k => k !== section.items[0].key) ?? []
+      const currentChecked = this.checked?.get(section.id)?.filter(k => k !== section.items[0].key) ?? []
       const index = currentChecked.indexOf(target.value)
 
       if (target.checked) {
@@ -132,7 +128,7 @@ export class ReciaFilters extends LitElement {
       newCheckedValues = currentChecked
     }
 
-    this.checked = new Map([...this.checked, [section.id, newCheckedValues]])
+    this.checked = new Map([...this.checked!, [section.id, newCheckedValues]])
   }
 
   itemTemplate(section: Section, item: Item): TemplateResult {
@@ -147,7 +143,7 @@ export class ReciaFilters extends LitElement {
             name="${section.type === 'radio' ? section.id : key}"
             value="${key}"
             class="tag"
-            ?checked="${this.checked.get(section.id)?.includes(key) ?? false}"
+            ?checked="${this.checked?.get(section.id)?.includes(key) ?? false}"
           >
           <label for="${inputId}">${value}</label>
         </li>
@@ -161,7 +157,7 @@ export class ReciaFilters extends LitElement {
           <button
             aria-expanded="${this.isExpanded}"
             aria-controls="filter-menu"
-            @click="${this.toggleDropdown}"
+            @click="${this.toggle}"
           >
             <span class="heading">${msg(str`Filtres`)}</span>
             ${
