@@ -39,7 +39,6 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
@@ -83,8 +82,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   async monInit() {
     await this.setupLocalization()
 
-    // get all widgets keys known/accepted by the adapter
-    this.allExistingKeys = window.WidgetAdapter.getKeys()
+    const soffit = await getToken(this.soffitUri)
 
     // FILTERED PROPERTIES
     this.filteredRequiredWidgetsKeys = this.widgetRequiredKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
@@ -104,9 +102,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
 
     await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
-    await this.fetchSoffit()
     for (const value of this.widgetToDisplayKeyArray) {
-      this.buildWidget(value, this.soffit)
+      this.buildWidget(value, soffit.encoded)
     }
     this.requestUpdate()
     this.fetchKeyToNameMap()
@@ -142,7 +139,6 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   // #region VARIABLES
 
-  soffit: string = ''
   allWidgets: Array<WidgetSelectorData> = []
   keyToNameMap: Map<string, string> = new Map()
 
@@ -173,10 +169,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
 
   // #endregion VARIABLES
-
-  async fetchSoffit() {
-    this.soffit = await getToken(this.soffitUri)
-  }
 
   async fetchKeyToNameMap() {
     const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames()
@@ -345,7 +337,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
   }
 
-  handleAddWidget(key: string) {
+  async handleAddWidget(key: string) {
     if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()) {
       return
     }
@@ -354,8 +346,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     if (this.widgetToDisplayKeyArray.includes(key)) {
       return
     }
-
-    this.buildWidget(key, this.soffit)
+    const soffit = await getToken(this.soffitUri)
+    this.buildWidget(key, soffit.encoded)
     this.widgetToDisplayKeyArray.push(key)
   }
 
