@@ -290,6 +290,19 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    settingsStore.setState({
+      portalPath: this.portalPath,
+      templateApiUrl: this.templateApiUrl,
+      portletInfoApiUrl: this.portletInfoApiUrl,
+      sessionApiUrl: this.sessionApiUrl,
+      userInfoApiUrl: this.userInfoApiUrl,
+      layoutApiUrl: this.layoutApiUrl,
+      orgAttributeName: this.orgAttributeName,
+      userAllOrgsIdAttributeName: this.userAllOrgsIdAttributeName,
+      organizationApiUrl: this.organizationApiUrl,
+      portletApiUrl: this.portletApiUrl,
+      favoriteApiUrl: this.favoriteApiUrl,
+    })
     if (_changedProperties.has('domain')) {
       if (!this.domain || this.domain === '') {
         this.domain = window.location.hostname
@@ -323,20 +336,6 @@ export class ReciaHeader extends LitElement {
     ) {
       return
     }
-
-    settingsStore.setState({
-      portalPath: this.portalPath,
-      templateApiUrl: this.templateApiUrl,
-      portletInfoApiUrl: this.portletInfoApiUrl,
-      sessionApiUrl: this.sessionApiUrl,
-      userInfoApiUrl: this.userInfoApiUrl,
-      layoutApiUrl: this.layoutApiUrl,
-      orgAttributeName: this.orgAttributeName,
-      userAllOrgsIdAttributeName: this.userAllOrgsIdAttributeName,
-      organizationApiUrl: this.organizationApiUrl,
-      portletApiUrl: this.portletApiUrl,
-      favoriteApiUrl: this.favoriteApiUrl,
-    })
 
     const fname = 'GLC'
 
