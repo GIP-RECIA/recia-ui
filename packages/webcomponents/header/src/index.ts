@@ -24,7 +24,6 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
-import pathHelper from './helpers/pathHelper.ts'
 import FavoritesService from './services/favoritesService.ts'
 import LayoutService from './services/layoutService.ts'
 import OrganizationService from './services/organizationService.ts'
@@ -233,8 +232,8 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'template-api-url' })
   templateApiUrl?: string
 
-  @property({ type: String, attribute: 'portal-info-api-url' })
-  portalInfoApiUrl?: string
+  @property({ type: String, attribute: 'portlet-info-api-url' })
+  portletInfoApiUrl?: string
 
   @property({ type: String, attribute: 'session-api-url' })
   sessionApiUrl?: string
@@ -253,6 +252,12 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'organization-api-url' })
   organizationApiUrl?: string
+
+  @property({ type: String, attribute: 'portlet-api-url' })
+  portletApiUrl?: string
+
+  @property({ type: String, attribute: 'favorite-api-url' })
+  favoriteApiUrl?: string
 
   @state()
   loaded: boolean = false
@@ -295,7 +300,7 @@ export class ReciaHeader extends LitElement {
 
   async devCalls(): Promise<void> {
     if (
-      !this.portalInfoApiUrl
+      !this.portletInfoApiUrl
       || !this.templateApiUrl
       || !this.sessionApiUrl
       || !this.userInfoApiUrl
@@ -303,32 +308,25 @@ export class ReciaHeader extends LitElement {
       || !this.orgAttributeName
       || !this.userAllOrgsIdAttributeName
       || !this.organizationApiUrl
+      || !this.portletApiUrl
+      || !this.favoriteApiUrl
     ) {
       return
     }
 
-    const fname = 'Mediacentre'
+    const fname = 'GLC'
+
+    const template = await TemplateService.get(this.templateApiUrl, this.domain)
+    console.log(template)
+
+    const session = await SessionService.get(this.sessionApiUrl)
+    console.log(session)
 
     const soffit = await SoffitService.get(this.userInfoApiUrl)
     console.log(soffit)
 
     if (!soffit)
       return
-
-    const template = await TemplateService.get(this.templateApiUrl, this.domain)
-    console.log(template)
-
-    const currentPortlet = await PortletService.get(pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain))
-    console.log(currentPortlet)
-
-    const session = await SessionService.get(this.sessionApiUrl)
-    console.log(session)
-
-    const layout = await LayoutService.get(soffit, this.layoutApiUrl)
-    console.log(layout)
-
-    const favorites = FavoritesService.getFromLayout(layout)
-    console.log(favorites)
 
     const userInfo = UserService.getFromSoffit(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
     console.log(userInfo)
@@ -345,6 +343,21 @@ export class ReciaHeader extends LitElement {
       ])
       console.log(ogrganization)
     }
+
+    const layout = await LayoutService.get(soffit, this.layoutApiUrl)
+    console.log(layout)
+
+    const favorites = FavoritesService.getFromLayout(layout)
+    console.log(favorites)
+
+    // const favoriteAdd = await FavoritesService.add(soffit, this.favoriteApiUrl, 114)
+    // console.log(favoriteAdd)
+
+    // const favoriteRemove = await FavoritesService.remove(soffit, this.favoriteApiUrl, 114)
+    // console.log(favoriteRemove)
+
+    const currentPortlet = await PortletService.get(`${this.portletInfoApiUrl}/${fname}.json`)
+    console.log(currentPortlet)
 
     this.loaded = true
   }

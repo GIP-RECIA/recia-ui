@@ -14,27 +14,76 @@
  * limitations under the License.
  */
 
+import type { Soffit } from '../types/SoffitType.ts'
+
 export default class FavoritesService {
   static getFromLayout(
     layout: any,
   ): Array<any> | undefined {
     const { authenticated, layout: { globals: { hasFavorites }, favorites } } = layout
     if (authenticated && hasFavorites && favorites)
-      return FavoritesService.flatten(favorites)
+      return FavoritesService.flattenFavorites(favorites)
 
     return undefined
   }
 
-  static flatten(favorites: any): Array<any> {
-    if (Array.isArray(favorites))
-      return favorites.flatMap(FavoritesService.flatten)
+  private static flattenFavorites(elem: any): Array<any> {
+    if (Array.isArray(elem))
+      return elem.flatMap(FavoritesService.flattenFavorites)
 
-    if (favorites.content)
-      return FavoritesService.flatten(favorites.content)
+    if (elem.content)
+      return FavoritesService.flattenFavorites(elem.content)
 
-    if (favorites.fname)
-      return [favorites]
+    if (elem.fname)
+      return [elem]
 
     return []
+  }
+
+  private static async toggle(
+    soffit: Soffit,
+    favoriteApiUrl: string,
+    action: 'addFavorite' | 'removeFavorite',
+    channelId: string | number,
+  ): Promise<boolean> {
+    try {
+      const { token } = soffit
+
+      if (typeof channelId === 'number')
+        channelId = channelId.toString()
+      const getParams = new URLSearchParams({ action, channelId })
+      const response = await fetch(`${favoriteApiUrl}?${getParams}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Authorization: token,
+        },
+      })
+
+      if (!response.ok)
+        throw new Error(response.statusText)
+
+      return true
+    }
+    catch (err) {
+      console.error(err)
+      return false
+    }
+  }
+
+  static async add(
+    soffit: Soffit,
+    favoriteApiUrl: string,
+    channelId: string | number,
+  ): Promise<boolean> {
+    return await FavoritesService.toggle(soffit, favoriteApiUrl, 'addFavorite', channelId)
+  }
+
+  static async remove(
+    soffit: Soffit,
+    favoriteApiUrl: string,
+    channelId: string | number,
+  ): Promise<boolean> {
+    return await FavoritesService.toggle(soffit, favoriteApiUrl, 'removeFavorite', channelId)
   }
 }
