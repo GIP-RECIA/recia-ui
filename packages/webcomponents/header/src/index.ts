@@ -27,6 +27,7 @@ import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import FavoritesService from './services/favoritesService.ts'
+import InfoService from './services/infoService.ts'
 import LayoutService from './services/layoutService.ts'
 import OrganizationService from './services/organizationService.ts'
 import PortletService from './services/portletService.ts'
@@ -44,6 +45,9 @@ import './components/notification-drawer'
 import './components/principal-container'
 import './components/services-layout'
 import 'regenerator-runtime/runtime.js'
+import 'service-info'
+import { ReciaBottomSheetServiceInfo } from 'service-info'
+import { createRef, Ref, ref } from 'lit/directives/ref.js'
 
 @localized()
 export class ReciaHeader extends LitElement {
@@ -263,6 +267,12 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'favorite-api-url' })
   favoriteApiUrl?: string
 
+  @property({ type: String, attribute: 'service-info-api-url' })
+  serviceInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'services-info-api-url' })
+  servicesInfoApiUrl?: string
+
   @state()
   loaded: boolean = false
 
@@ -280,6 +290,8 @@ export class ReciaHeader extends LitElement {
 
   @state()
   isSearching: boolean = false
+
+  serviceInfoRef: Ref<ReciaBottomSheetServiceInfo> = createRef()
 
   constructor() {
     super()
@@ -413,6 +425,7 @@ export class ReciaHeader extends LitElement {
         return
 
       const portlets = await PortletService.getAll(soffit, portletApiUrl)
+      const portletsInfo = await InfoService.getAll(this.servicesInfoApiUrl ?? '')
       this.services = portlets?.map((portlet) => {
         const {
           id,
@@ -425,21 +438,31 @@ export class ReciaHeader extends LitElement {
             alternativeMaximizedLinkTarget,
           },
         } = portlet
+        const { categoriePrincipale, doesInfoExist } = portletsInfo?.find(el => el.fname === fname) ?? {}
 
         return {
           id,
           fname,
           name: title,
-          category: Category.vieScolaire,
+          category: categoriePrincipale,
           iconUrl: iconUrl?.value,
           link: {
             href: alternativeMaximizedLink?.value ?? `/portail/p/${fname}`,
             target: alternativeMaximizedLinkTarget?.value ?? '_self',
           },
           favorite,
+          more: doesInfoExist,
         }
       })
     }
+  }
+
+  async openMore(e: CustomEvent) {
+    const { fname } = e.detail
+    if (!fname)
+      return
+
+    this.serviceInfoRef.value?.dispatchEvent(new CustomEvent('service-info', { detail: { fname }}))
   }
 
   render(): TemplateResult {
@@ -475,10 +498,19 @@ export class ReciaHeader extends LitElement {
           .filters="${this.data.filters}"
           .services="${this.services}"
           @close="${this.toggleServicesLayout}"
+          @open-more="${this.openMore}"
         >
         </r-services-layout>
         <r-notification-drawer>
         </r-notification-drawer>
+      </div>
+      <div class="teleport">
+        <r-service-info-bottom-sheet
+          ${ref(this.serviceInfoRef)}
+          portal-info-api-url="${this.portletInfoApiUrl ?? ''}"
+          service-info-api-url="${this.serviceInfoApiUrl ?? ''}"
+        >
+        </r-service-info-bottom-sheet>
       </div>
     `
   }

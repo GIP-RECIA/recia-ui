@@ -103,7 +103,7 @@ export class ReciaService extends LitElement {
   }
 
   openMore(_: Event): void {
-    this.dispatchEvent(new CustomEvent('open-more'))
+    this.dispatchEvent(new CustomEvent('open-more', { detail: { fname: this.fname } }))
   }
 
   render(): TemplateResult | typeof nothing {

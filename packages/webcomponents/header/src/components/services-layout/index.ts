@@ -148,6 +148,7 @@ export class ReciaServicesLayout extends LitElement {
                         ?new="${service.new}"
                         ?favorite="${service.favorite}"
                         ?more="${service.more}"
+                        @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
                       >
                       </r-service>
                     </li>
