@@ -343,8 +343,8 @@ export class ReciaWidgetsWrapper extends LitElement {
       return
     }
     const soffit = await getToken(this.soffitUri)
-    this.buildWidget(key, soffit.encoded)
     this.widgetToDisplayKeyArray.push(key)
+    this.buildWidget(key, soffit.encoded)
   }
 
   handleRemoveWidget(e: CustomEvent) {
@@ -353,6 +353,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async buildWidget(key: string, soffit: string) {
     if (this.widgetDataMap.has(key)) {
+      this.requestUpdate()
       return
     }
 
