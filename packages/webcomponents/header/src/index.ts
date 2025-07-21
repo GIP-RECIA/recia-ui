@@ -330,7 +330,7 @@ export class ReciaHeader extends LitElement {
     const favorites = FavoritesService.getFromLayout(layout)
     console.log(favorites)
 
-    const userInfo = UserService.get(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
+    const userInfo = UserService.getFromSoffit(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
     console.log(userInfo)
 
     if (userInfo) {

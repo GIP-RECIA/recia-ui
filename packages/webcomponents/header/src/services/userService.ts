@@ -19,7 +19,7 @@ import type { User } from '../types/UserType.ts'
 import { get } from 'lodash-es'
 
 export default class UserService {
-  static get(
+  static getFromSoffit(
     soffit: Soffit,
     orgIdAttribute: string,
     orgIdsAttribute: string,
