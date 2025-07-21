@@ -25,7 +25,11 @@ export interface OrganizationApiResponse {
   >
 }
 
-export interface Organization {
-  displayName: string
+export type Organization = Omit<OrganizationApiResponse, 'otherAttributes'> & {
   logo?: string
+}
+
+export interface FilteredOrganization {
+  current: Organization
+  other: Array<Organization>
 }

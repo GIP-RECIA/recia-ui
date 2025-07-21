@@ -19,52 +19,28 @@ import type { User } from '../types/UserType.ts'
 import { get } from 'lodash-es'
 
 export default class UserService {
-  static async get(
+  static get(
     soffit: Soffit,
-    layoutApiUrl: string,
     orgIdAttribute: string,
     orgIdsAttribute: string,
-  ): Promise<User | undefined> {
-    try {
-      const { name, picture, email, token } = soffit
+  ): User | undefined {
+    const { name, picture, email } = soffit
 
-      const response = await fetch(layoutApiUrl, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Authorization: token,
-        },
-      })
-
-      if (!response.ok)
-        throw new Error(response.statusText)
-
-      const layout: any = await response.json()
-
-      if (!layout.authenticated || (layout.authenticated === false || layout.authenticated === 'false')) {
-        console.info('User is not logged')
-        return undefined
-      }
-
-      const userInfo: User = {
-        displayName: name,
-        picture,
-        email,
-        orgId: get(soffit, orgIdAttribute) as string,
-        hasOtherOrgs: (get(soffit, orgIdsAttribute, []) as Array<string>).length > 1,
-      }
-
-      if (!userInfo.displayName || !userInfo.orgId) {
-        console.info('Missing user information')
-        return undefined
-      }
-      else {
-        return userInfo
-      }
+    const userInfo: User = {
+      displayName: name,
+      picture,
+      email,
+      currentOrgId: get(soffit, orgIdAttribute) as string,
+      orgIds: get(soffit, orgIdsAttribute, []) as Array<string>,
+      hasOtherOrgs: (get(soffit, orgIdsAttribute, []) as Array<string>).length > 1,
     }
-    catch (err) {
-      console.error(err, layoutApiUrl)
+
+    if (!userInfo.displayName || !userInfo.currentOrgId) {
+      console.info('Missing user information')
       return undefined
+    }
+    else {
+      return userInfo
     }
   }
 }

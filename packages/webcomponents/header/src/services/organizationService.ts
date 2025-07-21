@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-import type { Organization, OrganizationApiResponse } from '../types/OrganizationType.ts'
+import type { FilteredOrganization, Organization, OrganizationApiResponse } from '../types/OrganizationType.ts'
 import type { Soffit } from '../types/SoffitType.ts'
+import { get } from 'lodash-es'
 
 export default class OrganizationService {
   static async get(
     soffit: Soffit,
     orgApiUrl: string,
-    orgId: string,
-  ): Promise<Organization | undefined> {
+    orgIds: Array<string>,
+    currentOrgId: string,
+    logoAttribute: string,
+  ): Promise<FilteredOrganization | undefined> {
     try {
       const { token } = soffit
 
-      const getParams = new URLSearchParams({ ids: orgId })
-      const response = await fetch(`${orgApiUrl}?${getParams}`, {
+      const response = await fetch(`${orgApiUrl}?ids=${orgIds}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -38,25 +40,36 @@ export default class OrganizationService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const org: Record<string, OrganizationApiResponse> = await response.json()
+      const orgs: Record<string, OrganizationApiResponse> = await response.json()
 
-      if (!org[orgId]) {
+      if (!orgs || !orgs[currentOrgId]) {
         console.info('No organization found')
         return undefined
       }
 
-      const { displayName, otherAttributes } = org[orgId]
-      const orgInfos: Organization = {
-        displayName,
-        logo: otherAttributes.ESCOStructureLogo[0] as string,
-      }
+      const mappedOrgs: Array<Organization> = Object.values(orgs).map((org) => {
+        const { id, name, displayName, description, otherAttributes } = org
 
-      if (!orgInfos.displayName) {
+        return {
+          id,
+          name,
+          displayName,
+          description,
+          logo: get(otherAttributes, logoAttribute) as unknown as string,
+        }
+      })
+
+      const currentOrg = mappedOrgs.filter(org => org.id === currentOrgId)[0]
+
+      if (!currentOrg.displayName) {
         console.info('Missing organization information')
         return undefined
       }
       else {
-        return orgInfos
+        return {
+          other: mappedOrgs.filter(org => org.id !== currentOrgId),
+          current: currentOrg,
+        }
       }
     }
     catch (err) {

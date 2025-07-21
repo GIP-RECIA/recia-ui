@@ -25,6 +25,7 @@ import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import pathHelper from './helpers/pathHelper.ts'
+import LayoutService from './services/layoutService.ts'
 import OrganizationService from './services/organizationService.ts'
 import PortletService from './services/portletService.ts'
 import SessionService from './services/sessionService.ts'
@@ -313,32 +314,32 @@ export class ReciaHeader extends LitElement {
     if (!soffit)
       return
 
-    const data = await Promise.all([
-      PortletService.get(pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain)),
-      TemplateService.get(this.templateApiUrl, this.domain),
-      SessionService.get(this.sessionApiUrl),
-      UserService.get(
-        soffit,
-        this.layoutApiUrl,
-        this.orgAttributeName,
-        this.userAllOrgsIdAttributeName,
-      ),
-    ])
-    data.forEach((el) => {
-      console.log(el)
-    })
+    const template = await TemplateService.get(this.templateApiUrl, this.domain)
+    console.log(template)
 
-    if (data[3]) {
-      const data2 = await Promise.all([
+    const currentPortlet = await PortletService.get(pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain))
+    console.log(currentPortlet)
+
+    const session = await SessionService.get(this.sessionApiUrl)
+    console.log(session)
+
+    const layout = await LayoutService.get(soffit, this.layoutApiUrl)
+    console.log(layout)
+
+    const userInfo = UserService.get(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
+    console.log(userInfo)
+
+    if (userInfo) {
+      const ogrganization = await Promise.all([
         OrganizationService.get(
           soffit,
           this.organizationApiUrl,
-          data[3].orgId ?? '',
+          userInfo.orgIds ?? [],
+          userInfo.currentOrgId ?? '',
+          'ESCOStructureLogo[0]',
         ),
       ])
-      data2.forEach((el) => {
-        console.log(el)
-      })
+      console.log(ogrganization)
     }
 
     this.loaded = true

@@ -18,6 +18,7 @@ export interface User {
   displayName: string
   picture?: string
   email: string
-  orgId?: string
+  currentOrgId?: string
+  orgIds?: Array<string>
   hasOtherOrgs: boolean
 }
