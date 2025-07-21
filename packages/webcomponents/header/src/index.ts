@@ -25,6 +25,7 @@ import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import pathHelper from './helpers/pathHelper.ts'
+import FavoritesService from './services/favoritesService.ts'
 import LayoutService from './services/layoutService.ts'
 import OrganizationService from './services/organizationService.ts'
 import PortletService from './services/portletService.ts'
@@ -325,6 +326,9 @@ export class ReciaHeader extends LitElement {
 
     const layout = await LayoutService.get(soffit, this.layoutApiUrl)
     console.log(layout)
+
+    const favorites = FavoritesService.getFromLayout(layout)
+    console.log(favorites)
 
     const userInfo = UserService.get(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
     console.log(userInfo)
