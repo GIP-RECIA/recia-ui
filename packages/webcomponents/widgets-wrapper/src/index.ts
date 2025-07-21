@@ -19,6 +19,7 @@ import type { Item } from 'widget/src/types/ItemType'
 import type { WidgetDataDTO } from './classes/WidgetDataDTO.ts'
 import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
+import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -37,6 +38,7 @@ import { customElement, property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
+
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
@@ -65,6 +67,13 @@ export class ReciaWidgetsWrapper extends LitElement {
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
 
+    this.keyENTPersonProfilsInfo = {
+      ENTPersonProfils: [],
+      allowedKeys: [],
+      requiredKeys: [],
+      defaultKeys: [],
+    }
+
     document.addEventListener('init-widget', () => {
       this.monInit()
     })
@@ -84,18 +93,16 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     const soffit = await getToken(this.soffitUri)
 
-    // FILTERED PROPERTIES
-    this.filteredRequiredWidgetsKeys = this.widgetRequiredKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
-    this.filteredDefaultWidgetsKeys = this.widgetDefaultKeysAsString.split(';').filter(x => this.allExistingKeys.includes(x))
+    this.keyENTPersonProfilsInfo = await window.WidgetAdapter.getKeysENTPersonProfils(soffit.decoded.ENTPersonProfils)
 
     const prefs = await this.getUserFavoriteWidgets()
     const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
-    const preferedKeys: Array<string> = hasPrefs ? [...prefs!.prefs.filter(x => this.allExistingKeys.includes(x))] : [...this.filteredDefaultWidgetsKeys]
+    const preferedKeys: Array<string> = hasPrefs ? [...prefs!.prefs.filter(x => this.keyENTPersonProfilsInfo.allowedKeys.includes(x))] : [...this.keyENTPersonProfilsInfo.defaultKeys]
 
-    const missingRequiredKeys: Array<string> = this.except(this.filteredRequiredWidgetsKeys, preferedKeys)
+    const missingRequiredKeys: Array<string> = this.except(this.keyENTPersonProfilsInfo.requiredKeys, preferedKeys)
 
     if (missingRequiredKeys.length > 0) {
-      this.widgetToDisplayKeyArray = this.filteredRequiredWidgetsKeys.concat(this.except(preferedKeys, this.filteredRequiredWidgetsKeys)).toSpliced(this.getMaxWidgetsCount(), Infinity)
+      this.widgetToDisplayKeyArray = this.keyENTPersonProfilsInfo.requiredKeys.concat(this.except(preferedKeys, this.keyENTPersonProfilsInfo.requiredKeys)).toSpliced(this.getMaxWidgetsCount(), Infinity)
     }
     else {
       this.widgetToDisplayKeyArray = preferedKeys
@@ -116,12 +123,6 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   @property({ type: String, attribute: 'localization-uri' })
   localizationUri = ''
-
-  @property({ type: String, attribute: 'widget-keys-required' })
-  widgetRequiredKeysAsString = ''
-
-  @property({ type: String, attribute: 'widget-keys-default' })
-  widgetDefaultKeysAsString = ''
 
   @property({ type: Number, attribute: 'widget-max-count' })
   widgetMaxCount = 3
@@ -154,12 +155,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   // used for cancel changes
   widgetToDisplayKeyArrayBackup: Array<string> = []
 
-  allExistingKeys: Array<string> = []
-
-  filteredRequiredWidgetsKeys: Array<string> = []
-
-  // could be a local const
-  filteredDefaultWidgetsKeys: Array<string> = []
+  keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
 
   dropdownOpen: boolean = false
 
@@ -179,7 +175,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   getMaxWidgetsCount(): number {
-    return Math.max(this.widgetMaxCount, this.filteredRequiredWidgetsKeys.length)
+    return Math.max(this.widgetMaxCount, this.keyENTPersonProfilsInfo.requiredKeys.length)
   }
 
   async setupLocalization() {
@@ -366,7 +362,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       emptyDiscover: false,
       emptyText: '',
       loading: true,
-      deletable: !this.filteredRequiredWidgetsKeys.includes(key),
+      deletable: !this.keyENTPersonProfilsInfo.requiredKeys.includes(key),
     }
 
     this.widgetDataMap.set(key, widgetData)
@@ -506,7 +502,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   dropdownRender(): TemplateResult {
-    const nonUsedKeys = this.except(this.allExistingKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
+    const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
     if (nonUsedKeys.length === 0) {
       return html``
     }
