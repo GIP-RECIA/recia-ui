@@ -15,6 +15,7 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
+import type { Service } from './types/ServiceType.ts'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
@@ -32,6 +33,7 @@ import SessionService from './services/sessionService.ts'
 import SoffitService from './services/soffitService.ts'
 import TemplateService from './services/templateService.ts'
 import UserService from './services/userService.ts'
+import { settingsStore } from './stores/SettingsStore.ts'
 import styles from './style.scss?inline'
 import { Category } from './types/CategoryType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -263,6 +265,9 @@ export class ReciaHeader extends LitElement {
   loaded: boolean = false
 
   @state()
+  services?: Array<Service>
+
+  @state()
   isNavigationDrawerExpended: boolean = false
 
   @state()
@@ -314,6 +319,20 @@ export class ReciaHeader extends LitElement {
       return
     }
 
+    settingsStore.setState({
+      portalPath: this.portalPath,
+      templateApiUrl: this.templateApiUrl,
+      portletInfoApiUrl: this.portletInfoApiUrl,
+      sessionApiUrl: this.sessionApiUrl,
+      userInfoApiUrl: this.userInfoApiUrl,
+      layoutApiUrl: this.layoutApiUrl,
+      orgAttributeName: this.orgAttributeName,
+      userAllOrgsIdAttributeName: this.userAllOrgsIdAttributeName,
+      organizationApiUrl: this.organizationApiUrl,
+      portletApiUrl: this.portletApiUrl,
+      favoriteApiUrl: this.favoriteApiUrl,
+    })
+
     const fname = 'GLC'
 
     const template = await TemplateService.get(this.templateApiUrl, this.domain)
@@ -323,6 +342,7 @@ export class ReciaHeader extends LitElement {
     console.log(session)
 
     const soffit = await SoffitService.get(this.userInfoApiUrl)
+    settingsStore.setState({ soffit })
     console.log(soffit)
 
     if (!soffit)
@@ -380,10 +400,43 @@ export class ReciaHeader extends LitElement {
     })
   }
 
-  toggleServicesLayout(e: CustomEvent): void {
+  async toggleServicesLayout(e: CustomEvent): Promise<void> {
     const { show } = e.detail
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
+    if (show) {
+      const { userInfoApiUrl, portletApiUrl, soffit } = settingsStore.getState()
+      if (!userInfoApiUrl || !portletApiUrl || !soffit)
+        return
+
+      const portlets = await PortletService.getAll(soffit, portletApiUrl)
+      this.services = portlets?.map((portlet) => {
+        const {
+          id,
+          fname,
+          title,
+          favorite,
+          parameters: {
+            iconUrl,
+            alternativeMaximizedLink,
+            alternativeMaximizedLinkTarget,
+          },
+        } = portlet
+
+        return {
+          id,
+          fname,
+          name: title,
+          category: Category.vieScolaire,
+          iconUrl: iconUrl?.value,
+          link: {
+            href: alternativeMaximizedLink?.value ?? `/portail/p/${fname}`,
+            target: alternativeMaximizedLinkTarget?.value ?? '_self',
+          },
+          favorite,
+        }
+      })
+    }
   }
 
   render(): TemplateResult {
@@ -417,7 +470,7 @@ export class ReciaHeader extends LitElement {
           ?show="${this.isServicesLayout}"
           ?navigation-drawer-visible="${this.data.visible}"
           .filters="${this.data.filters}"
-          .services="${this.data.services}"
+          .services="${this.services}"
           @close="${this.toggleServicesLayout}"
         >
         </r-services-layout>

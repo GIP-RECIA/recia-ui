@@ -30,6 +30,7 @@
 'scd3518ecedad7590': str`Settings`,
 'sd933c55b5ba171d6': str`Search ENT`,
 'sde5d5a164cc22567': str`Collaborative`,
+'se1e9c7a19e8dd236': str`new`,
 'se627415befeda34d': str`Home`,
     };
   

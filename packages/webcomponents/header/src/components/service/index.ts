@@ -23,6 +23,8 @@ import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import FavoritesService from '../../services/favoritesService.ts'
+import { settingsStore } from '../../stores/SettingsStore.ts'
 import { Category } from '../../types/CategoryType.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -31,6 +33,12 @@ import 'filters'
 
 @localized()
 export class ReciaService extends LitElement {
+  @property({ type: Number, attribute: 'id' })
+  channelId?: number
+
+  @property({ type: String })
+  fname?: string
+
   @property({ type: String })
   name?: string
 
@@ -81,8 +89,17 @@ export class ReciaService extends LitElement {
     }
   }
 
-  toggleFavorite(_: Event): void {
-    this.isFavorite = !this.isFavorite
+  async toggleFavorite(_: Event): Promise<void> {
+    const { soffit, favoriteApiUrl } = settingsStore.getState()
+    if (!soffit || !favoriteApiUrl || !this.channelId)
+      return
+
+    const response: boolean = this.isFavorite
+      ? await FavoritesService.remove(soffit, favoriteApiUrl, this.channelId)
+      : await FavoritesService.add(soffit, favoriteApiUrl, this.channelId)
+
+    if (response)
+      this.isFavorite = !this.isFavorite
   }
 
   openMore(_: Event): void {
@@ -90,20 +107,24 @@ export class ReciaService extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
-    return this.iconUrl && this.link && this.name
+    return this.link && this.name
       ? html`
           <div class="service ${this.category}">
             ${
               this.isNew
                 ? html`
                     <div class="new">
-                      <span class="new">nouveau</span>
+                      <span class="new">${msg(str`nouveau`)}</span>
                     </div>
                   `
                 : nothing
             }
             <svg class="icon" aria-hidden="true">
-              <use href="${this.iconUrl}"></use>
+              ${
+                this.iconUrl
+                  ? html`<use href="${this.iconUrl}"></use>`
+                  : nothing
+              }
             </svg>
             ${
               this.link

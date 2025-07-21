@@ -90,6 +90,10 @@
   <source>Tutoriels</source>
   <target>Tutorials</target>
 </trans-unit>
+<trans-unit id="se1e9c7a19e8dd236">
+  <source>nouveau</source>
+  <target>new</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

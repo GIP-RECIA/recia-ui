@@ -139,6 +139,8 @@ export class ReciaServicesLayout extends LitElement {
                 service => html`
                     <li>
                       <r-service
+                        id="${service.id}"
+                        .fname="${service.fname}"
                         name="${service.name}"
                         category="${service.category}"
                         icon-url="${service.iconUrl}"

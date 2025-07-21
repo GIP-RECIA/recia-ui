@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-import type { Category } from './CategoryType.ts'
-import type { Link } from './LinkType.ts'
+import type { Soffit } from '../types/SoffitType.ts'
+import { Store } from './Store.ts'
 
-export interface Service {
-  id: number
-  fname: string
-  name: string
-  category: Category
-  iconUrl: string
-  link: Link
-  new?: boolean
-  favorite?: boolean
-  more?: boolean
+export interface SettingsState {
+  portalPath: string
+  templateApiUrl?: string
+  portletInfoApiUrl?: string
+  sessionApiUrl?: string
+  userInfoApiUrl?: string
+  layoutApiUrl?: string
+  orgAttributeName?: string
+  userAllOrgsIdAttributeName?: string
+  organizationApiUrl?: string
+  portletApiUrl?: string
+  favoriteApiUrl?: string
+  soffit?: Soffit
 }
+
+export const settingsStore = new Store<SettingsState>({
+  portalPath: import.meta.env.VITE_PORTAL_BASE_URL,
+})
