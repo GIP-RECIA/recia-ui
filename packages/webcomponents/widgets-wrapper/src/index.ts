@@ -511,7 +511,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       return html``
     }
     return html`
-      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" class="btn-secondary" @click="${this.clickOnAjouter}">Ajouter</button>
+      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" class="btn-secondary" @click="${this.clickOnAjouter}">${this.t(`buttons.Ajouter`, 'Ajouter')}</button>
       <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen ? 'display:none' : nothing}">
        ${repeat(
           nonUsedKeys,
@@ -538,14 +538,14 @@ export class ReciaWidgetsWrapper extends LitElement {
             this.isEditingWidgetsPrefs === false
               ? html`
                <div class="to-right">
-                  <button class="btn-secondary" @click="${this.clickOnGerer}">Gérer ${getIcon(faCog)}</button>
+                  <button class="btn-secondary" @click="${this.clickOnGerer}">${this.t(`buttons.Gerer`, 'Gerer')} ${getIcon(faCog)}</button>
                 </div>
               `
               : html`
               <div class="to-right">
                ${this.dropdownRender()}
-              <button class="btn-secondary" @click="${this.clickOnAnnuler}">Annuler</button>
-              <button class="btn-secondary" @click="${this.clickOnSauvegarder}">Sauvegarder</button>
+              <button class="btn-secondary" @click="${this.clickOnAnnuler}">${this.t(`buttons.Annuler`, 'Annuler')}</button>
+              <button class="btn-secondary" @click="${this.clickOnSauvegarder}">${this.t(`buttons.Sauvegarder`, 'Sauvegarder')}</button>
             </div>
             <p class="no-mobile">    ${this.widgetCountRender()}</p>
 
