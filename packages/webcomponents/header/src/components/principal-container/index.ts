@@ -15,12 +15,14 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { User } from '../../types/UserType.ts'
 import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import { userStore } from '../../stores/UserStore.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -35,12 +37,29 @@ export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'search' })
   searchEnabled: boolean = false
 
+  @state()
+  private userInfo?: User
+
+  private unsubscribe: () => void = () => {}
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    this.unsubscribe = userStore.subscribe(({ userInfo }) => {
+      this.userInfo = userInfo
+    })
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    this.unsubscribe()
   }
 
   render(): TemplateResult {
@@ -74,9 +93,17 @@ export class ReciaPrincipalContainer extends LitElement {
                 `
               : nothing
           }
-          <r-user-menu
-          >
-          </r-user-menu>
+          ${
+            this.userInfo
+              ? html`
+                  <r-user-menu
+                    picture="${this.userInfo.picture ?? '/images/icones/noPictureUser.svg'}"
+                    display-name="${this.userInfo.displayName}"
+                  >
+                  </r-user-menu>
+                `
+              : nothing
+          }
           ${
             false
               ? html`

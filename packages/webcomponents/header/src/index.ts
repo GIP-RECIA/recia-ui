@@ -34,6 +34,7 @@ import SoffitService from './services/soffitService.ts'
 import TemplateService from './services/templateService.ts'
 import UserService from './services/userService.ts'
 import { settingsStore } from './stores/SettingsStore.ts'
+import { userStore } from './stores/UserStore.ts'
 import styles from './style.scss?inline'
 import { Category } from './types/CategoryType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -349,6 +350,7 @@ export class ReciaHeader extends LitElement {
       return
 
     const userInfo = UserService.getFromSoffit(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
+    userStore.setState({ userInfo })
     console.log(userInfo)
 
     if (userInfo) {
