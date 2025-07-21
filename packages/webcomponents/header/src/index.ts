@@ -359,6 +359,9 @@ export class ReciaHeader extends LitElement {
     const currentPortlet = await PortletService.get(`${this.portletInfoApiUrl}/${fname}.json`)
     console.log(currentPortlet)
 
+    const portlets = await PortletService.getAll(soffit, this.portletApiUrl)
+    console.log(portlets)
+
     this.loaded = true
   }
 
