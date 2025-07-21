@@ -15,6 +15,7 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
+import type { FilteredOrganization } from './types/OrganizationType.ts'
 import type { Service } from './types/ServiceType.ts'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -269,6 +270,9 @@ export class ReciaHeader extends LitElement {
   services?: Array<Service>
 
   @state()
+  organization?: FilteredOrganization
+
+  @state()
   isNavigationDrawerExpended: boolean = false
 
   @state()
@@ -354,16 +358,14 @@ export class ReciaHeader extends LitElement {
     console.log(userInfo)
 
     if (userInfo) {
-      const ogrganization = await Promise.all([
-        OrganizationService.get(
-          soffit,
-          this.organizationApiUrl,
-          userInfo.orgIds ?? [],
-          userInfo.currentOrgId ?? '',
-          'ESCOStructureLogo[0]',
-        ),
-      ])
-      console.log(ogrganization)
+      this.organization = await OrganizationService.get(
+        soffit,
+        this.organizationApiUrl,
+        userInfo.orgIds ?? [],
+        userInfo.currentOrgId ?? '',
+        'ESCOStructureLogo[0]',
+      )
+      console.log(this.organization)
     }
 
     const layout = await LayoutService.get(soffit, this.layoutApiUrl)
@@ -453,7 +455,7 @@ export class ReciaHeader extends LitElement {
         </div>
         <r-navigation-drawer
           logo="${this.data.logo}"
-          name="${this.data.name}"
+          name="${this.organization?.current.displayName ?? ''}"
           .homeLink="${this.data.homeLink}"
           ?visible="${this.data.visible}"
           .items="${this.data.items}"
@@ -463,7 +465,7 @@ export class ReciaHeader extends LitElement {
         </r-navigation-drawer>
         <div class="topbar">
           <r-principal-container
-            name="${this.data.name}"
+            name="${this.organization?.current.displayName ?? ''}"
             search="${this.data.search}"
           >
           </r-principal-container>
