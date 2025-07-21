@@ -448,10 +448,9 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  handleClickAjouter() {
+  clickOnAjouter() {
     this.dropdownOpen = !this.dropdownOpen
     this.requestUpdate()
-
     this.boundClickEventOnPage = this.handleClickEventOnPageIfDropdownIsOpen.bind(this)
 
     // required, if not present the created event listener will detect the current event
@@ -462,10 +461,15 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   handleClickEventOnPageIfDropdownIsOpen(e: Event): void {
     const dropdownContent = this.shadowRoot!.querySelector('#dropdown-content')
+    const addWidgetButton = this.shadowRoot!.querySelector('#add-widget-button')
     const clickIsInside: boolean = e.composedPath().includes(dropdownContent as EventTarget)
+    const clickIsOnButton: boolean = e.composedPath().includes(addWidgetButton as EventTarget)
     if (!clickIsInside) {
-      this.dropdownOpen = false
-      window.removeEventListener('click', this.boundClickEventOnPage!) // this.removeEvent()
+      // do not interfere with button behavior
+      if (!clickIsOnButton) {
+        this.dropdownOpen = false
+      }
+      window.removeEventListener('click', this.boundClickEventOnPage!)
       this.requestUpdate()
     }
   }
@@ -507,7 +511,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       return html``
     }
     return html`
-      <button ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" class="btn-secondary" @click="${this.handleClickAjouter}}">Ajouter</button>
+      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" class="btn-secondary" @click="${this.clickOnAjouter}">Ajouter</button>
       <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen ? 'display:none' : nothing}">
        ${repeat(
           nonUsedKeys,
