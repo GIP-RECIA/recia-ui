@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
+import type { JWT } from '@uportal/open-id-connect'
 import oidc from '@uportal/open-id-connect'
 
-async function getToken(apiUrl: string): Promise<string> {
+async function getToken(apiUrl: string): Promise<{ encoded: string, decoded: JWT }> {
   const { encoded, decoded } = await oidc({
     userInfoApiUrl: apiUrl,
   })
   if (decoded.sub.startsWith('guest')) {
     throw new Error('You are not logged')
   }
-  return encoded
+  return { encoded, decoded }
 }
 
 export { getToken }
