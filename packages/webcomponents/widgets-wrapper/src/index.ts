@@ -508,12 +508,9 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   dropdownRender(): TemplateResult {
     const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
-    if (nonUsedKeys.length === 0) {
-      return html``
-    }
     return html`
-      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" class="btn-secondary" @click="${this.clickOnAjouter}">${this.t(`buttons.Ajouter`, 'Ajouter')}</button>
-      <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen ? 'display:none' : nothing}">
+      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount() || nonUsedKeys.length === 0}" class="btn-secondary" @click="${this.clickOnAjouter}">${this.t(`buttons.Ajouter`, 'Ajouter')}</button>
+      <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen || nonUsedKeys.length === 0 ? 'display:none' : nothing}">
        ${repeat(
           nonUsedKeys,
           (widgetKey: string) => widgetKey,
