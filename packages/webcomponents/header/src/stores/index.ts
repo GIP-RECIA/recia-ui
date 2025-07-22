@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
+import type { FilteredOrganization } from '../types/OrganizationType.ts'
+import type { Service } from '../types/ServiceType.ts'
 import type { Soffit } from '../types/SoffitType.ts'
 import type { User } from '../types/UserType.ts'
 import { atom } from 'nanostores'
+import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
-import { difference } from '../utils/objectUtils.ts'
 import UserService from '../services/userService.ts'
-import OrganizationService from '../services/organizationService.ts'
-import { FilteredOrganization } from '../types/OrganizationType.ts'
-import { Service } from '../types/ServiceType.ts'
+import { onDiff } from '../utils/storeUtils.ts'
 
 interface Settings {
   domain: string
@@ -38,8 +38,8 @@ interface Settings {
   organizationApiUrl: string
   portletApiUrl: string
   favoriteApiUrl: string
-  serviceInfoApiUrl: string,
-  servicesInfoApiUrl: string,
+  serviceInfoApiUrl: string
+  servicesInfoApiUrl: string
 }
 
 const settingsStore = atom<Partial<Settings>>({
@@ -55,23 +55,15 @@ const organizationStore = atom<FilteredOrganization | undefined>()
 
 const servicesStore = atom<Array<Service> | undefined>()
 
-settingsStore.listen((newValue, oldValue): void => {
-  const diffs = difference(newValue, oldValue)
-  if (diffs.size === 0)
-    return
-
+settingsStore.listen(onDiff((diffs) => {
   if (diffs.has('templateApiUrl'))
     initTemplate()
 
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
-})
+}))
 
-soffitStore.listen((newValue, oldValue): void => {
-  const diffs = difference(newValue, oldValue)
-  if (diffs.size === 0)
-    return
-
+soffitStore.listen(onDiff((diffs) => {
   if (
     diffs.has('name')
     || diffs.has('picture')
@@ -80,16 +72,12 @@ soffitStore.listen((newValue, oldValue): void => {
   ) {
     updateUserInfo()
   }
-})
+}))
 
-userStore.listen((newValue, oldValue): void => {
-  const diffs = difference(newValue, oldValue)
-  if (diffs.size === 0)
-    return
-
+userStore.listen(onDiff((diffs) => {
   if (diffs.has('orgIds') || diffs.has('currentOrgId'))
     updateOrganization()
-})
+}))
 
 async function initTemplate(): Promise<void> {
   const { templateApiUrl, domain } = settingsStore.get()
@@ -123,8 +111,8 @@ function updateUserInfo(): void {
   console.info('UserInfo', userInfo)
 }
 
-async function updateOrganization(): Promise<void>  {
-const { organizationApiUrl, userAllOrgsIdAttributeName } = settingsStore.get()
+async function updateOrganization(): Promise<void> {
+  const { organizationApiUrl, userAllOrgsIdAttributeName } = settingsStore.get()
   const soffit = soffitStore.get()
   const { orgIds, currentOrgId } = userStore.get() ?? {}
 
@@ -143,9 +131,9 @@ const { organizationApiUrl, userAllOrgsIdAttributeName } = settingsStore.get()
 }
 
 export {
+  organizationStore,
+  servicesStore,
   settingsStore,
   soffitStore,
   userStore,
-  organizationStore,
-  servicesStore
 }
