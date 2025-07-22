@@ -17,12 +17,12 @@
 import type { FilteredOrganization } from '../types/OrganizationType.ts'
 import type { Service } from '../types/ServiceType.ts'
 import type { Soffit } from '../types/SoffitType.ts'
-import type { User } from '../types/UserType.ts'
+import type { UserInfo } from '../types/UserInfoType.ts'
 import { atom } from 'nanostores'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
-import UserService from '../services/userService.ts'
+import UserInfoService from '../services/userInfoService.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 
 interface Settings {
@@ -42,20 +42,20 @@ interface Settings {
   servicesInfoApiUrl: string
 }
 
-const settingsStore = atom<Partial<Settings>>({
+const settings = atom<Partial<Settings>>({
   portalPath: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
 })
 
-const soffitStore = atom<Soffit | undefined>()
+const soffit = atom<Soffit | undefined>()
 
-const userStore = atom<User | undefined>()
+const userInfo = atom<UserInfo | undefined>()
 
-const organizationStore = atom<FilteredOrganization | undefined>()
+const organization = atom<FilteredOrganization | undefined>()
 
-const servicesStore = atom<Array<Service> | undefined>()
+const services = atom<Array<Service> | undefined>()
 
-settingsStore.listen(onDiff((diffs) => {
+settings.listen(onDiff((diffs) => {
   if (diffs.has('templateApiUrl'))
     initTemplate()
 
@@ -63,7 +63,7 @@ settingsStore.listen(onDiff((diffs) => {
     updateSoffit()
 }))
 
-soffitStore.listen(onDiff((diffs) => {
+soffit.listen(onDiff((diffs) => {
   if (
     diffs.has('name')
     || diffs.has('picture')
@@ -74,13 +74,13 @@ soffitStore.listen(onDiff((diffs) => {
   }
 }))
 
-userStore.listen(onDiff((diffs) => {
+userInfo.listen(onDiff((diffs) => {
   if (diffs.has('orgIds') || diffs.has('currentOrgId'))
     updateOrganization()
 }))
 
 async function initTemplate(): Promise<void> {
-  const { templateApiUrl, domain } = settingsStore.get()
+  const { templateApiUrl, domain } = settings.get()
   if (!templateApiUrl || !domain)
     return
 
@@ -89,51 +89,51 @@ async function initTemplate(): Promise<void> {
 }
 
 async function updateSoffit(): Promise<void> {
-  const { userInfoApiUrl } = settingsStore.get()
+  const { userInfoApiUrl } = settings.get()
 
   if (!userInfoApiUrl)
     return
 
-  const soffit = await SoffitService.get(userInfoApiUrl)
-  soffitStore.set(soffit)
-  console.info('Soffit', soffit)
+  const response = await SoffitService.get(userInfoApiUrl)
+  soffit.set(response)
+  console.info('Soffit', response)
 }
 
 function updateUserInfo(): void {
-  const { orgAttributeName, userAllOrgsIdAttributeName } = settingsStore.get()
-  const soffit = soffitStore.get()
+  const { orgAttributeName, userAllOrgsIdAttributeName } = settings.get()
+  const soffitObject = soffit.get()
 
-  if (!soffit || !orgAttributeName || !userAllOrgsIdAttributeName)
+  if (!soffitObject || !orgAttributeName || !userAllOrgsIdAttributeName)
     return
 
-  const userInfo = UserService.getFromSoffit(soffit, orgAttributeName, userAllOrgsIdAttributeName)
-  userStore.set(userInfo)
-  console.info('UserInfo', userInfo)
+  const response = UserInfoService.getFromSoffit(soffitObject, orgAttributeName, userAllOrgsIdAttributeName)
+  userInfo.set(response)
+  console.info('UserInfo', response)
 }
 
 async function updateOrganization(): Promise<void> {
-  const { organizationApiUrl, userAllOrgsIdAttributeName } = settingsStore.get()
-  const soffit = soffitStore.get()
-  const { orgIds, currentOrgId } = userStore.get() ?? {}
+  const { organizationApiUrl, userAllOrgsIdAttributeName } = settings.get()
+  const soffitObject = soffit.get()
+  const { orgIds, currentOrgId } = userInfo.get() ?? {}
 
-  if (!soffit || !organizationApiUrl || !userAllOrgsIdAttributeName || !orgIds || !currentOrgId)
+  if (!soffitObject || !organizationApiUrl || !userAllOrgsIdAttributeName || !orgIds || !currentOrgId)
     return
 
-  const organization = await OrganizationService.get(
-    soffit,
+  const response = await OrganizationService.get(
+    soffitObject,
     organizationApiUrl,
     orgIds,
     currentOrgId,
     'ESCOStructureLogo[0]',
   )
-  organizationStore.set(organization)
-  console.info('Organization', organization)
+  organization.set(response)
+  console.info('Organization', response)
 }
 
 export {
-  organizationStore,
-  servicesStore,
-  settingsStore,
-  soffitStore,
-  userStore,
+  organization,
+  services,
+  settings,
+  soffit,
+  userInfo,
 }

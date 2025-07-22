@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface User {
+export interface UserInfo {
   displayName: string
   picture?: string
   email: string

@@ -22,7 +22,7 @@ import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { userStore } from '../../stores/index.ts'
+import { userInfo } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -30,7 +30,7 @@ import '../search'
 import 'user-menu'
 
 @localized()
-@useStores(userStore)
+@useStores(userInfo)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: String })
   name?: string
@@ -47,6 +47,8 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   render(): TemplateResult {
+    const { displayName, picture } = userInfo.get() ?? {}
+
     return html`
       <div class="principal-container">
         <div class="start">
@@ -77,17 +79,11 @@ export class ReciaPrincipalContainer extends LitElement {
                 `
               : nothing
           }
-          ${
-            userStore.get()
-              ? html`
-                  <r-user-menu
-                    picture="${userStore.get()!.picture ?? '/images/icones/noPictureUser.svg'}"
-                    display-name="${userStore.get()!.displayName}"
-                  >
-                  </r-user-menu>
-                `
-              : nothing
-          }
+          <r-user-menu
+            picture="${picture ?? '/images/icones/noPictureUser.svg'}"
+            display-name="${displayName}"
+          >
+          </r-user-menu>
           ${
             false
               ? html`

@@ -15,18 +15,18 @@
  */
 
 import type { Soffit } from '../types/SoffitType.ts'
-import type { User } from '../types/UserType.ts'
+import type { UserInfo } from '../types/UserInfoType.ts'
 import { get } from 'lodash-es'
 
-export default class UserService {
+export default class UserInfoService {
   static getFromSoffit(
     soffit: Soffit,
     orgIdAttribute: string,
     orgIdsAttribute: string,
-  ): User | undefined {
+  ): UserInfo | undefined {
     const { name, picture, email } = soffit
 
-    const userInfo: User = {
+    const userInfo: UserInfo = {
       displayName: name,
       picture,
       email,

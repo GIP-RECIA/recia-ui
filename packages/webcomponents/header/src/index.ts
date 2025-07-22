@@ -28,12 +28,13 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
+import ServicesService from './services/servicesService.ts'
 import {
-  organizationStore,
-  servicesStore,
-  settingsStore,
-  soffitStore,
-  userStore
+  organization,
+  services,
+  settings,
+  soffit,
+  userInfo,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
 import { Category } from './types/CategoryType.ts'
@@ -44,14 +45,13 @@ import './components/principal-container'
 import './components/services-layout'
 import 'regenerator-runtime/runtime.js'
 import 'service-info'
-import ServicesService from './services/servicesService.ts'
 
 @localized()
-@useStores(settingsStore)
-@useStores(soffitStore)
-@useStores(userStore)
-@useStores(organizationStore)
-@useStores(servicesStore)
+@useStores(settings)
+@useStores(soffit)
+@useStores(userInfo)
+@useStores(organization)
+@useStores(services)
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
@@ -295,8 +295,8 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    settingsStore.set({
-      ...settingsStore.get(),
+    settings.set({
+      ...settings.get(),
       portalPath: this.portalPath,
       templateApiUrl: this.templateApiUrl,
       portletInfoApiUrl: this.portletInfoApiUrl,
@@ -309,7 +309,7 @@ export class ReciaHeader extends LitElement {
       portletApiUrl: this.portletApiUrl,
       favoriteApiUrl: this.favoriteApiUrl,
       serviceInfoApiUrl: this.serviceInfoApiUrl,
-      servicesInfoApiUrl: this.servicesInfoApiUrl
+      servicesInfoApiUrl: this.servicesInfoApiUrl,
     })
     if (_changedProperties.has('domain')) {
       if (!this.domain || this.domain === '') {
@@ -345,15 +345,15 @@ export class ReciaHeader extends LitElement {
     const { show } = e.detail
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
-    if (show && !servicesStore.get()) {
-      const { servicesInfoApiUrl, portletApiUrl } = settingsStore.get()
-      const soffit = soffitStore.get()
-      if (!soffit || !portletApiUrl || !servicesInfoApiUrl)
+    if (show && !services.get()) {
+      const { servicesInfoApiUrl, portletApiUrl } = settings.get()
+      const soffitObject = soffit.get()
+      if (!soffitObject || !portletApiUrl || !servicesInfoApiUrl)
         return
 
-      const services = await ServicesService.get(soffit, portletApiUrl, servicesInfoApiUrl)
-      servicesStore.set(services)
-      console.info('Services', services)
+      const response = await ServicesService.get(soffitObject, portletApiUrl, servicesInfoApiUrl)
+      services.set(response)
+      console.info('Services', response)
     }
   }
 
@@ -366,7 +366,7 @@ export class ReciaHeader extends LitElement {
   }
 
   render(): TemplateResult {
-    const orgName =  organizationStore.get()?.current.displayName ?? ''
+    const orgName = organization.get()?.current.displayName ?? ''
 
     return html`
       <div class="header">
@@ -398,7 +398,7 @@ export class ReciaHeader extends LitElement {
           ?show="${this.isServicesLayout}"
           ?navigation-drawer-visible="${this.data.visible}"
           .filters="${this.data.filters}"
-          .services="${servicesStore.get()}"
+          .services="${services.get()}"
           @close="${this.toggleServicesLayout}"
           @open-more="${this.openMore}"
         >
