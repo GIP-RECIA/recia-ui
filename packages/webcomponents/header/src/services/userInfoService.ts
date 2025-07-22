@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import type { Soffit } from '../types/SoffitType.ts'
-import type { UserInfo } from '../types/UserInfoType.ts'
+import type { Soffit, UserInfo } from '../types/index.ts'
 import { get } from 'lodash-es'
 
 export default class UserInfoService {

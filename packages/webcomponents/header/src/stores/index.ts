@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-import type { FilteredOrganization } from '../types/OrganizationType.ts'
-import type { Service } from '../types/ServiceType.ts'
-import type { Soffit } from '../types/SoffitType.ts'
-import type { UserInfo } from '../types/UserInfoType.ts'
+import type { FilteredOrganization, Service, Soffit, UserInfo } from '../types/index.ts'
 import { atom } from 'nanostores'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'

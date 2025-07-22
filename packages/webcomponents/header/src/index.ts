@@ -37,7 +37,7 @@ import {
   userInfo,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
-import { Category } from './types/CategoryType.ts'
+import { Category } from './types/index.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import './components/navigation-drawer'
 import './components/notification-drawer'

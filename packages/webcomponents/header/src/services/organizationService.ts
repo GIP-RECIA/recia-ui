@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import type { FilteredOrganization, Organization, OrganizationApiResponse } from '../types/OrganizationType.ts'
-import type { Soffit } from '../types/SoffitType.ts'
+import type { FilteredOrganization, Organization, OrganizationApiResponse, Soffit } from '../types/index.ts'
 import { get } from 'lodash-es'
 
 export default class OrganizationService {

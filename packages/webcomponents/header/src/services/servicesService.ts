@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-import { Service } from "../types/ServiceType.ts";
-import { Soffit } from "../types/SoffitType.ts";
-import InfoService from "./infoService.ts";
-import PortletService from "./portletService.ts";
+import type { Service, Soffit } from '../types/index.ts'
+import InfoService from './infoService.ts'
+import PortletService from './portletService.ts'
 
 export default class ServicesService {
   static async get(
     soffit: Soffit,
     portletApiUrl: string,
-    servicesInfoApiUrl: string
+    servicesInfoApiUrl: string,
   ): Promise<Array<Service> | undefined> {
     const [portlets, portletsInfo] = await Promise.all([
       PortletService.getAll(soffit, portletApiUrl),
-      InfoService.getAll(servicesInfoApiUrl)
+      InfoService.getAll(servicesInfoApiUrl),
     ])
 
     if (!portlets || !portletsInfo)
@@ -47,7 +46,7 @@ export default class ServicesService {
       } = portlet
       const {
         categoriePrincipale,
-        doesInfoExist
+        doesInfoExist,
       } = portletsInfo.find(el => el.fname === fname) ?? {}
 
       return {

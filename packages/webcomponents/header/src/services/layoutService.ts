@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Soffit } from '../types/SoffitType.ts'
+import type { Soffit } from '../types/index.ts'
 
 export default class LayoutService {
   static async get(

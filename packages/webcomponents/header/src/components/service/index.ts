@@ -15,7 +15,7 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Link } from '../../types/LinkType.ts'
+import type { Link } from '../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -26,7 +26,7 @@ import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import FavoritesService from '../../services/favoritesService.ts'
 import { settings, soffit } from '../../stores/index.ts'
-import { Category } from '../../types/CategoryType.ts'
+import { Category } from '../../types/index.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'

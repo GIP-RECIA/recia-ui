@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Template, TemplateApiResponse } from '../types/TemplateType.ts'
+import type { Template, TemplateApiResponse } from '../types/index.ts'
 
 export default class TemplateService {
   static async get(

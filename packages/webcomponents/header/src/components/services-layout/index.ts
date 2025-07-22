@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import type { Section } from '../../../../filters/src/types/SectionType.ts'
-import type { Service } from '../../types/ServiceType.ts'
+import type { Service } from '../../types/index.ts'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'

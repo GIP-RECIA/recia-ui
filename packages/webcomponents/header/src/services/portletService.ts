@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import type { Portlet } from '../types/PortletType.ts'
-import type { Soffit } from '../types/SoffitType.ts'
+import type { Portlet, Soffit } from '../types/index.ts'
 import { uniqBy } from 'lodash-es'
 
 export default class PortletService {

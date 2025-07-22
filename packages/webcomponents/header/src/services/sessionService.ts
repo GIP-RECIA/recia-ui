@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Session, SessionApiResponse } from '../types/SessionType.ts'
+import type { Session, SessionApiResponse } from '../types/index.ts'
 
 export default class SessionService {
   static async get(

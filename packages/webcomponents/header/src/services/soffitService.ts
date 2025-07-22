@@ -15,7 +15,7 @@
  */
 
 import type { Response } from '@uportal/open-id-connect'
-import type { Soffit } from '../types/SoffitType.ts'
+import type { Soffit } from '../types/index.ts'
 import oidc from '@uportal/open-id-connect'
 
 export default class SoffitService {

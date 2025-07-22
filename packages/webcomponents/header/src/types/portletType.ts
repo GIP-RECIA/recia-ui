@@ -35,20 +35,20 @@ export interface Portlet {
 }
 
 export interface portletParameters {
-  hideFromDesktop: boolean
-  blockImpersonation: boolean
+  hideFromDesktop: string
+  blockImpersonation: string
   mobileIconUrl: string
-  hasAbout: boolean
-  editable: boolean
-  alternate: boolean
-  disableDynamicTitle: boolean
-  hideFromMobile: boolean
-  highlight: boolean
+  hasAbout: string
+  editable: string
+  alternate: string
+  disableDynamicTitle: string
+  hideFromMobile: string
+  highlight: string
   alternativeMaximizedLink?: string
   alternativeMaximizedLinkTarget?: string
-  iconUrl: boolean
-  chromeStyle: boolean
-  configurable: boolean
-  disablePortletEvents: boolean
-  hasHelp: boolean
+  iconUrl: string
+  chromeStyle: string
+  configurable: string
+  disablePortletEvents: string
+  hasHelp: string
 }

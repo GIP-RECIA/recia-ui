@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Category } from '../types/CategoryType.ts'
+import type { Category } from '../types/index.ts'
 
 export default class InfoService {
   static async getAll(
