@@ -23,7 +23,7 @@ export default class SessionService {
     try {
       const response = await fetch(sessionApiUrl, {
         method: 'GET',
-        credentials: 'include',
+        credentials: 'same-origin',
       })
 
       if (!response.ok)

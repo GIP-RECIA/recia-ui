@@ -56,7 +56,7 @@ export default class PortletService {
       const { token } = soffit
       const response = await fetch(portletApiUrl, {
         method: 'GET',
-        credentials: 'include',
+        credentials: 'same-origin',
         headers: {
           Authorization: token,
         },

@@ -54,7 +54,7 @@ export default class FavoritesService {
       const getParams = new URLSearchParams({ action, channelId })
       const response = await fetch(`${favoriteApiUrl}?${getParams}`, {
         method: 'POST',
-        credentials: 'include',
+        credentials: 'same-origin',
         headers: {
           Authorization: token,
         },

@@ -31,7 +31,7 @@ export default class OrganizationService {
       const getParams = new URLSearchParams({ ids: orgIds.toString() })
       const response = await fetch(`${orgApiUrl}?${getParams}`, {
         method: 'GET',
-        credentials: 'include',
+        credentials: 'same-origin',
         headers: {
           Authorization: token,
         },

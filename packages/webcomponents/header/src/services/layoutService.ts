@@ -26,7 +26,7 @@ export default class LayoutService {
 
       const response = await fetch(layoutApiUrl, {
         method: 'GET',
-        credentials: 'include',
+        credentials: 'same-origin',
         headers: {
           Authorization: token,
         },
