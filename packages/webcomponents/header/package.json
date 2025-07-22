@@ -42,6 +42,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.17.0",
     "@lit/localize-tools": "^0.8.0",
+    "@nanostores/lit": "^0.2.2",
     "@types/lodash-es": "^4",
     "@types/regenerator-runtime": "^0",
     "@uportal/open-id-connect": "^1.40.2",
@@ -51,6 +52,7 @@
     "filters": "workspace:^",
     "info-etab": "workspace:^",
     "lodash-es": "^4.17.21",
+    "nanostores": "^1.0.1",
     "regenerator-runtime": "^0.14.1",
     "ress": "^5.0.2",
     "sass": "^1.89.2",

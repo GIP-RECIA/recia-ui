@@ -19,12 +19,13 @@ import type { Link } from '../../types/LinkType.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import FavoritesService from '../../services/favoritesService.ts'
-import { settingsStore } from '../../stores/SettingsStore.ts'
+import { settingsStore, soffitStore } from '../../stores/index.ts'
 import { Category } from '../../types/CategoryType.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -32,6 +33,8 @@ import styles from './style.scss?inline'
 import 'filters'
 
 @localized()
+@useStores(settingsStore)
+@useStores(soffitStore)
 export class ReciaService extends LitElement {
   @property({ type: Number, attribute: 'id' })
   channelId?: number
@@ -90,7 +93,8 @@ export class ReciaService extends LitElement {
   }
 
   async toggleFavorite(_: Event): Promise<void> {
-    const { soffit, favoriteApiUrl } = settingsStore.getState()
+    const { favoriteApiUrl } = settingsStore.get()
+    const soffit = soffitStore.get()
     if (!soffit || !favoriteApiUrl || !this.channelId)
       return
 

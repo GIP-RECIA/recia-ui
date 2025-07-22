@@ -15,28 +15,26 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { FilteredOrganization } from './types/OrganizationType.ts'
-import type { Service } from './types/ServiceType.ts'
+import type { Ref } from 'lit/directives/ref.js'
+import type { ReciaBottomSheetServiceInfo } from 'service-info'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
-import FavoritesService from './services/favoritesService.ts'
-import InfoService from './services/infoService.ts'
-import LayoutService from './services/layoutService.ts'
-import OrganizationService from './services/organizationService.ts'
-import PortletService from './services/portletService.ts'
-import SessionService from './services/sessionService.ts'
-import SoffitService from './services/soffitService.ts'
-import TemplateService from './services/templateService.ts'
-import UserService from './services/userService.ts'
-import { settingsStore } from './stores/SettingsStore.ts'
-import { userStore } from './stores/UserStore.ts'
+import {
+  organizationStore,
+  servicesStore,
+  settingsStore,
+  soffitStore,
+  userStore
+} from './stores/index.ts'
 import styles from './style.scss?inline'
 import { Category } from './types/CategoryType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
@@ -46,10 +44,14 @@ import './components/principal-container'
 import './components/services-layout'
 import 'regenerator-runtime/runtime.js'
 import 'service-info'
-import { ReciaBottomSheetServiceInfo } from 'service-info'
-import { createRef, Ref, ref } from 'lit/directives/ref.js'
+import ServicesService from './services/servicesService.ts'
 
 @localized()
+@useStores(settingsStore)
+@useStores(soffitStore)
+@useStores(userStore)
+@useStores(organizationStore)
+@useStores(servicesStore)
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
@@ -274,15 +276,6 @@ export class ReciaHeader extends LitElement {
   servicesInfoApiUrl?: string
 
   @state()
-  loaded: boolean = false
-
-  @state()
-  services?: Array<Service>
-
-  @state()
-  organization?: FilteredOrganization
-
-  @state()
   isNavigationDrawerExpended: boolean = false
 
   @state()
@@ -302,7 +295,8 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    settingsStore.setState({
+    settingsStore.set({
+      ...settingsStore.get(),
       portalPath: this.portalPath,
       templateApiUrl: this.templateApiUrl,
       portletInfoApiUrl: this.portletInfoApiUrl,
@@ -314,6 +308,8 @@ export class ReciaHeader extends LitElement {
       organizationApiUrl: this.organizationApiUrl,
       portletApiUrl: this.portletApiUrl,
       favoriteApiUrl: this.favoriteApiUrl,
+      serviceInfoApiUrl: this.serviceInfoApiUrl,
+      servicesInfoApiUrl: this.servicesInfoApiUrl
     })
     if (_changedProperties.has('domain')) {
       if (!this.domain || this.domain === '') {
@@ -325,79 +321,9 @@ export class ReciaHeader extends LitElement {
         this.portalPath = import.meta.env.VITE_PORTAL_BASE_URL
       }
     }
-    if (!this.loaded) {
-      this.devCalls()
-    }
     this.injectStyle()
     document.body.classList.add(this.data.visible ? 'navigation-drawer-visible' : '', 'auto-margin-top')
     return true
-  }
-
-  async devCalls(): Promise<void> {
-    if (
-      !this.portletInfoApiUrl
-      || !this.templateApiUrl
-      || !this.sessionApiUrl
-      || !this.userInfoApiUrl
-      || !this.layoutApiUrl
-      || !this.orgAttributeName
-      || !this.userAllOrgsIdAttributeName
-      || !this.organizationApiUrl
-      || !this.portletApiUrl
-      || !this.favoriteApiUrl
-    ) {
-      return
-    }
-
-    const fname = 'GLC'
-
-    const template = await TemplateService.get(this.templateApiUrl, this.domain)
-    console.log(template)
-
-    const session = await SessionService.get(this.sessionApiUrl)
-    console.log(session)
-
-    const soffit = await SoffitService.get(this.userInfoApiUrl)
-    settingsStore.setState({ soffit })
-    console.log(soffit)
-
-    if (!soffit)
-      return
-
-    const userInfo = UserService.getFromSoffit(soffit, this.orgAttributeName, this.userAllOrgsIdAttributeName)
-    userStore.setState({ userInfo })
-    console.log(userInfo)
-
-    if (userInfo) {
-      this.organization = await OrganizationService.get(
-        soffit,
-        this.organizationApiUrl,
-        userInfo.orgIds ?? [],
-        userInfo.currentOrgId ?? '',
-        'ESCOStructureLogo[0]',
-      )
-      console.log(this.organization)
-    }
-
-    const layout = await LayoutService.get(soffit, this.layoutApiUrl)
-    console.log(layout)
-
-    const favorites = FavoritesService.getFromLayout(layout)
-    console.log(favorites)
-
-    // const favoriteAdd = await FavoritesService.add(soffit, this.favoriteApiUrl, 114)
-    // console.log(favoriteAdd)
-
-    // const favoriteRemove = await FavoritesService.remove(soffit, this.favoriteApiUrl, 114)
-    // console.log(favoriteRemove)
-
-    const currentPortlet = await PortletService.get(`${this.portletInfoApiUrl}/${fname}.json`)
-    console.log(currentPortlet)
-
-    const portlets = await PortletService.getAll(soffit, this.portletApiUrl)
-    console.log(portlets)
-
-    this.loaded = true
   }
 
   injectStyle(): void {
@@ -419,41 +345,15 @@ export class ReciaHeader extends LitElement {
     const { show } = e.detail
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
-    if (show) {
-      const { userInfoApiUrl, portletApiUrl, soffit } = settingsStore.getState()
-      if (!userInfoApiUrl || !portletApiUrl || !soffit)
+    if (show && !servicesStore.get()) {
+      const { servicesInfoApiUrl, portletApiUrl } = settingsStore.get()
+      const soffit = soffitStore.get()
+      if (!soffit || !portletApiUrl || !servicesInfoApiUrl)
         return
 
-      const portlets = await PortletService.getAll(soffit, portletApiUrl)
-      const portletsInfo = await InfoService.getAll(this.servicesInfoApiUrl ?? '')
-      this.services = portlets?.map((portlet) => {
-        const {
-          id,
-          fname,
-          title,
-          favorite,
-          parameters: {
-            iconUrl,
-            alternativeMaximizedLink,
-            alternativeMaximizedLinkTarget,
-          },
-        } = portlet
-        const { categoriePrincipale, doesInfoExist } = portletsInfo?.find(el => el.fname === fname) ?? {}
-
-        return {
-          id,
-          fname,
-          name: title,
-          category: categoriePrincipale,
-          iconUrl: iconUrl?.value,
-          link: {
-            href: alternativeMaximizedLink?.value ?? `/portail/p/${fname}`,
-            target: alternativeMaximizedLinkTarget?.value ?? '_self',
-          },
-          favorite,
-          more: doesInfoExist,
-        }
-      })
+      const services = await ServicesService.get(soffit, portletApiUrl, servicesInfoApiUrl)
+      servicesStore.set(services)
+      console.info('Services', services)
     }
   }
 
@@ -462,10 +362,12 @@ export class ReciaHeader extends LitElement {
     if (!fname)
       return
 
-    this.serviceInfoRef.value?.dispatchEvent(new CustomEvent('service-info', { detail: { fname }}))
+    this.serviceInfoRef.value?.dispatchEvent(new CustomEvent('service-info', { detail: { fname } }))
   }
 
   render(): TemplateResult {
+    const orgName =  organizationStore.get()?.current.displayName ?? ''
+
     return html`
       <div class="header">
         <div
@@ -477,7 +379,7 @@ export class ReciaHeader extends LitElement {
         </div>
         <r-navigation-drawer
           logo="${this.data.logo}"
-          name="${this.organization?.current.displayName ?? ''}"
+          name="${orgName}"
           .homeLink="${this.data.homeLink}"
           ?visible="${this.data.visible}"
           .items="${this.data.items}"
@@ -487,7 +389,7 @@ export class ReciaHeader extends LitElement {
         </r-navigation-drawer>
         <div class="topbar">
           <r-principal-container
-            name="${this.organization?.current.displayName ?? ''}"
+            name="${orgName}"
             search="${this.data.search}"
           >
           </r-principal-container>
@@ -496,7 +398,7 @@ export class ReciaHeader extends LitElement {
           ?show="${this.isServicesLayout}"
           ?navigation-drawer-visible="${this.data.visible}"
           .filters="${this.data.filters}"
-          .services="${this.services}"
+          .services="${servicesStore.get()}"
           @close="${this.toggleServicesLayout}"
           @open-more="${this.openMore}"
         >
