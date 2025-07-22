@@ -19,16 +19,15 @@ function difference<T extends object>(
   oldValue: Partial<T> | undefined,
 ): Map<keyof T, T[keyof T]> {
   const differences = new Map<keyof T, T[keyof T]>()
+  if (newValue && oldValue === undefined)
+    return new Map<keyof T, T[keyof T]>(Object.entries(newValue) as [keyof T, T[keyof T]][])
 
-  const mapNewValue = new Map<keyof T, T[keyof T]>(Object.entries(newValue ?? {}) as [keyof T, T[keyof T]][])
   const mapOldValue = new Map<keyof T, T[keyof T]>(Object.entries(oldValue ?? {}) as [keyof T, T[keyof T]][])
 
-  mapNewValue.forEach((value, key) => {
-    if (!mapOldValue.get(key))
+  for (const [key, value] of Object.entries(newValue ?? {}) as [keyof T, T[keyof T]][]) {
+    if (mapOldValue.get(key) === undefined || mapOldValue.get(key) !== value)
       differences.set(key, value)
-    else if (mapOldValue.get(key) !== value)
-      differences.set(key, value)
-  })
+  }
 
   return differences
 }
