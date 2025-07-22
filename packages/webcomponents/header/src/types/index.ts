@@ -16,6 +16,7 @@
 
 export * from './categoryType.ts'
 export * from './drawerItemType.ts'
+export * from './headerType.ts'
 export * from './linkType.ts'
 export * from './organizationType.ts'
 export * from './portletType.ts'

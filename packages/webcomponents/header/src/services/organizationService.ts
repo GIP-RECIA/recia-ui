@@ -48,14 +48,14 @@ export default class OrganizationService {
       }
 
       const mappedOrgs: Array<Organization> = Object.values(orgs).map((org) => {
-        const { id, name, displayName, description, otherAttributes } = org
+        const { id, name, displayName, description } = org
 
         return {
           id,
           name,
           displayName,
           description,
-          logo: get(otherAttributes, logoAttribute) as unknown as string,
+          logo: get(org, logoAttribute) as unknown as string,
         }
       })
 

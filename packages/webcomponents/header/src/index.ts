@@ -37,7 +37,6 @@ import {
   userInfo,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
-import { Category } from './types/index.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import './components/navigation-drawer'
 import './components/notification-drawer'
@@ -55,7 +54,6 @@ import 'service-info'
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
-    name: 'Lycée international de Palaiseau',
     homeLink: {
       href: '#',
     },
@@ -118,162 +116,85 @@ export class ReciaHeader extends LitElement {
         ],
       },
     ],
-    services: [
-      {
-        name: 'Espaces Nextcloud',
-        category: Category.collaboratif,
-        iconUrl: './spritemap.svg#nextcloud',
-        link: {
-          href: '#',
-        },
-        new: true,
-        favorite: true,
-      },
-      {
-        name: 'Actualités',
-        category: Category.communication,
-        iconUrl: './spritemap.svg#actualites',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Carte mentale',
-        category: Category.apprentissage,
-        iconUrl: './spritemap.svg#carte-mentale',
-        link: {
-          href: '#',
-        },
-        new: true,
-        favorite: true,
-      },
-      {
-        name: 'Capytale',
-        category: Category.apprentissage,
-        iconUrl: './spritemap.svg#capytale',
-        link: {
-          href: '#',
-        },
-        favorite: true,
-        more: true,
-      },
-      {
-        name: 'Messagerie',
-        category: Category.communication,
-        iconUrl: './spritemap.svg#mail',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Plateforme vidéo',
-        category: Category.documentation,
-        iconUrl: './spritemap.svg#POD',
-        link: {
-          href: '#',
-        },
-        favorite: true,
-      },
-      {
-        name: 'MédiaCentre',
-        category: Category.documentation,
-        iconUrl: './spritemap.svg#mediacentre',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Kiosque de l\'orientation',
-        category: Category.orientation,
-        iconUrl: './spritemap.svg#orientation',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Mon compte ENT',
-        category: Category.parametres,
-        iconUrl: './spritemap.svg#MCE',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Menus du restaurant scolaire',
-        category: Category.vieScolaire,
-        iconUrl: './spritemap.svg#espace-vie-scolaire',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Orientation',
-        category: Category.orientation,
-        iconUrl: './spritemap.svg#orientation',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Aide du portail ENT',
-        category: Category.parametres,
-        iconUrl: './spritemap.svg#',
-        link: {
-          href: '#',
-        },
-      },
-      {
-        name: 'Documents',
-        category: Category.documentation,
-        iconUrl: './spritemap.svg#documentations',
-        link: {
-          href: '#',
-        },
-      },
-    ],
   }
+
+  @property({ type: Array })
+  messages?: Array<any>
 
   @property({ type: String })
   domain: string = window.location.hostname
 
-  @property({ type: String, attribute: 'portal-path' })
-  portalPath: string = import.meta.env.VITE_PORTAL_BASE_URL
+  @property({ type: String, attribute: 'default-org-logo-url' })
+  defaultOrgLogoUrl?: string
 
-  @property({ type: String, attribute: 'template-api-url' })
-  templateApiUrl?: string
+  @property({ type: String, attribute: 'default-org-icon-url' })
+  defaultOrgIconUrl?: string
 
-  @property({ type: String, attribute: 'portlet-info-api-url' })
-  portletInfoApiUrl?: string
+  @property({ type: String, attribute: 'default-avatar-url' })
+  defaultAvatarUrl?: string
 
-  @property({ type: String, attribute: 'session-api-url' })
-  sessionApiUrl?: string
+  @property({ type: String, attribute: 'context-api-url' })
+  contextApiUrl?: string
 
-  @property({ type: String, attribute: 'user-info-api-url' })
-  userInfoApiUrl?: string
+  @property({ type: String, attribute: 'favorite-api-url' })
+  favoriteApiUrl?: string
 
   @property({ type: String, attribute: 'layout-api-url' })
   layoutApiUrl?: string
 
-  @property({ type: String, attribute: 'user-org-id-attribute-name' })
-  orgAttributeName?: string
-
-  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
-  userAllOrgsIdAttributeName?: string
+  @property({ type: String, attribute: 'portlet-api-url' })
+  portletApiUrl?: string
 
   @property({ type: String, attribute: 'organization-api-url' })
   organizationApiUrl?: string
 
-  @property({ type: String, attribute: 'portlet-api-url' })
-  portletApiUrl?: string
+  @property({ type: String, attribute: 'user-info-api-url' })
+  userInfoApiUrl?: string
 
-  @property({ type: String, attribute: 'favorite-api-url' })
-  favoriteApiUrl?: string
+  @property({ type: String, attribute: 'session-api-url' })
+  sessionApiUrl?: string
+
+  @property({ type: String, attribute: 'template-api-url' })
+  templateApiUrl?: string
+
+  @property({ type: String, attribute: 'sign-out-url' })
+  signOutUrl?: string
+
+  @property({ type: String, attribute: 'sign-in-url' })
+  signInUrl?: string
+
+  @property({ type: String, attribute: 'user-info-portlet-url' })
+  userInfoPortletUrl?: string
+
+  @property({ type: String, attribute: 'switch-org-portlet-url' })
+  switchOrgPortletUrl?: string
+
+  @property({ type: String, attribute: 'user-org-id-attribute-name' })
+  orgAttributeName?: string
+
+  @property({ type: String, attribute: 'org-logo-url-attribute-name' })
+  orgLogoUrlAttributeName?: string
+
+  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
+  userAllOrgsIdAttributeName?: string
+
+  @property({ type: Boolean, attribute: 'disable-session-renew' })
+  sessionRenewDisable: boolean = false
+
+  @property({ type: String, attribute: 'portlet-info-api-url' })
+  portletInfoApiUrl?: string
 
   @property({ type: String, attribute: 'service-info-api-url' })
   serviceInfoApiUrl?: string
 
   @property({ type: String, attribute: 'services-info-api-url' })
   servicesInfoApiUrl?: string
+
+  @property({ type: String })
+  fname?: string
+
+  @property({ type: Boolean })
+  debug: boolean = false
 
   @state()
   isNavigationDrawerExpended: boolean = false
@@ -295,31 +216,63 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    settings.set({
-      ...settings.get(),
-      portalPath: this.portalPath,
-      templateApiUrl: this.templateApiUrl,
-      portletInfoApiUrl: this.portletInfoApiUrl,
-      sessionApiUrl: this.sessionApiUrl,
-      userInfoApiUrl: this.userInfoApiUrl,
-      layoutApiUrl: this.layoutApiUrl,
-      orgAttributeName: this.orgAttributeName,
-      userAllOrgsIdAttributeName: this.userAllOrgsIdAttributeName,
-      organizationApiUrl: this.organizationApiUrl,
-      portletApiUrl: this.portletApiUrl,
-      favoriteApiUrl: this.favoriteApiUrl,
-      serviceInfoApiUrl: this.serviceInfoApiUrl,
-      servicesInfoApiUrl: this.servicesInfoApiUrl,
-    })
-    if (_changedProperties.has('domain')) {
-      if (!this.domain || this.domain === '') {
-        this.domain = window.location.hostname
-      }
-    }
-    if (_changedProperties.has('portalPath')) {
-      if (!this.portalPath || this.portalPath === '') {
-        this.portalPath = import.meta.env.VITE_PORTAL_BASE_URL
-      }
+    if (
+      _changedProperties.has('messages')
+      || _changedProperties.has('domain')
+      || _changedProperties.has('defaultOrgLogoUrl')
+      || _changedProperties.has('defaultOrgIconUrl')
+      || _changedProperties.has('defaultAvatarUrl')
+      || _changedProperties.has('contextApiUrl')
+      || _changedProperties.has('favoriteApiUrl')
+      || _changedProperties.has('layoutApiUrl')
+      || _changedProperties.has('portletApiUrl')
+      || _changedProperties.has('organizationApiUrl')
+      || _changedProperties.has('userInfoApiUrl')
+      || _changedProperties.has('sessionApiUrl')
+      || _changedProperties.has('templateApiUrl')
+      || _changedProperties.has('signOutUrl')
+      || _changedProperties.has('signInUrl')
+      || _changedProperties.has('userInfoPortletUrl')
+      || _changedProperties.has('switchOrgPortletUrl')
+      || _changedProperties.has('orgAttributeName')
+      || _changedProperties.has('orgLogoUrlAttributeName')
+      || _changedProperties.has('userAllOrgsIdAttributeName')
+      || _changedProperties.has('sessionRenewDisable')
+      || _changedProperties.has('portletInfoApiUrl')
+      || _changedProperties.has('serviceInfoApiUrl')
+      || _changedProperties.has('servicesInfoApiUrl')
+      || _changedProperties.has('fname')
+      || _changedProperties.has('debug')
+    ) {
+      settings.set({
+        ...settings.get(),
+        messages: this.messages,
+        domain: this.domain,
+        defaultOrgLogoUrl: this.defaultOrgLogoUrl,
+        defaultOrgIconUrl: this.defaultOrgIconUrl,
+        defaultAvatarUrl: this.defaultAvatarUrl,
+        contextApiUrl: this.contextApiUrl,
+        favoriteApiUrl: this.favoriteApiUrl,
+        layoutApiUrl: this.layoutApiUrl,
+        portletApiUrl: this.portletApiUrl,
+        organizationApiUrl: this.organizationApiUrl,
+        userInfoApiUrl: this.userInfoApiUrl,
+        sessionApiUrl: this.sessionApiUrl,
+        templateApiUrl: this.templateApiUrl,
+        signOutUrl: this.signOutUrl,
+        signInUrl: this.signInUrl,
+        userInfoPortletUrl: this.userInfoPortletUrl,
+        switchOrgPortletUrl: this.switchOrgPortletUrl,
+        orgAttributeName: this.orgAttributeName,
+        orgLogoUrlAttributeName: this.orgLogoUrlAttributeName,
+        userAllOrgsIdAttributeName: this.userAllOrgsIdAttributeName,
+        sessionRenewDisable: this.sessionRenewDisable,
+        portletInfoApiUrl: this.portletInfoApiUrl,
+        serviceInfoApiUrl: this.serviceInfoApiUrl,
+        servicesInfoApiUrl: this.servicesInfoApiUrl,
+        fname: this.fname,
+        debug: this.debug,
+      })
     }
     this.injectStyle()
     document.body.classList.add(this.data.visible ? 'navigation-drawer-visible' : '', 'auto-margin-top')

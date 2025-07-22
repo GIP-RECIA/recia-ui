@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
+import type { HeaderProperties } from './headerType.ts'
+
 export interface TemplateApiResponse {
   version: string
   data: Array<TemplateApiData>
-  config: Record<
-    string,
-    string | boolean | Array<object>
-  >
+  config: Partial<HeaderProperties>
 }
 
 interface TemplateApiData {
@@ -67,8 +66,5 @@ interface TemplateApiData {
 export interface Template {
   name: string
   iconPath: string
-  config: Record<
-    string,
-    string | boolean | Array<object>
-  >
+  config: Partial<HeaderProperties>
 }

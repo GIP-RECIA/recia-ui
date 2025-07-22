@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { FilteredOrganization, Service, Soffit, UserInfo } from '../types/index.ts'
+import type { FilteredOrganization, HeaderProperties, Service, Soffit, UserInfo } from '../types/index.ts'
 import { atom } from 'nanostores'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
@@ -22,25 +22,8 @@ import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 
-interface Settings {
-  domain: string
-  portalPath: string
-  templateApiUrl: string
-  portletInfoApiUrl: string
-  sessionApiUrl: string
-  userInfoApiUrl: string
-  layoutApiUrl: string
-  orgAttributeName: string
-  userAllOrgsIdAttributeName: string
-  organizationApiUrl: string
-  portletApiUrl: string
-  favoriteApiUrl: string
-  serviceInfoApiUrl: string
-  servicesInfoApiUrl: string
-}
-
-const settings = atom<Partial<Settings>>({
-  portalPath: import.meta.env.VITE_PORTAL_BASE_URL,
+const settings = atom<Partial<HeaderProperties>>({
+  contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
 })
 
@@ -53,8 +36,8 @@ const organization = atom<FilteredOrganization | undefined>()
 const services = atom<Array<Service> | undefined>()
 
 settings.listen(onDiff((diffs) => {
-  if (diffs.has('templateApiUrl'))
-    initTemplate()
+  // if (diffs.has('templateApiUrl'))
+  //   updateTemplate()
 
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
@@ -76,7 +59,7 @@ userInfo.listen(onDiff((diffs) => {
     updateOrganization()
 }))
 
-async function initTemplate(): Promise<void> {
+async function updateTemplate(): Promise<void> {
   const { templateApiUrl, domain } = settings.get()
   if (!templateApiUrl || !domain)
     return
@@ -121,7 +104,7 @@ async function updateOrganization(): Promise<void> {
     organizationApiUrl,
     orgIds,
     currentOrgId,
-    'ESCOStructureLogo[0]',
+    'otherAttributes.ESCOStructureLogo[0]',
   )
   organization.set(response)
   console.info('Organization', response)
