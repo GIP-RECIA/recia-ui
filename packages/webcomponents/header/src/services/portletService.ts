@@ -65,7 +65,7 @@ export default class PortletService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const data: { registry: { categories: Array<PortletCategory> } } = await response.json()
+      const data: { registry: { categories: Array<any> } } = await response.json()
 
       if (!data.registry.categories) {
         console.error(`No data for ${portletApiUrl}`)
@@ -112,7 +112,7 @@ export default class PortletService {
     const portlets = registryJson.portlets || []
 
     if (portlets.length > 0)
-      portlets.forEach((p: any) => (p.categories = new Array(registryJson.name)))
+      portlets.forEach((p: any) => (p.categories = [registryJson.name]))
 
     if (registryJson.categories) {
       return portlets
