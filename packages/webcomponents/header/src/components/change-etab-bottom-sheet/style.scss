@@ -20,6 +20,7 @@
     height: 100%;
     min-height: 100px;
     font-size: var(--#{$prefix}font-size-xs);
+    cursor: pointer;
   }
 
   &:hover ~ label,
