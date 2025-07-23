@@ -11,33 +11,38 @@
 <body class="container">
   <section>
     <r-header
-      default-org-logo-url="/annuaire_images/default_banner_v1.jpg"
-      default-org-icon-url="/images/partners/netocentre-simple.svg"
-      default-avatar-url="/images/icones/noPictureUser.svg"
-      context-api-url="/portail"
-      favorite-api-url="/portail/api/layout"
-      layout-api-url="/portail/api/v4-3/dlm/layout.json"
-      portlet-api-url="/portail/api/v4-3/dlm/portletRegistry.json?category=All%20categories"
-      organization-api-url="/paramuseretab/rest/v2/structures/structs/"
-      user-info-api-url="/portail/api/v5-1/userinfo?claims=private,name,picture,ESCOSIRENCourant,ESCOSIREN&groups="
-      session-api-url="/portail/api/session.json"
       template-api-url="/commun/portal_template_api.tpl.json"
-      sign-out-url="/portail/Logout"
-      sign-in-url="/portail/Login"
-      user-info-portlet-url="/portail/api/ExternalURLStats?fname=ESCO-MCE&service=/MCE"
-      switch-org-portlet-url="/paramuseretab/changeetab/api/"
-      user-org-id-attribute-name="ESCOSIRENCourant[0]"
-      org-logo-url-attribute-name="otherAttributes.ESCOStructureLogo[0]"
-      user-all-orgs-id-attribute-name="ESCOSIREN"
-
-      portlet-info-api-url="/portail/api/portlet"
-      service-info-api-url="/service-info-api/api/serviceInfo"
-      services-info-api-url="/service-info-api/api/allServices"
     >
     </r-header>
   </section>
 
   <script>
+    const header = document.querySelector('r-header')
+    const config = {
+      'default-org-logo-url': "/annuaire_images/default_banner_v1.jpg",
+      'default-org-icon-url': "/images/partners/netocentre-simple.svg",
+      'default-avatar-url': "/images/icones/noPictureUser.svg",
+      'context-api-url': "/portail",
+      'favorite-api-url': "/portail/api/layout",
+      'layout-api-url': "/portail/api/v4-3/dlm/layout.json",
+      'portlet-api-url': "/portail/api/v4-3/dlm/portletRegistry.json?category=All%20categories",
+      'organization-api-url': "/paramuseretab/rest/v2/structures/structs/",
+      'user-info-api-url': "/portail/api/v5-1/userinfo?claims=private,name,picture,ESCOSIRENCourant,ESCOSIREN&groups=",
+      'session-api-url': "/portail/api/session.json",
+      'sign-out-url': "/portail/Logout",
+      'sign-in-url': "/portail/Login",
+      'user-info-portlet-url': "/portail/api/ExternalURLStats?fname=ESCO-MCE&service=/MCE",
+      'switch-org-portlet-url': "/paramuseretab/changeetab/api/",
+      'user-org-id-attribute-name': "ESCOSIRENCourant[0]",
+      'org-logo-url-attribute-name': "otherAttributes.ESCOStructureLogo[0]",
+      'user-all-orgs-id-attribute-name': "ESCOSIREN",
+      'portlet-info-api-url': "/portail/api/portlet",
+      'service-info-api-url': "/service-info-api/api/serviceInfo",
+      'services-info-api-url': "/service-info-api/api/allServices",
+    }
+    // Object.entries(config).forEach(([key, value]) => {
+    //   header.setAttribute(key, typeof value == "object" ? JSON.stringify(value) : value)
+    // })
   </script>
 </body>
 

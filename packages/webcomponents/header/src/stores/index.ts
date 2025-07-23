@@ -20,6 +20,7 @@ import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
+import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 
 const settings = atom<Partial<HeaderProperties>>({
@@ -36,9 +37,6 @@ const organization = atom<FilteredOrganization | undefined>()
 const services = atom<Array<Service> | undefined>()
 
 settings.listen(onDiff((diffs) => {
-  // if (diffs.has('templateApiUrl'))
-  //   updateTemplate()
-
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
 }))
@@ -59,13 +57,38 @@ userInfo.listen(onDiff((diffs) => {
     updateOrganization()
 }))
 
-async function updateTemplate(): Promise<void> {
-  const { templateApiUrl, domain } = settings.get()
+async function updateSettings(newValue: Partial<HeaderProperties>): Promise<void> {
+  const diffs = difference(newValue, settings.get())
+  if (diffs.size === 0)
+    return
+
+  if (diffs.has('templateApiUrl')) {
+    const config = await updateTemplate(
+      diffs.get('templateApiUrl') as string | undefined,
+      diffs.get('domain') as string | undefined ?? settings.get().domain,
+    )
+    settings.set({
+      ...settings.get(),
+      ...config,
+      ...newValue,
+    })
+  }
+  else {
+    settings.set({
+      ...settings.get(),
+      ...newValue,
+    })
+  }
+  console.info('Settings', settings.get())
+}
+
+async function updateTemplate(templateApiUrl: string | undefined, domain: string | undefined): Promise<Partial<HeaderProperties> | undefined> {
   if (!templateApiUrl || !domain)
     return
 
   const template = await TemplateService.get(templateApiUrl, domain)
   console.info('Template', template)
+  return template?.config
 }
 
 async function updateSoffit(): Promise<void> {
@@ -115,5 +138,6 @@ export {
   services,
   settings,
   soffit,
+  updateSettings,
   userInfo,
 }

@@ -17,6 +17,7 @@
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaBottomSheetServiceInfo } from 'service-info'
+import type { HeaderProperties } from './types/headerType.ts'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
@@ -34,6 +35,7 @@ import {
   services,
   settings,
   soffit,
+  updateSettings,
   userInfo,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
@@ -44,6 +46,35 @@ import './components/principal-container'
 import './components/services-layout'
 import 'regenerator-runtime/runtime.js'
 import 'service-info'
+
+const availablePropsKeys: Array<(keyof HeaderProperties)> = [
+  'messages',
+  'domain',
+  'defaultOrgLogoUrl',
+  'defaultOrgIconUrl',
+  'defaultAvatarUrl',
+  'contextApiUrl',
+  'favoriteApiUrl',
+  'layoutApiUrl',
+  'portletApiUrl',
+  'organizationApiUrl',
+  'userInfoApiUrl',
+  'sessionApiUrl',
+  'templateApiUrl',
+  'signOutUrl',
+  'signInUrl',
+  'userInfoPortletUrl',
+  'switchOrgPortletUrl',
+  'orgAttributeName',
+  'orgLogoUrlAttributeName',
+  'userAllOrgsIdAttributeName',
+  'sessionRenewDisable',
+  'portletInfoApiUrl',
+  'serviceInfoApiUrl',
+  'servicesInfoApiUrl',
+  'fname',
+  'debug',
+]
 
 @localized()
 @useStores(settings)
@@ -216,63 +247,12 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (
-      _changedProperties.has('messages')
-      || _changedProperties.has('domain')
-      || _changedProperties.has('defaultOrgLogoUrl')
-      || _changedProperties.has('defaultOrgIconUrl')
-      || _changedProperties.has('defaultAvatarUrl')
-      || _changedProperties.has('contextApiUrl')
-      || _changedProperties.has('favoriteApiUrl')
-      || _changedProperties.has('layoutApiUrl')
-      || _changedProperties.has('portletApiUrl')
-      || _changedProperties.has('organizationApiUrl')
-      || _changedProperties.has('userInfoApiUrl')
-      || _changedProperties.has('sessionApiUrl')
-      || _changedProperties.has('templateApiUrl')
-      || _changedProperties.has('signOutUrl')
-      || _changedProperties.has('signInUrl')
-      || _changedProperties.has('userInfoPortletUrl')
-      || _changedProperties.has('switchOrgPortletUrl')
-      || _changedProperties.has('orgAttributeName')
-      || _changedProperties.has('orgLogoUrlAttributeName')
-      || _changedProperties.has('userAllOrgsIdAttributeName')
-      || _changedProperties.has('sessionRenewDisable')
-      || _changedProperties.has('portletInfoApiUrl')
-      || _changedProperties.has('serviceInfoApiUrl')
-      || _changedProperties.has('servicesInfoApiUrl')
-      || _changedProperties.has('fname')
-      || _changedProperties.has('debug')
-    ) {
-      settings.set({
-        ...settings.get(),
-        messages: this.messages,
-        domain: this.domain,
-        defaultOrgLogoUrl: this.defaultOrgLogoUrl,
-        defaultOrgIconUrl: this.defaultOrgIconUrl,
-        defaultAvatarUrl: this.defaultAvatarUrl,
-        contextApiUrl: this.contextApiUrl,
-        favoriteApiUrl: this.favoriteApiUrl,
-        layoutApiUrl: this.layoutApiUrl,
-        portletApiUrl: this.portletApiUrl,
-        organizationApiUrl: this.organizationApiUrl,
-        userInfoApiUrl: this.userInfoApiUrl,
-        sessionApiUrl: this.sessionApiUrl,
-        templateApiUrl: this.templateApiUrl,
-        signOutUrl: this.signOutUrl,
-        signInUrl: this.signInUrl,
-        userInfoPortletUrl: this.userInfoPortletUrl,
-        switchOrgPortletUrl: this.switchOrgPortletUrl,
-        orgAttributeName: this.orgAttributeName,
-        orgLogoUrlAttributeName: this.orgLogoUrlAttributeName,
-        userAllOrgsIdAttributeName: this.userAllOrgsIdAttributeName,
-        sessionRenewDisable: this.sessionRenewDisable,
-        portletInfoApiUrl: this.portletInfoApiUrl,
-        serviceInfoApiUrl: this.serviceInfoApiUrl,
-        servicesInfoApiUrl: this.servicesInfoApiUrl,
-        fname: this.fname,
-        debug: this.debug,
-      })
+    if (availablePropsKeys.some(key => _changedProperties.has(key))) {
+      const updatedSettings = Object.fromEntries(
+        availablePropsKeys.map(key => [key, this[key]]).filter(([_, value]) => value !== undefined),
+      ) as Partial<HeaderProperties>
+
+      updateSettings(updatedSettings)
     }
     this.injectStyle()
     document.body.classList.add(this.data.visible ? 'navigation-drawer-visible' : '', 'auto-margin-top')
