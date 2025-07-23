@@ -16,6 +16,7 @@
 
 import type { FilteredOrganization, Organization, OrganizationApiResponse, Soffit } from '../types/index.ts'
 import { get } from 'lodash-es'
+import { debug } from '../stores/index.ts'
 
 export default class OrganizationService {
   static async get(
@@ -26,6 +27,7 @@ export default class OrganizationService {
     logoAttribute: string,
   ): Promise<FilteredOrganization | undefined> {
     try {
+      const debugValue = debug.get()
       const { token } = soffit
 
       const getParams = new URLSearchParams({ ids: orgIds.toString() })
@@ -43,7 +45,10 @@ export default class OrganizationService {
       const orgs: Record<string, OrganizationApiResponse> = await response.json()
 
       if (!orgs || !orgs[currentOrgId]) {
-        console.info('No organization found')
+        if (debugValue) {
+          // eslint-disable-next-line no-console
+          console.info('No organization found')
+        }
         return undefined
       }
 
@@ -62,7 +67,10 @@ export default class OrganizationService {
       const currentOrg = mappedOrgs.filter(org => org.id === currentOrgId)[0]
 
       if (!currentOrg.displayName) {
-        console.info('Missing organization information')
+        if (debugValue) {
+          // eslint-disable-next-line no-console
+          console.info('Missing organization information')
+        }
         return undefined
       }
       else {

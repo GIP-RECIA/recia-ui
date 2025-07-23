@@ -31,6 +31,7 @@ import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import ServicesService from './services/servicesService.ts'
 import {
+  debug,
   organization,
   services,
   settings,
@@ -286,7 +287,10 @@ export class ReciaHeader extends LitElement {
 
       const response = await ServicesService.get(soffitObject, portletApiUrl, servicesInfoApiUrl)
       services.set(response)
-      console.info('Services', response)
+      if (debug.get()) {
+        // eslint-disable-next-line no-console
+        console.info('Services', response)
+      }
     }
   }
 

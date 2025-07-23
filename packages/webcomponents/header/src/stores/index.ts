@@ -15,7 +15,7 @@
  */
 
 import type { FilteredOrganization, HeaderProperties, Service, Soffit, UserInfo } from '../types/index.ts'
-import { atom } from 'nanostores'
+import { atom, computed } from 'nanostores'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
@@ -35,6 +35,10 @@ const userInfo = atom<UserInfo | undefined>()
 const organization = atom<FilteredOrganization | undefined>()
 
 const services = atom<Array<Service> | undefined>()
+
+const debug = computed(settings, (newValue) => {
+  return newValue.debug ?? false
+})
 
 settings.listen(onDiff((diffs) => {
   if (diffs.has('userInfoApiUrl'))
@@ -79,7 +83,10 @@ async function updateSettings(newValue: Partial<HeaderProperties>): Promise<void
       ...newValue,
     })
   }
-  console.info('Settings', settings.get())
+  if (debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Settings', settings.get())
+  }
 }
 
 async function updateTemplate(templateApiUrl: string | undefined, domain: string | undefined): Promise<Partial<HeaderProperties> | undefined> {
@@ -87,7 +94,10 @@ async function updateTemplate(templateApiUrl: string | undefined, domain: string
     return
 
   const template = await TemplateService.get(templateApiUrl, domain)
-  console.info('Template', template)
+  if (debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Template', template)
+  }
   return template?.config
 }
 
@@ -99,7 +109,10 @@ async function updateSoffit(): Promise<void> {
 
   const response = await SoffitService.get(userInfoApiUrl)
   soffit.set(response)
-  console.info('Soffit', response)
+  if (debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Soffit', response)
+  }
 }
 
 function updateUserInfo(): void {
@@ -111,7 +124,10 @@ function updateUserInfo(): void {
 
   const response = UserInfoService.getFromSoffit(soffitObject, orgAttributeName, userAllOrgsIdAttributeName)
   userInfo.set(response)
-  console.info('UserInfo', response)
+  if (debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('UserInfo', response)
+  }
 }
 
 async function updateOrganization(): Promise<void> {
@@ -130,10 +146,14 @@ async function updateOrganization(): Promise<void> {
     'otherAttributes.ESCOStructureLogo[0]',
   )
   organization.set(response)
-  console.info('Organization', response)
+  if (debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Organization', response)
+  }
 }
 
 export {
+  debug,
   organization,
   services,
   settings,
