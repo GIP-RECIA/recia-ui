@@ -22,7 +22,7 @@ import type { HeaderProperties } from './types/headerType.ts'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
-import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
+import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -32,13 +32,13 @@ import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import ServicesService from './services/servicesService.ts'
 import {
-  debug,
-  organization,
-  services,
-  settings,
-  soffit,
+  $debug,
+  $organizations,
+  $services,
+  $settings,
+  $soffit,
+  $userInfo,
   updateSettings,
-  userInfo,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
 import { UserMenuItem } from './types/userMenuItemType.ts'
@@ -81,11 +81,11 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 ]
 
 @localized()
-@useStores(settings)
-@useStores(soffit)
-@useStores(userInfo)
-@useStores(organization)
-@useStores(services)
+@useStores($settings)
+@useStores($soffit)
+@useStores($userInfo)
+@useStores($organizations)
+@useStores($services)
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
@@ -284,15 +284,15 @@ export class ReciaHeader extends LitElement {
     const { show } = e.detail
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
-    if (show && !services.get()) {
-      const { servicesInfoApiUrl, portletApiUrl } = settings.get()
-      const soffitObject = soffit.get()
+    if (show && !$services.get()) {
+      const { servicesInfoApiUrl, portletApiUrl } = $settings.get()
+      const soffitObject = $soffit.get()
       if (!soffitObject || !portletApiUrl || !servicesInfoApiUrl)
         return
 
       const response = await ServicesService.get(soffitObject, portletApiUrl, servicesInfoApiUrl)
-      services.set(response)
-      if (debug.get()) {
+      $services.set(response)
+      if ($debug.get()) {
         // eslint-disable-next-line no-console
         console.info('Services', response)
       }
@@ -336,7 +336,7 @@ export class ReciaHeader extends LitElement {
   }
 
   render(): TemplateResult {
-    const orgName = organization.get()?.current.displayName ?? ''
+    const orgName = $organizations.get()?.current.displayName ?? ''
 
     return html`
       <div class="header">
@@ -369,7 +369,7 @@ export class ReciaHeader extends LitElement {
           ?show="${this.isServicesLayout}"
           ?navigation-drawer-visible="${this.data.visible}"
           .filters="${this.data.filters}"
-          .services="${services.get()}"
+          .services="${$services.get()}"
           @close="${this.toggleServicesLayout}"
           @open-more="${this.openMore}"
         >

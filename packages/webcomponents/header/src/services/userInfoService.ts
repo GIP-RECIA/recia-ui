@@ -16,7 +16,7 @@
 
 import type { Soffit, UserInfo } from '../types/index.ts'
 import { get } from 'lodash-es'
-import { debug } from '../stores/index.ts'
+import { $debug } from '../stores/index.ts'
 
 export default class UserInfoService {
   static getFromSoffit(
@@ -36,7 +36,7 @@ export default class UserInfoService {
     }
 
     if (!userInfo.displayName || !userInfo.currentOrgId) {
-      if (debug.get()) {
+      if ($debug.get()) {
         // eslint-disable-next-line no-console
         console.info('Missing user information')
       }

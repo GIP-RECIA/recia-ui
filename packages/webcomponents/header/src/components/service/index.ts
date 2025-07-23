@@ -25,7 +25,7 @@ import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import FavoritesService from '../../services/favoritesService.ts'
-import { settings, soffit } from '../../stores/index.ts'
+import { $settings, $soffit } from '../../stores/index.ts'
 import { Category } from '../../types/index.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -33,8 +33,8 @@ import styles from './style.scss?inline'
 import 'filters'
 
 @localized()
-@useStores(settings)
-@useStores(soffit)
+@useStores($settings)
+@useStores($soffit)
 export class ReciaService extends LitElement {
   @property({ type: Number, attribute: 'id' })
   channelId?: number
@@ -93,14 +93,14 @@ export class ReciaService extends LitElement {
   }
 
   async toggleFavorite(_: Event): Promise<void> {
-    const { favoriteApiUrl } = settings.get()
-    const soffitObject = soffit.get()
-    if (!soffitObject || !favoriteApiUrl || !this.channelId)
+    const { favoriteApiUrl } = $settings.get()
+    const soffit = $soffit.get()
+    if (!soffit || !favoriteApiUrl || !this.channelId)
       return
 
     const response: boolean = this.isFavorite
-      ? await FavoritesService.remove(soffitObject, favoriteApiUrl, this.channelId)
-      : await FavoritesService.add(soffitObject, favoriteApiUrl, this.channelId)
+      ? await FavoritesService.remove(soffit, favoriteApiUrl, this.channelId)
+      : await FavoritesService.add(soffit, favoriteApiUrl, this.channelId)
 
     if (response)
       this.isFavorite = !this.isFavorite

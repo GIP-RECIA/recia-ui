@@ -26,14 +26,14 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import ChangeEtabService from '../../services/changeEtabService.ts'
-import { organization, settings, soffit } from '../../stores/index.ts'
+import { $organizations, $settings, $soffit } from '../../stores/index.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'favorite'
 
 @localized()
-@useStores(organization)
+@useStores($organizations)
 export class ReciaChangeEtabBottomSheet extends LitElement {
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
@@ -62,8 +62,8 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
 
   async submitForm(e: Event): Promise<void> {
     e.preventDefault()
-    const soffitObject = soffit.get()
-    const { switchOrgPortletUrl } = settings.get()
+    const soffitObject = $soffit.get()
+    const { switchOrgPortletUrl } = $settings.get()
     if (!soffitObject || !switchOrgPortletUrl)
       return
 
@@ -80,7 +80,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
   }
 
   render(): TemplateResult {
-    const { other } = organization.get() ?? {}
+    const { other } = $organizations.get() ?? {}
 
     return html`
       <r-bottom-sheet

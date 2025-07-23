@@ -31,24 +31,24 @@ import { UserMenuItem } from '../types/index.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 
-const settings = atom<Partial<HeaderProperties>>({
+const $settings = atom<Partial<HeaderProperties>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
 })
 
-const soffit = atom<Soffit | undefined>()
+const $soffit = atom<Soffit | undefined>()
 
-const userInfo = atom<UserInfo | undefined>()
+const $userInfo = atom<UserInfo | undefined>()
 
-const organization = atom<Organizations | undefined>()
+const $organizations = atom<Organizations | undefined>()
 
-const services = atom<Array<Service> | undefined>()
+const $services = atom<Array<Service> | undefined>()
 
-const debug = computed(settings, (newValue) => {
+const $debug = computed($settings, (newValue) => {
   return newValue.debug ?? false
 })
 
-const userMenu = computed([userInfo, settings], (userInfoObject, settingsObject) => {
+const $userMenu = computed([$userInfo, $settings], (userInfoObject, settingsObject) => {
   if (!userInfoObject || !settingsObject)
     return undefined
 
@@ -88,12 +88,12 @@ const userMenu = computed([userInfo, settings], (userInfoObject, settingsObject)
   }
 })
 
-settings.listen(onDiff((diffs) => {
+$settings.listen(onDiff((diffs) => {
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
 }))
 
-soffit.listen(onDiff((diffs) => {
+$soffit.listen(onDiff((diffs) => {
   if (
     diffs.has('name')
     || diffs.has('picture')
@@ -104,45 +104,48 @@ soffit.listen(onDiff((diffs) => {
   }
 }))
 
-userInfo.listen(onDiff((diffs) => {
+$userInfo.listen(onDiff((diffs) => {
   if (diffs.has('orgIds') || diffs.has('currentOrgId'))
     updateOrganization()
 }))
 
 async function updateSettings(newValue: Partial<HeaderProperties>): Promise<void> {
-  const diffs = difference(newValue, settings.get())
+  const diffs = difference(newValue, $settings.get())
   if (diffs.size === 0)
     return
 
   if (diffs.has('templateApiUrl')) {
     const config = await updateTemplate(
       diffs.get('templateApiUrl') as string | undefined,
-      diffs.get('domain') as string | undefined ?? settings.get().domain,
+      diffs.get('domain') as string | undefined ?? $settings.get().domain,
     )
-    settings.set({
-      ...settings.get(),
+    $settings.set({
+      ...$settings.get(),
       ...config,
       ...newValue,
     })
   }
   else {
-    settings.set({
-      ...settings.get(),
+    $settings.set({
+      ...$settings.get(),
       ...newValue,
     })
   }
-  if (debug.get()) {
+  if ($debug.get()) {
     // eslint-disable-next-line no-console
-    console.info('Settings', settings.get())
+    console.info('Settings', $settings.get())
   }
 }
 
-async function updateTemplate(templateApiUrl: string | undefined, domain: string | undefined): Promise<Partial<HeaderProperties> | undefined> {
+async function updateTemplate(
+  templateApiUrl: string | undefined,
+  domain: string | undefined,
+): Promise<Partial<HeaderProperties> | undefined> {
   if (!templateApiUrl || !domain)
     return
 
   const template = await TemplateService.get(templateApiUrl, domain)
-  if (debug.get()) {
+  if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Template', template)
   }
@@ -150,63 +153,63 @@ async function updateTemplate(templateApiUrl: string | undefined, domain: string
 }
 
 async function updateSoffit(): Promise<void> {
-  const { userInfoApiUrl } = settings.get()
+  const { userInfoApiUrl } = $settings.get()
 
   if (!userInfoApiUrl)
     return
 
   const response = await SoffitService.get(userInfoApiUrl)
-  soffit.set(response)
-  if (debug.get()) {
+  $soffit.set(response)
+  if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Soffit', response)
   }
 }
 
 function updateUserInfo(): void {
-  const { orgAttributeName, userAllOrgsIdAttributeName } = settings.get()
-  const soffitObject = soffit.get()
+  const { orgAttributeName, userAllOrgsIdAttributeName } = $settings.get()
+  const soffit = $soffit.get()
 
-  if (!soffitObject || !orgAttributeName || !userAllOrgsIdAttributeName)
+  if (!soffit || !orgAttributeName || !userAllOrgsIdAttributeName)
     return
 
-  const response = UserInfoService.getFromSoffit(soffitObject, orgAttributeName, userAllOrgsIdAttributeName)
-  userInfo.set(response)
-  if (debug.get()) {
+  const response = UserInfoService.getFromSoffit(soffit, orgAttributeName, userAllOrgsIdAttributeName)
+  $userInfo.set(response)
+  if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('UserInfo', response)
   }
 }
 
 async function updateOrganization(): Promise<void> {
-  const { organizationApiUrl, userAllOrgsIdAttributeName } = settings.get()
-  const soffitObject = soffit.get()
-  const { orgIds, currentOrgId } = userInfo.get() ?? {}
+  const { organizationApiUrl, userAllOrgsIdAttributeName } = $settings.get()
+  const soffit = $soffit.get()
+  const { orgIds, currentOrgId } = $userInfo.get() ?? {}
 
-  if (!soffitObject || !organizationApiUrl || !userAllOrgsIdAttributeName || !orgIds || !currentOrgId)
+  if (!soffit || !organizationApiUrl || !userAllOrgsIdAttributeName || !orgIds || !currentOrgId)
     return
 
   const response = await OrganizationService.get(
-    soffitObject,
+    soffit,
     organizationApiUrl,
     orgIds,
     currentOrgId,
     'otherAttributes.ESCOStructureLogo[0]',
   )
-  organization.set(response)
-  if (debug.get()) {
+  $organizations.set(response)
+  if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Organization', response)
   }
 }
 
 export {
-  debug,
-  organization,
-  services,
-  settings,
-  soffit,
+  $debug,
+  $organizations,
+  $services,
+  $settings,
+  $soffit,
+  $userInfo,
+  $userMenu,
   updateSettings,
-  userInfo,
-  userMenu,
 }

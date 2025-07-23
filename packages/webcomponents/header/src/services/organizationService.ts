@@ -21,7 +21,7 @@ import type {
   Soffit,
 } from '../types/index.ts'
 import { get } from 'lodash-es'
-import { debug } from '../stores/index.ts'
+import { $debug } from '../stores/index.ts'
 
 export default class OrganizationService {
   static async get(
@@ -32,7 +32,7 @@ export default class OrganizationService {
     logoAttribute: string,
   ): Promise<Organizations | undefined> {
     try {
-      const debugValue = debug.get()
+      const debugValue = $debug.get()
       const { token } = soffit
 
       const getParams = new URLSearchParams({ ids: orgIds.toString() })

@@ -23,7 +23,7 @@ import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { userInfo, userMenu } from '../../stores/index.ts'
+import { $userInfo, $userMenu } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -31,7 +31,7 @@ import '../search'
 import 'user-menu'
 
 @localized()
-@useStores(userInfo)
+@useStores($userInfo)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: String })
   name?: string
@@ -48,7 +48,7 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   render(): TemplateResult {
-    const userMenuObject = userMenu.get()
+    const userMenu = $userMenu.get()
 
     return html`
       <div class="principal-container">
@@ -81,10 +81,10 @@ export class ReciaPrincipalContainer extends LitElement {
               : nothing
           }
           ${
-            userMenuObject
+            userMenu
               ? html`
                   <r-user-menu
-                    ${spreadAttributes(userMenuObject)}
+                    ${spreadAttributes(userMenu)}
                     @launch="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent('user-menu-event', e))}"
                   >
                   </r-user-menu>
