@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import type { FilteredOrganization, HeaderProperties, Service, Soffit, UserInfo } from '../types/index.ts'
+import type { FilteredOrganization, HeaderProperties, Service, Soffit, UserInfo, UserMenuConfig } from '../types/index.ts'
 import { atom, computed } from 'nanostores'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
+import { UserMenuItem } from '../types/index.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 
@@ -38,6 +39,46 @@ const services = atom<Array<Service> | undefined>()
 
 const debug = computed(settings, (newValue) => {
   return newValue.debug ?? false
+})
+
+const userMenu = computed([userInfo, settings], (userInfoObject, settingsObject) => {
+  if (!userInfoObject || !settingsObject)
+    return undefined
+
+  const { displayName, picture, hasOtherOrgs } = userInfoObject
+  const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settingsObject
+
+  const config: UserMenuConfig = {
+    [UserMenuItem.Search]: undefined,
+    [UserMenuItem.Notification]: false,
+    [UserMenuItem.Settings]: userInfoPortletUrl
+      ? {
+          link: {
+            href: userInfoPortletUrl,
+          },
+        }
+      : false,
+    [UserMenuItem.InfoEtab]: false,
+    [UserMenuItem.ChangeEtab]: hasOtherOrgs
+      ? {
+          link: null,
+        }
+      : false,
+    [UserMenuItem.Starter]: false,
+    [UserMenuItem.Logout]: signOutUrl
+      ? {
+          link: {
+            href: signOutUrl,
+          },
+        }
+      : false,
+  }
+
+  return {
+    'picture': picture ?? defaultAvatarUrl,
+    'display-name': displayName,
+    config,
+  }
 })
 
 settings.listen(onDiff((diffs) => {
@@ -160,4 +201,5 @@ export {
   soffit,
   updateSettings,
   userInfo,
+  userMenu,
 }

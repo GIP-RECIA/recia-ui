@@ -21,8 +21,9 @@ import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
+import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { userInfo } from '../../stores/index.ts'
+import { userInfo, userMenu } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -47,7 +48,7 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   render(): TemplateResult {
-    const { displayName, picture } = userInfo.get() ?? {}
+    const userMenuObject = userMenu.get()
 
     return html`
       <div class="principal-container">
@@ -79,11 +80,17 @@ export class ReciaPrincipalContainer extends LitElement {
                 `
               : nothing
           }
-          <r-user-menu
-            picture="${picture ?? '/images/icones/noPictureUser.svg'}"
-            display-name="${displayName}"
-          >
-          </r-user-menu>
+          ${
+            userMenuObject
+              ? html`
+                  <r-user-menu
+                    ${spreadAttributes(userMenuObject)}
+                    @launch="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent('user-menu-event', e))}"
+                  >
+                  </r-user-menu>
+                `
+              : nothing
+          }
           ${
             false
               ? html`

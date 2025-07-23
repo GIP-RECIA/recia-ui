@@ -173,13 +173,7 @@ export class ReciaUserMenu extends LitElement {
 
   emitEvent(_: Event, type: string): void {
     this.close(undefined, false)
-    document.dispatchEvent(new CustomEvent('launch', {
-      detail: {
-        type,
-      },
-      bubbles: true,
-      composed: true,
-    }))
+    this.dispatchEvent(new CustomEvent('launch', { detail: { type } }))
   }
 
   static i18n(): Record<Item, string> {

@@ -40,6 +40,7 @@ import {
   userInfo,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
+import { UserMenuItem } from './types/userMenuItemType.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import './components/navigation-drawer'
 import './components/notification-drawer'
@@ -302,6 +303,33 @@ export class ReciaHeader extends LitElement {
     this.serviceInfoRef.value?.dispatchEvent(new CustomEvent('service-info', { detail: { fname } }))
   }
 
+  handleUserMenuEvent(e: CustomEvent) {
+    const { type } = e.detail
+    switch (type as UserMenuItem) {
+      case UserMenuItem.Search:
+        break
+      case UserMenuItem.Notification:
+        break
+      case UserMenuItem.Settings:
+        break
+      case UserMenuItem.InfoEtab:
+        break
+      case UserMenuItem.ChangeEtab:
+        break
+      case UserMenuItem.Starter:
+        document.dispatchEvent(new CustomEvent('launch-starter', {
+          bubbles: true,
+          composed: true
+        }))
+        break
+      case UserMenuItem.Logout:
+        break
+
+      default:
+        break
+    }
+  }
+
   render(): TemplateResult {
     const orgName = organization.get()?.current.displayName ?? ''
 
@@ -328,6 +356,7 @@ export class ReciaHeader extends LitElement {
           <r-principal-container
             name="${orgName}"
             search="${this.data.search}"
+            @user-menu-event="${this.handleUserMenuEvent}"
           >
           </r-principal-container>
         </div>
