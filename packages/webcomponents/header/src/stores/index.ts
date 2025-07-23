@@ -97,14 +97,14 @@ $settings.listen(onDiff((diffs) => {
 }))
 
 $soffit.listen(onDiff((diffs) => {
-  if (
-    diffs.has('name')
-    || diffs.has('picture')
-    || diffs.has('ESCOSIRENCourant')
-    || diffs.has('ESCOSIREN')
-  ) {
+  const { orgAttributeName, userAllOrgsIdAttributeName } = $settings.get()
+  let userInfoDiff = diffs.has('name')
+  if (orgAttributeName)
+    userInfoDiff = userInfoDiff || diffs.has(orgAttributeName)
+  if (userAllOrgsIdAttributeName)
+    userInfoDiff = userInfoDiff || diffs.has(userAllOrgsIdAttributeName)
+  if (userInfoDiff)
     updateUserInfo()
-  }
 }))
 
 $userInfo.listen(onDiff((diffs) => {
@@ -170,13 +170,17 @@ async function updateSoffit(): Promise<void> {
 }
 
 function updateUserInfo(): void {
-  const { orgAttributeName, userAllOrgsIdAttributeName } = $settings.get()
   const soffit = $soffit.get()
+  const { orgAttributeName, userAllOrgsIdAttributeName } = $settings.get()
 
   if (!soffit || !orgAttributeName || !userAllOrgsIdAttributeName)
     return
 
-  const response = UserInfoService.getFromSoffit(soffit, orgAttributeName, userAllOrgsIdAttributeName)
+  const response = UserInfoService.getFromSoffit(
+    soffit,
+    orgAttributeName,
+    userAllOrgsIdAttributeName,
+  )
   $userInfo.set(response)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
@@ -185,11 +189,11 @@ function updateUserInfo(): void {
 }
 
 async function updateOrganization(): Promise<void> {
-  const { organizationApiUrl, userAllOrgsIdAttributeName } = $settings.get()
   const soffit = $soffit.get()
+  const { organizationApiUrl, orgLogoUrlAttributeName } = $settings.get()
   const { orgIds, currentOrgId } = $userInfo.get() ?? {}
 
-  if (!soffit || !organizationApiUrl || !userAllOrgsIdAttributeName || !orgIds || !currentOrgId)
+  if (!soffit || !organizationApiUrl || !orgIds || !currentOrgId)
     return
 
   const response = await OrganizationService.get(
@@ -197,7 +201,7 @@ async function updateOrganization(): Promise<void> {
     organizationApiUrl,
     orgIds,
     currentOrgId,
-    'otherAttributes.ESCOStructureLogo[0]',
+    orgLogoUrlAttributeName ?? '',
   )
   $organizations.set(response)
   if ($debug.get()) {
