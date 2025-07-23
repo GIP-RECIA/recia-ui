@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Item } from 'widget/src/types/ItemType'
+import type { Item } from '../../widget/src/types/ItemType.ts'
 import type { WidgetDataDTO } from './classes/WidgetDataDTO.ts'
 import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
@@ -44,7 +44,7 @@ import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
-import 'widget/dist/r-widget.js'
+import 'widget'
 
 const tagName = componentName(name)
 
