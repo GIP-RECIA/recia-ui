@@ -23,6 +23,7 @@ import type {
   UserMenuConfig,
 } from '../types/index.ts'
 import { atom, computed } from 'nanostores'
+import LayoutService from '../services/layoutService.ts'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
@@ -43,6 +44,8 @@ const $userInfo = atom<UserInfo | undefined>()
 const $organizations = atom<Organizations | undefined>()
 
 const $services = atom<Array<Service> | undefined>()
+
+const $layout = atom<any | undefined>()
 
 const $debug = computed($settings, (newValue) => {
   return newValue.debug ?? false
@@ -200,6 +203,21 @@ async function updateOrganization(): Promise<void> {
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Organization', response)
+  }
+}
+
+async function updateLayout(): Promise<void> {
+  const soffit = $soffit.get()
+  const { layoutApiUrl } = $settings.get()
+
+  if (!soffit || !layoutApiUrl)
+    return
+
+  const response = await LayoutService.get(soffit, layoutApiUrl)
+  $layout.set(response)
+  if ($debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Layout', response)
   }
 }
 
