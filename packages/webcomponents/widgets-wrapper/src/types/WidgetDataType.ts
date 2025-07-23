@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import type { Item } from 'widget/src/types/ItemType'
-import type { Link } from 'widget/src/types/LinkType'
+import type { TemplateResult } from 'lit'
+import type { Item } from '../../../widget/src/types/ItemType.ts'
+import type { Link } from '../../../widget/src/types/LinkType.ts'
 
 export interface WidgetData {
   uid: string
