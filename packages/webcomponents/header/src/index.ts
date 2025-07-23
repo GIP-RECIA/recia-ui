@@ -337,6 +337,7 @@ export class ReciaHeader extends LitElement {
 
   render(): TemplateResult {
     const orgName = $organizations.get()?.current.displayName ?? ''
+    const { serviceInfoApiUrl, portletInfoApiUrl } = $settings.get()
 
     return html`
       <div class="header">
@@ -380,8 +381,8 @@ export class ReciaHeader extends LitElement {
       <div class="teleport">
         <r-service-info-bottom-sheet
           ${ref(this.serviceInfoRef)}
-          portal-info-api-url="${this.portletInfoApiUrl ?? ''}"
-          service-info-api-url="${this.serviceInfoApiUrl ?? ''}"
+          portal-info-api-url="${portletInfoApiUrl ?? ''}"
+          service-info-api-url="${serviceInfoApiUrl ?? ''}"
         >
         </r-service-info-bottom-sheet>
         <r-change-etab-bottom-sheet
