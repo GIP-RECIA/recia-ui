@@ -23,6 +23,7 @@ export interface OrganizationApiResponse {
     string,
     Array<string | number | boolean>
   >
+  code: string
 }
 
 export type Organization = Omit<OrganizationApiResponse, 'otherAttributes'> & {

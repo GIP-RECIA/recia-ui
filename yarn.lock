@@ -4474,6 +4474,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     "@types/regenerator-runtime": "npm:^0"
     "@uportal/open-id-connect": "npm:^1.40.2"
+    bottom-sheet: "workspace:^"
     eslint: "npm:^9.31.0"
     eslint-plugin-format: "npm:^1.0.1"
     favorite: "workspace:^"

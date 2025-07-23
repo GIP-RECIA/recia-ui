@@ -46,6 +46,7 @@
     "@types/lodash-es": "^4",
     "@types/regenerator-runtime": "^0",
     "@uportal/open-id-connect": "^1.40.2",
+    "bottom-sheet": "workspace:^",
     "eslint": "^9.31.0",
     "eslint-plugin-format": "^1.0.1",
     "favorite": "workspace:^",

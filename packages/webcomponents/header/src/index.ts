@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaBottomSheetServiceInfo } from 'service-info'
@@ -21,7 +22,7 @@ import type { HeaderProperties } from './types/headerType.ts'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -48,6 +49,7 @@ import './components/principal-container'
 import './components/services-layout'
 import 'regenerator-runtime/runtime.js'
 import 'service-info'
+import './components/change-etab-bottom-sheet'
 
 const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'messages',
@@ -240,6 +242,8 @@ export class ReciaHeader extends LitElement {
 
   serviceInfoRef: Ref<ReciaBottomSheetServiceInfo> = createRef()
 
+  changeEtabRef: Ref<ReciaBottomSheet> = createRef()
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -315,11 +319,12 @@ export class ReciaHeader extends LitElement {
       case UserMenuItem.InfoEtab:
         break
       case UserMenuItem.ChangeEtab:
+        this.changeEtabRef.value?.open()
         break
       case UserMenuItem.Starter:
         document.dispatchEvent(new CustomEvent('launch-starter', {
           bubbles: true,
-          composed: true
+          composed: true,
         }))
         break
       case UserMenuItem.Logout:
@@ -379,6 +384,10 @@ export class ReciaHeader extends LitElement {
           service-info-api-url="${this.serviceInfoApiUrl ?? ''}"
         >
         </r-service-info-bottom-sheet>
+        <r-change-etab-bottom-sheet
+          ${ref(this.changeEtabRef)}
+        >
+        </r-change-etab-bottom-sheet>
       </div>
     `
   }
