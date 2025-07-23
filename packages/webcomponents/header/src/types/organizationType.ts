@@ -30,7 +30,7 @@ export type Organization = Omit<OrganizationApiResponse, 'otherAttributes'> & {
   logo?: string
 }
 
-export interface FilteredOrganization {
+export interface Organizations {
   current: Organization
   other: Array<Organization>
 }

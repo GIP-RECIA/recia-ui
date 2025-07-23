@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-import type { FilteredOrganization, HeaderProperties, Service, Soffit, UserInfo, UserMenuConfig } from '../types/index.ts'
+import type {
+  HeaderProperties,
+  Organizations,
+  Service,
+  Soffit,
+  UserInfo,
+  UserMenuConfig,
+} from '../types/index.ts'
 import { atom, computed } from 'nanostores'
 import OrganizationService from '../services/organizationService.ts'
 import SoffitService from '../services/soffitService.ts'
@@ -33,7 +40,7 @@ const soffit = atom<Soffit | undefined>()
 
 const userInfo = atom<UserInfo | undefined>()
 
-const organization = atom<FilteredOrganization | undefined>()
+const organization = atom<Organizations | undefined>()
 
 const services = atom<Array<Service> | undefined>()
 

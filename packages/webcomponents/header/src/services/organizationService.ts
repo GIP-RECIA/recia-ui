@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-import type { FilteredOrganization, Organization, OrganizationApiResponse, Soffit } from '../types/index.ts'
+import type {
+  Organization,
+  OrganizationApiResponse,
+  Organizations,
+  Soffit,
+} from '../types/index.ts'
 import { get } from 'lodash-es'
 import { debug } from '../stores/index.ts'
 
@@ -25,7 +30,7 @@ export default class OrganizationService {
     orgIds: Array<string>,
     currentOrgId: string,
     logoAttribute: string,
-  ): Promise<FilteredOrganization | undefined> {
+  ): Promise<Organizations | undefined> {
     try {
       const debugValue = debug.get()
       const { token } = soffit
