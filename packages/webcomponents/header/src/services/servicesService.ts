@@ -15,6 +15,7 @@
  */
 
 import type { Service, Soffit } from '../types/index.ts'
+import { $settings } from '../stores/index.ts'
 import InfoService from './infoService.ts'
 import PortletService from './portletService.ts'
 
@@ -32,6 +33,7 @@ export default class ServicesService {
     if (!portlets || !portletsInfo)
       return undefined
 
+    const { contextApiUrl } = $settings.get()
     const services: Array<Service> = portlets.map((portlet) => {
       const {
         id,
@@ -56,7 +58,7 @@ export default class ServicesService {
         category: categoriePrincipale,
         iconUrl: iconUrl?.value,
         link: {
-          href: alternativeMaximizedLink?.value ?? `/portail/p/${fname}`,
+          href: alternativeMaximizedLink?.value ?? `${contextApiUrl}/p/${fname}`,
           target: alternativeMaximizedLinkTarget?.value ?? '_self',
         },
         favorite,
