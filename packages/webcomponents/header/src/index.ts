@@ -22,7 +22,7 @@ import type { HeaderProperties } from './types/headerType.ts'
 import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -31,6 +31,7 @@ import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import {
+  $authenticated,
   $organizations,
   $services,
   $settings,
@@ -260,7 +261,7 @@ export class ReciaHeader extends LitElement {
       updateSettings(updatedSettings)
     }
     this.injectStyle()
-    document.body.classList.add(this.data.visible ? 'navigation-drawer-visible' : '', 'auto-margin-top')
+    document.body.classList.add('auto-margin-top')
     return true
   }
 
@@ -324,6 +325,7 @@ export class ReciaHeader extends LitElement {
   }
 
   render(): TemplateResult {
+    const authenticated = $authenticated.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
     const { serviceInfoApiUrl, portletInfoApiUrl } = $settings.get()
 
@@ -336,16 +338,22 @@ export class ReciaHeader extends LitElement {
           })}"
         >
         </div>
-        <r-navigation-drawer
-          logo="${this.data.logo}"
-          name="${orgName}"
-          .homeLink="${this.data.homeLink}"
-          ?visible="${this.data.visible}"
-          .items="${this.data.items}"
-          ?services-layout-state="${this.isServicesLayout}"
-          @toggle-services-layout="${this.toggleServicesLayout}"
-        >
-        </r-navigation-drawer>
+        ${
+          authenticated
+            ? html`
+                <r-navigation-drawer
+                  logo="${this.data.logo}"
+                  name="${orgName}"
+                  .homeLink="${this.data.homeLink}"
+                  ?visible="${this.data.visible}"
+                  .items="${this.data.items}"
+                  ?services-layout-state="${this.isServicesLayout}"
+                  @toggle-services-layout="${this.toggleServicesLayout}"
+                >
+                </r-navigation-drawer>
+              `
+            : nothing
+        }
         <div class="topbar">
           <r-principal-container
             name="${orgName}"
@@ -354,30 +362,42 @@ export class ReciaHeader extends LitElement {
           >
           </r-principal-container>
         </div>
-        <r-services-layout
-          ?show="${this.isServicesLayout}"
-          ?navigation-drawer-visible="${this.data.visible}"
-          .filters="${this.data.filters}"
-          .services="${$services.get()}"
-          @close="${this.toggleServicesLayout}"
-          @open-more="${this.openMore}"
-        >
-        </r-services-layout>
-        <r-notification-drawer>
-        </r-notification-drawer>
+        ${
+          authenticated
+            ? html`
+                <r-services-layout
+                  ?show="${this.isServicesLayout}"
+                  ?navigation-drawer-visible="${this.data.visible}"
+                  .filters="${this.data.filters}"
+                  .services="${$services.get()}"
+                  @close="${this.toggleServicesLayout}"
+                  @open-more="${this.openMore}"
+                >
+                </r-services-layout>
+                <r-notification-drawer>
+                </r-notification-drawer>
+              `
+            : nothing
+        }
       </div>
-      <div class="teleport">
-        <r-service-info-bottom-sheet
-          ${ref(this.serviceInfoRef)}
-          portal-info-api-url="${portletInfoApiUrl ?? ''}"
-          service-info-api-url="${serviceInfoApiUrl ?? ''}"
-        >
-        </r-service-info-bottom-sheet>
-        <r-change-etab-bottom-sheet
-          ${ref(this.changeEtabRef)}
-        >
-        </r-change-etab-bottom-sheet>
-      </div>
+      ${
+        authenticated
+          ? html`
+              <div class="teleport">
+                <r-service-info-bottom-sheet
+                  ${ref(this.serviceInfoRef)}
+                  portal-info-api-url="${portletInfoApiUrl ?? ''}"
+                  service-info-api-url="${serviceInfoApiUrl ?? ''}"
+                >
+                </r-service-info-bottom-sheet>
+                <r-change-etab-bottom-sheet
+                  ${ref(this.changeEtabRef)}
+                >
+                </r-change-etab-bottom-sheet>
+              </div>
+            `
+          : nothing
+      }
     `
   }
 

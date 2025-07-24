@@ -53,6 +53,10 @@ const $debug = computed($settings, (newValue) => {
   return newValue.debug ?? false
 })
 
+const $authenticated = computed($soffit, (newValue) => {
+  return newValue?.authenticated ?? false
+})
+
 const $userMenu = computed([$userInfo, $settings], (userInfoObject, settingsObject) => {
   if (!userInfoObject || !settingsObject)
     return undefined
@@ -105,7 +109,7 @@ $soffit.listen(onDiff((diffs) => {
     userInfoDiff = userInfoDiff || diffs.has(orgAttributeName)
   if (userAllOrgsIdAttributeName)
     userInfoDiff = userInfoDiff || diffs.has(userAllOrgsIdAttributeName)
-  if (userInfoDiff)
+  if (userInfoDiff && diffs.get('authenticated') === true)
     updateUserInfo()
 }))
 
@@ -113,6 +117,20 @@ $userInfo.listen(onDiff((diffs) => {
   if (diffs.has('orgIds') || diffs.has('currentOrgId'))
     updateOrganization()
 }))
+
+$authenticated.listen((value) => {
+  if (value) {
+    if (true)
+      document.body.classList.add('navigation-drawer-visible')
+  }
+  else {
+    document.body.classList.remove('navigation-drawer-visible')
+    $userInfo.set(undefined)
+    $organizations.set(undefined)
+    $services.set(undefined)
+    $layout.set(undefined)
+  }
+})
 
 async function updateSettings(newValue: Partial<HeaderProperties>): Promise<void> {
   const diffs = difference(newValue, $settings.get())
@@ -233,6 +251,7 @@ async function updateServices(): Promise<void> {
 }
 
 export {
+  $authenticated,
   $debug,
   $organizations,
   $services,

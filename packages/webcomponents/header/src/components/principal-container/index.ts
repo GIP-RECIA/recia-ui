@@ -23,7 +23,7 @@ import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $userInfo, $userMenu } from '../../stores/index.ts'
+import { $authenticated, $userInfo, $userMenu } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -47,70 +47,85 @@ export class ReciaPrincipalContainer extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
-  render(): TemplateResult {
+  authenticatedTemplate(): TemplateResult {
     const userMenu = $userMenu.get()
 
     return html`
-      <div class="principal-container">
-        <div class="start">
-          <span>${this.name}</span>
-        </div>
-        ${
-          this.searchEnabled
-            ? html`
-              <div class="middle">
-                <div>
-                  <r-search>
-                  </r-search>
-                </div>
-              </div>
-            `
-            : nothing
-        }
-        <div class="end">
+        <div class="principal-container">
+          <div class="start">
+            <span>${this.name}</span>
+          </div>
           ${
             this.searchEnabled
               ? html`
-                  <button
-                    class="btn-secondary circle search-button"
-                    aria-label="${msg(str`Rechercher dans l'ENT`)}"
-                  >
-                    ${getIcon(faMagnifyingGlass)}
-                  </button>
-                `
-              : nothing
-          }
-          ${
-            userMenu
-              ? html`
-                  <r-user-menu
-                    ${spreadAttributes(userMenu)}
-                    @launch="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent('user-menu-event', e))}"
-                  >
-                  </r-user-menu>
-                `
-              : nothing
-          }
-          ${
-            false
-              ? html`
-                  <div class="notification">
-                    <div class="notification-dot top right"></div>
-                    <button
-                      class="btn-secondary circle"
-                      aria-controls="notification-drawer"
-                      aria-expanded="false"
-                      aria-label="${msg(str`Tiroir de notifications`)}"
-                    >
-                      ${getIcon(faBell)}
-                    </button>
+                <div class="middle">
+                  <div>
+                    <r-search>
+                    </r-search>
                   </div>
-                `
+                </div>
+              `
               : nothing
           }
+          <div class="end">
+            ${
+              this.searchEnabled
+                ? html`
+                    <button
+                      class="btn-secondary circle search-button"
+                      aria-label="${msg(str`Rechercher dans l'ENT`)}"
+                    >
+                      ${getIcon(faMagnifyingGlass)}
+                    </button>
+                  `
+                : nothing
+            }
+            ${
+              userMenu
+                ? html`
+                    <r-user-menu
+                      ${spreadAttributes(userMenu)}
+                      @launch="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent('user-menu-event', e))}"
+                    >
+                    </r-user-menu>
+                  `
+                : nothing
+            }
+            ${
+              false
+                ? html`
+                    <div class="notification">
+                      <div class="notification-dot top right"></div>
+                      <button
+                        class="btn-secondary circle"
+                        aria-controls="notification-drawer"
+                        aria-expanded="false"
+                        aria-label="${msg(str`Tiroir de notifications`)}"
+                      >
+                        ${getIcon(faBell)}
+                      </button>
+                    </div>
+                  `
+                : nothing
+            }
+          </div>
         </div>
-      </div>
-    `
+      `
+  }
+
+  notAuthenticatedTemplate(): TemplateResult {
+    return html`
+        <div class="principal-container">
+          <div class="start"></div>
+          <div class="end"></div>
+        </div>
+      `
+  }
+
+  render(): TemplateResult {
+    return $authenticated.get()
+      ? this.authenticatedTemplate()
+      : this.notAuthenticatedTemplate()
   }
 
   static styles = css`${unsafeCSS(styles)}`
