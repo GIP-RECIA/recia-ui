@@ -24,6 +24,7 @@ import {
   faChevronDown,
   faInfoCircle,
   faTimes,
+  faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -82,6 +83,12 @@ export class ReciaWidget extends LitElement {
 
   @property({ type: Boolean })
   loading: boolean = false
+
+  @property({ type: Boolean, attribute: 'is-error' })
+  isError?: boolean = false
+
+  @property({ type: String, attribute: 'error-message' })
+  errorMessage?: boolean = false
 
   @state()
   isExpanded: boolean = false
@@ -200,6 +207,35 @@ export class ReciaWidget extends LitElement {
     `
   }
 
+  errorTemplate(): TemplateResult {
+    return html`
+      <div class="empty">
+        ${
+          getIconWithStyle(faTriangleExclamation, undefined, { icon: true })
+        }
+        <span>
+          ${this.errorMessage}
+        </span>
+      </div>
+    `
+  }
+
+  notErrorTemplate(): TemplateResult {
+    return this.items && this.items.length > 0
+      ? html`
+          <ul>
+            ${
+              repeat(
+                this.items,
+                item => item,
+                item => this.itemTemplate(item),
+              )
+            }
+          </ul>
+    `
+      : this.emptyTemplate()
+  }
+
   render(): TemplateResult | typeof nothing {
     if (!this.uid || !this.name)
       return nothing
@@ -313,19 +349,7 @@ export class ReciaWidget extends LitElement {
           ?inert="${this.manage || this.loading}"
         >
           ${
-            this.items && this.items.length > 0
-              ? html`
-                  <ul>
-                    ${
-                      repeat(
-                        this.items,
-                        item => item,
-                        item => this.itemTemplate(item),
-                      )
-                    }
-                  </ul>
-                `
-              : this.emptyTemplate()
+            this.isError ? this.errorTemplate() : this.notErrorTemplate()
           }
         </div>
       </div>

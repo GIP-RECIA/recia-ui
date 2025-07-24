@@ -29,4 +29,6 @@ export interface WidgetData {
   emptyDiscover: boolean
   deletable: boolean
   loading: boolean
+  isError?: boolean
+  errorMessage?: string
 }
