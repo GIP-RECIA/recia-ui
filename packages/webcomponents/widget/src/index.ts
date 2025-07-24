@@ -168,6 +168,38 @@ export class ReciaWidget extends LitElement {
     `
   }
 
+  emptyTemplate(): TemplateResult {
+    return html`
+      <div class="empty">
+        ${
+          !this.emptyDiscover
+            ? this.emptyIcon
+              ? unsafeSVG(this.emptyIcon)
+              : getIconWithStyle(faInfoCircle, undefined, { icon: true })
+            : nothing
+        }
+        <span class="text">
+          ${msg(str`Vous n'avez`)}
+          <span class="large">${this.emptyText}</span>
+        </span>
+        ${
+          this.emptyDiscover && this.link
+            ? html`
+                <a
+                  href="${this.link.href}"
+                  target="${this.link.target ?? nothing}"
+                  rel="${this.link.rel ?? nothing}"
+                  class="btn-secondary small"
+                >
+                  ${msg(str`Découvrir`)}${getIcon(faArrowRight)}
+                </a>
+              `
+            : nothing
+        }
+      </div>
+    `
+  }
+
   render(): TemplateResult | typeof nothing {
     if (!this.uid || !this.name)
       return nothing
@@ -293,35 +325,7 @@ export class ReciaWidget extends LitElement {
                     }
                   </ul>
                 `
-              : html`
-                  <div class="empty">
-                    ${
-                      !this.emptyDiscover
-                        ? this.emptyIcon
-                          ? unsafeSVG(this.emptyIcon)
-                          : getIconWithStyle(faInfoCircle, undefined, { icon: true })
-                        : nothing
-                    }
-                    <span class="text">
-                      ${msg(str`Vous n'avez`)}
-                      <span class="large">${this.emptyText}</span>
-                    </span>
-                    ${
-                      this.emptyDiscover && this.link
-                        ? html`
-                            <a
-                              href="${this.link.href}"
-                              target="${this.link.target ?? nothing}"
-                              rel="${this.link.rel ?? nothing}"
-                              class="btn-secondary small"
-                            >
-                              ${msg(str`Découvrir`)}${getIcon(faArrowRight)}
-                            </a>
-                          `
-                        : nothing
-                    }
-                  </div>
-                `
+              : this.emptyTemplate()
           }
         </div>
       </div>
