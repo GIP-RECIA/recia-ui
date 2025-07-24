@@ -17,3 +17,7 @@ body {
     }
   }
 }
+
+:root {
+  --#{$prefix}drawer-width: #{$drawer-width};
+}
