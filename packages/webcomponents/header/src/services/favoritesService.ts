@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-import type { Soffit } from '../types/index.ts'
+import type {
+  FavoriteContent,
+  FavoriteLayout,
+  LayoutApiResponse,
+  Soffit,
+} from '../types/index.ts'
 
 export default class FavoritesService {
   static getFromLayout(
-    layout: any,
-  ): Array<any> | undefined {
+    layout: LayoutApiResponse,
+  ): Array<FavoriteContent> | undefined {
     const { authenticated, layout: { globals: { hasFavorites }, favorites } } = layout
     if (authenticated && hasFavorites && favorites)
       return FavoritesService.flattenFavorites(favorites)
@@ -27,15 +32,20 @@ export default class FavoritesService {
     return undefined
   }
 
-  private static flattenFavorites(elem: any): Array<any> {
+  private static flattenFavorites(
+    elem: Array<FavoriteLayout> | Array<FavoriteContent> | FavoriteLayout | FavoriteContent,
+  ): Array<FavoriteContent> {
+    const { content } = elem as FavoriteLayout
+    const { fname } = elem as FavoriteContent
+
     if (Array.isArray(elem))
       return elem.flatMap(FavoritesService.flattenFavorites)
 
-    if (elem.content)
-      return FavoritesService.flattenFavorites(elem.content)
+    if (content)
+      return FavoritesService.flattenFavorites(content)
 
-    if (elem.fname)
-      return [elem]
+    if (fname)
+      return [elem as FavoriteContent]
 
     return []
   }

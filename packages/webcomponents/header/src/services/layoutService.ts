@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import type { Soffit } from '../types/index.ts'
+import type { LayoutApiResponse, Soffit } from '../types/index.ts'
 
 export default class LayoutService {
   static async get(
     soffit: Soffit,
     layoutApiUrl: string,
-  ): Promise<any | undefined> {
+  ): Promise<LayoutApiResponse | undefined> {
     try {
       const { token } = soffit
 
@@ -35,7 +35,7 @@ export default class LayoutService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const layout: any = await response.json()
+      const layout: LayoutApiResponse = await response.json()
 
       return layout
     }

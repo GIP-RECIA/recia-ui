@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-export interface Portlet {
+export interface PortletFromInfo {
   nodeId: string
   title: string
   description: string
-  url: string
+  url?: string
   iconUrl: string
   faIcon?: string
   fname: string
@@ -31,24 +31,26 @@ export interface Portlet {
   pithyStaticContent?: string
   altMaxUrl: boolean
   renderOnWeb: boolean
-  parameters: portletParameters
+  parameters: PortletFromInfoParameters
 }
 
-export interface portletParameters {
-  hideFromDesktop: string
-  blockImpersonation: string
+export interface PortletFromInfoParameters {
+  hideFromDesktop?: string
+  blockImpersonation?: string
   mobileIconUrl: string
   hasAbout: string
   editable: string
-  alternate: string
-  disableDynamicTitle: string
-  hideFromMobile: string
-  highlight: string
-  alternativeMaximizedLink?: string
-  alternativeMaximizedLinkTarget?: string
+  alternate?: string
+  disableDynamicTitle?: string
+  hideFromMobile?: string
+  highlight?: string
   iconUrl: string
-  chromeStyle: string
-  configurable: string
-  disablePortletEvents: string
+  chromeStyle?: string
+  configurable?: string
+  disablePortletEvents?: string
   hasHelp: string
+  alternativeMaximizedLink?: string
+  locale?: string
+  secure?: string
+  alternativeMaximizedLinkTarget?: string
 }

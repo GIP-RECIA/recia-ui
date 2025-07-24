@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-import type { Portlet, Soffit } from '../types/index.ts'
+import type {
+  PortletCategory,
+  PortletFromInfo,
+  PortletFromRegistry,
+  PortletRegistryApiResponse,
+  Registry,
+  Soffit,
+} from '../types/index.ts'
 import { uniqBy } from 'lodash-es'
 
 export default class PortletService {
   static async get(
     portalInfoApiUrl: string,
-  ): Promise<Partial<Portlet> | undefined> {
+  ): Promise<Partial<PortletFromInfo> | undefined> {
     try {
       const response = await fetch(portalInfoApiUrl, {
         method: 'GET',
@@ -29,7 +36,7 @@ export default class PortletService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const data: { portlet?: Portlet } = await response.json()
+      const data: { portlet?: PortletFromInfo } = await response.json()
 
       if (!data.portlet) {
         console.error(`No data for ${portalInfoApiUrl}`)
@@ -51,7 +58,7 @@ export default class PortletService {
   static async getAll(
     soffit: Soffit,
     portletApiUrl: string,
-  ): Promise<Array<any> | undefined> {
+  ): Promise<Array<PortletFromRegistry> | undefined> {
     try {
       const { token } = soffit
       const response = await fetch(portletApiUrl, {
@@ -65,7 +72,7 @@ export default class PortletService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const data: { registry: { categories: Array<any> } } = await response.json()
+      const data: PortletRegistryApiResponse = await response.json()
 
       if (!data.registry.categories) {
         console.error(`No data for ${portletApiUrl}`)
@@ -82,11 +89,14 @@ export default class PortletService {
 
   /**
    * Combines a array of arrays into a single level array
-   * @param {Array<Portlet>} acc - accululator that combines all the arrays
-   * @param {Array<Portlet>} arr - new array to add to the accumulator
-   * @return {Array<Portlet>} merged arrays
+   * @param {Array<PortletFromRegistry>} acc - accululator that combines all the arrays
+   * @param {Array<PortletFromRegistry>} arr - new array to add to the accumulator
+   * @return {Array<PortletFromRegistry>} merged arrays
    */
-  private static flatten(acc: Array<any>, arr: Array<any>): Array<any> {
+  private static flatten(
+    acc: Array<PortletFromRegistry>,
+    arr: Array<PortletFromRegistry>,
+  ): Array<PortletFromRegistry> {
     return acc.concat(arr)
   }
 
@@ -94,53 +104,61 @@ export default class PortletService {
    * Takes the returned array from treeWalker and removes duplicates
    * based on "fname"
    * @param {object} registryJson Portlet Registry Tree
-   * @return {Array<Portlet>} list of portlets
+   * @return {Array<PortletFromRegistry>} list of portlets
    */
-  static portletRegistryToArray(registryJson: any): Array<any> {
+  static portletRegistryToArray(
+    registryJson: PortletRegistryApiResponse | Registry | PortletCategory,
+  ): Array<PortletFromRegistry> {
     return PortletService.customUnique(PortletService.treeWalker(registryJson))
   }
 
   /**
    * Walks the portlet registry tree
    * @param {object} registryJson Portlet Registry Tree
-   * @return {Array<Portlet>} list of portlets
+   * @return {Array<PortletFromRegistry>} list of portlets
    */
-  private static treeWalker(registryJson: any): Array<any> {
-    if (registryJson.registry)
-      return PortletService.treeWalker(registryJson.registry)
+  private static treeWalker(
+    registryJson: PortletRegistryApiResponse | Registry | PortletCategory,
+  ): Array<PortletFromRegistry> {
+    const { registry } = registryJson as PortletRegistryApiResponse
+    const { categories } = registryJson as Registry
+    const { name, portlets, subcategories } = registryJson as PortletCategory
 
-    const portlets = registryJson.portlets || []
+    if (registry)
+      return PortletService.treeWalker(registry)
 
-    if (portlets.length > 0)
-      portlets.forEach((p: any) => (p.categories = [registryJson.name]))
+    const portletsList: Array<any> = portlets ?? []
 
-    if (registryJson.categories) {
-      return portlets
-        .concat(registryJson.categories.map(PortletService.portletRegistryToArray))
+    if (portletsList.length > 0)
+      portletsList.forEach(p => (p.categories = [name]))
+
+    if (categories) {
+      return portletsList
+        .concat(categories.map(PortletService.portletRegistryToArray))
         .reduce(PortletService.flatten, [])
     }
-    if (registryJson.subcategories) {
-      return portlets
-        .concat(registryJson.subcategories.map(PortletService.portletRegistryToArray))
+    if (subcategories) {
+      return portletsList
+        .concat(subcategories.map(PortletService.portletRegistryToArray))
         .reduce(PortletService.flatten, [])
     }
 
-    return portlets
+    return portletsList
   }
 
   /**
    * Custom function to remove duplicates portlet on fname, but with merging categories.
-   * @param {Array<Portlet>} array - Portlet List with duplicates.
-   * @return {Array<Portlet>} Portlet List without duplicates.
+   * @param {Array<PortletFromRegistry>} array - Portlet List with duplicates.
+   * @return {Array<PortletFromRegistry>} Portlet List without duplicates.
    */
-  private static customUnique(array: Array<any>): Array<any> {
+  private static customUnique(array: Array<PortletFromRegistry>): Array<PortletFromRegistry> {
     const unique = uniqBy(array, 'fname')
     // we construct unique portlets array will all linked categories (reversing category and portlets child)
-    unique.forEach((elem) => {
+    return unique.map((elem) => {
       const dupl = array.filter(e => e.fname === elem.fname)
       const allCategories = dupl.flatMap(({ categories }) => categories)
-      elem.categories = [...new Set(allCategories)]
+
+      return { ...elem, categories: [...new Set(allCategories)] }
     })
-    return unique
   }
 }
