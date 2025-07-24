@@ -21,6 +21,7 @@ import type { DrawerItem, Link } from '../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faGrip, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -29,12 +30,14 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
+import { $favoriteMenu, $services, updateServices } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'favorite'
 
 @localized()
+@useStores($favoriteMenu)
 export class ReciaNavigationDrawer extends LitElement {
   @property({ type: String })
   logo?: string
@@ -51,82 +54,7 @@ export class ReciaNavigationDrawer extends LitElement {
   @property({ type: Array })
   items?: Array<DrawerItem>
 
-  favorite?: Array<any> = [
-    {
-      id: 'services',
-      name: 'Services',
-      items: [
-        {
-          id: 'Carte mentale',
-          name: 'Carte mentale',
-          iconUrl: './spritemap.svg#carte-mentale',
-          category: 'apprentissage',
-          link: {
-            href: '/wisemapping',
-          },
-        },
-        {
-          id: 'Capytale',
-          name: 'Capytale',
-          iconUrl: './spritemap.svg#capytale',
-          category: 'apprentissage',
-          link: {
-            href: '#',
-          },
-        },
-        {
-          id: 'Espaces Nextcloud',
-          name: 'Espaces Nextcloud',
-          iconUrl: './spritemap.svg#nextcloud',
-          category: 'collaboratif',
-          link: {
-            href: '#',
-          },
-        },
-        {
-          id: 'Plateforme vidéo',
-          name: 'Plateforme vidéo',
-          iconUrl: './spritemap.svg#POD',
-          category: 'documentation',
-          link: {
-            href: '/POD',
-          },
-        },
-      ],
-    },
-    {
-      id: 'mediacentre',
-      name: 'Médiacentre',
-      items: [
-        {
-          id: 'Pix',
-          name: 'Pix',
-          iconUrl: './spritemap.svg#NOC-simple',
-          link: {
-            href: '#',
-          },
-        },
-        {
-          id: 'Peraltrees',
-          name: 'Peraltrees',
-          iconUrl: './spritemap.svg#NOC-simple',
-          link: {
-            href: '#',
-          },
-        },
-        {
-          id: 'EduMalin',
-          name: 'EduMalin',
-          iconUrl: './spritemap.svg#NOC-simple',
-          link: {
-            href: '#',
-          },
-        },
-      ],
-    },
-  ]
-
-  @property({ type: Boolean, attribute: 'expanded'})
+  @property({ type: Boolean, attribute: 'expanded' })
   isExpanded: boolean = false
 
   @property({ type: Boolean, attribute: 'services-layout-state' })
@@ -168,11 +96,11 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   toggleDrawer(_: Event): void {
-    this.dispatchEvent(new CustomEvent('toggle', { detail: { isExpanded: !this.isExpanded }}))
+    this.dispatchEvent(new CustomEvent('toggle', { detail: { isExpanded: !this.isExpanded } }))
   }
 
   closeDrawer(_: Event | undefined = undefined): void {
-    this.dispatchEvent(new CustomEvent('toggle', { detail: { isExpanded: false }}))
+    this.dispatchEvent(new CustomEvent('toggle', { detail: { isExpanded: false } }))
   }
 
   toggleServices(_: Event): void {
@@ -180,8 +108,21 @@ export class ReciaNavigationDrawer extends LitElement {
     this.dispatchEvent(new CustomEvent('toggle-services-layout', { detail: { show: !this.isServicesLayout } }))
   }
 
-  openBottomSheetFavorite(_: Event) {
+  openFavoriteBottomSheet(_: Event) {
+    this.getServices()
+    this.closeDrawer()
     this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
+  }
+
+  openFavoriteDropdown(_: CustomEvent) {
+    this.getServices()
+    this.closeDrawer()
+  }
+
+  getServices(): void {
+    if (!$services.get()) {
+      updateServices()
+    }
   }
 
   emitEvent(_: Event): void {
@@ -234,6 +175,8 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   render(): TemplateResult {
+    const favoriteMenu = $favoriteMenu.get()
+
     return html`
       <button
         class="drawer-toggle"
@@ -283,7 +226,7 @@ export class ReciaNavigationDrawer extends LitElement {
             <button
               id="toggle-favorite-button"
               title="${msg(str`Favoris`)}"
-              @click="${this.openBottomSheetFavorite}"
+              @click="${this.openFavoriteBottomSheet}"
             >
               <div class="active-indicator"></div>
               <div class="icon">
@@ -294,9 +237,9 @@ export class ReciaNavigationDrawer extends LitElement {
           </li>
           <li class="favorites-dropdown">
             <r-favorite-dropdown
-              .data="${this.favorite}"
+              .data="${favoriteMenu}"
               ?expended="${this.isExpanded}"
-              @click="${() => this.closeDrawer()}"
+              @open="${this.openFavoriteDropdown}"
             >
            </r-favorite-dropdown>
           </li>
@@ -312,7 +255,7 @@ export class ReciaNavigationDrawer extends LitElement {
       <div class="teleport">
         <r-favorite-bottom-sheet
           ${ref(this.favoriteBottomSheetRef)}
-          .data="${this.favorite}"
+          .data="${favoriteMenu}"
         >
         </r-favorite-bottom-sheet>
       </div>

@@ -23,7 +23,9 @@ import type {
   UserInfo,
   UserMenuConfig,
 } from '../types/index.ts'
+import { msg, str } from '@lit/localize'
 import { atom, computed } from 'nanostores'
+import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
 import OrganizationService from '../services/organizationService.ts'
 import ServicesService from '../services/servicesService.ts'
@@ -46,6 +48,8 @@ const $userInfo = atom<UserInfo | undefined>()
 const $organizations = atom<Organizations | undefined>()
 
 const $services = atom<Array<Service> | undefined>()
+
+const $favorites = atom<Array<Service> | undefined>()
 
 const $layout = atom<LayoutApiResponse | undefined>()
 
@@ -95,6 +99,19 @@ const $userMenu = computed([$userInfo, $settings], (userInfoObject, settingsObje
     'display-name': displayName,
     config,
   }
+})
+
+const $favoriteMenu = computed($favorites, (newValue) => {
+  if (!newValue)
+    return undefined
+
+  return [
+    {
+      id: 'services',
+      name: msg(str`Services`),
+      items: newValue,
+    },
+  ]
 })
 
 $settings.listen(onDiff((diffs) => {
@@ -240,19 +257,32 @@ async function updateServices(): Promise<void> {
     ServicesService.get(soffit, portletApiUrl, servicesInfoApiUrl),
     LayoutService.get(soffit, layoutApiUrl),
   ])
+
+  let favorites
+  if (layout) {
+    favorites = FavoritesService.getFromLayout(layout)
+      ?.map(fname => services?.find(service => service.fname === fname))
+      .filter(service => service !== undefined)
+  }
+
   $services.set(services)
+  $favorites.set(favorites)
   $layout.set(layout)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Services', services)
     // eslint-disable-next-line no-console
     console.info('Layout', layout)
+    // eslint-disable-next-line no-console
+    console.info('Favorites', favorites)
   }
 }
 
 export {
   $authenticated,
   $debug,
+  $favoriteMenu,
+  $favorites,
   $organizations,
   $services,
   $settings,
