@@ -365,9 +365,8 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.requestUpdate()
       return
     }
-
     const widgetData: WidgetData = {
-      name: key,
+      name: this.keyToNameMap.get(key) ?? key,
       uid: key,
       emptyDiscover: false,
       emptyText: '',
@@ -398,7 +397,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       const emptyText = this.t(`empty-text.${key}`, widgetDataDTO.emptyText)
 
       widgetData.loading = false
-      widgetData.name = widgetDataDTO.name
       widgetData.subtitle = widgetDataDTO.subtitle
       widgetData.emptyText = emptyText
       widgetData.emptyDiscover = widgetDataDTO.emptyDiscover
