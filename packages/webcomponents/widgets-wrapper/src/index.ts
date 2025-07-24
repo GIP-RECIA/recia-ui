@@ -179,6 +179,14 @@ export class ReciaWidgetsWrapper extends LitElement {
     return Math.max(this.widgetMaxCount, this.keyENTPersonProfilsInfo.requiredKeys.length)
   }
 
+  /**
+   *
+   * @returns The number of widgets that must be displayed at the same time. Is **not related** to the widgetToDisplayKeyArray length.
+   */
+  getWidgetsToShowCount(): number {
+    return Math.min(this.getMaxWidgetsCount(), this.keyENTPersonProfilsInfo.allowedKeys.length)
+  }
+
   async setupLocalization() {
     const version: string = window.WidgetAdapter.getVersion()
     const url = `${this.localizationUri}?v=${version}`
@@ -480,6 +488,10 @@ export class ReciaWidgetsWrapper extends LitElement {
     window.removeEventListener('click', this.boundClickEventOnPage!)
   }
 
+  canSave() {
+    return this.widgetToDisplayKeyArray.length === this.getWidgetsToShowCount()
+  }
+
   getWidgetRender(key: string, index: number): TemplateResult {
     if (this.widgetDataMap.has(key)) {
       const widgetData: WidgetData = this.widgetDataMap.get(key)!
@@ -544,7 +556,10 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   widgetCountRender(): TemplateResult {
     // TODO : localize
-    return html`Widgets actifs : ${this.widgetToDisplayKeyArray.length}/${this.getMaxWidgetsCount()}`
+    if (this.canSave()) {
+      return html`<p>Widgets actifs : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}</p>`
+    }
+    return html`<p>Nombre de widgets actifs insuffisant : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}</p>`
   }
 
   render(): TemplateResult {
