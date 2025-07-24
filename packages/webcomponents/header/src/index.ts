@@ -232,7 +232,7 @@ export class ReciaHeader extends LitElement {
   debug: boolean = false
 
   @state()
-  isNavigationDrawerExpended: boolean = false
+  isNavigationDrawerExpanded: boolean = false
 
   @state()
   isServicesLayout: boolean = false
@@ -278,6 +278,14 @@ export class ReciaHeader extends LitElement {
     window.addEventListener('load', () => {
       document.body.classList.add('transition-active')
     })
+  }
+
+  toggleDrawer(e: CustomEvent): void {
+    const { isExpanded } = e.detail
+    if (!isExpanded === undefined || typeof isExpanded !== 'boolean')
+      return
+
+    this.isNavigationDrawerExpanded = isExpanded
   }
 
   async toggleServicesLayout(e: CustomEvent): Promise<void> {
@@ -342,12 +350,14 @@ export class ReciaHeader extends LitElement {
           authenticated
             ? html`
                 <r-navigation-drawer
+                  ?expanded="${this.isNavigationDrawerExpanded}"
                   logo="${this.data.logo}"
                   name="${orgName}"
                   .homeLink="${this.data.homeLink}"
                   ?visible="${this.data.visible}"
                   .items="${this.data.items}"
                   ?services-layout-state="${this.isServicesLayout}"
+                  @toggle="${this.toggleDrawer}"
                   @toggle-services-layout="${this.toggleServicesLayout}"
                 >
                 </r-navigation-drawer>

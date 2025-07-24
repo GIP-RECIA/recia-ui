@@ -127,7 +127,7 @@ export class ReciaNavigationDrawer extends LitElement {
     },
   ]
 
-  @state()
+  @property({ type: Boolean, attribute: 'expanded'})
   isExpanded: boolean = false
 
   @property({ type: Boolean, attribute: 'services-layout-state' })
@@ -169,11 +169,11 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   toggleDrawer(_: Event): void {
-    this.isExpanded = !this.isExpanded
+    this.dispatchEvent(new CustomEvent('toggle', { detail: { isExpanded: !this.isExpanded }}))
   }
 
   closeDrawer(_: Event | undefined = undefined): void {
-    this.isExpanded = false
+    this.dispatchEvent(new CustomEvent('toggle', { detail: { isExpanded: false }}))
   }
 
   toggleServices(_: Event): void {
