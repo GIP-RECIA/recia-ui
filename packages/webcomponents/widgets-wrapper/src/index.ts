@@ -273,7 +273,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         new CustomEvent(
           item.eventDNMA,
           {
-            detail: JSON.stringify(item.eventDNMApayload),
+            detail: JSON.parse(item.eventDNMApayload),
           },
         ),
       )
@@ -284,7 +284,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         new CustomEvent(
           item.event,
           {
-            detail: JSON.stringify(item.eventpayload),
+            detail: JSON.parse(item.eventpayload),
           },
         ),
       )
