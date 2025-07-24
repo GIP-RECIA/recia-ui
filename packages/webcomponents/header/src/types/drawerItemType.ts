@@ -15,7 +15,7 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { Link } from './LinkType.ts'
+import type { Link } from './linkType.ts'
 
 export interface DrawerItem {
   name: string

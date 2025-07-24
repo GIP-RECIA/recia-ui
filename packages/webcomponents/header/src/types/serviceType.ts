@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import type { Category } from './CategoryType.ts'
-import type { Link } from './LinkType.ts'
+import type { Category } from './categoryType.ts'
+import type { Link } from './linkType.ts'
 
 export interface Service {
   id: number
   fname: string
   name: string
-  category: Category
+  category?: Category
   iconUrl: string
   link: Link
   new?: boolean
