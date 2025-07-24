@@ -131,6 +131,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   @property({ type: String, attribute: 'soffit-uri' })
   soffitUri = ''
 
+  @property({ type: String, attribute: 'adapter-config-uri' })
+  adapterConfigUri = ''
+
   @property({ type: String, attribute: 'get-prefs-uri' })
   getPrefsUri = ''
 
