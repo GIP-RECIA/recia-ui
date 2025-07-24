@@ -93,6 +93,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     await this.setupLocalization()
 
     const soffit = await getToken(this.soffitUri)
+    await this.fetchKeyToNameMap()
 
     this.keyENTPersonProfilsInfo = await window.WidgetAdapter.getKeysENTPersonProfils(soffit.decoded.ENTPersonProfils)
 
@@ -114,7 +115,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.buildWidget(value, soffit.encoded)
     }
     this.requestUpdate()
-    this.fetchKeyToNameMap()
   }
 
   // #region PROPERTIES
