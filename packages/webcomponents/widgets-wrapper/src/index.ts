@@ -536,14 +536,14 @@ export class ReciaWidgetsWrapper extends LitElement {
             this.isEditingWidgetsPrefs === false
               ? html`
                <div class="to-right">
-                  <button class="btn-secondary" @click="${this.clickOnGerer}">${this.t(`buttons.Gerer`, 'Gerer')} ${getIcon(faCog)}</button>
+                  <button class="btn-secondary small" ?disabled="${Array.from(this.widgetDataMap.values()).some(x => x.loading) || this.widgetDataMap.size === 0}"  @click="${this.clickOnGerer}">${this.t(`buttons.Gerer`, 'Gerer')} ${getIcon(faCog)}</button>
                 </div>
               `
               : html`
               <div class="to-right">
                ${this.dropdownRender()}
-              <button class="btn-secondary" @click="${this.clickOnAnnuler}">${this.t(`buttons.Annuler`, 'Annuler')}</button>
-              <button class="btn-secondary" @click="${this.clickOnSauvegarder}">${this.t(`buttons.Sauvegarder`, 'Sauvegarder')}</button>
+              <button class="btn-secondary small" @click="${this.clickOnAnnuler}">${this.t(`buttons.Annuler`, 'Annuler')}</button>
+              <button class="btn-secondary small" ?disabled="${!this.canSave()}" title="Save" @click="${this.clickOnSauvegarder}">${this.t(`buttons.Sauvegarder`, 'Sauvegarder')}</button>
             </div>
             <p class="no-mobile">    ${this.widgetCountRender()}</p>
 
