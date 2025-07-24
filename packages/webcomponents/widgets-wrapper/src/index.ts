@@ -35,6 +35,7 @@ import {
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
+import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
@@ -506,6 +507,25 @@ export class ReciaWidgetsWrapper extends LitElement {
     return html``
   }
 
+  getPlaceholderWidgetRender(index: number): TemplateResult {
+    return html`
+      <r-widget
+        role="listitem"
+        uid="${index}"
+        name="."
+        subtitle="."
+        .link=""
+        empty-text=""
+        ?empty-discover="false"
+        .items=""
+        ?deletable="false"
+        ?no-previous="${index === 0}"
+        ?no-next="${index === 2}"
+        ?loading=${true}
+        ></r-widget>
+    `
+  }
+
   dropdownRender(): TemplateResult {
     const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
     return html`
@@ -552,14 +572,16 @@ export class ReciaWidgetsWrapper extends LitElement {
 
         </header>
         <ul class="widget-tiles">
-          ${repeat(
-            this.widgetToDisplayKeyArray,
-            (widgetKey: string) => widgetKey,
-            (widgetKey: string, index: number) => html`
-            ${this.getWidgetRender(widgetKey, index)}
-            `,
-          )}
-
+          ${
+  this.widgetToDisplayKeyArray.length > 0
+    ? repeat(
+        this.widgetToDisplayKeyArray,
+        (widgetKey: string) => widgetKey,
+        (widgetKey: string, index: number) => html`
+                 ${this.getWidgetRender(widgetKey, index)}
+              `,
+      )
+    : map([0, 1, 2], i => this.getPlaceholderWidgetRender(i))}
         </ul>
         <p class="mobile-only">
         ${this.isEditingWidgetsPrefs ? this.widgetCountRender() : nothing}
