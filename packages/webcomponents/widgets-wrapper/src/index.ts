@@ -437,7 +437,10 @@ export class ReciaWidgetsWrapper extends LitElement {
       }
     }
     catch (error) {
-
+      widgetData.isError = true
+      widgetData.loading = false
+      widgetData.errorMessage = this.t('error-message', 'Une erreur est survenue')
+      console.error('catch error build widget', error)
     }
     this.requestUpdate()
   }
@@ -511,6 +514,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         @click-on-item="${this.handleClickOnItem}"
         @move="${this.handleMove}"
         @delete="${this.handleRemoveWidget}"
+        ?is-error="${widgetData.isError ?? false}"
+        error-message="${widgetData.errorMessage}"
         ></r-widget>
     `
     }
