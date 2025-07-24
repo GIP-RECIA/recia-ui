@@ -16,13 +16,16 @@
 
 import type { TemplateResult } from 'lit'
 import type { Section } from '../../types/SectionType.ts'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import { name } from '../../../package.json'
 import langHelper from '../../helpers/langHelper.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../layout/index.ts'
@@ -30,10 +33,13 @@ import '../layout/index.ts'
 @localized()
 export class ReciaFavoriteDropdown extends LitElement {
   @property({ type: Boolean })
-  show: boolean = false
+  expended: boolean = false
 
   @property({ type: Array })
   data?: Array<Section>
+
+  @state()
+  isExpanded: boolean = false
 
   constructor() {
     super()
@@ -57,13 +63,20 @@ export class ReciaFavoriteDropdown extends LitElement {
     window.removeEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
-  close(e: Event | undefined = undefined): void {
-    e?.stopPropagation()
-    this.dispatchEvent(new CustomEvent('close', { detail: { show: false } }))
+  toggle(_: Event | undefined = undefined): void {
+    if (!this.isExpanded)
+      this.dispatchEvent(new CustomEvent('open'))
+    this.isExpanded = !this.isExpanded
+  }
+
+  close(_: Event | undefined = undefined, resetFocus: boolean = true): void {
+    this.isExpanded = false
+    if (resetFocus)
+      this.shadowRoot?.getElementById('dropdown-favorites-button')?.focus()
   }
 
   handleKeyPress(e: KeyboardEvent): void {
-    if (this.show && e.key === 'Escape') {
+    if (this.isExpanded && e.key === 'Escape') {
       e.preventDefault()
       this.close()
     }
@@ -71,28 +84,48 @@ export class ReciaFavoriteDropdown extends LitElement {
 
   handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
     if (
-      this.show
+      this.isExpanded
       && e.target instanceof HTMLElement
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
-      this.close()
+      this.close(undefined, false)
     }
   }
 
   render(): TemplateResult {
     return html`
-      <div
-        id="dropdown-favorites-menu"
-        class="menu"
-        style="${styleMap({
-          display: this.show ? undefined : 'none',
-        })}"
-      >
-        <div class="active-indicator"></div>
-        <r-favorite-layout
-          .data="${this.data}"
+      <div class="dropdown-favorites">
+        <button
+          id="dropdown-favorites-button"
+          title="${msg(str`Favoris`)}"
+          aria-label="${msg(str`Menu favoris`)}"
+          aria-expanded="${this.isExpanded}"
+          aria-controls="dropdown-favorites-menu"
+          class="${classMap({
+            active: this.isExpanded,
+            expended: this.expended,
+          })}"
+          @click="${this.toggle}"
         >
-        </r-favorite-layout>
+          <div class="active-indicator"></div>
+          <div class="icon">
+            ${getIcon(farStar)}
+          </div>
+          <span class="text">${msg(str`Favoris`)}</span>
+        </button>
+        <div
+          id="dropdown-favorites-menu"
+          class="menu"
+          style="${styleMap({
+            display: this.isExpanded ? undefined : 'none',
+          })}"
+        >
+          <div class="active-indicator"></div>
+          <r-favorite-layout
+            .data="${this.data}"
+          >
+          </r-favorite-layout>
+        </div>
       </div>
     `
   }

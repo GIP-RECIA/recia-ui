@@ -58,6 +58,14 @@
   <source>Enregistrer</source>
   <target>Save</target>
 </trans-unit>
+<trans-unit id="s130d574b67f1fd9b">
+  <source>Favoris</source>
+  <target>Favorites</target>
+</trans-unit>
+<trans-unit id="s49283da0ddbeccc2">
+  <source>Menu favoris</source>
+  <target>Favorites menu</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

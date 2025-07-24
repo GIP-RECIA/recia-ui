@@ -27,7 +27,6 @@ import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
-import breakpointsHelper from '../../helpers/breakpointsHelper.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
@@ -134,7 +133,7 @@ export class ReciaNavigationDrawer extends LitElement {
   isServicesLayout: boolean = false
 
   @state()
-  isFavoriteActive: boolean = false
+  isFavoriteDrawer: boolean = false
 
   favoriteBottomSheetRef: Ref<ReciaFavoriteBottomSheet> = createRef()
 
@@ -181,20 +180,8 @@ export class ReciaNavigationDrawer extends LitElement {
     this.dispatchEvent(new CustomEvent('toggle-services-layout', { detail: { show: !this.isServicesLayout } }))
   }
 
-  toggleFavorite(e: Event): void {
-    e.stopPropagation()
-    this.closeDrawer()
-    if (breakpointsHelper.getCurrentBreakpoint() < breakpointsHelper.getBreakpoint('md')) {
-      this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
-    }
-    else {
-      this.isFavoriteActive = !this.isFavoriteActive
-    }
-  }
-
-  closeFavorite(e: CustomEvent): void {
-    const { show } = e.detail
-    this.isFavoriteActive = show
+  openBottomSheetFavorite(_: Event) {
+    this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
   }
 
   emitEvent(_: Event): void {
@@ -292,17 +279,11 @@ export class ReciaNavigationDrawer extends LitElement {
               <span class="text">${msg(str`Tous les services`)}</span>
             </button>
           </li>
-          <li class="dropdown-favorites">
+          <li class="favorites-bottom-sheet">
             <button
               id="toggle-favorite-button"
               title="${msg(str`Favoris`)}"
-              aria-label="${msg(str`Menu favoris`)}"
-              aria-expanded="${true ? this.isFavoriteActive : nothing as any}"
-              aria-controls="${true ? 'dropdown-favorites-menu' : nothing}"
-              class="${classMap({
-                active: this.isFavoriteActive,
-              })}"
-              @click="${this.toggleFavorite}"
+              @click="${this.openBottomSheetFavorite}"
             >
               <div class="active-indicator"></div>
               <div class="icon">
@@ -310,12 +291,14 @@ export class ReciaNavigationDrawer extends LitElement {
               </div>
               <span class="text">${msg(str`Favoris`)}</span>
             </button>
+          </li>
+          <li class="favorites-dropdown">
             <r-favorite-dropdown
-              ?show="${this.isFavoriteActive}"
               .data="${this.favorite}"
-              @close="${this.closeFavorite}"
+              ?expended="${this.isExpanded}"
+              @click="${() => this.closeDrawer()}"
             >
-            </r-favorite-dropdown>
+           </r-favorite-dropdown>
           </li>
           ${
             repeat(

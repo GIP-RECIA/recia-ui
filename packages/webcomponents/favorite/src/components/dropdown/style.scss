@@ -1,24 +1,106 @@
 @use 'sass:map';
+@use '../../../../header/src/variables' as *;
 @use '../../../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
 
-.menu {
-  position: absolute;
-  background-color: var(--#{$prefix}body-bg);
-  border-radius: 0 8px 8px 0;
-  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
-  overflow: hidden;
-  top: 0;
-  left: 100%;
-  width: 734px;
-  max-width: calc(100vw - calc(var(--#{$prefix}drawer-width) + 16px));
-  padding: 22px 34px;
-  color: var(--#{$prefix}body);
+.dropdown-favorites {
+  position: relative;
 
-  > .active-indicator {
+  > button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    @include unstyled-link;
+    color: inherit;
+    height: 60px;
+    width: 100%;
+    text-align: start;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-top: 1px solid rgba($white, 5%);
+    }
+
+    > .active-indicator {
+      display: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      border-left: 5px solid var(--#{$prefix}primary-dark);
+    }
+
+    > .icon {
+      flex: 0 0 $drawer-width;
+      display: inline-flex;
+      justify-content: center;
+      font-size: 16px;
+      transition: opacity .15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    > .text {
+      flex: 0 0 $drawer-expended-width - $drawer-width;
+      display: none;
+    }
+
+    &:not(.active) {
+      &:hover,
+      &:focus-visible {
+        outline: none;
+        color: var(--#{$prefix}primary-dark);
+
+        > .active-indicator {
+          display: unset;
+        }
+      }
+    }
+
+    &.active {
+      background-color: var(--#{$prefix}primary);
+
+      &:focus-visible {
+        outline: none;
+
+        > .active-indicator {
+          display: unset;
+          border-left: 5px solid $white;
+        }
+      }
+    }
+
+    &.expended {
+      > .icon {
+        opacity: .33;
+      }
+
+      > .text {
+        display: unset;
+      }
+    }
+  }
+
+  > .menu {
     position: absolute;
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 0 8px 8px 0;
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    overflow: hidden;
     top: 0;
-    bottom: 0;
-    left: 0;
-    border-left: 11px solid var(--#{$prefix}primary);
+    left: 100%;
+    width: 734px;
+    max-width: calc(100vw - calc(var(--#{$prefix}drawer-width) + 16px));
+    padding: 22px 34px;
+    color: var(--#{$prefix}body);
+
+    > .active-indicator {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      border-left: 11px solid var(--#{$prefix}primary);
+    }
   }
 }

@@ -167,8 +167,8 @@ button.drawer-toggle {
         }
       }
 
-      &.dropdown-favorites {
-        position: relative;
+      &.favorites-dropdown {
+        display: none;
       }
     }
   }
@@ -198,6 +198,16 @@ button.drawer-toggle {
   @media (width >= map.get($grid-breakpoints, md)) {
     &.visible {
       transform: translateX(0);
+    }
+
+    > ul > li {
+      &.favorites-bottom-sheet {
+        display: none;
+      }
+
+      &.favorites-dropdown {
+        display: unset;
+      }
     }
   }
 }

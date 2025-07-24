@@ -9,9 +9,11 @@
     /* eslint-disable @typescript-eslint/no-explicit-any */
 
     export const templates = {
-      's1c703460a5da79b1': str`Rorder to the left`,
+      's130d574b67f1fd9b': str`Favorites`,
+'s1c703460a5da79b1': str`Rorder to the left`,
 's47ebf3a8fb3b10c1': str`Orientation`,
 's47eeeccf4ffc41c3': str`Communication`,
+'s49283da0ddbeccc2': str`Favorites menu`,
 's4a214cbd6c588dd3': str`Learning`,
 's5261563ad59a1fae': str`Manage`,
 's5ee26933a140671a': str`Cancel`,

@@ -6,11 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script type="module" src="/index.ts"></script>
   <link rel="stylesheet" href="/assets/index.css" />
-  <style>
-    r-favorite-dropdown {
-      display: inline-block;
-    }
-  </style>
 </head>
 
 <body class="container">
@@ -33,12 +28,10 @@
     <section>
       <h2>r-favorite-dropdown</h2>
 
-      <span style="position: relative;">
-        <button id="dropdown">Open</button>
-
+      <div style="background-color: black; width: 72px;">
         <r-favorite-dropdown>
         </r-favorite-dropdown>
-      </span>
+      </div>
     </section>
   </section>
 
@@ -125,16 +118,6 @@
     dropdown.data = data;
     document.querySelector('button#bottom-sheet').addEventListener('click', () => {
       bottomSheet.open()
-    })
-    let showDropdown = false
-    document.querySelector('button#dropdown').addEventListener('click', (e) => {
-      e.stopPropagation()
-      showDropdown = !showDropdown
-      dropdown.show = showDropdown
-    })
-    dropdown.addEventListener('close', (e) => {
-      showDropdown = e.detail.show
-      dropdown.show = showDropdown
     })
   </script>
 </body>
