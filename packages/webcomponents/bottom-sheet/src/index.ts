@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { PropertyValues, TemplateResult } from 'lit'
+import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -31,9 +31,6 @@ import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
 export class ReciaBottomSheet extends LitElement {
-  @property({ type: Boolean, attribute: 'open', reflect: true })
-  isOpen: boolean = false
-
   @property({ type: Boolean, attribute: 'no-close' })
   closeIcon: boolean = false
 
@@ -47,6 +44,9 @@ export class ReciaBottomSheet extends LitElement {
   noPadding: boolean = false
 
   @state()
+  private show: boolean = false
+
+  @state()
   closeRequested: boolean = false
 
   private containerRef: Ref<HTMLElement> = createRef()
@@ -54,7 +54,6 @@ export class ReciaBottomSheet extends LitElement {
   private sheetRef: Ref<HTMLElement> = createRef()
 
   private animationDuration: number = 150
-  private show: boolean = false
   private startY: number = 0
   private currentY: number = 0
   private growHeight: number = 0
@@ -87,17 +86,10 @@ export class ReciaBottomSheet extends LitElement {
     this.removeEventListener('touchend', this.handleTouchEnd.bind(this))
   }
 
-  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('isOpen') && _changedProperties.get('isOpen') !== this.isOpen)
-      this.isOpen ? this.open() : this.close()
-    return true
-  }
-
   open(_: Event | undefined = undefined): void {
     this.activeElement = document.activeElement as HTMLElement
     document.documentElement.style.overflowY = 'hidden'
     this.show = true
-    this.isOpen = true
     setTimeout(() => {
       this.containerRef.value!.focus()
     }, this.animationDuration)
@@ -112,10 +104,10 @@ export class ReciaBottomSheet extends LitElement {
       setTimeout(() => {
         document.documentElement.style.overflowY = ''
         this.show = false
-        this.isOpen = false
         this.activeElement?.focus()
         this.closeRequested = false
         this.growRef.value!.style.marginTop = ''
+        this.dispatchEvent(new CustomEvent('close'))
       }, this.animationDuration)
     }, timeout)
   }

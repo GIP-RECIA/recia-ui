@@ -82,12 +82,12 @@
     const longBottomSheet = document.querySelector('r-bottom-sheet#long')
     document.querySelectorAll('button#btn-short').forEach((button) => {
       button.addEventListener('click', () => {
-        shortBottomSheet.setAttribute('open', '')
+        shortBottomSheet.open()
       })
     })
     document.querySelectorAll('button#btn-long').forEach((button) => {
       button.addEventListener('click', () => {
-        longBottomSheet.setAttribute('open', '')
+        longBottomSheet.open()
       })
     })
 
@@ -103,10 +103,10 @@
         `;
 
         shadow.querySelector('#btn-short').addEventListener('click', () => {
-          shortBottomSheet.setAttribute('open', '')
+          shortBottomSheet.open()
         })
         shadow.querySelector('#btn-long').addEventListener('click', () => {
-          longBottomSheet.setAttribute('open', '')
+          longBottomSheet.open()
         })
       }
     }
