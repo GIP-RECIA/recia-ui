@@ -85,7 +85,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     const versionUpdate = (new Date()).getTime()
     const scriptAdapter = document.createElement('script')
     scriptAdapter.type = 'module'
-    scriptAdapter.src = `${this.adapterSourceUri}${versionUpdate}`
+    scriptAdapter.src = `${this.adapterSourceUri}?v=${versionUpdate}&configUri=${this.adapterConfigUri}`
     document.body.appendChild(scriptAdapter)
   }
 
