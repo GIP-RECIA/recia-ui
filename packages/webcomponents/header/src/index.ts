@@ -30,14 +30,13 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
-import ServicesService from './services/servicesService.ts'
 import {
-  $debug,
   $organizations,
   $services,
   $settings,
   $soffit,
   $userInfo,
+  updateServices,
   updateSettings,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
@@ -282,21 +281,10 @@ export class ReciaHeader extends LitElement {
 
   async toggleServicesLayout(e: CustomEvent): Promise<void> {
     const { show } = e.detail
+    if (show && !$services.get())
+      updateServices()
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
-    if (show && !$services.get()) {
-      const { servicesInfoApiUrl, portletApiUrl } = $settings.get()
-      const soffitObject = $soffit.get()
-      if (!soffitObject || !portletApiUrl || !servicesInfoApiUrl)
-        return
-
-      const response = await ServicesService.get(soffitObject, portletApiUrl, servicesInfoApiUrl)
-      $services.set(response)
-      if ($debug.get()) {
-        // eslint-disable-next-line no-console
-        console.info('Services', response)
-      }
-    }
   }
 
   async openMore(e: CustomEvent) {

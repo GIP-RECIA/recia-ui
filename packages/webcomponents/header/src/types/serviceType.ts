@@ -22,7 +22,7 @@ export interface Service {
   fname: string
   name: string
   category?: Category
-  iconUrl: string
+  iconUrl?: string
   link: Link
   new?: boolean
   favorite?: boolean

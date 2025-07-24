@@ -16,6 +16,7 @@
 
 import type {
   HeaderProperties,
+  LayoutApiResponse,
   Organizations,
   Service,
   Soffit,
@@ -25,6 +26,7 @@ import type {
 import { atom, computed } from 'nanostores'
 import LayoutService from '../services/layoutService.ts'
 import OrganizationService from '../services/organizationService.ts'
+import ServicesService from '../services/servicesService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
@@ -45,7 +47,7 @@ const $organizations = atom<Organizations | undefined>()
 
 const $services = atom<Array<Service> | undefined>()
 
-const $layout = atom<any | undefined>()
+const $layout = atom<LayoutApiResponse | undefined>()
 
 const $debug = computed($settings, (newValue) => {
   return newValue.debug ?? false
@@ -210,18 +212,23 @@ async function updateOrganization(): Promise<void> {
   }
 }
 
-async function updateLayout(): Promise<void> {
+async function updateServices(): Promise<void> {
+  const { layoutApiUrl, portletApiUrl, servicesInfoApiUrl } = $settings.get()
   const soffit = $soffit.get()
-  const { layoutApiUrl } = $settings.get()
-
-  if (!soffit || !layoutApiUrl)
+  if (!soffit || !layoutApiUrl || !portletApiUrl || !servicesInfoApiUrl)
     return
 
-  const response = await LayoutService.get(soffit, layoutApiUrl)
-  $layout.set(response)
+  const [services, layout] = await Promise.all([
+    ServicesService.get(soffit, portletApiUrl, servicesInfoApiUrl),
+    LayoutService.get(soffit, layoutApiUrl),
+  ])
+  $services.set(services)
+  $layout.set(layout)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
-    console.info('Layout', response)
+    console.info('Services', services)
+    // eslint-disable-next-line no-console
+    console.info('Layout', layout)
   }
 }
 
@@ -233,5 +240,6 @@ export {
   $soffit,
   $userInfo,
   $userMenu,
+  updateServices,
   updateSettings,
 }

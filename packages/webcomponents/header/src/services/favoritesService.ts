@@ -24,7 +24,7 @@ import type {
 export default class FavoritesService {
   static getFromLayout(
     layout: LayoutApiResponse,
-  ): Array<FavoriteContent> | undefined {
+  ): Array<string> | undefined {
     const { authenticated, layout: { globals: { hasFavorites }, favorites } } = layout
     if (authenticated && hasFavorites && favorites)
       return FavoritesService.flattenFavorites(favorites)
@@ -34,7 +34,7 @@ export default class FavoritesService {
 
   private static flattenFavorites(
     elem: Array<FavoriteLayout> | Array<FavoriteContent> | FavoriteLayout | FavoriteContent,
-  ): Array<FavoriteContent> {
+  ): Array<string> {
     const { content } = elem as FavoriteLayout
     const { fname } = elem as FavoriteContent
 
@@ -45,7 +45,7 @@ export default class FavoritesService {
       return FavoritesService.flattenFavorites(content)
 
     if (fname)
-      return [elem as FavoriteContent]
+      return [fname]
 
     return []
   }
