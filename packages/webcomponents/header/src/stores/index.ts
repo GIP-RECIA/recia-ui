@@ -168,6 +168,10 @@ $userInfo.listen(onDiff((diffs) => {
     updateOrganization()
 }))
 
+$favoritesIds.listen(() => {
+  document.dispatchEvent(new CustomEvent('update-favorites'))
+})
+
 $authenticated.listen((value) => {
   if (value) {
     if (true)
