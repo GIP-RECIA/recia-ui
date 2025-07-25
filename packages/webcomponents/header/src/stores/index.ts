@@ -118,12 +118,14 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
       .filter(service => service !== undefined)
     favorites = favorites && favorites?.length > 0 ? favorites : undefined
 
-    $services.set(services.map((service) => {
+    let filterdServices: Array<Service> | undefined = services.map((service) => {
       return {
         ...service,
         favorite: favorites ? favorites.includes(service) : false,
       }
-    }))
+    })
+    filterdServices = filterdServices && filterdServices.length > 0 ? filterdServices : undefined
+    $services.set(filterdServices)
 
     if ($debug.get()) {
       // eslint-disable-next-line no-console
@@ -162,12 +164,16 @@ $soffit.listen(onDiff((diffs) => {
     userInfoDiff = userInfoDiff || diffs.has(orgAttributeName)
   if (userAllOrgsIdAttributeName)
     userInfoDiff = userInfoDiff || diffs.has(userAllOrgsIdAttributeName)
-  if (userInfoDiff && diffs.get('authenticated') === true)
+  if (userInfoDiff && $authenticated.get())
     updateUserInfo()
 }))
 
 $userInfo.listen(onDiff((diffs) => {
-  if (diffs.has('orgIds') || diffs.has('currentOrgId'))
+  if (diffs.has('currentOrgId')) {
+    $baseServices.set(undefined)
+    $layout.set(undefined)
+  }
+  if (diffs.has('currentOrgId') || diffs.has('orgIds'))
     updateOrganization()
 }))
 
@@ -184,7 +190,7 @@ $authenticated.listen((value) => {
     document.body.classList.remove('navigation-drawer-visible')
     $userInfo.set(undefined)
     $organizations.set(undefined)
-    $services.set(undefined)
+    $baseServices.set(undefined)
     $layout.set(undefined)
   }
 })
