@@ -59,20 +59,20 @@ const $layout = atom<LayoutApiResponse | undefined>()
 
 const $favoritesIds = atom<Array<number> | undefined>()
 
-const $debug = batched($settings, (newValue) => {
+const $debug: ReadableAtom<boolean> = batched($settings, (newValue) => {
   return newValue.debug ?? false
 })
 
-const $authenticated = batched($soffit, (newValue) => {
+const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
   return newValue?.authenticated ?? false
 })
 
-const $userMenu = batched([$userInfo, $settings], (userInfoObject, settingsObject) => {
-  if (!userInfoObject || !settingsObject)
+const $userMenu = batched([$userInfo, $settings], (userInfo, settings) => {
+  if (!userInfo || !settings)
     return undefined
 
-  const { displayName, picture, hasOtherOrgs } = userInfoObject
-  const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settingsObject
+  const { displayName, picture, hasOtherOrgs } = userInfo
+  const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settings
 
   const config: UserMenuConfig = {
     [UserMenuItem.Search]: undefined,
@@ -133,19 +133,22 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
-const $favoriteMenu = batched($favorites, (newValue) => {
-  if (!newValue)
-    return undefined
+const $favoriteMenu: ReadableAtom<Array<FavoritesService> | undefined> = batched(
+  $favorites,
+  (favorites) => {
+    if (!favorites)
+      return undefined
 
-  return [
-    {
-      id: favoriteSectionId,
-      name: msg(str`Services`),
-      items: newValue,
-      canDelete: true,
-    },
-  ]
-})
+    return [
+      {
+        id: favoriteSectionId,
+        name: msg(str`Services`),
+        items: favorites,
+        canDelete: true,
+      },
+    ]
+  },
+)
 
 $settings.listen(onDiff((diffs) => {
   if (diffs.has('userInfoApiUrl'))
@@ -186,7 +189,9 @@ $authenticated.listen((value) => {
   }
 })
 
-async function updateSettings(newValue: Partial<HeaderProperties>): Promise<void> {
+async function updateSettings(
+  newValue: Partial<HeaderProperties>,
+): Promise<void> {
   const diffs = difference(newValue, $settings.get())
   if (diffs.size === 0)
     return
@@ -231,7 +236,6 @@ async function updateTemplate(
 
 async function updateSoffit(): Promise<void> {
   const { userInfoApiUrl } = $settings.get()
-
   if (!userInfoApiUrl)
     return
 
@@ -246,7 +250,6 @@ async function updateSoffit(): Promise<void> {
 function updateUserInfo(): void {
   const soffit = $soffit.get()
   const { orgAttributeName, userAllOrgsIdAttributeName } = $settings.get()
-
   if (!soffit || !orgAttributeName || !userAllOrgsIdAttributeName)
     return
 
@@ -266,7 +269,6 @@ async function updateOrganization(): Promise<void> {
   const soffit = $soffit.get()
   const { organizationApiUrl, orgLogoUrlAttributeName } = $settings.get()
   const { orgIds, currentOrgId } = $userInfo.get() ?? {}
-
   if (!soffit || !organizationApiUrl || !orgIds || !currentOrgId)
     return
 
