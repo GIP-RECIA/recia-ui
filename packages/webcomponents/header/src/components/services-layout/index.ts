@@ -135,7 +135,7 @@ export class ReciaServicesLayout extends LitElement {
             ${
               repeat(
                 this.services ?? [],
-                service => service,
+                service => service.id,
                 service => html`
                     <li>
                       <r-service

@@ -97,7 +97,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
                 ${
                   repeat(
                     other ?? [],
-                    org => org,
+                    org => org.id,
                     (org, index) => html`
                         <li>
                           <input

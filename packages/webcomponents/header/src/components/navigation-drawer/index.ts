@@ -255,7 +255,7 @@ export class ReciaNavigationDrawer extends LitElement {
           ${
             repeat(
               this.items ?? [],
-              item => item,
+              item => item.name,
               item => this.itemTemplate(item),
             )
           }
