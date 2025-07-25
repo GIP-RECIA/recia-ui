@@ -21,6 +21,8 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { map } from 'lit/directives/map.js'
+import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
@@ -34,6 +36,15 @@ import { setLocale } from './utils/localizationUtils.ts'
 export class ReciaFilters extends LitElement {
   @property({ type: Array })
   data: Array<Section> | null = null
+
+  @property({ type: Boolean })
+  loading: boolean = false
+
+  @property({ type: Number, attribute: 'loding-sections' })
+  loadingSections?: number
+
+  @property({ type: Number, attribute: 'loding-sections-items' })
+  loadingSectionsItems?: number
 
   @state()
   checked?: Map<string, Array<string>>
@@ -150,7 +161,56 @@ export class ReciaFilters extends LitElement {
       `
   }
 
+  skeletonTemplate(): TemplateResult {
+    return html`
+        <div class="filters" inert>
+          <header>
+            <button>
+               <span class="heading skeleton"></span>
+            </button>
+            <span class="heading skeleton"></span>
+          </header>
+          <ul class="menu" style="display: none;">
+            ${
+              map(
+                range(this.loadingSections ?? 1),
+                () => html`
+                    <li>
+                      ${
+                        (this.loadingSections ?? 1) > 1
+                          ? html`
+                              <header>
+                                <span class="skeleton"></span>
+                              </header>
+                            `
+                          : nothing
+                      }
+                      <form>
+                        <fieldset>
+                          <legend class="sr-only"></legend>
+                          <ul>
+                            ${
+                              map(
+                                range(this.loadingSectionsItems ?? 6),
+                                () => html`<li class="skeleton"></li>`,
+                              )
+                            }
+                          </ul>
+                        </fieldset>
+                      </form>
+                    </li>
+                  `,
+              )
+            }
+          </ul>
+        </div>
+      `
+  }
+
   render(): TemplateResult {
+    if (this.loading)
+      return this.skeletonTemplate()
+
     return html`
       <div class="filters">
         <header>
