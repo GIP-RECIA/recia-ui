@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-export * from './categoryType.ts'
-export * from './drawerItemType.ts'
-export * from './favoriteItem.ts'
-export * from './favoriteSection.ts'
-export * from './headerType.ts'
-export * from './layoutType.ts'
-export * from './linkType.ts'
-export * from './organizationType.ts'
-export * from './portletType.ts'
-export * from './registryType.ts'
-export * from './serviceType.ts'
-export * from './sessionType.ts'
-export * from './soffitType.ts'
-export * from './templateType.ts'
-export * from './userInfoType.ts'
-export * from './userMenuConfigType.ts'
-export * from './userMenuItemType.ts'
+import type { FavoriteItem } from './favoriteItem.ts'
+
+export interface FavoriteSection {
+  id: string
+  name: string
+  items: Array<FavoriteItem>
+  canDelete?: boolean
+  canMove?: boolean
+}
+
+export type UpdatedFavoriteSection = FavoriteSection & {
+  deleted: Array<FavoriteItem>
+  orderHasChanged: boolean
+}

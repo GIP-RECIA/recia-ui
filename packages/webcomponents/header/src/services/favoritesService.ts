@@ -36,7 +36,7 @@ export default class FavoritesService {
     elem: Array<FavoriteLayout> | Array<FavoriteContent> | FavoriteLayout | FavoriteContent,
   ): Array<string> {
     const { content } = elem as FavoriteLayout
-    const { fname } = elem as FavoriteContent
+    const { chanID } = elem as FavoriteContent
 
     if (Array.isArray(elem))
       return elem.flatMap(FavoritesService.flattenFavorites)
@@ -44,8 +44,8 @@ export default class FavoritesService {
     if (content)
       return FavoritesService.flattenFavorites(content)
 
-    if (fname)
-      return [fname]
+    if (chanID)
+      return [chanID]
 
     return []
   }

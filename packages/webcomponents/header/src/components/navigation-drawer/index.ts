@@ -17,7 +17,7 @@
 import type { ReciaFavoriteBottomSheet } from 'favorite'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { DrawerItem, Link } from '../../types/index.ts'
+import type { DrawerItem, Link, UpdatedFavoriteSection } from '../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faGrip, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -30,7 +30,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
-import { $favoriteMenu, $services, updateServices } from '../../stores/index.ts'
+import { $favoriteMenu, $services, updateFavoritesFromFavorites, updateServices } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -108,13 +108,13 @@ export class ReciaNavigationDrawer extends LitElement {
     this.dispatchEvent(new CustomEvent('toggle-services-layout', { detail: { show: !this.isServicesLayout } }))
   }
 
-  openFavoriteBottomSheet(_: Event) {
+  openFavoriteBottomSheet(_: Event): void {
     this.getServices()
     this.closeDrawer()
     this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
   }
 
-  openFavoriteDropdown(_: CustomEvent) {
+  openFavoriteDropdown(_: CustomEvent): void {
     this.getServices()
     this.closeDrawer()
   }
@@ -123,6 +123,14 @@ export class ReciaNavigationDrawer extends LitElement {
     if (!$services.get()) {
       updateServices()
     }
+  }
+
+  handleFavoriteUpdate(e: CustomEvent): void {
+    const { newValue }: { newValue?: Array<UpdatedFavoriteSection> } = e.detail
+    if (!newValue)
+      return
+
+    updateFavoritesFromFavorites(newValue)
   }
 
   emitEvent(_: Event): void {
@@ -240,6 +248,7 @@ export class ReciaNavigationDrawer extends LitElement {
               .data="${favoriteMenu}"
               ?expended="${this.isExpanded}"
               @open="${this.openFavoriteDropdown}"
+              @updated="${this.handleFavoriteUpdate}"
             >
            </r-favorite-dropdown>
           </li>
@@ -256,6 +265,7 @@ export class ReciaNavigationDrawer extends LitElement {
         <r-favorite-bottom-sheet
           ${ref(this.favoriteBottomSheetRef)}
           .data="${favoriteMenu}"
+          @updated="${this.handleFavoriteUpdate}"
         >
         </r-favorite-bottom-sheet>
       </div>

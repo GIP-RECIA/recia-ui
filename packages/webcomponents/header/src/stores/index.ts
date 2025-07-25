@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
+import type { ReadableAtom } from 'nanostores'
 import type {
   HeaderProperties,
   LayoutApiResponse,
   Organizations,
   Service,
   Soffit,
+  UpdatedFavoriteSection,
   UserInfo,
   UserMenuConfig,
 } from '../types/index.ts'
 import { msg, str } from '@lit/localize'
-import { atom, computed } from 'nanostores'
+import { atom, batched } from 'nanostores'
 import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
 import OrganizationService from '../services/organizationService.ts'
@@ -35,6 +37,8 @@ import UserInfoService from '../services/userInfoService.ts'
 import { UserMenuItem } from '../types/index.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
+
+const favoriteSectionId: string = 'services'
 
 const $settings = atom<Partial<HeaderProperties>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
@@ -47,21 +51,23 @@ const $userInfo = atom<UserInfo | undefined>()
 
 const $organizations = atom<Organizations | undefined>()
 
-const $services = atom<Array<Service> | undefined>()
+const $baseServices = atom<Array<Service> | undefined>()
 
-const $favorites = atom<Array<Service> | undefined>()
+const $services = atom<Array<Service> | undefined>()
 
 const $layout = atom<LayoutApiResponse | undefined>()
 
-const $debug = computed($settings, (newValue) => {
+const $favoritesIds = atom<Array<number> | undefined>()
+
+const $debug = batched($settings, (newValue) => {
   return newValue.debug ?? false
 })
 
-const $authenticated = computed($soffit, (newValue) => {
+const $authenticated = batched($soffit, (newValue) => {
   return newValue?.authenticated ?? false
 })
 
-const $userMenu = computed([$userInfo, $settings], (userInfoObject, settingsObject) => {
+const $userMenu = batched([$userInfo, $settings], (userInfoObject, settingsObject) => {
   if (!userInfoObject || !settingsObject)
     return undefined
 
@@ -101,15 +107,42 @@ const $userMenu = computed([$userInfo, $settings], (userInfoObject, settingsObje
   }
 })
 
-const $favoriteMenu = computed($favorites, (newValue) => {
+const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
+  [$baseServices, $favoritesIds],
+  (services, favoriteIds) => {
+    if (!services || !favoriteIds)
+      return undefined
+
+    let favorites: Array<Service> | undefined = favoriteIds
+      ?.map(id => services?.find(service => service.id === id))
+      .filter(service => service !== undefined)
+    favorites = favorites && favorites?.length > 0 ? favorites : undefined
+
+    $services.set(services.map((service) => {
+      return {
+        ...service,
+        favorite: favorites ? favorites.includes(service) : false,
+      }
+    }))
+
+    if ($debug.get()) {
+      // eslint-disable-next-line no-console
+      console.info('Favorites', favorites)
+    }
+    return favorites
+  },
+)
+
+const $favoriteMenu = batched($favorites, (newValue) => {
   if (!newValue)
     return undefined
 
   return [
     {
-      id: 'services',
+      id: favoriteSectionId,
       name: msg(str`Services`),
       items: newValue,
+      canDelete: true,
     },
   ]
 })
@@ -258,23 +291,73 @@ async function updateServices(): Promise<void> {
     LayoutService.get(soffit, layoutApiUrl),
   ])
 
-  let favorites
-  if (layout) {
-    favorites = FavoritesService.getFromLayout(layout)
-      ?.map(fname => services?.find(service => service.fname === fname))
-      .filter(service => service !== undefined)
-  }
+  const favoriteIds = layout
+    ? [...new Set(FavoritesService.getFromLayout(layout)?.map(Number))]
+    : undefined
 
-  $services.set(services)
-  $favorites.set(favorites)
+  $favoritesIds.set(favoriteIds)
+  $baseServices.set(services)
   $layout.set(layout)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Services', services)
     // eslint-disable-next-line no-console
     console.info('Layout', layout)
-    // eslint-disable-next-line no-console
-    console.info('Favorites', favorites)
+  }
+}
+
+async function updateFavoritesFromFavorites(newValue: Array<UpdatedFavoriteSection>): Promise<void> {
+  const soffit = $soffit.get()
+  const layout = $layout.get()
+  const { favoriteApiUrl } = $settings.get()
+  if (!soffit || !favoriteApiUrl || !layout)
+    return
+
+  newValue.forEach((section) => {
+    const { id, deleted, items } = section
+    const deletedIds = deleted.map(item => item.id)
+
+    if (id === favoriteSectionId) {
+      deletedIds.forEach((id) => {
+        FavoritesService.remove(soffit, favoriteApiUrl, id)
+      })
+      const newFavoriteIds = items.map(item => Number(item.id))
+      $favoritesIds.set(newFavoriteIds)
+    }
+  })
+}
+
+async function addFavorite(id: number): Promise<void> {
+  const soffit = $soffit.get()
+  const { favoriteApiUrl } = $settings.get()
+  const favoritesIds = $favoritesIds.get()
+  if (!soffit || !favoriteApiUrl)
+    return
+
+  if (favoritesIds && favoritesIds.findIndex(el => el === id) !== -1)
+    return
+
+  const response = await FavoritesService.add(soffit, favoriteApiUrl, id)
+  if (response)
+    $favoritesIds.set([...(favoritesIds ?? []), id])
+}
+
+async function removeFavorite(id: number): Promise<void> {
+  const soffit = $soffit.get()
+  const { favoriteApiUrl } = $settings.get()
+  const favoritesIds = $favoritesIds.get()
+  if (!soffit || !favoriteApiUrl || !favoritesIds)
+    return
+
+  const index = favoritesIds.findIndex(el => el === id)
+  if (index === -1)
+    return
+
+  const response = await FavoritesService.remove(soffit, favoriteApiUrl, id)
+  if (response) {
+    const newFavoritesIds = [...favoritesIds]
+    newFavoritesIds.splice(index, 1)
+    $favoritesIds.set(newFavoritesIds)
   }
 }
 
@@ -289,6 +372,9 @@ export {
   $soffit,
   $userInfo,
   $userMenu,
+  addFavorite,
+  removeFavorite,
+  updateFavoritesFromFavorites,
   updateServices,
   updateSettings,
 }
