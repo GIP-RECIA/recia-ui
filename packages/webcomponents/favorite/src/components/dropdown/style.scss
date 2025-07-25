@@ -92,7 +92,6 @@
     left: 100%;
     width: 734px;
     max-width: calc(100vw - calc(var(--#{$prefix}drawer-width) + 16px));
-    padding: 22px 34px;
     color: var(--#{$prefix}body);
 
     > .active-indicator {
@@ -101,6 +100,12 @@
       bottom: 0;
       left: 0;
       border-left: 11px solid var(--#{$prefix}primary);
+    }
+
+    > .content {
+      padding: 22px 34px;
+      max-height: min(55vh, 734px);
+      overflow-y: auto;
     }
   }
 }

@@ -80,7 +80,8 @@
               "href": "/POD"
             }
           }
-        ]
+        ],
+        "canDelete": true,
       },
       {
         "id": "mediacentre",
@@ -110,7 +111,8 @@
               "href": "#"
             }
           }
-        ]
+        ],
+        "canMove": true
       }
     ]
     layout.data = data;
@@ -119,6 +121,13 @@
     document.querySelector('button#bottom-sheet').addEventListener('click', () => {
       bottomSheet.open()
     })
+    new Array(layout, bottomSheet, dropdown).forEach(element => {
+      console.log(element);
+
+      element.addEventListener('updated', (e) => {
+        console.log(e.detail)
+      })
+    });
   </script>
 </body>
 

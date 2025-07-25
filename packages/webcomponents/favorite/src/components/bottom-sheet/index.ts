@@ -63,13 +63,19 @@ export class ReciaFavoriteBottomSheet extends LitElement {
     this.bottomSheetRef.value!.close()
   }
 
+  resetLayout(_: CustomEvent): void {
+    this.shadowRoot?.querySelector('r-favorite-layout')?.dispatchEvent(new CustomEvent('reset'))
+  }
+
   render(): TemplateResult {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        @close="${this.resetLayout}"
       >
         <r-favorite-layout
           .data="${this.data}"
+          @updated="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
         >
         </r-favorite-layout>
       </r-bottom-sheet>

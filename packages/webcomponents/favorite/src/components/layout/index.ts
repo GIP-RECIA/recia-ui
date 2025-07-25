@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import type { Item } from '../../types/ItemType.ts'
-import type { Section } from '../../types/SectionType.ts'
+import type { Section, UpdatedSection } from '../../types/SectionType.ts'
 import {
   faArrowLeft,
   faArrowRight,
@@ -45,7 +45,7 @@ export class ReciaFavoriteLayout extends LitElement {
   tmpData?: Array<Section>
 
   @state()
-  manage: boolean = false
+  isManage: boolean = false
 
   constructor() {
     super()
@@ -53,6 +53,16 @@ export class ReciaFavoriteLayout extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener('reset', this.reset.bind(this))
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.removeEventListener('reset', this.reset.bind(this))
   }
 
   static i18nCategory(): Record<Category, string> {
@@ -67,16 +77,48 @@ export class ReciaFavoriteLayout extends LitElement {
     }
   }
 
+  reset(_: Event) {
+    this.isManage = false
+    this.tmpData = undefined
+  }
+
   toggleManage(save: boolean = false): void {
-    if (!this.manage) {
+    if (!this.isManage) {
       this.tmpData = this.data ? [...this.data] : undefined
     }
     else {
-      if (save)
+      if (save) {
+        this.dispatchEvent(new CustomEvent('updated', { detail: { newValue: this.getDiffs() } }))
         this.data = this.tmpData ? [...this.tmpData] : undefined
+      }
       this.tmpData = undefined
     }
-    this.manage = !this.manage
+    this.isManage = !this.isManage
+  }
+
+  getDiffs(): Array<UpdatedSection> | undefined {
+    if (!this.data || !this.tmpData)
+      return undefined
+
+    const changes: Array<UpdatedSection> = []
+
+    this.tmpData.forEach((newData) => {
+      const oldData = this.data?.find(({ id }) => id === newData.id)
+
+      const deleted = oldData?.items.filter(item => !newData.items.includes(item)) ?? []
+      const oldDataItemsNoDeleted = oldData?.items.filter(item => newData.items.includes(item))
+      const orderHasChanged = oldDataItemsNoDeleted?.some((item, index) => {
+        return newData.items.findIndex(({ id }) => id === item.id) !== index
+      }) ?? false
+
+      changes.push({
+        ...newData,
+        deleted,
+        orderHasChanged,
+      })
+    })
+
+    return changes
   }
 
   deleteItem(sectionId: string, item: Item): void {
@@ -114,11 +156,11 @@ export class ReciaFavoriteLayout extends LitElement {
   }
 
   manageTemplate(): TemplateResult | typeof nothing {
-    return this.data
+    return this.data && this.data.some(({ canDelete, canMove }) => canDelete || canMove)
       ? html`
           <div class="grow-1"></div>
           ${
-            this.manage
+            this.isManage
               ? html`
                   <button
                     class="btn-secondary small"
@@ -133,42 +175,55 @@ export class ReciaFavoriteLayout extends LitElement {
             class="btn-secondary small"
             @click="${() => this.toggleManage(true)}"
           >
-            ${!this.manage ? msg(str`Gérer`) : msg(str`Enregistrer`)}
-            ${getIcon(!this.manage ? faGear : faFloppyDisk)}
+            ${!this.isManage ? msg(str`Gérer`) : msg(str`Enregistrer`)}
+            ${getIcon(!this.isManage ? faGear : faFloppyDisk)}
           </button>
         `
       : nothing
   }
 
-  itemTemplate(sectionId: string, item: Item): TemplateResult {
-    const actionTemplate: TemplateResult | typeof nothing = this.manage
+  itemTemplate(section: Section, item: Item): TemplateResult {
+    const { id, canDelete, canMove } = section
+    const actionTemplate: TemplateResult | typeof nothing = this.isManage
       ? html`
           <div class="actions">
-            <div class="action-delete">
-              <button
-                aria-label="${msg(str`Supprimer le favori`)}"
-                @click="${() => this.deleteItem(sectionId, item)}"
-              >
-                ${getIcon(faTimes)}
-              </button>
-            </div>
-            <div class="action-back">
-              <button
-                aria-label="${msg(str`Réordonner vers la gauche`)}"
-                @click="${() => this.moveItem(sectionId, item, '-1')}"
-              >
-                ${getIcon(faArrowLeft)}
-              </button>
-            </div>
-            <div class="grow-1"></div>
-            <div class="action-next">
-              <button
-                aria-label="${msg(str`Réordonner vers la droite`)}"
-                @click="${() => this.moveItem(sectionId, item, '+1')}"
-              >
-                ${getIcon(faArrowRight)}
-              </button>
-            </div>
+            ${
+              canDelete
+                ? html`
+                    <div class="action-delete">
+                      <button
+                        aria-label="${msg(str`Supprimer le favori`)}"
+                        @click="${() => this.deleteItem(id, item)}"
+                      >
+                        ${getIcon(faTimes)}
+                      </button>
+                    </div>
+                  `
+                : nothing
+            }
+            ${
+              canMove
+                ? html`
+                    <div class="action-back">
+                      <button
+                        aria-label="${msg(str`Réordonner vers la gauche`)}"
+                        @click="${() => this.moveItem(id, item, '-1')}"
+                      >
+                        ${getIcon(faArrowLeft)}
+                      </button>
+                    </div>
+                    <div class="grow-1"></div>
+                    <div class="action-next">
+                      <button
+                        aria-label="${msg(str`Réordonner vers la droite`)}"
+                        @click="${() => this.moveItem(id, item, '+1')}"
+                      >
+                        ${getIcon(faArrowRight)}
+                      </button>
+                    </div>
+                  `
+                : nothing
+            }
           </div>
         `
       : nothing
@@ -185,7 +240,7 @@ export class ReciaFavoriteLayout extends LitElement {
             target="${item.link.target ?? nothing}"
             rel="${item.link.rel ?? nothing}"
             class="name"
-            tabindex="${this.manage ? -1 : nothing as any as number}"
+            tabindex="${this.isManage ? -1 : nothing as any as number}"
           >
             <span>${item.name}</span>
             <span aria-hidden="true"></span>
@@ -214,7 +269,7 @@ export class ReciaFavoriteLayout extends LitElement {
         <ul>
           ${
             repeat(
-              !this.manage ? this.data ?? [] : this.tmpData ?? [],
+              !this.isManage ? this.data ?? [] : this.tmpData ?? [],
               section => section.id,
               section => html`
                 <li id="${section.id}">
@@ -226,7 +281,7 @@ export class ReciaFavoriteLayout extends LitElement {
                       repeat(
                         section.items,
                         item => item.id,
-                        item => this.itemTemplate(section.id, item),
+                        item => this.itemTemplate(section, item),
                       )
                     }
                   </ul>

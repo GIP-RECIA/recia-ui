@@ -89,6 +89,7 @@ export class ReciaFavoriteDropdown extends LitElement {
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
       this.close(undefined, false)
+      this.shadowRoot?.querySelector('r-favorite-layout')?.dispatchEvent(new CustomEvent('reset'))
     }
   }
 
@@ -121,10 +122,13 @@ export class ReciaFavoriteDropdown extends LitElement {
           })}"
         >
           <div class="active-indicator"></div>
-          <r-favorite-layout
-            .data="${this.data}"
-          >
-          </r-favorite-layout>
+          <div class="content">
+            <r-favorite-layout
+              .data="${this.data}"
+              @updated="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
+            >
+            </r-favorite-layout>
+          </div>
         </div>
       </div>
     `

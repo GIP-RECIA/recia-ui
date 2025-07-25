@@ -20,4 +20,11 @@ export interface Section {
   id: string
   name: string
   items: Array<Item>
+  canDelete?: boolean
+  canMove?: boolean
+}
+
+export type UpdatedSection = Section & {
+  deleted: Array<Item>
+  orderHasChanged: boolean
 }
