@@ -66,6 +66,10 @@
   <source>Menu favoris</source>
   <target>Favorites menu</target>
 </trans-unit>
+<trans-unit id="s7b37041836cc3169">
+  <source>Vous n'avez</source>
+  <target>You have no</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

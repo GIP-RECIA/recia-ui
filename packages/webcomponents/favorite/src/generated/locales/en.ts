@@ -18,6 +18,7 @@
 's5261563ad59a1fae': str`Manage`,
 's5ee26933a140671a': str`Cancel`,
 's74cb3d66f6a668e1': str`Documentation`,
+'s7b37041836cc3169': str`You have no`,
 'sa284edf05520f63f': str`Your favorites`,
 'sc0c87afaac2a5993': str`School life`,
 'scd3518ecedad7590': str`Settings`,

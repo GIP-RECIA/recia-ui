@@ -23,6 +23,8 @@ export interface Section {
   emptyText: string
   canDelete?: boolean
   canMove?: boolean
+  loading?: boolean
+  loadingItems?: number
 }
 
 export type UpdatedSection = Section & {

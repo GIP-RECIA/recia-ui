@@ -287,7 +287,7 @@ export class ReciaFavoriteLayout extends LitElement {
                       <ul>
                         ${
                           map(
-                            range(this.loadingSectionsItems ?? 6),
+                            range(this.loadingSectionsItems ?? 4),
                             () => html`<li class="skeleton"></li>`,
                           )
                         }
@@ -322,28 +322,39 @@ export class ReciaFavoriteLayout extends LitElement {
                     <span>${section.name}</span>
                   </header>
                   ${
-                    section.items.length > 0
+                    section.loading
                       ? html`
                             <ul>
                               ${
-                                repeat(
-                                  section.items,
-                                  item => item.id,
-                                  item => this.itemTemplate(section, item),
+                                map(
+                                  range(section.loadingItems ?? 4),
+                                  () => html`<li class="skeleton"></li>`,
                                 )
                               }
                             </ul>
                           `
-                      : html`
-                            <div class="empty">
-                              <span class="text">
-                                ${msg(str`Vous n'avez`)}
-                                <span class="large">
-                                  ${section.emptyText}
+                      : section.items.length > 0
+                        ? html`
+                              <ul>
+                                ${
+                                  repeat(
+                                    section.items,
+                                    item => item.id,
+                                    item => this.itemTemplate(section, item),
+                                  )
+                                }
+                              </ul>
+                            `
+                        : html`
+                              <div class="empty">
+                                <span class="text">
+                                  ${msg(str`Vous n'avez`)}
+                                  <span class="large">
+                                    ${section.emptyText}
+                                  </span>
                                 </span>
-                              </span>
-                            </div>
-                          `
+                              </div>
+                            `
                   }
                 </li>
               `,
