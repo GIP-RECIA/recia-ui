@@ -3,44 +3,6 @@
 @use '../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
-body {
-  &.transition-active {
-    transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &.transition-active .header {
-    > .navigation-drawer {
-      transition:
-        transform .15s cubic-bezier(0.4, 0, 0.2, 1),
-        width .15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    > .topbar > .principal-container > .middle {
-      transition:
-        margin-left .15s cubic-bezier(0.4, 0, 0.2, 1),
-        transform .15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    > .services-layout {
-      transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    > .notification-drawer {
-      transition: transform .15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  }
-
-  @media (width >= map.get($grid-breakpoints, md)) {
-    &:has(.header .navigation-drawer.visible) {
-      &,
-      .header > .topbar > .principal-container > .middle,
-      .header > .services-layout {
-        margin-left: $drawer-width;
-      }
-    }
-  }
-}
-
 .header {
   position: fixed;
   left: 0;
