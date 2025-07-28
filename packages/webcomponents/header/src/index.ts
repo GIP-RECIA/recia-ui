@@ -33,10 +33,7 @@ import langHelper from './helpers/langHelper.ts'
 import {
   $authenticated,
   $organizations,
-  $services,
   $settings,
-  $soffit,
-  $userInfo,
   updateServices,
   updateSettings,
 } from './stores/index.ts'
@@ -82,10 +79,8 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 
 @localized()
 @useStores($settings)
-@useStores($soffit)
-@useStores($userInfo)
 @useStores($organizations)
-@useStores($services)
+@useStores($authenticated)
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
@@ -290,7 +285,7 @@ export class ReciaHeader extends LitElement {
 
   async toggleServicesLayout(e: CustomEvent): Promise<void> {
     const { show } = e.detail
-    if (show && !$services.get())
+    if (show)
       updateServices()
     this.isServicesLayout = show
     document.documentElement.style.overflowY = show ? 'hidden' : ''
@@ -379,7 +374,6 @@ export class ReciaHeader extends LitElement {
                   ?show="${this.isServicesLayout}"
                   ?navigation-drawer-visible="${this.data.visible}"
                   .filters="${this.data.filters}"
-                  .services="${$services.get()}"
                   @close="${this.toggleServicesLayout}"
                   @open-more="${this.openMore}"
                 >

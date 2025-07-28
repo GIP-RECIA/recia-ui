@@ -292,10 +292,13 @@ async function updateOrganization(): Promise<void> {
   }
 }
 
-async function updateServices(): Promise<void> {
+async function updateServices(forceUpdate: boolean = false): Promise<void> {
   const { layoutApiUrl, portletApiUrl, servicesInfoApiUrl } = $settings.get()
   const soffit = $soffit.get()
   if (!soffit || !layoutApiUrl || !portletApiUrl || !servicesInfoApiUrl)
+    return
+
+  if (!forceUpdate && $services.get() !== undefined)
     return
 
   const [services, layout] = await Promise.all([

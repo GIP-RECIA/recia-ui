@@ -30,7 +30,11 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
-import { $favoriteMenu, $services, updateFavoritesFromFavorites, updateServices } from '../../stores/index.ts'
+import {
+  $favoriteMenu,
+  updateFavoritesFromFavorites,
+  updateServices,
+} from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -109,20 +113,14 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   openFavoriteBottomSheet(_: Event): void {
-    this.getServices()
+    updateServices()
     this.closeDrawer()
     this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
   }
 
   openFavoriteDropdown(_: CustomEvent): void {
-    this.getServices()
+    updateServices()
     this.closeDrawer()
-  }
-
-  getServices(): void {
-    if (!$services.get()) {
-      updateServices()
-    }
   }
 
   handleFavoriteUpdate(e: CustomEvent): void {

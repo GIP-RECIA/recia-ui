@@ -16,16 +16,20 @@
 
 import type { TemplateResult } from 'lit'
 import type { Section } from '../../../../filters/src/types/SectionType.ts'
-import type { Service } from '../../types/index.ts'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faWarning } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { map } from 'lit/directives/map.js'
+import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import { $services } from '../../stores/index.ts'
+import { LoadingState } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -33,6 +37,7 @@ import 'filters'
 import '../service/index.ts'
 
 @localized()
+@useStores($services)
 export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean })
   show: boolean = false
@@ -42,9 +47,6 @@ export class ReciaServicesLayout extends LitElement {
 
   @property({ type: Array })
   filters?: Array<Section>
-
-  @property({ type: Array })
-  services?: Array<Service>
 
   private activeElement: HTMLElement | undefined
 
@@ -81,6 +83,85 @@ export class ReciaServicesLayout extends LitElement {
 
   updateFilters(e: CustomEvent): void {
     const { id, checked } = e.detail.activeFilters[0] ?? {}
+  }
+
+  contentTemplate(): TemplateResult | typeof nothing {
+    const loadingState = LoadingState.LOADED
+
+    switch (loadingState) {
+      case LoadingState.ERROR:
+        return this.errorTemplate()
+
+      case LoadingState.LOADED:
+        return this.tilesTemplate()
+
+      case LoadingState.UNLOADED:
+      case LoadingState.LOADING:
+      default:
+        return this.skeletonTemplate()
+    }
+  }
+
+  errorTemplate(): TemplateResult {
+    return html`
+        <div class="error">
+          ${getIcon(faWarning)}
+          <p>
+            ${msg(str`Une erreur est survenue lors de la récupération des services.\nTentez de rafraichir la page.`)}
+          </p>
+        </div>
+      `
+  }
+
+  skeletonTemplate(): TemplateResult {
+    return html`
+        <r-filters
+          loading
+          loding-sections="1"
+          loding-sections-items="9"
+        >
+        </r-filters>
+        <ul>
+          ${map(range(20), () => html`<li class="skeleton"></li>`)}
+        </ul>
+      `
+  }
+
+  tilesTemplate(): TemplateResult {
+    const services = $services.get() ?? []
+
+    return html`
+        <r-filters
+          .data="${this.filters}"
+          @update-filters="${this.updateFilters}"
+        >
+        </r-filters>
+        <ul>
+          ${
+            repeat(
+              services,
+              service => service.id,
+              service => html`
+                  <li>
+                    <r-service
+                      id="${service.id}"
+                      .fname="${service.fname}"
+                      name="${service.name}"
+                      category="${service.category}"
+                      icon-url="${service.iconUrl}"
+                      .link="${service.link}"
+                      ?new="${service.new}"
+                      ?favorite="${service.favorite}"
+                      ?more="${service.more}"
+                      @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
+                    >
+                    </r-service>
+                  </li>
+                `,
+            )
+          }
+        </ul>
+      `
   }
 
   render(): TemplateResult {
@@ -126,36 +207,7 @@ export class ReciaServicesLayout extends LitElement {
                 : nothing
             }
           </header>
-          <r-filters
-            .data="${this.filters}"
-            @update-filters="${this.updateFilters}"
-          >
-          </r-filters>
-          <ul>
-            ${
-              repeat(
-                this.services ?? [],
-                service => service.id,
-                service => html`
-                    <li>
-                      <r-service
-                        id="${service.id}"
-                        .fname="${service.fname}"
-                        name="${service.name}"
-                        category="${service.category}"
-                        icon-url="${service.iconUrl}"
-                        .link="${service.link}"
-                        ?new="${service.new}"
-                        ?favorite="${service.favorite}"
-                        ?more="${service.more}"
-                        @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
-                      >
-                      </r-service>
-                    </li>
-                  `,
-              )
-            }
-          </ul>
+          ${this.contentTemplate()}
         </div>
       </div>
     `
