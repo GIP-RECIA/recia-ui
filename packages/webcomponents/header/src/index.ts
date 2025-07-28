@@ -15,6 +15,7 @@
  */
 
 import type { ReciaBottomSheet } from 'bottom-sheet'
+import type { ReciaInfoEtabBottomSheet } from 'info-etab'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaBottomSheetServiceInfo } from 'service-info'
@@ -44,9 +45,10 @@ import './components/navigation-drawer'
 import './components/notification-drawer'
 import './components/principal-container'
 import './components/services-layout'
+import './components/change-etab-bottom-sheet'
 import 'regenerator-runtime/runtime.js'
 import 'service-info'
-import './components/change-etab-bottom-sheet'
+import 'info-etab'
 
 const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'messages',
@@ -100,7 +102,6 @@ export class ReciaHeader extends LitElement {
         link: { href: '/#' },
       },
     ],
-    search: true,
     filters: [
       {
         id: 'category',
@@ -239,6 +240,8 @@ export class ReciaHeader extends LitElement {
 
   changeEtabRef: Ref<ReciaBottomSheet> = createRef()
 
+  infoEtabRef: Ref<ReciaInfoEtabBottomSheet> = createRef()
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -309,6 +312,7 @@ export class ReciaHeader extends LitElement {
       case UserMenuItem.Settings:
         break
       case UserMenuItem.InfoEtab:
+        this.infoEtabRef.value?.open()
         break
       case UserMenuItem.ChangeEtab:
         this.changeEtabRef.value?.open()
@@ -362,7 +366,6 @@ export class ReciaHeader extends LitElement {
         <div class="topbar">
           <r-principal-container
             name="${orgName}"
-            search="${this.data.search}"
             @user-menu-event="${this.handleUserMenuEvent}"
           >
           </r-principal-container>
@@ -398,6 +401,10 @@ export class ReciaHeader extends LitElement {
                   ${ref(this.changeEtabRef)}
                 >
                 </r-change-etab-bottom-sheet>
+                <r-info-etab-bottom-sheet
+                  ${ref(this.infoEtabRef)}
+                >
+                </r-info-etab-bottom-sheet>
               </div>
             `
           : nothing

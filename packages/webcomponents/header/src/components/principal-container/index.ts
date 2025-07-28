@@ -23,21 +23,25 @@ import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $authenticated, $userInfo, $userMenu } from '../../stores/index.ts'
+import {
+  $authenticated,
+  $settings,
+  $userInfo,
+  $userMenu,
+} from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../search'
 import 'user-menu'
+import 'info-etab'
 
 @localized()
+@useStores($settings)
 @useStores($userInfo)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: String })
   name?: string
-
-  @property({ type: Boolean, attribute: 'search' })
-  searchEnabled: boolean = false
 
   constructor() {
     super()
@@ -49,14 +53,25 @@ export class ReciaPrincipalContainer extends LitElement {
 
   authenticatedTemplate(): TemplateResult {
     const userMenu = $userMenu.get()
+    const { search, notifications, infoEtab } = $settings.get()
 
     return html`
         <div class="principal-container">
           <div class="start">
             <span>${this.name}</span>
+            ${
+              infoEtab
+                ? html`
+                    <r-info-etab-dropdown-info
+                      class="dropdown-info"
+                    >
+                    </r-info-etab-dropdown-info>
+                  `
+                : nothing
+            }
           </div>
           ${
-            this.searchEnabled
+            search
               ? html`
                 <div class="middle">
                   <div>
@@ -69,7 +84,7 @@ export class ReciaPrincipalContainer extends LitElement {
           }
           <div class="end">
             ${
-              this.searchEnabled
+              search
                 ? html`
                     <button
                       class="btn-secondary circle search-button"
@@ -92,7 +107,7 @@ export class ReciaPrincipalContainer extends LitElement {
                 : nothing
             }
             ${
-              false
+              notifications
                 ? html`
                     <div class="notification">
                       <div class="notification-dot top right"></div>

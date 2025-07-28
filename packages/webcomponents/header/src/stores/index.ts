@@ -45,9 +45,20 @@ import { onDiff } from '../utils/storeUtils.ts'
 
 const favoriteSectionId: string = 'services'
 
-const $settings = atom<Partial<HeaderProperties>>({
+interface TmpSettings {
+  search: boolean
+  notifications: boolean
+  infoEtab: boolean
+  starter: boolean
+}
+
+const $settings = atom<Partial<HeaderProperties> & TmpSettings>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
+  search: true,
+  notifications: false,
+  infoEtab: false,
+  starter: false,
 })
 
 const $soffit = atom<Soffit | undefined>()
@@ -80,10 +91,11 @@ const $userMenu = batched([$userInfo, $settings], (userInfo, settings) => {
 
   const { displayName, picture, hasOtherOrgs } = userInfo
   const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settings
+  const { search, notifications, infoEtab, starter } = settings
 
   const config: UserMenuConfig = {
-    [UserMenuItem.Search]: undefined,
-    [UserMenuItem.Notification]: false,
+    [UserMenuItem.Search]: search ? undefined : false,
+    [UserMenuItem.Notification]: notifications ? undefined : false,
     [UserMenuItem.Settings]: userInfoPortletUrl
       ? {
           link: {
@@ -91,13 +103,13 @@ const $userMenu = batched([$userInfo, $settings], (userInfo, settings) => {
           },
         }
       : false,
-    [UserMenuItem.InfoEtab]: false,
+    [UserMenuItem.InfoEtab]: infoEtab ? undefined : false,
     [UserMenuItem.ChangeEtab]: hasOtherOrgs
       ? {
           link: null,
         }
       : false,
-    [UserMenuItem.Starter]: false,
+    [UserMenuItem.Starter]: starter ? undefined : false,
     [UserMenuItem.Logout]: signOutUrl
       ? {
           link: {
