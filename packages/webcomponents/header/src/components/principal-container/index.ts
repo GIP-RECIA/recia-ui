@@ -20,6 +20,8 @@ import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
@@ -29,6 +31,7 @@ import {
   $userInfo,
   $userMenu,
 } from '../../stores/index.ts'
+import { UserMenuItem } from '../../types/userMenuItemType.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -40,8 +43,17 @@ import 'info-etab'
 @useStores($settings)
 @useStores($userInfo)
 export class ReciaPrincipalContainer extends LitElement {
+  @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
+  isNavigationDrawerVisible: boolean = false
+
+  @property({ type: Boolean, attribute: 'searching' })
+  isSearching: boolean = false
+
   @property({ type: String })
   name?: string
+
+  @property({ type: Boolean, attribute: 'search-open' })
+  searchOpen: boolean = false
 
   constructor() {
     super()
@@ -73,11 +85,20 @@ export class ReciaPrincipalContainer extends LitElement {
           ${
             search
               ? html`
-                <div class="middle">
-                  <div>
-                    <r-search>
-                    </r-search>
-                  </div>
+                <div
+                  class="${classMap({
+                    'visible': this.searchOpen,
+                    'navigation-drawer-visible': this.isNavigationDrawerVisible,
+                    'searching': this.isSearching,
+                  })}middle"
+                >
+                  <r-search
+                    ?open="${this.searchOpen}"
+                    @event="${(e: CustomEvent) => {
+                      this.dispatchEvent(new CustomEvent('search-event', e))
+                    }}"
+                  >
+                  </r-search>
                 </div>
               `
               : nothing
@@ -87,8 +108,18 @@ export class ReciaPrincipalContainer extends LitElement {
               search
                 ? html`
                     <button
+                      style="${styleMap({
+                        display: this.searchOpen ? 'none' : undefined,
+                      })}"
                       class="btn-secondary circle search-button"
                       aria-label="${msg(str`Rechercher dans l'ENT`)}"
+                      @click="${(e: Event) => {
+                        e.stopPropagation()
+                        this.dispatchEvent(new CustomEvent(
+                          'user-menu-event',
+                          { detail: { type: UserMenuItem.Search } },
+                        ))
+                      }}"
                     >
                       ${getIcon(faMagnifyingGlass)}
                     </button>
@@ -100,7 +131,9 @@ export class ReciaPrincipalContainer extends LitElement {
                 ? html`
                     <r-user-menu
                       ${spreadAttributes(userMenu)}
-                      @launch="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent('user-menu-event', e))}"
+                      @launch="${(e: CustomEvent) => {
+                        this.dispatchEvent(new CustomEvent('user-menu-event', e))
+                      }}"
                     >
                     </r-user-menu>
                   `

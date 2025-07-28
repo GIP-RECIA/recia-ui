@@ -3,6 +3,24 @@
 @use '../../../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
+.search-container {
+  width: 100%;
+  padding: 16px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 600px + 2 * 16;
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    display: flex;
+    justify-content: center;
+    width: unset;
+    padding: unset;
+    margin-right: 32px;
+    margin-left: 32px;
+    max-width: unset;
+  }
+}
+
 .search {
   flex: 0 1 434px;
   position: relative;

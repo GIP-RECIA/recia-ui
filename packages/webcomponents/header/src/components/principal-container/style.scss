@@ -14,7 +14,7 @@
   }
 
   to {
-    z-index: 4;
+    z-index: unset;
     transform: translateY($header-height);
     opacity: 1;
   }
@@ -58,18 +58,17 @@
     right: 0;
     z-index: -1;
     visibility: hidden;
+    transition:
+      margin-left .15s cubic-bezier(0.4, 0, 0.2, 1),
+      transform .15s cubic-bezier(0.4, 0, 0.2, 1);
 
     &.visible {
       visibility: visible;
       animation: search-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    > div {
-      width: 100%;
-      padding: 16px;
-      margin-right: auto;
-      margin-left: auto;
-      max-width: 600px;
+    &.searching {
+      z-index: 4 !important;
     }
   }
 
@@ -95,6 +94,10 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
+    > .middle.navigation-drawer-visible {
+      margin-left: $drawer-width;
+    }
+
     > .start > .dropdown-info,
     > .end > .notification {
       display: unset;
@@ -106,20 +109,11 @@
       flex: 1 1 auto;
       position: unset;
       opacity: 1;
-      z-index: 4;
+      z-index: unset;
       transform: translateY(0) !important;
       margin: 0 !important;
       visibility: visible;
-
-      > div {
-        display: flex;
-        justify-content: center;
-        width: unset;
-        padding: unset;
-        margin-right: 32px;
-        margin-left: 32px;
-        max-width: unset;
-      }
+      animation: none !important;
     }
 
     > .end > .search-button {

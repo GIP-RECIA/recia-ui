@@ -25,6 +25,7 @@ import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
@@ -234,6 +235,9 @@ export class ReciaHeader extends LitElement {
   isServicesLayout: boolean = false
 
   @state()
+  isSearchOpen: boolean = false
+
+  @state()
   isSearching: boolean = false
 
   serviceInfoRef: Ref<ReciaBottomSheetServiceInfo> = createRef()
@@ -306,6 +310,7 @@ export class ReciaHeader extends LitElement {
     const { type } = e.detail
     switch (type as UserMenuItem) {
       case UserMenuItem.Search:
+        this.isSearchOpen = true
         break
       case UserMenuItem.Notification:
         break
@@ -331,6 +336,12 @@ export class ReciaHeader extends LitElement {
     }
   }
 
+  handleSearchEvent(e: CustomEvent) {
+    const { open, mask } = e.detail
+    this.isSearchOpen = open
+    this.isSearching = mask
+  }
+
   render(): TemplateResult {
     const authenticated = $authenticated.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
@@ -341,7 +352,7 @@ export class ReciaHeader extends LitElement {
         <div
           class="mask"
           style="${styleMap({
-            display: this.isSearching ? '' : 'none',
+            display: this.isSearching ? undefined : 'none',
           })}"
         >
         </div>
@@ -363,10 +374,18 @@ export class ReciaHeader extends LitElement {
               `
             : nothing
         }
-        <div class="topbar">
+        <div
+          class="${classMap({
+            'search-open': this.isSearchOpen,
+          })}topbar"
+        >
           <r-principal-container
+            ?navigation-drawer-visible="${this.data.visible}"
             name="${orgName}"
+            ?search-open="${this.isSearchOpen}"
+            ?searching="${this.isSearching}"
             @user-menu-event="${this.handleUserMenuEvent}"
+            @search-event="${this.handleSearchEvent}"
           >
           </r-principal-container>
         </div>

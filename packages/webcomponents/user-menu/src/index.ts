@@ -171,7 +171,8 @@ export class ReciaUserMenu extends LitElement {
     }
   }
 
-  emitEvent(_: Event, type: string): void {
+  emitEvent(e: Event, type: string): void {
+    e.stopPropagation()
     this.close(undefined, false)
     this.dispatchEvent(new CustomEvent('launch', { detail: { type } }))
   }
