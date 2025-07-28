@@ -87,10 +87,8 @@ export class ReciaFavoriteLayout extends LitElement {
       this.tmpData = this.data ? [...this.data] : undefined
     }
     else {
-      if (save) {
+      if (save)
         this.dispatchEvent(new CustomEvent('updated', { detail: { newValue: this.getDiffs() } }))
-        this.data = this.tmpData ? [...this.tmpData] : undefined
-      }
       this.tmpData = undefined
     }
     this.isManage = !this.isManage
