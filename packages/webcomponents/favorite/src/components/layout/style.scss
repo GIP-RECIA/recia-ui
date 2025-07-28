@@ -138,6 +138,34 @@
           }
         }
       }
+
+      > .empty {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100px;
+
+        > .icon {
+          font-size: 38px;
+          margin-bottom: 14px;
+          color: var(--#{$prefix}basic-black);
+          opacity: .1;
+        }
+
+        > .text {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          font-size: var(--#{$prefix}font-size-xs);
+
+          > .large {
+            font-size: var(--#{$prefix}font-size-sm);
+            font-weight: bold;
+            letter-spacing: -0.15px;
+          }
+        }
+      }
     }
   }
 

@@ -20,6 +20,7 @@ export interface Section {
   id: string
   name: string
   items: Array<Item>
+  emptyText: string
   canDelete?: boolean
   canMove?: boolean
 }

@@ -321,15 +321,30 @@ export class ReciaFavoriteLayout extends LitElement {
                   <header>
                     <span>${section.name}</span>
                   </header>
-                  <ul>
-                    ${
-                      repeat(
-                        section.items,
-                        item => item.id,
-                        item => this.itemTemplate(section, item),
-                      )
-                    }
-                  </ul>
+                  ${
+                    section.items.length > 0
+                      ? html`
+                            <ul>
+                              ${
+                                repeat(
+                                  section.items,
+                                  item => item.id,
+                                  item => this.itemTemplate(section, item),
+                                )
+                              }
+                            </ul>
+                          `
+                      : html`
+                            <div class="empty">
+                              <span class="text">
+                                ${msg(str`Vous n'avez`)}
+                                <span class="large">
+                                  ${section.emptyText}
+                                </span>
+                              </span>
+                            </div>
+                          `
+                  }
                 </li>
               `,
             )
