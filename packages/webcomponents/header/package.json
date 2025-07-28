@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && build:style && vite build",
+    "build": "tsc && yarn build:style && vite build",
     "preview": "vite preview",
     "test:unit": "echo No tests available",
     "build:style": "sass --style=compressed --error-css src/assets/scss/:src/assets/css/"
