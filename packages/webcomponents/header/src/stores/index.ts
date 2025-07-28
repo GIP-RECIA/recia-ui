@@ -16,6 +16,8 @@
 
 import type { ReadableAtom } from 'nanostores'
 import type {
+  FavoriteItem,
+  FavoriteSection,
   HeaderProperties,
   LayoutApiResponse,
   Organizations,
@@ -140,18 +142,19 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
-const $favoriteMenu: ReadableAtom<Array<FavoritesService> | undefined> = batched(
-  $favorites,
-  (favorites) => {
-    if (!favorites)
-      return undefined
-
+const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
+  [$favorites, $baseServicesLoad],
+  (favorites, baseServicesLoad) => {
     return [
       {
         id: favoriteSectionId,
         name: msg(str`Services`),
-        items: favorites,
+        items: (favorites ?? []) as unknown as Array<FavoriteItem>,
+        emptyText: msg(str`Aucun service favori`),
         canDelete: true,
+        loading:
+          baseServicesLoad === LoadingState.UNLOADED
+          || baseServicesLoad === LoadingState.LOADING,
       },
     ]
   },

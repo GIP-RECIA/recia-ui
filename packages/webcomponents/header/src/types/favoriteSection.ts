@@ -20,8 +20,11 @@ export interface FavoriteSection {
   id: string
   name: string
   items: Array<FavoriteItem>
+  emptyText: string
   canDelete?: boolean
   canMove?: boolean
+  loading?: boolean
+  loadingItems?: number
 }
 
 export type UpdatedFavoriteSection = FavoriteSection & {
