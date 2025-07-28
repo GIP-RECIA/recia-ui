@@ -28,16 +28,18 @@ import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $services } from '../../stores/index.ts'
+import { $baseServicesLoad, $services } from '../../stores/index.ts'
 import { LoadingState } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
+import { alphaSort } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
 import 'filters'
 import '../service/index.ts'
 
 @localized()
 @useStores($services)
+@useStores($baseServicesLoad)
 export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean })
   show: boolean = false
@@ -86,7 +88,7 @@ export class ReciaServicesLayout extends LitElement {
   }
 
   contentTemplate(): TemplateResult | typeof nothing {
-    const loadingState = LoadingState.LOADED
+    const loadingState = $baseServicesLoad.get()
 
     switch (loadingState) {
       case LoadingState.ERROR:

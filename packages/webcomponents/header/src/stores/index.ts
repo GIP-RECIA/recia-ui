@@ -34,7 +34,10 @@ import ServicesService from '../services/servicesService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
-import { UserMenuItem } from '../types/index.ts'
+import {
+  LoadingState,
+  UserMenuItem,
+} from '../types/index.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 
@@ -52,6 +55,8 @@ const $userInfo = atom<UserInfo | undefined>()
 const $organizations = atom<Organizations | undefined>()
 
 const $baseServices = atom<Array<Service> | undefined>()
+
+const $baseServicesLoad = atom<LoadingState>(LoadingState.UNLOADED)
 
 const $services = atom<Array<Service> | undefined>()
 
@@ -298,9 +303,13 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
   if (!soffit || !layoutApiUrl || !portletApiUrl || !servicesInfoApiUrl)
     return
 
+  if ($baseServicesLoad.get() === LoadingState.LOADING)
+    return
+
   if (!forceUpdate && $services.get() !== undefined)
     return
 
+  $baseServicesLoad.set(LoadingState.LOADING)
   const [services, layout] = await Promise.all([
     ServicesService.get(soffit, portletApiUrl, servicesInfoApiUrl),
     LayoutService.get(soffit, layoutApiUrl),
@@ -309,6 +318,8 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
   const favoriteIds = layout
     ? [...new Set(FavoritesService.getFromLayout(layout)?.map(Number))]
     : undefined
+
+  $baseServicesLoad.set(services ? LoadingState.LOADED : LoadingState.ERROR)
 
   $favoritesIds.set(favoriteIds)
   $baseServices.set(services)
@@ -378,6 +389,7 @@ async function removeFavorite(id: number): Promise<void> {
 
 export {
   $authenticated,
+  $baseServicesLoad,
   $debug,
   $favoriteMenu,
   $favorites,
