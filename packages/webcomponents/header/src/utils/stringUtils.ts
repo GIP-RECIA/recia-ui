@@ -25,4 +25,21 @@ function slugify(value: string): string {
     .replace(/-+/g, '-')
 }
 
-export { slugify }
+function compareNormalize(value: string): string {
+  return value.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '')
+}
+
+function alphaSort(a: string, b: string, order: 'asc' | 'desc'): 0 | 1 | -1 {
+  const normalizedA = compareNormalize(a)
+  const normalizedB = compareNormalize(b)
+
+  if (normalizedA === normalizedB)
+    return 0
+
+  if (order === 'asc')
+    return normalizedA > normalizedB ? 1 : -1
+  else
+    return normalizedA < normalizedB ? 1 : -1
+}
+
+export { alphaSort, slugify }
