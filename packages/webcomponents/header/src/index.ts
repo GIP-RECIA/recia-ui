@@ -340,6 +340,8 @@ export class ReciaHeader extends LitElement {
     const { open, mask } = e.detail
     this.isSearchOpen = open
     this.isSearching = mask
+    if (open)
+      this.isServicesLayout = false
   }
 
   render(): TemplateResult {
