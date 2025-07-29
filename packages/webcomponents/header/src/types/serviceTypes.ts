@@ -24,6 +24,7 @@ export interface Service {
   category?: Category
   iconUrl?: string
   link: Link
+  description?: string
   new?: boolean
   favorite?: boolean
   more?: boolean

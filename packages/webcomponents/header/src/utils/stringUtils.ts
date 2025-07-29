@@ -42,4 +42,41 @@ function alphaSort(a: string, b: string, order: 'asc' | 'desc'): 0 | 1 | -1 {
     return normalizedA < normalizedB ? 1 : -1
 }
 
-export { alphaSort, slugify }
+function truncate(value: string): string {
+  return value.split('   ')[0].trim()
+}
+
+function sanitize(value: string): string {
+  return value.replace(/[^a-z0-9]/gi, '_').trim()
+}
+
+function getAcronym(value: string): string {
+  return value
+    .split(/[\s,']+/)
+    .map((word) => {
+      return word.length >= 4 || word !== word.toLowerCase()
+        ? word.split('')[0].toUpperCase()
+        : ''
+    })
+    .join('')
+}
+
+function hashCode(value: string): string {
+  let hash = 0
+  for (let i = 0; i < value.length; i++) {
+    const code = value.charCodeAt(i)
+    hash = (hash << 5) - hash + code
+    hash = hash & hash
+  }
+
+  return hash.toString()
+}
+
+export {
+  alphaSort,
+  getAcronym,
+  hashCode,
+  sanitize,
+  slugify,
+  truncate,
+}
