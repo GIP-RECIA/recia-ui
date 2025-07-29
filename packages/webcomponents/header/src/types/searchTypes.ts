@@ -18,7 +18,7 @@ import type { Category } from './categoryTypes.ts'
 import type { Link } from './linkTypes.ts'
 
 export interface SearchItem {
-  id: string
+  id: string | number
   name: string
   category?: Category
   link: Link
