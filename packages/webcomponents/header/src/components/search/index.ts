@@ -178,14 +178,15 @@ export class ReciaSearch extends LitElement {
     this.emitEvent({ mask: false })
   }
 
-  clear(_: Event | undefined = undefined): void {
+  clear(_: Event | undefined = undefined, resetFocus: boolean = false): void {
     const input = this.inputRef.value
     if (!input)
       return
 
     input.value = ''
     this.hideResults()
-    input.focus()
+    if (resetFocus)
+      input.focus()
   }
 
   filteredResults(): Array<SearchSection> {
@@ -295,7 +296,7 @@ export class ReciaSearch extends LitElement {
                 style="${styleMap({
                   display: this.isExpanded ? undefined : 'none',
                 })}"
-                @click="${this.clear}"
+                @click="${(e: Event) => this.clear(e, true)}"
               >
                 ${getIcon(faXmark)}
               </button>
