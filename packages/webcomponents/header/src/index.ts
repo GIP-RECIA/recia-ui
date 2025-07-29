@@ -310,6 +310,7 @@ export class ReciaHeader extends LitElement {
     const { type } = e.detail
     switch (type as UserMenuItem) {
       case UserMenuItem.Search:
+        this.isServicesLayout = false
         this.isSearchOpen = true
         break
       case UserMenuItem.Notification:
@@ -338,10 +339,13 @@ export class ReciaHeader extends LitElement {
 
   handleSearchEvent(e: CustomEvent) {
     const { open, mask } = e.detail
-    this.isSearchOpen = open
-    this.isSearching = mask
-    if (open)
-      this.isServicesLayout = false
+    if (typeof open === 'boolean') {
+      this.isSearchOpen = open
+      if (open)
+        this.isServicesLayout = false
+    }
+    if (typeof mask === 'boolean')
+      this.isSearching = mask
   }
 
   render(): TemplateResult {

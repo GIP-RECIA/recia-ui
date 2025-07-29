@@ -53,6 +53,18 @@ export class ReciaSearch extends LitElement {
 
   private parentNodeElement: ParentNode | null | undefined
 
+  static i18nCategory(): Record<Category, string> {
+    return {
+      [Category.documentation]: msg(str`Documentation`),
+      [Category.collaboratif]: msg(str`Collaboratif`),
+      [Category.apprentissage]: msg(str`Apprentissage`),
+      [Category.vieScolaire]: msg(str`Vie scolaire`),
+      [Category.orientation]: msg(str`Orientation`),
+      [Category.parametres]: msg(str`Paramètres`),
+      [Category.communication]: msg(str`Communication`),
+    }
+  }
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -86,33 +98,6 @@ export class ReciaSearch extends LitElement {
     return true
   }
 
-  static i18nCategory(): Record<Category, string> {
-    return {
-      [Category.documentation]: msg(str`Documentation`),
-      [Category.collaboratif]: msg(str`Collaboratif`),
-      [Category.apprentissage]: msg(str`Apprentissage`),
-      [Category.vieScolaire]: msg(str`Vie scolaire`),
-      [Category.orientation]: msg(str`Orientation`),
-      [Category.parametres]: msg(str`Paramètres`),
-      [Category.communication]: msg(str`Communication`),
-    }
-  }
-
-  emitEvent(detail: { open: boolean, mask: boolean }): void {
-    this.dispatchEvent(new CustomEvent('event', { detail }))
-  }
-
-  close(_: Event | undefined = undefined): void {
-    const input = this.inputRef.value
-    if (!input)
-      return
-
-    document.documentElement.style.overflowY = ''
-    this.isExpanded = false
-    input.value = ''
-    this.emitEvent({ open: false, mask: false })
-  }
-
   handleKeyPress(e: KeyboardEvent): void {
     if (e.key === 'Escape') {
       e.preventDefault()
@@ -138,32 +123,67 @@ export class ReciaSearch extends LitElement {
     }
   }
 
-  handleSearch = debounce((_: Event) => {
-    const value = this.inputRef.value?.value.trim() ?? ''
-    if (value.length < 3) {
-      document.documentElement.style.overflowY = ''
-      this.isExpanded = false
-      this.emitEvent({ open: true, mask: false })
-      this.search = ''
-      return
-    }
+  emitEvent(detail: {
+    open?: boolean
+    mask?: boolean
+  }): void {
+    this.dispatchEvent(new CustomEvent('event', { detail }))
+  }
 
-    updateServices()
-    document.documentElement.style.overflowY = 'hidden'
-    this.isExpanded = true
-    this.emitEvent({ open: true, mask: true })
-    this.search = value
-  }, 500)
-
-  clearSearch(_: Event | undefined = undefined) {
+  close(_: Event | undefined = undefined): void {
     const input = this.inputRef.value
     if (!input)
       return
 
+    this.clear()
+    this.emitEvent({ open: false })
+    // TODO : Need to reset focus
+  }
+
+  handleInput(e: Event): void {
+    if (!this.isOpen)
+      this.emitEvent({ open: true })
+    this.handleSearch(e)
+  }
+
+  handleSearch = debounce((_: Event) => {
+    const value = this.inputRef.value?.value.trim() ?? ''
+    if (value.length < 3) {
+      this.search = ''
+      this.hideResults()
+      return
+    }
+
+    updateServices()
+    this.search = value
+    this.showResults()
+  }, 500)
+
+  showResults(): void {
+    if (this.isExpanded)
+      return
+
+    document.documentElement.style.overflowY = 'hidden'
+    this.isExpanded = true
+    this.emitEvent({ mask: true })
+  }
+
+  hideResults(): void {
+    if (!this.isExpanded)
+      return
+
     document.documentElement.style.overflowY = ''
     this.isExpanded = false
+    this.emitEvent({ mask: false })
+  }
+
+  clear(_: Event | undefined = undefined): void {
+    const input = this.inputRef.value
+    if (!input)
+      return
+
     input.value = ''
-    this.emitEvent({ open: true, mask: false })
+    this.hideResults()
     input.focus()
   }
 
@@ -264,7 +284,7 @@ export class ReciaSearch extends LitElement {
                 type="text"
                 placeholder="${msg(str`Rechercher un service`)}"
                 title="${msg(str`Rechercher un service`)}"
-                @input="${(e: Event) => this.handleSearch(e)}"
+                @input="${this.handleInput}"
               >
             </div>
             <div class="end">
@@ -274,7 +294,7 @@ export class ReciaSearch extends LitElement {
                 style="${styleMap({
                   display: this.isExpanded ? undefined : 'none',
                 })}"
-                @click="${this.clearSearch}"
+                @click="${this.clear}"
               >
                 ${getIcon(faXmark)}
               </button>
