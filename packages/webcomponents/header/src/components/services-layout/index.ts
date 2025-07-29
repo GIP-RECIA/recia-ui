@@ -141,7 +141,7 @@ export class ReciaServicesLayout extends LitElement {
         <ul>
           ${
             repeat(
-              services,
+              services?.sort((a, b) => alphaSort(a.name, b.name, 'asc')),
               service => service.id,
               service => html`
                   <li>
