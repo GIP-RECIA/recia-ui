@@ -213,8 +213,11 @@ $soffit.listen(onDiff((diffs) => {
 
 $userInfo.listen(onDiff((diffs) => {
   if (diffs.has('currentOrgId')) {
+    $baseServicesLoad.set(LoadingState.UNLOADED)
     $baseServices.set(undefined)
+    $services.set(undefined)
     $layout.set(undefined)
+    $favoritesIds.set(undefined)
   }
   if (diffs.has('currentOrgId') || diffs.has('orgIds'))
     updateOrganization()
@@ -233,8 +236,11 @@ $authenticated.listen((value) => {
     document.body.classList.remove('navigation-drawer-visible')
     $userInfo.set(undefined)
     $organizations.set(undefined)
+    $baseServicesLoad.set(LoadingState.UNLOADED)
     $baseServices.set(undefined)
+    $services.set(undefined)
     $layout.set(undefined)
+    $favoritesIds.set(undefined)
   }
 })
 
