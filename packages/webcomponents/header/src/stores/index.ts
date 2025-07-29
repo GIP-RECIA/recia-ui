@@ -21,6 +21,7 @@ import type {
   HeaderProperties,
   LayoutApiResponse,
   Organizations,
+  SearchSection,
   Service,
   Soffit,
   UpdatedFavoriteSection,
@@ -42,6 +43,7 @@ import {
 } from '../types/index.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
+import { alphaSort } from '../utils/stringUtils.ts'
 
 const favoriteSectionId: string = 'services'
 
@@ -166,6 +168,27 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
         canDelete: true,
         loading:
           baseServicesLoad === LoadingState.UNLOADED
+          || baseServicesLoad === LoadingState.LOADING,
+      },
+    ]
+  },
+)
+
+const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
+  [$baseServices, $baseServicesLoad],
+  (services, baseServicesLoad) => {
+    const servicesItems = services?.map(({ id, name, category, link, description }) => {
+      return { id, name, category, link, description }
+    })
+      .sort((a, b) => alphaSort(a.name, b.name, 'asc'))
+      ?? []
+
+    return [
+      {
+        id: 'services',
+        name: msg(str`Services`),
+        items: servicesItems,
+        loading: baseServicesLoad === LoadingState.UNLOADED
           || baseServicesLoad === LoadingState.LOADING,
       },
     ]
@@ -409,6 +432,7 @@ export {
   $favoriteMenu,
   $favorites,
   $organizations,
+  $searchResults,
   $services,
   $settings,
   $soffit,

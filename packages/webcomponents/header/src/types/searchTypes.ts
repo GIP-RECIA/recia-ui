@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-export * from './categoryTypes.ts'
-export * from './drawerTypes.ts'
-export * from './favoriteTypes.ts'
-export * from './headerTypes.ts'
-export * from './layoutTypes.ts'
-export * from './linkTypes.ts'
-export * from './loadingStateTypes.ts'
-export * from './organizationTypes.ts'
-export * from './portletTypes.ts'
-export * from './registryTypes.ts'
-export * from './searchTypes.ts'
-export * from './serviceTypes.ts'
-export * from './sessionTypes.ts'
-export * from './soffitTypes.ts'
-export * from './templateTypes.ts'
-export * from './userInfoTypes.ts'
-export * from './userMenuTypes.ts'
+import type { Category } from './categoryTypes.ts'
+import type { Link } from './linkTypes.ts'
+
+export interface SearchItem {
+  id: string
+  name: string
+  category?: Category
+  link: Link
+  description?: string
+}
+
+export interface SearchSection {
+  id: string
+  name: string
+  items: Array<SearchItem>
+  loading?: boolean
+  loadingItems?: number
+}

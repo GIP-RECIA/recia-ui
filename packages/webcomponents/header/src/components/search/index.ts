@@ -16,20 +16,28 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
+import type { SearchItem, SearchSection } from '../../types/searchTypes.ts'
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { useStores } from '@nanostores/lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { map } from 'lit/directives/map.js'
+import { range } from 'lit/directives/range.js'
 import { createRef, ref } from 'lit/directives/ref.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { debounce } from 'lodash-es'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import { $searchResults, updateServices } from '../../stores/index.ts'
+import { Category } from '../../types/categoryTypes.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
+@useStores($searchResults)
 export class ReciaSearch extends LitElement {
   @property({ type: Boolean, attribute: 'open' })
   isOpen: boolean = false
@@ -74,6 +82,18 @@ export class ReciaSearch extends LitElement {
     return true
   }
 
+  static i18nCategory(): Record<Category, string> {
+    return {
+      [Category.documentation]: msg(str`Documentation`),
+      [Category.collaboratif]: msg(str`Collaboratif`),
+      [Category.apprentissage]: msg(str`Apprentissage`),
+      [Category.vieScolaire]: msg(str`Vie scolaire`),
+      [Category.orientation]: msg(str`Orientation`),
+      [Category.parametres]: msg(str`Paramètres`),
+      [Category.communication]: msg(str`Communication`),
+    }
+  }
+
   emitEvent(detail: { open: boolean, mask: boolean }): void {
     this.dispatchEvent(new CustomEvent('event', { detail }))
   }
@@ -83,6 +103,7 @@ export class ReciaSearch extends LitElement {
     if (!input)
       return
 
+    document.documentElement.style.overflowY = ''
     this.isExpanded = false
     input.value = ''
     this.emitEvent({ open: false, mask: false })
@@ -116,11 +137,14 @@ export class ReciaSearch extends LitElement {
   handleSearch = debounce((_: Event) => {
     const value = this.inputRef.value?.value ?? ''
     if (value.length < 3) {
+      document.documentElement.style.overflowY = ''
       this.isExpanded = false
       this.emitEvent({ open: true, mask: false })
       return
     }
 
+    updateServices()
+    document.documentElement.style.overflowY = 'hidden'
     this.isExpanded = true
     this.emitEvent({ open: true, mask: true })
   }, 300)
@@ -130,13 +154,77 @@ export class ReciaSearch extends LitElement {
     if (!input)
       return
 
+    document.documentElement.style.overflowY = ''
     this.isExpanded = false
     input.value = ''
     this.emitEvent({ open: true, mask: false })
     input.focus()
   }
 
+  sectionTemplate(section: SearchSection): TemplateResult | typeof nothing {
+    if (!section.loading && section.items.length === 0)
+      return nothing
+
+    return html`
+      <li id="${section.id}">
+        <header>
+          <span>${section.name}</span>
+        </header>
+        <ul>
+          ${
+            !section.loading
+              ? repeat(
+                  section.items,
+                  item => item.id,
+                  item => this.itemTemplate(item),
+                )
+              : map(
+                  range(section.loadingItems ?? 2),
+                  () => html`<li class="skeleton"></li>`,
+                )
+          }
+        </ul>
+      </li>
+    `
+  }
+
+  itemTemplate(item: SearchItem): TemplateResult {
+    return html`
+        <li>
+          <a
+            href="${item.link.href}"
+            target="${item.link.target ?? nothing}"
+            rel="${item.link.rel ?? nothing}"
+          >
+            <div>
+              <header>
+                ${
+                  item.category
+                    ? html`
+                        <span class="result-tag ${item.category}">
+                          ${ReciaSearch.i18nCategory()[item.category]}
+                        </span>
+                      `
+                    : nothing
+                }
+                <span class="result-title">
+                  ${item.name}
+                </span>
+              </header>
+              ${
+                item.description
+                  ? html`<span>${item.description}</span>`
+                  : nothing
+              }
+            </div>
+          </a>
+        </li>
+      `
+  }
+
   render(): TemplateResult {
+    const results = $searchResults.get() ?? []
+
     return html`
       <div class="search-container">
         <div class="search">
@@ -166,68 +254,22 @@ export class ReciaSearch extends LitElement {
               </button>
             </div>
           </div>
-          <ul
+          <div
             class="search-results"
             style="${styleMap({
               display: this.isExpanded ? undefined : 'none',
             })}"
           >
-            <li>
-              <div class="section-name">
-                <span>Services</span>
-              </div>
-              <ul>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-tag collaboratif">Espace collaboratif</span><span class="result-title">Espaces Nextcloud</span>
-                    </header>
-                    <span>Espaces de <strong>stockage</strong> cloud de l'ENT</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div class="section-name">
-                <span>Médiacentre</span>
-              </div>
-              <ul>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-title">Apprendre tous les secrets de Nextcloud</span>
-                    </header>
-                    <span>Les espaces de <strong>stockage</strong> Nextcloud offrent bien plus de fonctionnalités que vous ne le pensiez : ...</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div class="section-name">
-                <span>Actualités</span>
-              </div>
-              <ul>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-tag">Collectivités</span>
-                      <span class="result-title">Espaces de <strong>stockage</strong> Nextcloud inaccessibles du 13/04 au 15/04</span>
-                    </header>
-                    <span>Ce week-end, les espaces de <strong>stockage</strong> cloud de l'ENT subiront une interruption de maintenance l...</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <header>
-                      <span class="result-tag">Etablissement</span>
-                      <span class="result-title">Attention aux piratage des espaces de <strong>stockage</strong></span>
-                    </header>
-                    <span>Depuis le début de l'année scolaire, plus d'une dizaine de comptes étudiants ont été piratés, résul...</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+            <ul>
+              ${
+                repeat(
+                  results,
+                  section => section.id,
+                  section => this.sectionTemplate(section),
+                )
+              }
+            </ul>
+          </div>
         </div>
       </div>
     `

@@ -3,6 +3,16 @@
 @use '../../../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .search-container {
   width: 100%;
   padding: 16px;
@@ -93,7 +103,6 @@
   &-results {
     position: absolute;
     top: calc(100% + 8px);
-    @include unstyled-list;
     width: 100%;
     background-color: var(--#{$prefix}body-bg);
     padding: 16px;
@@ -102,76 +111,101 @@
     row-gap: 8px;
     border-radius: 8px;
     box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
-    max-height: calc(100vh - 126px);
+    max-height: calc(100dvh - #{calc(#{$header-height + 2 * 16 + 2 * (8.5 + 16) + 5} + var(--recia-font-size-md))});
     overflow-y: auto;
 
-    > li {
-      > .section-name {
-        color: var(--#{$prefix}basic-black-lighter);
-        display: block;
-        font-weight: 500;
-        font-style: italic;
-        border-bottom: 1px solid var(--#{$prefix}stroke);
-        margin-bottom: 8px;
-        padding: 4px 10px;
-      }
+    > ul {
+      @include unstyled-list;
 
-      > ul {
-        @include unstyled-list;
-        display: flex;
-        flex-direction: column;
-        row-gap: 8px;
-
-        > li > a {
-          @include unstyled-link;
+      > li {
+        > header {
+          color: var(--#{$prefix}basic-black-lighter);
           display: block;
-          background-color: #F8F8F8;
-          border-radius: 4px;
-          padding: 8px 10px;
-          outline: none;
+          font-weight: 500;
+          font-style: italic;
+          border-bottom: 1px solid var(--#{$prefix}stroke);
+          margin-bottom: 8px;
+          padding: 4px 10px;
+        }
 
-          > header {
-            > .result-title {
-              font-family: $sora;
-              font-size: var(--#{$prefix}font-size-sm);
-              line-height: 140%;
-              margin-bottom: 4px;
-            }
+        > ul {
+          @include unstyled-list;
+          display: flex;
+          flex-direction: column;
+          row-gap: 8px;
 
-            > .result-tag {
-              display: inline-flex;
-              font-family: $dm-sans;
-              font-size: var(--#{$prefix}font-size-xs);
-              font-weight: 500;
-              margin-right: 4px;
-              padding: 4px 10px;
-              border-radius: 13px;
-              background-color: var(--#{$prefix}stroke);
+          > li {
+            > a {
+              @include unstyled-link;
+              display: inline-block;
+              width: 100%;
+              background-color: #F8F8F8;
+              border-radius: 4px;
+              outline: none;
 
-              @each $type, $values in $categories {
-                &.#{$type} {
-                  background-color: var(--#{$prefix}#{$type});
-                  color: var(--#{$prefix}#{$type}-text);
+              > div {
+                margin: 8px 10px;
+                overflow: hidden;
+
+                > header {
+                  > .result-title {
+                    font-family: $sora;
+                    font-size: var(--#{$prefix}font-size-sm);
+                    line-height: 140%;
+                    margin-bottom: 4px;
+                  }
+
+                  > .result-tag {
+                    display: inline-flex;
+                    font-family: $dm-sans;
+                    font-size: var(--#{$prefix}font-size-xs);
+                    font-weight: 500;
+                    margin-right: 4px;
+                    padding: 4px 10px;
+                    border-radius: 13px;
+                    background-color: var(--#{$prefix}stroke);
+
+                    @each $type, $values in $categories {
+                      &.#{$type} {
+                        background-color: var(--#{$prefix}#{$type});
+                        color: var(--#{$prefix}#{$type}-text);
+                      }
+                    }
+                  }
+                }
+
+                > span {
+                  line-height: 150%;
+                }
+              }
+
+
+              &:hover,
+              &:focus-visible {
+                background-color: #F0F0F0;
+
+                > div > header > .result-title {
+                  color: var(--#{$prefix}primary);
+                  font-weight: 600;
                 }
               }
             }
-          }
 
-          > span {
-            line-height: 150%;
-          }
-
-          &:hover,
-          &:focus-visible {
-            background-color: #F0F0F0;
-
-            > header > .result-title {
-              color: var(--#{$prefix}primary);
-              font-weight: 600;
+            &.skeleton {
+              padding: 8px 10px;
+              height: 4em;
+              border-radius: 4px;
+              background: linear-gradient(90deg, #e9e9e9 30%, #f6f6f6 50%, #e9e9e9 70%);
+              background-size: 200% 100%;
+              animation: shimmer 1.5s infinite linear;
             }
           }
         }
       }
+    }
+
+    &:focus-visible {
+      outline: 2px dotted var(--#{$prefix}primary);
     }
   }
 
@@ -193,6 +227,12 @@
       > .end {
         margin-right: 5px;
       }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    &-results {
+      max-height: calc(100dvh - ($header-height + 2 * 16px));
     }
   }
 }
