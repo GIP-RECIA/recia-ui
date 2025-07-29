@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import type { TemplateResult } from 'lit'
+import { html } from 'lit'
+
 function slugify(value: string): string {
   return String(value)
     .normalize('NFKD')
@@ -25,13 +28,13 @@ function slugify(value: string): string {
     .replace(/-+/g, '-')
 }
 
-function compareNormalize(value: string): string {
+function normalize(value: string): string {
   return value.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '')
 }
 
 function alphaSort(a: string, b: string, order: 'asc' | 'desc'): 0 | 1 | -1 {
-  const normalizedA = compareNormalize(a)
-  const normalizedB = compareNormalize(b)
+  const normalizedA = normalize(a)
+  const normalizedB = normalize(b)
 
   if (normalizedA === normalizedB)
     return 0
@@ -72,10 +75,40 @@ function hashCode(value: string): string {
   return hash.toString()
 }
 
+function highlight(text: string, searchTerm: string): TemplateResult {
+  if (!searchTerm)
+    return html`${text}`
+
+  const normalizedText = normalize(text)
+  const normalizedSearch = normalize(searchTerm)
+
+  const parts: Array<string | TemplateResult> = []
+  let lastIndex = 0
+
+  let index = normalizedText.indexOf(normalizedSearch)
+  while (index !== -1) {
+    if (index > lastIndex)
+      parts.push(text.slice(lastIndex, index))
+
+    const matched = text.slice(index, index + searchTerm.length)
+    parts.push(html`<strong>${matched}</strong>`)
+
+    lastIndex = index + searchTerm.length
+    index = normalizedText.indexOf(normalizedSearch, lastIndex)
+  }
+
+  if (lastIndex < text.length)
+    parts.push(text.slice(lastIndex))
+
+  return html`${parts}`
+}
+
 export {
   alphaSort,
   getAcronym,
   hashCode,
+  highlight,
+  normalize,
   sanitize,
   slugify,
   truncate,

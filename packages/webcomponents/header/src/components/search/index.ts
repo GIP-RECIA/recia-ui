@@ -35,6 +35,7 @@ import { $searchResults, updateServices } from '../../stores/index.ts'
 import { Category } from '../../types/categoryTypes.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
+import { highlight } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
@@ -254,12 +255,12 @@ export class ReciaSearch extends LitElement {
                     : nothing
                 }
                 <span class="result-title">
-                  ${item.name}
+                  ${highlight(item.name, this.search)}
                 </span>
               </header>
               ${
                 item.description
-                  ? html`<span>${item.description}</span>`
+                  ? html`<span>${highlight(item.description, this.search)}</span>`
                   : nothing
               }
             </div>
