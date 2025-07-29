@@ -158,6 +158,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.23.8":
+  version: 7.28.2
+  resolution: "@babel/runtime@npm:7.28.2"
+  checksum: 10/a0965fbdd6aaa40709290923bbe05e1c4314021f0cef608eb1d69f04f717c41829e50a53d79c4a0f461512b4be9b3c0190dc19387b219bcdaacdd793b2fe1b8a
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.28.0":
   version: 7.28.1
   resolution: "@babel/types@npm:7.28.1"
@@ -4465,6 +4472,7 @@ __metadata:
     info-etab: "workspace:^"
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
+    match-sorter: "npm:^8.1.0"
     nanostores: "npm:^1.0.1"
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
@@ -5353,6 +5361,16 @@ __metadata:
   version: 3.0.4
   resolution: "markdown-table@npm:3.0.4"
   checksum: 10/bc699819e6a15607e5def0f21aa862aa061cf1f49877baa93b0185574f6ab143591afe0e18b94d9b15ea80c6a693894150dbccfacf4f6767160dc32ae393dfe0
+  languageName: node
+  linkType: hard
+
+"match-sorter@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "match-sorter@npm:8.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.8"
+    remove-accents: "npm:0.5.0"
+  checksum: 10/9a4c18f1b168656925abee9d98d23b6e1dfe5a3aaaeae26fc61efd65da8a00310865372a7376974ea6d3f6c9df0dae59700d49b26bde095e3b4be0594da1df9a
   languageName: node
   linkType: hard
 
@@ -6873,6 +6891,13 @@ __metadata:
   bin:
     regjsparser: bin/parser
   checksum: 10/c2d6506b3308679de5223a8916984198e0493649a67b477c66bdb875357e3785abbf3bedf7c5c2cf8967d3b3a7bdf08b7cbd39e65a70f9e1ffad584aecf5f06a
+  languageName: node
+  linkType: hard
+
+"remove-accents@npm:0.5.0":
+  version: 0.5.0
+  resolution: "remove-accents@npm:0.5.0"
+  checksum: 10/4aa1a9d0c18468515a33c6760b0f8e28dfbceddcb846fac90b2189445445b27b11cc1df9fbceb97b4449438bc13250d77b27d4ab325b2d69933acc156d6c5b50
   languageName: node
   linkType: hard
 

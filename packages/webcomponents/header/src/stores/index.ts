@@ -177,8 +177,8 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
 const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   [$baseServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
-    const servicesItems = services?.map(({ id, name, category, link, description }) => {
-      return { id, name, category, link, description }
+    const servicesItems = services?.map(({ id, name, category, link, description, keywords }) => {
+      return { id, name, category, link, description, keywords }
     })
       .sort((a, b) => alphaSort(a.name, b.name, 'asc'))
       ?? []

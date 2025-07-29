@@ -204,6 +204,13 @@
       }
     }
 
+    > .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+    }
+
     &:focus-visible {
       outline: 2px dotted var(--#{$prefix}primary);
     }

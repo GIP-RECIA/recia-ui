@@ -23,6 +23,7 @@ export interface SearchItem {
   category?: Category
   link: Link
   description?: string
+  keywords?: Array<string>
 }
 
 export interface SearchSection {

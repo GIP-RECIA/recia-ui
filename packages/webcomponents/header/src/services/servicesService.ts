@@ -52,6 +52,14 @@ export default class ServicesService {
         doesInfoExist,
       } = portletsInfo.find(el => el.fname === fname) ?? {}
 
+      let keywords: Array<string> | undefined = description.split('   ')
+      keywords.shift()
+      keywords = keywords.filter(val => val.trim().length > 0)
+      if (keywords.length > 0)
+        keywords = keywords[0].split(', ')
+      else
+        keywords = undefined
+
       return {
         id,
         fname,
@@ -63,6 +71,7 @@ export default class ServicesService {
           target: alternativeMaximizedLinkTarget?.value ?? '_self',
         },
         description: truncate(description),
+        keywords,
         favorite: false,
         more: doesInfoExist,
       }

@@ -28,6 +28,7 @@ import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { debounce } from 'lodash-es'
+import { matchSorter } from 'match-sorter'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { $searchResults, updateServices } from '../../stores/index.ts'
@@ -44,6 +45,9 @@ export class ReciaSearch extends LitElement {
 
   @state()
   isExpanded: boolean = false
+
+  @state()
+  search: string = ''
 
   private inputRef: Ref<HTMLInputElement> = createRef()
 
@@ -135,11 +139,12 @@ export class ReciaSearch extends LitElement {
   }
 
   handleSearch = debounce((_: Event) => {
-    const value = this.inputRef.value?.value ?? ''
+    const value = this.inputRef.value?.value.trim() ?? ''
     if (value.length < 3) {
       document.documentElement.style.overflowY = ''
       this.isExpanded = false
       this.emitEvent({ open: true, mask: false })
+      this.search = ''
       return
     }
 
@@ -147,7 +152,8 @@ export class ReciaSearch extends LitElement {
     document.documentElement.style.overflowY = 'hidden'
     this.isExpanded = true
     this.emitEvent({ open: true, mask: true })
-  }, 300)
+    this.search = value
+  }, 500)
 
   clearSearch(_: Event | undefined = undefined) {
     const input = this.inputRef.value
@@ -159,6 +165,26 @@ export class ReciaSearch extends LitElement {
     input.value = ''
     this.emitEvent({ open: true, mask: false })
     input.focus()
+  }
+
+  filteredResults(): Array<SearchSection> {
+    let results = $searchResults.get() ?? []
+    if (this.search !== '') {
+      results = results?.map((section) => {
+        const items = matchSorter(
+          section.items,
+          this.search,
+          {
+            keys: ['title', 'name', 'description', 'keywords'],
+            threshold: matchSorter.rankings.ACRONYM,
+          },
+        )
+
+        return { ...section, items }
+      })
+    }
+
+    return results
   }
 
   sectionTemplate(section: SearchSection): TemplateResult | typeof nothing {
@@ -223,7 +249,7 @@ export class ReciaSearch extends LitElement {
   }
 
   render(): TemplateResult {
-    const results = $searchResults.get() ?? []
+    const results = this.filteredResults()
 
     return html`
       <div class="search-container">
@@ -260,15 +286,21 @@ export class ReciaSearch extends LitElement {
               display: this.isExpanded ? undefined : 'none',
             })}"
           >
-            <ul>
-              ${
-                repeat(
-                  results,
-                  section => section.id,
-                  section => this.sectionTemplate(section),
-                )
-              }
-            </ul>
+            ${
+              results.some(section => section.items.length > 0 || section.loading)
+                ? html`
+                    <ul>
+                      ${
+                        repeat(
+                          results,
+                          section => section.id,
+                          section => this.sectionTemplate(section),
+                        )
+                      }
+                    </ul>
+                  `
+                : html`<div class="empty">${msg(str`Aucun résultats`)}</div>`
+            }
           </div>
         </div>
       </div>
