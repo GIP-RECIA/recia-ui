@@ -31,7 +31,7 @@ import {
   $userInfo,
   $userMenu,
 } from '../../stores/index.ts'
-import { UserMenuItem } from '../../types/userMenuItemType.ts'
+import { UserMenuItem } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'

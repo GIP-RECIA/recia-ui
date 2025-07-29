@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-import type { Category } from './categoryType.ts'
-import type { Link } from './linkType.ts'
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
+import type { Link } from './linkTypes.ts'
 
-export interface Service {
-  id: number
-  fname: string
+export interface DrawerItem {
   name: string
-  category?: Category
-  iconUrl?: string
-  link: Link
-  new?: boolean
-  favorite?: boolean
-  more?: boolean
+  ariaLabel?: string
+  icon: IconDefinition
+  link?: Link
 }

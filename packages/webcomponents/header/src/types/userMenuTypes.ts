@@ -15,11 +15,22 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { Link } from './linkType.ts'
+import type { Link } from './linkTypes.ts'
 
-export interface DrawerItem {
-  name: string
-  ariaLabel?: string
-  icon: IconDefinition
-  link?: Link
+export enum UserMenuItem {
+  Search = 'search',
+  Notification = 'notification',
+  Settings = 'settings',
+  InfoEtab = 'info-etab',
+  ChangeEtab = 'change-etab',
+  Starter = 'starter',
+  Logout = 'logout',
 }
+
+export type UserMenuConfig = Record<
+  UserMenuItem,
+  false | undefined | {
+    icon?: IconDefinition
+    link?: Link | null
+  }
+>

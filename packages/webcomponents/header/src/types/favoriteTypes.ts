@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
-export enum UserMenuItem {
-  Search = 'search',
-  Notification = 'notification',
-  Settings = 'settings',
-  InfoEtab = 'info-etab',
-  ChangeEtab = 'change-etab',
-  Starter = 'starter',
-  Logout = 'logout',
+import type { Category } from './categoryTypes.ts'
+import type { Link } from './linkTypes.ts'
+
+export interface FavoriteItem {
+  id: string
+  name: string
+  iconUrl?: string
+  category?: Category
+  link: Link
+}
+
+export interface FavoriteSection {
+  id: string
+  name: string
+  items: Array<FavoriteItem>
+  emptyText: string
+  canDelete?: boolean
+  canMove?: boolean
+  loading?: boolean
+  loadingItems?: number
+}
+
+export type UpdatedFavoriteSection = FavoriteSection & {
+  deleted: Array<FavoriteItem>
+  orderHasChanged: boolean
 }

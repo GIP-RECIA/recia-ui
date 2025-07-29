@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { HeaderProperties } from './headerType.ts'
+import type { HeaderProperties } from './headerTypes.ts'
 
 export interface TemplateApiResponse {
   version: string

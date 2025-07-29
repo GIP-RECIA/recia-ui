@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { Link } from './linkType.ts'
-import type { UserMenuItem } from './userMenuItemType.ts'
+import type { Category } from './categoryTypes.ts'
+import type { Link } from './linkTypes.ts'
 
-export type UserMenuConfig = Record<
-  UserMenuItem,
-  false | undefined | {
-    icon?: IconDefinition
-    link?: Link | null
-  }
->
+export interface Service {
+  id: number
+  fname: string
+  name: string
+  category?: Category
+  iconUrl?: string
+  link: Link
+  new?: boolean
+  favorite?: boolean
+  more?: boolean
+}
