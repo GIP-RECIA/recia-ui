@@ -113,8 +113,7 @@ export class ReciaPrincipalContainer extends LitElement {
                       })}"
                       class="btn-secondary circle search-button"
                       aria-label="${msg(str`Rechercher dans l'ENT`)}"
-                      @click="${(e: Event) => {
-                        e.stopPropagation()
+                      @click="${(_: Event) => {
                         this.dispatchEvent(new CustomEvent(
                           'user-menu-event',
                           { detail: { type: UserMenuItem.Search } },
