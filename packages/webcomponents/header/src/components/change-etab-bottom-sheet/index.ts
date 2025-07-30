@@ -64,8 +64,18 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
     e.preventDefault()
     const soffitObject = $soffit.get()
     const { switchOrgPortletUrl } = $settings.get()
-    if (!soffitObject || !switchOrgPortletUrl)
+    const organizations = $organizations.get()
+    if (
+      !soffitObject
+      || !switchOrgPortletUrl
+      || !organizations?.other
+      || organizations.other.length === 0
+    ) {
+      console.error(`Unable to change etab. User has ${organizations?.other.length ?? 0} other organization.`)
       return
+    }
+    if (!this.selectedEtab)
+      this.selectedEtab = organizations.other[0].id
 
     // eslint-disable-next-line no-alert
     if (confirm(msg(str`Afin que le changement d'établissement soit effectif, vous devez vous déonnecter.\n\nAcceptez-vous de vous déconnecter maintenant ?`))) {
