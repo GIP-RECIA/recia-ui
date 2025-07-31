@@ -17,7 +17,7 @@
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Link } from '../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { faExclamationTriangle, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -27,6 +27,7 @@ import langHelper from '../../helpers/langHelper.ts'
 import { $settings, $soffit, addFavorite, removeFavorite } from '../../stores/index.ts'
 import { Category } from '../../types/index.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
+import { getSvgIcon } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'filters'
@@ -117,15 +118,7 @@ export class ReciaService extends LitElement {
                   `
                 : nothing
             }
-            ${
-              this.iconUrl
-                ? html`
-                    <svg class="icon" aria-hidden="true">
-                      <use href="${this.iconUrl}#icone"></use>
-                    </svg>
-                  `
-                : getIconWithStyle(faExclamationTriangle, undefined, { icon: true })
-            }
+            ${getSvgIcon(this.iconUrl)}
             ${
               this.link
                 ? html`

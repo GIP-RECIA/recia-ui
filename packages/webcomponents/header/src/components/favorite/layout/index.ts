@@ -33,6 +33,7 @@ import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { Category } from '../../../types/index.ts'
 import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { getSvgIcon } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
@@ -239,9 +240,7 @@ export class ReciaFavoriteLayout extends LitElement {
       <li>
         <div class="favorite">
           ${actionTemplate}
-          <svg class="icon" aria-hidden="true">
-            <use href="${item.iconUrl}"></use>
-          </svg>
+          ${getSvgIcon(item.iconUrl)}
           <a
             href="${item.link.href}"
             target="${item.link.target ?? nothing}"
