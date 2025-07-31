@@ -32,7 +32,7 @@ import { matchSorter } from 'match-sorter'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { $searchResults, updateServices } from '../../stores/index.ts'
-import { Category } from '../../types/categoryTypes.ts'
+import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import { highlight } from '../../utils/stringUtils.ts'
@@ -53,18 +53,6 @@ export class ReciaSearch extends LitElement {
   private inputRef: Ref<HTMLInputElement> = createRef()
 
   private parentNodeElement: ParentNode | null | undefined
-
-  static i18nCategory(): Record<Category, string> {
-    return {
-      [Category.documentation]: msg(str`Documentation`),
-      [Category.collaboratif]: msg(str`Collaboratif`),
-      [Category.apprentissage]: msg(str`Apprentissage`),
-      [Category.vieScolaire]: msg(str`Vie scolaire`),
-      [Category.orientation]: msg(str`Orientation`),
-      [Category.parametres]: msg(str`Paramètres`),
-      [Category.communication]: msg(str`Communication`),
-    }
-  }
 
   constructor() {
     super()
@@ -250,7 +238,7 @@ export class ReciaSearch extends LitElement {
                   item.category
                     ? html`
                         <span class="result-tag ${item.category}">
-                          ${ReciaSearch.i18nCategory()[item.category]}
+                          ${getCategoryTranslation(item.category)}
                         </span>
                       `
                     : nothing

@@ -26,6 +26,7 @@ import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { $settings, $soffit, addFavorite, removeFavorite } from '../../stores/index.ts'
 import { Category } from '../../types/index.ts'
+import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { getSvgIcon } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -80,18 +81,6 @@ export class ReciaService extends LitElement {
     return true
   }
 
-  static i18nCategory(): Record<Category, string> {
-    return {
-      [Category.documentation]: msg(str`Documentation`),
-      [Category.collaboratif]: msg(str`Collaboratif`),
-      [Category.apprentissage]: msg(str`Apprentissage`),
-      [Category.vieScolaire]: msg(str`Vie scolaire`),
-      [Category.orientation]: msg(str`Orientation`),
-      [Category.parametres]: msg(str`Paramètres`),
-      [Category.communication]: msg(str`Communication`),
-    }
-  }
-
   async toggleFavorite(_: Event): Promise<void> {
     if (!this.channelId)
       return
@@ -137,7 +126,7 @@ export class ReciaService extends LitElement {
             ${
               this.category
                 ? html`
-                    <span class="category">${ReciaService.i18nCategory()[this.category]}</span>
+                    <span class="category">${getCategoryTranslation(this.category)}</span>
                   `
                 : nothing
             }

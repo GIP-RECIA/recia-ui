@@ -31,7 +31,7 @@ import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
-import { Category } from '../../../types/index.ts'
+import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
 import { getIcon } from '../../../utils/fontawesomeUtils.ts'
 import { getSvgIcon } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
@@ -73,18 +73,6 @@ export class ReciaFavoriteLayout extends LitElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.removeEventListener('reset', this.reset.bind(this))
-  }
-
-  static i18nCategory(): Record<Category, string> {
-    return {
-      [Category.documentation]: msg(str`Documentation`),
-      [Category.collaboratif]: msg(str`Collaboratif`),
-      [Category.apprentissage]: msg(str`Apprentissage`),
-      [Category.vieScolaire]: msg(str`Vie scolaire`),
-      [Category.orientation]: msg(str`Orientation`),
-      [Category.parametres]: msg(str`Paramètres`),
-      [Category.communication]: msg(str`Communication`),
-    }
   }
 
   reset(_: Event) {
@@ -255,7 +243,7 @@ export class ReciaFavoriteLayout extends LitElement {
             item.category
               ? html`
                   <span class="tag-category ${item.category}">
-                    ${ReciaFavoriteLayout.i18nCategory()[item.category]}
+                    ${getCategoryTranslation(item.category)}
                   </span>
                 `
               : nothing
