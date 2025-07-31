@@ -17,15 +17,14 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { Section } from '../../types/SectionType.ts'
+import type { FavoriteSection } from '../../../types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import langHelper from '../../helpers/langHelper.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'bottom-sheet'
 import '../layout/index.ts'
@@ -33,7 +32,7 @@ import '../layout/index.ts'
 @localized()
 export class ReciaFavoriteBottomSheet extends LitElement {
   @property({ type: Array })
-  data?: Array<Section>
+  data?: Array<FavoriteSection>
 
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
@@ -85,7 +84,7 @@ export class ReciaFavoriteBottomSheet extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-bottom-sheet`)
+const tagName = componentName('favorite-bottom-sheet')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaFavoriteBottomSheet)

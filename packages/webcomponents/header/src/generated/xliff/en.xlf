@@ -94,6 +94,88 @@
   <source>nouveau</source>
   <target>new</target>
 </trans-unit>
+<trans-unit id="sf55d634dcc743595">
+  <source>Services</source>
+  <target>Services</target>
+</trans-unit>
+<trans-unit id="saeef3be08ad38e0f">
+  <source>Aucun service favori</source>
+  <target>No favorite service</target>
+</trans-unit>
+<trans-unit id="s5ee26933a140671a">
+  <source>Annuler</source>
+  <target>Cancel</target>
+</trans-unit>
+<trans-unit id="s5261563ad59a1fae">
+  <source>Gérer</source>
+  <target>Manage</target>
+</trans-unit>
+<trans-unit id="se430513274f9b495">
+  <source>Enregistrer</source>
+  <target>Save</target>
+</trans-unit>
+<trans-unit id="sdb9a884ccc06edf6">
+  <source>Supprimer le favori</source>
+  <target>Delete favorite</target>
+</trans-unit>
+<trans-unit id="s1c703460a5da79b1">
+  <source>Réordonner vers la gauche</source>
+  <target>Rorder to the left</target>
+</trans-unit>
+<trans-unit id="se831b27916e38e5f">
+  <source>Réordonner vers la droite</source>
+  <target>Rorder to the right</target>
+</trans-unit>
+<trans-unit id="sa284edf05520f63f">
+  <source>Vos favoris</source>
+  <target>Your favorites</target>
+</trans-unit>
+<trans-unit id="s7b37041836cc3169">
+  <source>Vous n'avez</source>
+  <target>You have</target>
+</trans-unit>
+<trans-unit id="s7d6fe3c46c5ad168">
+  <source>Rechercher un service</source>
+  <target>Search for a service</target>
+</trans-unit>
+<trans-unit id="s3aeb7a7330a293db">
+  <source>Effacer la recherche</source>
+  <target>Clear search</target>
+</trans-unit>
+<trans-unit id="sfd12a1f85c45fce6">
+  <source>Aucun résultats</source>
+  <target>No results</target>
+</trans-unit>
+<trans-unit id="sc139bbab63351fe2">
+  <source>Accéder à l'ENT</source>
+  <target>Access the ENT</target>
+</trans-unit>
+<trans-unit id="sf52ce9bda73f60a6">
+  <source>Une erreur est survenue lors de la récupération des services.
+Tentez de rafraichir la page.</source>
+  <target>An error occurred while retrieving services.
+Try refreshing the page.</target>
+</trans-unit>
+<trans-unit id="sba76902f0ee13f8d">
+  <source>Afin que le changement d'établissement soit effectif, vous devez vous déonnecter.
+
+Acceptez-vous de vous déconnecter maintenant ?</source>
+  <target>In order for the change of institution to take effect, you must log out.
+
+Do you agree to log out now?</target>
+</trans-unit>
+<trans-unit id="sbddc966a2760f55c">
+  <source>Changer d'établissement</source>
+  <target>Change institution</target>
+</trans-unit>
+<trans-unit id="s97f93435ca295cf5">
+  <source>Établissement</source>
+  <target>Institution</target>
+</trans-unit>
+<trans-unit id="sf0da99a184bafb7e">
+  <source>Fermer</source>
+  <target>Close</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

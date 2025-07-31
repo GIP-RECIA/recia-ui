@@ -30,7 +30,7 @@ import { $organizations, $settings, $soffit } from '../../stores/index.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'favorite'
+import 'bottom-sheet'
 
 @localized()
 @useStores($organizations)

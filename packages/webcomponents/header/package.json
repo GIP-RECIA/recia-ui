@@ -49,7 +49,6 @@
     "bottom-sheet": "workspace:^",
     "eslint": "^9.32.0",
     "eslint-plugin-format": "^1.0.1",
-    "favorite": "workspace:^",
     "filters": "workspace:^",
     "info-etab": "workspace:^",
     "lodash-es": "^4.17.21",

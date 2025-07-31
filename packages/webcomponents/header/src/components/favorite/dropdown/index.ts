@@ -15,18 +15,17 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Section } from '../../types/SectionType.ts'
+import type { FavoriteSection } from '../../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { styleMap } from 'lit/directives/style-map.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import langHelper from '../../helpers/langHelper.ts'
-import { getIcon } from '../../utils/fontawesomeUtils.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../layout/index.ts'
 
@@ -36,7 +35,7 @@ export class ReciaFavoriteDropdown extends LitElement {
   expended: boolean = false
 
   @property({ type: Array })
-  data?: Array<Section>
+  data?: Array<FavoriteSection>
 
   @state()
   isExpanded: boolean = false
@@ -137,7 +136,7 @@ export class ReciaFavoriteDropdown extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-dropdown`)
+const tagName = componentName('favorite-dropdown')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaFavoriteDropdown)

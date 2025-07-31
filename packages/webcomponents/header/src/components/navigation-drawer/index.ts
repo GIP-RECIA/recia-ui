@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ReciaFavoriteBottomSheet } from 'favorite'
+import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { DrawerItem, Link, UpdatedFavoriteSection } from '../../types/index.ts'
@@ -38,7 +38,8 @@ import {
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'favorite'
+import '../favorite/bottom-sheet/index.ts'
+import '../favorite/dropdown/index.ts'
 
 @localized()
 @useStores($favoriteMenu)

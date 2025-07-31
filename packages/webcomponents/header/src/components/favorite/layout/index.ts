@@ -15,8 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Item } from '../../types/ItemType.ts'
-import type { Section, UpdatedSection } from '../../types/SectionType.ts'
+import type { FavoriteItem, FavoriteSection, UpdatedFavoriteSection } from '../../../types/index.ts'
 import {
   faArrowLeft,
   faArrowRight,
@@ -30,18 +29,17 @@ import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import langHelper from '../../helpers/langHelper.ts'
-import { Category } from '../../types/CategoryType.ts'
-import { getIcon } from '../../utils/fontawesomeUtils.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import { Category } from '../../../types/index.ts'
+import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
 export class ReciaFavoriteLayout extends LitElement {
   @property({ type: Array })
-  data?: Array<Section>
+  data?: Array<FavoriteSection>
 
   @property({ type: Boolean })
   loading: boolean = false
@@ -53,7 +51,7 @@ export class ReciaFavoriteLayout extends LitElement {
   loadingSectionsItems?: number
 
   @state()
-  tmpData?: Array<Section>
+  tmpData?: Array<FavoriteSection>
 
   @state()
   isManage: boolean = false
@@ -105,11 +103,11 @@ export class ReciaFavoriteLayout extends LitElement {
     this.isManage = !this.isManage
   }
 
-  getDiffs(): Array<UpdatedSection> | undefined {
+  getDiffs(): Array<UpdatedFavoriteSection> | undefined {
     if (!this.data || !this.tmpData)
       return undefined
 
-    const changes: Array<UpdatedSection> = []
+    const changes: Array<UpdatedFavoriteSection> = []
 
     this.tmpData.forEach((newData) => {
       const oldData = this.data?.find(({ id }) => id === newData.id)
@@ -130,7 +128,7 @@ export class ReciaFavoriteLayout extends LitElement {
     return changes
   }
 
-  deleteItem(sectionId: string, item: Item): void {
+  deleteItem(sectionId: string, item: FavoriteItem): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section
@@ -141,7 +139,7 @@ export class ReciaFavoriteLayout extends LitElement {
     })
   }
 
-  moveItem(sectionId: string, item: Item, newPosition: '-1' | '+1'): void {
+  moveItem(sectionId: string, item: FavoriteItem, newPosition: '-1' | '+1'): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section
@@ -191,7 +189,7 @@ export class ReciaFavoriteLayout extends LitElement {
       : nothing
   }
 
-  itemTemplate(section: Section, item: Item): TemplateResult {
+  itemTemplate(section: FavoriteSection, item: FavoriteItem): TemplateResult {
     const { id, canDelete, canMove } = section
     const actionTemplate: TemplateResult | typeof nothing = this.isManage
       ? html`
@@ -368,7 +366,7 @@ export class ReciaFavoriteLayout extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-layout`)
+const tagName = componentName('favorite-layout')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaFavoriteLayout)

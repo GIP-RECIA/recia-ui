@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '../../../../header/src/variables' as *;
-@use '../../../../common/assets/scss/global' as *;
+@use '../../../variables' as *;
+@use '../../../../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .dropdown-favorites {

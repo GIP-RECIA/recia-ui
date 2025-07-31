@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '../../../../actions/src/style' as *;
-@use '../../../../common/assets/scss/global' as *;
+@use '../../../../../actions/src/style' as *;
+@use '../../../../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
 @keyframes shimmer {
