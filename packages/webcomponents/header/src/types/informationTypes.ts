@@ -15,17 +15,23 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { Item } from './ItemType.ts'
-import type { Link } from './LinkType.ts'
+import { Link } from './linkTypes.ts'
+
+export enum InformationItem {
+  Adress = 'adress',
+  Mail = 'mail',
+  Phone = 'phone',
+  Website = 'website',
+}
 
 export interface Information {
-  id: Item
+  id: InformationItem
   icon?: IconDefinition
   link?: Link | null
   value?: string
 }
 
 export type InformationConfig = Record<
-  Item,
+  InformationItem,
   Omit<Partial<Information>, 'id'>
 >

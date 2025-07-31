@@ -15,31 +15,30 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Information, InformationConfig } from '../../types/InformationType.ts'
+import type { Information, InformationConfig } from '../../../types/index.ts'
+import { InformationItem } from '../../../types/index.ts'
 import { faEnvelope, faGlobe, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import langHelper from '../../helpers/langHelper.ts'
-import { Item } from '../../types/ItemType.ts'
-import { getIcon } from '../../utils/fontawesomeUtils.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 const defaultInformation: Partial<InformationConfig> = {
-  [Item.Adress]: {
+  [InformationItem.Adress]: {
     icon: faLocationDot,
   },
-  [Item.Mail]: {
+  [InformationItem.Mail]: {
     icon: faEnvelope,
   },
-  [Item.Phone]: {
+  [InformationItem.Phone]: {
     icon: faPhone,
   },
-  [Item.Website]: {
+  [InformationItem.Website]: {
     icon: faGlobe,
   },
 }
@@ -87,19 +86,19 @@ export class ReciaInfoEtabLayout extends LitElement {
       Object.entries(this.information).map(([key, value]) => [
         key,
         {
-          ...defaultInformation[key as Item],
+          ...defaultInformation[key as InformationItem],
           ...value,
         },
       ]),
     )
   }
 
-  static i18n(): Record<Item, string> {
+  static i18n(): Record<InformationItem, string> {
     return {
-      [Item.Adress]: msg(str`Adresse`),
-      [Item.Mail]: msg(str`Mail`),
-      [Item.Phone]: msg(str`Numéro de téléphone`),
-      [Item.Website]: msg(str`Site web`),
+      [InformationItem.Adress]: msg(str`Adresse`),
+      [InformationItem.Mail]: msg(str`Mail`),
+      [InformationItem.Phone]: msg(str`Numéro de téléphone`),
+      [InformationItem.Website]: msg(str`Site web`),
     }
   }
 
@@ -165,10 +164,10 @@ export class ReciaInfoEtabLayout extends LitElement {
                       <ul>
                         ${repeat(
                           Object.entries(this.localInformation)?.filter(([key, value]) => {
-                            return Object.values(Item).includes(key as Item) && value.value
+                            return Object.values(InformationItem).includes(key as InformationItem) && value.value
                           }),
                           ([key, _]) => key,
-                          ([key, value]) => this.itemTemplate({ id: key as Item, ...value }),
+                          ([key, value]) => this.itemTemplate({ id: key as InformationItem, ...value }),
                         )}
                       </ul>
                     </address>
@@ -184,7 +183,7 @@ export class ReciaInfoEtabLayout extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-layout`)
+const tagName = componentName('info-etab-layout')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaInfoEtabLayout)

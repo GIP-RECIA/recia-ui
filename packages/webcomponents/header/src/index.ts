@@ -15,7 +15,7 @@
  */
 
 import type { ReciaBottomSheet } from 'bottom-sheet'
-import type { ReciaInfoEtabBottomSheet } from 'info-etab'
+import type { ReciaInfoEtabBottomSheet } from './components/info-etab/bottom-sheet/index.ts'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaBottomSheetServiceInfo } from 'service-info'
@@ -47,9 +47,9 @@ import './components/notification-drawer'
 import './components/principal-container'
 import './components/services-layout'
 import './components/change-etab-bottom-sheet'
+import './components/info-etab/bottom-sheet/index.ts'
 import 'regenerator-runtime/runtime.js'
 import 'service-info'
-import 'info-etab'
 
 const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'messages',

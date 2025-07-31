@@ -22,11 +22,10 @@ import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
-import langHelper from '../../helpers/langHelper.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'bottom-sheet'
 import '../layout/index.ts'
@@ -72,7 +71,7 @@ export class ReciaInfoEtabBottomSheet extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-bottom-sheet`)
+const tagName = componentName('info-etab-bottom-sheet')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaInfoEtabBottomSheet)

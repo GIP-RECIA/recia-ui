@@ -3052,7 +3052,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dropdown-info@workspace:^, dropdown-info@workspace:packages/webcomponents/dropdown-info":
+"dropdown-info@workspace:packages/webcomponents/dropdown-info":
   version: 0.0.0-use.local
   resolution: "dropdown-info@workspace:packages/webcomponents/dropdown-info"
   dependencies:
@@ -4447,7 +4447,6 @@ __metadata:
     eslint: "npm:^9.32.0"
     eslint-plugin-format: "npm:^1.0.1"
     filters: "workspace:^"
-    info-etab: "workspace:^"
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     match-sorter: "npm:^8.1.0"
@@ -4598,28 +4597,6 @@ __metadata:
   checksum: 10/e466c27b6373440e6d84fbc19e750219ce25865cb82d578e41a6053d727e5520dc5725217d6eb1cc76005a1bb1696a0f106d84ce7ebda3033b963a38583fb3b3
   languageName: node
   linkType: hard
-
-"info-etab@workspace:^, info-etab@workspace:packages/webcomponents/info-etab":
-  version: 0.0.0-use.local
-  resolution: "info-etab@workspace:packages/webcomponents/info-etab"
-  dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
-    "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.0"
-    "@types/lodash-es": "npm:^4"
-    bottom-sheet: "workspace:^"
-    dropdown-info: "workspace:^"
-    eslint: "npm:^9.32.0"
-    eslint-plugin-format: "npm:^1.0.1"
-    lit: "npm:^3.3.1"
-    lodash-es: "npm:^4.17.21"
-    ress: "npm:^5.0.2"
-    sass: "npm:^1.89.2"
-    typescript: "npm:^5.8.3"
-    vite: "npm:^7.0.6"
-    vite-plugin-dts: "npm:^4.5.4"
-  languageName: unknown
-  linkType: soft
 
 "inherits@npm:^2.0.3, inherits@npm:~2.0.3":
   version: 2.0.4

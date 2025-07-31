@@ -37,7 +37,7 @@ import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../search'
 import 'user-menu'
-import 'info-etab'
+import '../info-etab/dropdown-info/index.ts'
 
 @localized()
 @useStores($settings)
