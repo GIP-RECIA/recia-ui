@@ -64,6 +64,7 @@ interface TemplateApiData {
 }
 
 export interface Template {
+  id: string
   name: string
   iconPath: string
   config: Partial<HeaderProperties>

@@ -281,7 +281,19 @@ async function updateTemplate(
   if (!templateApiUrl || !domain)
     return
 
-  const template = await TemplateService.get(templateApiUrl, domain)
+  const templates = await TemplateService.get(templateApiUrl)
+  if (!templates)
+    return undefined
+
+  const template = TemplateService.getCurrent(templates, domain)
+  if (!template)
+    return
+
+  document.body.classList.forEach((cls) => {
+    if (cls.startsWith('theme-'))
+      document.body.classList.remove(cls)
+  })
+  document.body.classList.add(`theme-${template.id}`)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Template', template)

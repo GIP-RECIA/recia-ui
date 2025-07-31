@@ -19,8 +19,7 @@ import type { Template, TemplateApiResponse } from '../types/index.ts'
 export default class TemplateService {
   static async get(
     templateApiUrl: string,
-    domain: string,
-  ): Promise<Template | undefined> {
+  ): Promise<TemplateApiResponse | undefined> {
     try {
       const response = await fetch(templateApiUrl, {
         method: 'GET',
@@ -30,33 +29,44 @@ export default class TemplateService {
         throw new Error(response.statusText)
 
       const templates: TemplateApiResponse = await response.json()
+      if (!templates.data)
+        return undefined
 
-      if (templates.data) {
-        const currenTemplate = templates.data?.find(
-          tpl => tpl?.identity?.domains?.includes(domain),
-        )
-        if (currenTemplate) {
-          const name = currenTemplate?.identity?.name
-          const icon = currenTemplate?.images?.find(image => image?.Id === 'icon')
-          if (icon) {
-            return {
-              name,
-              iconPath: icon?.path ?? '',
-              config: templates.config,
-            }
-          }
-          else {
-            console.error('Incorrect template datas', icon)
-          }
-        }
-        else {
-          console.error(`No template found for ${domain}`, templates.data)
-        }
-      }
+      return templates
     }
     catch (err) {
       console.error(err, templateApiUrl)
       return undefined
+    }
+  }
+
+  static getCurrent(
+    templates: TemplateApiResponse,
+    domain: string,
+  ): Template | undefined {
+    if (templates.data) {
+      const currenTemplate = templates.data?.find(
+        tpl => tpl?.identity?.domains?.includes(domain),
+      )
+      if (currenTemplate) {
+        const { identity: { Id, name }, images } = currenTemplate
+        const icon = images.find(image => image?.Id === 'icon')
+
+        if (icon) {
+          return {
+            id: Id,
+            name,
+            iconPath: icon?.path ?? '',
+            config: templates.config,
+          }
+        }
+        else {
+          console.error('Incorrect template datas', icon)
+        }
+      }
+      else {
+        console.error(`No template found for ${domain}`, templates.data)
+      }
     }
     return undefined
   }
