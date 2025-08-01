@@ -36,10 +36,12 @@ import langHelper from '../../helpers/langHelper.ts'
 import pathHelper from '../../helpers/pathHelper.ts'
 import {
   $favoriteMenu,
+  $settings,
   updateFavoritesFromFavorites,
   updateServices,
 } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
+import { getDomainLink } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../favorite/bottom-sheet/index.ts'
@@ -47,15 +49,13 @@ import '../favorite/dropdown/index.ts'
 
 @localized()
 @useStores($favoriteMenu)
+@useStores($settings)
 export class ReciaNavigationDrawer extends LitElement {
   @property({ type: String })
   logo?: string
 
   @property({ type: String })
   name?: string
-
-  @property({ type: Object, attribute: 'home-link' })
-  homeLink?: Link
 
   @property({ type: Boolean })
   visible: boolean = false
@@ -154,7 +154,8 @@ export class ReciaNavigationDrawer extends LitElement {
       ? html`
           <li>
             <a
-              href="${item.link.href}"
+              id="nav-${item.id}"
+              href="${getDomainLink(item.link.href)}"
               target="${item.link.target ?? nothing}"
               rel="${item.link.rel ?? nothing}"
               title="${item.name}"
@@ -172,6 +173,7 @@ export class ReciaNavigationDrawer extends LitElement {
       : html`
           <li>
             <button
+              id="nav-${item.id}"
               title="${item.name}"
               aria-label="${item.ariaLabel ?? nothing}"
               @click="${(e: Event) => {
@@ -187,6 +189,11 @@ export class ReciaNavigationDrawer extends LitElement {
 
   render(): TemplateResult {
     const favoriteMenu = $favoriteMenu.get()
+    const { contextApiUrl, drawerItems } = $settings.get() ?? {}
+    const homeLink: Link = {
+      href: getDomainLink(contextApiUrl ?? '/'),
+      target: '_self',
+    }
 
     return html`
       <button
@@ -211,14 +218,18 @@ export class ReciaNavigationDrawer extends LitElement {
           <span>${this.name}</span>
         </div>
         <ul>
-          ${this.itemTemplate({
-            name: msg(str`Accueil`),
-            ariaLabel: msg(str`Retourer à l'accueil`),
-            icon: faHouse,
-            link: this.homeLink,
-          })}
+          ${
+            this.itemTemplate({
+              id: 'home',
+              name: msg(str`Accueil`),
+              ariaLabel: msg(str`Retourer à l'accueil`),
+              icon: faHouse,
+              link: homeLink,
+            })
+          }
           <li>
             <button
+              id="nav-all-services"
               title="${msg(str`Tous les services`)}"
               aria-label=""
               class="${classMap({
@@ -233,10 +244,10 @@ export class ReciaNavigationDrawer extends LitElement {
               <span class="text">${msg(str`Tous les services`)}</span>
             </button>
           </li>
-          <li class="favorites-bottom-sheet">
+          <li id="nav-favorite">
             <button
-              id="toggle-favorite-button"
               title="${msg(str`Favoris`)}"
+              class="favorites-bottom-sheet"
               @click="${this.openFavoriteBottomSheet}"
             >
               <div class="active-indicator"></div>
@@ -245,11 +256,10 @@ export class ReciaNavigationDrawer extends LitElement {
               </div>
               <span class="text">${msg(str`Favoris`)}</span>
             </button>
-          </li>
-          <li class="favorites-dropdown">
             <r-favorite-dropdown
               .data="${favoriteMenu}"
               ?expended="${this.isExpanded}"
+              class="favorites-dropdown"
               @open="${this.openFavoriteDropdown}"
               @updated="${this.handleFavoriteUpdate}"
             >
@@ -257,7 +267,7 @@ export class ReciaNavigationDrawer extends LitElement {
           </li>
           ${
             repeat(
-              this.items ?? [],
+              drawerItems ?? [],
               item => item.name,
               item => this.itemTemplate(item),
             )

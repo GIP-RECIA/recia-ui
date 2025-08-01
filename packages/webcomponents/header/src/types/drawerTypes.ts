@@ -18,6 +18,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import type { Link } from './linkTypes.ts'
 
 export interface DrawerItem {
+  id: string
   name: string
   ariaLabel?: string
   icon: IconDefinition

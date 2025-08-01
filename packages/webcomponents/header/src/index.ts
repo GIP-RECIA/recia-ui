@@ -19,8 +19,8 @@ import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaInfoEtabBottomSheet } from './components/info-etab/bottom-sheet/index.ts'
 import type { ReciaBottomSheetServiceInfo } from './components/service-info/bottom-sheet/index.ts'
-import type { HeaderProperties } from './types/index.ts'
-import { faBookOpen, faMessage } from '@fortawesome/free-solid-svg-icons'
+import type { DrawerItem, HeaderProperties } from './types/index.ts'
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -79,6 +79,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
   'fname',
+  'drawerItems',
   'debug',
 ]
 
@@ -89,22 +90,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 export class ReciaHeader extends LitElement {
   data = {
     logo: './spritemap.svg#NOC-simple',
-    homeLink: {
-      href: '#',
-    },
     visible: true,
-    items: [
-      {
-        name: msg(str`Médiacentre`),
-        icon: faBookOpen,
-        link: { href: '/portail/p/Mediacentre' },
-      },
-      {
-        name: msg(str`Tutoriels`),
-        icon: faMessage,
-        link: { href: '/#' },
-      },
-    ],
     filters: [
       {
         id: 'category',
@@ -226,6 +212,16 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String })
   fname?: string
+
+  @property({ type: Array })
+  drawerItems?: Array<DrawerItem> = [
+    {
+      id: 'mediacentre',
+      name: msg(str`Médiacentre`),
+      icon: faBookOpen,
+      link: { href: '/portail/p/Mediacentre' },
+    },
+  ]
 
   @property({ type: Boolean })
   debug: boolean = false
@@ -383,9 +379,7 @@ export class ReciaHeader extends LitElement {
                   ?expanded="${this.isNavigationDrawerExpanded}"
                   logo="${this.data.logo}"
                   name="${orgName}"
-                  .homeLink="${this.data.homeLink}"
                   ?visible="${this.data.visible}"
-                  .items="${this.data.items}"
                   ?services-layout-state="${this.isServicesLayout}"
                   @toggle="${this.toggleDrawer}"
                   @toggle-services-layout="${this.toggleServicesLayout}"

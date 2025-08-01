@@ -167,7 +167,7 @@ button.drawer-toggle {
         }
       }
 
-      &.favorites-dropdown {
+      > .favorites-dropdown {
         display: none;
       }
     }
@@ -201,11 +201,11 @@ button.drawer-toggle {
     }
 
     > ul > li {
-      &.favorites-bottom-sheet {
+      > .favorites-bottom-sheet {
         display: none;
       }
 
-      &.favorites-dropdown {
+      > .favorites-dropdown {
         display: unset;
       }
     }

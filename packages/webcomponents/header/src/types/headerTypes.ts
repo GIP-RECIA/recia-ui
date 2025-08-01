@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import type { DrawerItem } from './drawerTypes.ts'
+
 export interface HeaderProperties {
   messages: unknown
   domain: string
@@ -40,5 +42,6 @@ export interface HeaderProperties {
   serviceInfoApiUrl: string
   servicesInfoApiUrl: string
   fname: string
+  drawerItems: Array<DrawerItem>
   debug: boolean
 }
