@@ -228,8 +228,9 @@ $favoritesIds.listen(() => {
 })
 
 $authenticated.listen((value) => {
+  const { navigationDrawerVisible } = $settings.get() ?? {}
   if (value) {
-    if (true)
+    if (navigationDrawerVisible === true)
       document.body.classList.add('navigation-drawer-visible')
   }
   else {

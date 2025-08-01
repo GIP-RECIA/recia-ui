@@ -43,5 +43,6 @@ export interface HeaderProperties {
   servicesInfoApiUrl: string
   fname: string
   drawerItems: Array<DrawerItem>
+  navigationDrawerVisible: boolean
   debug: boolean
 }

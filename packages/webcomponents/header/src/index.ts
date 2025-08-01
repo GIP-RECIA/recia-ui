@@ -80,6 +80,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'servicesInfoApiUrl',
   'fname',
   'drawerItems',
+  'navigationDrawerVisible',
   'debug',
 ]
 
@@ -213,7 +214,7 @@ export class ReciaHeader extends LitElement {
   @property({ type: String })
   fname?: string
 
-  @property({ type: Array })
+  @property({ type: Array, attribute: 'drawer-items' })
   drawerItems?: Array<DrawerItem> = [
     {
       id: 'mediacentre',
@@ -223,6 +224,9 @@ export class ReciaHeader extends LitElement {
       autoDetectCurrent: true,
     },
   ]
+
+  @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
+  navigationDrawerVisible: boolean = false
 
   @property({ type: Boolean })
   debug: boolean = false
@@ -362,7 +366,7 @@ export class ReciaHeader extends LitElement {
   render(): TemplateResult {
     const authenticated = $authenticated.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
-    const { serviceInfoApiUrl, portletInfoApiUrl } = $settings.get()
+    const { serviceInfoApiUrl, portletInfoApiUrl, navigationDrawerVisible } = $settings.get()
 
     return html`
       <div class="header">
@@ -380,7 +384,7 @@ export class ReciaHeader extends LitElement {
                   ?expanded="${this.isNavigationDrawerExpanded}"
                   logo="${this.data.logo}"
                   name="${orgName}"
-                  ?visible="${this.data.visible}"
+                  ?visible="${navigationDrawerVisible}"
                   ?services-layout-state="${this.isServicesLayout}"
                   @toggle="${this.toggleDrawer}"
                   @toggle-services-layout="${this.toggleServicesLayout}"
@@ -395,7 +399,7 @@ export class ReciaHeader extends LitElement {
           })}topbar"
         >
           <r-principal-container
-            ?navigation-drawer-visible="${this.data.visible}"
+            ?navigation-drawer-visible="${navigationDrawerVisible}"
             name="${orgName}"
             ?search-open="${this.isSearchOpen}"
             ?searching="${this.isSearching}"
@@ -409,7 +413,7 @@ export class ReciaHeader extends LitElement {
             ? html`
                 <r-services-layout
                   ?show="${this.isServicesLayout}"
-                  ?navigation-drawer-visible="${this.data.visible}"
+                  ?navigation-drawer-visible="${navigationDrawerVisible}"
                   .filters="${this.data.filters}"
                   @close="${this.toggleServicesLayout}"
                   @open-more="${this.openMore}"
