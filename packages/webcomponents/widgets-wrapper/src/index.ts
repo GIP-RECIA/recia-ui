@@ -23,6 +23,7 @@ import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoTyp
 import type { WidgetData } from './types/WidgetDataType.ts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faAdd,
   faAnglesRight,
   faArrowLeft,
   faArrowRight,
@@ -30,7 +31,9 @@ import {
   faCog,
   faInfoCircle,
   faPlus,
+  faSave,
   faTimes,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -558,7 +561,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   dropdownRender(): TemplateResult {
     const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
     return html`
-      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount() || nonUsedKeys.length === 0}" class="btn-secondary small" @click="${this.clickOnAjouter}">${this.t(`buttons.Ajouter`, 'Ajouter')} </button>
+      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount() || nonUsedKeys.length === 0}" class="btn-secondary small" @click="${this.clickOnAjouter}">${this.t(`buttons.Ajouter`, 'Ajouter')} ${getIcon(faAdd)}</button>
       <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen || nonUsedKeys.length === 0 ? 'display:none' : nothing}">
        ${repeat(
           nonUsedKeys,
@@ -594,8 +597,8 @@ export class ReciaWidgetsWrapper extends LitElement {
               : html`
               <div class="to-right">
                ${this.dropdownRender()}
-              <button class="btn-secondary small" @click="${this.clickOnAnnuler}">${this.t(`buttons.Annuler`, 'Annuler')}</button>
-              <button class="btn-secondary small" ?disabled="${!this.canSave()}" title="Save" @click="${this.clickOnSauvegarder}">${this.t(`buttons.Sauvegarder`, 'Sauvegarder')}</button>
+              <button class="btn-secondary small" @click="${this.clickOnAnnuler}">${this.t(`buttons.Annuler`, 'Annuler')} ${getIcon(faXmark)}</button>
+              <button class="btn-secondary small" ?disabled="${!this.canSave()}" title="Save" @click="${this.clickOnSauvegarder}">${this.t(`buttons.Sauvegarder`, 'Enregistrer')} ${getIcon(faSave)}</button>
             </div>
             <p class="no-mobile">    ${this.widgetCountRender()}</p>
 
