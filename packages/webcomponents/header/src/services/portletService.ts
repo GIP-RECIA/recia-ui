@@ -24,13 +24,11 @@ import type {
   Soffit,
 } from '../types/index.ts'
 import { uniqBy } from 'lodash-es'
-import pathHelper from '../helpers/pathHelper.ts'
+import { getServiceLink } from '../utils/linkUtils.ts'
 
 export default class PortletService {
   static async get(
     portalInfoApiUrl: string,
-    domain: string,
-    portalPath: string,
   ): Promise<Partial<ServiceInfoLayout> | undefined> {
     try {
       const options = {
@@ -56,11 +54,11 @@ export default class PortletService {
         return {
           'icon-url': iconUrl,
           'name': title,
-          'launch-link': {
-            href: alternativeMaximizedLink ?? pathHelper.getUrl(`${portalPath}/p/${fname}`, domain),
-            target: alternativeMaximizedLinkTarget ?? '_self',
-            rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined,
-          },
+          'launch-link': getServiceLink(
+            fname,
+            alternativeMaximizedLink,
+            alternativeMaximizedLinkTarget,
+          ),
         }
       }
       else {

@@ -116,8 +116,6 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     const [portlet, info] = await Promise.all([
       PortletService.get(
         pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain),
-        this.domain,
-        this.portalPath,
       ),
       InfoService.get(pathHelper.getUrl(`${this.serviceInfoApiUrl}/${fname}`, this.domain)),
     ])

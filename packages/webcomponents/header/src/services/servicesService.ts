@@ -17,6 +17,7 @@
 import type { Service, Soffit } from '../types/index.ts'
 import { $settings } from '../stores/index.ts'
 import { Category } from '../types/index.ts'
+import { getServiceLink } from '../utils/linkUtils.ts'
 import { truncate } from '../utils/stringUtils.ts'
 import InfoService from './infoService.ts'
 import PortletService from './portletService.ts'
@@ -70,10 +71,11 @@ export default class ServicesService {
         name: title,
         category,
         iconUrl: iconUrl?.value,
-        link: {
-          href: alternativeMaximizedLink?.value ?? `${contextApiUrl}/p/${fname}`,
-          target: alternativeMaximizedLinkTarget?.value ?? '_self',
-        },
+        link: getServiceLink(
+          fname,
+          alternativeMaximizedLink?.value,
+          alternativeMaximizedLinkTarget?.value,
+        ),
         description: truncate(description),
         keywords,
         favorite: false,
