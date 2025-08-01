@@ -11,10 +11,14 @@
 <body class="container">
   <section>
     <r-header
-      template-api-url="/commun/portal_template_api.tpl.json"
+      template-api-url="/commun/portal_template_api_v2.tpl.json"
       debug
     >
     </r-header>
+
+    <button id="soffit-updater">
+      Soffit updater
+    </button>
   </section>
 
   <script>
@@ -44,6 +48,9 @@
     // Object.entries(config).forEach(([key, value]) => {
     //   header.setAttribute(key, typeof value == "object" ? JSON.stringify(value) : value)
     // })
+    document.querySelector('#soffit-updater').addEventListener('click', () => {
+      header.dispatchEvent(new CustomEvent('update-soffit'))
+    })
   </script>
 </body>
 

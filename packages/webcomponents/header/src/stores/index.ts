@@ -461,4 +461,5 @@ export {
   updateFavoritesFromFavorites,
   updateServices,
   updateSettings,
+  updateSoffit,
 }

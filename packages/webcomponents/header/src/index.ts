@@ -34,10 +34,12 @@ import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import {
   $authenticated,
+  $debug,
   $organizations,
   $settings,
   updateServices,
   updateSettings,
+  updateSoffit,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
 import { UserMenuItem } from './types/index.ts'
@@ -252,6 +254,7 @@ export class ReciaHeader extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
+    this.initDebugEventsListener()
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
@@ -265,6 +268,17 @@ export class ReciaHeader extends LitElement {
     this.injectStyle()
     document.body.classList.add('auto-margin-top')
     return true
+  }
+
+  initDebugEventsListener(): void {
+    $debug.listen((value) => {
+      if (value === true) {
+        this.addEventListener('update-soffit', updateSoffit)
+      }
+      else {
+        this.removeEventListener('update-soffit', updateSoffit)
+      }
+    })
   }
 
   injectStyle(): void {

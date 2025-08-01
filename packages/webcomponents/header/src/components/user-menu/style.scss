@@ -24,9 +24,13 @@
       display: none;
       align-items: baseline;
       flex-direction: column;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+
+      > .displayname,
+      > .function {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
 
       > .displayname {
         font-size: var(--#{$prefix}font-size-md);

@@ -325,7 +325,9 @@ export class ReciaUserMenu extends LitElement {
             repeat(
               Object.entries(this.localConfig),
               ([key, _]) => key,
-              ([key, value]) => this.itemTemplate({ id: key as UserMenuItem, ...value }),
+              ([key, value]) => this.itemTemplate(
+                { id: key as UserMenuItem, ...value },
+              ),
             )
           }
         </ul>
