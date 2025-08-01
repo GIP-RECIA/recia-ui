@@ -32,6 +32,15 @@ function getServiceLink(
   }
 }
 
+function getDomainLink(
+  path: string,
+): string {
+  const { domain } = $settings.get() ?? {}
+
+  return pathHelper.getUrl(path, domain)
+}
+
 export {
+  getDomainLink,
   getServiceLink,
 }

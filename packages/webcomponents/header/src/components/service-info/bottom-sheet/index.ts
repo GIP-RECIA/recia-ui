@@ -15,7 +15,7 @@
  */
 
 import type { ReciaBottomSheet } from 'bottom-sheet'
-import type { PropertyValues, TemplateResult } from 'lit'
+import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ServiceInfoLayout } from '../../../types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
@@ -25,9 +25,9 @@ import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../../common/config.ts'
 import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../../helpers/langHelper.ts'
-import pathHelper from '../../../helpers/pathHelper.ts'
 import InfoService from '../../../services/infoService.ts'
 import PortletService from '../../../services/portletService.ts'
+import { getDomainLink } from '../../../utils/linkUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../layout/index.ts'
@@ -35,12 +35,6 @@ import 'bottom-sheet'
 
 @localized()
 export class ReciaBottomSheetServiceInfo extends LitElement {
-  @property({ type: String })
-  domain: string = window.location.hostname
-
-  @property({ type: String, attribute: 'portal-path' })
-  portalPath: string = import.meta.env.VITE_PORTAL_BASE_URL
-
   @property({ type: String, attribute: 'portal-info-api-url' })
   portalInfoApiUrl?: string
 
@@ -75,20 +69,6 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     this.removeEventListener('service-info', this.handleEvent.bind(this))
   }
 
-  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('domain')) {
-      if (!this.domain || this.domain === '') {
-        this.domain = window.location.hostname
-      }
-    }
-    if (_changedProperties.has('portalPath')) {
-      if (!this.portalPath || this.portalPath === '') {
-        this.portalPath = import.meta.env.VITE_PORTAL_BASE_URL
-      }
-    }
-    return true
-  }
-
   open(): void {
     this.bottomSheetRef.value!.open()
   }
@@ -114,10 +94,8 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     }
 
     const [portlet, info] = await Promise.all([
-      PortletService.get(
-        pathHelper.getUrl(`${this.portalInfoApiUrl}/${fname}.json`, this.domain),
-      ),
-      InfoService.get(pathHelper.getUrl(`${this.serviceInfoApiUrl}/${fname}`, this.domain)),
+      PortletService.get(getDomainLink(`${this.portalInfoApiUrl}/${fname}.json`)),
+      InfoService.get(getDomainLink(`${this.serviceInfoApiUrl}/${fname}`)),
     ])
 
     if (!portlet || !info) {

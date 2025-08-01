@@ -36,6 +36,7 @@ import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { UserMenuItem } from '../../types/index.ts'
 import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
+import { getDomainLink } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
@@ -218,7 +219,7 @@ export class ReciaUserMenu extends LitElement {
               ? html`
                   <a
                     id="${item.id}"
-                    href="${item.link.href}"
+                    href="${getDomainLink(item.link.href)}"
                     target="${item.link.target ?? nothing}"
                     rel="${item.link.rel ?? nothing}"
                     @click="${this.close}"

@@ -15,7 +15,6 @@
  */
 
 import type { Service, Soffit } from '../types/index.ts'
-import { $settings } from '../stores/index.ts'
 import { Category } from '../types/index.ts'
 import { getServiceLink } from '../utils/linkUtils.ts'
 import { truncate } from '../utils/stringUtils.ts'
@@ -36,7 +35,6 @@ export default class ServicesService {
     if (!portlets || !portletsInfo)
       return undefined
 
-    const { contextApiUrl } = $settings.get()
     const services: Array<Service> = portlets.map((portlet) => {
       const {
         id,
