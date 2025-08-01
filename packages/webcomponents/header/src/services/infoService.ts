@@ -19,6 +19,8 @@ import type {
   ServiceInfoApiResponse,
   ServiceInfoLayout,
 } from '../types/index.ts'
+import pathHelper from '../helpers/pathHelper.ts'
+import { $settings } from '../stores/index.ts'
 
 export default class InfoService {
   static async get(serviceInfoApiUrl: string): Promise<Partial<ServiceInfoLayout> | undefined> {
@@ -36,14 +38,21 @@ export default class InfoService {
       const data: ServiceInfoApiResponse = await response.json()
 
       if (data) {
-        const { description, video_link, categorie_principale, tutorials, resource_link } = data
+        const { domain } = $settings.get() ?? {}
+        const {
+          description,
+          video_link,
+          categorie_principale,
+          tutorials,
+          resource_link,
+        } = data
 
         return {
           description,
-          'video': video_link,
+          'video': video_link ? pathHelper.getUrl(video_link, domain) : undefined,
           'category': categorie_principale,
           'ressources': tutorials,
-          'ressources-link': resource_link ? { href: resource_link } : undefined,
+          'ressources-link': resource_link ? { href: pathHelper.getUrl(resource_link, domain) } : undefined,
         }
       }
       else {
