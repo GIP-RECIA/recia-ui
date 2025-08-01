@@ -16,8 +16,7 @@
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Config } from './types/ConfigType.ts'
-import type { Link } from './types/LinkType.ts'
+import type { Link, UserMenuConfig } from '../../types/index.ts'
 import {
   faArrowRightFromBracket,
   faChevronDown,
@@ -33,13 +32,12 @@ import { property, state } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
-import { componentName } from '../../common/config.ts'
-import { name } from '../package.json'
-import langHelper from './helpers/langHelper.ts'
+import { componentName } from '../../../../common/config.ts'
+import langHelper from '../../helpers/langHelper.ts'
+import { UserMenuItem } from '../../types/index.ts'
+import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import { Item } from './types/ItemType.ts'
-import { getIcon, getIconWithStyle } from './utils/fontawesomeUtils.ts'
-import { setLocale } from './utils/localizationUtils.ts'
 
 @localized()
 export class ReciaUserMenu extends LitElement {
@@ -53,7 +51,7 @@ export class ReciaUserMenu extends LitElement {
   function?: string
 
   @property({ type: Object })
-  config?: Config
+  config?: UserMenuConfig
 
   @property({ type: Number })
   notification?: number
@@ -65,27 +63,27 @@ export class ReciaUserMenu extends LitElement {
   isExpanded: boolean = false
 
   @state()
-  localConfig: Config = {
-    [Item.Search]: {
+  localConfig: UserMenuConfig = {
+    [UserMenuItem.Search]: {
       icon: faMagnifyingGlass,
     },
-    [Item.Notification]: {},
-    [Item.Settings]: {
+    [UserMenuItem.Notification]: {},
+    [UserMenuItem.Settings]: {
       icon: faGear,
     },
-    [Item.InfoEtab]: {
+    [UserMenuItem.InfoEtab]: {
       icon: faInfoCircle,
     },
-    [Item.ChangeEtab]: {
+    [UserMenuItem.ChangeEtab]: {
       icon: faRightLeft,
       link: {
         href: '/uPortal/p/switchStruct/',
       },
     },
-    [Item.Starter]: {
+    [UserMenuItem.Starter]: {
       icon: faPlay,
     },
-    [Item.Logout]: {
+    [UserMenuItem.Logout]: {
       icon: faArrowRightFromBracket,
       link: {
         href: '/uPortal/Logout',
@@ -126,9 +124,9 @@ export class ReciaUserMenu extends LitElement {
     if (!this.config)
       return
 
-    const merged: Config = { ...this.localConfig }
+    const merged: UserMenuConfig = { ...this.localConfig }
 
-    for (const key of Object.keys(this.config) as Item[]) {
+    for (const key of Object.keys(this.config) as UserMenuItem[]) {
       const value = this.config[key]
       if (value === false) {
         merged[key] = false
@@ -176,23 +174,23 @@ export class ReciaUserMenu extends LitElement {
     this.dispatchEvent(new CustomEvent('launch', { detail: { type } }))
   }
 
-  static i18n(): Record<Item, string> {
+  static i18n(): Record<UserMenuItem, string> {
     return {
-      [Item.Search]: msg(str`Rechercher`),
-      [Item.Notification]: msg(str`Notifications`),
-      [Item.Settings]: msg(str`Mon profil`),
-      [Item.InfoEtab]: msg(str`Infos de l\'établissement`),
-      [Item.ChangeEtab]: msg(str`Changer d\'établissement`),
-      [Item.Starter]: msg(str`Lancer le didacticiel`),
-      [Item.Logout]: msg(str`Déconnexion`),
+      [UserMenuItem.Search]: msg(str`Rechercher`),
+      [UserMenuItem.Notification]: msg(str`Notifications`),
+      [UserMenuItem.Settings]: msg(str`Mon profil`),
+      [UserMenuItem.InfoEtab]: msg(str`Infos de l\'établissement`),
+      [UserMenuItem.ChangeEtab]: msg(str`Changer d\'établissement`),
+      [UserMenuItem.Starter]: msg(str`Lancer le didacticiel`),
+      [UserMenuItem.Logout]: msg(str`Déconnexion`),
     }
   }
 
-  itemTemplate(item: { id: Item, icon?: IconDefinition, link?: Link | null }): TemplateResult {
+  itemTemplate(item: { id: UserMenuItem, icon?: IconDefinition, link?: Link | null }): TemplateResult {
     const content = html`
       ${ReciaUserMenu.i18n()[item.id]}
       ${
-        item.id === Item.Notification
+        item.id === UserMenuItem.Notification
           ? keyed(
               this.notification && this.notification > 0 ? 'notifications' : 'no-notifications',
               html`
@@ -304,10 +302,10 @@ export class ReciaUserMenu extends LitElement {
           ${
             repeat(
               Object.entries(this.localConfig)?.filter(([key, value]) => {
-                return Object.values(Item).includes(key as Item) && value !== false
+                return Object.values(UserMenuItem).includes(key as UserMenuItem) && value !== false
               }),
               ([key, _]) => key,
-              ([key, value]) => this.itemTemplate({ id: key as Item, ...value }),
+              ([key, value]) => this.itemTemplate({ id: key as UserMenuItem, ...value }),
             )
           }
         </ul>
@@ -318,7 +316,7 @@ export class ReciaUserMenu extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(name)
+const tagName = componentName('user-menu')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaUserMenu)

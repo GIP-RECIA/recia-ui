@@ -35,8 +35,8 @@ import { UserMenuItem } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import '../search'
-import 'user-menu'
+import '../search/index.ts'
+import '../user-menu/index.ts'
 import '../info-etab/dropdown-info/index.ts'
 
 @localized()

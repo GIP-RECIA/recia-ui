@@ -118,10 +118,6 @@
   <source>Aucun résultats</source>
   <target>No results</target>
 </trans-unit>
-<trans-unit id="sc139bbab63351fe2">
-  <source>Accéder à l'ENT</source>
-  <target>Access the ENT</target>
-</trans-unit>
 <trans-unit id="sf52ce9bda73f60a6">
   <source>Une erreur est survenue lors de la récupération des services.
 Tentez de rafraichir la page.</source>
@@ -213,6 +209,34 @@ Do you agree to log out now?</target>
 <trans-unit id="sfaa072ad346ce9d6">
   <source>Lancer le service</source>
   <target>Launch service</target>
+</trans-unit>
+<trans-unit id="s358106e7a82ecfb0">
+  <source>Rechercher</source>
+  <target>Search</target>
+</trans-unit>
+<trans-unit id="s5be3c6d61cd9182f">
+  <source>Notifications</source>
+  <target>Notifications</target>
+</trans-unit>
+<trans-unit id="sb1ae6414f46b7471">
+  <source>Mon profil</source>
+  <target>My profile</target>
+</trans-unit>
+<trans-unit id="sbf71c25c7ca379d8">
+  <source>Infos de l'établissement</source>
+  <target>Institution info</target>
+</trans-unit>
+<trans-unit id="s4c45c541dc69732e">
+  <source>Lancer le didacticiel</source>
+  <target>Start tutorial</target>
+</trans-unit>
+<trans-unit id="sc3a31f700d8e22a1">
+  <source>Déconnexion</source>
+  <target>Logout</target>
+</trans-unit>
+<trans-unit id="s0879a675a2208eb0">
+  <source>Menu mon compte</source>
+  <target>My account menu</target>
 </trans-unit>
 </body>
 </file>

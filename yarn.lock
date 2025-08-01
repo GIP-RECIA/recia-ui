@@ -4455,7 +4455,6 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.89.2"
     typescript: "npm:^5.8.3"
-    user-menu: "workspace:^"
     vite: "npm:^7.0.6"
     vite-plugin-dts: "npm:^4.5.4"
   languageName: unknown
@@ -7900,7 +7899,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"user-menu@workspace:^, user-menu@workspace:packages/webcomponents/user-menu":
+"user-menu@workspace:packages/webcomponents/user-menu":
   version: 0.0.0-use.local
   resolution: "user-menu@workspace:packages/webcomponents/user-menu"
   dependencies:
