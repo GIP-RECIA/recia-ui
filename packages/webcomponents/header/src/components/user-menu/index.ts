@@ -170,9 +170,18 @@ export class ReciaUserMenu extends LitElement {
     }
   }
 
-  emitEvent(_: Event, type: string): void {
-    this.close(undefined, false)
-    this.dispatchEvent(new CustomEvent('launch', { detail: { type } }))
+  emitEvent(e: Event, from: 'link' | 'button', type: string): void {
+    this.close()
+    if (from === 'button')
+      this.dispatchEvent(new CustomEvent('launch', { detail: { type } }))
+    document.dispatchEvent(new CustomEvent('user-menu-event', {
+      detail: {
+        event: e,
+        elementId: type,
+      },
+      bubbles: true,
+      composed: true,
+    }))
   }
 
   static i18n(): Record<UserMenuItem, string> {
@@ -222,7 +231,7 @@ export class ReciaUserMenu extends LitElement {
                     href="${getDomainLink(item.link.href)}"
                     target="${item.link.target ?? nothing}"
                     rel="${item.link.rel ?? nothing}"
-                    @click="${this.close}"
+                    @click="${(e: Event) => this.emitEvent(e, 'link', item.id)}"
                   >
                     ${content}
                   </a>
@@ -230,7 +239,7 @@ export class ReciaUserMenu extends LitElement {
               : html`
                   <button
                     id="${item.id}"
-                    @click="${(e: Event) => this.emitEvent(e, item.id)}"
+                    @click="${(e: Event) => this.emitEvent(e, 'button', item.id)}"
                   >
                     ${content}
                   </button>
