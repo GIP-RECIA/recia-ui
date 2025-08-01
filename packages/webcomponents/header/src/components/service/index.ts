@@ -99,6 +99,16 @@ export class ReciaService extends LitElement {
     this.dispatchEvent(new CustomEvent('open-more', { detail: { fname: this.fname } }))
   }
 
+  handleLinkClick(e: Event): void {
+    document.dispatchEvent(new CustomEvent('service-event', {
+      detail: {
+        event: e,
+      },
+      bubbles: true,
+      composed: true,
+    }))
+  }
+
   render(): TemplateResult | typeof nothing {
     return this.link && this.name
       ? html`
@@ -121,6 +131,7 @@ export class ReciaService extends LitElement {
                       target="${this.link.target ?? nothing}"
                       rel="${this.link.rel ?? nothing}"
                       class="name"
+                      @click="${this.handleLinkClick}"
                     >
                       <h3>${this.name}</h3>
                       <span aria-hidden="true"></span>
