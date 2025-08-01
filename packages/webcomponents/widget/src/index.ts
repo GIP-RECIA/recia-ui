@@ -118,6 +118,10 @@ export class ReciaWidget extends LitElement {
     this.dispatchEvent(new CustomEvent('click-on-item', { detail: { uid: this.uid, id } }))
   }
 
+  clickOnHeadingLink() {
+    this.dispatchEvent(new CustomEvent('click-on-heading-link', { detail: { uid: this.uid } }))
+  }
+
   headingTemplate(): TemplateResult {
     // temp for dev
     return html`
@@ -329,6 +333,7 @@ export class ReciaWidget extends LitElement {
                       target="${this.link.target ?? nothing}"
                       rel="${this.link.rel ?? nothing}"
                       aria-label="${this.name}"
+                      @click="${this.clickOnHeadingLink}"
                     >
                       ${getIconWithStyle(faAnglesRight, undefined, { 'focus-indicator': true })}
                       <div class="heading">${this.headingTemplate()}</div>
