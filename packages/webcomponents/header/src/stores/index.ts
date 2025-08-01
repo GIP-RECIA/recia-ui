@@ -54,7 +54,11 @@ interface TmpSettings {
   starter: boolean
 }
 
-const $settings = atom<Partial<HeaderProperties> & TmpSettings>({
+interface ThemeSettings {
+  drawerIcon: string
+}
+
+const $settings = atom<Partial<HeaderProperties> & TmpSettings & Partial<ThemeSettings>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
   search: true,
@@ -290,6 +294,10 @@ async function updateTemplate(
   if (!template)
     return
 
+  $settings.set({
+    ...$settings.get(),
+    drawerIcon: template.iconPath,
+  })
   document.body.classList.forEach((cls) => {
     if (cls.startsWith('theme-'))
       document.body.classList.remove(cls)

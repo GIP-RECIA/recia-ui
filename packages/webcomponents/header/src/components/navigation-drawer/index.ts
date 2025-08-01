@@ -51,9 +51,6 @@ import '../favorite/dropdown/index.ts'
 @useStores($settings)
 export class ReciaNavigationDrawer extends LitElement {
   @property({ type: String })
-  logo?: string
-
-  @property({ type: String })
   name?: string
 
   @property({ type: Boolean })
@@ -190,7 +187,7 @@ export class ReciaNavigationDrawer extends LitElement {
 
   render(): TemplateResult {
     const favoriteMenu = $favoriteMenu.get()
-    const { contextApiUrl, drawerItems } = $settings.get() ?? {}
+    const { contextApiUrl, drawerItems, drawerIcon } = $settings.get() ?? {}
     const homeLink: Link = {
       href: getDomainLink(contextApiUrl ?? '/'),
       target: '_self',
@@ -204,7 +201,7 @@ export class ReciaNavigationDrawer extends LitElement {
         @click="${this.toggleDrawer}"
       >
         <svg aria-hidden="true">
-          <use href="${this.logo}"></use>
+          <use href="${drawerIcon}#icone"></use>
         </svg>
         <span>${msg(str`Menu`)}</span>
       </button>
