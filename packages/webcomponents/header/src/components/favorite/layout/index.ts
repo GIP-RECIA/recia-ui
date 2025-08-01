@@ -15,7 +15,11 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { FavoriteItem, FavoriteSection, UpdatedFavoriteSection } from '../../../types/index.ts'
+import type {
+  FavoriteItem,
+  FavoriteSection,
+  UpdatedFavoriteSection,
+} from '../../../types/index.ts'
 import {
   faArrowLeft,
   faArrowRight,

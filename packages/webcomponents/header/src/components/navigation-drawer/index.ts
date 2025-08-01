@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { DrawerItem, Link, UpdatedFavoriteSection } from '../../types/index.ts'
+import type {
+  DrawerItem,
+  Link,
+  UpdatedFavoriteSection,
+} from '../../types/index.ts'
+import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faGrip, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'

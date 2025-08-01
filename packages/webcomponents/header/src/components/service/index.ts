@@ -24,7 +24,12 @@ import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $settings, $soffit, addFavorite, removeFavorite } from '../../stores/index.ts'
+import {
+  $settings,
+  $soffit,
+  addFavorite,
+  removeFavorite,
+} from '../../stores/index.ts'
 import { Category } from '../../types/index.ts'
 import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'

@@ -26,8 +26,8 @@ import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'bottom-sheet'
 import '../layout/index.ts'
+import 'bottom-sheet'
 
 @localized()
 export class ReciaFavoriteBottomSheet extends LitElement {

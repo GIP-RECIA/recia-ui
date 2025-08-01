@@ -34,8 +34,8 @@ import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import { alphaSort } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
-import 'filters'
 import '../service/index.ts'
+import 'filters'
 
 @localized()
 @useStores($services)

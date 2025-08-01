@@ -27,8 +27,8 @@ import { spreadAttributes } from '../../../directives/spreadAttributesDirective.
 import langHelper from '../../../helpers/langHelper.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'bottom-sheet'
 import '../layout/index.ts'
+import 'bottom-sheet'
 
 @localized()
 export class ReciaInfoEtabBottomSheet extends LitElement {

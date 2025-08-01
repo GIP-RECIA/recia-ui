@@ -24,8 +24,8 @@ import { spreadAttributes } from '../../../directives/spreadAttributesDirective.
 import langHelper from '../../../helpers/langHelper.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'dropdown-info'
 import '../layout/index.ts'
+import 'dropdown-info'
 
 @localized()
 export class ReciaInfoEtabDropdownInfo extends LitElement {
