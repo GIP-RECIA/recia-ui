@@ -15,7 +15,7 @@
  */
 
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Link } from '../../types/LinkType.ts'
+import type { Link } from '../../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -24,13 +24,12 @@ import { property } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import langHelper from '../../helpers/langHelper.ts'
-import { Category } from '../../types/CategoryType.ts'
-import { Origin } from '../../types/OriginType.ts'
-import { getIcon } from '../../utils/fontawesomeUtils.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import { Category, Origin } from '../../../types/index.ts'
+import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
+import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
@@ -89,18 +88,6 @@ export class ReciaServiceInfoLayout extends LitElement {
     return {
       [Origin.native]: msg(str`Sercice natif`),
       [Origin.external]: msg(str`Service externe`),
-    }
-  }
-
-  static i18nCategory(): Record<Category, string> {
-    return {
-      [Category.documentation]: msg(str`Documentation`),
-      [Category.collaboratif]: msg(str`Collaboratif`),
-      [Category.apprentissage]: msg(str`Apprentissage`),
-      [Category.vieScolaire]: msg(str`Vie scolaire`),
-      [Category.orientation]: msg(str`Orientation`),
-      [Category.parametres]: msg(str`Paramètres`),
-      [Category.communication]: msg(str`Communication`),
     }
   }
 
@@ -179,7 +166,7 @@ export class ReciaServiceInfoLayout extends LitElement {
               this.iconUrl
                 ? html`
                     <svg class="heading-logo" aria-hidden="true">
-                      <use href="${this.iconUrl}"></use>
+                      <use href="${this.iconUrl}#icone"></use>
                     </svg>
                   `
                 : nothing
@@ -199,7 +186,7 @@ export class ReciaServiceInfoLayout extends LitElement {
                 this.category && Object.values(Category).includes(this.category)
                   ? html`
                       <span class="tag-category ${this.category}">
-                        ${ReciaServiceInfoLayout.i18nCategory()[this.category]}
+                        ${getCategoryTranslation(this.category)}
                       </span>
                     `
                   : nothing
@@ -270,7 +257,7 @@ export class ReciaServiceInfoLayout extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-layout`)
+const tagName = componentName('service-info-layout')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaServiceInfoLayout)

@@ -4454,7 +4454,6 @@ __metadata:
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
     sass: "npm:^1.89.2"
-    service-info: "workspace:^"
     typescript: "npm:^5.8.3"
     user-menu: "workspace:^"
     vite: "npm:^7.0.6"
@@ -7150,27 +7149,6 @@ __metadata:
   checksum: 10/985dec0d372370229a262c737063860fabd4a1c730662c1ea3200a2f649117761a42184c96df62a0e885e76fbd5dace41087d6c1ac0351b13c0df5d6bcb1b5ac
   languageName: node
   linkType: hard
-
-"service-info@workspace:^, service-info@workspace:packages/webcomponents/service-info":
-  version: 0.0.0-use.local
-  resolution: "service-info@workspace:packages/webcomponents/service-info"
-  dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
-    "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.0"
-    "@types/lodash-es": "npm:^4"
-    bottom-sheet: "workspace:^"
-    eslint: "npm:^9.32.0"
-    eslint-plugin-format: "npm:^1.0.1"
-    lit: "npm:^3.3.1"
-    lodash-es: "npm:^4.17.21"
-    ress: "npm:^5.0.2"
-    sass: "npm:^1.89.2"
-    typescript: "npm:^5.8.3"
-    vite: "npm:^7.0.6"
-    vite-plugin-dts: "npm:^4.5.4"
-  languageName: unknown
-  linkType: soft
 
 "shebang-command@npm:^2.0.0":
   version: 2.0.0

@@ -38,34 +38,6 @@
   <source>Tiroir de notifications</source>
   <target>Notification drawer</target>
 </trans-unit>
-<trans-unit id="s74cb3d66f6a668e1">
-  <source>Documentation</source>
-  <target>Documentation</target>
-</trans-unit>
-<trans-unit id="sde5d5a164cc22567">
-  <source>Collaboratif</source>
-  <target>Collaborative</target>
-</trans-unit>
-<trans-unit id="s4a214cbd6c588dd3">
-  <source>Apprentissage</source>
-  <target>Learning</target>
-</trans-unit>
-<trans-unit id="sc0c87afaac2a5993">
-  <source>Vie scolaire</source>
-  <target>School life</target>
-</trans-unit>
-<trans-unit id="s47ebf3a8fb3b10c1">
-  <source>Orientation</source>
-  <target>Orientation</target>
-</trans-unit>
-<trans-unit id="scd3518ecedad7590">
-  <source>Paramètres</source>
-  <target>Settings</target>
-</trans-unit>
-<trans-unit id="s47eeeccf4ffc41c3">
-  <source>Communication</source>
-  <target>Communication</target>
-</trans-unit>
 <trans-unit id="s91fb0e685cae0940">
   <source>Retirer des favoris</source>
   <target>Remove from favorites</target>
@@ -175,6 +147,72 @@ Do you agree to log out now?</target>
 <trans-unit id="sf0da99a184bafb7e">
   <source>Fermer</source>
   <target>Close</target>
+</trans-unit>
+<trans-unit id="sdd2fffdf86bf5b6e">
+  <source>Adresse</source>
+  <target>Address</target>
+</trans-unit>
+<trans-unit id="s49e765aed0087b0e">
+  <source>Mail</source>
+  <target>Email</target>
+</trans-unit>
+<trans-unit id="sc9cc5c66b847c2fc">
+  <source>Numéro de téléphone</source>
+  <target>Phone number</target>
+</trans-unit>
+<trans-unit id="s602431f0eda0656c">
+  <source>Site web</source>
+  <target>Web site</target>
+</trans-unit>
+<trans-unit id="s053c80dfb273b703">
+  <source>Photo de l'établissement</source>
+  <target>Photo of the institution</target>
+</trans-unit>
+<trans-unit id="sf52f40951786e21e">
+  <source>Administration &amp; Support</source>
+</trans-unit>
+<trans-unit id="sf450bb4fc19737e8">
+  <source>Communication &amp; Collaboration</source>
+</trans-unit>
+<trans-unit id="sd46d46064b6bfd0b">
+  <source>Documents &amp; Ressources numériques</source>
+</trans-unit>
+<trans-unit id="s93417adf0c36d59b">
+  <source>Apprentissage &amp; Suivi</source>
+</trans-unit>
+<trans-unit id="s6a11501a42b1fd83">
+  <source>Services Citoyens &amp; Territoriaux</source>
+</trans-unit>
+<trans-unit id="sa70929987fb9a6d4">
+  <source>Services RH &amp; Gestion</source>
+</trans-unit>
+<trans-unit id="s8e501f157694decd">
+  <source>Sercice natif</source>
+  <target>Native service</target>
+</trans-unit>
+<trans-unit id="sfb9d2d8c7ef581a9">
+  <source>Service externe</source>
+  <target>External service</target>
+</trans-unit>
+<trans-unit id="sfde5e3a793d980c1">
+  <source>Premiers pas avec le service</source>
+  <target>First steps with the service</target>
+</trans-unit>
+<trans-unit id="se9bc00ac86dcb50b">
+  <source>Ressources disponibles</source>
+  <target>Available resources</target>
+</trans-unit>
+<trans-unit id="s26883f1a61fd0699">
+  <source>Voir toutes les ressources</source>
+  <target>See all resources</target>
+</trans-unit>
+<trans-unit id="s63d894b1ddb06289">
+  <source>Description</source>
+  <target>Description</target>
+</trans-unit>
+<trans-unit id="sfaa072ad346ce9d6">
+  <source>Lancer le service</source>
+  <target>Launch service</target>
 </trans-unit>
 </body>
 </file>

@@ -15,7 +15,7 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import { Link } from './linkTypes.ts'
+import type { Link } from './linkTypes.ts'
 
 export enum InformationItem {
   Adress = 'adress',

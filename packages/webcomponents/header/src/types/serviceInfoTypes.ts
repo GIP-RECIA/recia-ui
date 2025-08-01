@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-import type { Category } from './CategoryType.ts'
-import type { Link } from './LinkType.ts'
-import type { Origin } from './OriginType.ts'
+import type { Category } from './categoryTypes.ts'
+import type { Link } from './linkTypes.ts'
 
-export interface Layout {
+export enum Origin {
+  native = 'native',
+  external = 'external',
+}
+
+export interface ServiceInfoLayout {
   'icon-url'?: string
   'name'?: string
   'origin'?: Origin
@@ -30,4 +34,15 @@ export interface Layout {
   'ressources'?: Array<Link>
   'ressources-link'?: Link
   'launch-link'?: Link
+}
+
+export interface ServiceInfoApiResponse {
+  description: string
+  video_link?: string
+  categorie_principale?: Category
+  tutorials?: Array<Link>
+  resource_link?: string
+  populations_cible?: Array<string>
+  contextes_cible?: Array<string>
+  responsable?: string
 }

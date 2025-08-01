@@ -48,8 +48,8 @@ import './components/principal-container'
 import './components/services-layout'
 import './components/change-etab-bottom-sheet'
 import './components/info-etab/bottom-sheet/index.ts'
+import './components/service-info/bottom-sheet/index.ts'
 import 'regenerator-runtime/runtime.js'
-import 'service-info'
 
 const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'messages',

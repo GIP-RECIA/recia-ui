@@ -17,20 +17,20 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { Layout } from '../../types/LayoutType.ts'
+import type { ServiceInfoLayout } from '../../../types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
-import { componentName } from '../../../../common/config.ts'
-import { name } from '../../../package.json'
-import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
-import langHelper from '../../helpers/langHelper.ts'
-import pathHelper from '../../helpers/pathHelper.ts'
-import InfoService from '../../services/infoService.ts'
-import PortletService from '../../services/portletService.ts'
-import { setLocale } from '../../utils/localizationUtils.ts'
+import { componentName } from '../../../../../common/config.ts'
+import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
+import langHelper from '../../../helpers/langHelper.ts'
+import pathHelper from '../../../helpers/pathHelper.ts'
+import InfoService from '../../../services/infoService.ts'
+import PortletService from '../../../services/portletService.ts'
+import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
+import '../layout/index.ts'
 import 'bottom-sheet'
 
 @localized()
@@ -48,7 +48,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   serviceInfoApiUrl?: string
 
   @state()
-  data?: Layout
+  data?: ServiceInfoLayout
 
   @state()
   loading = false
@@ -149,7 +149,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(`${name}-bottom-sheet`)
+const tagName = componentName('service-info-bottom-sheet')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaBottomSheetServiceInfo)

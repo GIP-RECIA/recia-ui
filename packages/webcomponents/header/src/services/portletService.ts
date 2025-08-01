@@ -20,39 +20,58 @@ import type {
   PortletFromRegistry,
   PortletRegistryApiResponse,
   Registry,
+  ServiceInfoLayout,
   Soffit,
 } from '../types/index.ts'
 import { uniqBy } from 'lodash-es'
+import pathHelper from '../helpers/pathHelper.ts'
 
 export default class PortletService {
   static async get(
     portalInfoApiUrl: string,
-  ): Promise<Partial<PortletFromInfo> | undefined> {
+    domain: string,
+    portalPath: string,
+  ): Promise<Partial<ServiceInfoLayout> | undefined> {
     try {
-      const response = await fetch(portalInfoApiUrl, {
+      const options = {
         method: 'GET',
-      })
+      }
 
-      if (!response.ok)
+      const response = await fetch(portalInfoApiUrl, options)
+
+      if (!response.ok) {
         throw new Error(response.statusText)
+      }
 
       const data: { portlet?: PortletFromInfo } = await response.json()
 
-      if (!data.portlet) {
-        console.error(`No data for ${portalInfoApiUrl}`)
-        return undefined
+      if (data.portlet) {
+        const {
+          title,
+          iconUrl,
+          fname,
+          parameters: { alternativeMaximizedLink, alternativeMaximizedLinkTarget },
+        } = data.portlet
+
+        return {
+          'icon-url': iconUrl,
+          'name': title,
+          'launch-link': {
+            href: alternativeMaximizedLink ?? pathHelper.getUrl(`${portalPath}/p/${fname}`, domain),
+            target: alternativeMaximizedLinkTarget ?? '_self',
+            rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined,
+          },
+        }
       }
-
-      const { title } = data.portlet
-
-      return {
-        title,
+      else {
+        console.error(`No data for ${portalInfoApiUrl}`)
       }
     }
     catch (err) {
       console.error(err, portalInfoApiUrl)
       return undefined
     }
+    return undefined
   }
 
   static async getAll(

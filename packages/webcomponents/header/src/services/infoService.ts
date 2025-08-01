@@ -14,9 +14,49 @@
  * limitations under the License.
  */
 
-import type { Category } from '../types/index.ts'
+import type {
+  Category,
+  ServiceInfoApiResponse,
+  ServiceInfoLayout,
+} from '../types/index.ts'
 
 export default class InfoService {
+  static async get(serviceInfoApiUrl: string): Promise<Partial<ServiceInfoLayout> | undefined> {
+    try {
+      const options = {
+        method: 'GET',
+      }
+
+      const response = await fetch(serviceInfoApiUrl, options)
+
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+
+      const data: ServiceInfoApiResponse = await response.json()
+
+      if (data) {
+        const { description, video_link, categorie_principale, tutorials, resource_link } = data
+
+        return {
+          description,
+          'video': video_link,
+          'category': categorie_principale,
+          'ressources': tutorials,
+          'ressources-link': resource_link ? { href: resource_link } : undefined,
+        }
+      }
+      else {
+        console.error(`No data for ${serviceInfoApiUrl}`)
+      }
+    }
+    catch (err) {
+      console.error(err, serviceInfoApiUrl)
+      return undefined
+    }
+    return undefined
+  }
+
   static async getAll(
     serviceInfoApiUrl: string,
   ): Promise<Array<{ fname: string, categoriePrincipale: Category, doesInfoExist: boolean }> | undefined> {
