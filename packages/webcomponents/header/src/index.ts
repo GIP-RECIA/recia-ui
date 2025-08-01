@@ -89,56 +89,6 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 @useStores($organizations)
 @useStores($authenticated)
 export class ReciaHeader extends LitElement {
-  data = {
-    logo: './spritemap.svg#NOC-simple',
-    visible: true,
-    filters: [
-      {
-        id: 'category',
-        name: 'Par catégorie :',
-        type: 'radio',
-        items: [
-          {
-            key: 'all',
-            value: 'Tous les services',
-          },
-          {
-            key: 'new',
-            value: 'Nouveautés',
-          },
-          {
-            key: 'collaboratif',
-            value: 'Collaboratif',
-          },
-          {
-            key: 'appresntissage',
-            value: 'Apprentissage',
-          },
-          {
-            key: 'communication',
-            value: 'Communication',
-          },
-          {
-            key: 'documentation',
-            value: 'Documentation',
-          },
-          {
-            key: 'vie-scolaire',
-            value: 'Vie scolaire',
-          },
-          {
-            key: 'parametres',
-            value: 'Paramètres',
-          },
-          {
-            key: 'orientation',
-            value: 'Orientation',
-          },
-        ],
-      },
-    ],
-  }
-
   @property({ type: Array })
   messages?: Array<any>
 
@@ -382,7 +332,6 @@ export class ReciaHeader extends LitElement {
             ? html`
                 <r-navigation-drawer
                   ?expanded="${this.isNavigationDrawerExpanded}"
-                  logo="${this.data.logo}"
                   name="${orgName}"
                   ?visible="${navigationDrawerVisible}"
                   ?services-layout-state="${this.isServicesLayout}"
