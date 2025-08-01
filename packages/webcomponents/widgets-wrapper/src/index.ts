@@ -263,6 +263,16 @@ export class ReciaWidgetsWrapper extends LitElement {
     await this.setUserFavoriteWidgets([])
   }
 
+  handleClickOnHeadingLink(e: CustomEvent) {
+    const eventDNMA = new CustomEvent(
+      'click-portlet-card',
+      {
+        detail: { fname: e.detail.uid },
+      },
+    )
+    document.dispatchEvent(eventDNMA)
+  }
+
   handleClickOnItem(e: CustomEvent) {
     const id: string = e.detail.id
     const uid: string = e.detail.uid
@@ -515,6 +525,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         ?loading="${widgetData.loading}"
         ?manage="${this.isEditingWidgetsPrefs}"
         @click-on-item="${this.handleClickOnItem}"
+        @click-on-heading-link="${this.handleClickOnHeadingLink}"
         @move="${this.handleMove}"
         @delete="${this.handleRemoveWidget}"
         ?is-error="${widgetData.isError ?? false}"
