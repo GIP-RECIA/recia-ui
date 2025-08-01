@@ -33,7 +33,6 @@ import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import pathHelper from '../../helpers/pathHelper.ts'
 import {
   $favoriteMenu,
   $settings,
@@ -41,7 +40,7 @@ import {
   updateServices,
 } from '../../stores/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
-import { getDomainLink } from '../../utils/linkUtils.ts'
+import { getDomainLink, isCurrentPage } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../favorite/bottom-sheet/index.ts'
@@ -161,9 +160,11 @@ export class ReciaNavigationDrawer extends LitElement {
               title="${item.name}"
               aria-label="${item.ariaLabel ?? nothing}"
               class="${classMap({
-                active: pathHelper.isCurrentPage(item.link.href),
+                active: item.autoDetectCurrent === true && isCurrentPage(item.link.href),
               })}"
-              aria-current="${pathHelper.isCurrentPage(item.link.href) ?? nothing}"
+              aria-current="${
+                (item.autoDetectCurrent === true && isCurrentPage(item.link.href)) ?? nothing
+              }"
               @click="${this.closeDrawer}"
             >
               ${content}

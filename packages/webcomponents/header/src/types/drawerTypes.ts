@@ -23,4 +23,5 @@ export interface DrawerItem {
   ariaLabel?: string
   icon: IconDefinition
   link?: Link
+  autoDetectCurrent?: boolean
 }

@@ -15,7 +15,6 @@
  */
 
 import type { Link } from '../types/index.ts'
-import pathHelper from '../helpers/pathHelper.ts'
 import { $settings } from '../stores/index.ts'
 
 function getServiceLink(
@@ -23,10 +22,10 @@ function getServiceLink(
   alternativeMaximizedLink: string | undefined,
   alternativeMaximizedLinkTarget: string | undefined,
 ): Link {
-  const { contextApiUrl, domain } = $settings.get() ?? {}
+  const { contextApiUrl } = $settings.get() ?? {}
 
   return {
-    href: alternativeMaximizedLink ?? pathHelper.getUrl(`${contextApiUrl}/p/${fname}`, domain),
+    href: alternativeMaximizedLink ?? getDomainLink(`${contextApiUrl}/p/${fname}`),
     target: alternativeMaximizedLinkTarget ?? '_self',
     rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined,
   }
@@ -37,10 +36,31 @@ function getDomainLink(
 ): string {
   const { domain } = $settings.get() ?? {}
 
-  return pathHelper.getUrl(path, domain)
+  if (path.startsWith('http'))
+    return path
+
+  return `https://${domain}${path.startsWith('/') ? '' : '/'}${path}`
+}
+
+function isCurrentPage(link: string): boolean {
+  const { contextApiUrl } = $settings.get() ?? {}
+  const { origin, href, pathname } = window.location
+
+  const currentPath = pathname.split('.')[0]
+  const targetURL = new URL(link, origin)
+  const targetPath = targetURL.pathname
+
+  if (link.startsWith('#') || link === '')
+    return pathname === new URL(href).pathname
+
+  if (targetPath.startsWith(contextApiUrl ?? '/'))
+    return currentPath.startsWith(targetPath)
+
+  return pathname === targetPath
 }
 
 export {
   getDomainLink,
   getServiceLink,
+  isCurrentPage,
 }
