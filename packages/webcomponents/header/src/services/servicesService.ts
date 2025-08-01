@@ -16,6 +16,7 @@
 
 import type { Service, Soffit } from '../types/index.ts'
 import { $settings } from '../stores/index.ts'
+import { Category } from '../types/index.ts'
 import { truncate } from '../utils/stringUtils.ts'
 import InfoService from './infoService.ts'
 import PortletService from './portletService.ts'
@@ -51,6 +52,9 @@ export default class ServicesService {
         categoriePrincipale,
         doesInfoExist,
       } = portletsInfo.find(el => el.fname === fname) ?? {}
+      const category = categoriePrincipale && Object.values(Category).includes(categoriePrincipale)
+        ? categoriePrincipale
+        : undefined
 
       let keywords: Array<string> | undefined = description.split('   ')
       keywords.shift()
@@ -64,7 +68,7 @@ export default class ServicesService {
         id,
         fname,
         name: title,
-        category: categoriePrincipale,
+        category,
         iconUrl: iconUrl?.value,
         link: {
           href: alternativeMaximizedLink?.value ?? `${contextApiUrl}/p/${fname}`,
