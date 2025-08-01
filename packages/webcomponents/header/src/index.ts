@@ -414,7 +414,6 @@ export class ReciaHeader extends LitElement {
                 <r-services-layout
                   ?show="${this.isServicesLayout}"
                   ?navigation-drawer-visible="${navigationDrawerVisible}"
-                  .filters="${this.data.filters}"
                   @close="${this.toggleServicesLayout}"
                   @open-more="${this.openMore}"
                 >

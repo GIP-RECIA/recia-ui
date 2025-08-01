@@ -133,11 +133,17 @@ export class ReciaServicesLayout extends LitElement {
     const services = $services.get() ?? []
 
     return html`
-        <r-filters
-          .data="${this.filters}"
-          @update-filters="${this.updateFilters}"
-        >
-        </r-filters>
+        ${
+          this.filters
+            ? html`
+                <r-filters
+                  .data="${this.filters}"
+                  @update-filters="${this.updateFilters}"
+                >
+                </r-filters>
+              `
+            : nothing
+        }
         <ul>
           ${
             repeat(
