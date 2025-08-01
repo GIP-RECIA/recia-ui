@@ -72,6 +72,11 @@
     margin-bottom: 8px;
   }
 
+  > img.icon {
+    opacity: .5;
+    transition: opacity .3s ease-out;
+  }
+
   > .name {
     flex: 0 0 auto;
     @include unstyled-link;
@@ -149,6 +154,10 @@
 
     > .icon {
       color: var(--#{$prefix}service-hover);
+    }
+
+    > img.icon {
+      opacity: 1;
     }
 
     > .more {

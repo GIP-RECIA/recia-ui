@@ -15,12 +15,12 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
-import { svg } from 'lit'
+import { faPersonDigging } from '@fortawesome/free-solid-svg-icons'
+import { html, svg } from 'lit'
 import { getIconWithStyle } from './fontawesomeUtils.ts'
 
 function getSvgIcon(iconUrl: string | undefined): TemplateResult {
-  const defaultIcon = getIconWithStyle(faExclamationTriangle, undefined, { icon: true })
+  const defaultIcon = getIconWithStyle(faPersonDigging, undefined, { icon: true })
 
   if (!iconUrl)
     return defaultIcon
@@ -37,7 +37,7 @@ function getSvgIcon(iconUrl: string | undefined): TemplateResult {
       `
   }
 
-  return defaultIcon
+  return html`<img src="${iconUrl}" alt="" class="icon"> `
 }
 
 export {

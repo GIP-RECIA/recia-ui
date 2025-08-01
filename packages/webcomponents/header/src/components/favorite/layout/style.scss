@@ -38,6 +38,10 @@
     opacity: .2;
   }
 
+  img.icon {
+    opacity: .8;
+  }
+
   > .name {
     flex: 0 0 auto;
     @include unstyled-link;
