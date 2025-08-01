@@ -4,10 +4,6 @@
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .service {
-  --#{$prefix}service: #cccccc;
-  --#{$prefix}service-hover: var(--#{$prefix}stroke);
-  --#{$prefix}service-hover-shadow: var(--#{$prefix}service);
-
   border-radius: 10px;
   border-top: 11px solid var(--#{$prefix}service);
   background-color: var(--#{$prefix}body-bg);
@@ -128,10 +124,16 @@
   }
 
   @each $type, $values in $categories {
-    &.#{$type} {
+    @if $type == default {
       --#{$prefix}service: var(--#{$prefix}#{$type});
       --#{$prefix}service-hover: var(--#{$prefix}#{$type}-hover);
       --#{$prefix}service-hover-shadow: var(--#{$prefix}#{$type}-hover-shadow);
+    } @else {
+      &.#{$type} {
+        --#{$prefix}service: var(--#{$prefix}#{$type});
+        --#{$prefix}service-hover: var(--#{$prefix}#{$type}-hover);
+        --#{$prefix}service-hover-shadow: var(--#{$prefix}#{$type}-hover-shadow);
+      }
     }
   }
 

@@ -15,11 +15,10 @@
  */
 
 export enum Category {
-  documentation = 'documentation',
-  collaboratif = 'collaboratif',
-  apprentissage = 'apprentissage',
-  vieScolaire = 'vie-scolaire',
-  orientation = 'orientation',
-  parametres = 'parametres',
-  communication = 'communication',
+  administrationSupport = 'administrationSupport',
+  communicationCollaboration = 'communicationCollaboration',
+  documentsRessources = 'documentsRessources',
+  apprentissageSuivi = 'apprentissageSuivi',
+  citoyensTerritoriaux = 'citoyensTerritoriaux',
+  rhGestion = 'rhGestion',
 }

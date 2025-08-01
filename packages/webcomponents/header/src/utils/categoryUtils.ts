@@ -18,13 +18,12 @@ import { msg, str } from '@lit/localize'
 import { Category } from '../types/index.ts'
 
 const i18nCategories: Record<Category, string> = {
-  [Category.documentation]: msg(str`Documentation`),
-  [Category.collaboratif]: msg(str`Collaboratif`),
-  [Category.apprentissage]: msg(str`Apprentissage`),
-  [Category.vieScolaire]: msg(str`Vie scolaire`),
-  [Category.orientation]: msg(str`Orientation`),
-  [Category.parametres]: msg(str`Paramètres`),
-  [Category.communication]: msg(str`Communication`),
+  [Category.administrationSupport]: msg(str`Administration & Support`),
+  [Category.communicationCollaboration]: msg(str`Communication & Collaboration`),
+  [Category.documentsRessources]: msg(str`Documents & Ressources numériques`),
+  [Category.apprentissageSuivi]: msg(str`Apprentissage & Suivi`),
+  [Category.citoyensTerritoriaux]: msg(str`Services Citoyens & Territoriaux`),
+  [Category.rhGestion]: msg(str`Services RH & Gestion`),
 }
 
 function getCategoryTranslation(category: Category): string {

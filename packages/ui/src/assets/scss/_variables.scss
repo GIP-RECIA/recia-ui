@@ -179,40 +179,7 @@ $domain-theme: (                // 18, 36 and 45 are same
 );
 
 $categories: (
-  documentation: (
-    color: #AB47BC,
-    hover: (
-      color: #C400F3,
-      shadow: (
-        color: #C400F3,
-        opacity: .1,
-      ),
-    ),
-    text: $white
-  ),
-  collaboratif: (
-    color: #5747BC,
-    hover: (
-      color: #665BE7,
-      shadow: (
-        color: #665BE7,
-        opacity: .15,
-      ),
-    ),
-    text: $white
-  ),
-  apprentissage: (
-    color: #FFAC2F,
-    hover: (
-      color: #F5C72E,
-      shadow: (
-        color: #9D7A06,
-        opacity: .15,
-      ),
-    ),
-    text: $black
-  ),
-  vie-scolaire: (
+  default: (
     color: #858585,
     hover: (
       color: #5B5B5B,
@@ -223,7 +190,51 @@ $categories: (
     ),
     text: $black
   ),
-  orientation: (
+  administrationSupport: (
+    color: #EC407A,
+    hover: (
+      color: #F60086,
+      shadow: (
+        color: #EC407A,
+        opacity: .2,
+      ),
+    ),
+    text: $black
+  ),
+  rhGestion: (
+    color: #AB47BC,
+    hover: (
+      color: #C400F3,
+      shadow: (
+        color: #C400F3,
+        opacity: .1,
+      ),
+    ),
+    text: $white
+  ),
+  communicationCollaboration: (
+    color: #5747BC,
+    hover: (
+      color: #665BE7,
+      shadow: (
+        color: #665BE7,
+        opacity: .15,
+      ),
+    ),
+    text: $white
+  ),
+  apprentissageSuivi: (
+    color: #FFAC2F,
+    hover: (
+      color: #F5C72E,
+      shadow: (
+        color: #9D7A06,
+        opacity: .15,
+      ),
+    ),
+    text: $black
+  ),
+  citoyensTerritoriaux: (
     color: #26C6DA,
     hover: (
       color: #70EAF5,
@@ -234,24 +245,13 @@ $categories: (
     ),
     text: $black
   ),
-  parametres: (
+  documentsRessources: (
     color: #66BB6A,
     hover: (
       color: #4EF186,
       shadow: (
         color: #069D28,
         opacity: .15,
-      ),
-    ),
-    text: $black
-  ),
-  communication: (
-    color: #EC407A,
-    hover: (
-      color: #F60086,
-      shadow: (
-        color: #EC407A,
-        opacity: .2,
       ),
     ),
     text: $black
