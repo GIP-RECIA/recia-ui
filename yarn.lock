@@ -5,9 +5,9 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@antfu/eslint-config@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@antfu/eslint-config@npm:5.0.0"
+"@antfu/eslint-config@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@antfu/eslint-config@npm:5.1.0"
   dependencies:
     "@antfu/install-pkg": "npm:^1.1.0"
     "@clack/prompts": "npm:^0.11.0"
@@ -20,14 +20,14 @@ __metadata:
     ansis: "npm:^4.1.0"
     cac: "npm:^6.7.14"
     eslint-config-flat-gitignore: "npm:^2.1.0"
-    eslint-flat-config-utils: "npm:^2.1.0"
+    eslint-flat-config-utils: "npm:^2.1.1"
     eslint-merge-processors: "npm:^2.0.0"
     eslint-plugin-antfu: "npm:^3.1.1"
     eslint-plugin-command: "npm:^3.3.1"
     eslint-plugin-import-lite: "npm:^0.3.0"
-    eslint-plugin-jsdoc: "npm:^51.4.1"
+    eslint-plugin-jsdoc: "npm:^52.0.0"
     eslint-plugin-jsonc: "npm:^2.20.1"
-    eslint-plugin-n: "npm:^17.21.0"
+    eslint-plugin-n: "npm:^17.21.3"
     eslint-plugin-no-only-tests: "npm:^3.3.0"
     eslint-plugin-perfectionist: "npm:^4.15.0"
     eslint-plugin-pnpm: "npm:^1.1.0"
@@ -54,6 +54,7 @@ __metadata:
     eslint: ^9.10.0
     eslint-plugin-astro: ^1.2.0
     eslint-plugin-format: ">=0.1.0"
+    eslint-plugin-jsx-a11y: ">=6.10.2"
     eslint-plugin-react-hooks: ^5.2.0
     eslint-plugin-react-refresh: ^0.4.19
     eslint-plugin-solid: ^0.14.3
@@ -77,6 +78,8 @@ __metadata:
       optional: true
     eslint-plugin-format:
       optional: true
+    eslint-plugin-jsx-a11y:
+      optional: true
     eslint-plugin-react-hooks:
       optional: true
     eslint-plugin-react-refresh:
@@ -95,7 +98,7 @@ __metadata:
       optional: true
   bin:
     eslint-config: bin/index.js
-  checksum: 10/e52626b44e4a9d63569b76d7f67ce7dc96e08b36ae1103c506f0b7a7a9fb4d2844b1950a9737a212a9fdbb3e1d04c5451ca49d653a548603d0e0a0a96f8dc12e
+  checksum: 10/d3811b7df2f4b26298d277a6f0033cf66f6c456ad15908b6f065df037f9d39fc713dd0cc764f1331f3a635e3c2bc417a52ecf1cc3c10812cd8f99f8ba5ee762f
   languageName: node
   linkType: hard
 
@@ -832,7 +835,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gip-recia/ui@workspace:packages/ui"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@fortawesome/fontawesome-free": "npm:^6.7.2"
     "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
@@ -2115,7 +2118,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bottom-sheet@workspace:packages/webcomponents/bottom-sheet"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -3056,7 +3059,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dropdown-info@workspace:packages/webcomponents/dropdown-info"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -3356,12 +3359,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-flat-config-utils@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "eslint-flat-config-utils@npm:2.1.0"
+"eslint-flat-config-utils@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "eslint-flat-config-utils@npm:2.1.1"
   dependencies:
     pathe: "npm:^2.0.3"
-  checksum: 10/d2b68d0d46f0523724f57678b4675d29619da7c9afffef3ee52824434362f8171d163d89fef9409a039eb664278d69b7a67ddae05fc4c5748e1e7c119e435061
+  checksum: 10/8dae5f73050358eb593c4a5b7e3359336f0ee13c0fa3bdfd483b142407ea30062707d07e3d62af4c364098b9709972a7054f9da90bcc369b5fcd3dd16fb602f4
   languageName: node
   linkType: hard
 
@@ -3473,9 +3476,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:^51.4.1":
-  version: 51.4.1
-  resolution: "eslint-plugin-jsdoc@npm:51.4.1"
+"eslint-plugin-jsdoc@npm:^52.0.0":
+  version: 52.0.2
+  resolution: "eslint-plugin-jsdoc@npm:52.0.2"
   dependencies:
     "@es-joy/jsdoccomment": "npm:~0.52.0"
     are-docs-informative: "npm:^0.0.2"
@@ -3489,7 +3492,7 @@ __metadata:
     spdx-expression-parse: "npm:^4.0.0"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
-  checksum: 10/96dc18417763e193af28ff0642612b1bdb127e4c47877761c84baa539660da77b4c2f9870fec6e1a60f4b8797951e5f51a1d06d29be064d77a49366f3cc3ba6d
+  checksum: 10/e7af1a044b117183042cdc4c8ee6bcc02f2d610305c2744da659140e3dc3bb02a151edf5817b295bf8d612cdbc142c4256a88fd0ce6cb66354b6615d4539bc4a
   languageName: node
   linkType: hard
 
@@ -3511,22 +3514,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:^17.21.0":
-  version: 17.21.0
-  resolution: "eslint-plugin-n@npm:17.21.0"
+"eslint-plugin-n@npm:^17.21.3":
+  version: 17.21.3
+  resolution: "eslint-plugin-n@npm:17.21.3"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.5.0"
     enhanced-resolve: "npm:^5.17.1"
     eslint-plugin-es-x: "npm:^7.8.0"
     get-tsconfig: "npm:^4.8.1"
     globals: "npm:^15.11.0"
+    globrex: "npm:^0.1.2"
     ignore: "npm:^5.3.2"
-    minimatch: "npm:^9.0.5"
     semver: "npm:^7.6.3"
     ts-declaration-location: "npm:^1.0.6"
   peerDependencies:
     eslint: ">=8.23.0"
-  checksum: 10/b9dedfc2e83c86c852485ed62a6bddcacb92214591c79fcab9c0cc12e75bbfa85368a9c166e6627ec07a8d2272b19260d275b16ffaab79d1c6cd43a04afbc18f
+  checksum: 10/da12ea061b5f81ab3b208297233662a85440fe29e9568bc0cc32a55405005d66d1c45356d88077a436bf9fd47097f3f45f42c26ca554612c2e0c9067aa99a1de
   languageName: node
   linkType: hard
 
@@ -3949,7 +3952,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "filters@workspace:packages/webcomponents/filters"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -4042,7 +4045,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "footer@workspace:packages/webcomponents/footer"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -4338,6 +4341,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"globrex@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "globrex@npm:0.1.2"
+  checksum: 10/81ce62ee6f800d823d6b7da7687f841676d60ee8f51f934ddd862e4057316d26665c4edc0358d4340a923ac00a514f8b67c787e28fe693aae16350f4e60d55e9
+  languageName: node
+  linkType: hard
+
 "gopd@npm:^1.2.0":
   version: 1.2.0
   resolution: "gopd@npm:1.2.0"
@@ -4436,7 +4446,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "header@workspace:packages/webcomponents/header"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@nanostores/lit": "npm:^0.2.2"
@@ -5930,7 +5940,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^9.0.3, minimatch@npm:^9.0.4, minimatch@npm:^9.0.5":
+"minimatch@npm:^9.0.3, minimatch@npm:^9.0.4":
   version: 9.0.5
   resolution: "minimatch@npm:9.0.5"
   dependencies:
@@ -6649,7 +6659,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "project-skeleton@workspace:etc/webcomponent/project-skeleton"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -7899,26 +7909,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"user-menu@workspace:packages/webcomponents/user-menu":
-  version: 0.0.0-use.local
-  resolution: "user-menu@workspace:packages/webcomponents/user-menu"
-  dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
-    "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.0"
-    "@types/lodash-es": "npm:^4"
-    eslint: "npm:^9.32.0"
-    eslint-plugin-format: "npm:^1.0.1"
-    lit: "npm:^3.3.1"
-    lodash-es: "npm:^4.17.21"
-    ress: "npm:^5.0.2"
-    sass: "npm:^1.89.2"
-    typescript: "npm:^5.8.3"
-    vite: "npm:^7.0.6"
-    vite-plugin-dts: "npm:^4.5.4"
-  languageName: unknown
-  linkType: soft
-
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -8065,7 +8055,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "wayf@workspace:packages/webcomponents/wayf"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -8141,7 +8131,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "widget@workspace:packages/webcomponents/widget"
   dependencies:
-    "@antfu/eslint-config": "npm:^5.0.0"
+    "@antfu/eslint-config": "npm:^5.1.0"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
