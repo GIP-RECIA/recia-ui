@@ -34,6 +34,9 @@ function getServiceLink(
 function getDomainLink(
   path: string,
 ): string {
+  if (import.meta.env.DEV)
+    return path
+
   const { domain } = $settings.get() ?? {}
 
   if (path.startsWith('http'))

@@ -41,6 +41,7 @@ import {
   LoadingState,
   UserMenuItem,
 } from '../types/index.ts'
+import { getDomainLink } from '../utils/linkUtils.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 import { alphaSort } from '../utils/stringUtils.ts'
@@ -91,13 +92,14 @@ const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
   return newValue?.authenticated ?? false
 })
 
-const $userMenu = batched([$userInfo, $settings], (userInfo, settings) => {
+const $userMenu = batched([$userInfo, $settings, $organizations], (userInfo, settings, organizations) => {
   if (!userInfo || !settings)
     return undefined
 
   const { displayName, picture, hasOtherOrgs } = userInfo
   const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settings
   const { search, notifications, infoEtab, starter } = settings
+  const { current, other } = organizations ?? {}
 
   const config: UserMenuConfig = {
     [UserMenuItem.Search]: search ? undefined : false,
@@ -109,8 +111,8 @@ const $userMenu = batched([$userInfo, $settings], (userInfo, settings) => {
           },
         }
       : false,
-    [UserMenuItem.InfoEtab]: infoEtab ? undefined : false,
-    [UserMenuItem.ChangeEtab]: hasOtherOrgs
+    [UserMenuItem.InfoEtab]: infoEtab && current ? undefined : false,
+    [UserMenuItem.ChangeEtab]: hasOtherOrgs && other && other.length > 0
       ? {
           link: null,
         }
@@ -181,9 +183,10 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
 const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   [$baseServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
-    const servicesItems = services?.map(({ id, name, category, link, description, keywords }) => {
-      return { id, name, category, link, description, keywords }
-    })
+    const servicesItems = services
+      ?.map(({ id, name, category, link, description, keywords }) => {
+        return { id, name, category, link, description, keywords }
+      })
       .sort((a, b) => alphaSort(a.name, b.name, 'asc'))
       ?? []
 
@@ -256,10 +259,24 @@ async function updateSettings(
   if (diffs.size === 0)
     return
 
+  if (diffs.has('debug')) {
+    $settings.set({
+      ...$settings.get(),
+      debug: diffs.get('debug') as boolean,
+    })
+  }
+
+  if (diffs.has('domain')) {
+    $settings.set({
+      ...$settings.get(),
+      domain: diffs.get('domain') as string | undefined,
+    })
+  }
+
   if (diffs.has('templateApiUrl')) {
     const config = await updateTemplate(
       diffs.get('templateApiUrl') as string | undefined,
-      diffs.get('domain') as string | undefined ?? $settings.get().domain,
+      $settings.get().domain,
     )
     $settings.set({
       ...$settings.get(),
@@ -286,7 +303,7 @@ async function updateTemplate(
   if (!templateApiUrl || !domain)
     return
 
-  const templates = await TemplateService.get(templateApiUrl)
+  const templates = await TemplateService.get(getDomainLink(templateApiUrl))
   if (!templates)
     return undefined
 
@@ -315,7 +332,7 @@ async function updateSoffit(): Promise<void> {
   if (!userInfoApiUrl)
     return
 
-  const response = await SoffitService.get(userInfoApiUrl)
+  const response = await SoffitService.get(getDomainLink(userInfoApiUrl))
   $soffit.set(response)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
@@ -350,7 +367,7 @@ async function updateOrganization(): Promise<void> {
 
   const response = await OrganizationService.get(
     soffit,
-    organizationApiUrl,
+    getDomainLink(organizationApiUrl),
     orgIds,
     currentOrgId,
     orgLogoUrlAttributeName ?? '',
@@ -376,8 +393,8 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
 
   $baseServicesLoad.set(LoadingState.LOADING)
   const [services, layout] = await Promise.all([
-    ServicesService.get(soffit, portletApiUrl, servicesInfoApiUrl),
-    LayoutService.get(soffit, layoutApiUrl),
+    ServicesService.get(soffit, getDomainLink(portletApiUrl), getDomainLink(servicesInfoApiUrl)),
+    LayoutService.get(soffit, getDomainLink(layoutApiUrl)),
   ])
 
   const favoriteIds = layout
@@ -397,7 +414,9 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
   }
 }
 
-async function updateFavoritesFromFavorites(newValue: Array<UpdatedFavoriteSection>): Promise<void> {
+async function updateFavoritesFromFavorites(
+  newValue: Array<UpdatedFavoriteSection>,
+): Promise<void> {
   const soffit = $soffit.get()
   const layout = $layout.get()
   const { favoriteApiUrl } = $settings.get()
@@ -410,7 +429,7 @@ async function updateFavoritesFromFavorites(newValue: Array<UpdatedFavoriteSecti
 
     if (id === favoriteSectionId) {
       deletedIds.forEach((id) => {
-        FavoritesService.remove(soffit, favoriteApiUrl, id)
+        FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
       })
       const newFavoriteIds = items.map(item => Number(item.id))
       $favoritesIds.set(newFavoriteIds)
@@ -428,7 +447,7 @@ async function addFavorite(id: number): Promise<void> {
   if (favoritesIds && favoritesIds.findIndex(el => el === id) !== -1)
     return
 
-  const response = await FavoritesService.add(soffit, favoriteApiUrl, id)
+  const response = await FavoritesService.add(soffit, getDomainLink(favoriteApiUrl), id)
   if (response)
     $favoritesIds.set([...(favoritesIds ?? []), id])
 }
@@ -444,7 +463,7 @@ async function removeFavorite(id: number): Promise<void> {
   if (index === -1)
     return
 
-  const response = await FavoritesService.remove(soffit, favoriteApiUrl, id)
+  const response = await FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
   if (response) {
     const newFavoritesIds = [...favoritesIds]
     newFavoritesIds.splice(index, 1)
