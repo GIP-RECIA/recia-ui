@@ -52,6 +52,7 @@ export default class PortletService {
         } = data.portlet
 
         return {
+          fname,
           'icon-url': iconUrl,
           'name': title,
           'launch-link': getServiceLink(

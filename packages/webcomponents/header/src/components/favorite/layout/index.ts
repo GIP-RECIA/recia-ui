@@ -154,6 +154,17 @@ export class ReciaFavoriteLayout extends LitElement {
     })
   }
 
+  handleLinkClick(e: Event, fname: string | undefined): void {
+    document.dispatchEvent(new CustomEvent('favorite-event', {
+      detail: {
+        event: e,
+        fname,
+      },
+      bubbles: true,
+      composed: true,
+    }))
+  }
+
   manageTemplate(): TemplateResult | typeof nothing {
     return this.data && this.data.some(({ canDelete, canMove }) => canDelete || canMove)
       ? html`
@@ -238,6 +249,7 @@ export class ReciaFavoriteLayout extends LitElement {
             rel="${item.link.rel ?? nothing}"
             class="name"
             tabindex="${this.isManage ? -1 : nothing as any as number}"
+            @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
           >
             <span>${item.name}</span>
             <span aria-hidden="true"></span>

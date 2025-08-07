@@ -23,6 +23,7 @@ export enum Origin {
 }
 
 export interface ServiceInfoLayout {
+  'fname'?: string
   'icon-url'?: string
   'name'?: string
   'origin'?: Origin

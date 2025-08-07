@@ -23,6 +23,7 @@ export interface FavoriteItem {
   iconUrl?: string
   category?: Category
   link: Link
+  fname?: string
 }
 
 export interface FavoriteSection {

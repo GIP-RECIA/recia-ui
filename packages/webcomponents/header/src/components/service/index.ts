@@ -103,6 +103,7 @@ export class ReciaService extends LitElement {
     document.dispatchEvent(new CustomEvent('service-event', {
       detail: {
         event: e,
+        fname: this.fname,
       },
       bubbles: true,
       composed: true,

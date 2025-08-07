@@ -34,6 +34,9 @@ import styles from './style.scss?inline'
 
 @localized()
 export class ReciaServiceInfoLayout extends LitElement {
+  @property({ type: String })
+  fname?: string
+
   @property({ type: String, attribute: 'icon-url' })
   iconUrl?: string
 
@@ -93,7 +96,21 @@ export class ReciaServiceInfoLayout extends LitElement {
 
   toggleFavorite(_: Event): void {
     this.isFavorite = !this.isFavorite
-    this.dispatchEvent(new CustomEvent('toggle-favorite', { detail: { favorite: this.isFavorite } }))
+    this.dispatchEvent(new CustomEvent(
+      'toggle-favorite',
+      { detail: { favorite: this.isFavorite } },
+    ))
+  }
+
+  handleLinkClick(e: Event): void {
+    document.dispatchEvent(new CustomEvent('service-info-event', {
+      detail: {
+        event: e,
+        fname: this.fname,
+      },
+      bubbles: true,
+      composed: true,
+    }))
   }
 
   videoTemplate(): TemplateResult | typeof nothing {
@@ -242,6 +259,7 @@ export class ReciaServiceInfoLayout extends LitElement {
                     target="${this.launchLink.target ?? nothing}"
                     rel="${this.launchLink.rel ?? nothing}"
                     class="btn-primary launch"
+                    @click="${this.handleLinkClick}"
                   >
                     ${msg(str`Lancer le service`)}
                     ${getIcon(faArrowRight)}

@@ -289,10 +289,6 @@ export class ReciaHeader extends LitElement {
         this.changeEtabRef.value?.open()
         break
       case UserMenuItem.Starter:
-        document.dispatchEvent(new CustomEvent('launch-starter', {
-          bubbles: true,
-          composed: true,
-        }))
         break
       case UserMenuItem.Logout:
         break

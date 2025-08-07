@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script type="module" src="/index.ts"></script>
-  <link rel="stylesheet" href="/assets/index.css" />
 </head>
 
 <body class="container">
@@ -51,6 +50,26 @@
     // })
     document.querySelector('#soffit-updater').addEventListener('click', () => {
       header.dispatchEvent(new CustomEvent('update-soffit'))
+    })
+
+    const documentEvents = [
+      'favorite-event',
+      'service-event',
+      'user-menu-event',
+      'update-favorites',
+      'service-info-event'
+    ]
+    documentEvents.forEach((listener) => {
+      document.addEventListener(listener, (e) => {
+        if (!e.detail) {
+          console.log(e.type)
+          return
+        }
+
+        if (e.detail.event)
+          e.detail.event.preventDefault()
+        console.log(e.type, e.detail)
+      })
     })
   </script>
 </body>
