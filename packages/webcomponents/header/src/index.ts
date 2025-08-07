@@ -260,7 +260,7 @@ export class ReciaHeader extends LitElement {
     if (show)
       updateServices()
     this.isServicesLayout = show
-    document.documentElement.style.overflowY = show ? 'hidden' : ''
+    document.documentElement.classList.toggle('services-layout', show)
   }
 
   async openMore(e: CustomEvent) {
@@ -275,7 +275,6 @@ export class ReciaHeader extends LitElement {
     const { type } = e.detail
     switch (type as UserMenuItem) {
       case UserMenuItem.Search:
-        this.isServicesLayout = false
         this.isSearchOpen = true
         break
       case UserMenuItem.Notification:
@@ -300,11 +299,8 @@ export class ReciaHeader extends LitElement {
 
   handleSearchEvent(e: CustomEvent) {
     const { open, mask } = e.detail
-    if (typeof open === 'boolean') {
+    if (typeof open === 'boolean')
       this.isSearchOpen = open
-      if (open)
-        this.isServicesLayout = false
-    }
     if (typeof mask === 'boolean')
       this.isSearching = mask
   }

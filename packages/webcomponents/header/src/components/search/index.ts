@@ -152,7 +152,7 @@ export class ReciaSearch extends LitElement {
     if (this.isExpanded)
       return
 
-    document.documentElement.style.overflowY = 'hidden'
+    document.documentElement.classList.add('search-results')
     this.isExpanded = true
     this.emitEvent({ mask: true })
   }
@@ -161,7 +161,7 @@ export class ReciaSearch extends LitElement {
     if (!this.isExpanded)
       return
 
-    document.documentElement.style.overflowY = ''
+    document.documentElement.classList.remove('search-results')
     this.isExpanded = false
     this.emitEvent({ mask: false })
   }

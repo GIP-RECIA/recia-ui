@@ -3,6 +3,13 @@
 @use '../../../../../ui/src/assets/scss/functions' as *;
 @use '../../../../../ui/src/assets/scss/variables' as *;
 
+html {
+  &.services-layout,
+  &.search-results {
+    overflow-y: hidden;
+  }
+}
+
 body {
   &.auto-margin-top {
     margin-top: $header-height;
