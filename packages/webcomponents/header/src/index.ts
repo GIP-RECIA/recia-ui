@@ -70,6 +70,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'signOutUrl',
   'signInUrl',
   'userInfoPortletUrl',
+  'switchOrgApiUrl',
   'switchOrgPortletUrl',
   'orgAttributeName',
   'orgLogoUrlAttributeName',
@@ -135,6 +136,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'user-info-portlet-url' })
   userInfoPortletUrl?: string
+
+  @property({ type: String, attribute: 'switch-org-api-url' })
+  switchOrgApiUrl?: string
 
   @property({ type: String, attribute: 'switch-org-portlet-url' })
   switchOrgPortletUrl?: string

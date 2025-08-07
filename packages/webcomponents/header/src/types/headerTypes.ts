@@ -33,6 +33,7 @@ export interface HeaderProperties {
   signOutUrl: string
   signInUrl: string
   userInfoPortletUrl: string
+  switchOrgApiUrl: string
   switchOrgPortletUrl: string
   orgAttributeName: string
   orgLogoUrlAttributeName: string

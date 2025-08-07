@@ -65,11 +65,11 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
   async submitForm(e: Event): Promise<void> {
     e.preventDefault()
     const soffitObject = $soffit.get()
-    const { switchOrgPortletUrl } = $settings.get()
+    const { switchOrgApiUrl } = $settings.get()
     const organizations = $organizations.get()
     if (
       !soffitObject
-      || !switchOrgPortletUrl
+      || !switchOrgApiUrl
       || !organizations?.other
       || organizations.other.length === 0
     ) {
@@ -84,7 +84,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
       this.close()
       const response = await ChangeEtabService.setEtab(
         soffitObject,
-        `${switchOrgPortletUrl}/${this.selectedEtab}`,
+        `${switchOrgApiUrl}/${this.selectedEtab}`,
       )
       if (response)
         location.replace(`${response}/Logout`)

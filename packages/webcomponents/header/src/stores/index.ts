@@ -20,6 +20,7 @@ import type {
   FavoriteSection,
   HeaderProperties,
   LayoutApiResponse,
+  Link,
   Organizations,
   SearchSection,
   Service,
@@ -98,9 +99,25 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
       return undefined
 
     const { displayName, picture, hasOtherOrgs } = userInfo
-    const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settings
+    const {
+      defaultAvatarUrl,
+      userInfoPortletUrl,
+      signOutUrl,
+      switchOrgApiUrl,
+      switchOrgPortletUrl,
+    } = settings
     const { search, notifications, infoEtab, starter } = settings
     const { current, other } = organizations ?? {}
+
+    let changeEtabLink: Link | null | undefined
+    if (switchOrgPortletUrl) {
+      changeEtabLink = {
+        href: switchOrgPortletUrl,
+        target: '_self',
+      }
+    }
+    if (switchOrgApiUrl)
+      changeEtabLink = null
 
     const config: UserMenuConfig = {
       [UserMenuItem.Search]: search ? undefined : false,
@@ -109,13 +126,14 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
         ? {
             link: {
               href: userInfoPortletUrl,
+              target: '_self',
             },
           }
         : false,
       [UserMenuItem.InfoEtab]: infoEtab && current ? undefined : false,
-      [UserMenuItem.ChangeEtab]: hasOtherOrgs && other && other.length > 0
+      [UserMenuItem.ChangeEtab]: hasOtherOrgs && other && other.length > 0 && changeEtabLink !== undefined
         ? {
-            link: null,
+            link: changeEtabLink,
           }
         : false,
       [UserMenuItem.Starter]: starter ? undefined : false,
@@ -123,6 +141,7 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
         ? {
             link: {
               href: signOutUrl,
+              target: '_self',
             },
           }
         : false,
