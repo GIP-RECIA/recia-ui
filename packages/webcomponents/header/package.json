@@ -35,7 +35,7 @@
     "test:unit": "echo No tests available",
     "build:style": "sass --style=compressed --error-css src/assets/scss/:src/assets/css/",
     "dev:json-server": "json-server ./json-server/api.json -c ./json-server/config.json",
-    "dev:all": "concurrently 'yarn dev:json-server' 'yarn build:style --watch' 'yarn dev'"
+    "dev:all": "concurrently --kill-others -n 'json,sass,vite' -c auto --pad-prefix 'yarn dev:json-server' 'yarn build:style --watch' 'yarn dev'"
   },
   "dependencies": {
     "@lit/localize": "^0.12.2",
