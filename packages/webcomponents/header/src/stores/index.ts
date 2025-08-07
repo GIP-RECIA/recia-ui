@@ -26,6 +26,7 @@ import type {
   Soffit,
   UpdatedFavoriteSection,
   UserInfo,
+  UserMenu,
   UserMenuConfig,
 } from '../types/index.ts'
 import { msg, str } from '@lit/localize'
@@ -90,47 +91,50 @@ const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
   return newValue?.authenticated ?? false
 })
 
-const $userMenu = batched([$userInfo, $settings, $organizations], (userInfo, settings, organizations) => {
-  if (!userInfo || !settings)
-    return undefined
+const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
+  [$userInfo, $settings, $organizations],
+  (userInfo, settings, organizations) => {
+    if (!userInfo || !settings)
+      return undefined
 
-  const { displayName, picture, hasOtherOrgs } = userInfo
-  const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settings
-  const { search, notifications, infoEtab, starter } = settings
-  const { current, other } = organizations ?? {}
+    const { displayName, picture, hasOtherOrgs } = userInfo
+    const { defaultAvatarUrl, userInfoPortletUrl, signOutUrl } = settings
+    const { search, notifications, infoEtab, starter } = settings
+    const { current, other } = organizations ?? {}
 
-  const config: UserMenuConfig = {
-    [UserMenuItem.Search]: search ? undefined : false,
-    [UserMenuItem.Notification]: notifications ? undefined : false,
-    [UserMenuItem.Settings]: userInfoPortletUrl
-      ? {
-          link: {
-            href: userInfoPortletUrl,
-          },
-        }
-      : false,
-    [UserMenuItem.InfoEtab]: infoEtab && current ? undefined : false,
-    [UserMenuItem.ChangeEtab]: hasOtherOrgs && other && other.length > 0
-      ? {
-          link: null,
-        }
-      : false,
-    [UserMenuItem.Starter]: starter ? undefined : false,
-    [UserMenuItem.Logout]: signOutUrl
-      ? {
-          link: {
-            href: signOutUrl,
-          },
-        }
-      : false,
-  }
+    const config: UserMenuConfig = {
+      [UserMenuItem.Search]: search ? undefined : false,
+      [UserMenuItem.Notification]: notifications ? undefined : false,
+      [UserMenuItem.Settings]: userInfoPortletUrl
+        ? {
+            link: {
+              href: userInfoPortletUrl,
+            },
+          }
+        : false,
+      [UserMenuItem.InfoEtab]: infoEtab && current ? undefined : false,
+      [UserMenuItem.ChangeEtab]: hasOtherOrgs && other && other.length > 0
+        ? {
+            link: null,
+          }
+        : false,
+      [UserMenuItem.Starter]: starter ? undefined : false,
+      [UserMenuItem.Logout]: signOutUrl
+        ? {
+            link: {
+              href: signOutUrl,
+            },
+          }
+        : false,
+    }
 
-  return {
-    'picture': picture ?? defaultAvatarUrl,
-    'display-name': displayName,
-    config,
-  }
-})
+    return {
+      'picture': picture ?? defaultAvatarUrl,
+      'display-name': displayName,
+      config,
+    }
+  },
+)
 
 const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
   [$baseServices, $favoritesIds],

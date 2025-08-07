@@ -34,3 +34,12 @@ export type UserMenuConfig = Record<
     link?: Link | null
   }
 >
+
+export interface UserMenu {
+  'picture'?: string
+  'display-name'?: string
+  'function'?: string
+  'config'?: Partial<UserMenuConfig>
+  'notification'?: number
+  'avatar-size'?: string
+}
