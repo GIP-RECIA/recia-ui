@@ -35,7 +35,6 @@ import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
-import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
 import { getIcon } from '../../../utils/fontawesomeUtils.ts'
 import { getSvgIcon } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
@@ -243,15 +242,6 @@ export class ReciaFavoriteLayout extends LitElement {
             <span>${item.name}</span>
             <span aria-hidden="true"></span>
           </a>
-          ${
-            item.category
-              ? html`
-                  <span class="tag-category ${item.category}">
-                    ${getCategoryTranslation(item.category)}
-                  </span>
-                `
-              : nothing
-          }
         </div>
       </li>
     `
