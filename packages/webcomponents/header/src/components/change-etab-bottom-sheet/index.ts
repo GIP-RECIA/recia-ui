@@ -37,6 +37,8 @@ import 'bottom-sheet'
 export class ReciaChangeEtabBottomSheet extends LitElement {
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
+  private formRef: Ref<HTMLFormElement> = createRef()
+
   private selectedEtab?: string
 
   constructor() {
@@ -89,16 +91,28 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
     }
   }
 
+  resetForm(_: Event | undefined = undefined): void {
+    setTimeout(() => {
+      this.selectedEtab = undefined
+      this.formRef.value?.reset()
+    }, 300)
+  }
+
   render(): TemplateResult {
     const { other } = $organizations.get() ?? {}
 
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        @close="${this.resetForm}"
       >
-        <form @change="${this.handleFormChange}" @submit="${this.submitForm}">
+        <form
+          ${ref(this.formRef)}
+          @change="${this.handleFormChange}"
+          @submit="${this.submitForm}"
+        >
           <header>
-            <h1>${msg(str`Changer d'établissement`)}</h1>
+            <h1>${msg(str`Changer d\'établissement`)}</h1>
           </header>
           <div class="content">
             <fieldset>
@@ -138,7 +152,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
               ${msg(str`Fermer`)}
             </button>
             <button type="submit" class="btn-primary">
-              ${msg(str`Changer d'établissement`)}
+              ${msg(str`Changer d\'établissement`)}
             </button>
           </footer>
         </form>
