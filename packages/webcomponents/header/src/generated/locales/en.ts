@@ -30,7 +30,6 @@
 's6d8c02aee480af7a': str`Menu`,
 's7b37041836cc3169': str`You have`,
 's7d6fe3c46c5ad168': str`Search for a service`,
-'s82888c1c03352568': str`Tutorials`,
 's8c72b686e1d78170': str`All services`,
 's8e501f157694decd': str`Native service`,
 's91fb0e685cae0940': str`Remove from favorites`,

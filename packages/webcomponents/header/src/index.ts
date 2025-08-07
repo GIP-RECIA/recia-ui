@@ -173,7 +173,7 @@ export class ReciaHeader extends LitElement {
       id: 'mediacentre',
       name: msg(str`Médiacentre`),
       icon: faBookOpen,
-      link: { href: '/portail/p/Mediacentre' },
+      link: { href: '/portail/p/Mediacentre', target: '_self' },
       autoDetectCurrent: true,
     },
   ]

@@ -182,7 +182,6 @@ export class ReciaServicesLayout extends LitElement {
         style="${styleMap({
           display: this.show ? undefined : 'none',
         })}"
-        tabindex="-1"
       >
         <div class="container page-layout">
           <header>
