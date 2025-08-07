@@ -30,7 +30,7 @@ export default ({ mode }: ConfigEnv) => {
   return defineConfig({
     base: mode === 'development' ? VITE_BASE_URI : undefined,
     server: {
-      allowedHosts: JSON.parse(VITE_ALLOWED_HOSTS ?? ''),
+      allowedHosts: VITE_ALLOWED_HOSTS ? JSON.parse(VITE_ALLOWED_HOSTS) : undefined,
     },
     publicDir: mode === 'development' ? undefined : false,
     plugins: [
