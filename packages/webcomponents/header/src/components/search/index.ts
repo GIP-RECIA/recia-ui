@@ -197,6 +197,17 @@ export class ReciaSearch extends LitElement {
     return results
   }
 
+  handleLinkClick(e: Event, fname: string | undefined): void {
+    document.dispatchEvent(new CustomEvent('search-event', {
+      detail: {
+        event: e,
+        fname,
+      },
+      bubbles: true,
+      composed: true,
+    }))
+  }
+
   sectionTemplate(section: SearchSection): TemplateResult | typeof nothing {
     if (!section.loading && section.items.length === 0)
       return nothing
@@ -231,6 +242,7 @@ export class ReciaSearch extends LitElement {
             href="${item.link.href}"
             target="${item.link.target ?? nothing}"
             rel="${item.link.rel ?? nothing}"
+            @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
           >
             <div>
               <header>

@@ -25,7 +25,9 @@ function getServiceLink(
   const { contextApiUrl } = $settings.get() ?? {}
 
   return {
-    href: alternativeMaximizedLink ?? getDomainLink(`${contextApiUrl}/p/${fname}`),
+    href: alternativeMaximizedLink
+      ? getDomainLink(alternativeMaximizedLink)
+      : getDomainLink(`${contextApiUrl}/p/${fname}`),
     target: alternativeMaximizedLinkTarget ?? '_self',
     rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined,
   }

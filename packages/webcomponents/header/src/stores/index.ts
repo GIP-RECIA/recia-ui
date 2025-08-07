@@ -22,6 +22,7 @@ import type {
   LayoutApiResponse,
   Link,
   Organizations,
+  SearchItem,
   SearchSection,
   Service,
   Soffit,
@@ -204,9 +205,9 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
 const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   [$baseServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
-    const servicesItems = services
-      ?.map(({ id, name, category, link, description, keywords }) => {
-        return { id, name, category, link, description, keywords }
+    const servicesItems: Array<SearchItem> = services
+      ?.map(({ id, name, category, link, description, keywords, fname }) => {
+        return { id, name, category, link, description, keywords, fname }
       })
       .sort((a, b) => alphaSort(a.name, b.name, 'asc'))
       ?? []

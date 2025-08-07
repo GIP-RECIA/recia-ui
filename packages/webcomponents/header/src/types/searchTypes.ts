@@ -24,6 +24,7 @@ export interface SearchItem {
   link: Link
   description?: string
   keywords?: Array<string>
+  fname?: string
 }
 
 export interface SearchSection {
