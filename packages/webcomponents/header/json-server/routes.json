@@ -1,0 +1,13 @@
+{
+  "/portail/api/layout\\?*": "/actionsOnlayout",
+  "/portail/api/v4-3/dlm/layout.json": "/layout",
+  "/portail/api/v4-3/dlm/portletRegistry.json\\?*": "/portletRegistry",
+  "/paramuseretab/rest/v2/structures/structs\\?*": "/structs",
+  "/portail/api/v5-1/userinfo\\?*": "/userinfo",
+  "/portail/api/session.json": "/session",
+  "/paramuseretab/changeetab/api/*": "/changeetab",
+  "/portail/api/portlet/*": "/$1",
+  "/service-info-api/api/serviceInfo/*": "/$1",
+  "/service-info-api/api/allServices": "/allServices",
+  "/commun/portal_template_api_v2.tpl.json": "/template"
+}

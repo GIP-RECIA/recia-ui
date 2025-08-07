@@ -1,0 +1,13 @@
+{
+  "port": 3000,
+  "host": "localhost",
+  "watch": true,
+  "routes": "./json-server/routes.json",
+  "middlewares": [
+    "./json-server/middlewares/userinfo.cjs"
+  ],
+  "static": "./json-server/static",
+  "readOnly": false,
+  "noCors": false,
+  "quiet": false
+}
