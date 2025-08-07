@@ -248,7 +248,7 @@ export class ReciaFavoriteLayout extends LitElement {
             target="${item.link.target ?? nothing}"
             rel="${item.link.rel ?? nothing}"
             class="name"
-            tabindex="${this.isManage ? -1 : nothing as any as number}"
+            ?inert="${this.isManage}"
             @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
           >
             <span>${item.name}</span>
