@@ -59,6 +59,8 @@ interface ThemeSettings {
   drawerIcon: string
 }
 
+const $debug = atom<boolean>(false)
+
 const $settings = atom<Partial<HeaderProperties> & TmpSettings & Partial<ThemeSettings>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
@@ -83,10 +85,6 @@ const $services = atom<Array<Service> | undefined>()
 const $layout = atom<LayoutApiResponse | undefined>()
 
 const $favoritesIds = atom<Array<number> | undefined>()
-
-const $debug: ReadableAtom<boolean> = batched($settings, (newValue) => {
-  return newValue.debug ?? false
-})
 
 const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
   return newValue?.authenticated ?? false
@@ -258,13 +256,6 @@ async function updateSettings(
   const diffs = difference(newValue, $settings.get())
   if (diffs.size === 0)
     return
-
-  if (diffs.has('debug')) {
-    $settings.set({
-      ...$settings.get(),
-      debug: diffs.get('debug') as boolean,
-    })
-  }
 
   if (diffs.has('domain')) {
     $settings.set({

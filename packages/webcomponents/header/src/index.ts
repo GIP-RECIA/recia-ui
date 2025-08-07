@@ -81,7 +81,6 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'fname',
   'drawerItems',
   'navigationDrawerVisible',
-  'debug',
 ]
 
 @localized()
@@ -209,6 +208,9 @@ export class ReciaHeader extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('debug')) {
+      $debug.set(this.debug)
+    }
     if (availablePropsKeys.some(key => _changedProperties.has(key))) {
       const updatedSettings = Object.fromEntries(
         availablePropsKeys.map(key => [key, this[key]]).filter(([_, value]) => value !== undefined),

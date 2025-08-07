@@ -32,7 +32,7 @@ export default class OrganizationService {
     logoAttribute: string,
   ): Promise<Organizations | undefined> {
     try {
-      const debugValue = $debug.get()
+      const debug = $debug.get()
       const { token } = soffit
 
       const getParams = new URLSearchParams({ ids: orgIds.toString() })
@@ -50,7 +50,7 @@ export default class OrganizationService {
       const orgs: Record<string, OrganizationApiResponse> = await response.json()
 
       if (!orgs || !orgs[currentOrgId]) {
-        if (debugValue) {
+        if (debug) {
           // eslint-disable-next-line no-console
           console.info('No organization found')
         }
@@ -73,7 +73,7 @@ export default class OrganizationService {
       const currentOrg = mappedOrgs.filter(org => org.id === currentOrgId)[0]
 
       if (!currentOrg.displayName) {
-        if (debugValue) {
+        if (debug) {
           // eslint-disable-next-line no-console
           console.info('Missing organization information')
         }
