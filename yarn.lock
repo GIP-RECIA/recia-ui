@@ -1025,13 +1025,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nanostores/lit@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@nanostores/lit@npm:0.2.2"
+"@nanostores/lit@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@nanostores/lit@npm:0.2.3"
   peerDependencies:
     lit: ^2.6.0 || ^3.0.0
-    nanostores: ^0.7 || ^0.8 || ^0.9 || ^0.10 || ^0.11
-  checksum: 10/e07c55d34530b81471aaebd4f26fd5c4fa8c46a5cf333f4a1b0fca1abd3da7c36afa1f6ded5a5d58f14e1897159743a7c465d827e03e540cb286c9269b3db7b4
+    nanostores: ">=0.7 < 1.0.0 || ^1.0.0"
+  checksum: 10/12232d983e83d539ad9e7367d82d5f6e4aab2f0c072e5e42c2b26750f0cb0af2f482a4ea29e563b211ab12354d1b48c830127b95130c67cc024de81cef0aebde
   languageName: node
   linkType: hard
 
@@ -4763,7 +4763,7 @@ __metadata:
     "@antfu/eslint-config": "npm:^5.2.1"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
-    "@nanostores/lit": "npm:^0.2.2"
+    "@nanostores/lit": "npm:^0.2.3"
     "@types/lodash-es": "npm:^4"
     "@types/regenerator-runtime": "npm:^0"
     "@uportal/open-id-connect": "npm:^1.40.2"
