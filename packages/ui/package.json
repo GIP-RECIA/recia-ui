@@ -34,7 +34,7 @@
     "ress": "^5.0.2",
     "sass": "^1.90.0",
     "typescript": "^5.9.2",
-    "vite": "^7.1.2",
+    "vite": "^7.1.3",
     "vite-plugin-svg-spritemap": "^1.0.12"
   }
 }
