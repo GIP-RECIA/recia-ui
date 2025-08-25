@@ -55,7 +55,6 @@ interface TmpSettings {
   search: boolean
   notifications: boolean
   infoEtab: boolean
-  starter: boolean
 }
 
 interface ThemeSettings {
@@ -64,13 +63,10 @@ interface ThemeSettings {
 
 const $debug = atom<boolean>(false)
 
-const $settings = atom<Partial<HeaderProperties> & TmpSettings & Partial<ThemeSettings>>({
+const $settings = atom<Partial<HeaderProperties> & Partial<TmpSettings> & Partial<ThemeSettings>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
   search: true,
-  notifications: false,
-  infoEtab: false,
-  starter: false,
 })
 
 const $soffit = atom<Soffit | undefined>()

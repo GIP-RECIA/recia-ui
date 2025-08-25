@@ -157,10 +157,10 @@ export class ReciaNavigationDrawer extends LitElement {
               title="${item.name}"
               aria-label="${item.ariaLabel ?? nothing}"
               class="${classMap({
-                active: item.autoDetectCurrent === true && isCurrentPage(item.link.href),
+                active: item.isCurrent || (item.autoDetectCurrent === true && isCurrentPage(item.link.href)),
               })}"
               aria-current="${
-                (item.autoDetectCurrent === true && isCurrentPage(item.link.href)) ?? nothing
+                (item.isCurrent || (item.autoDetectCurrent === true && isCurrentPage(item.link.href))) ?? nothing
               }"
               @click="${this.closeDrawer}"
             >
@@ -187,7 +187,7 @@ export class ReciaNavigationDrawer extends LitElement {
 
   render(): TemplateResult {
     const favoriteMenu = $favoriteMenu.get()
-    const { contextApiUrl, drawerItems, drawerIcon } = $settings.get() ?? {}
+    const { contextApiUrl, drawerItems, drawerIcon, homePage } = $settings.get() ?? {}
     const homeLink: Link = {
       href: getDomainLink(contextApiUrl ?? '/'),
       target: '_self',
@@ -223,6 +223,7 @@ export class ReciaNavigationDrawer extends LitElement {
               ariaLabel: msg(str`Retourer à l'accueil`),
               icon: faHouse,
               link: homeLink,
+              isCurrent: homePage,
             })
           }
           <li>

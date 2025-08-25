@@ -82,6 +82,8 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'fname',
   'drawerItems',
   'navigationDrawerVisible',
+  'homePage',
+  'starter',
 ]
 
 @localized()
@@ -180,6 +182,12 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   navigationDrawerVisible: boolean = false
+
+  @property({ type: Boolean, attribute: 'home-page' })
+  homePage: boolean = false
+
+  @property({ type: Boolean, attribute: 'starter' })
+  starter: boolean = false
 
   @property({ type: Boolean })
   debug: boolean = false

@@ -45,4 +45,6 @@ export interface HeaderProperties {
   fname: string
   drawerItems: Array<DrawerItem>
   navigationDrawerVisible: boolean
+  homePage: boolean
+  starter: boolean
 }
