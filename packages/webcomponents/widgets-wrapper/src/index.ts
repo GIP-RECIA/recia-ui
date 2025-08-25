@@ -85,10 +85,10 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    const versionUpdate = (new Date()).getTime()
     const scriptAdapter = document.createElement('script')
     scriptAdapter.type = 'module'
-    scriptAdapter.src = `${this.adapterSourceUri}?v=${versionUpdate}&configUri=${this.adapterConfigUri}`
+    const uriHasParam: boolean = this.adapterSourceUri.split('?')[1]?.length > 0
+    scriptAdapter.src = `${this.adapterSourceUri}${uriHasParam ? '&' : '?'}configUri=${this.adapterConfigUri}`
     document.body.appendChild(scriptAdapter)
   }
 
