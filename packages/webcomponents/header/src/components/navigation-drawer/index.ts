@@ -22,8 +22,6 @@ import type {
   UpdatedFavoriteSection,
 } from '../../types/index.ts'
 import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { faGrip, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -31,7 +29,11 @@ import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 import { componentName } from '../../../../common/config.ts'
+import grid from '../../assets/svg/grid.svg?raw'
+import home from '../../assets/svg/home.svg?raw'
+import star from '../../assets/svg/star.svg?raw'
 import langHelper from '../../helpers/langHelper.ts'
 import {
   $favoriteMenu,
@@ -39,7 +41,7 @@ import {
   updateFavoritesFromFavorites,
   updateServices,
 } from '../../stores/index.ts'
-import { getIcon } from '../../utils/fontawesomeUtils.ts'
+import { getSvgIcon } from '../../utils/iconUtils.ts'
 import { getDomainLink, isCurrentPage } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -138,11 +140,13 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   itemTemplate(item: DrawerItem): TemplateResult {
+    const icon = item.icon.startsWith('<svg ')
+      ? unsafeSVG(item.icon)
+      : getSvgIcon(item.icon)
+
     const content: TemplateResult = html`
       <div class="active-indicator"></div>
-      <div class="icon">
-        ${getIcon(item.icon)}
-      </div>
+      <div class="icon">${icon}</div>
       <span class="text">${item.name}</span>
     `
 
@@ -221,7 +225,7 @@ export class ReciaNavigationDrawer extends LitElement {
               id: 'home',
               name: msg(str`Accueil`),
               ariaLabel: msg(str`Retourer à l'accueil`),
-              icon: faHouse,
+              icon: home,
               link: homeLink,
               isCurrent: homePage,
             })
@@ -238,7 +242,7 @@ export class ReciaNavigationDrawer extends LitElement {
             >
               <div class="active-indicator"></div>
               <div class="icon">
-                ${getIcon(faGrip)}
+                ${unsafeSVG(grid)}
               </div>
               <span class="text">${msg(str`Tous les services`)}</span>
             </button>
@@ -251,7 +255,7 @@ export class ReciaNavigationDrawer extends LitElement {
             >
               <div class="active-indicator"></div>
               <div class="icon">
-                ${getIcon(farStar)}
+                ${unsafeSVG(star)}
               </div>
               <span class="text">${msg(str`Favoris`)}</span>
             </button>

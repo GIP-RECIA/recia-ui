@@ -20,7 +20,6 @@ import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaInfoEtabBottomSheet } from './components/info-etab/bottom-sheet/index.ts'
 import type { ReciaBottomSheetServiceInfo } from './components/service-info/bottom-sheet/index.ts'
 import type { DrawerItem, HeaderProperties } from './types/index.ts'
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -174,7 +173,7 @@ export class ReciaHeader extends LitElement {
     {
       id: 'mediacentre',
       name: msg(str`Médiacentre`),
-      icon: faBookOpen,
+      icon: '/images/portlet_icons/Mediacentre.svg',
       link: { href: '/portail/p/Mediacentre', target: '_self' },
       autoDetectCurrent: true,
     },

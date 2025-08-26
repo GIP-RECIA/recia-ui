@@ -16,15 +16,15 @@
 
 import type { TemplateResult } from 'lit'
 import type { FavoriteSection } from '../../../types/index.ts'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { styleMap } from 'lit/directives/style-map.js'
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 import { componentName } from '../../../../../common/config.ts'
+import star from '../../../assets/svg/star.svg?raw'
 import langHelper from '../../../helpers/langHelper.ts'
-import { getIcon } from '../../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../layout/index.ts'
@@ -109,7 +109,7 @@ export class ReciaFavoriteDropdown extends LitElement {
         >
           <div class="active-indicator"></div>
           <div class="icon">
-            ${getIcon(farStar)}
+            ${unsafeSVG(star)}
           </div>
           <span class="text">${msg(str`Favoris`)}</span>
         </button>
