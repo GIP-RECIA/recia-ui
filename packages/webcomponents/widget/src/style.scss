@@ -90,7 +90,7 @@ $vivible-items: 3;
         @include unstyled-link;
         display: inline-flex;
         align-items: center;
-        gap: 4px;
+        gap: 8px;
 
         > .focus-indicator {
           display: none;
@@ -179,7 +179,7 @@ $vivible-items: 3;
           &:focus-visible {
             outline: none;
             color: var(--#{$prefix}primary);
-            background-color: var(--#{$prefix}btn-secondary-hover);
+            background-color: var(--#{$prefix}btn-secondary-hover); // TODO: replace with more lighter color
           }
         }
       }
@@ -241,6 +241,16 @@ $vivible-items: 3;
       > div {
         display: inline-flex !important;
         height: 58px;
+
+        > a > .heading {
+          > h3 {
+            font-size: var(--#{$prefix}font-size-h3);
+          }
+
+          > .heading-subtitle {
+            font-size: var(--#{$prefix}font-size-xs);
+          }
+        }
       }
 
       > button {
