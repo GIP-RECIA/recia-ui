@@ -163,10 +163,15 @@ $vivible-items: 3;
           height: $line-height;
 
           > .icon {
-            flex-shrink: 0;
+            flex: 0 0 auto;
             height: 20px;
             width: 20px;
             color: var(--#{$prefix}basic-black);
+            opacity: .2;
+          }
+
+          > img.icon {
+            opacity: .8;
           }
 
           > span {
@@ -180,6 +185,11 @@ $vivible-items: 3;
             outline: none;
             color: var(--#{$prefix}primary);
             background-color: var(--#{$prefix}btn-secondary-hover); // TODO: replace with more lighter color
+
+            > .icon {
+              color: var(--#{$prefix}primary);
+              opacity: 1;
+            }
           }
         }
       }
