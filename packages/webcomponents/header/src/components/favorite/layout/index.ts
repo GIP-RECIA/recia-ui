@@ -264,7 +264,6 @@ export class ReciaFavoriteLayout extends LitElement {
         <div class="favorite-layout">
           <header>
             <h2>${msg(str`Vos favoris`)}</h2>
-            ${this.manageTemplate()}
           </header>
           <ul>
             ${
@@ -300,7 +299,12 @@ export class ReciaFavoriteLayout extends LitElement {
       <div class="favorite-layout">
         <header>
           <h2>${msg(str`Vos favoris`)}</h2>
-          ${this.manageTemplate()}
+
+          ${
+            !(this.data ?? []).some(section => section.loading)
+              ? this.manageTemplate()
+              : nothing
+          }
         </header>
         <ul>
           ${
