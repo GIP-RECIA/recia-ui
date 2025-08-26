@@ -169,15 +169,7 @@ export class ReciaHeader extends LitElement {
   fname?: string
 
   @property({ type: Array, attribute: 'drawer-items' })
-  drawerItems?: Array<DrawerItem> = [
-    {
-      id: 'mediacentre',
-      name: msg(str`Médiacentre`),
-      icon: '/images/portlet_icons/Mediacentre.svg',
-      link: { href: '/portail/p/Mediacentre', target: '_self' },
-      autoDetectCurrent: true,
-    },
-  ]
+  drawerItems?: Array<DrawerItem>
 
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   navigationDrawerVisible: boolean = false

@@ -11,6 +11,15 @@
   <section>
     <r-header
       template-api-url="/commun/portal_template_api_v2.tpl.json"
+      drawer-items='[
+        {
+          "id": "mediacentre",
+          "name": "Médiacentre",
+          "icon": "/images/portlet_icons/Mediacentre.svg",
+          "link": { "href": "/portail/p/Mediacentre", "target": "_self" },
+          "autoDetectCurrent": true
+        }
+      ]'
       navigation-drawer-visible
       debug
     >
