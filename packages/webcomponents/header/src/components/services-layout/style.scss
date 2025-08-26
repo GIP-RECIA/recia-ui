@@ -92,7 +92,7 @@
       @include unstyled-list;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
-      grid-auto-rows: 1fr;
+      // grid-auto-rows: 1fr; // Fix bug due to learn more
       gap: 16px;
 
       > li {
