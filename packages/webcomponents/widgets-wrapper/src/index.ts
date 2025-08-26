@@ -268,7 +268,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     await this.setUserFavoriteWidgets([])
   }
 
-  async updateFavorites(e: Event) {
+  async updateFavorites() {
     const soffit = await getToken(this.soffitUri)
     await this.buildWidget('Favoris', soffit.encoded, true)
   }
