@@ -252,13 +252,16 @@ $vivible-items: 3;
         display: inline-flex !important;
         height: 58px;
 
-        > a > .heading {
-          > h3 {
-            font-size: var(--#{$prefix}font-size-h3);
-          }
+        > a,
+        & {
+          > .heading {
+            > h3 {
+              font-size: var(--#{$prefix}font-size-h3);
+            }
 
-          > .heading-subtitle {
-            font-size: var(--#{$prefix}font-size-xs);
+            > .heading-subtitle {
+              font-size: var(--#{$prefix}font-size-xs);
+            }
           }
         }
       }
