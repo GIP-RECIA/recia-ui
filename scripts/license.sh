@@ -15,7 +15,8 @@
 files=$(find ./packages/ ./scripts/ \
   \( \
     -path '.*/dist/*' -o \
-    -path '.*/generated/*' \
+    -path '.*/generated/*' -o\
+    -path '.*/node_modules/*' \
   \) -prune -o \
   \( \
     -name '*.vue' -o \
