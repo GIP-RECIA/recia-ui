@@ -33,6 +33,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 import { componentName } from '../../common/config.ts'
+import { getSvgIcon } from '../../header/src/utils/iconUtils.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
@@ -147,7 +148,7 @@ export class ReciaWidget extends LitElement {
 
   itemTemplate(item: Item): TemplateResult {
     const content: TemplateResult = html`
-      ${unsafeSVG(item.icon)}
+      ${getSvgIcon(item.icon)}
       <span>${item.name}</span>
     `
 
