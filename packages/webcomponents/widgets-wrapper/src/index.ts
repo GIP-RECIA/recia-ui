@@ -90,6 +90,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     const uriHasParam: boolean = this.adapterSourceUri.split('?')[1]?.length > 0
     scriptAdapter.src = `${this.adapterSourceUri}${uriHasParam ? '&' : '?'}configUri=${this.adapterConfigUri}`
     document.body.appendChild(scriptAdapter)
+    this.updateFavorites = this.updateFavorites.bind(this)
+    document.addEventListener('update-favorites', this.updateFavorites)
   }
 
   async monInit() {
@@ -266,6 +268,11 @@ export class ReciaWidgetsWrapper extends LitElement {
     await this.setUserFavoriteWidgets([])
   }
 
+  async updateFavorites(e: Event) {
+    const soffit = await getToken(this.soffitUri)
+    await this.buildWidget('Favoris', soffit.encoded, true)
+  }
+
   handleClickOnHeadingLink(e: CustomEvent) {
     const eventDNMA = new CustomEvent(
       'click-portlet-card',
@@ -376,8 +383,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.widgetToDisplayKeyArray = this.removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
   }
 
-  async buildWidget(key: string, soffit: string) {
-    if (this.widgetDataMap.has(key)) {
+  async buildWidget(key: string, soffit: string, forceRebuild: boolean = false) {
+    if (this.widgetDataMap.has(key) && !forceRebuild) {
       this.requestUpdate()
       return
     }
