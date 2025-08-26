@@ -83,8 +83,8 @@ export class ReciaServicesLayout extends LitElement {
     }
   }
 
-  updateFilters(e: CustomEvent): void {
-    const { id, checked } = e.detail.activeFilters[0] ?? {}
+  updateFilters(_: CustomEvent): void {
+    // const { id, checked } = e.detail.activeFilters[0] ?? {}
   }
 
   contentTemplate(): TemplateResult | typeof nothing {
@@ -117,12 +117,12 @@ export class ReciaServicesLayout extends LitElement {
 
   skeletonTemplate(): TemplateResult {
     return html`
-        <r-filters
+        <!-- <r-filters
           loading
           loding-sections="1"
           loding-sections-items="9"
         >
-        </r-filters>
+        </r-filters> -->
         <ul>
           ${map(range(20), () => html`<li class="skeleton"></li>`)}
         </ul>
