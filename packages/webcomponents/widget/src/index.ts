@@ -124,7 +124,6 @@ export class ReciaWidget extends LitElement {
   }
 
   headingTemplate(): TemplateResult {
-    // temp for dev
     return html`
       <h3>${this.name}</h3>
       ${
