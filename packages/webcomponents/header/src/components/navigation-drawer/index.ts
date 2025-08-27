@@ -25,7 +25,7 @@ import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
@@ -58,17 +58,11 @@ export class ReciaNavigationDrawer extends LitElement {
   @property({ type: Boolean })
   visible: boolean = false
 
-  @property({ type: Array })
-  items?: Array<DrawerItem>
-
   @property({ type: Boolean, attribute: 'expanded' })
   isExpanded: boolean = false
 
   @property({ type: Boolean, attribute: 'services-layout-state' })
   isServicesLayout: boolean = false
-
-  @state()
-  isFavoriteDrawer: boolean = false
 
   favoriteBottomSheetRef: Ref<ReciaFavoriteBottomSheet> = createRef()
 
