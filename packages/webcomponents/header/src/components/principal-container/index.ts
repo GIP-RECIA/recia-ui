@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightToBracket, faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -161,10 +161,31 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   notAuthenticatedTemplate(): TemplateResult {
+    const { signInUrl, defaultOrgIconUrl, orgIconUrl } = $settings.get()
+
     return html`
-        <div class="principal-container">
-          <div class="start"></div>
-          <div class="end"></div>
+        <div class="principal-container not-logged">
+          <div class="start">
+            <svg class="simple" aria-hidden="true">
+              <use href="${orgIconUrl ?? defaultOrgIconUrl}#icone"></use>
+            </svg>
+          </div>
+          <div class="end">
+            ${
+              signInUrl
+                ? html`
+                    <a
+                      id="${UserMenuItem.Logout}"
+                      href="${signInUrl}"
+                      target="_self"
+                    >
+                      ${msg(str`Accéder à l'ENT`)}
+                      ${getIcon(faArrowRightToBracket)}
+                    </a>
+                  `
+                : nothing
+            }
+          </div>
         </div>
       `
   }

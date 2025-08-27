@@ -29,6 +29,35 @@
   height: $header-height;
   padding: 16px;
 
+  &.not-logged {
+    margin-left: unset;
+
+    > .start {
+      > svg {
+        flex: 0 1 auto;
+
+        &.simple {
+          color: var(--#{$prefix}primary);
+          height: 36px;
+          width: 36px;
+        }
+      }
+    }
+
+    > .end > a {
+      flex: 0 0 auto;
+      @include button-and-tag;
+      font-family: $sora;
+      padding: 6px 12px;
+      font-weight: 600;
+      font-size: var(--#{$prefix}font-size-md);
+
+      &:focus-visible {
+        outline: 4px solid var(--#{$prefix}primary);
+      }
+    }
+  }
+
   > .start {
     display: flex;
     column-gap: 16px;

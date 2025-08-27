@@ -54,10 +54,6 @@
   <source>Fermer le menu</source>
   <target>Close menu</target>
 </trans-unit>
-<trans-unit id="s1744bdfd2aae7edc">
-  <source>Médiacentre</source>
-  <target>Médiacentre</target>
-</trans-unit>
 <trans-unit id="se1e9c7a19e8dd236">
   <source>nouveau</source>
   <target>new</target>
@@ -233,6 +229,10 @@ Do you agree to log out now?</target>
 <trans-unit id="s0879a675a2208eb0">
   <source>Menu mon compte</source>
   <target>My account menu</target>
+</trans-unit>
+<trans-unit id="sc139bbab63351fe2">
+  <source>Accéder à l'ENT</source>
+  <target>Access the ENT</target>
 </trans-unit>
 </body>
 </file>
