@@ -27,10 +27,13 @@ import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
+import { debounce, throttle } from 'lodash-es'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
+import SessionService from './services/sessionService.ts'
+import SoffitService from './services/soffitService.ts'
 import {
   $authenticated,
   $debug,
@@ -51,6 +54,8 @@ import './components/change-etab-bottom-sheet/index.ts'
 import './components/info-etab/bottom-sheet/index.ts'
 import './components/service-info/bottom-sheet/index.ts'
 import 'regenerator-runtime/runtime.js'
+
+const listenEvents: Array<string> = ['mousemove', 'click', 'keypress']
 
 const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'messages',
@@ -210,6 +215,20 @@ export class ReciaHeader extends LitElement {
     this.initDebugEventsListener()
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    listenEvents.every(event =>
+      document.addEventListener(event, this.handleUserAction.bind(this)),
+    )
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    listenEvents.every(event =>
+      document.removeEventListener(event, this.handleUserAction.bind(this)),
+    )
+  }
+
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('debug')) {
       $debug.set(this.debug)
@@ -236,6 +255,18 @@ export class ReciaHeader extends LitElement {
       }
     })
   }
+
+  handleUserAction(): void {
+    if (!$authenticated.value)
+      return
+
+    this.debounceRenewToken()
+    this.throttleRenewSession()
+  }
+
+  debounceRenewToken = debounce(SoffitService.renew.bind(this), 500)
+
+  throttleRenewSession = throttle(SessionService.renew.bind(this), SessionService.timeout)
 
   injectStyle(): void {
     const id = name

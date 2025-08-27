@@ -15,8 +15,12 @@
  */
 
 import type { Session, SessionApiResponse } from '../types/index.ts'
+import { $settings, updateSoffit } from '../stores/index.ts'
+import { getDomainLink } from '../utils/linkUtils.ts'
 
 export default class SessionService {
+  static timeout: number = 300000
+
   static async get(
     sessionApiUrl: string,
   ): Promise<Session | undefined> {
@@ -38,6 +42,8 @@ export default class SessionService {
 
       const { sessionKey, timeoutMS } = data.person
 
+      SessionService.timeout = timeoutMS - 10000
+
       return {
         key: sessionKey,
         timeout: timeoutMS,
@@ -48,5 +54,15 @@ export default class SessionService {
       console.error(err, sessionApiUrl)
       return undefined
     }
+  }
+
+  static async renew(): Promise<void> {
+    const { sessionApiUrl } = $settings.get()
+    if (!sessionApiUrl)
+      return
+
+    const session = await SessionService.get(getDomainLink(sessionApiUrl))
+    if (!session?.isConnected)
+      updateSoffit()
   }
 }

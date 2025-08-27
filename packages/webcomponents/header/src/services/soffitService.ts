@@ -17,14 +17,22 @@
 import type { Response } from '@uportal/open-id-connect'
 import type { Soffit } from '../types/index.ts'
 import oidc from '@uportal/open-id-connect'
+import { updateSoffit } from '../stores/index.ts'
 
 export default class SoffitService {
+  static loading: boolean = false
+  static expireTime: number = 0
+
   static async get(
     userInfoApiUrl: string,
   ): Promise<Soffit | undefined> {
+    SoffitService.loading = true
     try {
       const response: Response = await oidc({ userInfoApiUrl })
       const { encoded, decoded } = response
+
+      SoffitService.expireTime = decoded.exp - 5
+      SoffitService.loading = false
 
       return {
         ...decoded,
@@ -33,8 +41,16 @@ export default class SoffitService {
       }
     }
     catch (err) {
+      SoffitService.loading = false
       console.error(err, userInfoApiUrl)
       return undefined
+    }
+  }
+
+  static async renew(): Promise<void> {
+    const currentTime = Math.ceil(Date.now() / 1000)
+    if (!SoffitService.loading && currentTime >= SoffitService.expireTime) {
+      await updateSoffit()
     }
   }
 }
