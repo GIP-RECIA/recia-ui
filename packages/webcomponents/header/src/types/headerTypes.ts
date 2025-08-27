@@ -42,9 +42,11 @@ export interface HeaderProperties {
   portletInfoApiUrl: string
   serviceInfoApiUrl: string
   servicesInfoApiUrl: string
+  dnmaUrl: string
   fname: string
   drawerItems: Array<DrawerItem>
   navigationDrawerVisible: boolean
   homePage: boolean
   starter: boolean
+  debug: boolean
 }

@@ -83,6 +83,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'portletInfoApiUrl',
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
+  'dnmaUrl',
   'fname',
   'drawerItems',
   'navigationDrawerVisible',
@@ -169,6 +170,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'services-info-api-url' })
   servicesInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'dnma-url' })
+  dnmaUrl?: string
 
   @property({ type: String })
   fname?: string

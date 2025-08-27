@@ -33,6 +33,7 @@ import type {
 } from '../types/index.ts'
 import { msg, str } from '@lit/localize'
 import { atom, batched } from 'nanostores'
+import DnmaService from '../services/dnmaService.ts'
 import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
 import OrganizationService from '../services/organizationService.ts'
@@ -253,10 +254,12 @@ $favoritesIds.listen(() => {
 })
 
 $authenticated.listen((value) => {
-  const { navigationDrawerVisible } = $settings.get() ?? {}
+  const { navigationDrawerVisible, dnmaUrl, fname } = $settings.get() ?? {}
   if (value) {
     if (navigationDrawerVisible === true)
       document.body.classList.add('navigation-drawer-visible')
+    if (dnmaUrl)
+      DnmaService.init(dnmaUrl, fname ?? 'Unknown')
   }
   else {
     document.body.classList.remove('navigation-drawer-visible')
