@@ -127,6 +127,10 @@
       margin-left: $drawer-width;
     }
 
+    > .start {
+      min-width: $drawer-expended-width - $drawer-width - 2 * 16;
+    }
+
     > .start > .dropdown-info,
     > .end > .notification {
       display: unset;
