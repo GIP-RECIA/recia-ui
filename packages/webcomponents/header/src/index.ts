@@ -434,13 +434,19 @@ export class ReciaHeader extends LitElement {
 }
 
 const tagName = componentName(name)
+class ExtendedUportalHeader extends ReciaHeader {}
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaHeader)
 }
 
+if (!customElements.get('extended-uportal-header')) {
+  customElements.define('extended-uportal-header', ExtendedUportalHeader)
+}
+
 declare global {
   interface HTMLElementTagNameMap {
     [tagName]: ReciaHeader
+    'extended-uportal-header': ExtendedUportalHeader
   }
 }

@@ -149,13 +149,19 @@ export class ReciaFooter extends LitElement {
 }
 
 const tagName = componentName(name)
+class ExtendedUportalFooter extends ReciaFooter {}
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaFooter)
 }
 
+if (!customElements.get('extended-uportal-footer')) {
+  customElements.define('extended-uportal-footer', ExtendedUportalFooter)
+}
+
 declare global {
   interface HTMLElementTagNameMap {
     [tagName]: ReciaFooter
+    'extended-uportal-footer': ExtendedUportalFooter
   }
 }
