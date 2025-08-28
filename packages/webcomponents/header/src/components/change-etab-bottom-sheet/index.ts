@@ -28,6 +28,7 @@ import langHelper from '../../helpers/langHelper.ts'
 import ChangeEtabService from '../../services/changeEtabService.ts'
 import { $organizations, $settings, $soffit } from '../../stores/index.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
+import { getDomainLink } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'bottom-sheet'
@@ -84,7 +85,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
       this.close()
       const response = await ChangeEtabService.setEtab(
         soffitObject,
-        `${switchOrgApiUrl}/${this.selectedEtab}`,
+        getDomainLink(`${switchOrgApiUrl}/${this.selectedEtab}`),
       )
       if (response)
         location.replace(`${response}/Logout`)
