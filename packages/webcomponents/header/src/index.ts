@@ -135,6 +135,9 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'template-api-url' })
   templateApiUrl?: string
 
+  @property({ type: String, attribute: 'template-api-path' })
+  templateApiPath?: string
+
   @property({ type: String, attribute: 'sign-out-url' })
   signOutUrl?: string
 
@@ -236,6 +239,9 @@ export class ReciaHeader extends LitElement {
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('debug')) {
       $debug.set(this.debug)
+    }
+    if (_changedProperties.has('templateApiPath')) {
+      this.templateApiUrl = this.templateApiPath
     }
     if (availablePropsKeys.some(key => _changedProperties.has(key))) {
       const updatedSettings = Object.fromEntries(

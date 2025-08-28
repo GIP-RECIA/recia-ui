@@ -38,6 +38,9 @@ export class ReciaFooter extends LitElement {
   @property({ type: String, attribute: 'template-api-url' })
   templateApiUrl?: string
 
+  @property({ type: String, attribute: 'template-api-path' })
+  templateApiPath?: string
+
   @property({ type: Array, attribute: 'top-links' })
   topLinks?: Array<Link>
 
@@ -56,6 +59,9 @@ export class ReciaFooter extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('templateApiPath')) {
+      this.templateApiUrl = this.templateApiPath
+    }
     if (_changedProperties.has('domain') || _changedProperties.has('templateApiUrl')) {
       this._getTemplate()
       return false
