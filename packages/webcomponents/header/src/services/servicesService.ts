@@ -32,7 +32,7 @@ export default class ServicesService {
       InfoService.getAll(servicesInfoApiUrl),
     ])
 
-    if (!portlets || !portletsInfo)
+    if (!portlets)
       return undefined
 
     const services: Array<Service> = portlets.map((portlet) => {
@@ -50,7 +50,9 @@ export default class ServicesService {
       const {
         categoriePrincipale,
         doesInfoExist,
-      } = portletsInfo.find(el => el.fname === fname) ?? {}
+      } = portletsInfo
+        ? (portletsInfo.find(el => el.fname === fname) ?? {})
+        : {}
       const category = categoriePrincipale && Object.values(Category).includes(categoriePrincipale)
         ? categoriePrincipale
         : undefined
