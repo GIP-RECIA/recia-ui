@@ -18,6 +18,7 @@ import type { TemplateResult } from 'lit'
 import { faPersonDigging } from '@fortawesome/free-solid-svg-icons'
 import { html, svg } from 'lit'
 import { getIconWithStyle } from './fontawesomeUtils.ts'
+import { getDomainLink } from './linkUtils.ts'
 
 function getSvgIcon(iconUrl: string | undefined): TemplateResult {
   const defaultIcon = getIconWithStyle(faPersonDigging, undefined, { icon: true })
@@ -37,7 +38,7 @@ function getSvgIcon(iconUrl: string | undefined): TemplateResult {
       `
   }
 
-  return html`<img src="${iconUrl}" alt="" class="icon"> `
+  return html`<img src="${getDomainLink(iconUrl)}" alt="" class="icon"> `
 }
 
 export {
