@@ -102,15 +102,21 @@ export class ReciaFooter extends LitElement {
                 <div class="logo">
                   <img src="${this.template.logoPath}" alt="${this.template.name}">
                 </div>
-                <ul class="links">
-                  ${
-                    repeat(
-                      this.topLinks ?? [],
-                      link => link,
-                      link => this.linkItemTemplate(link),
-                    )
-                  }
-                </ul>
+                ${
+                  this.topLinks
+                    ? html`
+                        <ul class="links">
+                          ${
+                            repeat(
+                              this.topLinks ?? [],
+                              link => link,
+                              link => this.linkItemTemplate(link),
+                            )
+                          }
+                        </ul>
+                      `
+                    : nothing
+                }
                 <ul class="parteners">
                   ${
                     repeat(
