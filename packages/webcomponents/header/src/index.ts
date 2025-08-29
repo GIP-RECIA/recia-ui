@@ -79,7 +79,6 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'orgAttributeName',
   'orgLogoUrlAttributeName',
   'userAllOrgsIdAttributeName',
-  'sessionRenewDisable',
   'portletInfoApiUrl',
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
@@ -275,7 +274,8 @@ export class ReciaHeader extends LitElement {
       return
 
     this.debounceRenewToken()
-    this.throttleRenewSession()
+    if (!this.sessionRenewDisable)
+      this.throttleRenewSession()
   }
 
   debounceRenewToken = debounce(SoffitService.renew.bind(this), 500)
