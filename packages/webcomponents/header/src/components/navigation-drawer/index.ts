@@ -198,9 +198,7 @@ export class ReciaNavigationDrawer extends LitElement {
         aria-label="${msg(str`Tiroir de navigation`)}"
         @click="${this.toggleDrawer}"
       >
-        <svg aria-hidden="true">
-          <use href="${orgIconUrl ?? defaultOrgIconUrl}#icone"></use>
-        </svg>
+        ${getSvgIcon(orgIconUrl ?? defaultOrgIconUrl)}
         <span>${msg(str`Menu`)}</span>
       </button>
       <div
