@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
+import type { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import type { TemplateResult } from 'lit'
 import { faPersonDigging } from '@fortawesome/free-solid-svg-icons'
-import { html, svg } from 'lit'
+import { html, nothing, svg } from 'lit'
 import { getIconWithStyle } from './fontawesomeUtils.ts'
 import { getBusteredLink, getDomainLink } from './linkUtils.ts'
 
-function getSvgIcon(iconUrl: string | undefined): TemplateResult {
-  const defaultIcon = getIconWithStyle(faPersonDigging, undefined, { icon: true })
-
-  if (!iconUrl)
+function getSvgIcon(
+  iconUrl: string | undefined,
+  defaultIcon?: IconDefinition,
+): TemplateResult | typeof nothing {
+  if (!iconUrl) {
     return defaultIcon
+      ? getIconWithStyle(defaultIcon, undefined, { icon: true })
+      : nothing
+  }
 
   const hasFragment = /\.svg#[\w-]{1,10}$/.test(iconUrl)
   const isPlainSvg = iconUrl.endsWith('.svg')
@@ -42,6 +47,11 @@ function getSvgIcon(iconUrl: string | undefined): TemplateResult {
   return html`<img src="${getDomainLink(iconUrl)}" alt="" class="icon"> `
 }
 
+function getSvgIconService(iconUrl: string | undefined): TemplateResult | typeof nothing {
+  return getSvgIcon(iconUrl, faPersonDigging)
+}
+
 export {
   getSvgIcon,
+  getSvgIconService,
 }

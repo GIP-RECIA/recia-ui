@@ -36,7 +36,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { getIcon } from '../../../utils/fontawesomeUtils.ts'
-import { getSvgIcon } from '../../../utils/iconUtils.ts'
+import { getSvgIconService } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
@@ -242,7 +242,7 @@ export class ReciaFavoriteLayout extends LitElement {
       <li>
         <div class="favorite ${item.category}">
           ${actionTemplate}
-          ${getSvgIcon(item.iconUrl)}
+          ${getSvgIconService(item.iconUrl)}
           <a
             href="${item.link.href}"
             target="${item.link.target ?? nothing}"

@@ -29,7 +29,7 @@ import langHelper from '../../../helpers/langHelper.ts'
 import { Category, Origin } from '../../../types/index.ts'
 import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
 import { getIcon } from '../../../utils/fontawesomeUtils.ts'
-import { getSvgIcon } from '../../../utils/iconUtils.ts'
+import { getSvgIconService } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
@@ -180,7 +180,7 @@ export class ReciaServiceInfoLayout extends LitElement {
       <div class="service-info">
         <header>
           <div class="heading">
-            ${getSvgIcon(this.iconUrl)}
+            ${getSvgIconService(this.iconUrl)}
             <div class="heading-text">
               <h1>${this.name}</h1>
               ${

@@ -33,7 +33,7 @@ import {
 import { Category } from '../../types/index.ts'
 import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
-import { getSvgIcon } from '../../utils/iconUtils.ts'
+import { getSvgIconService } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import 'filters'
@@ -123,7 +123,7 @@ export class ReciaService extends LitElement {
                   `
                 : nothing
             }
-            ${getSvgIcon(this.iconUrl)}
+            ${getSvgIconService(this.iconUrl)}
             ${
               this.link
                 ? html`
