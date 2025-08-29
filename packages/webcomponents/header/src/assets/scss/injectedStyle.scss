@@ -92,7 +92,7 @@ html {
 
 body {
   &.auto-margin-top {
-    margin-top: $header-height;
+    margin-top: var(--#{$prefix}header-height);
   }
 
   &.transition-active {
@@ -101,13 +101,9 @@ body {
 
   @media (width >= map.get($grid-breakpoints, md)) {
     &.navigation-drawer-visible {
-      margin-left: $drawer-width;
+      margin-left: var(--#{$prefix}drawer-width);
     }
   }
-}
-
-:root {
-  --#{$prefix}drawer-width: #{$drawer-width};
 }
 
 :root {
@@ -161,6 +157,9 @@ body {
   @each $size, $value in $headings-font-sizes {
     --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
   }
+
+  --#{$prefix}drawer-width: #{$drawer-width};
+  --#{$prefix}header-height: #{$header-height};
 }
 
 @media screen and (width >= map.get($grid-breakpoints, lg)) {

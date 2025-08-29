@@ -192,6 +192,9 @@ export class ReciaHeader extends LitElement {
   @property({ type: Boolean, attribute: 'starter' })
   starter: boolean = false
 
+  @property({ type: Boolean, attribute: 'margin-top' })
+  marginTop: boolean = false
+
   @property({ type: String, attribute: 'cache-buster-version' })
   cacheBusterVersion: string = Math.floor(Date.now() / (24 * 60 * 60 * 1000)).toString()
 
@@ -254,7 +257,12 @@ export class ReciaHeader extends LitElement {
       updateSettings(updatedSettings)
     }
     this.injectStyle()
-    document.body.classList.add('auto-margin-top')
+    if (_changedProperties.has('marginTop')) {
+      if (this.marginTop === true)
+        document.body.classList.add('auto-margin-top')
+      else
+        document.body.classList.remove('auto-margin-top')
+    }
     return true
   }
 
