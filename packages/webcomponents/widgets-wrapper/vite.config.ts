@@ -24,8 +24,13 @@ import { name } from './package.json'
 export default ({ mode }: ConfigEnv) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
+  const { VITE_BASE_URI, VITE_ALLOWED_HOSTS } = process.env
+
   return defineConfig({
-    base: process.env.VITE_BASE_URI,
+    base: mode === 'development' ? VITE_BASE_URI : undefined,
+    server: {
+      allowedHosts: JSON.parse(VITE_ALLOWED_HOSTS ?? ''),
+    },
     publicDir: mode === 'development' ? undefined : false,
     build: {
       sourcemap: true,
@@ -41,8 +46,8 @@ export default ({ mode }: ConfigEnv) => {
         },
       },
     },
-    server: {
-      allowedHosts: ['lycees.test.recia.dev'],
+    define: {
+      'process.env': { NODE_ENV: process.env.NODE_ENV },
     },
   })
 }
