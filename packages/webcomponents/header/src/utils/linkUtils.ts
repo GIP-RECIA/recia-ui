@@ -64,7 +64,18 @@ function isCurrentPage(link: string): boolean {
   return pathname === targetPath
 }
 
+function getBusteredLink(path: string): string {
+  const { cacheBusterVersion } = $settings.get()
+
+  const [base, hash] = path.split('#')
+  const baseClean = base.replace(/\?v=\d+/, '')
+  const newBase = `${baseClean}?v=${cacheBusterVersion}`
+
+  return hash ? `${newBase}#${hash}` : newBase
+}
+
 export {
+  getBusteredLink,
   getDomainLink,
   getServiceLink,
   isCurrentPage,

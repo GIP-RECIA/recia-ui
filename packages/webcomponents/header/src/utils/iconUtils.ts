@@ -18,7 +18,7 @@ import type { TemplateResult } from 'lit'
 import { faPersonDigging } from '@fortawesome/free-solid-svg-icons'
 import { html, svg } from 'lit'
 import { getIconWithStyle } from './fontawesomeUtils.ts'
-import { getDomainLink } from './linkUtils.ts'
+import { getBusteredLink, getDomainLink } from './linkUtils.ts'
 
 function getSvgIcon(iconUrl: string | undefined): TemplateResult {
   const defaultIcon = getIconWithStyle(faPersonDigging, undefined, { icon: true })
@@ -28,6 +28,7 @@ function getSvgIcon(iconUrl: string | undefined): TemplateResult {
 
   const hasFragment = /\.svg#[\w-]{1,10}$/.test(iconUrl)
   const isPlainSvg = iconUrl.endsWith('.svg')
+  iconUrl = getBusteredLink(iconUrl)
 
   if (isPlainSvg || hasFragment) {
     const href = isPlainSvg ? `${iconUrl}#icone` : iconUrl

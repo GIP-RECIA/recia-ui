@@ -89,6 +89,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'navigationDrawerVisible',
   'homePage',
   'starter',
+  'cacheBusterVersion',
 ]
 
 @localized()
@@ -191,6 +192,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: Boolean, attribute: 'starter' })
   starter: boolean = false
+
+  @property({ type: String, attribute: 'cache-buster-version' })
+  cacheBusterVersion: string = Math.floor(Date.now() / (24 * 60 * 60 * 1000)).toString()
 
   @property({ type: Boolean })
   debug: boolean = false

@@ -48,5 +48,6 @@ export interface HeaderProperties {
   navigationDrawerVisible: boolean
   homePage: boolean
   starter: boolean
+  cacheBusterVersion: string
   debug: boolean
 }
