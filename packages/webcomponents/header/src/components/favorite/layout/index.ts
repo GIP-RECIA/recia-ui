@@ -240,7 +240,7 @@ export class ReciaFavoriteLayout extends LitElement {
 
     return html`
       <li>
-        <div class="favorite">
+        <div class="favorite ${item.category}">
           ${actionTemplate}
           ${getSvgIcon(item.iconUrl)}
           <a

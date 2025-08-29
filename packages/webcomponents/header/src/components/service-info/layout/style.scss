@@ -10,19 +10,19 @@
       column-gap: 6px;
       margin-bottom: 16px;
 
-      > .heading {
-        &-logo {
-          flex: 0 0 auto;
-          height: 100px;
-          width: 100px;
-          opacity: .2;
+      > .icon {
+        flex: 0 0 auto;
+        height: 100px;
+        width: 100px;
+        color: HEXToRGBA($black, .3);;
 
-          > image {
-            width: 100%;
-            height: 100%;
-          }
+        > image {
+          width: 100%;
+          height: 100%;
         }
+      }
 
+      > .heading {
         &-text {
           > h1 {
             margin: 0;
