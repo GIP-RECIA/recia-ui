@@ -20,13 +20,16 @@
           "autoDetectCurrent": true
         }
       ]'
-      navigation-drawer-visible
       debug
     >
     </r-header>
 
     <button id="soffit-updater">
       Soffit updater
+    </button>
+
+    <button id="toggle-drawer">
+      Toggle drawer
     </button>
 
     <p>
@@ -66,6 +69,9 @@
     // })
     document.querySelector('#soffit-updater').addEventListener('click', () => {
       header.dispatchEvent(new CustomEvent('update-soffit'))
+    })
+    document.querySelector('#toggle-drawer').addEventListener('click', () => {
+      header.toggleAttribute('navigation-drawer-visible')
     })
 
     const documentEvents = [

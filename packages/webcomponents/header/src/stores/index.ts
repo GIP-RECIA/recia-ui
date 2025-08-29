@@ -222,8 +222,15 @@ const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
 )
 
 $settings.listen(onDiff((diffs) => {
+  const authenticated = $authenticated.get()
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
+  if (authenticated && diffs.has('navigationDrawerVisible')) {
+    if (diffs.get('navigationDrawerVisible') === true)
+      document.body.classList.add('navigation-drawer-visible')
+    else
+      document.body.classList.remove('navigation-drawer-visible')
+  }
 }))
 
 $soffit.listen(onDiff((diffs) => {
