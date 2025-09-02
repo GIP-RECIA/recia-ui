@@ -26,6 +26,7 @@ import type {
   SearchSection,
   Service,
   Soffit,
+  Template,
   UpdatedFavoriteSection,
   UserInfo,
   UserMenu,
@@ -234,13 +235,16 @@ $settings.listen(onDiff((diffs) => {
 }))
 
 $soffit.listen(onDiff((diffs) => {
+  if (!$authenticated.get())
+    return
+
   const { orgAttributeName, userAllOrgsIdAttributeName } = $settings.get()
   let userInfoDiff = diffs.has('name')
   if (orgAttributeName)
     userInfoDiff = userInfoDiff || diffs.has(orgAttributeName)
   if (userAllOrgsIdAttributeName)
     userInfoDiff = userInfoDiff || diffs.has(userAllOrgsIdAttributeName)
-  if (userInfoDiff && $authenticated.get())
+  if (userInfoDiff)
     updateUserInfo()
 }))
 
@@ -287,21 +291,15 @@ async function updateSettings(
   if (diffs.size === 0)
     return
 
-  if (diffs.has('domain')) {
-    $settings.set({
-      ...$settings.get(),
-      domain: diffs.get('domain') as string | undefined,
-    })
-  }
-
   if (diffs.has('templateApiUrl')) {
-    const config = await updateTemplate(
+    const template = await updateTemplate(
       diffs.get('templateApiUrl') as string | undefined,
-      $settings.get().domain,
+      diffs.has('domain') ? diffs.get('domain') as string | undefined : $settings.get().domain,
     )
     $settings.set({
       ...$settings.get(),
-      ...config,
+      ...template?.config,
+      orgIconUrl: template?.iconPath,
       ...newValue,
     })
   }
@@ -320,7 +318,7 @@ async function updateSettings(
 async function updateTemplate(
   templateApiUrl: string | undefined,
   domain: string | undefined,
-): Promise<Partial<HeaderProperties> | undefined> {
+): Promise<Template | undefined> {
   if (!templateApiUrl || !domain)
     return
 
@@ -332,10 +330,6 @@ async function updateTemplate(
   if (!template)
     return
 
-  $settings.set({
-    ...$settings.get(),
-    orgIconUrl: template.iconPath,
-  })
   document.body.classList.forEach((cls) => {
     if (cls.startsWith('theme-'))
       document.body.classList.remove(cls)
@@ -345,7 +339,7 @@ async function updateTemplate(
     // eslint-disable-next-line no-console
     console.info('Template', template)
   }
-  return template?.config
+  return template
 }
 
 async function updateSoffit(): Promise<void> {

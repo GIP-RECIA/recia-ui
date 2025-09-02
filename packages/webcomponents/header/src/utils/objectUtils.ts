@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { isEqual } from 'lodash-es'
+
 function difference<T extends object>(
   newValue: Partial<T> | undefined,
   oldValue: Partial<T> | undefined,
@@ -25,7 +27,8 @@ function difference<T extends object>(
   const mapOldValue = new Map<keyof T, T[keyof T]>(Object.entries(oldValue ?? {}) as [keyof T, T[keyof T]][])
 
   for (const [key, value] of Object.entries(newValue ?? {}) as [keyof T, T[keyof T]][]) {
-    if (mapOldValue.get(key) === undefined || mapOldValue.get(key) !== value)
+    const oldValue = mapOldValue.get(key)
+    if (oldValue === undefined || !isEqual(oldValue, value))
       differences.set(key, value)
   }
 
