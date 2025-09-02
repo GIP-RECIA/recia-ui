@@ -197,5 +197,9 @@
     > .icon {
       color: var(--#{$prefix}service);
     }
+
+    > img.icon {
+      opacity: 1;
+    }
   }
 }
