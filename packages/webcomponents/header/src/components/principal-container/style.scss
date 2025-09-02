@@ -62,9 +62,14 @@
     display: flex;
     column-gap: 16px;
     align-items: center;
+    width: $drawer-expended-width - $drawer-width - 2 * 16;
+
+    &:has(> .dropdown-info) {
+      width: $drawer-expended-width - $drawer-width - 16 + 44;
+    }
 
     > span {
-      flex: 0 1 $drawer-expended-width - $drawer-width - 2 * 16;
+      flex: 0 1 auto;
       font-family: $sora;
       font-size: var(--#{$prefix}font-size-sm);
       font-weight: 600;
@@ -125,10 +130,6 @@
   @media (width >= map.get($grid-breakpoints, md)) {
     > .middle.navigation-drawer-visible {
       margin-left: $drawer-width;
-    }
-
-    > .start {
-      min-width: $drawer-expended-width - $drawer-width - 2 * 16;
     }
 
     > .start > .dropdown-info,
