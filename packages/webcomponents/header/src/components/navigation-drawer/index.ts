@@ -117,7 +117,12 @@ export class ReciaNavigationDrawer extends LitElement {
 
   openFavoriteDropdown(_: CustomEvent): void {
     updateServices()
+    this.dispatchEvent(new CustomEvent('toggle-favorite-dropdown', { detail: { show: true } }))
     this.closeDrawer()
+  }
+
+  closeFavoriteDropdown(_: CustomEvent): void {
+    this.dispatchEvent(new CustomEvent('toggle-favorite-dropdown', { detail: { show: false } }))
   }
 
   handleFavoriteUpdate(e: CustomEvent): void {
@@ -256,6 +261,7 @@ export class ReciaNavigationDrawer extends LitElement {
               ?expended="${this.isExpanded}"
               class="favorites-dropdown"
               @open="${this.openFavoriteDropdown}"
+              @close="${this.closeFavoriteDropdown}"
               @updated="${this.handleFavoriteUpdate}"
             >
            </r-favorite-dropdown>

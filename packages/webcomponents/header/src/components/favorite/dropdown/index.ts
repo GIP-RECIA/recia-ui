@@ -65,10 +65,12 @@ export class ReciaFavoriteDropdown extends LitElement {
   toggle(_: Event | undefined = undefined): void {
     if (!this.isExpanded)
       this.dispatchEvent(new CustomEvent('open'))
+    else this.dispatchEvent(new CustomEvent('close'))
     this.isExpanded = !this.isExpanded
   }
 
   close(_: Event | undefined = undefined, resetFocus: boolean = true): void {
+    this.dispatchEvent(new CustomEvent('close'))
     this.isExpanded = false
     if (resetFocus)
       this.shadowRoot?.getElementById('dropdown-favorites-button')?.focus()

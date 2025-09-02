@@ -208,6 +208,9 @@ export class ReciaHeader extends LitElement {
   isServicesLayout: boolean = false
 
   @state()
+  isFavoriteDropdown: boolean = false
+
+  @state()
   isSearchOpen: boolean = false
 
   @state()
@@ -315,10 +318,21 @@ export class ReciaHeader extends LitElement {
 
   async toggleServicesLayout(e: CustomEvent): Promise<void> {
     const { show } = e.detail
+    if (!show === undefined || typeof show !== 'boolean')
+      return
+
     if (show)
       updateServices()
     this.isServicesLayout = show
     document.documentElement.classList.toggle('services-layout', show)
+  }
+
+  toggleFavoriteDropdown(e: CustomEvent): void {
+    const { show } = e.detail
+    if (!show === undefined || typeof show !== 'boolean')
+      return
+
+    this.isFavoriteDropdown = show
   }
 
   async openMore(e: CustomEvent) {
@@ -367,6 +381,7 @@ export class ReciaHeader extends LitElement {
     const authenticated = $authenticated.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
     const { serviceInfoApiUrl, portletInfoApiUrl, navigationDrawerVisible } = $settings.get()
+    const isNavigationDrawerVisible = navigationDrawerVisible || this.isServicesLayout || this.isFavoriteDropdown
 
     return html`
       <div class="header">
@@ -383,10 +398,11 @@ export class ReciaHeader extends LitElement {
                 <r-navigation-drawer
                   ?expanded="${this.isNavigationDrawerExpanded}"
                   name="${orgName}"
-                  ?visible="${navigationDrawerVisible}"
+                  ?visible="${isNavigationDrawerVisible}"
                   ?services-layout-state="${this.isServicesLayout}"
                   @toggle="${this.toggleDrawer}"
                   @toggle-services-layout="${this.toggleServicesLayout}"
+                  @toggle-favorite-dropdown="${this.toggleFavoriteDropdown}"
                 >
                 </r-navigation-drawer>
               `
@@ -398,7 +414,7 @@ export class ReciaHeader extends LitElement {
           })}topbar"
         >
           <r-principal-container
-            ?navigation-drawer-visible="${navigationDrawerVisible}"
+            ?navigation-drawer-visible="${isNavigationDrawerVisible}"
             name="${orgName}"
             ?search-open="${this.isSearchOpen}"
             ?searching="${this.isSearching}"
@@ -412,7 +428,7 @@ export class ReciaHeader extends LitElement {
             ? html`
                 <r-services-layout
                   ?show="${this.isServicesLayout}"
-                  ?navigation-drawer-visible="${navigationDrawerVisible}"
+                  ?navigation-drawer-visible="${isNavigationDrawerVisible}"
                   @close="${this.toggleServicesLayout}"
                   @open-more="${this.openMore}"
                 >
