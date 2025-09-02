@@ -48,7 +48,7 @@
         height: 20px;
         width: 20px;
         margin: 2px;
-        color: var(--#{$prefix}stroke);
+        color: HEXToRGBA($black, .2);
         transition: color .3s ease-out;
 
         &.marked {
@@ -67,7 +67,7 @@
     order: 0;
     height: 40px;
     width: 40px;
-    color: HEXToRGBA($black, .3);
+    color: HEXToRGBA($black, .2);
     transition: color .3s ease-out;
     margin-bottom: 8px;
   }
