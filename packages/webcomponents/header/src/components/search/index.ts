@@ -185,7 +185,7 @@ export class ReciaSearch extends LitElement {
           section.items,
           this.search,
           {
-            keys: ['title', 'name', 'description', 'keywords'],
+            keys: ['name', 'description', 'keywords'],
             threshold: matchSorter.rankings.ACRONYM,
           },
         )

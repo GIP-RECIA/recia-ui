@@ -39,6 +39,7 @@ export default class ServicesService {
       const {
         id,
         fname,
+        name,
         title,
         description,
         parameters: {
@@ -57,13 +58,14 @@ export default class ServicesService {
         ? categoriePrincipale
         : undefined
 
-      let keywords: Array<string> | undefined = description.split('   ')
+      let keywords: Array<string> = description.split('   ')
       keywords.shift()
       keywords = keywords.filter(val => val.trim().length > 0)
       if (keywords.length > 0)
         keywords = keywords[0].split(', ')
       else
-        keywords = undefined
+        keywords = []
+      keywords.push(name)
 
       return {
         id,
