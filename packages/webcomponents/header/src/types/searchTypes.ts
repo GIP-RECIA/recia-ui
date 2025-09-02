@@ -14,23 +14,12 @@
  * limitations under the License.
  */
 
-import type { Category } from './categoryTypes.ts'
-import type { Link } from './linkTypes.ts'
-
-export interface SearchItem {
-  id: string | number
-  name: string
-  category?: Category
-  link: Link
-  description?: string
-  keywords?: Array<string>
-  fname?: string
-}
+import type { Service } from './serviceTypes.ts'
 
 export interface SearchSection {
   id: string
   name: string
-  items: Array<SearchItem>
+  items: Array<Service>
   loading?: boolean
   loadingItems?: number
 }

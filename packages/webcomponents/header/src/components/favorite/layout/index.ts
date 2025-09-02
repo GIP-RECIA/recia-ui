@@ -16,8 +16,8 @@
 
 import type { TemplateResult } from 'lit'
 import type {
-  FavoriteItem,
   FavoriteSection,
+  Service,
   UpdatedFavoriteSection,
 } from '../../../types/index.ts'
 import {
@@ -120,7 +120,7 @@ export class ReciaFavoriteLayout extends LitElement {
     return changes
   }
 
-  deleteItem(sectionId: string, item: FavoriteItem): void {
+  deleteItem(sectionId: string, item: Service): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section
@@ -131,7 +131,7 @@ export class ReciaFavoriteLayout extends LitElement {
     })
   }
 
-  moveItem(sectionId: string, item: FavoriteItem, newPosition: '-1' | '+1'): void {
+  moveItem(sectionId: string, item: Service, newPosition: '-1' | '+1'): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section

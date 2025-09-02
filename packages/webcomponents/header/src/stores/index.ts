@@ -16,13 +16,11 @@
 
 import type { ReadableAtom } from 'nanostores'
 import type {
-  FavoriteItem,
   FavoriteSection,
   HeaderProperties,
   LayoutApiResponse,
   Link,
   Organizations,
-  SearchItem,
   SearchSection,
   Service,
   Soffit,
@@ -189,7 +187,7 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
       {
         id: favoriteSectionId,
         name: msg(str`Services`),
-        items: (favorites ?? []) as unknown as Array<FavoriteItem>,
+        items: (favorites ?? []),
         emptyText: msg(str`Aucun service favori`),
         canDelete: true,
         loading:
@@ -203,11 +201,8 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
 const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   [$baseServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
-    const servicesItems: Array<SearchItem> = services
-      ?.map(({ id, name, category, link, description, keywords, fname }) => {
-        return { id, name, category, link, description, keywords, fname }
-      })
-      .sort((a, b) => alphaSort(a.name, b.name, 'asc'))
+    const servicesItems: Array<Service> = services
+      ?.sort((a, b) => alphaSort(a.name, b.name, 'asc'))
       ?? []
 
     return [

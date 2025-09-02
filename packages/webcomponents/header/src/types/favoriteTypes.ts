@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-import type { Category } from './categoryTypes.ts'
-import type { Link } from './linkTypes.ts'
-
-export interface FavoriteItem {
-  id: string
-  name: string
-  iconUrl?: string
-  category?: Category
-  link: Link
-  fname?: string
-}
+import type { Service } from './serviceTypes.ts'
 
 export interface FavoriteSection {
   id: string
   name: string
-  items: Array<FavoriteItem>
+  items: Array<Service>
   emptyText: string
   canDelete?: boolean
   canMove?: boolean
@@ -38,6 +28,6 @@ export interface FavoriteSection {
 }
 
 export type UpdatedFavoriteSection = FavoriteSection & {
-  deleted: Array<FavoriteItem>
+  deleted: Array<Service>
   orderHasChanged: boolean
 }

@@ -16,7 +16,7 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { SearchItem, SearchSection } from '../../types/searchTypes.ts'
+import type { SearchSection, Service } from '../../types/index.ts'
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
@@ -235,7 +235,7 @@ export class ReciaSearch extends LitElement {
     `
   }
 
-  itemTemplate(item: SearchItem): TemplateResult {
+  itemTemplate(item: Service): TemplateResult {
     return html`
         <li>
           <a
