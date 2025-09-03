@@ -15,20 +15,21 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Section } from '../../../../filters/src/types/SectionType.ts'
+import type { Service } from '../../types/index.ts'
 import { faArrowLeft, faWarning } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
+import { matchSorter } from 'match-sorter'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $baseServicesLoad, $services } from '../../stores/index.ts'
+import { $baseServicesLoad, $categoryFilters, $services } from '../../stores/index.ts'
 import { LoadingState } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -37,8 +38,11 @@ import styles from './style.scss?inline'
 import '../service/index.ts'
 import 'filters'
 
+const defaultCategory: string = 'all'
+
 @localized()
 @useStores($services)
+@useStores($categoryFilters)
 @useStores($baseServicesLoad)
 export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean })
@@ -47,8 +51,8 @@ export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
 
-  @property({ type: Array })
-  filters?: Array<Section>
+  @state()
+  category: string = defaultCategory
 
   private activeElement: HTMLElement | undefined
 
@@ -83,8 +87,25 @@ export class ReciaServicesLayout extends LitElement {
     }
   }
 
-  updateFilters(_: CustomEvent): void {
-    // const { id, checked } = e.detail.activeFilters[0] ?? {}
+  updateFilters(e: CustomEvent): void {
+    const { checked } = e.detail.activeFilters[0] ?? {}
+    this.category = checked[0] ?? defaultCategory
+  }
+
+  filteredServices(): Array<Service> {
+    let results = $services.get() ?? []
+    if (this.category !== defaultCategory) {
+      results = matchSorter(
+        results,
+        this.category,
+        {
+          keys: ['categories'],
+          threshold: matchSorter.rankings.EQUAL,
+        },
+      )
+    }
+
+    return results
   }
 
   contentTemplate(): TemplateResult | typeof nothing {
@@ -117,12 +138,12 @@ export class ReciaServicesLayout extends LitElement {
 
   skeletonTemplate(): TemplateResult {
     return html`
-        <!-- <r-filters
+        <r-filters
           loading
           loding-sections="1"
           loding-sections-items="9"
         >
-        </r-filters> -->
+        </r-filters>
         <ul>
           ${map(range(20), () => html`<li class="skeleton"></li>`)}
         </ul>
@@ -130,14 +151,14 @@ export class ReciaServicesLayout extends LitElement {
   }
 
   tilesTemplate(): TemplateResult {
-    const services = $services.get() ?? []
+    const filters = $categoryFilters.get()
 
     return html`
         ${
-          this.filters
+          filters[0].items.length > 1
             ? html`
                 <r-filters
-                  .data="${this.filters}"
+                  .data="${filters}"
                   @update-filters="${this.updateFilters}"
                 >
                 </r-filters>
@@ -147,7 +168,7 @@ export class ReciaServicesLayout extends LitElement {
         <ul>
           ${
             repeat(
-              services?.sort((a, b) => alphaSort(a.name, b.name, 'asc')),
+              this.filteredServices().sort((a, b) => alphaSort(a.name, b.name, 'asc')),
               service => service.id,
               service => html`
                   <li>

@@ -22,6 +22,7 @@ export interface Service {
   fname: string
   name: string
   category?: Category
+  categories: string[]
   iconUrl?: string
   link: Link
   description?: string

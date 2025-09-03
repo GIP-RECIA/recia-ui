@@ -15,6 +15,7 @@
  */
 
 import type { ReadableAtom } from 'nanostores'
+import type { Section } from '../../../filters/src/types/SectionType.ts'
 import type {
   FavoriteSection,
   HeaderProperties,
@@ -212,6 +213,34 @@ const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
         items: servicesItems,
         loading: baseServicesLoad === LoadingState.UNLOADED
           || baseServicesLoad === LoadingState.LOADING,
+      },
+    ]
+  },
+)
+
+const $categories: ReadableAtom<Array<string> | undefined> = batched(
+  [$baseServices],
+  (services) => {
+    return [
+      ...new Set(services?.flatMap(({ categories }) => categories)),
+    ].sort((a, b) => alphaSort(a, b, 'asc'))
+  },
+)
+
+const $categoryFilters: ReadableAtom<Array<Section>> = batched(
+  [$categories],
+  (categories) => {
+    return [
+      {
+        id: 'category',
+        name: msg(str`Catégorie`),
+        type: 'radio',
+        items: [
+          { key: 'all', value: msg(str`Tous les services`) },
+          ...(categories?.map((category) => {
+            return { key: category, value: category }
+          })) ?? [],
+        ],
       },
     ]
   },
@@ -484,6 +513,8 @@ async function removeFavorite(id: number): Promise<void> {
 export {
   $authenticated,
   $baseServicesLoad,
+  $categories,
+  $categoryFilters,
   $debug,
   $favoriteMenu,
   $favorites,

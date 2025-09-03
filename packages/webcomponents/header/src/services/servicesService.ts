@@ -47,6 +47,7 @@ export default class ServicesService {
           alternativeMaximizedLink,
           alternativeMaximizedLinkTarget,
         },
+        categories,
       } = portlet
       const {
         categoriePrincipale,
@@ -72,6 +73,7 @@ export default class ServicesService {
         fname,
         name: title,
         category,
+        categories,
         iconUrl: iconUrl?.value,
         link: getServiceLink(
           fname,

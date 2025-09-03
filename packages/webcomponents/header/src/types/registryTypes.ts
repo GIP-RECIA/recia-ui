@@ -43,7 +43,6 @@ export interface PortletFromRegistry {
   favorite: boolean
   state: PortletState
   parameters: { [key: string]: PortletFromRegistryParameter }
-
   categories: string[]
 }
 
