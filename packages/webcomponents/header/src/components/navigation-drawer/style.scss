@@ -144,8 +144,8 @@ button.drawer-toggle {
       }
 
       > a.active {
-        color: var(--#{$prefix}basic-black);
-        background-color: $white;
+        color: var(--#{$prefix}body);
+        background-color: var(--#{$prefix}body-bg);
         font-weight: bold;
 
         &:focus-visible {
@@ -153,7 +153,7 @@ button.drawer-toggle {
 
           > .active-indicator {
             display: unset;
-            border-left: 5px solid var(--#{$prefix}basic-black);
+            border-left: 5px solid var(--#{$prefix}body);
           }
         }
       }
@@ -166,7 +166,7 @@ button.drawer-toggle {
 
           > .active-indicator {
             display: unset;
-            border-left: 5px solid $white;
+            border-left: 5px solid var(--#{$prefix}body-bg);
           }
         }
       }
