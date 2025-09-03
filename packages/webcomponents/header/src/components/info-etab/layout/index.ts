@@ -30,6 +30,7 @@ import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { InformationItem } from '../../../types/index.ts'
 import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { getSvgIcon } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
@@ -146,15 +147,7 @@ export class ReciaInfoEtabLayout extends LitElement {
         ${this.imageTemplate('image-container')}
         <div class="content-container">
           <header>
-            ${
-              this.svgUrl
-                ? html`
-                    <svg aria-hidden="true">
-                      <use href="${this.svgUrl}"></use>
-                    </svg>
-                  `
-                : nothing
-            }
+            ${getSvgIcon(this.svgUrl)}
             <div class="heading">
               ${this.etabName ? html`<span class="etab">${this.etabName}</span>` : nothing}
               ${this.acadName ? html`<span class="acad">${this.acadName}</span>` : nothing}
