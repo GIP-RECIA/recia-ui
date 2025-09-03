@@ -160,10 +160,8 @@ body {
 
   --#{$prefix}drawer-width: #{$drawer-width};
   --#{$prefix}header-height: #{$header-height};
-}
 
-@media screen and (width >= map.get($grid-breakpoints, lg)) {
-  :root {
+  @media screen and (width >= map.get($grid-breakpoints, lg)) {
     --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
 
     @each $size, $value in $headings-font-sizes-lg {
