@@ -28,6 +28,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { matchSorter } from 'match-sorter'
 import { componentName } from '../../../../common/config.ts'
+import { defaultFilterKey } from '../../config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import { $baseServicesLoad, $categoryFilters, $services } from '../../stores/index.ts'
 import { LoadingState } from '../../types/index.ts'
@@ -37,8 +38,6 @@ import { alphaSort } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
 import '../service/index.ts'
 import 'filters'
-
-const defaultCategory: string = 'all'
 
 @localized()
 @useStores($services)
@@ -52,7 +51,7 @@ export class ReciaServicesLayout extends LitElement {
   isNavigationDrawerVisible: boolean = false
 
   @state()
-  category: string = defaultCategory
+  category: string = defaultFilterKey
 
   private activeElement: HTMLElement | undefined
 
@@ -89,12 +88,12 @@ export class ReciaServicesLayout extends LitElement {
 
   updateFilters(e: CustomEvent): void {
     const { checked } = e.detail.activeFilters[0] ?? {}
-    this.category = checked[0] ?? defaultCategory
+    this.category = checked[0] ?? defaultFilterKey
   }
 
   filteredServices(): Array<Service> {
     let results = $services.get() ?? []
-    if (this.category !== defaultCategory) {
+    if (this.category !== defaultFilterKey) {
       results = matchSorter(
         results,
         this.category,

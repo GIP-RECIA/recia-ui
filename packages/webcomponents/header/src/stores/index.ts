@@ -33,6 +33,7 @@ import type {
 } from '../types/index.ts'
 import { msg, str } from '@lit/localize'
 import { atom, batched } from 'nanostores'
+import { defaultFilterKey } from '../config.ts'
 import DnmaService from '../services/dnmaService.ts'
 import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
@@ -236,7 +237,10 @@ const $categoryFilters: ReadableAtom<Array<Section>> = batched(
         name: msg(str`Catégorie`),
         type: 'radio',
         items: [
-          { key: 'all', value: msg(str`Tous les services`) },
+          {
+            key: defaultFilterKey,
+            value: msg(str`Tous les services`),
+          },
           ...(categories?.map((category) => {
             return { key: category, value: category }
           })) ?? [],
