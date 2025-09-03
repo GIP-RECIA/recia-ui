@@ -27,6 +27,7 @@
       text-align: start;
       font-size: var(--#{$prefix}font-size-md);
       font-weight: bold;
+      color: inherit;
 
       > .folded-indicator {
         font-size: 16px;
