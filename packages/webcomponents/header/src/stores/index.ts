@@ -43,6 +43,7 @@ import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
 import {
+  FavoriteSectionId,
   LoadingState,
   UserMenuItem,
 } from '../types/index.ts'
@@ -50,8 +51,6 @@ import { getDomainLink } from '../utils/linkUtils.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 import { alphaSort } from '../utils/stringUtils.ts'
-
-const favoriteSectionId: string = 'services'
 
 interface TmpSettings {
   search: boolean
@@ -187,7 +186,7 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
   (favorites, baseServicesLoad) => {
     return [
       {
-        id: favoriteSectionId,
+        id: FavoriteSectionId.Services,
         name: msg(str`Services`),
         items: (favorites ?? []),
         emptyText: msg(str`Aucun service favori`),
@@ -470,7 +469,7 @@ async function updateFavoritesFromFavorites(
     const { id, deleted, items } = section
     const deletedIds = deleted.map(item => item.id)
 
-    if (id === favoriteSectionId) {
+    if (id === FavoriteSectionId.Services) {
       deletedIds.forEach((id) => {
         FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
       })
