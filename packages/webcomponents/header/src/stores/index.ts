@@ -181,7 +181,7 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
-const $favoriteMenu: ReadableAtom<Array<FavoriteSection> | undefined> = batched(
+const $favoriteMenu: ReadableAtom<Array<FavoriteSection>> = batched(
   [$favorites, $baseServicesLoad],
   (favorites, baseServicesLoad) => {
     return [

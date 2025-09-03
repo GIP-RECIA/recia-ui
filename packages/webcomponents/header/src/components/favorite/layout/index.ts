@@ -192,7 +192,7 @@ export class ReciaFavoriteLayout extends LitElement {
       : nothing
   }
 
-  itemTemplate(section: FavoriteSection, item: FavoriteItem): TemplateResult {
+  itemTemplate(section: FavoriteSection, item: Service): TemplateResult {
     const { id, canDelete, canMove } = section
     const actionTemplate: TemplateResult | typeof nothing = this.isManage
       ? html`

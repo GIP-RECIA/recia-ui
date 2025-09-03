@@ -180,7 +180,7 @@ export class ReciaSearch extends LitElement {
   filteredResults(): Array<SearchSection> {
     let results = $searchResults.get() ?? []
     if (this.search !== '') {
-      results = results?.map((section) => {
+      results = results.map((section) => {
         const items = matchSorter(
           section.items,
           this.search,
