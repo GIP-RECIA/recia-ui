@@ -402,7 +402,17 @@ function updateUserInfo(): void {
 
 async function updateOrganization(): Promise<void> {
   const soffit = $soffit.get()
-  const { organizationApiUrl, orgLogoUrlAttributeName } = $settings.get()
+  const {
+    organizationApiUrl,
+    orgSourceAttributeName,
+    orgLogoUrlAttributeName,
+    orgPostalCodeAttributeName,
+    orgStreetAttributeName,
+    orgCityAttributeName,
+    orgMailAttributeName,
+    orgPhoneAttributeName,
+    orgWebsiteAttributeName,
+  } = $settings.get()
   const { orgIds, currentOrgId } = $userInfo.get() ?? {}
   if (!soffit || !organizationApiUrl || !orgIds || !currentOrgId)
     return
@@ -412,7 +422,14 @@ async function updateOrganization(): Promise<void> {
     getDomainLink(organizationApiUrl),
     orgIds,
     currentOrgId,
+    orgSourceAttributeName ?? '',
     orgLogoUrlAttributeName ?? '',
+    orgPostalCodeAttributeName ?? '',
+    orgStreetAttributeName ?? '',
+    orgCityAttributeName ?? '',
+    orgMailAttributeName ?? '',
+    orgPhoneAttributeName ?? '',
+    orgWebsiteAttributeName ?? '',
   )
   $organizations.set(response)
   if ($debug.get()) {

@@ -27,7 +27,12 @@ export interface OrganizationApiResponse {
 }
 
 export type Organization = Omit<OrganizationApiResponse, 'otherAttributes'> & {
+  source?: string
   logo?: string
+  adress?: string
+  mail?: string
+  phone?: string
+  website?: string
 }
 
 export interface Organizations {

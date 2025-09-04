@@ -36,8 +36,15 @@ export interface HeaderProperties {
   switchOrgApiUrl: string
   switchOrgPortletUrl: string
   orgAttributeName: string
-  orgLogoUrlAttributeName: string
   userAllOrgsIdAttributeName: string
+  orgSourceAttributeName: string
+  orgLogoUrlAttributeName: string
+  orgPostalCodeAttributeName: string
+  orgStreetAttributeName: string
+  orgCityAttributeName: string
+  orgMailAttributeName: string
+  orgPhoneAttributeName: string
+  orgWebsiteAttributeName: string
   sessionRenewDisable: boolean
   portletInfoApiUrl: string
   serviceInfoApiUrl: string

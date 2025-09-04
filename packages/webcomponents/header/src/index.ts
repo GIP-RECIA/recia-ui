@@ -77,8 +77,15 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'switchOrgApiUrl',
   'switchOrgPortletUrl',
   'orgAttributeName',
-  'orgLogoUrlAttributeName',
   'userAllOrgsIdAttributeName',
+  'orgSourceAttributeName',
+  'orgLogoUrlAttributeName',
+  'orgPostalCodeAttributeName',
+  'orgStreetAttributeName',
+  'orgCityAttributeName',
+  'orgMailAttributeName',
+  'orgPhoneAttributeName',
+  'orgWebsiteAttributeName',
   'portletInfoApiUrl',
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
@@ -156,11 +163,32 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'user-org-id-attribute-name' })
   orgAttributeName?: string
 
+  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
+  userAllOrgsIdAttributeName?: string
+
+  @property({ type: String, attribute: 'org-source-attribute-name' })
+  orgSourceAttributeName?: string
+
   @property({ type: String, attribute: 'org-logo-url-attribute-name' })
   orgLogoUrlAttributeName?: string
 
-  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
-  userAllOrgsIdAttributeName?: string
+  @property({ type: String, attribute: 'org-postal-code-attribute-name' })
+  orgPostalCodeAttributeName?: string
+
+  @property({ type: String, attribute: 'org-street-attribute-name' })
+  orgStreetAttributeName?: string
+
+  @property({ type: String, attribute: 'org-city-attribute-name' })
+  orgCityAttributeName?: string
+
+  @property({ type: String, attribute: 'org-mail-attribute-name' })
+  orgMailAttributeName?: string
+
+  @property({ type: String, attribute: 'org-phone-attribute-name' })
+  orgPhoneAttributeName?: string
+
+  @property({ type: String, attribute: 'org-website-attribute-name' })
+  orgWebsiteAttributeName?: string
 
   @property({ type: Boolean, attribute: 'disable-session-renew' })
   sessionRenewDisable: boolean = false

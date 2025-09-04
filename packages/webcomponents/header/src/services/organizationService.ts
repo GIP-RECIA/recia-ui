@@ -21,6 +21,7 @@ import type {
   Soffit,
 } from '../types/index.ts'
 import { get } from 'lodash-es'
+import { attributeSeparator } from '../config.ts'
 import { $debug } from '../stores/index.ts'
 
 export default class OrganizationService {
@@ -29,7 +30,14 @@ export default class OrganizationService {
     orgApiUrl: string,
     orgIds: Array<string>,
     currentOrgId: string,
+    sourceAttribute: string,
     logoAttribute: string,
+    postalCodeAttribute: string,
+    streetAttribute: string,
+    cityAttribute: string,
+    mailAttribute: string,
+    phoneAttribute: string,
+    websiteAttribute: string,
   ): Promise<Organizations | undefined> {
     try {
       const debug = $debug.get()
@@ -60,13 +68,26 @@ export default class OrganizationService {
       const mappedOrgs: Array<Organization> = Object.values(orgs).map((org) => {
         const { id, name, displayName, description, code } = org
 
+        const postalCode = get(org, postalCodeAttribute) as unknown as string | undefined
+        const street = get(org, streetAttribute) as unknown as string | undefined
+        const city = get(org, cityAttribute) as unknown as string | undefined
+
+        let adress: string | undefined
+        if (postalCode && street && city)
+          adress = `${street.replaceAll(attributeSeparator, ' ').trim()}, ${postalCode} ${city}`
+
         return {
           id,
           name,
           displayName,
           description,
           code,
+          source: (get(org, sourceAttribute) as unknown as string | undefined)?.split(attributeSeparator)[0],
           logo: get(org, logoAttribute) as unknown as string | undefined,
+          adress,
+          mail: get(org, mailAttribute) as unknown as string | undefined,
+          phone: get(org, phoneAttribute) as unknown as string | undefined,
+          website: get(org, websiteAttribute) as unknown as string | undefined,
         }
       })
 

@@ -16,6 +16,9 @@
 
 const defaultFilterKey: string = 'all'
 
+const attributeSeparator: string = '$'
+
 export {
+  attributeSeparator,
   defaultFilterKey,
 }
