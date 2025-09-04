@@ -294,7 +294,7 @@ export class ReciaHeader extends LitElement {
   throttleRenewSession = throttle(SessionService.renew.bind(this), SessionService.timeout)
 
   injectStyle(): void {
-    const id = name
+    const id = componentName(name)
     let style = document.head.querySelector<HTMLStyleElement>(`style#${id}`)
     if (style)
       return
