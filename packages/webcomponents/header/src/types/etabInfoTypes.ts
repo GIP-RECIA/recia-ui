@@ -35,3 +35,11 @@ export type InformationConfig = Record<
   InformationItem,
   Omit<Partial<Information>, 'id'>
 >
+
+export interface InfoEtabData {
+  'image-url'?: string
+  'svg-url'?: string
+  'etab-name'?: string
+  'acad-name'?: string
+  'information'?: Partial<InformationConfig>
+}

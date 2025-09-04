@@ -27,6 +27,7 @@ import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import {
   $authenticated,
+  $infoEtabData,
   $settings,
   $userInfo,
   $userMenu,
@@ -42,6 +43,7 @@ import '../info-etab/dropdown-info/index.ts'
 @localized()
 @useStores($settings)
 @useStores($userInfo)
+@useStores($infoEtabData)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
@@ -65,6 +67,7 @@ export class ReciaPrincipalContainer extends LitElement {
 
   authenticatedTemplate(): TemplateResult {
     const userMenu = $userMenu.get()
+    const infoEtabData = $infoEtabData.get()
     const { search, notifications, infoEtab } = $settings.get()
 
     return html`
@@ -90,6 +93,7 @@ export class ReciaPrincipalContainer extends LitElement {
                     </button>
                     <r-info-etab-dropdown-info
                       class="dropdown-info"
+                      .data="${infoEtabData}"
                     >
                     </r-info-etab-dropdown-info>
                   `

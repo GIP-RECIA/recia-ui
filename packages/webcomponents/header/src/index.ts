@@ -37,6 +37,7 @@ import SoffitService from './services/soffitService.ts'
 import {
   $authenticated,
   $debug,
+  $infoEtabData,
   $organizations,
   $settings,
   updateServices,
@@ -100,6 +101,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 
 @localized()
 @useStores($settings)
+@useStores($infoEtabData)
 @useStores($organizations)
 @useStores($authenticated)
 export class ReciaHeader extends LitElement {
@@ -407,6 +409,7 @@ export class ReciaHeader extends LitElement {
 
   render(): TemplateResult {
     const authenticated = $authenticated.get()
+    const infoEtabData = $infoEtabData.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
     const { serviceInfoApiUrl, portletInfoApiUrl, navigationDrawerVisible } = $settings.get()
     const isNavigationDrawerVisible = navigationDrawerVisible || this.isServicesLayout || this.isFavoriteDropdown
@@ -483,6 +486,7 @@ export class ReciaHeader extends LitElement {
                 </r-change-etab-bottom-sheet>
                 <r-info-etab-bottom-sheet
                   ${ref(this.infoEtabRef)}
+                  .data="${infoEtabData}"
                 >
                 </r-info-etab-bottom-sheet>
               </div>

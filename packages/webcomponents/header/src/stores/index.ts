@@ -19,6 +19,7 @@ import type { Section } from '../../../filters/src/types/SectionType.ts'
 import type {
   FavoriteSection,
   HeaderProperties,
+  InfoEtabData,
   LayoutApiResponse,
   Link,
   Organizations,
@@ -44,6 +45,7 @@ import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
 import {
   FavoriteSectionId,
+  InformationItem,
   LoadingState,
   UserMenuItem,
 } from '../types/index.ts'
@@ -246,6 +248,58 @@ const $categoryFilters: ReadableAtom<Array<Section>> = batched(
         ],
       },
     ]
+  },
+)
+
+const $infoEtabData: ReadableAtom<Partial<InfoEtabData> | undefined> = batched(
+  [$organizations],
+  (organizations) => {
+    const { defaultOrgIconUrl, orgIconUrl } = $settings.get() ?? {}
+    if (!organizations)
+      return undefined
+
+    const {
+      current: {
+        displayName,
+        source,
+        logo,
+        adress,
+        mail,
+        phone,
+        website,
+      },
+    } = organizations
+    return {
+      'image-url': logo ? getDomainLink(logo) : undefined,
+      'svg-url': orgIconUrl ?? defaultOrgIconUrl,
+      'etab-name': displayName,
+      'acad-name': source,
+      'information': {
+        [InformationItem.Adress]: {
+          value: adress,
+        },
+        [InformationItem.Mail]: {
+          value: mail,
+          link: {
+            href: `mailto:${mail}`,
+          },
+        },
+        [InformationItem.Phone]: {
+          value: phone,
+          link: {
+            href: `tel:${phone}`,
+          },
+        },
+        [InformationItem.Website]: {
+          value: website,
+          link: website
+            ? {
+                href: website,
+              }
+            : null,
+        },
+      },
+    }
   },
 )
 
@@ -538,6 +592,7 @@ export {
   $debug,
   $favoriteMenu,
   $favorites,
+  $infoEtabData,
   $organizations,
   $searchResults,
   $services,

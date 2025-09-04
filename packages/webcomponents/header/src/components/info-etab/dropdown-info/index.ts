@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
 import { componentName } from '../../../../../common/config.ts'
@@ -45,6 +45,7 @@ export class ReciaInfoEtabDropdownInfo extends LitElement {
   render(): TemplateResult {
     return html`
       <r-dropdown-info
+        label="${msg(str`Infos de l\'établissement`)}"
         no-padding
       >
         <r-info-etab-layout
