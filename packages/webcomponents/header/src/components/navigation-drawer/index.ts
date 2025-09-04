@@ -199,6 +199,7 @@ export class ReciaNavigationDrawer extends LitElement {
     return html`
       <button
         class="drawer-toggle"
+        aria-expanded="${this.visible || this.isExpanded}"
         aria-controls="navigation-drawer"
         aria-label="${msg(str`Tiroir de navigation`)}"
         @click="${this.toggleDrawer}"
@@ -216,7 +217,7 @@ export class ReciaNavigationDrawer extends LitElement {
         <div>
           <span>${this.name}</span>
         </div>
-        <ul>
+        <ul ?inert="${!(this.visible || this.isExpanded)}">
           ${
             this.itemTemplate({
               id: 'home',
