@@ -20,6 +20,7 @@ import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
 import { componentName } from '../../../../../common/config.ts'
+import { preserveFromSpreading } from '../../../config.ts'
 import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
@@ -49,7 +50,12 @@ export class ReciaInfoEtabDropdownInfo extends LitElement {
         no-padding
       >
         <r-info-etab-layout
-          ${spreadAttributes(this.data as Record<string, unknown> | null, new Set(['data-', 'aria-', 'loading']))}
+          ${
+            spreadAttributes(
+              this.data as Record<string, unknown> | null,
+              new Set([...preserveFromSpreading, 'loading']),
+            )
+          }
         >
         </r-info-etab-layout>
       </r-dropdown-info>

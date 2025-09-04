@@ -23,6 +23,7 @@ import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../../common/config.ts'
+import { preserveFromSpreading } from '../../../config.ts'
 import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
@@ -61,7 +62,12 @@ export class ReciaInfoEtabBottomSheet extends LitElement {
         ${ref(this.bottomSheetRef)}
       >
         <r-info-etab-layout
-          ${spreadAttributes(this.data as Record<string, unknown> | null, new Set(['data-', 'aria-', 'loading']))}
+          ${
+            spreadAttributes(
+              this.data as Record<string, unknown> | null,
+              new Set([...preserveFromSpreading, 'loading']),
+            )
+          }
         >
         </r-info-etab-layout>
       </r-bottom-sheet>

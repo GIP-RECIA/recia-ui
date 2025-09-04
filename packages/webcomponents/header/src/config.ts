@@ -18,7 +18,10 @@ const defaultFilterKey: string = 'all'
 
 const attributeSeparator: string = '$'
 
+const preserveFromSpreading: string[] = ['data-', 'aria-']
+
 export {
   attributeSeparator,
   defaultFilterKey,
+  preserveFromSpreading,
 }

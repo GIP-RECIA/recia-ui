@@ -23,6 +23,7 @@ import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../../common/config.ts'
+import { preserveFromSpreading } from '../../../config.ts'
 import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import InfoService from '../../../services/infoService.ts'
@@ -113,7 +114,12 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
         ${ref(this.bottomSheetRef)}
       >
         <r-service-info-layout
-          ${spreadAttributes(this.data as Record<string, unknown>, new Set(['data-', 'aria-', 'loading']))}
+          ${
+            spreadAttributes(
+              this.data as Record<string, unknown>,
+              new Set(preserveFromSpreading),
+            )
+          }
           ?loading="${this.loading}"
           @close="${() => this.close()}"
         >

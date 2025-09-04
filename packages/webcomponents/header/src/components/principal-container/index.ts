@@ -23,6 +23,7 @@ import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
+import { preserveFromSpreading } from '../../config.ts'
 import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import {
@@ -147,7 +148,12 @@ export class ReciaPrincipalContainer extends LitElement {
               userMenu
                 ? html`
                     <r-user-menu
-                      ${spreadAttributes(userMenu)}
+                      ${
+                        spreadAttributes(
+                          userMenu,
+                          new Set(preserveFromSpreading),
+                        )
+                      }
                       @launch="${(e: CustomEvent) => {
                         this.dispatchEvent(new CustomEvent('user-menu-event', e))
                       }}"
