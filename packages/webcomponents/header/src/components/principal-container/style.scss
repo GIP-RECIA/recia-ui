@@ -151,6 +151,10 @@
   }
 
   @media (width >= map.get($grid-breakpoints, lg)) {
+    > .start {
+      flex-shrink: 0;
+    }
+
     > .middle {
       flex: 1 1 auto;
       position: unset;
