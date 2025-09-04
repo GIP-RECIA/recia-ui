@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { isEqual } from 'lodash-es'
+import { get, isEqual } from 'lodash-es'
 
 function difference<T extends object>(
   newValue: Partial<T> | undefined,
@@ -35,6 +35,18 @@ function difference<T extends object>(
   return differences
 }
 
+function getAs<T>(object: unknown, path: string): T | undefined
+function getAs<T>(object: unknown, path: string, defaultValue: T): T
+
+function getAs<T>(
+  object: unknown,
+  path: string,
+  defaultValue?: T,
+): T | undefined {
+  return get(object, path, defaultValue)
+}
+
 export {
   difference,
+  getAs,
 }

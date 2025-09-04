@@ -20,9 +20,9 @@ import type {
   Organizations,
   Soffit,
 } from '../types/index.ts'
-import { get } from 'lodash-es'
 import { attributeSeparator } from '../config.ts'
 import { $debug } from '../stores/index.ts'
+import { getAs } from '../utils/objectUtils.ts'
 
 export default class OrganizationService {
   static async get(
@@ -68,13 +68,13 @@ export default class OrganizationService {
       const mappedOrgs: Array<Organization> = Object.values(orgs).map((org) => {
         const { id, name, displayName, description, code } = org
 
-        const postalCode = get(org, postalCodeAttribute) as unknown as string | undefined
-        const street = get(org, streetAttribute) as unknown as string | undefined
-        const city = get(org, cityAttribute) as unknown as string | undefined
+        const postalCode = getAs<string>(org, postalCodeAttribute)
+        const street = getAs<string>(org, streetAttribute)?.replaceAll(attributeSeparator, ' ').trim()
+        const city = getAs<string>(org, cityAttribute)
 
         let adress: string | undefined
         if (postalCode && street && city)
-          adress = `${street.replaceAll(attributeSeparator, ' ').trim()}, ${postalCode} ${city}`
+          adress = `${street}, ${postalCode} ${city}`
 
         return {
           id,
@@ -82,12 +82,12 @@ export default class OrganizationService {
           displayName,
           description,
           code,
-          source: (get(org, sourceAttribute) as unknown as string | undefined)?.split(attributeSeparator)[0],
-          logo: get(org, logoAttribute) as unknown as string | undefined,
+          source: (getAs<string>(org, sourceAttribute))?.split(attributeSeparator)[0],
+          logo: getAs<string>(org, logoAttribute),
           adress,
-          mail: get(org, mailAttribute) as unknown as string | undefined,
-          phone: get(org, phoneAttribute) as unknown as string | undefined,
-          website: get(org, websiteAttribute) as unknown as string | undefined,
+          mail: getAs<string>(org, mailAttribute),
+          phone: getAs<string>(org, phoneAttribute),
+          website: getAs<string>(org, websiteAttribute),
         }
       })
 

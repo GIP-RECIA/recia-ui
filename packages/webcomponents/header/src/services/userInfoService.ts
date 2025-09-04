@@ -15,8 +15,8 @@
  */
 
 import type { Soffit, UserInfo } from '../types/index.ts'
-import { get } from 'lodash-es'
 import { $debug } from '../stores/index.ts'
+import { getAs } from '../utils/objectUtils.ts'
 
 export default class UserInfoService {
   static getFromSoffit(
@@ -30,9 +30,9 @@ export default class UserInfoService {
       displayName: name,
       picture,
       email,
-      currentOrgId: get(soffit, orgIdAttribute) as string,
-      orgIds: get(soffit, orgIdsAttribute, []) as Array<string>,
-      hasOtherOrgs: (get(soffit, orgIdsAttribute, []) as Array<string>).length > 1,
+      currentOrgId: getAs<string>(soffit, orgIdAttribute),
+      orgIds: getAs<Array<string>>(soffit, orgIdsAttribute, []),
+      hasOtherOrgs: getAs<Array<string>>(soffit, orgIdsAttribute, []).length > 1,
     }
 
     if (!userInfo.displayName || !userInfo.currentOrgId) {
