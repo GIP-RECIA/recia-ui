@@ -2,7 +2,7 @@
 @use '../../../../../common/assets/scss/global' as *;
 
 @media (width >= map.get($grid-breakpoints, md)) {
-  > r-info-etab-layout {
+  r-info-etab-layout {
     margin: -32px;
     border-radius: 8px 8px 0px 0px;
     overflow: hidden;
