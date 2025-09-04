@@ -20,7 +20,7 @@ import type { Link } from './linkTypes.ts'
 export enum UserMenuItem {
   Search = 'search',
   Notification = 'notification',
-  Settings = 'settings',
+  Account = 'account',
   InfoEtab = 'info-etab',
   ChangeEtab = 'change-etab',
   Starter = 'starter',

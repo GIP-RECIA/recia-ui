@@ -351,7 +351,7 @@ export class ReciaHeader extends LitElement {
         break
       case UserMenuItem.Notification:
         break
-      case UserMenuItem.Settings:
+      case UserMenuItem.Account:
         break
       case UserMenuItem.InfoEtab:
         this.infoEtabRef.value?.open()

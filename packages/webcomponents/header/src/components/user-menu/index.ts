@@ -20,11 +20,11 @@ import type { Link, UserMenuConfig } from '../../types/index.ts'
 import {
   faArrowRightFromBracket,
   faChevronDown,
-  faGear,
   faInfoCircle,
   faMagnifyingGlass,
   faPlay,
   faRightLeft,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -45,8 +45,8 @@ const defaultConfig: UserMenuConfig = {
     icon: faMagnifyingGlass,
   },
   [UserMenuItem.Notification]: {},
-  [UserMenuItem.Settings]: {
-    icon: faGear,
+  [UserMenuItem.Account]: {
+    icon: faUser,
   },
   [UserMenuItem.InfoEtab]: {
     icon: faInfoCircle,
@@ -179,7 +179,7 @@ export class ReciaUserMenu extends LitElement {
     return {
       [UserMenuItem.Search]: msg(str`Rechercher`),
       [UserMenuItem.Notification]: msg(str`Notifications`),
-      [UserMenuItem.Settings]: msg(str`Mon profil`),
+      [UserMenuItem.Account]: msg(str`Mon profil`),
       [UserMenuItem.InfoEtab]: msg(str`Infos de l\'établissement`),
       [UserMenuItem.ChangeEtab]: msg(str`Changer d\'établissement`),
       [UserMenuItem.Starter]: msg(str`Lancer le didacticiel`),

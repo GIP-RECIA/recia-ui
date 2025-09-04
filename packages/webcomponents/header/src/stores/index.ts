@@ -120,7 +120,7 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
     const config: UserMenuConfig = {
       [UserMenuItem.Search]: search ? undefined : false,
       [UserMenuItem.Notification]: notifications ? undefined : false,
-      [UserMenuItem.Settings]: userInfoPortletUrl
+      [UserMenuItem.Account]: userInfoPortletUrl
         ? {
             link: {
               href: userInfoPortletUrl,
