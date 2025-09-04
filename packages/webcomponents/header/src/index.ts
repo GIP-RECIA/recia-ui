@@ -47,6 +47,7 @@ import {
 import styles from './style.scss?inline'
 import { UserMenuItem } from './types/index.ts'
 import { setLocale } from './utils/localizationUtils.ts'
+import { calculateScrollbarWidth } from './utils/styleUtils.ts'
 import './components/navigation-drawer/index.ts'
 import './components/notification-drawer/index.ts'
 import './components/principal-container/index.ts'
@@ -266,6 +267,9 @@ export class ReciaHeader extends LitElement {
     listenEvents.every(event =>
       document.addEventListener(event, this.handleUserAction.bind(this)),
     )
+    document.addEventListener('DOMContentLoaded', calculateScrollbarWidth.bind(this), false)
+    window.addEventListener('resize', calculateScrollbarWidth.bind(this), false)
+    window.addEventListener('load', calculateScrollbarWidth.bind(this))
   }
 
   disconnectedCallback(): void {
@@ -273,6 +277,9 @@ export class ReciaHeader extends LitElement {
     listenEvents.every(event =>
       document.removeEventListener(event, this.handleUserAction.bind(this)),
     )
+    document.removeEventListener('DOMContentLoaded', calculateScrollbarWidth.bind(this), false)
+    window.removeEventListener('resize', calculateScrollbarWidth.bind(this), false)
+    window.removeEventListener('load', calculateScrollbarWidth.bind(this))
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
