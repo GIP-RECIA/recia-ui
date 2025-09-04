@@ -70,6 +70,7 @@ const $settings = atom<Partial<HeaderProperties> & Partial<TmpSettings> & Partia
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
   search: true,
+  infoEtab: true,
 })
 
 const $soffit = atom<Soffit | undefined>()
