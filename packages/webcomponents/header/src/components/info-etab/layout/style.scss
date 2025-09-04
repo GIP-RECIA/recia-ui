@@ -9,11 +9,12 @@
   overflow: hidden;
 
   > .image-container {
-    flex: 0 0 244px;
+    flex: 0 0 auto;
     display: none;
     position: relative;
-    width: 244px;
     overflow: hidden;
+    aspect-ratio: 9 / 4;
+    width: 100%;
 
     > img  {
       position: absolute;
@@ -21,12 +22,6 @@
       object-fit: cover;
       height: 100%;
       width: 100%;
-    }
-  }
-
-  &.padding {
-    > .image-container {
-      border-radius: 4px;
     }
   }
 
@@ -44,7 +39,7 @@
         flex-shrink: 0;
         height: 36px;
         width: 36px;
-        --logo-simple-color: var(--#{$prefix}primary);
+        color: var(--#{$prefix}primary);
       }
 
       > .heading {
@@ -65,7 +60,8 @@
 
     > .content {
       > .image {
-        height: 141px;
+        aspect-ratio: 9 / 4;
+        width: 100%;
         overflow: hidden;
         margin-bottom: 24px;
         border-radius: 4px;
@@ -112,20 +108,8 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    flex-direction: row;
-
     > .image-container {
-      display: unset;
-    }
-
-    &.padding {
-      > .content-container {
-        padding-right: 0;
-
-        > header > .heading {
-          text-wrap: unset;
-        }
-      }
+      display: flex;
     }
 
     > .content-container {
@@ -133,10 +117,6 @@
 
       > header {
         margin-bottom: 32px;
-
-        > .heading {
-          text-wrap: nowrap;
-        }
       }
 
       > .content {
