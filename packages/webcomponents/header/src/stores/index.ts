@@ -459,7 +459,7 @@ async function updateOrganization(): Promise<void> {
   const soffit = $soffit.get()
   const {
     organizationApiUrl,
-    orgSourceAttributeName,
+    orgTypeAttributeName,
     orgLogoUrlAttributeName,
     orgPostalCodeAttributeName,
     orgStreetAttributeName,
@@ -477,7 +477,7 @@ async function updateOrganization(): Promise<void> {
     getDomainLink(organizationApiUrl),
     orgIds,
     currentOrgId,
-    orgSourceAttributeName ?? '',
+    orgTypeAttributeName ?? '',
     orgLogoUrlAttributeName ?? '',
     orgPostalCodeAttributeName ?? '',
     orgStreetAttributeName ?? '',

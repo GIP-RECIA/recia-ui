@@ -37,7 +37,7 @@ export interface HeaderProperties {
   switchOrgPortletUrl: string
   orgAttributeName: string
   userAllOrgsIdAttributeName: string
-  orgSourceAttributeName: string
+  orgTypeAttributeName: string
   orgLogoUrlAttributeName: string
   orgPostalCodeAttributeName: string
   orgStreetAttributeName: string
