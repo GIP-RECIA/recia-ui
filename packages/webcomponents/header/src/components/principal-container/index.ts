@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { faArrowRightToBracket, faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightToBracket, faBell, faCircleInfo, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -74,6 +74,20 @@ export class ReciaPrincipalContainer extends LitElement {
             ${
               infoEtab
                 ? html`
+                    <button
+                      id="${UserMenuItem.InfoEtab}"
+                      class="btn-secondary-toggle circle"
+                      aria-label="${msg(str`Infos de l\'établissement`)}"
+                      @click="${(_: Event) => {
+                        this.dispatchEvent(new CustomEvent('user-menu-event', {
+                          detail: {
+                            type: UserMenuItem.InfoEtab,
+                          },
+                        }))
+                      }}"
+                    >
+                      ${getIcon(faCircleInfo)}
+                    </button>
                     <r-info-etab-dropdown-info
                       class="dropdown-info"
                     >

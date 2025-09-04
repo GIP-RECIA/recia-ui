@@ -125,6 +125,12 @@
     }
   }
 
+  @media (width >= map.get($custom-breakpoints, user-info)) {
+    > ul > li:has(> button#info-etab) {
+      display: none;
+    }
+  }
+
   @media (width >= map.get($grid-breakpoints, md)) {
     > .notification-dot {
       display: none;

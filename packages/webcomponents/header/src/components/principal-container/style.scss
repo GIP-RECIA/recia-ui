@@ -80,6 +80,11 @@
       overflow: hidden;
     }
 
+    > button#info-etab {
+      display: none;
+      flex-shrink: 0;
+    }
+
     > .dropdown-info {
       display: none;
     }
@@ -111,10 +116,6 @@
     align-items: center;
     column-gap: 16px;
 
-    > .search-button {
-      display: none;
-    }
-
     > .notification {
       display: none;
       position: relative;
@@ -122,8 +123,20 @@
   }
 
   @media (width >= map.get($custom-breakpoints, user-info)) {
-    > .end > .search-button {
-      display: unset;
+    > .start > button#info-etab {
+      display: inline-flex;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) and (height >= map.get($grid-breakpoints, md)) {
+    > .start {
+      > button#info-etab {
+        display: none;
+      }
+
+      > .dropdown-info {
+        display: unset;
+      }
     }
   }
 
@@ -132,7 +145,6 @@
       margin-left: $drawer-width;
     }
 
-    > .start > .dropdown-info,
     > .end > .notification {
       display: unset;
     }
