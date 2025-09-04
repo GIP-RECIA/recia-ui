@@ -23,6 +23,7 @@ export default class TemplateService {
     try {
       const response = await fetch(templateApiUrl, {
         method: 'GET',
+        cache: 'no-cache',
       })
 
       if (!response.ok)
