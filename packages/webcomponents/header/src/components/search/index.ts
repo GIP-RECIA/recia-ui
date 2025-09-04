@@ -294,8 +294,9 @@ export class ReciaSearch extends LitElement {
                 class="btn-tertiary circle"
                 aria-label="${msg(str`Effacer la recherche`)}"
                 style="${styleMap({
-                  display: this.isExpanded ? undefined : 'none',
+                  visibility: this.isExpanded ? undefined : 'hidden',
                 })}"
+                ?disabled="${!this.isExpanded}"
                 @click="${(e: Event) => this.clear(e, true)}"
               >
                 ${getIcon(faXmark)}

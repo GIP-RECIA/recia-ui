@@ -77,11 +77,13 @@
 
     > .end {
       display: inline-flex;
-      margin-right: 3px;
+      margin-right: 12px;
       opacity: .7;
 
       > button {
         display: inline-flex;
+        margin-right: -12px;
+        margin-left: -8px;
 
         > svg {
           font-size: 16px;
@@ -232,7 +234,7 @@
       }
 
       > .end {
-        margin-right: 5px;
+        margin-right: 18px;
       }
     }
   }
