@@ -49,7 +49,7 @@ import {
   LoadingState,
   UserMenuItem,
 } from '../types/index.ts'
-import { getDomainLink } from '../utils/linkUtils.ts'
+import { getDomainLink, removeProtocol } from '../utils/linkUtils.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 import { alphaSort } from '../utils/stringUtils.ts'
@@ -291,7 +291,7 @@ const $infoEtabData: ReadableAtom<Partial<InfoEtabData> | undefined> = batched(
           },
         },
         [InformationItem.Website]: {
-          value: website,
+          value: website ? removeProtocol(website) : undefined,
           link: website
             ? {
                 href: website,

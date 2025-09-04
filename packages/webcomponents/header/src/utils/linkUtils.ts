@@ -74,9 +74,14 @@ function getBusteredLink(path: string): string {
   return hash ? `${newBase}#${hash}` : newBase
 }
 
+function removeProtocol(url: string): string {
+  return url.replace(/^[a-z]+:\/\//i, '')
+}
+
 export {
   getBusteredLink,
   getDomainLink,
   getServiceLink,
   isCurrentPage,
+  removeProtocol,
 }
