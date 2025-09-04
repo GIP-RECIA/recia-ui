@@ -1,2 +1,8 @@
-// @use 'sass:map';
-// @use '../../../../../common/assets/scss/global' as *;
+@use 'sass:map';
+@use '../../../variables' as *;
+@use '../../../../../common/assets/scss/global' as *;
+
+r-info-etab-layout {
+  display: block;
+  width: min(calc(calc(100dvw - ($drawer-expended-width - 2px)) - var(--scrollbar-width, 0px)), 720px);
+}
