@@ -12,6 +12,10 @@
       gap: 8px;
     }
 
+    section > section > * {
+      min-width: 0;
+    }
+
     @media (width >= 768px) {
       section > section {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

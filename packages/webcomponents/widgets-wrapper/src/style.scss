@@ -9,6 +9,10 @@
     @include unstyled-list;
     display: grid;
     gap: 8px;
+
+    > * {
+      min-width: 0;
+    }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
