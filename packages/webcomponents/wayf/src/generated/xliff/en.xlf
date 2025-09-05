@@ -2,41 +2,33 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="sc974ce9fa0aac9c1">
-  <source>Élève ou parent
-(éducation nationale)</source>
-  <target>Student or parents
-(national education)</target>
-</trans-unit>
-<trans-unit id="s92bd5fa4e899fd8a">
-  <source>Élève ou parent
-(enseignement agricole)</source>
-  <target>Student or parent
-(agricultural education)</target>
-</trans-unit>
-<trans-unit id="se6226bfe4a365f9b">
-  <source>Personnel
-(éducation nationale)</source>
-  <target>Staff
-(national education)</target>
-</trans-unit>
-<trans-unit id="sca0972101e448a98">
-  <source>Personnel
-(enseignement agricole)</source>
-  <target>Staff
-(agricultural education)</target>
-</trans-unit>
-<trans-unit id="s884ff070dd0e70ab">
-  <source>Personnel
-(Région Centre-Val de Loire)</source>
-  <target>Staff
-(Centre-Val de Loire region)</target>
-</trans-unit>
 <trans-unit id="seb3f3765a51f4055">
   <source>Autre public
 (utilisateur local, entreprise,...)</source>
   <target>Other public
 (local user, company,...)</target>
+</trans-unit>
+<trans-unit id="sd76deeb0fc71eb13">
+  <source>Élève ou parent de l'éducation nationale
+(ÉduConnect)</source>
+  <target>Student or parent in the national education
+(ÉduConnect)</target>
+</trans-unit>
+<trans-unit id="s14b0408f1aced5cd">
+  <source>Élève ou parent de l'enseignement agricole</source>
+  <target>Student or parent in agricultural education</target>
+</trans-unit>
+<trans-unit id="s97a3d79692bf6b4a">
+  <source>Personnel de l'éducation nationale</source>
+  <target>National education staff</target>
+</trans-unit>
+<trans-unit id="sd362dba1c8aa8f6f">
+  <source>Personnel de l'enseignement agricole</source>
+  <target>Agricultural education staff</target>
+</trans-unit>
+<trans-unit id="s1bcb1fb4564acdca">
+  <source>Personnel de la Région Centre-Val de Loire</source>
+  <target>Centre-Val de Loire region staff</target>
 </trans-unit>
 </body>
 </file>

@@ -47,11 +47,11 @@ export class ReciaWayf extends LitElement {
 
   static i18n(): Record<IdpId, string> {
     return {
-      [IdpId.ParentEleveEN]: msg(str`Élève ou parent\n(éducation nationale)`),
-      [IdpId.ElevesParents]: msg(str`Élève ou parent\n(enseignement agricole)`),
-      [IdpId.Catel]: msg(str`Personnel\n(éducation nationale)`),
-      [IdpId.Agri]: msg(str`Personnel\n(enseignement agricole)`),
-      [IdpId.RCVL]: msg(str`Personnel\n(Région Centre-Val de Loire)`),
+      [IdpId.ParentEleveEN]: msg(str`Élève ou parent de l'éducation nationale\n(ÉduConnect)`),
+      [IdpId.ElevesParents]: msg(str`Élève ou parent de l'enseignement agricole`),
+      [IdpId.Catel]: msg(str`Personnel de l'éducation nationale`),
+      [IdpId.Agri]: msg(str`Personnel de l'enseignement agricole`),
+      [IdpId.RCVL]: msg(str`Personnel de la Région Centre-Val de Loire`),
       [IdpId.AutresPublics]: msg(str`Autre public\n(utilisateur local, entreprise,...)`),
     }
   }
