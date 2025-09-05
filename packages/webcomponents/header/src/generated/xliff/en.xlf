@@ -234,6 +234,10 @@ Do you agree to log out now?</target>
   <source>Accéder à l'ENT</source>
   <target>Access the ENT</target>
 </trans-unit>
+<trans-unit id="s7cdba3bb9574b540">
+  <source>Catégorie</source>
+  <target>Category</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

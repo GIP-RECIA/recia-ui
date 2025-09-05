@@ -28,6 +28,7 @@
 's63d894b1ddb06289': str`Description`,
 's6d8c02aee480af7a': str`Menu`,
 's7b37041836cc3169': str`You have`,
+'s7cdba3bb9574b540': str`Category`,
 's7d6fe3c46c5ad168': str`Search for a service`,
 's8c72b686e1d78170': str`All services`,
 's8e501f157694decd': str`Native service`,
