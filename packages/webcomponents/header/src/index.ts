@@ -267,6 +267,7 @@ export class ReciaHeader extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
+    injectStyle()
     addScrollbarWidthListeners()
     listenEvents.every(event =>
       document.addEventListener(event, this.handleUserAction.bind(this)),
@@ -279,10 +280,6 @@ export class ReciaHeader extends LitElement {
     listenEvents.every(event =>
       document.removeEventListener(event, this.handleUserAction.bind(this)),
     )
-  }
-
-  protected firstUpdated(_changedProperties: PropertyValues): void {
-    injectStyle()
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
