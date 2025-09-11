@@ -30,7 +30,6 @@ import { styleMap } from 'lit/directives/style-map.js'
 import { debounce, throttle } from 'lodash-es'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
-import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import SessionService from './services/sessionService.ts'
 import SoffitService from './services/soffitService.ts'
@@ -47,7 +46,7 @@ import {
 import styles from './style.scss?inline'
 import { UserMenuItem } from './types/index.ts'
 import { setLocale } from './utils/localizationUtils.ts'
-import { calculateScrollbarWidth } from './utils/styleUtils.ts'
+import { calculateScrollbarWidth, injectStyle } from './utils/styleUtils.ts'
 import './components/navigation-drawer/index.ts'
 import './components/notification-drawer/index.ts'
 import './components/principal-container/index.ts'
@@ -282,6 +281,10 @@ export class ReciaHeader extends LitElement {
     window.removeEventListener('load', calculateScrollbarWidth.bind(this))
   }
 
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    injectStyle()
+  }
+
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('debug')) {
       $debug.set(this.debug)
@@ -296,7 +299,6 @@ export class ReciaHeader extends LitElement {
 
       updateSettings(updatedSettings)
     }
-    this.injectStyle()
     if (_changedProperties.has('marginTop')) {
       if (this.marginTop === true)
         document.body.classList.add('auto-margin-top')
@@ -329,21 +331,6 @@ export class ReciaHeader extends LitElement {
   debounceRenewToken = debounce(SoffitService.renew.bind(this), 500)
 
   throttleRenewSession = throttle(SessionService.renew.bind(this), SessionService.timeout)
-
-  injectStyle(): void {
-    const id = componentName(name)
-    let style = document.head.querySelector<HTMLStyleElement>(`style#${id}`)
-    if (style)
-      return
-
-    style = document.createElement('style')
-    style.id = id
-    style.textContent = injectedStyle
-    document.head.appendChild(style)
-    window.addEventListener('load', () => {
-      document.body.classList.add('transition-active')
-    })
-  }
 
   toggleDrawer(e: CustomEvent): void {
     const { isExpanded } = e.detail

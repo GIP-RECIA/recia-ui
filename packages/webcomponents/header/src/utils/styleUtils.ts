@@ -14,13 +14,33 @@
  * limitations under the License.
  */
 
-function calculateScrollbarWidth() {
+import { componentName } from '../../../common/config'
+import { name } from '../../package.json'
+import injectedStyle from '../assets/css/injectedStyle.css?inline'
+
+function calculateScrollbarWidth(): void {
   document.documentElement.style.setProperty(
     '--scrollbar-width',
     `${window.innerWidth - document.documentElement.clientWidth}px`,
   )
 }
 
+function injectStyle(): void {
+  const id = componentName(name)
+  let style = document.head.querySelector<HTMLStyleElement>(`style#${id}`)
+  if (style)
+    return
+
+  style = document.createElement('style')
+  style.id = id
+  style.textContent = injectedStyle
+  document.head.appendChild(style)
+  window.addEventListener('load', () => {
+    document.body.classList.add('transition-active')
+  })
+}
+
 export {
   calculateScrollbarWidth,
+  injectStyle,
 }
