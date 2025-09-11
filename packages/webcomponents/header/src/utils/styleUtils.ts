@@ -18,11 +18,23 @@ import { componentName } from '../../../common/config'
 import { name } from '../../package.json'
 import injectedStyle from '../assets/css/injectedStyle.css?inline'
 
-function calculateScrollbarWidth(): void {
+function calculateScrollbarWidth(_: Event): void {
   document.documentElement.style.setProperty(
     '--scrollbar-width',
     `${window.innerWidth - document.documentElement.clientWidth}px`,
   )
+}
+
+function addScrollbarWidthListeners(): void {
+  document.addEventListener('DOMContentLoaded', calculateScrollbarWidth, false)
+  window.addEventListener('resize', calculateScrollbarWidth, false)
+  window.addEventListener('load', calculateScrollbarWidth)
+}
+
+function removeScrollbarWidthListeners(): void {
+  document.removeEventListener('DOMContentLoaded', calculateScrollbarWidth, false)
+  window.removeEventListener('resize', calculateScrollbarWidth, false)
+  window.removeEventListener('load', calculateScrollbarWidth)
 }
 
 function injectStyle(): void {
@@ -41,6 +53,7 @@ function injectStyle(): void {
 }
 
 export {
-  calculateScrollbarWidth,
+  addScrollbarWidthListeners,
   injectStyle,
+  removeScrollbarWidthListeners,
 }
