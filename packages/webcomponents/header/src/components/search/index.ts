@@ -81,7 +81,7 @@ export class ReciaSearch extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('isOpen') && _changedProperties.get('isOpen') === false) {
+    if (_changedProperties.has('isOpen') && this.isOpen === true) {
       this.inputRef.value?.focus()
     }
     return true
