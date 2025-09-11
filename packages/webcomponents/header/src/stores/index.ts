@@ -352,7 +352,7 @@ $authenticated.listen((value) => {
     if (navigationDrawerVisible === true)
       document.body.classList.add('navigation-drawer-visible')
     if (dnmaUrl)
-      DnmaService.init(dnmaUrl, fname ?? 'Unknown')
+      DnmaService.init(dnmaUrl, fname ?? '')
   }
   else {
     document.body.classList.remove('navigation-drawer-visible')
