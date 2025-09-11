@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import type { TemplateResult } from 'lit'
+import type { PropertyValues, TemplateResult } from 'lit'
+import type { Ref } from 'lit/directives/ref.js'
 import type { Service } from '../../types/index.ts'
 import { faArrowLeft, faWarning } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
@@ -24,6 +25,7 @@ import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { matchSorter } from 'match-sorter'
@@ -53,6 +55,8 @@ export class ReciaServicesLayout extends LitElement {
   @state()
   category: string = defaultFilterKey
 
+  private layoutRef: Ref<HTMLElement> = createRef()
+
   private activeElement: HTMLElement | undefined
 
   constructor() {
@@ -71,6 +75,15 @@ export class ReciaServicesLayout extends LitElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.removeEventListener('keyup', this.handleKeyPress.bind(this))
+  }
+
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('show') && this.show === true) {
+      setTimeout(() => {
+        this.layoutRef.value?.focus()
+      }, 150)
+    }
+    return true
   }
 
   closeMenu(_: Event, resetFocus: boolean = true): void {
@@ -195,7 +208,9 @@ export class ReciaServicesLayout extends LitElement {
   render(): TemplateResult {
     return html`
       <div
+        ${ref(this.layoutRef)}
         id="services-layout"
+        tabindex="-1"
         class="${classMap({
           'navigation-drawer-visible': this.isNavigationDrawerVisible,
         })}services-layout"
