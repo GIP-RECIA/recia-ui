@@ -28,8 +28,12 @@ function getServiceLink(
     href: alternativeMaximizedLink
       ? getDomainLink(alternativeMaximizedLink)
       : getDomainLink(`${contextApiUrl}/p/${fname}`),
-    target: alternativeMaximizedLinkTarget ?? '_self',
-    rel: alternativeMaximizedLink ? 'noopener noreferrer' : undefined,
+    target: alternativeMaximizedLink
+      ? (alternativeMaximizedLinkTarget ?? '_blank')
+      : '_self',
+    rel: alternativeMaximizedLink
+      ? 'noopener noreferrer'
+      : undefined,
   }
 }
 
