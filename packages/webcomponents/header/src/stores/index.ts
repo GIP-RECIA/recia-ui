@@ -276,8 +276,11 @@ const $categories: ReadableAtom<Array<string> | undefined> = batched(
 )
 
 const $categoryFilters: ReadableAtom<Array<Section>> = batched(
-  [$categories],
-  (categories) => {
+  [$categories, $selectedCategory],
+  (categories, selectedCategory) => {
+    if (!categories?.includes(selectedCategory))
+      $selectedCategory.set(defaultFilterKey)
+
     return [
       {
         id: 'category',
@@ -287,9 +290,14 @@ const $categoryFilters: ReadableAtom<Array<Section>> = batched(
           {
             key: defaultFilterKey,
             value: msg(str`Tous les services`),
+            checked: defaultFilterKey === selectedCategory,
           },
           ...(categories?.map((category) => {
-            return { key: category, value: category }
+            return {
+              key: category,
+              value: category,
+              checked: category === selectedCategory,
+            }
           })) ?? [],
         ],
       },
