@@ -238,6 +238,10 @@ Do you agree to log out now?</target>
   <source>Catégorie</source>
   <target>Category</target>
 </trans-unit>
+<trans-unit id="s24da9cfa1f59b900">
+  <source>Aucun service</source>
+  <target>No service</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

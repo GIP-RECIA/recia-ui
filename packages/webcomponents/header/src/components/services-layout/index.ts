@@ -161,31 +161,39 @@ export class ReciaServicesLayout extends LitElement {
               `
             : nothing
         }
-        <ul>
-          ${
-            repeat(
-              services,
-              service => service.id,
-              service => html`
-                  <li>
-                    <r-service
-                      id="${service.id}"
-                      .fname="${service.fname}"
-                      name="${service.name}"
-                      category="${service.category ?? nothing}"
-                      icon-url="${service.iconUrl ?? nothing}"
-                      .link="${service.link}"
-                      ?new="${service.new}"
-                      ?favorite="${service.favorite}"
-                      ?more="${service.more}"
-                      @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
-                    >
-                    </r-service>
-                  </li>
-                `,
-            )
-          }
-        </ul>
+        ${
+          services.length > 0
+            ? html`
+                <ul>
+                  ${
+                    repeat(
+                      services,
+                      service => service.id,
+                      service => html`
+                          <li>
+                            <r-service
+                              id="${service.id}"
+                              .fname="${service.fname}"
+                              name="${service.name}"
+                              category="${service.category ?? nothing}"
+                              icon-url="${service.iconUrl ?? nothing}"
+                              .link="${service.link}"
+                              ?new="${service.new}"
+                              ?favorite="${service.favorite}"
+                              ?more="${service.more}"
+                              @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
+                            >
+                            </r-service>
+                          </li>
+                        `,
+                    )
+                  }
+                </ul>
+              `
+            : html`
+                <div class="empty">${msg(str`Aucun service`)}</div>
+              `
+        }
       `
   }
 

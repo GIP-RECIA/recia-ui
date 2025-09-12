@@ -109,6 +109,13 @@
         }
       }
     }
+
+    > .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+    }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
