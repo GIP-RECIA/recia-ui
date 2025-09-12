@@ -28,10 +28,13 @@ import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { debounce } from 'lodash-es'
-import { matchSorter } from 'match-sorter'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $searchResults, updateServices } from '../../stores/index.ts'
+import {
+  $searchQueryString,
+  $searchResults,
+  updateServices,
+} from '../../stores/index.ts'
 import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -39,6 +42,7 @@ import { highlight } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
+@useStores($searchQueryString)
 @useStores($searchResults)
 export class ReciaSearch extends LitElement {
   @property({ type: Boolean, attribute: 'open' })
@@ -46,9 +50,6 @@ export class ReciaSearch extends LitElement {
 
   @state()
   isExpanded: boolean = false
-
-  @state()
-  search: string = ''
 
   private inputRef: Ref<HTMLInputElement> = createRef()
 
@@ -138,13 +139,13 @@ export class ReciaSearch extends LitElement {
   handleSearch = debounce((_: Event) => {
     const value = this.inputRef.value?.value.trim() ?? ''
     if (value.length < 3) {
-      this.search = ''
+      $searchQueryString.set('')
       this.hideResults()
       return
     }
 
     updateServices()
-    this.search = value
+    $searchQueryString.set(value)
     this.showResults()
   }, 500)
 
@@ -175,26 +176,7 @@ export class ReciaSearch extends LitElement {
     this.hideResults()
     if (resetFocus)
       input.focus()
-  }
-
-  filteredResults(): Array<SearchSection> {
-    let results = $searchResults.get() ?? []
-    if (this.search !== '') {
-      results = results.map((section) => {
-        const items = matchSorter(
-          section.items,
-          this.search,
-          {
-            keys: ['name', 'description', 'keywords'],
-            threshold: matchSorter.rankings.ACRONYM,
-          },
-        )
-
-        return { ...section, items }
-      })
-    }
-
-    return results
+    $searchQueryString.set('')
   }
 
   handleLinkClick(e: Event, fname: string | undefined): void {
@@ -236,6 +218,8 @@ export class ReciaSearch extends LitElement {
   }
 
   itemTemplate(item: Service): TemplateResult {
+    const searchQueryString = $searchQueryString.get()
+
     return html`
         <li>
           <a
@@ -256,12 +240,12 @@ export class ReciaSearch extends LitElement {
                     : nothing
                 }
                 <span class="result-title">
-                  ${highlight(item.name, this.search)}
+                  ${highlight(item.name, searchQueryString)}
                 </span>
               </header>
               ${
                 item.description
-                  ? html`<span>${highlight(item.description, this.search)}</span>`
+                  ? html`<span>${highlight(item.description, searchQueryString)}</span>`
                   : nothing
               }
             </div>
@@ -271,7 +255,7 @@ export class ReciaSearch extends LitElement {
   }
 
   render(): TemplateResult {
-    const results = this.filteredResults()
+    const results = $searchResults.get() ?? []
 
     return html`
       <div class="search-container">

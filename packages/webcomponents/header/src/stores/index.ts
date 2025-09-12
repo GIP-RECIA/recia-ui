@@ -90,6 +90,8 @@ const $layout = atom<LayoutApiResponse | undefined>()
 
 const $favoritesIds = atom<Array<number> | undefined>()
 
+const $searchQueryString = atom<string>('')
+
 const $selectedCategory = atom<string>(defaultFilterKey)
 
 const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
@@ -187,6 +189,28 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
+const $searchResultServices: ReadableAtom<Array<Service> | undefined> = batched(
+  [$services, $searchQueryString],
+  (services, search) => {
+    if (!services)
+      return
+
+    let results = services
+    if (search !== '') {
+      results = matchSorter(
+        results,
+        search,
+        {
+          keys: ['name', 'description', 'keywords'],
+          threshold: matchSorter.rankings.ACRONYM,
+        },
+      )
+    }
+
+    return results
+  },
+)
+
 const $filteredServices: ReadableAtom<Array<Service> | undefined> = batched(
   [$services, $selectedCategory],
   (services, category) => {
@@ -228,7 +252,7 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection>> = batched(
 )
 
 const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
-  [$baseServices, $baseServicesLoad],
+  [$searchResultServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
     return [
       {
@@ -243,7 +267,7 @@ const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
 )
 
 const $categories: ReadableAtom<Array<string> | undefined> = batched(
-  [$baseServices],
+  [$searchResultServices],
   (services) => {
     return [
       ...new Set(services?.flatMap(({ categories }) => categories)),
@@ -617,7 +641,9 @@ export {
   $filteredServices,
   $infoEtabData,
   $organizations,
+  $searchQueryString,
   $searchResults,
+  $searchResultServices,
   $selectedCategory,
   $services,
   $settings,
