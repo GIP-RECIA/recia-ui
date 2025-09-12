@@ -106,10 +106,6 @@
   <source>Effacer la recherche</source>
   <target>Clear search</target>
 </trans-unit>
-<trans-unit id="sfd12a1f85c45fce6">
-  <source>Aucun résultats</source>
-  <target>No results</target>
-</trans-unit>
 <trans-unit id="sf52ce9bda73f60a6">
   <source>Une erreur est survenue lors de la récupération des services.
 Tentez de rafraichir la page.</source>
@@ -241,6 +237,10 @@ Do you agree to log out now?</target>
 <trans-unit id="s24da9cfa1f59b900">
   <source>Aucun service</source>
   <target>No service</target>
+</trans-unit>
+<trans-unit id="s598ab55550d660f1">
+  <source>Aucun résultat</source>
+  <target>No results</target>
 </trans-unit>
 </body>
 </file>
