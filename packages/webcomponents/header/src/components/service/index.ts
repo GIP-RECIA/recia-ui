@@ -19,14 +19,11 @@ import type { Link } from '../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import {
-  $settings,
-  $soffit,
   addFavorite,
   removeFavorite,
 } from '../../stores/index.ts'
@@ -39,8 +36,6 @@ import styles from './style.scss?inline'
 import 'filters'
 
 @localized()
-@useStores($settings)
-@useStores($soffit)
 export class ReciaService extends LitElement {
   @property({ type: Number, attribute: 'id' })
   channelId?: number

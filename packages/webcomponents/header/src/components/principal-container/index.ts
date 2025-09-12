@@ -42,9 +42,9 @@ import '../user-menu/index.ts'
 import '../info-etab/dropdown-info/index.ts'
 
 @localized()
+@useStores($infoEtabData)
 @useStores($settings)
 @useStores($userInfo)
-@useStores($infoEtabData)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
@@ -67,9 +67,9 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   authenticatedTemplate(): TemplateResult {
-    const userMenu = $userMenu.get()
     const infoEtabData = $infoEtabData.get()
     const { search, notifications, infoEtab } = $settings.get()
+    const userMenu = $userMenu.get()
 
     return html`
         <div class="principal-container">

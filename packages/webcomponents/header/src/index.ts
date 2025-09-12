@@ -104,10 +104,10 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 ]
 
 @localized()
-@useStores($settings)
+@useStores($authenticated)
 @useStores($infoEtabData)
 @useStores($organizations)
-@useStores($authenticated)
+@useStores($settings)
 export class ReciaHeader extends LitElement {
   @property({ type: Array })
   messages?: Array<any>
