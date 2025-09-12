@@ -16,44 +16,43 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { Service } from '../../types/index.ts'
 import { faArrowLeft, faWarning } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
-import { matchSorter } from 'match-sorter'
 import { componentName } from '../../../../common/config.ts'
 import { defaultFilterKey } from '../../config.ts'
 import langHelper from '../../helpers/langHelper.ts'
-import { $baseServicesLoad, $categoryFilters, $services } from '../../stores/index.ts'
+import {
+  $baseServicesLoad,
+  $categoryFilters,
+  $filteredServices,
+  $selectedCategory,
+} from '../../stores/index.ts'
 import { LoadingState } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
-import { alphaSort } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
 import '../service/index.ts'
 import 'filters'
 
 @localized()
-@useStores($services)
-@useStores($categoryFilters)
 @useStores($baseServicesLoad)
+@useStores($categoryFilters)
+@useStores($filteredServices)
 export class ReciaServicesLayout extends LitElement {
   @property({ type: Boolean })
   show: boolean = false
 
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
-
-  @state()
-  category: string = defaultFilterKey
 
   private layoutRef: Ref<HTMLElement> = createRef()
 
@@ -101,23 +100,7 @@ export class ReciaServicesLayout extends LitElement {
 
   updateFilters(e: CustomEvent): void {
     const { checked } = e.detail.activeFilters[0] ?? {}
-    this.category = checked[0] ?? defaultFilterKey
-  }
-
-  filteredServices(): Array<Service> {
-    let results = $services.get() ?? []
-    if (this.category !== defaultFilterKey) {
-      results = matchSorter(
-        results,
-        this.category,
-        {
-          keys: ['categories'],
-          threshold: matchSorter.rankings.EQUAL,
-        },
-      )
-    }
-
-    return results
+    $selectedCategory.set(checked[0] ?? defaultFilterKey)
   }
 
   contentTemplate(): TemplateResult | typeof nothing {
@@ -164,6 +147,7 @@ export class ReciaServicesLayout extends LitElement {
 
   tilesTemplate(): TemplateResult {
     const filters = $categoryFilters.get()
+    const services = $filteredServices.get() ?? []
 
     return html`
         ${
@@ -180,7 +164,7 @@ export class ReciaServicesLayout extends LitElement {
         <ul>
           ${
             repeat(
-              this.filteredServices(),
+              services,
               service => service.id,
               service => html`
                   <li>

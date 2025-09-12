@@ -33,6 +33,7 @@ import type {
   UserMenuConfig,
 } from '../types/index.ts'
 import { msg, str } from '@lit/localize'
+import { matchSorter } from 'match-sorter'
 import { atom, batched } from 'nanostores'
 import { defaultFilterKey } from '../config.ts'
 import DnmaService from '../services/dnmaService.ts'
@@ -88,6 +89,8 @@ const $services = atom<Array<Service> | undefined>()
 const $layout = atom<LayoutApiResponse | undefined>()
 
 const $favoritesIds = atom<Array<number> | undefined>()
+
+const $selectedCategory = atom<string>(defaultFilterKey)
 
 const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
   return newValue?.authenticated ?? false
@@ -181,6 +184,28 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
       console.info('Favorites', favorites)
     }
     return favorites
+  },
+)
+
+const $filteredServices: ReadableAtom<Array<Service> | undefined> = batched(
+  [$services, $selectedCategory],
+  (services, category) => {
+    if (!services)
+      return
+
+    let results = services
+    if (category !== defaultFilterKey) {
+      results = matchSorter(
+        results,
+        category,
+        {
+          keys: ['categories'],
+          threshold: matchSorter.rankings.EQUAL,
+        },
+      )
+    }
+
+    return results
   },
 )
 
@@ -589,9 +614,11 @@ export {
   $debug,
   $favoriteMenu,
   $favorites,
+  $filteredServices,
   $infoEtabData,
   $organizations,
   $searchResults,
+  $selectedCategory,
   $services,
   $settings,
   $soffit,
