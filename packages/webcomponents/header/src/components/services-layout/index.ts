@@ -180,7 +180,7 @@ export class ReciaServicesLayout extends LitElement {
         <ul>
           ${
             repeat(
-              this.filteredServices().sort((a, b) => alphaSort(a.name, b.name, 'asc')),
+              this.filteredServices(),
               service => service.id,
               service => html`
                   <li>

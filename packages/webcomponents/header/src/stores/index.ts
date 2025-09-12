@@ -205,15 +205,11 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection>> = batched(
 const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   [$baseServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
-    const servicesItems: Array<Service> = services
-      ?.sort((a, b) => alphaSort(a.name, b.name, 'asc'))
-      ?? []
-
     return [
       {
         id: 'services',
         name: msg(str`Services`),
-        items: servicesItems,
+        items: services ?? [],
         loading: baseServicesLoad === LoadingState.UNLOADED
           || baseServicesLoad === LoadingState.LOADING,
       },
@@ -518,7 +514,7 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
   $baseServicesLoad.set(services ? LoadingState.LOADED : LoadingState.ERROR)
 
   $favoritesIds.set(favoriteIds)
-  $baseServices.set(services)
+  $baseServices.set(services?.sort((a, b) => alphaSort(a.name, b.name, 'asc')))
   $layout.set(layout)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
