@@ -116,9 +116,13 @@
     align-items: center;
     column-gap: 16px;
 
+    > .search,
+    > .notification {
+      position: relative;
+    }
+
     > .notification {
       display: none;
-      position: relative;
     }
   }
 
@@ -169,7 +173,7 @@
       }
     }
 
-    > .end > .search-button {
+    > .end > .search {
       display: none;
     }
   }

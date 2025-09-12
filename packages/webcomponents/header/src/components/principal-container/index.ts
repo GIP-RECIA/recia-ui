@@ -29,6 +29,7 @@ import langHelper from '../../helpers/langHelper.ts'
 import {
   $authenticated,
   $infoEtabData,
+  $searchQueryString,
   $settings,
   $userInfo,
   $userMenu,
@@ -43,6 +44,7 @@ import '../info-etab/dropdown-info/index.ts'
 
 @localized()
 @useStores($infoEtabData)
+@useStores($searchQueryString)
 @useStores($settings)
 @useStores($userInfo)
 export class ReciaPrincipalContainer extends LitElement {
@@ -68,6 +70,7 @@ export class ReciaPrincipalContainer extends LitElement {
 
   authenticatedTemplate(): TemplateResult {
     const infoEtabData = $infoEtabData.get()
+    const searchQueryString = $searchQueryString.get()
     const { search, notifications, infoEtab } = $settings.get()
     const userMenu = $userMenu.get()
 
@@ -126,21 +129,32 @@ export class ReciaPrincipalContainer extends LitElement {
             ${
               search
                 ? html`
-                    <button
+                    <div
+                      class="search"
                       style="${styleMap({
                         display: this.searchOpen ? 'none' : undefined,
                       })}"
-                      class="btn-secondary circle search-button"
-                      aria-label="${msg(str`Rechercher dans l'ENT`)}"
-                      @click="${(_: Event) => {
-                        this.dispatchEvent(new CustomEvent(
-                          'user-menu-event',
-                          { detail: { type: UserMenuItem.Search } },
-                        ))
-                      }}"
                     >
-                      ${getIcon(faMagnifyingGlass)}
-                    </button>
+                      <div
+                        class="notification-dot top right"
+                        style="${styleMap({
+                          display: searchQueryString === '' ? 'none' : undefined,
+                        })}"
+                      >
+                      </div>
+                      <button
+                        class="btn-secondary circle search-button"
+                        aria-label="${msg(str`Rechercher dans l'ENT`)}"
+                        @click="${(_: Event) => {
+                          this.dispatchEvent(new CustomEvent(
+                            'user-menu-event',
+                            { detail: { type: UserMenuItem.Search } },
+                          ))
+                        }}"
+                      >
+                        ${getIcon(faMagnifyingGlass)}
+                      </button>
+                    </div>
                   `
                 : nothing
             }
