@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import { getDomainLink } from '../utils/linkUtils'
-
 export default class DnmaService {
   static init(
     dnmaUrl: string,
@@ -29,28 +27,31 @@ export default class DnmaService {
 
     const dnmaScript = document.createElement('script')
     dnmaScript.id = 'dnma'
-    dnmaScript.src = getDomainLink(dnmaUrl)
-    document.body.appendChild(dnmaScript)
-
-    const dnmaSetupScript = document.createElement('script')
-    dnmaSetupScript.type = 'text/javascript'
-    dnmaSetupScript.text = `
-      try {
-        if (ENT4DNMA) {
-          ENT4DNMA.markPage('${fname}');
-          ENT4DNMA.markOnEvent('click-portlet-card');
-          ENT4DNMA.markOnEvent('favorite-event');
-          ENT4DNMA.markOnEvent('service-event');
-          ENT4DNMA.markOnEvent('service-info-event');
-          ENT4DNMA.markOnEvent('search-event');
+    dnmaScript.src = dnmaUrl
+    dnmaScript.addEventListener('load', () => {
+      const dnmaSetupScript = document.createElement('script')
+      dnmaSetupScript.id = `${dnmaScript.id}-setup`
+      dnmaSetupScript.type = 'text/javascript'
+      dnmaSetupScript.text = `
+        try {
+          if (ENT4DNMA) {
+            ENT4DNMA.markPage('${fname}');
+            ENT4DNMA.markOnEvent('click-portlet-card');
+            ENT4DNMA.markOnEvent('favorite-event');
+            ENT4DNMA.markOnEvent('service-event');
+            ENT4DNMA.markOnEvent('service-info-event');
+            ENT4DNMA.markOnEvent('search-event');
+          }
+        } catch (error) {
+          console.info('DNMA is not available');
         }
-      } catch (error) {
-        console.info('DNMA is not available');
-      }
-    `
-
-    setTimeout(() => {
+      `
       document.body.appendChild(dnmaSetupScript)
-    }, 1000)
+    })
+    dnmaScript.addEventListener('error', () => {
+      // eslint-disable-next-line no-console
+      console.info(`Unable to load DNMA`)
+    })
+    document.body.appendChild(dnmaScript)
   }
 }
