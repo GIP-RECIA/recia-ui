@@ -48,6 +48,9 @@ export class ReciaSearch extends LitElement {
   @property({ type: Boolean, attribute: 'open' })
   isOpen: boolean = false
 
+  @property({ type: Boolean, attribute: 'no-results' })
+  noResults: boolean = false
+
   @state()
   isExpanded: boolean = false
 
@@ -84,6 +87,9 @@ export class ReciaSearch extends LitElement {
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('isOpen') && this.isOpen === true) {
       this.inputRef.value?.focus()
+    }
+    if (_changedProperties.has('noResults') && this.noResults === false) {
+      this.close()
     }
     return true
   }
@@ -125,7 +131,8 @@ export class ReciaSearch extends LitElement {
     if (!input)
       return
 
-    this.clear()
+    if (!this.noResults)
+      this.clear()
     this.emitEvent({ open: false })
     // TODO : Need to reset focus
   }
@@ -153,8 +160,10 @@ export class ReciaSearch extends LitElement {
     if (this.isExpanded)
       return
 
-    document.documentElement.classList.add('search-results')
     this.isExpanded = true
+    if (this.noResults)
+      return
+    document.documentElement.classList.add('search-results')
     this.emitEvent({ mask: true })
   }
 
@@ -162,8 +171,8 @@ export class ReciaSearch extends LitElement {
     if (!this.isExpanded)
       return
 
-    document.documentElement.classList.remove('search-results')
     this.isExpanded = false
+    document.documentElement.classList.remove('search-results')
     this.emitEvent({ mask: false })
   }
 
@@ -290,7 +299,7 @@ export class ReciaSearch extends LitElement {
           <div
             class="search-results"
             style="${styleMap({
-              display: this.isExpanded ? undefined : 'none',
+              display: this.isExpanded && !this.noResults ? undefined : 'none',
             })}"
           >
             ${

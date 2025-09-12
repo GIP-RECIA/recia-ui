@@ -440,6 +440,7 @@ export class ReciaHeader extends LitElement {
             name="${orgName}"
             ?search-open="${this.isSearchOpen}"
             ?searching="${this.isSearching}"
+            ?services-open="${this.isServicesLayout}"
             @user-menu-event="${this.handleUserMenuEvent}"
             @search-event="${this.handleSearchEvent}"
           >

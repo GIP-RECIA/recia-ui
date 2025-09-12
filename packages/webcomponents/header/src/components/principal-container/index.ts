@@ -60,6 +60,9 @@ export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'search-open' })
   searchOpen: boolean = false
 
+  @property({ type: Boolean, attribute: 'services-open' })
+  servicesOpen: boolean = false
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -116,6 +119,7 @@ export class ReciaPrincipalContainer extends LitElement {
                 >
                   <r-search
                     ?open="${this.searchOpen}"
+                    ?no-results="${this.servicesOpen}"
                     @event="${(e: CustomEvent) => {
                       this.dispatchEvent(new CustomEvent('search-event', e))
                     }}"

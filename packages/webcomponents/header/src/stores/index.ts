@@ -212,7 +212,7 @@ const $searchResultServices: ReadableAtom<Array<Service> | undefined> = batched(
 )
 
 const $filteredServices: ReadableAtom<Array<Service> | undefined> = batched(
-  [$services, $selectedCategory],
+  [$searchResultServices, $selectedCategory],
   (services, category) => {
     if (!services)
       return
