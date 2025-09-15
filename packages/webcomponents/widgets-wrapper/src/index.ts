@@ -37,7 +37,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
@@ -50,10 +50,7 @@ import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
 import 'widget'
 
-const tagName = componentName(name)
-
 @localized()
-@customElement(tagName)
 export class ReciaWidgetsWrapper extends LitElement {
   constructor() {
     super()
@@ -633,6 +630,12 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(name)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaWidgetsWrapper)
 }
 
 declare global {
