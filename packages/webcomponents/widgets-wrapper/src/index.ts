@@ -491,38 +491,40 @@ export class ReciaWidgetsWrapper extends LitElement {
       .filter(x => this.keyToNameMap.has(x))
 
     return html`
-      <button
-        id="add-widget-button"
-        ?disabled="${
-          this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
-          || nonUsedKeys.length === 0
-        }"
-        class="btn-secondary small"
-        @click="${this.clickOnAjouter}"
-      >
-        ${this.t(`buttons.Ajouter`, 'Ajouter')} ${getIcon(faAdd)}
-      </button>
-      <div
-        id="dropdown-content"
-        class="dropdown-content"
-        style="${styleMap({
-          display: !this.dropdownOpen || nonUsedKeys.length === 0 ? 'none' : undefined,
-        })}"
-      >
-       ${
+      <div class="dropdown">
+        <button
+          id="add-widget-button"
+          ?disabled="${
+            this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
+            || nonUsedKeys.length === 0
+          }"
+          class="btn-secondary small"
+          @click="${this.clickOnAjouter}"
+        >
+          ${this.t(`buttons.Ajouter`, 'Ajouter')} ${getIcon(faAdd)}
+        </button>
+        <div
+          id="dropdown-content"
+          class="dropdown-content"
+          style="${styleMap({
+            display: !this.dropdownOpen || nonUsedKeys.length === 0 ? 'none' : undefined,
+          })}"
+        >
+        ${
           repeat(
             nonUsedKeys,
             widgetKey => widgetKey,
             widgetKey => html`
-              <button
-                ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}"
-                @click="${() => { this.handleAddWidget(widgetKey) }}"
-              >
-                ${this.keyToNameMap.get(widgetKey)}
-              </button>
-            `,
+                <button
+                  ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}"
+                  @click="${() => { this.handleAddWidget(widgetKey) }}"
+                >
+                  ${this.keyToNameMap.get(widgetKey)}
+                </button>
+              `,
           )
         }
+        </div>
       </div>
     `
   }
