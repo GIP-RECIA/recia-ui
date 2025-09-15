@@ -43,6 +43,51 @@ import 'widget'
 
 @localized()
 export class ReciaWidgetsWrapper extends LitElement {
+  @property({ type: String, attribute: 'adapter-source-uri' })
+  adapterSourceUri = ''
+
+  @property({ type: String, attribute: 'localization-uri' })
+  localizationUri = ''
+
+  @property({ type: Number, attribute: 'widget-max-count' })
+  widgetMaxCount = 3
+
+  @property({ type: String, attribute: 'soffit-uri' })
+  soffitUri = ''
+
+  @property({ type: String, attribute: 'adapter-config-uri' })
+  adapterConfigUri = ''
+
+  @property({ type: String, attribute: 'get-prefs-uri' })
+  getPrefsUri = ''
+
+  @property({ type: String, attribute: 'put-prefs-uri' })
+  putPrefsUri = ''
+
+  allWidgets: Array<WidgetSelectorData> = []
+  keyToNameMap: Map<string, string> = new Map()
+
+  @state()
+  isEditingWidgetsPrefs: boolean = false
+
+  @state()
+  widgetDataMap: Map<string, WidgetData> = new Map()
+
+  @state()
+  widgetToDisplayKeyArray: Array<string> = []
+
+  // used for cancel changes
+  widgetToDisplayKeyArrayBackup: Array<string> = []
+
+  keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
+
+  dropdownOpen: boolean = false
+
+  itemByWidgetNestedMap: Map<string, Map<string, Item>> = new Map()
+
+  // store the bounded event used for listenning for click, and removing it when the dropdown is closed
+  boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -104,59 +149,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
     this.requestUpdate()
   }
-
-  // #region PROPERTIES
-
-  @property({ type: String, attribute: 'adapter-source-uri' })
-  adapterSourceUri = ''
-
-  @property({ type: String, attribute: 'localization-uri' })
-  localizationUri = ''
-
-  @property({ type: Number, attribute: 'widget-max-count' })
-  widgetMaxCount = 3
-
-  @property({ type: String, attribute: 'soffit-uri' })
-  soffitUri = ''
-
-  @property({ type: String, attribute: 'adapter-config-uri' })
-  adapterConfigUri = ''
-
-  @property({ type: String, attribute: 'get-prefs-uri' })
-  getPrefsUri = ''
-
-  @property({ type: String, attribute: 'put-prefs-uri' })
-  putPrefsUri = ''
-
-  // #endregion PROPERTIES
-
-  // #region VARIABLES
-
-  allWidgets: Array<WidgetSelectorData> = []
-  keyToNameMap: Map<string, string> = new Map()
-
-  @state()
-  isEditingWidgetsPrefs: boolean = false
-
-  @state()
-  widgetDataMap: Map<string, WidgetData> = new Map()
-
-  @state()
-  widgetToDisplayKeyArray: Array<string> = []
-
-  // used for cancel changes
-  widgetToDisplayKeyArrayBackup: Array<string> = []
-
-  keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
-
-  dropdownOpen: boolean = false
-
-  itemByWidgetNestedMap: Map<string, Map<string, Item>> = new Map()
-
-  // store the bounded event used for listenning for click, and removing it when the dropdown is closed
-  boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
-
-  // #endregion VARIABLES
 
   async fetchKeyToNameMap(profils: any) {
     const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames(profils)
