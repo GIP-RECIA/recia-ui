@@ -18,17 +18,13 @@ import type { TemplateResult } from 'lit'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { setLocale } from './utils/localizationUtils.ts'
 
-const tagName = componentName(name)
-
 @localized()
-@customElement(tagName)
 export class ReciaProjectSkeleton extends LitElement {
   constructor() {
     super()
@@ -48,6 +44,12 @@ export class ReciaProjectSkeleton extends LitElement {
   }
 
   static styles = css`${unsafeCSS(styles)}`
+}
+
+const tagName = componentName(name)
+
+if (!customElements.get(tagName)) {
+  customElements.define(tagName, ReciaProjectSkeleton)
 }
 
 declare global {
