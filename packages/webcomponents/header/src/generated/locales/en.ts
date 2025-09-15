@@ -66,11 +66,5 @@ Try refreshing the page.`,
 'sfaa072ad346ce9d6': str`Launch service`,
 'sfb9d2d8c7ef581a9': str`External service`,
 'sfde5e3a793d980c1': str`First steps with the service`,
-'sf52f40951786e21e': str`Administration &amp; Support`,
-'sf450bb4fc19737e8': str`Communication &amp; Collaboration`,
-'sd46d46064b6bfd0b': str`Documents &amp; Ressources numériques`,
-'s93417adf0c36d59b': str`Apprentissage &amp; Suivi`,
-'s6a11501a42b1fd83': str`Services Citoyens &amp; Territoriaux`,
-'sa70929987fb9a6d4': str`Services RH &amp; Gestion`,
     };
   

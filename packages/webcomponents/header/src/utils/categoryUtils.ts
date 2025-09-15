@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-import { msg, str } from '@lit/localize'
 import { Category } from '../types/index.ts'
 
 const i18nCategories: Record<Category, string> = {
-  [Category.administrationSupport]: msg(str`Administration & Support`),
-  [Category.communicationCollaboration]: msg(str`Communication & Collaboration`),
-  [Category.documentsRessources]: msg(str`Documents & Ressources numériques`),
-  [Category.apprentissageSuivi]: msg(str`Apprentissage & Suivi`),
-  [Category.citoyensTerritoriaux]: msg(str`Services Citoyens & Territoriaux`),
-  [Category.rhGestion]: msg(str`Services RH & Gestion`),
+  [Category.administrationSupport]: 'Administration & Support',
+  [Category.communicationCollaboration]: 'Communication & Collaboration',
+  [Category.documentsRessources]: 'Documents & Ressources numériques',
+  [Category.apprentissageSuivi]: 'Apprentissage & Suivi',
+  [Category.citoyensTerritoriaux]: 'Services Citoyens & Territoriaux',
+  [Category.rhGestion]: 'Services RH & Gestion',
 }
 
 function getCategoryTranslation(category: Category): string {

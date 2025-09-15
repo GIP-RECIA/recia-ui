@@ -152,24 +152,6 @@ Do you agree to log out now?</target>
   <source>Photo de l'établissement</source>
   <target>Photo of the institution</target>
 </trans-unit>
-<trans-unit id="sf52f40951786e21e">
-  <source>Administration &amp; Support</source>
-</trans-unit>
-<trans-unit id="sf450bb4fc19737e8">
-  <source>Communication &amp; Collaboration</source>
-</trans-unit>
-<trans-unit id="sd46d46064b6bfd0b">
-  <source>Documents &amp; Ressources numériques</source>
-</trans-unit>
-<trans-unit id="s93417adf0c36d59b">
-  <source>Apprentissage &amp; Suivi</source>
-</trans-unit>
-<trans-unit id="s6a11501a42b1fd83">
-  <source>Services Citoyens &amp; Territoriaux</source>
-</trans-unit>
-<trans-unit id="sa70929987fb9a6d4">
-  <source>Services RH &amp; Gestion</source>
-</trans-unit>
 <trans-unit id="s8e501f157694decd">
   <source>Sercice natif</source>
   <target>Native service</target>
