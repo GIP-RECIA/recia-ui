@@ -240,13 +240,8 @@ export class ReciaWidget extends LitElement {
       : this.emptyTemplate()
   }
 
-  render(): TemplateResult | typeof nothing {
-    if (!this.uid || !this.name)
-      return nothing
-
-    const slug = slugify(this.name)
-
-    const actionTemplate: TemplateResult | typeof nothing = this.manage
+  actionTemplate(): TemplateResult | typeof nothing {
+    return this.manage
       ? html`
           <div class="actions">
             ${
@@ -295,6 +290,13 @@ export class ReciaWidget extends LitElement {
           </div>
         `
       : nothing
+  }
+
+  render(): TemplateResult | typeof nothing {
+    if (!this.uid || !this.name)
+      return nothing
+
+    const slug = slugify(this.name)
 
     return html`
       <div class="widget">
@@ -305,7 +307,7 @@ export class ReciaWidget extends LitElement {
               `
             : nothing
         }
-        ${actionTemplate}
+        ${this.actionTemplate()}
         <header ?inert="${this.manage || this.loading}">
           <button
             aria-expanded="${this.isExpanded}"
