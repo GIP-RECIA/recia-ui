@@ -2,10 +2,27 @@
 @use '../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
-.widget {
-  margin-bottom: 8px;
+.widget-layout {
+  > header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
 
-  & > &-tiles {
+    > h2 {
+      margin-bottom: 0;
+    }
+
+    > .actions {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      justify-content: end;
+      gap: 6px;
+    }
+  }
+
+  > ul {
     @include unstyled-list;
     display: grid;
     gap: 8px;
@@ -16,26 +33,19 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    & > &-tiles {
+    > ul {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       grid-auto-rows: 1fr;
       gap: 16px;
     }
   }
 
-  @media (width >= map.get($grid-breakpoints, md)) {
-    & > &-tiles {
+  @media (width >= map.get($grid-breakpoints, lg)) {
+    > ul {
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     }
   }
 }
-
-
-#test-id{
-  color: red;
-}
-
-
 
  /* Dropdown Button */
 .dropbtn {
@@ -86,18 +96,13 @@
   }
 }
 
-.to-right{
-  margin-left: auto;
-  margin-bottom: 10px;
-  width: fit-content;
-}
-
 ul{
   margin-top: 5px;
 }
 
 .no-mobile{
   display: none;
+  flex-basis: 100%;
 }
 
 .mobile-only{

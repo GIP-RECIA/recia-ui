@@ -23,7 +23,7 @@ import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoTyp
 import type { WidgetData } from './types/WidgetDataType.ts'
 import {
   faAdd,
-  faCog,
+  faGear,
   faSave,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -545,13 +545,13 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   render(): TemplateResult {
     return html`
-      <div class="widget">
+      <div class="widget-layout">
         <header>
           <h2 class="sr-only">Accès rapides</h2>
-          ${
-            this.isEditingWidgetsPrefs === false
-              ? html`
-                  <div class="to-right">
+          <div class="actions">
+            ${
+              this.isEditingWidgetsPrefs === false
+                ? html`
                     <button
                       class="btn-secondary small"
                       ?disabled="${
@@ -561,12 +561,10 @@ export class ReciaWidgetsWrapper extends LitElement {
                       @click="${this.clickOnGerer}"
                     >
                       ${this.t(`buttons.Gerer`, 'Gerer')}
-                      ${getIcon(faCog)}
+                      ${getIcon(faGear)}
                     </button>
-                  </div>
-                `
-              : html`
-                  <div class="to-right">
+                  `
+                : html`
                     ${this.dropdownRender()}
                     <button
                       class="btn-secondary small"
@@ -584,9 +582,13 @@ export class ReciaWidgetsWrapper extends LitElement {
                       ${this.t(`buttons.Sauvegarder`, 'Enregistrer')}
                       ${getIcon(faSave)}
                     </button>
-                  </div>
-                  <p class="no-mobile">${this.widgetCountRender()}</p>
-                `
+                  `
+            }
+          </div>
+          ${
+            this.isEditingWidgetsPrefs === true
+              ? html`<p class="no-mobile">${this.widgetCountRender()}</p>`
+              : nothing
           }
         </header>
         <ul class="widget-tiles">
