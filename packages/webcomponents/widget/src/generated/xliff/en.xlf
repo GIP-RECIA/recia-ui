@@ -30,6 +30,14 @@
   <source>Réordonner vers la droite</source>
   <target>Rorder to the right</target>
 </trans-unit>
+<trans-unit id="se67ae86332ee7cb8">
+  <source>Erreur</source>
+  <target>Error</target>
+</trans-unit>
+<trans-unit id="s7f210bf2a45185b6">
+  <source>Impossible de charger le contenu</source>
+  <target>Unable to load content</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

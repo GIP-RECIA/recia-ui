@@ -195,7 +195,8 @@ $vivible-items: 3;
       }
     }
 
-    > .empty {
+    > .empty,
+    > .error {
       display: flex;
       flex-direction: column;
       align-items: center;

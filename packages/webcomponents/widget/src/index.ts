@@ -86,10 +86,10 @@ export class ReciaWidget extends LitElement {
   loading: boolean = false
 
   @property({ type: Boolean, attribute: 'is-error' })
-  isError?: boolean = false
+  isError: boolean = false
 
   @property({ type: String, attribute: 'error-message' })
-  errorMessage?: boolean = false
+  errorMessage?: string
 
   @state()
   isExpanded: boolean = false
@@ -213,12 +213,11 @@ export class ReciaWidget extends LitElement {
 
   errorTemplate(): TemplateResult {
     return html`
-      <div class="empty">
-        ${
-          getIconWithStyle(faTriangleExclamation, undefined, { icon: true })
-        }
-        <span>
-          ${this.errorMessage}
+      <div class="error">
+        ${getIconWithStyle(faTriangleExclamation, undefined, { icon: true })}
+        <span class="text">
+          ${msg(str`Erreur`)}
+          <span class="large">${this.errorMessage ?? msg(str`Impossible de charger le contenu`)}</span>
         </span>
       </div>
     `
