@@ -44,25 +44,25 @@ import 'widget'
 @localized()
 export class ReciaWidgetsWrapper extends LitElement {
   @property({ type: String, attribute: 'adapter-source-uri' })
-  adapterSourceUri = ''
+  adapterSourceUri: string = ''
 
   @property({ type: String, attribute: 'localization-uri' })
-  localizationUri = ''
+  localizationUri: string = ''
 
   @property({ type: Number, attribute: 'widget-max-count' })
-  widgetMaxCount = 3
+  widgetMaxCount: number = 3
 
   @property({ type: String, attribute: 'soffit-uri' })
-  soffitUri = ''
+  soffitUri: string = ''
 
   @property({ type: String, attribute: 'adapter-config-uri' })
-  adapterConfigUri = ''
+  adapterConfigUri: string = ''
 
   @property({ type: String, attribute: 'get-prefs-uri' })
-  getPrefsUri = ''
+  getPrefsUri: string = ''
 
   @property({ type: String, attribute: 'put-prefs-uri' })
-  putPrefsUri = ''
+  putPrefsUri: string = ''
 
   allWidgets: Array<WidgetSelectorData> = []
   keyToNameMap: Map<string, string> = new Map()
