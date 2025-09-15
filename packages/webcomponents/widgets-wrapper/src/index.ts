@@ -31,7 +31,9 @@ import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
+import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -451,7 +453,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         role="listitem"
         uid="${widgetData.uid}"
         name="${widgetData.name}"
-        subtitle="${widgetData.subtitle}"
+        subtitle="${widgetData.subtitle ?? nothing}"
         .link="${widgetData.link}"
         empty-text="${widgetData.emptyText}"
         ?empty-discover=${widgetData.emptyDiscover ?? false}
@@ -466,7 +468,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         @move="${this.handleMove}"
         @delete="${this.handleRemoveWidget}"
         ?is-error="${widgetData.isError ?? false}"
-        error-message="${widgetData.errorMessage}"
+        error-message="${widgetData.errorMessage ?? nothing}"
       >
       </r-widget>
     `
@@ -477,16 +479,8 @@ export class ReciaWidgetsWrapper extends LitElement {
       <r-widget
         role="listitem"
         uid="${index}"
-        name="."
-        subtitle="."
-        .link=""
-        empty-text=""
-        ?empty-discover="false"
-        .items=""
-        ?deletable="false"
-        ?no-previous="${index === 0}"
-        ?no-next="${index === 2}"
-        ?loading=${true}
+        name=" "
+        loading
       >
       </r-widget>
     `
@@ -511,7 +505,9 @@ export class ReciaWidgetsWrapper extends LitElement {
       <div
         id="dropdown-content"
         class="dropdown-content"
-        style="${!this.dropdownOpen || nonUsedKeys.length === 0 ? 'display:none' : nothing}"
+        style="${styleMap({
+          display: !this.dropdownOpen || nonUsedKeys.length === 0 ? 'none' : undefined,
+        })}"
       >
        ${
           repeat(
@@ -603,7 +599,7 @@ export class ReciaWidgetsWrapper extends LitElement {
                     ${this.getWidgetRender(widgetKey, index)}
                   `,
                 )
-              : map([0, 1, 2], i => this.getPlaceholderWidgetRender(i))
+              : map(range(this.widgetMaxCount), index => this.getPlaceholderWidgetRender(index))
           }
         </ul>
         <p class="mobile-only">
