@@ -65,7 +65,7 @@ export class ReciaWidget extends LitElement {
   emptyIcon?: string
 
   @property({ type: String, attribute: 'empty-text' })
-  emptyText: string = msg(str`Aucun élément`)
+  emptyText?: string
 
   @property({ type: Boolean, attribute: 'empty-discover' })
   emptyDiscover: boolean = false
@@ -191,7 +191,7 @@ export class ReciaWidget extends LitElement {
         }
         <span class="text">
           ${msg(str`Vous n'avez`)}
-          <span class="large">${this.emptyText}</span>
+          <span class="large">${this.emptyText ?? msg(str`Aucun élément`)}</span>
         </span>
         ${
           this.emptyDiscover && this.link
