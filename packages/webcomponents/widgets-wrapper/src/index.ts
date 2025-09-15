@@ -34,7 +34,6 @@ import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
-
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
 import { getIcon } from './utils/fontawesomeUtils.ts'
@@ -84,12 +83,16 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     const prefs = await this.getUserFavoriteWidgets()
     const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
-    const preferedKeys: Array<string> = hasPrefs ? [...prefs!.prefs.filter(x => this.keyENTPersonProfilsInfo.allowedKeys.includes(x))] : [...this.keyENTPersonProfilsInfo.defaultKeys]
+    const preferedKeys: Array<string> = hasPrefs
+      ? [...prefs!.prefs.filter(x => this.keyENTPersonProfilsInfo.allowedKeys.includes(x))]
+      : [...this.keyENTPersonProfilsInfo.defaultKeys]
 
     const missingRequiredKeys: Array<string> = this.except(this.keyENTPersonProfilsInfo.requiredKeys, preferedKeys)
 
     if (missingRequiredKeys.length > 0) {
-      this.widgetToDisplayKeyArray = this.keyENTPersonProfilsInfo.requiredKeys.concat(this.except(preferedKeys, this.keyENTPersonProfilsInfo.requiredKeys)).toSpliced(this.getMaxWidgetsCount(), Infinity)
+      this.widgetToDisplayKeyArray = this.keyENTPersonProfilsInfo.requiredKeys
+        .concat(this.except(preferedKeys, this.keyENTPersonProfilsInfo.requiredKeys))
+        .toSpliced(this.getMaxWidgetsCount(), Infinity)
     }
     else {
       this.widgetToDisplayKeyArray = preferedKeys
@@ -169,7 +172,8 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   /**
    *
-   * @returns The number of widgets that must be displayed at the same time. Is **not related** to the widgetToDisplayKeyArray length.
+   * @returns The number of widgets that must be displayed at the same time.
+   * Is **not related** to the widgetToDisplayKeyArray length.
    */
   getWidgetsToShowCount(): number {
     return Math.min(this.getMaxWidgetsCount(), this.keyENTPersonProfilsInfo.allowedKeys.length)
@@ -180,9 +184,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     const url = `${this.localizationUri}?v=${version}`
     try {
       const response = await fetch(url)
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(`Response status: ${response.status}`)
-      }
       const json = await response.json()
       langHelper.setReference(json)
     }
@@ -211,9 +214,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     const url = this.getPrefsUri
     try {
       const response = await fetch(url)
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(`Response status: ${response.status}`)
-      }
 
       const json = await response.json()
 
@@ -235,9 +237,8 @@ export class ReciaWidgetsWrapper extends LitElement {
         method: 'PUT',
         body: JSON.stringify({ displayedKeys: keys }),
       })
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(`Response status: ${response.status}`)
-      }
     }
     catch (error: any) {
       console.error(error.message)
@@ -254,12 +255,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   handleClickOnHeadingLink(e: CustomEvent) {
-    const eventDNMA = new CustomEvent(
-      'click-portlet-card',
-      {
-        detail: { fname: e.detail.uid },
-      },
-    )
+    const eventDNMA = new CustomEvent('click-portlet-card', {
+      detail: { fname: e.detail.uid },
+    })
     document.dispatchEvent(eventDNMA)
   }
 
@@ -267,29 +265,22 @@ export class ReciaWidgetsWrapper extends LitElement {
     const id: string = e.detail.id
     const uid: string = e.detail.uid
     const item: Item | undefined = this.itemByWidgetNestedMap.get(uid)?.get(id)
-    if (item === undefined) {
+    if (item === undefined)
       return
-    }
 
     if (item.eventDNMA) {
       document.dispatchEvent(
-        new CustomEvent(
-          item.eventDNMA,
-          {
-            detail: JSON.parse(item.eventDNMApayload),
-          },
-        ),
+        new CustomEvent(item.eventDNMA, {
+          detail: JSON.parse(item.eventDNMApayload),
+        }),
       )
     }
 
     if (item.event) {
       document.dispatchEvent(
-        new CustomEvent(
-          item.event,
-          {
-            detail: JSON.parse(item.eventpayload),
-          },
-        ),
+        new CustomEvent(item.event, {
+          detail: JSON.parse(item.eventpayload),
+        }),
       )
     }
   }
@@ -297,40 +288,48 @@ export class ReciaWidgetsWrapper extends LitElement {
   handleMove(e: CustomEvent) {
     const newPosition: string = e.detail.newPosition
     const uid: string = e.detail.uid
-    if (!this.widgetToDisplayKeyArray.includes(uid)) {
+    if (!this.widgetToDisplayKeyArray.includes(uid))
       return
-    }
-    if (newPosition === '+1') {
+    if (newPosition === '+1')
       this.moveWidgetForward(uid)
-    }
-    else if (newPosition === '-1') {
+    else if (newPosition === '-1')
       this.moveWidgetBack(uid)
-    }
   }
 
   moveWidgetBack(uid: string): void {
     const index = this.widgetToDisplayKeyArray.indexOf(uid)
-    if (index === 0) {
+    if (index === 0)
       return
-    }
     const indexOther = index - 1;
-    [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]] = [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]]
+    [
+      this.widgetToDisplayKeyArray[indexOther],
+      this.widgetToDisplayKeyArray[index],
+    ] = [
+      this.widgetToDisplayKeyArray[index],
+      this.widgetToDisplayKeyArray[indexOther],
+    ]
     this.requestUpdate()
   }
 
   moveWidgetForward(uid: string): void {
     const index = this.widgetToDisplayKeyArray.indexOf(uid)
-    if (index === this.widgetToDisplayKeyArray.length - 1) {
+    if (index === this.widgetToDisplayKeyArray.length - 1)
       return
-    }
     const indexOther = index + 1;
-    [this.widgetToDisplayKeyArray[index], this.widgetToDisplayKeyArray[indexOther]] = [this.widgetToDisplayKeyArray[indexOther], this.widgetToDisplayKeyArray[index]]
+    [
+      this.widgetToDisplayKeyArray[index],
+      this.widgetToDisplayKeyArray[indexOther],
+    ] = [
+      this.widgetToDisplayKeyArray[indexOther],
+      this.widgetToDisplayKeyArray[index],
+    ]
     this.requestUpdate()
   }
 
   clickOnGerer() {
     this.isEditingWidgetsPrefs = true
-    // create a copy of array, because original will be modified to reflect the change instantly, and this one will be used if cancel is pressed
+    // create a copy of array, because original will be modified to reflect
+    // the change instantly, and this one will be used if cancel is pressed
     this.widgetToDisplayKeyArrayBackup = [...this.widgetToDisplayKeyArray]
   }
 
@@ -346,9 +345,8 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   async handleAddWidget(key: string) {
-    if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()) {
+    if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount())
       return
-    }
 
     // avoid duplicated display, should not happen but check is just in case
     if (this.widgetToDisplayKeyArray.includes(key)) {
@@ -387,9 +385,8 @@ export class ReciaWidgetsWrapper extends LitElement {
       const replaceMap: Map<string, string> = new Map()
       // eslint-disable-next-line no-cond-assign
       while ((execArray = regexForPartToLocalize.exec(itemsAsString)) !== null) {
-        if (!replaceMap.has(execArray[0])) {
+        if (!replaceMap.has(execArray[0]))
           replaceMap.set(execArray[0], this.t(`items.${execArray[1]}`, execArray[1]))
-        }
       }
       replaceMap.forEach((value: string, key: string) => {
         itemsAsString = itemsAsString.replaceAll(key, value)
@@ -411,7 +408,9 @@ export class ReciaWidgetsWrapper extends LitElement {
           }
         : undefined
 
-      const itemDTOs: Array<ItemDTO> = widgetDataDTO.items ? JSON.parse(widgetDataDTO.items) : undefined
+      const itemDTOs: Array<ItemDTO> = widgetDataDTO.items
+        ? JSON.parse(widgetDataDTO.items)
+        : undefined
 
       if (itemDTOs !== undefined) {
         const items: Array<Item> = itemDTOs.map(x => (
@@ -480,9 +479,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     const clickIsOnButton: boolean = e.composedPath().includes(addWidgetButton as EventTarget)
     if (!clickIsInside) {
       // do not interfere with button behavior
-      if (!clickIsOnButton) {
+      if (!clickIsOnButton)
         this.dropdownOpen = false
-      }
       window.removeEventListener('click', this.boundClickEventOnPage!)
       this.requestUpdate()
     }
@@ -496,10 +494,12 @@ export class ReciaWidgetsWrapper extends LitElement {
     return this.widgetToDisplayKeyArray.length === this.getWidgetsToShowCount()
   }
 
-  getWidgetRender(key: string, index: number): TemplateResult {
-    if (this.widgetDataMap.has(key)) {
-      const widgetData: WidgetData = this.widgetDataMap.get(key)!
-      return html`
+  getWidgetRender(key: string, index: number): TemplateResult | typeof nothing {
+    if (!this.widgetDataMap.has(key))
+      return nothing
+
+    const widgetData: WidgetData = this.widgetDataMap.get(key)!
+    return html`
       <r-widget
         role="listitem"
         uid="${widgetData.uid}"
@@ -520,10 +520,9 @@ export class ReciaWidgetsWrapper extends LitElement {
         @delete="${this.handleRemoveWidget}"
         ?is-error="${widgetData.isError ?? false}"
         error-message="${widgetData.errorMessage}"
-        ></r-widget>
+      >
+      </r-widget>
     `
-    }
-    return html``
   }
 
   getPlaceholderWidgetRender(index: number): TemplateResult {
@@ -541,22 +540,46 @@ export class ReciaWidgetsWrapper extends LitElement {
         ?no-previous="${index === 0}"
         ?no-next="${index === 2}"
         ?loading=${true}
-        ></r-widget>
+      >
+      </r-widget>
     `
   }
 
   dropdownRender(): TemplateResult {
-    const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray).filter(x => this.keyToNameMap.has(x))
+    const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray)
+      .filter(x => this.keyToNameMap.has(x))
+
     return html`
-      <button id="add-widget-button" ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount() || nonUsedKeys.length === 0}" class="btn-secondary small" @click="${this.clickOnAjouter}">${this.t(`buttons.Ajouter`, 'Ajouter')} ${getIcon(faAdd)}</button>
-      <div id="dropdown-content" class="dropdown-content" style="${!this.dropdownOpen || nonUsedKeys.length === 0 ? 'display:none' : nothing}">
-       ${repeat(
-          nonUsedKeys,
-          (widgetKey: string) => widgetKey,
-          (widgetKey: string) => html`
-            <button ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}" @click="${() => { this.handleAddWidget(widgetKey) }}">${this.keyToNameMap.get(widgetKey)}</button>
+      <button
+        id="add-widget-button"
+        ?disabled="${
+          this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
+          || nonUsedKeys.length === 0
+        }"
+        class="btn-secondary small"
+        @click="${this.clickOnAjouter}"
+      >
+        ${this.t(`buttons.Ajouter`, 'Ajouter')} ${getIcon(faAdd)}
+      </button>
+      <div
+        id="dropdown-content"
+        class="dropdown-content"
+        style="${!this.dropdownOpen || nonUsedKeys.length === 0 ? 'display:none' : nothing}"
+      >
+       ${
+          repeat(
+            nonUsedKeys,
+            widgetKey => widgetKey,
+            widgetKey => html`
+              <button
+                ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}"
+                @click="${() => { this.handleAddWidget(widgetKey) }}"
+              >
+                ${this.keyToNameMap.get(widgetKey)}
+              </button>
             `,
-        )}
+          )
+        }
       </div>
     `
   }
@@ -564,9 +587,17 @@ export class ReciaWidgetsWrapper extends LitElement {
   widgetCountRender(): TemplateResult {
     // TODO : localize
     if (this.canSave()) {
-      return html`<p>Widgets actifs : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}</p>`
+      return html`
+        <p>
+          Widgets actifs : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}
+        </p>
+      `
     }
-    return html`<p>Nombre de widgets actifs insuffisant : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}</p>`
+    return html`
+      <p>
+        Nombre de widgets actifs insuffisant : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}
+      </p>
+    `
   }
 
   render(): TemplateResult {
@@ -577,36 +608,59 @@ export class ReciaWidgetsWrapper extends LitElement {
           ${
             this.isEditingWidgetsPrefs === false
               ? html`
-               <div class="to-right">
-                  <button class="btn-secondary small" ?disabled="${Array.from(this.widgetDataMap.values()).some(x => x.loading) || this.widgetDataMap.size === 0}"  @click="${this.clickOnGerer}">${this.t(`buttons.Gerer`, 'Gerer')} ${getIcon(faCog)}</button>
-                </div>
-              `
+                  <div class="to-right">
+                    <button
+                      class="btn-secondary small"
+                      ?disabled="${
+                        Array.from(this.widgetDataMap.values()).some(x => x.loading)
+                        || this.widgetDataMap.size === 0
+                      }"
+                      @click="${this.clickOnGerer}"
+                    >
+                      ${this.t(`buttons.Gerer`, 'Gerer')}
+                      ${getIcon(faCog)}
+                    </button>
+                  </div>
+                `
               : html`
-              <div class="to-right">
-               ${this.dropdownRender()}
-              <button class="btn-secondary small" @click="${this.clickOnAnnuler}">${this.t(`buttons.Annuler`, 'Annuler')} ${getIcon(faXmark)}</button>
-              <button class="btn-secondary small" ?disabled="${!this.canSave()}" title="Save" @click="${this.clickOnSauvegarder}">${this.t(`buttons.Sauvegarder`, 'Enregistrer')} ${getIcon(faSave)}</button>
-            </div>
-            <p class="no-mobile">    ${this.widgetCountRender()}</p>
-
-            `
+                  <div class="to-right">
+                    ${this.dropdownRender()}
+                    <button
+                      class="btn-secondary small"
+                      @click="${this.clickOnAnnuler}"
+                    >
+                      ${this.t(`buttons.Annuler`, 'Annuler')}
+                      ${getIcon(faXmark)}
+                    </button>
+                    <button
+                      class="btn-secondary small"
+                      ?disabled="${!this.canSave()}"
+                      title="Save"
+                      @click="${this.clickOnSauvegarder}"
+                    >
+                      ${this.t(`buttons.Sauvegarder`, 'Enregistrer')}
+                      ${getIcon(faSave)}
+                    </button>
+                  </div>
+                  <p class="no-mobile">${this.widgetCountRender()}</p>
+                `
           }
-
         </header>
         <ul class="widget-tiles">
           ${
-  this.widgetToDisplayKeyArray.length > 0
-    ? repeat(
-        this.widgetToDisplayKeyArray,
-        (widgetKey: string) => widgetKey,
-        (widgetKey: string, index: number) => html`
-                 ${this.getWidgetRender(widgetKey, index)}
-              `,
-      )
-    : map([0, 1, 2], i => this.getPlaceholderWidgetRender(i))}
+            this.widgetToDisplayKeyArray.length > 0
+              ? repeat(
+                  this.widgetToDisplayKeyArray,
+                  widgetKey => widgetKey,
+                  (widgetKey, index) => html`
+                    ${this.getWidgetRender(widgetKey, index)}
+                  `,
+                )
+              : map([0, 1, 2], i => this.getPlaceholderWidgetRender(i))
+          }
         </ul>
         <p class="mobile-only">
-        ${this.isEditingWidgetsPrefs ? this.widgetCountRender() : nothing}
+          ${this.isEditingWidgetsPrefs ? this.widgetCountRender() : nothing}
         </p>
       </div>
     `
