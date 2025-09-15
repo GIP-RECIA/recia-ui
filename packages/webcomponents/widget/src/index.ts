@@ -293,8 +293,10 @@ export class ReciaWidget extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
-    if (!this.uid || !this.name)
+    if (!this.uid || !this.name) {
+      console.error('uid and name are required')
       return nothing
+    }
 
     const slug = slugify(this.name)
 
