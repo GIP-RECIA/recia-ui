@@ -179,6 +179,27 @@ export class ReciaWidget extends LitElement {
     `
   }
 
+  contentTemplate(): TemplateResult {
+    if (this.isError)
+      return this.errorTemplate()
+
+    if (this.items && this.items.length > 0) {
+      return html`
+        <ul>
+          ${
+            repeat(
+              this.items,
+              item => item,
+              item => this.itemTemplate(item),
+            )
+          }
+        </ul>
+      `
+    }
+
+    return this.emptyTemplate()
+  }
+
   emptyTemplate(): TemplateResult {
     return html`
       <div class="empty">
@@ -221,22 +242,6 @@ export class ReciaWidget extends LitElement {
         </span>
       </div>
     `
-  }
-
-  notErrorTemplate(): TemplateResult {
-    return this.items && this.items.length > 0
-      ? html`
-          <ul>
-            ${
-              repeat(
-                this.items,
-                item => item,
-                item => this.itemTemplate(item),
-              )
-            }
-          </ul>
-    `
-      : this.emptyTemplate()
   }
 
   actionTemplate(): TemplateResult | typeof nothing {
@@ -356,9 +361,7 @@ export class ReciaWidget extends LitElement {
           })}"
           ?inert="${this.manage || this.loading}"
         >
-          ${
-            this.isError ? this.errorTemplate() : this.notErrorTemplate()
-          }
+          ${this.contentTemplate()}
         </div>
       </div>
     `
