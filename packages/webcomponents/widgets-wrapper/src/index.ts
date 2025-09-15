@@ -35,7 +35,9 @@ import { repeat } from 'lit/directives/repeat.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
+import FavoriteService from './services/favoriteService.ts'
 import styles from './style.scss?inline'
+import { except, removeItem } from './utils/arrayUtils.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
@@ -126,17 +128,17 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     this.keyENTPersonProfilsInfo = await window.WidgetAdapter.getKeysENTPersonProfils(soffit.decoded.ENTPersonProfils)
 
-    const prefs = await this.getUserFavoriteWidgets()
+    const prefs = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
     const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
     const preferedKeys: Array<string> = hasPrefs
       ? [...prefs!.prefs.filter(x => this.keyENTPersonProfilsInfo.allowedKeys.includes(x))]
       : [...this.keyENTPersonProfilsInfo.defaultKeys]
 
-    const missingRequiredKeys: Array<string> = this.except(this.keyENTPersonProfilsInfo.requiredKeys, preferedKeys)
+    const missingRequiredKeys: Array<string> = except(this.keyENTPersonProfilsInfo.requiredKeys, preferedKeys)
 
     if (missingRequiredKeys.length > 0) {
       this.widgetToDisplayKeyArray = this.keyENTPersonProfilsInfo.requiredKeys
-        .concat(this.except(preferedKeys, this.keyENTPersonProfilsInfo.requiredKeys))
+        .concat(except(preferedKeys, this.keyENTPersonProfilsInfo.requiredKeys))
         .toSpliced(this.getMaxWidgetsCount(), Infinity)
     }
     else {
@@ -186,55 +188,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  intersect<T>(a: Array<T>, b: Array<T>): Array<T> {
-    return a.filter(value => b.includes(value))
-  }
-
-  union<T>(a: Array<T>, b: Array<T>): Array<T> {
-    return [...new Set([...a, ...b])]
-  }
-
-  except<T>(a: Array<T>, b: Array<T>): Array<T> {
-    return a.filter(x => !b.includes(x))
-  }
-
-  removeItem<T>(a: Array<T>, b: T): Array<T> {
-    return a.filter(x => x !== b)
-  }
-
-  async getUserFavoriteWidgets(): Promise<{ prefs: Array<string>, noStoredPrefs: boolean } | undefined> {
-    const url = this.getPrefsUri
-    try {
-      const response = await fetch(url)
-      if (!response.ok)
-        throw new Error(`Response status: ${response.status}`)
-
-      const json = await response.json()
-
-      return {
-        prefs: json.displayedKeys !== undefined ? json.displayedKeys : [],
-        noStoredPrefs: json.displayedKeys === undefined,
-      }
-    }
-    catch (error: any) {
-      console.error(error.message)
-      return undefined
-    }
-  }
-
-  async setUserFavoriteWidgets(keys: Array<string>) {
-    const url = this.putPrefsUri
-    try {
-      const response = await fetch(url, {
-        method: 'PUT',
-        body: JSON.stringify({ displayedKeys: keys }),
-      })
-      if (!response.ok)
-        throw new Error(`Response status: ${response.status}`)
-    }
-    catch (error: any) {
-      console.error(error.message)
-    }
+  async setUserFavoriteWidgets(keys: Array<string>): Promise<void> {
+    await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, keys)
   }
 
   async resetUserFavoriteWidgets() {
@@ -350,7 +305,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   handleRemoveWidget(e: CustomEvent) {
-    this.widgetToDisplayKeyArray = this.removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
+    this.widgetToDisplayKeyArray = removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
   }
 
   async buildWidget(key: string, soffit: string, forceRebuild: boolean = false) {
@@ -538,7 +493,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   dropdownRender(): TemplateResult {
-    const nonUsedKeys = this.except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray)
+    const nonUsedKeys = except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray)
       .filter(x => this.keyToNameMap.has(x))
 
     return html`
