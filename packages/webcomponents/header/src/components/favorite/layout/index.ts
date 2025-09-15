@@ -168,26 +168,27 @@ export class ReciaFavoriteLayout extends LitElement {
   manageTemplate(): TemplateResult | typeof nothing {
     return this.data && this.data.some(({ canDelete, canMove }) => canDelete || canMove)
       ? html`
-          <div class="grow-1"></div>
-          ${
-            this.isManage
-              ? html`
-                  <button
-                    class="btn-secondary small"
-                    @click="${() => this.toggleManage()}"
-                  >
-                    ${msg(str`Annuler`)}${getIcon(faTimes)}
-                  </button>
-                `
-              : nothing
-          }
-          <button
-            class="btn-secondary small"
-            @click="${() => this.toggleManage(true)}"
-          >
-            ${!this.isManage ? msg(str`Gérer`) : msg(str`Enregistrer`)}
-            ${getIcon(!this.isManage ? faGear : faFloppyDisk)}
-          </button>
+          <div class="actions">
+            ${
+              this.isManage
+                ? html`
+                    <button
+                      class="btn-secondary small"
+                      @click="${() => this.toggleManage()}"
+                    >
+                      ${msg(str`Annuler`)}${getIcon(faTimes)}
+                    </button>
+                  `
+                : nothing
+            }
+            <button
+              class="btn-secondary small"
+              @click="${() => this.toggleManage(true)}"
+            >
+              ${!this.isManage ? msg(str`Gérer`) : msg(str`Enregistrer`)}
+              ${getIcon(!this.isManage ? faGear : faFloppyDisk)}
+            </button>
+          </div>
         `
       : nothing
   }

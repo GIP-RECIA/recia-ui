@@ -79,12 +79,21 @@
 .favorite-layout {
   > header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    column-gap: 6px;
+    gap: 6px;
 
     > h2 {
       margin: 0;
       color: var(--#{$prefix}primary);
+    }
+
+    > .actions {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      justify-content: end;
+      gap: 6px;
     }
   }
 
