@@ -21,18 +21,10 @@ import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
-import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faAdd,
-  faAnglesRight,
-  faArrowLeft,
-  faArrowRight,
-  faChevronDown,
   faCog,
-  faInfoCircle,
-  faPlus,
   faSave,
-  faTimes,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
@@ -54,15 +46,6 @@ import 'widget'
 export class ReciaWidgetsWrapper extends LitElement {
   constructor() {
     super()
-    library.add(
-      faAnglesRight,
-      faArrowLeft,
-      faArrowRight,
-      faChevronDown,
-      faInfoCircle,
-      faPlus,
-      faTimes,
-    )
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
