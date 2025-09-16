@@ -21,19 +21,13 @@ import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
-import {
-  faAdd,
-  faGear,
-  faSave,
-  faXmark,
-} from '@fortawesome/free-solid-svg-icons'
+import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -43,6 +37,7 @@ import { except, removeItem } from './utils/arrayUtils.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
+import './components/dropdown-add/index.ts'
 import 'widget'
 
 @localized()
@@ -84,8 +79,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   widgetToDisplayKeyArrayBackup: Array<string> = []
 
   keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
-
-  dropdownOpen: boolean = false
 
   itemByWidgetNestedMap: Map<string, Map<string, Item>> = new Map()
 
@@ -284,7 +277,6 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   clickOnAnnuler() {
     this.isEditingWidgetsPrefs = false
-    this.dropdownOpen = false
     this.widgetToDisplayKeyArray = [...this.widgetToDisplayKeyArrayBackup]
   }
 
@@ -293,7 +285,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
   }
 
-  async handleAddWidget(key: string) {
+  async handleAddWidget(e: CustomEvent) {
+    const { key } = e.detail
     if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount())
       return
 
@@ -410,31 +403,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  clickOnAjouter() {
-    this.dropdownOpen = !this.dropdownOpen
-    this.requestUpdate()
-    this.boundClickEventOnPage = this.handleClickEventOnPageIfDropdownIsOpen.bind(this)
-
-    // required, if not present the created event listener will detect the current event
-    setTimeout(() => {
-      window.addEventListener('click', this.boundClickEventOnPage!)
-    }, 0)
-  }
-
-  handleClickEventOnPageIfDropdownIsOpen(e: Event): void {
-    const dropdownContent = this.shadowRoot!.querySelector('#dropdown-content')
-    const addWidgetButton = this.shadowRoot!.querySelector('#add-widget-button')
-    const clickIsInside: boolean = e.composedPath().includes(dropdownContent as EventTarget)
-    const clickIsOnButton: boolean = e.composedPath().includes(addWidgetButton as EventTarget)
-    if (!clickIsInside) {
-      // do not interfere with button behavior
-      if (!clickIsOnButton)
-        this.dropdownOpen = false
-      window.removeEventListener('click', this.boundClickEventOnPage!)
-      this.requestUpdate()
-    }
-  }
-
   removeClickEvent() {
     window.removeEventListener('click', this.boundClickEventOnPage!)
   }
@@ -486,49 +454,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     `
   }
 
-  dropdownRender(): TemplateResult {
-    const nonUsedKeys = except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray)
-      .filter(x => this.keyToNameMap.has(x))
-
-    return html`
-      <div class="dropdown">
-        <button
-          id="add-widget-button"
-          ?disabled="${
-            this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
-            || nonUsedKeys.length === 0
-          }"
-          class="btn-secondary small"
-          @click="${this.clickOnAjouter}"
-        >
-          ${this.t(`buttons.Ajouter`, 'Ajouter')} ${getIcon(faAdd)}
-        </button>
-        <div
-          id="dropdown-content"
-          class="dropdown-content"
-          style="${styleMap({
-            display: !this.dropdownOpen || nonUsedKeys.length === 0 ? 'none' : undefined,
-          })}"
-        >
-        ${
-          repeat(
-            nonUsedKeys,
-            widgetKey => widgetKey,
-            widgetKey => html`
-                <button
-                  ?disabled="${this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()}"
-                  @click="${() => { this.handleAddWidget(widgetKey) }}"
-                >
-                  ${this.keyToNameMap.get(widgetKey)}
-                </button>
-              `,
-          )
-        }
-        </div>
-      </div>
-    `
-  }
-
   widgetCountRender(): TemplateResult {
     // TODO : localize
     if (this.canSave()) {
@@ -546,6 +471,10 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   render(): TemplateResult {
+    const nonUsed = except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray)
+      .filter(x => this.keyToNameMap.has(x))
+      .map((x) => { return { key: x, value: this.keyToNameMap.get(x) } })
+
     return html`
       <div class="widget-layout">
         <header>
@@ -567,7 +496,15 @@ export class ReciaWidgetsWrapper extends LitElement {
                     </button>
                   `
                 : html`
-                    ${this.dropdownRender()}
+                    <r-dropdown-add
+                      .items="${nonUsed}"
+                      ?disabled="${
+                        this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
+                        || nonUsed.length === 0
+                      }"
+                      @item-click="${this.handleAddWidget}"
+                    >
+                    </r-dropdown-add>
                     <button
                       class="btn-secondary small"
                       @click="${this.clickOnAnnuler}"

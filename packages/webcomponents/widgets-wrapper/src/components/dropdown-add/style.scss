@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use '../../../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+.dropdown {
+  position: relative;
+  width: fit-content;
+
+  > ul {
+    @include unstyled-list;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 100%;
+    max-width: calc(100vw - 32px);
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 8px;
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    overflow: hidden;
+    z-index: 1000;
+
+    > li > button {
+      @include unstyled-link;
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 12px;
+      text-wrap: nowrap;
+      font-size: var(--#{$prefix}font-size-sm);
+      width: 100%;
+
+      &:hover,
+      &:focus-visible {
+        font-weight: 500;
+        background-color:var(--#{$prefix}hover);
+        outline: none;
+      }
+    }
+  }
+}
