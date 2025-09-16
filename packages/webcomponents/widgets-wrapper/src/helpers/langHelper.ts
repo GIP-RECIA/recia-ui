@@ -20,10 +20,8 @@ import { allLocales, sourceLocale } from '../generated/locale-codes'
 export interface LangRef {
   locales: string[]
   messages: {
-    message: {
-      [section: string]: {
-        [translation: string]: string
-      }
+    [section: string]: {
+      [translation: string]: string
     }
   }
 }
@@ -102,18 +100,12 @@ export default class langHelper {
   }
 
   static localTranslation(stringId: string, defaultString: string): string {
-    try {
-      const currentRef = this.reference?.find(ref =>
-        ref.locales.includes(this.locale),
-      )
-      const currentMessages = currentRef?.messages
-      return currentMessages
-        ? get(currentMessages as unknown, stringId, defaultString)
-        : defaultString
-    }
-    catch (error) {
-      console.error(error)
-      return defaultString
-    }
+    const currentRef = this.reference?.find(ref =>
+      ref.locales.includes(this.locale),
+    )
+    const currentMessages = currentRef?.messages
+    return currentMessages
+      ? get(currentMessages as unknown, stringId, defaultString)
+      : defaultString
   }
 }

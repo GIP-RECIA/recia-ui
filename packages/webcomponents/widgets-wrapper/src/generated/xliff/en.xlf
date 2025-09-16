@@ -38,6 +38,30 @@
   <source>Réordonner vers la droite</source>
   <target>Rorder to the right</target>
 </trans-unit>
+<trans-unit id="s65e1444584dbb304">
+  <source>Menu ajouter</source>
+  <target>Add menu</target>
+</trans-unit>
+<trans-unit id="s8a65c8735b536091">
+  <source>Ajouter</source>
+  <target>Add</target>
+</trans-unit>
+<trans-unit id="sc90caad5feb98add">
+  <source>Accès rapides</source>
+  <target>Quick access</target>
+</trans-unit>
+<trans-unit id="s5261563ad59a1fae">
+  <source>Gérer</source>
+  <target>Manage</target>
+</trans-unit>
+<trans-unit id="s5ee26933a140671a">
+  <source>Annuler</source>
+  <target>Cancel</target>
+</trans-unit>
+<trans-unit id="se430513274f9b495">
+  <source>Enregistrer</source>
+  <target>Save</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

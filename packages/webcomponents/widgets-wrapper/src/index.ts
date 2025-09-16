@@ -22,7 +22,7 @@ import type { Item } from './types/ItemType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
 import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
@@ -327,8 +327,12 @@ export class ReciaWidgetsWrapper extends LitElement {
       const replaceMap: Map<string, string> = new Map()
       // eslint-disable-next-line no-cond-assign
       while ((execArray = regexForPartToLocalize.exec(itemsAsString)) !== null) {
-        if (!replaceMap.has(execArray[0]))
-          replaceMap.set(execArray[0], this.t(`items.${execArray[1]}`, execArray[1]))
+        if (!replaceMap.has(execArray[0])) {
+          replaceMap.set(
+            execArray[0],
+            langHelper.localTranslation(`items.${execArray[1]}`, execArray[1]),
+          )
+        }
       }
       replaceMap.forEach((value: string, key: string) => {
         itemsAsString = itemsAsString.replaceAll(key, value)
@@ -336,7 +340,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
       const widgetDataDTO: WidgetDataDTO = JSON.parse(itemsAsString)
 
-      const emptyText = this.t(`empty-text.${key}`, widgetDataDTO.emptyText)
+      const emptyText = langHelper.localTranslation(`empty-text.${key}`, widgetDataDTO.emptyText)
 
       widgetData.loading = false
       widgetData.subtitle = widgetDataDTO.subtitle
@@ -383,14 +387,10 @@ export class ReciaWidgetsWrapper extends LitElement {
     catch (error) {
       widgetData.isError = true
       widgetData.loading = false
-      widgetData.errorMessage = this.t('error-message', 'Une erreur est survenue')
+      widgetData.errorMessage = langHelper.localTranslation('error-message', 'Une erreur est survenue')
       console.error('catch error build widget', error)
     }
     this.requestUpdate()
-  }
-
-  t(key: string, defaultString?: string): string {
-    return langHelper.localTranslation(`message.${key}`, defaultString ?? 'Missing localization')
   }
 
   async getWidgetData(key: string, soffit: string): Promise<string> {
@@ -478,7 +478,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     return html`
       <div class="widget-layout">
         <header>
-          <h2 class="sr-only">Accès rapides</h2>
+          <h2 class="sr-only">${msg(str`Accès rapides`)}</h2>
           <div class="actions">
             ${
               this.isEditingWidgetsPrefs === false
@@ -491,7 +491,12 @@ export class ReciaWidgetsWrapper extends LitElement {
                       }"
                       @click="${this.clickOnGerer}"
                     >
-                      ${this.t(`buttons.Gerer`, 'Gerer')}
+                      ${
+                        langHelper.localTranslation(
+                          'buttons.Gerer',
+                          msg(str`Gérer`),
+                        )
+                      }
                       ${getIcon(faGear)}
                     </button>
                   `
@@ -509,7 +514,12 @@ export class ReciaWidgetsWrapper extends LitElement {
                       class="btn-secondary small"
                       @click="${this.clickOnAnnuler}"
                     >
-                      ${this.t(`buttons.Annuler`, 'Annuler')}
+                      ${
+                        langHelper.localTranslation(
+                          'buttons.Annuler',
+                          msg(str`Annuler`),
+                        )
+                      }
                       ${getIcon(faXmark)}
                     </button>
                     <button
@@ -518,7 +528,12 @@ export class ReciaWidgetsWrapper extends LitElement {
                       title="Save"
                       @click="${this.clickOnSauvegarder}"
                     >
-                      ${this.t(`buttons.Sauvegarder`, 'Enregistrer')}
+                      ${
+                        langHelper.localTranslation(
+                          'buttons.Sauvegarder',
+                          msg(str`Enregistrer`),
+                        )
+                      }
                       ${getIcon(faSave)}
                     </button>
                   `

@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
@@ -103,13 +103,13 @@ export class ReciaDropdownAdd extends LitElement {
           ?disabled="${this.disabled}"
           aria-expanded="${this.isExpanded}"
           aria-controls="dropdown-content"
-          aria-label="Menu ajouter"
+          aria-label="${msg(str`Menu ajouter`)}"
           @click="${this.toggle}"
         >
           ${
             langHelper.localTranslation(
               `message.buttons.Ajouter`,
-              'Ajouter',
+              msg(str`Ajouter`),
             )
           }
           ${getIcon(faAdd)}
