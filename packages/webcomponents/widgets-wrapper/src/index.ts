@@ -442,18 +442,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     `
   }
 
-  getPlaceholderWidgetRender(index: number): TemplateResult {
-    return html`
-      <r-widget
-        role="listitem"
-        uid="${index}"
-        name=" "
-        loading
-      >
-      </r-widget>
-    `
-  }
-
   widgetCountRender(): TemplateResult {
     // TODO : localize
     if (this.canSave()) {
@@ -555,7 +543,18 @@ export class ReciaWidgetsWrapper extends LitElement {
                     ${this.getWidgetRender(widgetKey, index)}
                   `,
                 )
-              : map(range(this.widgetMaxCount), index => this.getPlaceholderWidgetRender(index))
+              : map(
+                  range(this.widgetMaxCount),
+                  index => html`
+                    <r-widget
+                      role="listitem"
+                      uid="${index}"
+                      name=" "
+                      loading
+                    >
+                    </r-widget>
+                  `,
+                )
           }
         </ul>
         <p class="mobile-only">
