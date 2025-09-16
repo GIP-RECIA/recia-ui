@@ -267,7 +267,7 @@ export class ReciaUserMenu extends LitElement {
         >
         </div>
         <button
-          class="eyebrow-button"
+          id="eyebrow-button"
           aria-expanded="${this.isExpanded}"
           aria-controls="user-menu"
           aria-label="${msg(str`Menu mon compte`)}"
