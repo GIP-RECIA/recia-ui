@@ -20,6 +20,10 @@
       justify-content: end;
       gap: 6px;
     }
+
+    > .info {
+      flex-basis: 100%;
+    }
   }
 
   > ul {
@@ -44,24 +48,5 @@
     > ul {
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     }
-  }
-}
-
-.no-mobile {
-  display: none;
-  flex-basis: 100%;
-}
-
-.mobile-only {
-  display: unset;
-}
-
-@media (width >= map.get($grid-breakpoints, md)) {
-  .no-mobile {
-    display: unset;
-  }
-
-  .mobile-only {
-    display: none;
   }
 }

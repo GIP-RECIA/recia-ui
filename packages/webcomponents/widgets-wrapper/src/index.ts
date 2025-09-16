@@ -444,18 +444,12 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   widgetCountRender(): TemplateResult {
     // TODO : localize
-    if (this.canSave()) {
-      return html`
-        <p>
-          Widgets actifs : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}
-        </p>
-      `
-    }
-    return html`
-      <p>
-        Nombre de widgets actifs insuffisant : ${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}
-      </p>
-    `
+    const count: string = `${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}`
+    const message = this.canSave()
+      ? 'Widgets actifs'
+      : 'Nombre de widgets actifs insuffisant'
+
+    return html`<span class="info">${message} : ${count}</span>`
   }
 
   render(): TemplateResult {
@@ -529,7 +523,7 @@ export class ReciaWidgetsWrapper extends LitElement {
           </div>
           ${
             this.isEditingWidgetsPrefs === true
-              ? html`<p class="no-mobile">${this.widgetCountRender()}</p>`
+              ? this.widgetCountRender()
               : nothing
           }
         </header>
@@ -557,9 +551,6 @@ export class ReciaWidgetsWrapper extends LitElement {
                 )
           }
         </ul>
-        <p class="mobile-only">
-          ${this.isEditingWidgetsPrefs ? this.widgetCountRender() : nothing}
-        </p>
       </div>
     `
   }
