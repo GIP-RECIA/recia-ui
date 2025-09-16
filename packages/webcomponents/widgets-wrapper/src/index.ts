@@ -15,10 +15,10 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Item } from '../../widget/src/types/ItemType.ts'
 import type { WidgetDataDTO } from './classes/WidgetDataDTO.ts'
 import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
+import type { Item } from './types/ItemType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
 import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -38,7 +38,7 @@ import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
 import './components/dropdown-add/index.ts'
-import 'widget'
+import './components/widget/index.ts'
 
 @localized()
 export class ReciaWidgetsWrapper extends LitElement {

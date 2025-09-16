@@ -15,8 +15,8 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Item } from './types/ItemType.ts'
-import type { Link } from './types/LinkType.ts'
+import type { Item } from '../../types/ItemType.ts'
+import type { Link } from '../../types/LinkType.ts'
 import {
   faAnglesRight,
   faArrowLeft,
@@ -32,14 +32,13 @@ import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
-import { componentName } from '../../common/config.ts'
-import { getSvgIcon } from '../../header/src/utils/iconUtils.ts'
-import { name } from '../package.json'
-import langHelper from './helpers/langHelper.ts'
+import { componentName } from '../../../../common/config.ts'
+import { getSvgIcon } from '../../../../header/src/utils/iconUtils.ts'
+import langHelper from '../../helpers/langHelper.ts'
+import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../utils/localizationUtils.ts'
+import { slugify } from '../../utils/stringUtils.ts'
 import styles from './style.scss?inline'
-import { getIcon, getIconWithStyle } from './utils/fontawesomeUtils.ts'
-import { setLocale } from './utils/localizationUtils.ts'
-import { slugify } from './utils/stringUtils.ts'
 
 @localized()
 export class ReciaWidget extends LitElement {
@@ -370,7 +369,7 @@ export class ReciaWidget extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName(name)
+const tagName = componentName('widget')
 
 if (!customElements.get(tagName)) {
   customElements.define(tagName, ReciaWidget)
