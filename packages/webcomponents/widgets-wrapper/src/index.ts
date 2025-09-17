@@ -116,7 +116,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     document.addEventListener('update-favorites', this.updateFavorites)
   }
 
-  async monInit() {
+  async monInit(): Promise<void> {
     await TranslationService.init(`${this.localizationUri}?v=${window.WidgetAdapter.getVersion()}`)
 
     const soffit = await getToken(this.soffitUri)
@@ -148,7 +148,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.requestUpdate()
   }
 
-  async fetchKeyToNameMap(profils: any) {
+  async fetchKeyToNameMap(profils: any): Promise<void> {
     const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames(profils)
     names.forEach((value) => {
       this.keyToNameMap.set(value.key, value.name)
@@ -173,23 +173,23 @@ export class ReciaWidgetsWrapper extends LitElement {
     await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, keys)
   }
 
-  async resetUserFavoriteWidgets() {
+  async resetUserFavoriteWidgets(): Promise<void> {
     await this.setUserFavoriteWidgets([])
   }
 
-  async updateFavorites() {
+  async updateFavorites(): Promise<void> {
     const soffit = await getToken(this.soffitUri)
     await this.buildWidget('Favoris', soffit.encoded, true)
   }
 
-  handleClickOnHeadingLink(e: CustomEvent) {
+  handleClickOnHeadingLink(e: CustomEvent): void {
     const eventDNMA = new CustomEvent('click-portlet-card', {
       detail: { fname: e.detail.uid },
     })
     document.dispatchEvent(eventDNMA)
   }
 
-  handleClickOnItem(e: CustomEvent) {
+  handleClickOnItem(e: CustomEvent): void {
     const id: string = e.detail.id
     const uid: string = e.detail.uid
     const item: WidgetItem | undefined = this.itemByWidgetNestedMap.get(uid)?.get(id)
@@ -213,7 +213,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  handleMove(e: CustomEvent) {
+  handleMove(e: CustomEvent): void {
     const newPosition: string = e.detail.newPosition
     const uid: string = e.detail.uid
     if (!this.widgetToDisplayKeyArray.includes(uid))
@@ -254,24 +254,24 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.requestUpdate()
   }
 
-  clickOnGerer() {
+  clickOnGerer(): void {
     this.isEditingWidgetsPrefs = true
     // create a copy of array, because original will be modified to reflect
     // the change instantly, and this one will be used if cancel is pressed
     this.widgetToDisplayKeyArrayBackup = [...this.widgetToDisplayKeyArray]
   }
 
-  clickOnAnnuler() {
+  clickOnAnnuler(): void {
     this.isEditingWidgetsPrefs = false
     this.widgetToDisplayKeyArray = [...this.widgetToDisplayKeyArrayBackup]
   }
 
-  clickOnSauvegarder() {
+  clickOnSauvegarder(): void {
     this.isEditingWidgetsPrefs = false
     this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
   }
 
-  async handleAddWidget(e: CustomEvent) {
+  async handleAddWidget(e: CustomEvent): Promise<void> {
     const { key } = e.detail
     if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount())
       return
@@ -285,11 +285,11 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.buildWidget(key, soffit.encoded)
   }
 
-  handleRemoveWidget(e: CustomEvent) {
+  handleRemoveWidget(e: CustomEvent): void {
     this.widgetToDisplayKeyArray = removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
   }
 
-  async buildWidget(key: string, soffit: string, forceRebuild: boolean = false) {
+  async buildWidget(key: string, soffit: string, forceRebuild: boolean = false): Promise<void> {
     if (this.widgetDataMap.has(key) && !forceRebuild) {
       this.requestUpdate()
       return
@@ -389,11 +389,11 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
   }
 
-  removeClickEvent() {
+  removeClickEvent(): void {
     window.removeEventListener('click', this.boundClickEventOnPage!)
   }
 
-  canSave() {
+  canSave(): boolean {
     return this.widgetToDisplayKeyArray.length === this.getWidgetsToShowCount()
   }
 
