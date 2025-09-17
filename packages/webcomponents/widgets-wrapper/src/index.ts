@@ -435,7 +435,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         @click-on-heading-link="${this.handleClickOnHeadingLink}"
         @move="${this.handleMove}"
         @delete="${this.handleRemoveWidget}"
-        ?is-error="${widgetData.isError ?? false}"
+        ?error="${widgetData.isError ?? false}"
         error-message="${widgetData.errorMessage ?? nothing}"
       >
       </r-widget>

@@ -84,7 +84,7 @@ export class ReciaWidget extends LitElement {
   @property({ type: Boolean })
   loading: boolean = false
 
-  @property({ type: Boolean, attribute: 'is-error' })
+  @property({ type: Boolean, attribute: 'error' })
   isError: boolean = false
 
   @property({ type: String, attribute: 'error-message' })
