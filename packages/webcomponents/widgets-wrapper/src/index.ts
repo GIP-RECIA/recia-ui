@@ -15,8 +15,6 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { WidgetDataDTO } from './classes/WidgetDataDTO.ts'
-import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
@@ -64,7 +62,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   @property({ type: String, attribute: 'put-prefs-uri' })
   putPrefsUri: string = ''
 
-  allWidgets: Array<WidgetSelectorData> = []
   keyToNameMap: Map<string, string> = new Map()
 
   @state()
@@ -197,19 +194,15 @@ export class ReciaWidgetsWrapper extends LitElement {
       return
 
     if (item.eventDNMA) {
-      document.dispatchEvent(
-        new CustomEvent(item.eventDNMA, {
-          detail: JSON.parse(item.eventDNMApayload),
-        }),
-      )
+      document.dispatchEvent(new CustomEvent(item.eventDNMA, {
+        detail: JSON.parse(item.eventDNMApayload),
+      }))
     }
 
     if (item.event) {
-      document.dispatchEvent(
-        new CustomEvent(item.event, {
-          detail: JSON.parse(item.eventpayload),
-        }),
-      )
+      document.dispatchEvent(new CustomEvent(item.event, {
+        detail: JSON.parse(item.eventpayload),
+      }))
     }
   }
 
@@ -324,7 +317,18 @@ export class ReciaWidgetsWrapper extends LitElement {
         itemsAsString = itemsAsString.replaceAll(key, value)
       })
 
-      const widgetDataDTO: WidgetDataDTO = JSON.parse(itemsAsString)
+      const widgetDataDTO: {
+        name: string
+        subtitle: string
+        link: string
+        emptyText: string
+        emptyDiscover: boolean
+        items: string
+        target: string
+        rel: string
+        eventDNMA: string
+        eventpayloadDNMA: string
+      } = JSON.parse(itemsAsString)
 
       const emptyText = langHelper.localTranslation(`empty-text.${key}`, widgetDataDTO.emptyText)
 
