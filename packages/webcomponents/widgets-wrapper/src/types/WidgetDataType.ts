@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import type { Item } from '../../../widget/src/types/ItemType.ts'
-import type { Link } from '../../../widget/src/types/LinkType.ts'
+import type { Link } from './linkType.ts'
+import type { WidgetItem } from './widgetItemType.ts'
 
 export interface WidgetData {
   uid: string
@@ -23,7 +23,7 @@ export interface WidgetData {
   subtitle?: string
   notifications?: number
   link?: Link
-  items?: Array<Item>
+  items?: Array<WidgetItem>
   emptyIcon?: string
   emptyText: string
   emptyDiscover: boolean

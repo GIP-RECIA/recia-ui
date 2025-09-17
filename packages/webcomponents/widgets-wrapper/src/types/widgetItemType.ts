@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import type { Link } from './LinkType.ts'
+import type { Link } from './linkType.ts'
 
-export interface Item {
+export interface WidgetItem {
   id: string
   name: string
   icon?: string

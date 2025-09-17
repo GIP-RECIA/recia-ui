@@ -18,9 +18,9 @@ import type { TemplateResult } from 'lit'
 import type { WidgetDataDTO } from './classes/WidgetDataDTO.ts'
 import type { WidgetSelectorData } from './classes/WidgetSelectorData.ts'
 import type { ItemDTO } from './types/ItemDTOType.ts'
-import type { Item } from './types/ItemType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
 import type { WidgetData } from './types/WidgetDataType.ts'
+import type { WidgetItem } from './types/widgetItemType.ts'
 import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -80,7 +80,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
 
-  itemByWidgetNestedMap: Map<string, Map<string, Item>> = new Map()
+  itemByWidgetNestedMap: Map<string, Map<string, WidgetItem>> = new Map()
 
   // store the bounded event used for listenning for click, and removing it when the dropdown is closed
   boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
@@ -206,7 +206,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   handleClickOnItem(e: CustomEvent) {
     const id: string = e.detail.id
     const uid: string = e.detail.uid
-    const item: Item | undefined = this.itemByWidgetNestedMap.get(uid)?.get(id)
+    const item: WidgetItem | undefined = this.itemByWidgetNestedMap.get(uid)?.get(id)
     if (item === undefined)
       return
 
@@ -359,7 +359,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         : undefined
 
       if (itemDTOs !== undefined) {
-        const items: Array<Item> = itemDTOs.map(x => (
+        const items: Array<WidgetItem> = itemDTOs.map(x => (
           {
             name: x.name,
             icon: x.icon,
@@ -379,7 +379,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         )
         widgetData.items = items
         this.itemByWidgetNestedMap.set(key, new Map())
-        items.forEach((value: Item) => {
+        items.forEach((value: WidgetItem) => {
           this.itemByWidgetNestedMap.get(key)?.set(value.id, value)
         })
       }

@@ -15,8 +15,8 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { Item } from '../../types/ItemType.ts'
-import type { Link } from '../../types/LinkType.ts'
+import type { Link } from '../../types/linkType.ts'
+import type { WidgetItem } from '../../types/widgetItemType.ts'
 import {
   faAnglesRight,
   faArrowLeft,
@@ -58,7 +58,7 @@ export class ReciaWidget extends LitElement {
   link?: Link
 
   @property({ type: Array })
-  items?: Array<Item>
+  items?: Array<WidgetItem>
 
   @property({ type: String, attribute: 'empty-icon' })
   emptyIcon?: string
@@ -113,7 +113,7 @@ export class ReciaWidget extends LitElement {
     this.dispatchEvent(new CustomEvent('move', { detail: { uid: this.uid, newPosition } }))
   }
 
-  clickOnItem(item: Item): void {
+  clickOnItem(item: WidgetItem): void {
     const { id } = item
     this.dispatchEvent(new CustomEvent('click-on-item', { detail: { uid: this.uid, id } }))
   }
@@ -144,7 +144,7 @@ export class ReciaWidget extends LitElement {
       : nothing
   }
 
-  itemTemplate(item: Item): TemplateResult {
+  itemTemplate(item: WidgetItem): TemplateResult {
     const content: TemplateResult = html`
       ${getSvgIcon(item.icon)}
       <span>${item.name}</span>
