@@ -20,8 +20,8 @@
 | `name`           |              `string`               |   `false`   | `undefined` | Titre                                                                         |
 | `subtitle`       |              `string`               |   `false`   | `undefined` | Sous titre                                                                    |
 | `notifications`  |              `number`               |   `false`   | `undefined` | Nombre de notifications                                                       |
-| `link`           |  [`Link`](./src/types/LinkType.ts)  |   `false`   | `undefined` | Lien d’entête                                                                 |
-| `items`          | [`Item[]`](./src/types/ItemType.ts) |   `false`   | `undefined` | Liste des éléments à afficher                                                 |
+| `link`           |  [`Link`](../src/types/LinkType.ts)  |   `false`   | `undefined` | Lien d’entête                                                                 |
+| `items`          | [`Item[]`](../src/types/ItemType.ts) |   `false`   | `undefined` | Liste des éléments à afficher                                                 |
 | `empty-icon`     |              `string`               |   `false`   | `undefined` | SVG lors ce qu'il n'y a pas d'éléments à afficher                             |
 | `empty-text`     |              `string`               |   `false`   | `undefined` | Texte lors ce qu'il n'y a pas d'éléments à afficher                           |
 | `empty-discover` |              `boolean`              |   `false`   |   `false`   | Affiche un lien vers le service lors ce qu'il n'y a pas d'éléments à afficher |
