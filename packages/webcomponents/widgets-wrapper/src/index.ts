@@ -32,6 +32,7 @@ import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import FavoriteService from './services/favoriteService.ts'
+import TranslationService from './services/translationService.ts'
 import styles from './style.scss?inline'
 import { except, removeItem } from './utils/arrayUtils.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
@@ -116,7 +117,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   async monInit() {
-    await this.setupLocalization()
+    await TranslationService.init(`${this.localizationUri}?v=${window.WidgetAdapter.getVersion()}`)
 
     const soffit = await getToken(this.soffitUri)
     await this.fetchKeyToNameMap(soffit.decoded.ENTPersonProfils)
@@ -166,21 +167,6 @@ export class ReciaWidgetsWrapper extends LitElement {
    */
   getWidgetsToShowCount(): number {
     return Math.min(this.getMaxWidgetsCount(), this.keyENTPersonProfilsInfo.allowedKeys.length)
-  }
-
-  async setupLocalization() {
-    const version: string = window.WidgetAdapter.getVersion()
-    const url = `${this.localizationUri}?v=${version}`
-    try {
-      const response = await fetch(url)
-      if (!response.ok)
-        throw new Error(`Response status: ${response.status}`)
-      const json = await response.json()
-      langHelper.setReference(json)
-    }
-    catch (error: any) {
-      console.error(error.message)
-    }
   }
 
   async setUserFavoriteWidgets(keys: Array<string>): Promise<void> {
