@@ -108,7 +108,7 @@ export class ReciaDropdownAdd extends LitElement {
         >
           ${
             langHelper.localTranslation(
-              `message.buttons.Ajouter`,
+              `buttons.Ajouter`,
               msg(str`Ajouter`),
             )
           }
