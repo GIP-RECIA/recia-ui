@@ -298,9 +298,12 @@ export class ReciaWidgetsWrapper extends LitElement {
       widgetData.items = widgetDataDTO.items
     }
     catch (error) {
+      let errorMessage: string | undefined = langHelper.localTranslation('error-message', '')
+      errorMessage = errorMessage !== '' ? errorMessage : undefined
+
       widgetData.isError = true
       widgetData.loading = false
-      widgetData.errorMessage = langHelper.localTranslation('error-message', 'Une erreur est survenue')
+      widgetData.errorMessage = errorMessage
       console.error('catch error build widget', error)
     }
     this.requestUpdate()
