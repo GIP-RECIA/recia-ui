@@ -287,7 +287,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       })
 
       const widgetDataDTO: Widget & { eventDNMA: any, eventpayloadDNMA: any } = JSON.parse(itemsAsString)
-      let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${key}`, widgetDataDTO.emptyText ?? '')
+      let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${key}`, '')
       emptyText = emptyText !== '' ? emptyText : undefined
 
       widgetData.loading = false
