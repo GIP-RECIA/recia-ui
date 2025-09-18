@@ -15,10 +15,8 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { ItemDTO } from './types/ItemDTOType.ts'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
-import type { WidgetData } from './types/WidgetDataType.ts'
-import type { WidgetItem } from './types/widgetItemType.ts'
+import type { Widget, WidgetItem } from './types/widgetType.ts'
 import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -68,7 +66,7 @@ export class ReciaWidgetsWrapper extends LitElement {
   isEditingWidgetsPrefs: boolean = false
 
   @state()
-  widgetDataMap: Map<string, WidgetData> = new Map()
+  widgetDataMap: Map<string, Widget> = new Map()
 
   @state()
   widgetToDisplayKeyArray: Array<string> = []
@@ -287,7 +285,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.requestUpdate()
       return
     }
-    const widgetData: WidgetData = {
+    const widgetData: Widget = {
       name: this.keyToNameMap.get(key) ?? key,
       uid: key,
       emptyDiscover: false,
@@ -300,7 +298,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.requestUpdate()
 
     try {
-      let itemsAsString: string = await this.getWidgetData(key, soffit)
+      let itemsAsString: string = JSON.stringify(await this.getWidgetData(key, soffit))
       const regexForPartToLocalize = /I18N\$([A-Za-z0-9]+)\$/g
       let execArray
       const replaceMap: Map<string, string> = new Map()
@@ -317,62 +315,34 @@ export class ReciaWidgetsWrapper extends LitElement {
         itemsAsString = itemsAsString.replaceAll(key, value)
       })
 
-      const widgetDataDTO: {
-        name: string
-        subtitle: string
-        link: string
-        emptyText: string
-        emptyDiscover: boolean
-        items: string
-        target: string
-        rel: string
-        eventDNMA: string
-        eventpayloadDNMA: string
-      } = JSON.parse(itemsAsString)
-
-      const emptyText = langHelper.localTranslation(`empty-text.${key}`, widgetDataDTO.emptyText)
+      const widgetDataDTO: Widget & { eventDNMA: any, eventpayloadDNMA: any } = JSON.parse(itemsAsString)
+      let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${key}`, widgetDataDTO.emptyText ?? '')
+      emptyText = emptyText !== '' ? emptyText : undefined
 
       widgetData.loading = false
       widgetData.subtitle = widgetDataDTO.subtitle
       widgetData.emptyText = emptyText
-      widgetData.emptyDiscover = widgetDataDTO.emptyDiscover
+      widgetData.emptyDiscover = widgetDataDTO.emptyDiscover ?? false
       widgetData.link = widgetDataDTO.link
-        ? {
-            href: widgetDataDTO.link,
-            target: widgetDataDTO.target,
-            rel: widgetDataDTO.rel,
-          }
-        : undefined
 
-      const itemDTOs: Array<ItemDTO> = widgetDataDTO.items
-        ? JSON.parse(widgetDataDTO.items)
-        : undefined
+      const items: Array<WidgetItem> = widgetDataDTO.items?.map(x => (
+        {
+          id: x.id,
+          name: x.name,
+          icon: x.icon,
+          link: x.link,
+          event: x.event,
+          eventpayload: x.eventpayload,
+          eventDNMA: x.eventDNMA,
+          eventDNMApayload: x.eventDNMApayload,
+        }),
+      ) ?? []
 
-      if (itemDTOs !== undefined) {
-        const items: Array<WidgetItem> = itemDTOs.map(x => (
-          {
-            name: x.name,
-            icon: x.icon,
-            link: x.link
-              ? {
-                  href: x.link,
-                  target: x.target,
-                  rel: x.rel,
-                }
-              : undefined,
-            id: x.id,
-            event: x.event,
-            eventpayload: x.eventpayload,
-            eventDNMA: x.eventDNMA,
-            eventDNMApayload: x.eventpayloadDNMA,
-          }),
-        )
-        widgetData.items = items
-        this.itemByWidgetNestedMap.set(key, new Map())
-        items.forEach((value: WidgetItem) => {
-          this.itemByWidgetNestedMap.get(key)?.set(value.id, value)
-        })
-      }
+      widgetData.items = items
+      this.itemByWidgetNestedMap.set(key, new Map())
+      items.forEach((value: WidgetItem) => {
+        this.itemByWidgetNestedMap.get(key)?.set(value.id, value)
+      })
     }
     catch (error) {
       widgetData.isError = true
@@ -383,7 +353,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.requestUpdate()
   }
 
-  async getWidgetData(key: string, soffit: string): Promise<string> {
+  async getWidgetData(key: string, soffit: string): Promise<Widget & { eventDNMA: any, eventpayloadDNMA: any }> {
     try {
       return await window.WidgetAdapter.getJsonForWidget(key, soffit)
     }
@@ -405,7 +375,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     if (!this.widgetDataMap.has(key))
       return nothing
 
-    const widgetData: WidgetData = this.widgetDataMap.get(key)!
+    const widgetData: Widget = this.widgetDataMap.get(key)!
     return html`
       <r-widget
         role="listitem"
@@ -413,7 +383,7 @@ export class ReciaWidgetsWrapper extends LitElement {
         name="${widgetData.name}"
         subtitle="${widgetData.subtitle ?? nothing}"
         .link="${widgetData.link}"
-        empty-text="${widgetData.emptyText}"
+        empty-text="${widgetData.emptyText ?? nothing}"
         ?empty-discover=${widgetData.emptyDiscover ?? false}
         .items=${widgetData.items}
         ?deletable="${widgetData.deletable}"

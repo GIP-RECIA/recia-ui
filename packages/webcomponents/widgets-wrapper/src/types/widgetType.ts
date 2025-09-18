@@ -16,6 +16,25 @@
 
 import type { Link } from './linkType.ts'
 
+export interface Widget {
+  uid: string
+  name: string
+  subtitle?: string
+  notifications?: number
+  link?: Link
+  items?: Array<WidgetItem>
+  emptyIcon?: string
+  emptyText?: string
+  emptyDiscover?: boolean
+  manage?: boolean
+  deletable?: boolean
+  noPrevious?: boolean
+  noNext?: boolean
+  loading?: boolean
+  isError?: boolean
+  errorMessage?: string
+}
+
 export interface WidgetItem {
   id: string
   name: string

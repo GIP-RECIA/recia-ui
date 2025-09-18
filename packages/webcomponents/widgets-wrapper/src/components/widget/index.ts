@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import type { Link } from '../../types/linkType.ts'
-import type { WidgetItem } from '../../types/widgetItemType.ts'
+import type { WidgetItem } from '../../types/widgetType.ts'
 import {
   faAnglesRight,
   faArrowLeft,
