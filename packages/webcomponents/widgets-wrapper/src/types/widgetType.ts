@@ -40,8 +40,5 @@ export interface WidgetItem {
   name: string
   icon?: string
   link?: Link
-  event: string
-  eventpayload: string
-  eventDNMA: string
-  eventDNMApayload: string
+  dispatchEvents?: { type: string, detail?: object }[]
 }

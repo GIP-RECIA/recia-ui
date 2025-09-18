@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
-import type { Widget, WidgetItem } from './types/widgetType.ts'
+import type { Widget } from './types/widgetType.ts'
 import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -75,8 +75,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   widgetToDisplayKeyArrayBackup: Array<string> = []
 
   keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
-
-  itemByWidgetNestedMap: Map<string, Map<string, WidgetItem>> = new Map()
 
   // store the bounded event used for listenning for click, and removing it when the dropdown is closed
   boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
@@ -175,33 +173,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   async updateFavorites(): Promise<void> {
     const soffit = await getToken(this.soffitUri)
     await this.buildWidget('Favoris', soffit.encoded, true)
-  }
-
-  handleClickOnHeadingLink(e: CustomEvent): void {
-    const eventDNMA = new CustomEvent('click-portlet-card', {
-      detail: { fname: e.detail.uid },
-    })
-    document.dispatchEvent(eventDNMA)
-  }
-
-  handleClickOnItem(e: CustomEvent): void {
-    const id: string = e.detail.id
-    const uid: string = e.detail.uid
-    const item: WidgetItem | undefined = this.itemByWidgetNestedMap.get(uid)?.get(id)
-    if (item === undefined)
-      return
-
-    if (item.eventDNMA) {
-      document.dispatchEvent(new CustomEvent(item.eventDNMA, {
-        detail: JSON.parse(item.eventDNMApayload),
-      }))
-    }
-
-    if (item.event) {
-      document.dispatchEvent(new CustomEvent(item.event, {
-        detail: JSON.parse(item.eventpayload),
-      }))
-    }
   }
 
   handleMove(e: CustomEvent): void {
@@ -324,25 +295,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       widgetData.emptyText = emptyText
       widgetData.emptyDiscover = widgetDataDTO.emptyDiscover ?? false
       widgetData.link = widgetDataDTO.link
-
-      const items: Array<WidgetItem> = widgetDataDTO.items?.map(x => (
-        {
-          id: x.id,
-          name: x.name,
-          icon: x.icon,
-          link: x.link,
-          event: x.event,
-          eventpayload: x.eventpayload,
-          eventDNMA: x.eventDNMA,
-          eventDNMApayload: x.eventDNMApayload,
-        }),
-      ) ?? []
-
-      widgetData.items = items
-      this.itemByWidgetNestedMap.set(key, new Map())
-      items.forEach((value: WidgetItem) => {
-        this.itemByWidgetNestedMap.get(key)?.set(value.id, value)
-      })
+      widgetData.items = widgetDataDTO.items
     }
     catch (error) {
       widgetData.isError = true
@@ -391,8 +344,6 @@ export class ReciaWidgetsWrapper extends LitElement {
         ?no-next="${index === this.widgetToDisplayKeyArray.length - 1}"
         ?loading="${widgetData.loading}"
         ?manage="${this.isEditingWidgetsPrefs}"
-        @click-on-item="${this.handleClickOnItem}"
-        @click-on-heading-link="${this.handleClickOnHeadingLink}"
         @move="${this.handleMove}"
         @delete="${this.handleRemoveWidget}"
         ?error="${widgetData.isError ?? false}"

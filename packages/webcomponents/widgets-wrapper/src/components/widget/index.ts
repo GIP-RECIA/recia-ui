@@ -113,13 +113,17 @@ export class ReciaWidget extends LitElement {
     this.dispatchEvent(new CustomEvent('move', { detail: { uid: this.uid, newPosition } }))
   }
 
-  clickOnItem(item: WidgetItem): void {
-    const { id } = item
-    this.dispatchEvent(new CustomEvent('click-on-item', { detail: { uid: this.uid, id } }))
+  clickOnItem(_: Event, item: WidgetItem): void {
+    const { dispatchEvents } = item
+    dispatchEvents?.forEach(({ type, detail }) => {
+      document.dispatchEvent(new CustomEvent(type, { detail }))
+    })
   }
 
-  clickOnHeadingLink() {
-    this.dispatchEvent(new CustomEvent('click-on-heading-link', { detail: { uid: this.uid } }))
+  clickOnHeadingLink(_: Event) {
+    document.dispatchEvent(new CustomEvent('click-portlet-card', {
+      detail: { fname: this.uid },
+    }))
   }
 
   headingTemplate(): TemplateResult {
@@ -160,7 +164,7 @@ export class ReciaWidget extends LitElement {
                   target="${item.link.target ?? nothing}"
                   rel="${item.link.rel ?? nothing}"
                   title="${item.name}"
-                  @click="${() => this.clickOnItem(item)}"
+                  @click="${(e: Event) => this.clickOnItem(e, item)}"
                 >
                   ${content}
                 </a>
@@ -168,7 +172,7 @@ export class ReciaWidget extends LitElement {
             : html`
                 <button
                   title="${item.name}"
-                  @click="${() => this.clickOnItem(item)}"
+                  @click="${(e: Event) => this.clickOnItem(e, item)}"
                 >
                   ${content}
                 </button>
