@@ -11,6 +11,23 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/r-project-skeleton.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/r-project-skeleton.js"
+      }
+    }
+  },
+  "main": "./dist/r-bottom-sheet.js",
+  "module": "./dist/r-bottom-sheet.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
@@ -31,6 +48,7 @@
     "ress": "^5.0.2",
     "sass": "^1.93.0",
     "typescript": "^5.9.2",
-    "vite": "^7.1.6"
+    "vite": "^7.1.6",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
