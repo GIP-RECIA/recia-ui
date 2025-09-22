@@ -51,8 +51,5 @@ export interface ProfilsConfig {
 }
 
 export type WidgetsWrapperConfig = Omit<ProfilsConfig, 'ENTPersonProfils'> & {
-  names: {
-    name: string
-    key: string
-  }[]
+  availableWidgets: Widget[]
 }

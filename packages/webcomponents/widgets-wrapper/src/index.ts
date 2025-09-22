@@ -79,7 +79,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     allowedKeys: [],
     requiredKeys: [],
     defaultKeys: [],
-    names: [],
+    availableWidgets: [],
   }
 
   constructor() {
@@ -108,7 +108,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     const soffit = await getToken(this.soffitUri)
 
-    this.wrapperConfig = await await window.WidgetAdapter.getKeysENTPersonProfils(soffit.decoded.ENTPersonProfils)
+    this.wrapperConfig = await await window.WidgetAdapter.getConfig(soffit.decoded.ENTPersonProfils)
 
     const prefs = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
     const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
@@ -240,8 +240,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
 
     let widgetData: Widget = {
-      uid: key,
-      name: this.wrapperConfig.names.find(name => name.key === key)?.name ?? key,
+      ...this.wrapperConfig.availableWidgets.find(({ uid }) => uid === key)!,
       loading: true,
     }
     this.widgetDataMap.set(key, widgetData)
@@ -251,7 +250,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       widgetData = JSON.parse(
         JSON
           .stringify(
-            await window.WidgetAdapter.getJsonForWidget(key, soffit),
+            await window.WidgetAdapter.getWidget(key, soffit),
           )
           .replaceAll(
             /I18N\$([A-Za-z0-9]+)\$/g,
@@ -330,8 +329,8 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   render(): TemplateResult {
-    const nonUsed = this.wrapperConfig.names.filter(({ key }) =>
-      except(this.wrapperConfig.allowedKeys, this.widgetToDisplayKeyArray).includes(key),
+    const nonUsed = this.wrapperConfig.availableWidgets.filter(({ uid }) =>
+      except(this.wrapperConfig.allowedKeys, this.widgetToDisplayKeyArray).includes(uid),
     )
 
     return html`

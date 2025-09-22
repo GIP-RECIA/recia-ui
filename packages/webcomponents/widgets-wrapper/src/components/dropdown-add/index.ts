@@ -15,22 +15,23 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { Widget } from '../../types/widgetType.ts'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
-import { componentName } from '../../../../common/config'
-import langHelper from '../../helpers/langHelper'
-import { getIcon } from '../../utils/fontawesomeUtils'
-import { setLocale } from '../../utils/localizationUtils'
+import { componentName } from '../../../../common/config.ts'
+import langHelper from '../../helpers/langHelper.ts'
+import { getIcon } from '../../utils/fontawesomeUtils.ts'
+import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
 export class ReciaDropdownAdd extends LitElement {
   @property({ type: Array })
-  items?: Array<{ key: string, name: string }>
+  items?: Array<Widget>
 
   @property({ type: Boolean })
   disabled: boolean = false
@@ -123,11 +124,11 @@ export class ReciaDropdownAdd extends LitElement {
           ${
             repeat(
               this.items ?? [],
-              item => item.key,
-              ({ key, name }) => html`
+              item => item.uid,
+              ({ uid, name }) => html`
                 <li>
                   <button
-                    @click="${(e: Event) => this.handleItemClick(e, key)}"
+                    @click="${(e: Event) => this.handleItemClick(e, uid)}"
                   >
                     ${name}
                   </button>
