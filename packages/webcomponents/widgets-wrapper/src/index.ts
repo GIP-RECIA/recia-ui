@@ -23,6 +23,7 @@ import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { isEqual } from 'lodash-es'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -127,7 +128,8 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.widgetToDisplayKeyArray = preferedKeys
     }
 
-    await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+    if (!isEqual(prefs?.prefs, this.widgetToDisplayKeyArray))
+      await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
     for (const value of this.widgetToDisplayKeyArray) {
       this.buildWidget(value, soffit.encoded)
     }
