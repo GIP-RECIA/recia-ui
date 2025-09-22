@@ -100,8 +100,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     const uriHasParam: boolean = this.adapterSourceUri.split('?')[1]?.length > 0
     scriptAdapter.src = `${this.adapterSourceUri}${uriHasParam ? '&' : '?'}configUri=${this.adapterConfigUri}`
     document.body.appendChild(scriptAdapter)
-    this.updateFavorites = this.updateFavorites.bind(this)
-    document.addEventListener('update-favorites', this.updateFavorites)
+    document.addEventListener('update-favorites', this.updateFavorites.bind(this))
   }
 
   async monInit(): Promise<void> {
@@ -129,7 +128,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     }
 
     if (!isEqual(prefs?.prefs, this.widgetToDisplayKeyArray))
-      await this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+      await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, this.widgetToDisplayKeyArray)
     for (const value of this.widgetToDisplayKeyArray) {
       this.buildWidget(value, soffit.encoded)
     }
@@ -147,14 +146,6 @@ export class ReciaWidgetsWrapper extends LitElement {
    */
   getWidgetsToShowCount(): number {
     return Math.min(this.getMaxWidgetsCount(), this.wrapperConfig.allowedKeys.length)
-  }
-
-  async setUserFavoriteWidgets(keys: Array<string>): Promise<void> {
-    await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, keys)
-  }
-
-  async resetUserFavoriteWidgets(): Promise<void> {
-    await this.setUserFavoriteWidgets([])
   }
 
   async updateFavorites(): Promise<void> {
@@ -215,9 +206,9 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.widgetToDisplayKeyArray = [...this.widgetToDisplayKeyArrayBackup]
   }
 
-  clickOnSauvegarder(): void {
+  async clickOnSauvegarder(): Promise<void> {
     this.isEditingWidgetsPrefs = false
-    this.setUserFavoriteWidgets(this.widgetToDisplayKeyArray)
+    await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, this.widgetToDisplayKeyArray)
   }
 
   async handleAddWidget(e: CustomEvent): Promise<void> {
@@ -226,9 +217,9 @@ export class ReciaWidgetsWrapper extends LitElement {
       return
 
     // avoid duplicated display, should not happen but check is just in case
-    if (this.widgetToDisplayKeyArray.includes(key)) {
+    if (this.widgetToDisplayKeyArray.includes(key))
       return
-    }
+
     const soffit = await getToken(this.soffitUri)
     this.widgetToDisplayKeyArray.push(key)
     this.buildWidget(key, soffit.encoded)
