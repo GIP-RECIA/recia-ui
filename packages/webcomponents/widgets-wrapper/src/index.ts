@@ -251,13 +251,17 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.widgetToDisplayKeyArray = removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
   }
 
-  async buildWidget(key: string, soffit: string, forceRebuild: boolean = false): Promise<void> {
+  async buildWidget(
+    key: string,
+    soffit: string,
+    forceRebuild: boolean = false,
+  ): Promise<void> {
     if (this.widgetDataMap.has(key) && !forceRebuild) {
       this.requestUpdate()
       return
     }
 
-    const widgetData: Widget = {
+    let widgetData: Widget = {
       uid: key,
       name: this.keyToNameMap.get(key) ?? key,
       loading: true,
@@ -266,28 +270,21 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.requestUpdate()
 
     try {
-      let itemsAsString: string = JSON.stringify(await window.WidgetAdapter.getJsonForWidget(key, soffit))
-      const regexForPartToLocalize = /I18N\$([A-Za-z0-9]+)\$/g
-      let execArray
-      const replaceMap: Map<string, string> = new Map()
-      // eslint-disable-next-line no-cond-assign
-      while ((execArray = regexForPartToLocalize.exec(itemsAsString)) !== null) {
-        if (!replaceMap.has(execArray[0])) {
-          replaceMap.set(
-            execArray[0],
-            langHelper.localTranslation(`items.${execArray[1]}`, execArray[1]),
+      widgetData = JSON.parse(
+        JSON
+          .stringify(
+            await window.WidgetAdapter.getJsonForWidget(key, soffit),
           )
-        }
-      }
-      replaceMap.forEach((value: string, key: string) => {
-        itemsAsString = itemsAsString.replaceAll(key, value)
-      })
-
+          .replaceAll(
+            /I18N\$([A-Za-z0-9]+)\$/g,
+            (_, match) => langHelper.localTranslation(`items.${match}`, match),
+          ),
+      )
       let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${key}`, '')
       emptyText = emptyText !== '' ? emptyText : undefined
 
       this.widgetDataMap.set(key, {
-        ...JSON.parse(itemsAsString),
+        ...widgetData,
         emptyText,
         deletable: !this.keyENTPersonProfilsInfo.requiredKeys.includes(key),
       })
