@@ -30,7 +30,7 @@ import styles from './style.scss?inline'
 @localized()
 export class ReciaDropdownAdd extends LitElement {
   @property({ type: Array })
-  items?: Array<{ key: string, value: string }>
+  items?: Array<{ key: string, name: string }>
 
   @property({ type: Boolean })
   disabled: boolean = false
@@ -124,12 +124,12 @@ export class ReciaDropdownAdd extends LitElement {
             repeat(
               this.items ?? [],
               item => item.key,
-              ({ key, value }) => html`
+              ({ key, name }) => html`
                 <li>
                   <button
                     @click="${(e: Event) => this.handleItemClick(e, key)}"
                   >
-                    ${value}
+                    ${name}
                   </button>
                 </li>
               `,

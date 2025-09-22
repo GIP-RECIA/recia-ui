@@ -15,8 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { KeyENTPersonProfilsInfo } from './types/KeyENTPersonProfilsInfoType.ts'
-import type { Widget } from './types/widgetType.ts'
+import type { Widget, WidgetsWrapperConfig } from './types/widgetType.ts'
 import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -60,8 +59,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   @property({ type: String, attribute: 'put-prefs-uri' })
   putPrefsUri: string = ''
 
-  keyToNameMap: Map<string, string> = new Map()
-
   @state()
   isEditingWidgetsPrefs: boolean = false
 
@@ -74,10 +71,15 @@ export class ReciaWidgetsWrapper extends LitElement {
   // used for cancel changes
   widgetToDisplayKeyArrayBackup: Array<string> = []
 
-  keyENTPersonProfilsInfo: KeyENTPersonProfilsInfo
-
   // store the bounded event used for listenning for click, and removing it when the dropdown is closed
   boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
+
+  wrapperConfig: WidgetsWrapperConfig = {
+    allowedKeys: [],
+    requiredKeys: [],
+    defaultKeys: [],
+    names: [],
+  }
 
   constructor() {
     super()
@@ -85,14 +87,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
-
-    this.keyENTPersonProfilsInfo = {
-      ENTPersonProfils: [],
-      allowedKeys: [],
-      requiredKeys: [],
-      defaultKeys: [],
-    }
-
     document.addEventListener('init-widget', () => {
       this.monInit()
     })
@@ -113,21 +107,20 @@ export class ReciaWidgetsWrapper extends LitElement {
     await TranslationService.init(`${this.localizationUri}?v=${window.WidgetAdapter.getVersion()}`)
 
     const soffit = await getToken(this.soffitUri)
-    await this.fetchKeyToNameMap(soffit.decoded.ENTPersonProfils)
 
-    this.keyENTPersonProfilsInfo = await window.WidgetAdapter.getKeysENTPersonProfils(soffit.decoded.ENTPersonProfils)
+    this.wrapperConfig = await await window.WidgetAdapter.getKeysENTPersonProfils(soffit.decoded.ENTPersonProfils)
 
     const prefs = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
     const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
     const preferedKeys: Array<string> = hasPrefs
-      ? [...prefs!.prefs.filter(x => this.keyENTPersonProfilsInfo.allowedKeys.includes(x))]
-      : [...this.keyENTPersonProfilsInfo.defaultKeys]
+      ? prefs!.prefs.filter(x => this.wrapperConfig.allowedKeys.includes(x))
+      : this.wrapperConfig.defaultKeys ?? []
 
-    const missingRequiredKeys: Array<string> = except(this.keyENTPersonProfilsInfo.requiredKeys, preferedKeys)
+    const missingRequiredKeys: Array<string> = except(this.wrapperConfig.requiredKeys, preferedKeys)
 
     if (missingRequiredKeys.length > 0) {
-      this.widgetToDisplayKeyArray = this.keyENTPersonProfilsInfo.requiredKeys
-        .concat(except(preferedKeys, this.keyENTPersonProfilsInfo.requiredKeys))
+      this.widgetToDisplayKeyArray = this.wrapperConfig.requiredKeys
+        .concat(except(preferedKeys, this.wrapperConfig.requiredKeys))
         .toSpliced(this.getMaxWidgetsCount(), Infinity)
     }
     else {
@@ -141,16 +134,8 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.requestUpdate()
   }
 
-  async fetchKeyToNameMap(profils: any): Promise<void> {
-    const names: Array<{ name: string, key: string }> = await window.WidgetAdapter.getAllNames(profils)
-    names.forEach((value) => {
-      this.keyToNameMap.set(value.key, value.name)
-    })
-    this.requestUpdate()
-  }
-
   getMaxWidgetsCount(): number {
-    return Math.max(this.widgetMaxCount, this.keyENTPersonProfilsInfo.requiredKeys.length)
+    return Math.max(this.widgetMaxCount, this.wrapperConfig.requiredKeys.length)
   }
 
   /**
@@ -159,7 +144,7 @@ export class ReciaWidgetsWrapper extends LitElement {
    * Is **not related** to the widgetToDisplayKeyArray length.
    */
   getWidgetsToShowCount(): number {
-    return Math.min(this.getMaxWidgetsCount(), this.keyENTPersonProfilsInfo.allowedKeys.length)
+    return Math.min(this.getMaxWidgetsCount(), this.wrapperConfig.allowedKeys.length)
   }
 
   async setUserFavoriteWidgets(keys: Array<string>): Promise<void> {
@@ -263,7 +248,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     let widgetData: Widget = {
       uid: key,
-      name: this.keyToNameMap.get(key) ?? key,
+      name: this.wrapperConfig.names.find(name => name.key === key)?.name ?? key,
       loading: true,
     }
     this.widgetDataMap.set(key, widgetData)
@@ -286,7 +271,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.widgetDataMap.set(key, {
         ...widgetData,
         emptyText,
-        deletable: !this.keyENTPersonProfilsInfo.requiredKeys.includes(key),
+        deletable: !this.wrapperConfig.requiredKeys.includes(key),
       })
     }
     // eslint-disable-next-line unused-imports/no-unused-vars
@@ -352,9 +337,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   render(): TemplateResult {
-    const nonUsed = except(this.keyENTPersonProfilsInfo.allowedKeys, this.widgetToDisplayKeyArray)
-      .filter(x => this.keyToNameMap.has(x))
-      .map((x) => { return { key: x, value: this.keyToNameMap.get(x) } })
+    const nonUsed = this.wrapperConfig.names.filter(({ key }) =>
+      except(this.wrapperConfig.allowedKeys, this.widgetToDisplayKeyArray).includes(key),
+    )
 
     return html`
       <div class="widget-layout">
