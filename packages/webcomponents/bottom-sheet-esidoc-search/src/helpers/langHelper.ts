@@ -20,10 +20,8 @@ import { allLocales, sourceLocale } from '../generated/locale-codes'
 export interface LangRef {
   locales: string[]
   messages: {
-    message: {
-      [section: string]: {
-        [translation: string]: string
-      }
+    [section: string]: {
+      [translation: string]: string
     }
   }
 }
