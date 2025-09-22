@@ -256,20 +256,17 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.requestUpdate()
       return
     }
-    const widgetData: Widget = {
-      name: this.keyToNameMap.get(key) ?? key,
-      uid: key,
-      emptyDiscover: false,
-      emptyText: '',
-      loading: true,
-      deletable: !this.keyENTPersonProfilsInfo.requiredKeys.includes(key),
-    }
 
+    const widgetData: Widget = {
+      uid: key,
+      name: this.keyToNameMap.get(key) ?? key,
+      loading: true,
+    }
     this.widgetDataMap.set(key, widgetData)
     this.requestUpdate()
 
     try {
-      let itemsAsString: string = JSON.stringify(await this.getWidgetData(key, soffit))
+      let itemsAsString: string = JSON.stringify(await window.WidgetAdapter.getJsonForWidget(key, soffit))
       const regexForPartToLocalize = /I18N\$([A-Za-z0-9]+)\$/g
       let execArray
       const replaceMap: Map<string, string> = new Map()
@@ -286,37 +283,28 @@ export class ReciaWidgetsWrapper extends LitElement {
         itemsAsString = itemsAsString.replaceAll(key, value)
       })
 
-      const widgetDataDTO: Widget & { eventDNMA: any, eventpayloadDNMA: any } = JSON.parse(itemsAsString)
       let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${key}`, '')
       emptyText = emptyText !== '' ? emptyText : undefined
 
-      widgetData.loading = false
-      widgetData.subtitle = widgetDataDTO.subtitle
-      widgetData.emptyText = emptyText
-      widgetData.emptyDiscover = widgetDataDTO.emptyDiscover ?? false
-      widgetData.link = widgetDataDTO.link
-      widgetData.items = widgetDataDTO.items
+      this.widgetDataMap.set(key, {
+        ...JSON.parse(itemsAsString),
+        emptyText,
+        deletable: !this.keyENTPersonProfilsInfo.requiredKeys.includes(key),
+      })
     }
-    catch (error) {
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    catch (_) {
       let errorMessage: string | undefined = langHelper.localTranslation('error-message', '')
       errorMessage = errorMessage !== '' ? errorMessage : undefined
 
-      widgetData.isError = true
-      widgetData.loading = false
-      widgetData.errorMessage = errorMessage
-      console.error('catch error build widget', error)
+      this.widgetDataMap.set(key, {
+        ...widgetData,
+        loading: false,
+        isError: true,
+        errorMessage,
+      })
     }
     this.requestUpdate()
-  }
-
-  async getWidgetData(key: string, soffit: string): Promise<Widget & { eventDNMA: any, eventpayloadDNMA: any }> {
-    try {
-      return await window.WidgetAdapter.getJsonForWidget(key, soffit)
-    }
-    catch (error) {
-      console.error(`${error} from get widget data`)
-      throw error
-    }
   }
 
   removeClickEvent(): void {
