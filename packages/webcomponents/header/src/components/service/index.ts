@@ -90,7 +90,14 @@ export class ReciaService extends LitElement {
       : addFavorite(this.channelId)
   }
 
-  openMore(_: Event): void {
+  openMore(e: Event): void {
+    document.dispatchEvent(new CustomEvent('open-more', {
+      detail: {
+        event: e,
+        fname: 'ServiceInfo',
+        SERVICE: this.fname,
+      },
+    }))
     this.dispatchEvent(new CustomEvent('open-more', { detail: { fname: this.fname } }))
   }
 

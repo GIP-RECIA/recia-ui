@@ -41,6 +41,7 @@ export default class DnmaService {
             ENT4DNMA.markOnEvent('service-event');
             ENT4DNMA.markOnEvent('service-info-event');
             ENT4DNMA.markOnEvent('search-event');
+            ENT4DNMA.markOnEvent('open-more');
           }
         } catch (error) {
           console.info('DNMA is not available');
