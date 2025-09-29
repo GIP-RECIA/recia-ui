@@ -38,6 +38,7 @@ export interface Widget {
 export interface WidgetItem {
   id: string
   name: string
+  description?: string
   icon?: string
   link?: Link
   dispatchEvents?: { type: string, detail?: object }[]

@@ -151,8 +151,16 @@ export class ReciaWidget extends LitElement {
   itemTemplate(item: WidgetItem): TemplateResult {
     const content: TemplateResult = html`
       ${getSvgIcon(item.icon)}
-      <span>${item.name}</span>
+      <div>
+        <span>${item.name}</span>
+        ${
+          item.description
+            ? html`<span class="description">${item.description}</span>`
+            : nothing
+        }
+      </div>
     `
+    const title = `${item.name}${item.description ? ' | ' : ''}${item.description}`
 
     return html`
       <li>
@@ -163,7 +171,7 @@ export class ReciaWidget extends LitElement {
                   href="${item.link.href}"
                   target="${item.link.target ?? nothing}"
                   rel="${item.link.rel ?? nothing}"
-                  title="${item.name}"
+                  title="${title}"
                   @click="${(e: Event) => this.clickOnItem(e, item)}"
                 >
                   ${content}
@@ -171,7 +179,7 @@ export class ReciaWidget extends LitElement {
               `
             : html`
                 <button
-                  title="${item.name}"
+                  title="${title}"
                   @click="${(e: Event) => this.clickOnItem(e, item)}"
                 >
                   ${content}

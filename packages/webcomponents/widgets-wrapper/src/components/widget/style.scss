@@ -167,17 +167,45 @@ $vivible-items: 3;
             height: 20px;
             width: 20px;
             color: var(--#{$prefix}basic-black);
-            opacity: .2;
+            opacity: .3;
+
+            &[class*="fa-"] {
+              height: 18px;
+              width: 18px;
+            }
+
+            &.error,
+            &.warn {
+              opacity: .6;
+            }
+
+            &.error {
+              color: var(--#{$prefix}system-red) !important;
+            }
+
+            &.warn {
+              color: #FFAA46 !important;
+            }
           }
 
           > img.icon {
             opacity: .5;
           }
 
-          > span {
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
+          > div {
+            display: flex;
+            flex-direction: column;
+
+            > span {
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+
+              &.description {
+                font-size: var(--#{$prefix}font-size-xs);
+                opacity: .6;
+              }
+            }
           }
 
           &:hover,
