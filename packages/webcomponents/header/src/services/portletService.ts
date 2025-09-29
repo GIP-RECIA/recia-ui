@@ -24,12 +24,27 @@ import type {
   Soffit,
 } from '../types/index.ts'
 import { uniqBy } from 'lodash-es'
+import { $services } from '../stores/index.ts'
 import { getServiceLink } from '../utils/linkUtils.ts'
 
 export default class PortletService {
   static async get(
     portalInfoApiUrl: string,
+    fname?: string,
   ): Promise<Partial<ServiceInfoLayout> | undefined> {
+    const services = $services.get()
+    if (fname && services) {
+      const service = services.find(service => service.fname === fname)
+      if (service) {
+        return {
+          fname,
+          'icon-url': service.iconUrl,
+          'name': service.name,
+          'launch-link': service.link,
+        }
+      }
+    }
+
     try {
       const options = {
         method: 'GET',

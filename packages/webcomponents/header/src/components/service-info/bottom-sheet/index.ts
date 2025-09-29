@@ -50,6 +50,8 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
 
   lastfname?: string
 
+  lastData?: ServiceInfoLayout
+
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 
   constructor() {
@@ -78,24 +80,29 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     this.bottomSheetRef.value!.close()
   }
 
+  reset(_: CustomEvent): void {
+    this.lastData = this.data
+    this.data = undefined
+  }
+
   async handleEvent(e: Event): Promise<void> {
     const { fname } = (e as CustomEvent).detail ?? {}
     if (!fname)
       return
 
     if (fname !== this.lastfname) {
-      this.data = undefined
       this.lastfname = fname
       this.loading = true
       this.open()
     }
     else {
+      this.data = this.lastData
       this.open()
       return
     }
 
     const [portlet, info] = await Promise.all([
-      PortletService.get(getDomainLink(`${this.portalInfoApiUrl}/${fname}.json`)),
+      PortletService.get(getDomainLink(`${this.portalInfoApiUrl}/${fname}.json`), fname),
       InfoService.get(getDomainLink(`${this.serviceInfoApiUrl}/${fname}`)),
     ])
 
@@ -112,6 +119,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        @close="${this.reset}"
       >
         <r-service-info-layout
           ${
