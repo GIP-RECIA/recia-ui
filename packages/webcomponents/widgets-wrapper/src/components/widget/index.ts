@@ -160,7 +160,7 @@ export class ReciaWidget extends LitElement {
         }
       </div>
     `
-    const title = `${item.name}${item.description ? ' | ' : ''}${item.description}`
+    const title = `${item.name}${item.description ? ` | ${item.description}` : ''}`
 
     return html`
       <li>

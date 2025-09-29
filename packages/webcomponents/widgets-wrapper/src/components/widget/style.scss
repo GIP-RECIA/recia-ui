@@ -195,6 +195,7 @@ $vivible-items: 3;
           > div {
             display: flex;
             flex-direction: column;
+            overflow: hidden;
 
             > span {
               white-space: nowrap;
