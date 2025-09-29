@@ -40,6 +40,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@lit/localize-tools": "^0.8.0",
     "@types/lodash-es": "^4",
     "eslint": "^9.36.0",

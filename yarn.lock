@@ -2167,6 +2167,9 @@ __metadata:
   resolution: "bottom-sheet@workspace:packages/webcomponents/bottom-sheet"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -3245,6 +3248,9 @@ __metadata:
   resolution: "dropdown-info@workspace:packages/webcomponents/dropdown-info"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -4240,6 +4246,9 @@ __metadata:
   resolution: "filters@workspace:packages/webcomponents/filters"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -4348,6 +4357,9 @@ __metadata:
   resolution: "footer@workspace:packages/webcomponents/footer"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -4763,6 +4775,9 @@ __metadata:
   resolution: "header@workspace:packages/webcomponents/header"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@nanostores/lit": "npm:^0.2.3"
@@ -7232,6 +7247,9 @@ __metadata:
   resolution: "project-skeleton@workspace:etc/webcomponent/project-skeleton"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -8855,6 +8873,9 @@ __metadata:
   resolution: "wayf@workspace:packages/webcomponents/wayf"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"
@@ -8931,6 +8952,9 @@ __metadata:
   resolution: "widgets-wrapper@workspace:packages/webcomponents/widgets-wrapper"
   dependencies:
     "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.0"
     "@types/lodash-es": "npm:^4"

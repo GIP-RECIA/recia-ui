@@ -31,6 +31,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && yarn build:style && vite build",
+    "build:service-info-layout": "tsc && vite build --config vite-info.config.ts",
     "preview": "vite preview",
     "test:unit": "echo No tests available",
     "build:style": "sass --style=compressed --error-css src/assets/scss/:src/assets/css/",
@@ -43,6 +44,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@lit/localize-tools": "^0.8.0",
     "@nanostores/lit": "^0.2.3",
     "@types/lodash-es": "^4",
