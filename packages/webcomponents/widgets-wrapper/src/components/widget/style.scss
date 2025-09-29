@@ -29,19 +29,36 @@ $vivible-items: 3;
 
 .widget {
   position: relative;
-  outline: 1px solid var(--#{$prefix}stroke);
   border-radius: 10px;
-  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
   height: 100%;
 
-  > .skeleton {
+  &:not(
+    :has(> .skeleton),
+    :has(> .placeholder)
+  ) {
+    outline: 1px solid var(--#{$prefix}stroke);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
+  }
+
+  > .skeleton,
+  > .placeholder {
     position: absolute;
     inset: 0;
     z-index: 1;
+    border-radius: 10px;
+  }
+
+  > .skeleton {
     background: linear-gradient(90deg, #e9e9e9 30%, #f6f6f6 50%, #e9e9e9 70%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite linear;
-    border-radius: 10px;
+  }
+
+  > .placeholder {
+    background-color: var(--#{$prefix}body-bg);
+    box-shadow: unset;
+    outline: unset;
+    border: 3px dashed var(--#{$prefix}stroke);
   }
 
   > .actions {
@@ -259,7 +276,11 @@ $vivible-items: 3;
     }
   }
 
-  &:not(:has(.skeleton), :has(.actions)) {
+  &:not(
+    :has(.placeholder),
+    :has(.skeleton),
+    :has(.actions)
+  ) {
     &:hover,
     &:has(:focus-visible) {
       outline: 2px solid var(--#{$prefix}primary);
@@ -275,7 +296,12 @@ $vivible-items: 3;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    &:not(
+      :has(> .skeleton),
+      :has(> .placeholder)
+    ) {
+      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    }
 
     > header {
       > div {

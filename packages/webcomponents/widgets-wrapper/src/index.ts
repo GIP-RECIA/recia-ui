@@ -286,7 +286,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   }
 
   canSave(): boolean {
-    return this.widgetToDisplayKeyArray.length === this.getWidgetsToShowCount()
+    return !isEqual(this.widgetToDisplayKeyArrayBackup, this.widgetToDisplayKeyArray)
+      && this.widgetToDisplayKeyArray.length >= this.wrapperConfig.requiredKeys.length
+      && this.widgetToDisplayKeyArray.length <= this.widgetMaxCount
   }
 
   getWidgetRender(key: string, index: number): TemplateResult | typeof nothing {
@@ -320,16 +322,6 @@ export class ReciaWidgetsWrapper extends LitElement {
     `
   }
 
-  widgetCountRender(): TemplateResult {
-    // TODO : localize
-    const count: string = `${this.widgetToDisplayKeyArray.length}/${this.getWidgetsToShowCount()}`
-    const message = this.canSave()
-      ? 'Widgets actifs'
-      : 'Nombre de widgets actifs insuffisant'
-
-    return html`<span class="info">${message} : ${count}</span>`
-  }
-
   render(): TemplateResult {
     const nonUsed = this.wrapperConfig.availableWidgets.filter(({ uid }) =>
       except(this.wrapperConfig.allowedKeys, this.widgetToDisplayKeyArray).includes(uid),
@@ -341,7 +333,7 @@ export class ReciaWidgetsWrapper extends LitElement {
           <h2 class="sr-only">${msg(str`Accès rapides`)}</h2>
           <div class="actions">
             ${
-              this.isEditingWidgetsPrefs === false
+              !this.isEditingWidgetsPrefs
                 ? html`
                     <button
                       class="btn-secondary small"
@@ -399,11 +391,6 @@ export class ReciaWidgetsWrapper extends LitElement {
                   `
             }
           </div>
-          ${
-            this.isEditingWidgetsPrefs === true
-              ? this.widgetCountRender()
-              : nothing
-          }
         </header>
         <ul class="widget-tiles">
           ${
@@ -427,6 +414,26 @@ export class ReciaWidgetsWrapper extends LitElement {
                     </r-widget>
                   `,
                 )
+          }
+          ${
+            this.isEditingWidgetsPrefs
+              ? html`
+                  ${
+                    map(
+                      range(this.widgetMaxCount - this.widgetToDisplayKeyArray.length),
+                      index => html`
+                        <r-widget
+                          role="listitem"
+                          uid="${index}"
+                          name=" "
+                          placeholder
+                        >
+                        </r-widget>
+                      `,
+                    )
+                  }
+                `
+              : nothing
           }
         </ul>
       </div>

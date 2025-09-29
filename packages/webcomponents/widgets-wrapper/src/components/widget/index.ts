@@ -90,6 +90,9 @@ export class ReciaWidget extends LitElement {
   @property({ type: String, attribute: 'error-message' })
   errorMessage?: string
 
+  @property({ type: Boolean })
+  placeholder: boolean = false
+
   @state()
   isExpanded: boolean = false
 
@@ -324,8 +327,15 @@ export class ReciaWidget extends LitElement {
               `
             : nothing
         }
+        ${
+          this.placeholder
+            ? html`
+                <div class="placeholder"></div>
+              `
+            : nothing
+        }
         ${this.actionTemplate()}
-        <header ?inert="${this.manage || this.loading}">
+        <header ?inert="${this.manage || this.loading || this.placeholder}">
           <button
             aria-expanded="${this.isExpanded}"
             aria-controls="widget-${slug}-menu"
