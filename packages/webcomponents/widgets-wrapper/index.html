@@ -21,6 +21,27 @@
     >
     </r-widgets-wrapper>
   </section>
+
+  <script>
+    const documentEvents = [
+      'init-widget',
+      'click-portlet-card',
+      'recia-actu-modal',
+      'openSearchEsidoc'
+    ]
+    documentEvents.forEach((listener) => {
+      document.addEventListener(listener, (e) => {
+        if (!e.detail) {
+          console.log(e.type)
+          return
+        }
+
+        if (e.detail.event)
+          e.detail.event.preventDefault()
+        console.log(e.type, e.detail)
+      })
+    })
+  </script>
 </body>
 
 </html>
