@@ -300,19 +300,21 @@ export class ReciaWidgetsWrapper extends LitElement {
         uid="${widgetData.uid}"
         name="${widgetData.name}"
         subtitle="${widgetData.subtitle ?? nothing}"
+        notifications="${widgetData.notifications ?? nothing}"
         .link="${widgetData.link}"
+        .items="${widgetData.items}"
+        empty-icon="${widgetData.emptyIcon ?? nothing}"
         empty-text="${widgetData.emptyText ?? nothing}"
         ?empty-discover=${widgetData.emptyDiscover ?? false}
-        .items=${widgetData.items}
+        ?manage="${this.isEditingWidgetsPrefs}"
         ?deletable="${widgetData.deletable}"
         ?no-previous="${index === 0}"
         ?no-next="${index === this.widgetToDisplayKeyArray.length - 1}"
         ?loading="${widgetData.loading}"
-        ?manage="${this.isEditingWidgetsPrefs}"
-        @move="${this.handleMove}"
-        @delete="${this.handleRemoveWidget}"
         ?error="${widgetData.isError ?? false}"
         error-message="${widgetData.errorMessage ?? nothing}"
+        @move="${this.handleMove}"
+        @delete="${this.handleRemoveWidget}"
       >
       </r-widget>
     `
