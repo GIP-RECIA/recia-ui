@@ -27,7 +27,7 @@
     "@types/lodash-es": "^4",
     "@uportal/open-id-connect": "^1.40.2",
     "eslint": "^9.36.0",
-    "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-format": "^1.0.2",
     "lodash-es": "^4.17.21",
     "regenerator-runtime": "^0.14.1",
     "ress": "^5.0.2",
