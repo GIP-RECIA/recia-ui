@@ -845,7 +845,7 @@ __metadata:
     eslint-plugin-format: "npm:^1.0.1"
     lint-staged: "npm:^16.1.6"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-svg-spritemap: "npm:^1.0.13"
@@ -2175,7 +2175,7 @@ __metadata:
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -3253,7 +3253,7 @@ __metadata:
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -4248,7 +4248,7 @@ __metadata:
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -4356,7 +4356,7 @@ __metadata:
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -4781,7 +4781,7 @@ __metadata:
     nanostores: "npm:^1.0.1"
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -7257,7 +7257,7 @@ __metadata:
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -7730,9 +7730,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.93.0":
-  version: 1.93.0
-  resolution: "sass@npm:1.93.0"
+"sass@npm:^1.93.2":
+  version: 1.93.2
+  resolution: "sass@npm:1.93.2"
   dependencies:
     "@parcel/watcher": "npm:^2.4.1"
     chokidar: "npm:^4.0.0"
@@ -7743,7 +7743,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 10/37f22e016e1d5ad04754123009064260c1f568771688742a2b34c763d7c30b706e8c991dffb578ca6a1ecf598ea57e7392597719786eff5eb47b099b7dbf03cd
+  checksum: 10/2fc0dcafdf3050f4131650a00ddd772790af1dc3e31a97c6533f323efabddce81bd139a920f13a88af80d630a255f51ee91067a7478364b2a13fcc6f5f7e8308
   languageName: node
   linkType: hard
 
@@ -8880,7 +8880,7 @@ __metadata:
     lit: "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
     vite-plugin-dts: "npm:^4.5.4"
@@ -8958,7 +8958,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
-    sass: "npm:^1.93.0"
+    sass: "npm:^1.93.2"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1.6"
   languageName: unknown
