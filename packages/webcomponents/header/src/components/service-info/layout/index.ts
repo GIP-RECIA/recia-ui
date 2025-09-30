@@ -17,7 +17,11 @@
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Link } from '../../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { faArrowRight, faStar } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRight,
+  faExclamationTriangle,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
@@ -28,7 +32,7 @@ import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { Category, Origin } from '../../../types/index.ts'
 import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
-import { getIcon } from '../../../utils/fontawesomeUtils.ts'
+import { getIcon, getIconWithStyle } from '../../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -70,6 +74,12 @@ export class ReciaServiceInfoLayout extends LitElement {
 
   @property({ type: Object, attribute: 'launch-link' })
   launchLink?: Link
+
+  @property({ type: Boolean })
+  loading: boolean = false
+
+  @property({ type: Boolean })
+  error: boolean = false
 
   constructor() {
     super()
@@ -175,7 +185,75 @@ export class ReciaServiceInfoLayout extends LitElement {
       : nothing
   }
 
+  skeletonTemplate(): TemplateResult {
+    return html`
+        <div class="service-info">
+          <header inert>
+            <div class="heading">
+              <div class="icon skeleton"></div>
+              <div class="heading-text">
+                <h1 class="skeleton"></h1>
+                <span class="tag-category skeleton"></span>
+              </div>
+            </div>
+          </header>
+          <div class="content" inert>
+            <section class="description">
+              <h2 class="h3">${msg(str`Description`)}</h2>
+              <div class="skeleton">
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
+            </section>
+            <section class="first-step">
+              <h2 class="h3">${msg(str`Premiers pas avec le service`)}</h2>
+              <div class="video">
+                <div class="skeleton"></div>
+              </div>
+            </section>
+          </div>
+          <footer>
+            <button
+              class="btn-secondary close"
+              @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
+            >
+              ${msg(str`Fermer`)}
+            </button>
+          </footer>
+        </div>
+      `
+  }
+
+  errorTemplate(): TemplateResult {
+    return html`
+        <div class="service-info">
+          <div class="content">
+            <div class="error">
+              ${getIconWithStyle(faExclamationTriangle, undefined, { icon: true })}
+              <p>
+                ${msg(str`Une erreur est survenue lors de la récupération des informations du service.\nTentez de rouvrir cette fiche.`)}
+              </p>
+            </div>
+          </div>
+          <footer>
+            <button
+              class="btn-secondary close"
+              @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
+            >
+              ${msg(str`Fermer`)}
+            </button>
+          </footer>
+        </div>
+      `
+  }
+
   render(): TemplateResult {
+    if (this.loading)
+      return this.skeletonTemplate()
+    if (this.error)
+      return this.errorTemplate()
+
     return html`
       <div class="service-info">
         <header>

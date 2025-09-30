@@ -48,6 +48,9 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   @state()
   loading = false
 
+  @state()
+  error = false
+
   lastfname?: string
 
   lastData?: ServiceInfoLayout
@@ -93,6 +96,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     if (fname !== this.lastfname) {
       this.lastfname = fname
       this.loading = true
+      this.error = false
       this.open()
     }
     else {
@@ -108,6 +112,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
 
     if (!portlet || !info) {
       this.loading = false
+      this.error = true
       return
     }
 
@@ -129,6 +134,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
             )
           }
           ?loading="${this.loading}"
+          ?error="${this.error}"
           @close="${() => this.close()}"
         >
         </r-service-info-layout>
