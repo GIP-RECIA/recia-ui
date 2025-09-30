@@ -73,7 +73,7 @@ function getBusteredLink(path: string): string {
 
   const [base, hash] = path.split('#')
   const baseClean = base.replace(/\?v=\d+/, '')
-  const newBase = `${baseClean}?v=${cacheBusterVersion}`
+  const newBase = baseClean + (cacheBusterVersion ? `?v=${cacheBusterVersion}` : '')
 
   return hash ? `${newBase}#${hash}` : newBase
 }

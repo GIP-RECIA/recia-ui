@@ -70,6 +70,7 @@ const $debug = atom<boolean>(false)
 const $settings = atom<Partial<HeaderProperties> & Partial<TmpSettings> & Partial<otherSettings>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
+  cacheBusterVersion: Math.floor(Date.now() / (24 * 60 * 60 * 1000)).toString(),
   search: true,
   infoEtab: true,
 })
