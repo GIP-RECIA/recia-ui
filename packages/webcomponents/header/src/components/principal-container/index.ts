@@ -36,6 +36,7 @@ import {
 } from '../../stores/index.ts'
 import { UserMenuItem } from '../../types/index.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
+import { getDomainLink } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 import '../search/index.ts'
@@ -203,7 +204,7 @@ export class ReciaPrincipalContainer extends LitElement {
   }
 
   notAuthenticatedTemplate(): TemplateResult {
-    const { signInUrl, defaultOrgIconUrl, orgIconUrl } = $settings.get()
+    const { signInUrl, casUrl, defaultOrgIconUrl, orgIconUrl } = $settings.get()
 
     return html`
         <div class="principal-container not-logged">
@@ -218,7 +219,11 @@ export class ReciaPrincipalContainer extends LitElement {
                 ? html`
                     <a
                       id="${UserMenuItem.Logout}"
-                      href="${signInUrl}"
+                      href="${
+                        casUrl
+                          ? getDomainLink(casUrl) + getDomainLink(signInUrl)
+                          : getDomainLink(signInUrl)
+                      }"
                       target="_self"
                     >
                       ${msg(str`Accéder à l'ENT`)}

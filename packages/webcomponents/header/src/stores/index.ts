@@ -478,11 +478,23 @@ async function updateTemplate(
 }
 
 async function updateSoffit(): Promise<void> {
-  const { userInfoApiUrl } = $settings.get()
+  const { signInUrl, casUrl, userInfoApiUrl } = $settings.get()
   if (!userInfoApiUrl)
     return
 
-  const response = await SoffitService.get(getDomainLink(userInfoApiUrl))
+  let response = await SoffitService.get(getDomainLink(userInfoApiUrl))
+  if (response && !response.authenticated) {
+    if (casUrl && signInUrl) {
+      await fetch(getDomainLink(casUrl) + getDomainLink(signInUrl), {
+        method: 'GET',
+        mode: 'no-cors',
+        credentials: 'include',
+      }).then(async () => {
+        response = await SoffitService.get(getDomainLink(userInfoApiUrl))
+      })
+    }
+  }
+
   $soffit.set(response)
   if ($debug.get()) {
     // eslint-disable-next-line no-console

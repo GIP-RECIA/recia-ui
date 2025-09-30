@@ -32,6 +32,7 @@ export interface HeaderProperties {
   templateApiUrl: string
   signOutUrl: string
   signInUrl: string
+  casUrl: string
   userInfoPortletUrl: string
   switchOrgApiUrl: string
   switchOrgPortletUrl: string

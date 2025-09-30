@@ -78,6 +78,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'templateApiUrl',
   'signOutUrl',
   'signInUrl',
+  'casUrl',
   'userInfoPortletUrl',
   'switchOrgApiUrl',
   'switchOrgPortletUrl',
@@ -156,6 +157,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'sign-in-url' })
   signInUrl?: string
+
+  @property({ type: String, attribute: 'cas-url' })
+  casUrl?: string
 
   @property({ type: String, attribute: 'user-info-portlet-url' })
   userInfoPortletUrl?: string
