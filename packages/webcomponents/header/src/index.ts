@@ -19,6 +19,7 @@ import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaInfoEtabBottomSheet } from './components/info-etab/bottom-sheet/index.ts'
 import type { ReciaBottomSheetServiceInfo } from './components/service-info/bottom-sheet/index.ts'
+import type { LangRef } from './helpers/langHelper.ts'
 import type { DrawerItem, HeaderProperties } from './types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
@@ -111,7 +112,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
 @useStores($settings)
 export class ReciaHeader extends LitElement {
   @property({ type: Array })
-  messages?: Array<any>
+  messages?: Array<LangRef>
 
   @property({ type: String })
   domain: string = window.location.hostname
