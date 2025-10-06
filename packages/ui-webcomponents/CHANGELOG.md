@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.6.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.5.1...ui-webcomponents/v1.6.0) (2025-10-06)
+
 ## [1.5.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.5.0...ui-webcomponents/v1.5.1) (2025-10-01)
 
 ## [1.5.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.4.1...ui-webcomponents/v1.5.0) (2025-09-30)
