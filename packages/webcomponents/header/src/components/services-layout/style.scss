@@ -28,7 +28,7 @@
       align-self: flex-start;
       display: inline-flex;
       align-items: center;
-      column-gap: 6px;
+      column-gap: 16px;
 
       > .btn-tertiary {
         font-size: var(--#{$prefix}font-size-md);
@@ -60,7 +60,7 @@
 
   > div {
     margin-top: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
 
     > header > .sort {
       align-self: flex-end;
@@ -119,6 +119,10 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
+    > div {
+      margin-bottom: 70px;
+    }
+
     &.navigation-drawer-visible {
       margin-left: $drawer-width;
     }

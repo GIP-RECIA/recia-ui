@@ -25,7 +25,7 @@ h3,
 .h3 {
   @extend %heading;
   font-size: var(--#{$prefix}font-size-h3);
-  font-weight: 600;
+  font-weight: bold;
 }
 
 h4,

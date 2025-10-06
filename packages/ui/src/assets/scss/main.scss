@@ -123,7 +123,9 @@ body {
 
     @media (width >= map.get($grid-breakpoints, md)) {
       > main {
-        row-gap: 70px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        row-gap: 60px;
       }
     }
   }

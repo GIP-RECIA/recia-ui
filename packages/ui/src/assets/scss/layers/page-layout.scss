@@ -16,7 +16,7 @@
       align-self: flex-start;
       display: inline-flex;
       align-items: center;
-      column-gap: 6px;
+      column-gap: 16px;
 
       > .btn-tertiary {
         font-size: var(--#{$prefix}font-size-md);
