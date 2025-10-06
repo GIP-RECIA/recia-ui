@@ -96,7 +96,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
       // grid-auto-rows: 1fr; // Fix bug due to learn more
-      gap: 16px;
+      gap: 24px 16px;
 
       > li {
         > a {
@@ -125,6 +125,10 @@
   @media (width >= map.get($grid-breakpoints, md)) {
     > div {
       margin-bottom: 70px;
+
+      > ul {
+        gap: 16px;
+      }
     }
 
     &.navigation-drawer-visible {
