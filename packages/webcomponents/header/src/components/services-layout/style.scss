@@ -45,6 +45,10 @@
 
     > header {
       flex-direction: row;
+
+      > .heading {
+        align-self: unset;
+      }
     }
   }
 }

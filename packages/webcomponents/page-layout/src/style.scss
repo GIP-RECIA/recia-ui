@@ -1,5 +1,6 @@
 @use 'sass:map';
-@use '../recia-style' as *;
+@use '../../common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .page-layout {
   display: grid;
