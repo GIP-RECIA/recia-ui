@@ -311,6 +311,11 @@ export class ReciaWidget extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
+    if (this.loading)
+      return html`<div class="widget-skeleton"></div>`
+    if (this.placeholder)
+      return html`<div class="widget-placeholder"></div>`
+
     if (!this.uid || !this.name) {
       console.error('uid and name are required')
       return nothing
@@ -320,20 +325,6 @@ export class ReciaWidget extends LitElement {
 
     return html`
       <div class="widget">
-        ${
-          this.loading
-            ? html`
-                <div class="skeleton"></div>
-              `
-            : nothing
-        }
-        ${
-          this.placeholder
-            ? html`
-                <div class="placeholder"></div>
-              `
-            : nothing
-        }
         ${this.actionTemplate()}
         <header ?inert="${this.manage || this.loading || this.placeholder}">
           <button

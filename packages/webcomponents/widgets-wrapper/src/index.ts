@@ -404,11 +404,9 @@ export class ReciaWidgetsWrapper extends LitElement {
                 )
               : map(
                   range(this.widgetMaxCount),
-                  index => html`
+                  () => html`
                     <r-widget
                       role="listitem"
-                      uid="${index}"
-                      name=" "
                       loading
                     >
                     </r-widget>
@@ -421,11 +419,9 @@ export class ReciaWidgetsWrapper extends LitElement {
                   ${
                     map(
                       range(this.widgetMaxCount - this.widgetToDisplayKeyArray.length),
-                      index => html`
+                      () => html`
                         <r-widget
                           role="listitem"
-                          uid="${index}"
-                          name=" "
                           placeholder
                         >
                         </r-widget>
