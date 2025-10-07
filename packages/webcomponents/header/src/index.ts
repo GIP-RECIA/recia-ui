@@ -59,6 +59,7 @@ import './components/services-layout/index.ts'
 import './components/change-etab-bottom-sheet/index.ts'
 import './components/info-etab/bottom-sheet/index.ts'
 import './components/service-info/bottom-sheet/index.ts'
+import './components/suggestions/index.ts'
 import 'regenerator-runtime/runtime.js'
 
 const listenEvents: string[] = ['mousemove', 'click', 'keypress']
@@ -282,6 +283,7 @@ export class ReciaHeader extends LitElement {
     listenEvents.every(event =>
       document.addEventListener(event, this.handleUserAction.bind(this)),
     )
+    this.addEventListener(componentName(name), this.handleRequestedEvent.bind(this))
   }
 
   disconnectedCallback(): void {
@@ -290,6 +292,7 @@ export class ReciaHeader extends LitElement {
     listenEvents.every(event =>
       document.removeEventListener(event, this.handleUserAction.bind(this)),
     )
+    this.removeEventListener(componentName(name), this.handleRequestedEvent.bind(this))
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
@@ -330,6 +333,18 @@ export class ReciaHeader extends LitElement {
   debounceRenewToken = debounce(SoffitService.renew.bind(this), 500)
 
   throttleRenewSession = throttle(SessionService.renew.bind(this), SessionService.timeout)
+
+  handleRequestedEvent(e: Event): void {
+    const { fun, attributes } = (e as CustomEvent<{
+      fun: keyof Pick<ReciaHeader, 'toggleServicesLayout'>
+      attributes: any[]
+    }>).detail
+
+    if (fun in this && typeof this[fun] === 'function')
+      (this[fun] as (...args: any[]) => void)(...attributes)
+    else
+      console.warn(`Méthode inconnue : ${fun}`)
+  }
 
   toggleDrawer(e: CustomEvent): void {
     const { isExpanded } = e.detail
