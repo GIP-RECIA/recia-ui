@@ -69,11 +69,13 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.addEventListener('service-info', this.handleEvent.bind(this))
+    document.addEventListener('service-info', this.handleEvent.bind(this))
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.removeEventListener('service-info', this.handleEvent.bind(this))
+    document.removeEventListener('service-info', this.handleEvent.bind(this))
   }
 
   open(): void {
