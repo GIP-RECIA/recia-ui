@@ -52,6 +52,7 @@ export default class ServicesService {
       const {
         categoriePrincipale,
         doesInfoExist,
+        newService,
       } = portletsInfo
         ? (portletsInfo.find(el => el.fname === fname) ?? {})
         : {}
@@ -82,6 +83,7 @@ export default class ServicesService {
         ),
         description: truncate(description),
         keywords,
+        new: newService,
         favorite: false,
         more: doesInfoExist,
       }

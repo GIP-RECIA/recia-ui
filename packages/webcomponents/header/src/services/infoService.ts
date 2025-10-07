@@ -15,7 +15,7 @@
  */
 
 import type {
-  Category,
+  ServiceInfo,
   ServiceInfoApiResponse,
   ServiceInfoLayout,
 } from '../types/index.ts'
@@ -66,7 +66,7 @@ export default class InfoService {
 
   static async getAll(
     serviceInfoApiUrl: string,
-  ): Promise<Array<{ fname: string, categoriePrincipale: Category, doesInfoExist: boolean }> | undefined> {
+  ): Promise<Array<ServiceInfo> | undefined> {
     try {
       const response = await fetch(serviceInfoApiUrl, {
         method: 'GET',
@@ -75,7 +75,7 @@ export default class InfoService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const data: Array<{ fname: string, categoriePrincipale: Category, doesInfoExist: boolean }> = await response.json()
+      const data: Array<ServiceInfo> = await response.json()
 
       if (!data) {
         console.error(`No data for ${serviceInfoApiUrl}`)

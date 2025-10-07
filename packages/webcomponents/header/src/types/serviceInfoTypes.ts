@@ -47,3 +47,10 @@ export interface ServiceInfoApiResponse {
   contextes_cible?: Array<string>
   responsable?: string
 }
+
+export interface ServiceInfo {
+  fname: string
+  categoriePrincipale?: Category
+  doesInfoExist: boolean
+  newService?: boolean
+}
