@@ -234,13 +234,17 @@ export class ReciaWidgetsWrapper extends LitElement {
     soffit: string,
     forceRebuild: boolean = false,
   ): Promise<void> {
+    const currentWidget = this.wrapperConfig.availableWidgets.find(({ uid }) => uid === key)
+    if (!currentWidget)
+      return
+
     if (this.widgetDataMap.has(key) && !forceRebuild) {
       this.requestUpdate()
       return
     }
 
     let widgetData: Widget = {
-      ...this.wrapperConfig.availableWidgets.find(({ uid }) => uid === key)!,
+      ...currentWidget,
       loading: true,
     }
     this.widgetDataMap.set(key, widgetData)
