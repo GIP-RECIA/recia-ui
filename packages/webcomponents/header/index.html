@@ -82,7 +82,11 @@
       'user-menu-event',
       'update-favorites',
       'service-info-event',
-      'search-event'
+      'search-event',
+      'open-more'
+    ]
+    const noPrevent = [
+      'open-more'
     ]
     documentEvents.forEach((listener) => {
       document.addEventListener(listener, (e) => {
@@ -91,7 +95,7 @@
           return
         }
 
-        if (e.detail.event)
+        if (e.detail.event && !noPrevent.includes(e))
           e.detail.event.preventDefault()
         console.log(e.type, e.detail)
       })
