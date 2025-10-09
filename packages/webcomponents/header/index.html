@@ -8,24 +8,24 @@
   <script type="module" src="/index.ts"></script>
 </head>
 
-<body class="container">
-  <section>
-    <r-header
-      template-api-url="/commun/portal_template_api.tpl.json"
-      drawer-items='[
-        {
-          "id": "mediacentre",
-          "name": "Médiacentre",
-          "icon": "/images/portlet_icons/Mediacentre.svg",
-          "link": { "href": "/portail/p/Mediacentre", "target": "_self" },
-          "autoDetectCurrent": true
-        }
-      ]'
-      margin-top
-      debug
-    >
-    </r-header>
+<body>
+  <r-header
+    template-api-url="/commun/portal_template_api.tpl.json"
+    drawer-items='[
+      {
+        "id": "mediacentre",
+        "name": "Médiacentre",
+        "icon": "/images/portlet_icons/Mediacentre.svg",
+        "link": { "href": "/portail/p/Mediacentre", "target": "_self" },
+        "autoDetectCurrent": true
+      }
+    ]'
+    margin-top
+    debug
+  >
+  </r-header>
 
+  <section class="container">
     <button id="soffit-updater">
       Soffit updater
     </button>

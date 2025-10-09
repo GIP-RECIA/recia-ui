@@ -19,7 +19,7 @@ import { setDevEnv } from '../common/config.ts'
 import { name } from './package.json'
 
 import './src/index.ts'
-import '../common/assets/css/dev.css'
+import '../common/assets/scss/dev.scss'
 import 'regenerator-runtime'
 
 setDevEnv(name, libName)
