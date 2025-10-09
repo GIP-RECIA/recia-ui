@@ -1,0 +1,26 @@
+{
+  "esidoc": {
+    "apiUri": ""
+  },
+  "favoris": {
+    "favorisUri": "/portail/api/v4-3/dlm/layout.json"
+  },
+  "global": {
+    "context": "/portail",
+    "timeout": 10000,
+    "populationsKeysUri": "./widgets-adapter/widgets-populations-keys.json",
+    "portletInfoUri": "/portail/api/portlet/{fname}.json",
+    "portletRegistryUri": "/portail/api/v4-3/dlm/portletRegistry.json?category=All categories"
+  },
+  "mediacentre": {
+    "apiFavorisUri": "/mediacentre-api/api/resources/favorites",
+    "apiConfigUri": "/mediacentre-api/api/config",
+    "redirectLinkPattern": "/portail/api/ExternalURLStats?fname={fname}&service=/portail/p/Mediacentre?redirect={name}%26base64%3D{b64}",
+    "userRigthsApiUri": "/portail/api/groups",
+    "userFavorisApiUri": "/portail/api/prefs/getentityonlyprefs/"
+  },
+  "publisher": {
+    "resourcesUri": "/publisher/news/myNews/3?overview=true",
+    "eventName": "recia-actu-modal"
+  }
+}

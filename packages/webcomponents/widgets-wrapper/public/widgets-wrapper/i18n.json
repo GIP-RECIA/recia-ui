@@ -1,0 +1,23 @@
+[
+  {
+    "locales": [
+      "fr"
+    ],
+    "messages": {
+      "message": {
+        "empty-text": {
+          "Documents": "Aucun document",
+          "Favoris": "Aucun service favori",
+          "Mediacentre": "Aucune ressource favorite",
+          "MonCDI": "Aucun emprunt en cours ni en retard"
+        },
+        "items": {
+          "Rechercher": "Rechercher une ressource",
+          "loan": "Emprunt en cours : ",
+          "loans": "Emprunts en cours : ",
+          "returnDate": "A rendre avant le : "
+        }
+      }
+    }
+  }
+]

@@ -11,13 +11,13 @@
 <body class="container">
   <section>
     <r-widgets-wrapper
-      localization-uri="/commun/widgets-wrapper/20250828/i18n.json"
+      localization-uri="./widgets-wrapper/i18n.json"
       soffit-uri="/portail/api/v5-1/userinfo?claims=private,ENTPersonGARIdentifiant,ESCOUAICourant,ESCOUAI,ENTPersonProfils&groups="
-      widget-max-count="3"
+      widget-max-count="6"
       get-prefs-uri="/portail/api/prefs/getentityonlyprefs/Widgets"
       put-prefs-uri="/portail/api/prefs/putprefs?fname=Widgets"
-      adapter-source-uri="/portail/scripts/widgets-to-endpoints-adapter.js"
-      adapter-config-uri="/commun/widgets-to-endpoints-adapter/20250828/adapter-configuration.json"
+      adapter-source-uri="./widgets-adapter/widgets-to-endpoints-adapter.js"
+      adapter-config-uri="./widgets-adapter/adapter-configuration.json"
     >
     </r-widgets-wrapper>
   </section>

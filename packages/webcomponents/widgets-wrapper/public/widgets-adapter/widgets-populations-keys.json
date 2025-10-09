@@ -1,0 +1,84 @@
+[
+  {
+    "ENTPersonProfils": [
+      "National_tut"
+    ],
+    "allowedKeys": [
+      "Favoris",
+      "Mediacentre",
+      "Documents"
+    ],
+    "requiredKeys": [],
+    "defaultKeys": [
+      "Mediacentre",
+      "Documents"
+    ]
+  },
+  {
+    "ENTPersonProfils": [
+      "National_elv"
+    ],
+    "allowedKeys": [
+      "Favoris",
+      "Mediacentre",
+      "Documents"
+    ],
+    "requiredKeys": [
+      "Mediacentre"
+    ],
+    "defaultKeys": [
+      "Documents"
+    ]
+  },
+  {
+    "ENTPersonProfils": [
+      "National_ens",
+      "National_doc"
+    ],
+    "allowedKeys": [
+      "Favoris",
+      "Mediacentre",
+      "Documents"
+    ],
+    "requiredKeys": [
+      "Mediacentre"
+    ],
+    "defaultKeys": [
+      "Documents"
+    ]
+  },
+  {
+    "ENTPersonProfils": [
+      "National_dir",
+      "National_evs",
+      "National_eta"
+    ],
+    "allowedKeys": [
+      "Favoris",
+      "Mediacentre",
+      "Documents"
+    ],
+    "requiredKeys": [
+      "Documents"
+    ],
+    "defaultKeys": [
+      "Mediacentre"
+    ]
+  },
+  {
+    "ENTPersonProfils": [
+      "National_aca",
+      "National_col"
+    ],
+    "allowedKeys": [
+      "Favoris",
+      "Documents"
+    ],
+    "requiredKeys": [
+      "Documents"
+    ],
+    "defaultKeys": [
+      "Favoris"
+    ]
+  }
+]

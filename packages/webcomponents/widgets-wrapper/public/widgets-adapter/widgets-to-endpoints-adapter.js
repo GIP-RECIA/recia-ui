@@ -1,0 +1,1 @@
+../../../../widgets-adapter/dist/widgets-to-endpoints-adapter.js
