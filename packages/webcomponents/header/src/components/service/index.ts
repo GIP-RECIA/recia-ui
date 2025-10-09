@@ -33,7 +33,6 @@ import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
-import 'filters'
 
 @localized()
 export class ReciaService extends LitElement {
