@@ -873,6 +873,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@gip-recia/widgets-to-endpoints-adapter@workspace:packages/widgets-adapter":
+  version: 0.0.0-use.local
+  resolution: "@gip-recia/widgets-to-endpoints-adapter@workspace:packages/widgets-adapter"
+  dependencies:
+    "@antfu/eslint-config": "npm:^5.4.1"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
+    "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
+    "@types/lodash-es": "npm:^4"
+    "@types/regenerator-runtime": "npm:^0"
+    eslint: "npm:^9.37.0"
+    eslint-plugin-format: "npm:^1.0.2"
+    lint-staged: "npm:^16.2.3"
+    lodash-es: "npm:^4.17.21"
+    regenerator-runtime: "npm:^0.14.1"
+    typescript: "npm:^5.9.3"
+    vite: "npm:^7.1.9"
+  languageName: unknown
+  linkType: soft
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"

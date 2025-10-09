@@ -5,7 +5,8 @@
     "etc/webcomponent/project-skeleton",
     "packages/ui",
     "packages/ui-webcomponents",
-    "packages/webcomponents/*"
+    "packages/webcomponents/*",
+    "packages/widgets-adapter"
   ],
   "scripts": {
     "each": "yarn workspaces foreach -At run",

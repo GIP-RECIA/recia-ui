@@ -1,0 +1,50 @@
+{
+  "name": "@gip-recia/widgets-to-endpoints-adapter",
+  "type": "module",
+  "version": "2.0.1",
+  "description": "",
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/GIP-RECIA/recia-ui/tree/main/packages/widgets-to-endpoints-adapter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GIP-RECIA/recia-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GIP-RECIA/recia-ui/issues"
+  },
+  "keywords": [
+    "gip-recia"
+  ],
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "release": "yarn run -T commit-and-tag-version -t 'widgets-to-endpoints-adapter/v' --path . --release-as $1 || echo 'Please specify a version type (yarn run release -- [patch, minor, major])'"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^5.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@types/lodash-es": "^4",
+    "@types/regenerator-runtime": "^0",
+    "eslint": "^9.37.0",
+    "eslint-plugin-format": "^1.0.2",
+    "lint-staged": "^16.2.3",
+    "lodash-es": "^4.17.21",
+    "regenerator-runtime": "^0.14.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
+}
