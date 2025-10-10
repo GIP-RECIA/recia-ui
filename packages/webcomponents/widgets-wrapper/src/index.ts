@@ -108,30 +108,33 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async monInit(): Promise<void> {
     await TranslationService.init(`${this.localizationUri}?v=${window.WidgetAdapter.getVersion()}`)
-
     const soffit = await getToken(this.soffitUri)
+    this.wrapperConfig = await window.WidgetAdapter.getConfig(soffit.decoded.ENTPersonProfils)
 
-    this.wrapperConfig = await await window.WidgetAdapter.getConfig(soffit.decoded.ENTPersonProfils)
+    const {
+      displayedKeys,
+      defaultKeys,
+      noStoredDisplayedKeys,
+    } = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
+    this.widgetToDisplayKeyArray = noStoredDisplayedKeys
+      ? this.wrapperConfig.defaultKeys
+      : displayedKeys.filter(key => this.wrapperConfig.allowedKeys.includes(key))
 
-    const prefs = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
-    const hasPrefs = prefs !== undefined && !prefs.noStoredPrefs
-    const preferedKeys: Array<string> = hasPrefs
-      ? prefs!.prefs.filter(x => this.wrapperConfig.allowedKeys.includes(x))
-      : this.wrapperConfig.defaultKeys ?? []
+    const missingRequiredKeys = except(this.wrapperConfig.requiredKeys, this.widgetToDisplayKeyArray)
+    if (missingRequiredKeys.length > 0)
+      this.widgetToDisplayKeyArray = [...missingRequiredKeys, ...this.widgetToDisplayKeyArray]
 
-    const missingRequiredKeys: Array<string> = except(this.wrapperConfig.requiredKeys, preferedKeys)
+    const missingDefaultKeys = except(this.wrapperConfig.defaultKeys, defaultKeys)
+    if (missingDefaultKeys.length > 0)
+      this.widgetToDisplayKeyArray = [...this.widgetToDisplayKeyArray, ...missingDefaultKeys]
 
-    if (missingRequiredKeys.length > 0) {
-      this.widgetToDisplayKeyArray = this.wrapperConfig.requiredKeys
-        .concat(except(preferedKeys, this.wrapperConfig.requiredKeys))
-        .toSpliced(this.getMaxWidgetsCount(), Infinity)
+    if (missingRequiredKeys || missingDefaultKeys) {
+      await FavoriteService.setUserFavoriteWidgets(
+        this.putPrefsUri,
+        this.widgetToDisplayKeyArray,
+        this.wrapperConfig.defaultKeys,
+      )
     }
-    else {
-      this.widgetToDisplayKeyArray = preferedKeys
-    }
-
-    if (!isEqual(prefs?.prefs, this.widgetToDisplayKeyArray))
-      await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, this.widgetToDisplayKeyArray)
     for (const value of this.widgetToDisplayKeyArray) {
       this.buildWidget(value, soffit.encoded)
     }
@@ -211,7 +214,11 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async clickOnSauvegarder(): Promise<void> {
     this.isEditingWidgetsPrefs = false
-    await FavoriteService.setUserFavoriteWidgets(this.putPrefsUri, this.widgetToDisplayKeyArray)
+    await FavoriteService.setUserFavoriteWidgets(
+      this.putPrefsUri,
+      this.widgetToDisplayKeyArray,
+      this.wrapperConfig.defaultKeys,
+    )
   }
 
   async handleAddWidget(e: CustomEvent): Promise<void> {

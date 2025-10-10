@@ -17,7 +17,11 @@
 export default class FavoriteService {
   static async getUserFavoriteWidgets(
     url: string,
-  ): Promise<{ prefs: Array<string>, noStoredPrefs: boolean } | undefined> {
+  ): Promise<{
+    displayedKeys: string[]
+    defaultKeys: string[]
+    noStoredDisplayedKeys: boolean
+  }> {
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -26,27 +30,33 @@ export default class FavoriteService {
       if (!response.ok)
         throw new Error(response.statusText)
 
-      const json = await response.json()
+      const data = await response.json()
 
       return {
-        prefs: json.displayedKeys !== undefined ? json.displayedKeys : [],
-        noStoredPrefs: json.displayedKeys === undefined,
+        displayedKeys: data.displayedKeys !== undefined ? data.displayedKeys : [],
+        defaultKeys: data.defaultKeys !== undefined ? data.defaultKeys : [],
+        noStoredDisplayedKeys: data.displayedKeys === undefined,
       }
     }
     catch (error: any) {
       console.error(error.message)
-      return undefined
+      return {
+        displayedKeys: [],
+        defaultKeys: [],
+        noStoredDisplayedKeys: true,
+      }
     }
   }
 
   static async setUserFavoriteWidgets(
     url: string,
-    keys: Array<string>,
+    displayedKeys: Array<string>,
+    defaultKeys: Array<string>,
   ): Promise<void> {
     try {
       const response = await fetch(url, {
         method: 'PUT',
-        body: JSON.stringify({ displayedKeys: keys }),
+        body: JSON.stringify({ displayedKeys, defaultKeys }),
       })
 
       if (!response.ok)
