@@ -12,7 +12,7 @@
 </trans-unit>
 <trans-unit id="s70b7ef13f5cd5ac3">
   <source>Aucun élément</source>
-  <target>No items</target>
+  <target>Items</target>
 </trans-unit>
 <trans-unit id="sde4e0c4335914de4">
   <source>Découvrir</source>
@@ -61,6 +61,12 @@
 <trans-unit id="se430513274f9b495">
   <source>Enregistrer</source>
   <target>Save</target>
+</trans-unit>
+<trans-unit id="s622357f4a4e1195d">
+  <source><x id="0" equiv-text="${msg(str `Vous n'avez`)}"/> aucun widget
+Cliquez sur le bouton "<x id="1" equiv-text="${langHelper.localTranslation('buttons.Gerer', msg(str `Gérer`))}"/>" pour en ajouter de nouveaux</source>
+  <target><x id="0" equiv-text="${msg(str `Vous n'avez`)}"/> widget
+Click on "<x id="1" equiv-text="${langHelper.localTranslation('buttons.Gerer', msg(str `Gérer`))}"/>" button to add new ones</target>
 </trans-unit>
 </body>
 </file>

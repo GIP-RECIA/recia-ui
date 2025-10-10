@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import type { Widget, WidgetsWrapperConfig } from './types/widgetType.ts'
-import { faGear, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faInfoCircle, faSave, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -31,7 +31,7 @@ import FavoriteService from './services/favoriteService.ts'
 import TranslationService from './services/translationService.ts'
 import styles from './style.scss?inline'
 import { except, removeItem } from './utils/arrayUtils.ts'
-import { getIcon } from './utils/fontawesomeUtils.ts'
+import { getIcon, getIconWithStyle } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import { getToken } from './utils/soffitUtils.ts'
 import './components/dropdown-add/index.ts'
@@ -68,6 +68,9 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   @state()
   widgetToDisplayKeyArray: Array<string> = []
+
+  @state()
+  loading: boolean = true
 
   // used for cancel changes
   widgetToDisplayKeyArrayBackup: Array<string> = []
@@ -132,7 +135,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     for (const value of this.widgetToDisplayKeyArray) {
       this.buildWidget(value, soffit.encoded)
     }
-    this.requestUpdate()
+    this.loading = false
   }
 
   getMaxWidgetsCount(): number {
@@ -295,35 +298,101 @@ export class ReciaWidgetsWrapper extends LitElement {
       && this.widgetToDisplayKeyArray.length <= this.widgetMaxCount
   }
 
-  getWidgetRender(key: string, index: number): TemplateResult | typeof nothing {
-    if (!this.widgetDataMap.has(key))
-      return nothing
+  contentTemplate(): TemplateResult | typeof nothing {
+    if (this.loading && this.widgetToDisplayKeyArray.length === 0)
+      return this.skeletonTemplate()
 
-    const widgetData: Widget = this.widgetDataMap.get(key)!
     return html`
-      <r-widget
-        role="listitem"
-        uid="${widgetData.uid}"
-        name="${widgetData.name}"
-        subtitle="${widgetData.subtitle ?? nothing}"
-        notifications="${widgetData.notifications ?? nothing}"
-        .link="${widgetData.link}"
-        .items="${widgetData.items}"
-        empty-icon="${widgetData.emptyIcon ?? nothing}"
-        empty-text="${widgetData.emptyText ?? nothing}"
-        ?empty-discover=${widgetData.emptyDiscover ?? false}
-        ?manage="${this.isEditingWidgetsPrefs}"
-        ?deletable="${widgetData.deletable}"
-        ?no-previous="${index === 0}"
-        ?no-next="${index === this.widgetToDisplayKeyArray.length - 1}"
-        ?loading="${widgetData.loading}"
-        ?error="${widgetData.isError ?? false}"
-        error-message="${widgetData.errorMessage ?? nothing}"
-        @move="${this.handleMove}"
-        @delete="${this.handleRemoveWidget}"
-      >
-      </r-widget>
-    `
+        ${
+          this.widgetToDisplayKeyArray.length === 0 && !this.isEditingWidgetsPrefs
+            ? html`
+                <div class="empty">
+                  ${getIconWithStyle(faInfoCircle, undefined, { icon: true })}
+                  <p>${
+                    msg(str`${msg(str`Vous n'avez`)} aucun widget\nCliquez sur le bouton "${
+                      langHelper.localTranslation(
+                        'buttons.Gerer',
+                        msg(str`Gérer`),
+                      )
+                    }" pour en ajouter de nouveaux`)
+                  }</p>
+                </div>
+              `
+            : nothing
+        }
+        <ul class="widget-tiles">
+          ${
+            repeat(
+              this.widgetToDisplayKeyArray.map(key => this.widgetDataMap.get(key)).filter(data => data !== undefined),
+              widget => widget.uid,
+              (widget, index) => html`
+                <li>
+                  <r-widget
+                    uid="${widget.uid}"
+                    name="${widget.name}"
+                    subtitle="${widget.subtitle ?? nothing}"
+                    notifications="${widget.notifications ?? nothing}"
+                    .link="${widget.link}"
+                    .items="${widget.items}"
+                    empty-icon="${widget.emptyIcon ?? nothing}"
+                    empty-text="${widget.emptyText ?? nothing}"
+                    ?empty-discover=${widget.emptyDiscover ?? false}
+                    ?manage="${this.isEditingWidgetsPrefs}"
+                    ?deletable="${widget.deletable}"
+                    ?no-previous="${index === 0}"
+                    ?no-next="${index === this.widgetToDisplayKeyArray.length - 1}"
+                    ?loading="${widget.loading}"
+                    ?error="${widget.isError ?? false}"
+                    error-message="${widget.errorMessage ?? nothing}"
+                    @move="${this.handleMove}"
+                    @delete="${this.handleRemoveWidget}"
+                  >
+                  </r-widget>
+                </li>
+                `,
+            )
+          }
+          ${
+            this.widgetToDisplayKeyArray.length === 0 || this.isEditingWidgetsPrefs
+              ? this.placholderTemplate()
+              : nothing
+          }
+        </ul>
+      `
+  }
+
+  skeletonTemplate(): TemplateResult {
+    return html`
+        <ul class="widget-tiles">
+          ${
+            map(
+              range(this.widgetMaxCount),
+              () => html`
+                <li>
+                  <r-widget loading>
+                  </r-widget>
+                </li>
+              `,
+            )
+          }
+        </ul>
+      `
+  }
+
+  placholderTemplate(): TemplateResult {
+    return html`
+        ${
+          map(
+            range(this.widgetMaxCount - this.widgetToDisplayKeyArray.length),
+            () => html`
+              <li>
+                <r-widget placeholder>
+                </r-widget>
+              </li>
+            `,
+          )
+        }
+      `
   }
 
   render(): TemplateResult {
@@ -343,7 +412,7 @@ export class ReciaWidgetsWrapper extends LitElement {
                       class="btn-secondary small"
                       ?disabled="${
                         Array.from(this.widgetDataMap.values()).some(x => x.loading)
-                        || this.widgetDataMap.size === 0
+                        || this.loading
                       }"
                       @click="${this.clickOnGerer}"
                     >
@@ -396,46 +465,9 @@ export class ReciaWidgetsWrapper extends LitElement {
             }
           </div>
         </header>
-        <ul class="widget-tiles">
-          ${
-            this.widgetToDisplayKeyArray.length > 0
-              ? repeat(
-                  this.widgetToDisplayKeyArray,
-                  widgetKey => widgetKey,
-                  (widgetKey, index) => html`
-                    ${this.getWidgetRender(widgetKey, index)}
-                  `,
-                )
-              : map(
-                  range(this.widgetMaxCount),
-                  () => html`
-                    <r-widget
-                      role="listitem"
-                      loading
-                    >
-                    </r-widget>
-                  `,
-                )
-          }
-          ${
-            this.isEditingWidgetsPrefs
-              ? html`
-                  ${
-                    map(
-                      range(this.widgetMaxCount - this.widgetToDisplayKeyArray.length),
-                      () => html`
-                        <r-widget
-                          role="listitem"
-                          placeholder
-                        >
-                        </r-widget>
-                      `,
-                    )
-                  }
-                `
-              : nothing
-          }
-        </ul>
+        <div class="content">
+          ${this.contentTemplate()}
+        </div>
       </div>
     `
   }

@@ -14,8 +14,10 @@
 's3862381e95ec3dcf': str`notifications`,
 's5261563ad59a1fae': str`Manage`,
 's5ee26933a140671a': str`Cancel`,
+'s622357f4a4e1195d': str`${0} widget
+Click on "${1}" button to add new ones`,
 's65e1444584dbb304': str`Add menu`,
-'s70b7ef13f5cd5ac3': str`No items`,
+'s70b7ef13f5cd5ac3': str`Items`,
 's7b37041836cc3169': str`You have no`,
 's7f210bf2a45185b6': str`Unable to load content`,
 's8a65c8735b536091': str`Add`,

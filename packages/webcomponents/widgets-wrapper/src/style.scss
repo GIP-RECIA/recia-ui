@@ -26,18 +26,43 @@
     }
   }
 
-  > ul {
-    @include unstyled-list;
-    display: grid;
-    gap: 8px;
+  > .content {
+    position: relative;
 
-    > * {
-      min-width: 0;
+    > .empty {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(1.5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      > svg {
+        font-size: 38px;
+        margin-bottom: 14px;
+        color: HEXToRGBA($black, .3);
+      }
+
+      > p {
+        white-space-collapse: preserve-breaks;
+      }
+    }
+
+    > ul {
+      @include unstyled-list;
+      display: grid;
+      gap: 8px;
+
+      > li {
+        min-width: 0;
+      }
     }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    > ul {
+    > .content > ul {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       grid-auto-rows: 1fr;
       gap: 16px;
@@ -45,7 +70,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, lg)) {
-    > ul {
+    > .content > ul {
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     }
   }
