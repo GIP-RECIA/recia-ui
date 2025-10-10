@@ -7,13 +7,22 @@ $line-height: 40px;
 $line-height-md: 50px;
 $vivible-items: 3;
 
+$header-height: 60px;
+$header-height-md: 58px;
+
+$menu-height: $vivible-items * $line-height;
+$menu-height-md: $vivible-items * $line-height-md + $vivible-items - 1;
+
+$skeleton-placeholder-height: $header-height + 2;
+$skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
+
 @keyframes widget-slide-down {
   from {
     max-height: 0;
   }
 
   to {
-    max-height: $vivible-items * $line-height;
+    max-height: $menu-height;
   }
 }
 
@@ -37,7 +46,7 @@ $vivible-items: 3;
   &-skeleton,
   &-placeholder {
     border-radius: 10px;
-    height: 60px + 2;
+    height: $skeleton-placeholder-height;
   }
 
   &-skeleton {
@@ -61,7 +70,7 @@ $vivible-items: 3;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      height: 60px;
+      height: $header-height;
       width: 100%;
       background-color: var(--#{$prefix}basic-grey);
       padding: 16px 12px;
@@ -148,7 +157,7 @@ $vivible-items: 3;
     animation: widget-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
     > * {
-      height: $vivible-items * $line-height;
+      height: $menu-height;
     }
 
     > ul {
@@ -286,13 +295,13 @@ $vivible-items: 3;
 
     &-skeleton,
     &-placeholder {
-      height: 58px + $vivible-items * $line-height-md + $vivible-items - 1 + 2;
+      height: $skeleton-placeholder-height-md;
     }
 
     > header {
       > div {
         display: inline-flex !important;
-        height: 58px;
+        height: $header-height-md;
 
         > a,
         & {
@@ -324,7 +333,7 @@ $vivible-items: 3;
       > ul > li {
         > a,
         > button {
-          height: 50px;
+          height: $line-height-md;
         }
 
         &:not(:last-child) {
