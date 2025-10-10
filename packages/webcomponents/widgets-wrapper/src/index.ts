@@ -246,15 +246,16 @@ export class ReciaWidgetsWrapper extends LitElement {
       return
     }
 
-    let widgetData: Widget = {
+    const baseWidgetData: Widget = {
       ...currentWidget,
+      deletable: !this.wrapperConfig.requiredKeys.includes(key),
       loading: true,
     }
-    this.widgetDataMap.set(key, widgetData)
+    this.widgetDataMap.set(key, baseWidgetData)
     this.requestUpdate()
 
     try {
-      widgetData = JSON.parse(
+      const widgetData = JSON.parse(
         JSON
           .stringify(
             await window.WidgetAdapter.getWidget(key, soffit),
@@ -268,9 +269,10 @@ export class ReciaWidgetsWrapper extends LitElement {
       emptyText = emptyText !== '' ? emptyText : undefined
 
       this.widgetDataMap.set(key, {
+        ...baseWidgetData,
         ...widgetData,
+        loading: false,
         emptyText,
-        deletable: !this.wrapperConfig.requiredKeys.includes(key),
       })
     }
     // eslint-disable-next-line unused-imports/no-unused-vars
@@ -279,7 +281,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       errorMessage = errorMessage !== '' ? errorMessage : undefined
 
       this.widgetDataMap.set(key, {
-        ...widgetData,
+        ...baseWidgetData,
         loading: false,
         isError: true,
         errorMessage,
