@@ -1,5 +1,7 @@
 - [r-header](#r-header)
   - [Propriétés](#propriétés)
+  - [Architecture](#architecture)
+    - [Imbrications des composants](#imbrications-des-composants)
 
 # r-header
 
@@ -50,3 +52,32 @@
 | `margin-top`                      |      `boolean`      |   `false`   |          `false`           | Ajoute un mage en haute au body de la hauteur du composant                                                |
 | `cache-buster-version`            |      `string`       |   `false`   |        `undefined`         | Version permettant le bypass des caches navigateurs                                                       |
 | `debug`                           |      `boolean`      |   `false`   |          `false`           | Active le mode debug                                                                                      |
+
+## Architecture
+
+### Imbrications des composants
+
+ - [r-header](./src/index.ts)
+   - [r-navigation-drawer](./src/components/navigation-drawer/index.ts)
+     - [r-favorite-dropdown](./src/components/favorite/dropdown/index.ts)
+       - [r-favorite-layout](./src/components/favorite/layout/index.ts)
+     - [r-favorite-bottom-sheet](./src/components/favorite/bottom-sheet/index.ts)
+       - [r-bottom-sheet](../bottom-sheet/src/index.ts)
+       - [r-favorite-layout](./src/components/favorite/layout/index.ts)
+   - [r-principal-container](./src/components/principal-container/index.ts)
+     - [r-info-etab-dropdown-info](./src/components/info-etab/dropdown-info/index.ts)
+       - [r-dropdown-info](../dropdown-info/src/index.ts)
+       - [r-info-etab-layout](./src/components/info-etab/layout/index.ts)
+     - [r-search](./src/components/search/index.ts)
+     - [r-user-menu](./src/components/user-menu/index.ts)
+   - [r-services-layout](./src/components/services-layout/index.ts)
+     - [r-filters](../filters/src/index.ts)
+     - [r-service](./src/components/service/index.ts)
+   - [r-service-info-bottom-sheet](./src/components/service-info/bottom-sheet/index.ts)
+     - [r-bottom-sheet](../bottom-sheet/src/index.ts)
+     - [r-service-info-layout](./src/components/service-info/layout/index.ts)
+   - [r-change-etab-bottom-sheet](./src/components/change-etab-bottom-sheet/index.ts)
+     - [r-bottom-sheet](../bottom-sheet/src/index.ts)
+   - [r-info-etab-bottom-sheet](./src/components/info-etab/bottom-sheet/index.ts)
+     - [r-bottom-sheet](../bottom-sheet/src/index.ts)
+     - [r-info-etab-layout](./src/components/info-etab/layout/index.ts)
