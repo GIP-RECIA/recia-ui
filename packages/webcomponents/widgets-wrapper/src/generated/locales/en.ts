@@ -10,7 +10,7 @@
 
     export const templates = {
       's0e86522d5b18fdc1': str`Delete widget`,
-'s1c703460a5da79b1': str`Rorder to the left`,
+'s1c703460a5da79b1': str`Reorder to the left`,
 's3862381e95ec3dcf': str`notifications`,
 's5261563ad59a1fae': str`Manage`,
 's5ee26933a140671a': str`Cancel`,
@@ -25,6 +25,6 @@ Click on "${1}" button to add new ones`,
 'sde4e0c4335914de4': str`Discover`,
 'se430513274f9b495': str`Save`,
 'se67ae86332ee7cb8': str`Error`,
-'se831b27916e38e5f': str`Rorder to the right`,
+'se831b27916e38e5f': str`Reorder to the right`,
     };
   
