@@ -1,6 +1,6 @@
 {
   "esidoc": {
-    "apiUri": ""
+    "apiUri": "/esidoc-api/empruntsUtilisateur"
   },
   "favoris": {
     "favorisUri": "/portail/api/v4-3/dlm/layout.json"
