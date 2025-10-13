@@ -118,7 +118,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     } = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
     this.widgetToDisplayKeyArray = noStoredDisplayedKeys
       ? this.wrapperConfig.defaultKeys
-      : displayedKeys.filter(key => this.wrapperConfig.allowedKeys.includes(key))
+      : [...new Set(displayedKeys.filter(key => this.wrapperConfig.allowedKeys.includes(key)))]
 
     const missingRequiredKeys = except(this.wrapperConfig.requiredKeys, this.widgetToDisplayKeyArray)
     if (missingRequiredKeys.length > 0)
