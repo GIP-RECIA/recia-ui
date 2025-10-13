@@ -224,6 +224,12 @@ Do you agree to log out now?</target>
   <source>Aucun résultat</source>
   <target>No results</target>
 </trans-unit>
+<trans-unit id="s306320e48e15d90b">
+  <source>Une erreur est survenue lors de la récupération des informations du service.
+Tentez de rouvrir cette fiche.</source>
+  <target>An error occurred while retrieving information from the service.
+Please try reopening this file.</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

@@ -15,6 +15,8 @@
 's1c703460a5da79b1': str`Rorder to the left`,
 's24da9cfa1f59b900': str`No service`,
 's26883f1a61fd0699': str`See all resources`,
+'s306320e48e15d90b': str`An error occurred while retrieving information from the service.
+Please try reopening this file.`,
 's358106e7a82ecfb0': str`Search`,
 's3aeb7a7330a293db': str`Clear search`,
 's49283da0ddbeccc2': str`Favorites menu`,
