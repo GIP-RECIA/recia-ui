@@ -21,13 +21,15 @@
     "allowedKeys": [
       "Favoris",
       "Mediacentre",
-      "Documents"
+      "Documents",
+      "MonCDI"
     ],
     "requiredKeys": [
       "Mediacentre"
     ],
     "defaultKeys": [
-      "Documents"
+      "Documents",
+      "MonCDI"
     ]
   },
   {
@@ -38,13 +40,15 @@
     "allowedKeys": [
       "Favoris",
       "Mediacentre",
-      "Documents"
+      "Documents",
+      "MonCDI"
     ],
     "requiredKeys": [
       "Mediacentre"
     ],
     "defaultKeys": [
-      "Documents"
+      "Documents",
+      "MonCDI"
     ]
   },
   {
@@ -56,19 +60,20 @@
     "allowedKeys": [
       "Favoris",
       "Mediacentre",
-      "Documents"
+      "Documents",
+      "MonCDI"
     ],
     "requiredKeys": [
       "Documents"
     ],
     "defaultKeys": [
-      "Mediacentre"
+      "Mediacentre",
+      "MonCDI"
     ]
   },
   {
     "ENTPersonProfils": [
-      "National_aca",
-      "National_col"
+      "National_aca"
     ],
     "allowedKeys": [
       "Favoris",
@@ -79,6 +84,23 @@
     ],
     "defaultKeys": [
       "Favoris"
+    ]
+  },
+  {
+    "ENTPersonProfils": [
+      "National_col"
+    ],
+    "allowedKeys": [
+      "Favoris",
+      "Documents",
+      "MonCDI"
+    ],
+    "requiredKeys": [
+      "Documents"
+    ],
+    "defaultKeys": [
+      "Favoris",
+      "MonCDI"
     ]
   }
 ]
