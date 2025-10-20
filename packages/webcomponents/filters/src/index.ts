@@ -25,6 +25,7 @@ import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
+import { isEqual } from 'lodash-es'
 import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -55,6 +56,8 @@ export class ReciaFilters extends LitElement {
   @state()
   isExpanded: boolean = false
 
+  lastActiveFilters: { id: string, checked: string[] }[] = []
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -72,6 +75,8 @@ export class ReciaFilters extends LitElement {
         const checked = checkedItems.length > 0 ? checkedItems.map(item => item.key) : [section.items[0].key]
 
         this.checked.set(section.id, checked)
+        this.shadowRoot?.querySelectorAll('form').forEach(form => form.reset())
+        this.updateActiveFilters()
       })
     }
     return true
@@ -87,8 +92,11 @@ export class ReciaFilters extends LitElement {
 
       return { id: key, checked: value.filter(it => it !== firstKey) }
     })
-    this.dispatchEvent(new CustomEvent('update-filters', { detail: { activeFilters } }))
-    this.activeFilters = activeFilters.map(item => item.checked).flat().length
+    if (!isEqual(this.lastActiveFilters, activeFilters)) {
+      this.lastActiveFilters = activeFilters
+      this.dispatchEvent(new CustomEvent('update-filters', { detail: { activeFilters } }))
+      this.activeFilters = activeFilters.map(item => item.checked).flat().length
+    }
   }
 
   handleFormChange(e: Event, section: Section): void {
@@ -248,7 +256,7 @@ export class ReciaFilters extends LitElement {
           ${
             repeat(
               this.data ?? [],
-              section => section,
+              section => section.id,
               section => html`
                 <li>
                   ${

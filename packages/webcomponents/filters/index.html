@@ -12,6 +12,8 @@
   <section class="container">
     <r-filters>
     </r-filters>
+
+    <button id="update">Update data</button>
   </section>
 
   <section class="container">
@@ -98,6 +100,49 @@
     filters.data = data;
     filters.addEventListener('update-filters', (e) => {
       console.table(e.detail.activeFilters)
+    })
+
+    document.querySelector('button#update').addEventListener('click', () => {
+      filters.data = [
+        {
+          "id": "source",
+          "name": "Par source :",
+          "type": "checkbox",
+          "items": [
+            {
+              "key": "all",
+              "value": "Toures les sources"
+            },
+            {
+              "key": "rcvdl",
+              "value": "Région Centre-Val de Loire"
+            }
+          ]
+        },
+        {
+          "id": "rubrique",
+          "name": "Par rubrique :",
+          "type": "radio",
+          "items": [
+            {
+              "key": "all",
+              "value": "Toures les rubriques"
+            },
+            {
+              "key": "sante-et-social",
+              "value": "Santé et social"
+            },
+            {
+              "key": "documentation",
+              "value": "Documentation"
+            },
+            {
+              "key": "autre",
+              "value": "Autre"
+            }
+          ]
+        }
+      ];
     })
   </script>
 </body>
