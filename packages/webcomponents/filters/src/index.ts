@@ -47,7 +47,7 @@ export class ReciaFilters extends LitElement {
   loadingSectionsItems?: number
 
   @state()
-  checked?: Map<string, Array<string>>
+  checked: Map<string, Array<string>> = new Map()
 
   @state()
   activeFilters?: number
@@ -64,8 +64,6 @@ export class ReciaFilters extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (!this.checked)
-      this.checked = new Map()
     if (_changedProperties.has('data')) {
       this.data?.forEach((section) => {
         let checkedItems = section.items.filter(item => item.checked)
@@ -73,17 +71,8 @@ export class ReciaFilters extends LitElement {
           checkedItems = checkedItems[0] ? [checkedItems[0]] : []
         const checked = checkedItems.length > 0 ? checkedItems.map(item => item.key) : [section.items[0].key]
 
-        this.checked!.set(section.id, checked)
+        this.checked.set(section.id, checked)
       })
-    }
-    if (_changedProperties.has('checked')) {
-      const activeFilters = [...this.checked.entries()].map(([key, value]) => {
-        const firstKey = this.data?.find(section => section.id === key)?.items[0].key
-
-        return { id: key, checked: value.filter(it => it !== firstKey) }
-      })
-      this.dispatchEvent(new CustomEvent('update-filters', { detail: { activeFilters } }))
-      this.activeFilters = activeFilters.map(item => item.checked).flat().length
     }
     return true
   }
@@ -92,11 +81,22 @@ export class ReciaFilters extends LitElement {
     this.isExpanded = !this.isExpanded
   }
 
+  updateActiveFilters(): void {
+    const activeFilters = [...this.checked.entries()].map(([key, value]) => {
+      const firstKey = this.data?.find(section => section.id === key)?.items[0].key
+
+      return { id: key, checked: value.filter(it => it !== firstKey) }
+    })
+    this.dispatchEvent(new CustomEvent('update-filters', { detail: { activeFilters } }))
+    this.activeFilters = activeFilters.map(item => item.checked).flat().length
+  }
+
   handleFormChange(e: Event, section: Section): void {
     const target = e.target as HTMLInputElement
 
     if (section.type === 'radio') {
-      this.checked = new Map([...this.checked!, [section.id, [target.value]]])
+      this.checked.set(section.id, [target.value])
+      this.updateActiveFilters()
       return
     }
 
@@ -124,7 +124,7 @@ export class ReciaFilters extends LitElement {
     }
     else if (!isFirst) { // Other triggered
       firstCb.checked = false
-      const currentChecked = this.checked?.get(section.id)?.filter(k => k !== section.items[0].key) ?? []
+      const currentChecked = this.checked.get(section.id)?.filter(k => k !== section.items[0].key) ?? []
       const index = currentChecked.indexOf(target.value)
 
       if (target.checked) {
@@ -139,7 +139,8 @@ export class ReciaFilters extends LitElement {
       newCheckedValues = currentChecked
     }
 
-    this.checked = new Map([...this.checked!, [section.id, newCheckedValues]])
+    this.checked.set(section.id, newCheckedValues)
+    this.updateActiveFilters()
   }
 
   itemTemplate(section: Section, item: Item): TemplateResult {
@@ -154,7 +155,7 @@ export class ReciaFilters extends LitElement {
             name="${section.type === 'radio' ? section.id : key}"
             value="${key}"
             class="tag"
-            ?checked="${this.checked?.get(section.id)?.includes(key) ?? false}"
+            ?checked="${this.checked.get(section.id)?.includes(key) ?? false}"
           >
           <label for="${inputId}">${value}</label>
         </li>
@@ -251,7 +252,7 @@ export class ReciaFilters extends LitElement {
               section => html`
                 <li>
                   ${
-                    this.data && this.data?.length > 1
+                    this.data && this.data.length > 1
                       ? html`
                           <header aria-hidden="true">
                             <span>${section.name}</span>
