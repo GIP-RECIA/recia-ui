@@ -45,10 +45,8 @@ export class ReciaPageLayout extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
-    if (!this.pageTitle) {
-      console.error('page-title is required')
-      return nothing
-    }
+    if (!this.pageTitle)
+      console.warn('page-title is missing')
 
     return html`
       <div class="page-layout">
@@ -69,7 +67,11 @@ export class ReciaPageLayout extends LitElement {
                   `
                 : nothing
             }
-            <h1>${this.pageTitle}</h1>
+            ${
+              this.pageTitle
+                ? html`<h1>${this.pageTitle}</h1>`
+                : nothing
+            }
           </div>
           <slot name="header"></slot>
         </header>

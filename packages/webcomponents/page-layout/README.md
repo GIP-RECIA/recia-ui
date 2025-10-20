@@ -8,4 +8,4 @@
 | Nom          |                Type                | Obligatoire |   Default   | Description                                                  |
 | ------------ | :--------------------------------: | :---------: | :---------: | ------------------------------------------------------------ |
 | `back-link`  | `[Link](./src/types/linkTypes.ts)` |   `false`   | `undefined` | Lien du bouton retour (utiliser `name` pour l'accessibilité) |
-| `page-title` |              `String`              |   `true`    | `undefined` | Titre de la page                                             |
+| `page-title` |              `String`              |   `false`   | `undefined` | Titre de la page                                             |
