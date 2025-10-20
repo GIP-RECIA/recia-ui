@@ -813,6 +813,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:7.1.0":
+  version: 7.1.0
+  resolution: "@fortawesome/fontawesome-common-types@npm:7.1.0"
+  checksum: 10/cf13595f54a7cb3e1e123032a2b34b939bacac300db25faa972da391b1bba7129beb1f929d6866a4b2aa28ac75b20a10a2b1a04e977c0948eceb5ff4c888663e
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-free@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/fontawesome-free@npm:6.7.2"
@@ -820,12 +827,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-svg-core@npm:^6.7.2":
-  version: 6.7.2
-  resolution: "@fortawesome/fontawesome-svg-core@npm:6.7.2"
+"@fortawesome/fontawesome-svg-core@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@fortawesome/fontawesome-svg-core@npm:7.1.0"
   dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.7.2"
-  checksum: 10/a3767631329aaa8c1bfafc9470718628533ceb42365774cd0c121477e0f3125f3cce4c2447058deee2874829ce11aa7a3fe183b0000bad81cf5ed0449c8470ef
+    "@fortawesome/fontawesome-common-types": "npm:7.1.0"
+  checksum: 10/a6137c120d2009df445e72e07e1b9fba923847fc7a3d2429a216fb09ee444aaf7904d9e89c90a1aea47876381437041e42837bb2c4f5a1c758f1424218157bb8
   languageName: node
   linkType: hard
 
@@ -859,7 +866,7 @@ __metadata:
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
     "@fortawesome/fontawesome-free": "npm:^6.7.2"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     eslint: "npm:^9.38.0"
@@ -877,7 +884,7 @@ __metadata:
   resolution: "@gip-recia/widgets-to-endpoints-adapter@workspace:packages/widgets-adapter"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@types/lodash-es": "npm:^4"
@@ -2206,7 +2213,7 @@ __metadata:
   resolution: "bottom-sheet@workspace:packages/webcomponents/bottom-sheet"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -3294,7 +3301,7 @@ __metadata:
   resolution: "dropdown-info@workspace:packages/webcomponents/dropdown-info"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -4296,7 +4303,7 @@ __metadata:
   resolution: "filters@workspace:packages/webcomponents/filters"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -4407,7 +4414,7 @@ __metadata:
   resolution: "footer@workspace:packages/webcomponents/footer"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -4825,7 +4832,7 @@ __metadata:
   resolution: "header@workspace:packages/webcomponents/header"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -6992,7 +6999,7 @@ __metadata:
   resolution: "page-layout@workspace:packages/webcomponents/page-layout"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -7320,7 +7327,7 @@ __metadata:
   resolution: "project-skeleton@workspace:etc/webcomponent/project-skeleton"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -8946,7 +8953,7 @@ __metadata:
   resolution: "wayf@workspace:packages/webcomponents/wayf"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
@@ -9025,7 +9032,7 @@ __metadata:
   resolution: "widgets-wrapper@workspace:packages/webcomponents/widgets-wrapper"
   dependencies:
     "@antfu/eslint-config": "npm:^6.0.0"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@lit/localize": "npm:^0.12.2"
