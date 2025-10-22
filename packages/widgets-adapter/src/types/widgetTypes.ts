@@ -62,4 +62,5 @@ export enum WidgetKey {
   MEDIACENTRE = 'Mediacentre',
   DOCUMENTS = 'Documents',
   ESIDOC = 'MonCDI',
+  EMAIL = 'CourrielEleves',
 }

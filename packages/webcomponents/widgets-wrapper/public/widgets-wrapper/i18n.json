@@ -13,7 +13,8 @@
       "items": {
         "loan": "Emprunt en cours : ",
         "loans": "Emprunts en cours : ",
-        "returnDate": "A rendre avant le : "
+        "returnDate": "A rendre avant le : ",
+        "emailSubjectNull": "(pas d'objet)"
       }
     }
   }
