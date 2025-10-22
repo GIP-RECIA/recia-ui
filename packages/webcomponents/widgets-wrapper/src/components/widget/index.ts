@@ -29,6 +29,7 @@ import {
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
@@ -152,9 +153,10 @@ export class ReciaWidget extends LitElement {
   }
 
   itemTemplate(item: WidgetItem): TemplateResult {
+    const isNew: boolean = item.isNew ?? false
     const content: TemplateResult = html`
       ${getSvgIcon(item.icon)}
-      <div>
+      <div class=${classMap({ isNew })}">
         <span>${item.name}</span>
         ${
           item.description
