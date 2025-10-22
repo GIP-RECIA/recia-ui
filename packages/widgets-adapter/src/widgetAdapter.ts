@@ -20,6 +20,7 @@ import type { Widget, WidgetsWrapperConfig } from './types/widgetTypes.ts'
 import { version } from '../package.json'
 import { ConfigService } from './services/configService.ts'
 import { getDocumentsWidget } from './services/documentsService.ts'
+import { getEmailWidget } from './services/emailService.ts'
 import { getEsidocWidget } from './services/esidocService.ts'
 import { getFavoriteWidget } from './services/favoriteService.ts'
 import { getMediacentreWidget } from './services/mediacentreService.ts'
@@ -39,6 +40,7 @@ class WidgetAdapter {
     [WidgetKey.MEDIACENTRE]: soffit => getMediacentreWidget(this.config, soffit),
     [WidgetKey.DOCUMENTS]: soffit => getDocumentsWidget(this.config, soffit),
     [WidgetKey.ESIDOC]: soffit => getEsidocWidget(this.config, soffit),
+    [WidgetKey.EMAIL]: soffit => getEmailWidget(this.config, soffit),
   }
 
   constructor(config: Config) {
