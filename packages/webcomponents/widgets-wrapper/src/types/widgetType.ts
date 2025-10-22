@@ -42,6 +42,7 @@ export interface WidgetItem {
   description?: string
   icon?: string
   link?: Link
+  isNew?: boolean
   dispatchEvents?: { type: string, detail?: object }[]
 }
 
