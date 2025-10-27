@@ -85,20 +85,25 @@ export class ReciaPrincipalContainer extends LitElement {
             ${
               infoEtab
                 ? html`
-                    <button
-                      id="${UserMenuItem.InfoEtab}"
-                      class="btn-secondary-toggle circle"
-                      aria-label="${msg(str`Infos de l\'établissement`)}"
-                      @click="${(_: Event) => {
-                        this.dispatchEvent(new CustomEvent('user-menu-event', {
-                          detail: {
-                            type: UserMenuItem.InfoEtab,
-                          },
-                        }))
-                      }}"
-                    >
-                      ${getIcon(faCircleInfo)}
-                    </button>
+                    <div class="tooltip-container">
+                      <button
+                        id="${UserMenuItem.InfoEtab}"
+                        class="btn-secondary-toggle circle"
+                        aria-label="${msg(str`Menu ${msg(str`Informations de l\'établissement`)}`)}"
+                        @click="${(_: Event) => {
+                          this.dispatchEvent(new CustomEvent('user-menu-event', {
+                            detail: {
+                              type: UserMenuItem.InfoEtab,
+                            },
+                          }))
+                        }}"
+                      >
+                        ${getIcon(faCircleInfo)}
+                      </button>
+                      <div class="tooltip bottom right">
+                        <span>${msg(str`Informations de l\'établissement`)}</span>
+                      </div>
+                    </div>
                     <r-info-etab-dropdown-info
                       class="dropdown-info"
                       .data="${infoEtabData}"

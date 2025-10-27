@@ -192,10 +192,6 @@ Do you agree to log out now?</target>
   <source>Mon profil</source>
   <target>My profile</target>
 </trans-unit>
-<trans-unit id="sbf71c25c7ca379d8">
-  <source>Infos de l'établissement</source>
-  <target>Institution info</target>
-</trans-unit>
 <trans-unit id="s4c45c541dc69732e">
   <source>Lancer le didacticiel</source>
   <target>Start tutorial</target>
@@ -229,6 +225,14 @@ Do you agree to log out now?</target>
 Tentez de rouvrir cette fiche.</source>
   <target>An error occurred while retrieving information from the service.
 Please try reopening this file.</target>
+</trans-unit>
+<trans-unit id="sef8481fc13f940c8">
+  <source>Informations de l'établissement</source>
+  <target>Institution information</target>
+</trans-unit>
+<trans-unit id="s0b1729a212cce6d0">
+  <source>Menu <x id="0" equiv-text="${msg(str `Informations de l\'établissement`)}"/></source>
+  <target><x id="0" equiv-text="${msg(str `Informations de l\'établissement`)}"/> menu</target>
 </trans-unit>
 </body>
 </file>

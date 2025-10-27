@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../variables' as *;
+@use '../../../../tooltip/src/style.scss' as *;
 @use '../../../../common/assets/scss/global' as *;
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -82,9 +83,16 @@
       overflow: hidden;
     }
 
-    > button#info-etab {
+    > .tooltip-container > button#info-etab {
       display: none;
       flex-shrink: 0;
+
+      &:hover,
+      &:focus-visible {
+        ~ .tooltip {
+          display: unset;
+        }
+      }
     }
 
     > .dropdown-info {
@@ -129,14 +137,14 @@
   }
 
   @media (width >= map.get($custom-breakpoints, user-info)) {
-    > .start > button#info-etab {
+    > .start > .tooltip-container > button#info-etab {
       display: inline-flex;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) and (height >= map.get($grid-breakpoints, md)) {
     > .start {
-      > button#info-etab {
+      > .tooltip-container > button#info-etab {
         display: none;
       }
 

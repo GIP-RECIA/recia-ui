@@ -11,6 +11,7 @@
     export const templates = {
       's053c80dfb273b703': str`Photo of the institution`,
 's0879a675a2208eb0': str`My account menu`,
+'s0b1729a212cce6d0': str`${0} menu`,
 's130d574b67f1fd9b': str`Favorites`,
 's1c703460a5da79b1': str`Rorder to the left`,
 's24da9cfa1f59b900': str`No service`,
@@ -48,7 +49,6 @@ Please try reopening this file.`,
 
 Do you agree to log out now?`,
 'sbddc966a2760f55c': str`Change institution`,
-'sbf71c25c7ca379d8': str`Institution info`,
 'sc139bbab63351fe2': str`Access the ENT`,
 'sc3a31f700d8e22a1': str`Logout`,
 'sc9760fd20a454f56': str`Learn more`,
@@ -61,6 +61,7 @@ Do you agree to log out now?`,
 'se627415befeda34d': str`Home`,
 'se831b27916e38e5f': str`Rorder to the right`,
 'se9bc00ac86dcb50b': str`Available resources`,
+'sef8481fc13f940c8': str`Institution information`,
 'sf0da99a184bafb7e': str`Close`,
 'sf52ce9bda73f60a6': str`An error occurred while retrieving services.
 Try refreshing the page.`,
