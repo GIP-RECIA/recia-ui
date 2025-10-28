@@ -135,9 +135,9 @@ export class ReciaWidgetsWrapper extends LitElement {
         this.wrapperConfig.defaultKeys,
       )
     }
-    for (const value of this.widgetToDisplayKeyArray) {
-      this.buildWidget(value, soffit.encoded)
-    }
+    [...new Set(this.widgetToDisplayKeyArray)].forEach((key) => {
+      this.buildWidget(key, soffit.encoded)
+    })
     this.loading = false
   }
 
