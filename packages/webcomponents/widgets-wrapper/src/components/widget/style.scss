@@ -165,8 +165,11 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
       background-color: var(--#{$prefix}body-bg);
       overflow-y: auto;
       outline: none;
+      scroll-snap-type: y mandatory;
 
       > li {
+        scroll-snap-align: start;
+
         > a,
         > button {
           @include unstyled-link;
