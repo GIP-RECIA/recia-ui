@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.7.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.0...ui-webcomponents/v1.7.1) (2025-10-28)
+
+
+### Features
+
+* **header:** add background image when image not loaded ([db5365e](https://github.com/GIP-RECIA/recia-ui/commit/db5365e785cd0695929d764cd92b0c1eb9f213c4))
+* **header:** add missing structure information tool tip ([2eee348](https://github.com/GIP-RECIA/recia-ui/commit/2eee34838ca49731297825b64b1a62575ab9277b))
+* **page-layout:** make page-title only warn instead of render nothing ([0af4790](https://github.com/GIP-RECIA/recia-ui/commit/0af479087719c41c25760f55c4a91bfa5c6f07d2))
+* **widgets-wrapper:** add scroll snap ([7a5b2cf](https://github.com/GIP-RECIA/recia-ui/commit/7a5b2cfa2e65544e43ca2776a54e4cdf48a03d3d))
+* **widgets-wrapper:** e-sidoc add MonCDI ([375c0ba](https://github.com/GIP-RECIA/recia-ui/commit/375c0ba21b37e4c901ad5979261844e975214f5b))
+
+
+### Bug Fixes
+
+* **filters:** acceptability issue when data update ([5f46847](https://github.com/GIP-RECIA/recia-ui/commit/5f468472217ba1aa23b97a727b5ee6959cda452a))
+* **header:** not logged start width ([5285cce](https://github.com/GIP-RECIA/recia-ui/commit/5285cce8142a6eb3f80feeeb2d95c88a4831888b))
+* **header:** service more margin ([7563f1a](https://github.com/GIP-RECIA/recia-ui/commit/7563f1ac593d72e1639504fe95f4a6f31f4691d1))
+* **widgets-wrapper:** e-sidoc i18n ([d59e80e](https://github.com/GIP-RECIA/recia-ui/commit/d59e80e8756cd55a3fa1c6def35561bdddd9b475))
+* **widgets-wrapper:** en translation ([23684e0](https://github.com/GIP-RECIA/recia-ui/commit/23684e09b110804dcec322be9f63d0cfad1b5a43))
+* **widgets-wrapper:** remove duplicated keys ([3deb08f](https://github.com/GIP-RECIA/recia-ui/commit/3deb08fe520448e8a46cfc475cac28b45c697f4b))
+
 ## [1.7.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.6.0...ui-webcomponents/v1.7.0) (2025-10-13)
 
 
