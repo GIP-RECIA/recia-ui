@@ -327,7 +327,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
       animation: none;
 
       > * {
-        height: $vivible-items * $line-height-md + $vivible-items - 1;
+        height: $menu-height-md;
       }
 
       > ul > li {
