@@ -83,14 +83,17 @@
       overflow: hidden;
     }
 
-    > .tooltip-container > button#info-etab {
+    > .tooltip-container:has(> button#info-etab) {
       display: none;
-      flex-shrink: 0;
 
-      &:hover,
-      &:focus-visible {
-        ~ .tooltip {
-          display: unset;
+      > button#info-etab {
+        flex-shrink: 0;
+
+        &:hover,
+        &:focus-visible {
+          ~ .tooltip {
+            display: unset;
+          }
         }
       }
     }
@@ -137,14 +140,14 @@
   }
 
   @media (width >= map.get($custom-breakpoints, user-info)) {
-    > .start > .tooltip-container > button#info-etab {
-      display: inline-flex;
+    > .start > .tooltip-container:has(> button#info-etab) {
+      display: inline;
     }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) and (height >= map.get($grid-breakpoints, md)) {
     > .start {
-      > .tooltip-container > button#info-etab {
+      > .tooltip-container:has(> button#info-etab)  {
         display: none;
       }
 
