@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.7.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.1...ui-webcomponents/v1.7.2) (2025-10-30)
+
+
+### Bug Fixes
+
+* **header:** disable matchSorter sorting ([42b706f](https://github.com/GIP-RECIA/recia-ui/commit/42b706f273aabb0a29f68f6d09103c61dd135097))
+* **header:** info etab button style ([31935f0](https://github.com/GIP-RECIA/recia-ui/commit/31935f00fabac6430db4a683b08fdf82b1983882))
+* **page-layout:** arrow position ([aecb6fe](https://github.com/GIP-RECIA/recia-ui/commit/aecb6fe870827f1d980e7ee3293c3fd3a6dc19a6))
+
 ## [1.7.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.0...ui-webcomponents/v1.7.1) (2025-10-28)
 
 
