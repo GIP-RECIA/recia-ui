@@ -204,6 +204,7 @@ const $searchResultServices: ReadableAtom<Array<Service> | undefined> = batched(
         {
           keys: ['name', 'description', 'keywords'],
           threshold: matchSorter.rankings.ACRONYM,
+          sorter: rankedItems => rankedItems,
         },
       )
     }
@@ -226,6 +227,7 @@ const $filteredServices: ReadableAtom<Array<Service> | undefined> = batched(
         {
           keys: ['categories'],
           threshold: matchSorter.rankings.EQUAL,
+          sorter: rankedItems => rankedItems,
         },
       )
     }
