@@ -22,16 +22,14 @@ import { WidgetKey } from '../types/widgetTypes.ts'
 
 async function get(
   url: string,
-  soffit: string,
   timeout: number,
 ): Promise<EmailApiResponse> {
   try {
     const response = await fetch(url, {
       method: 'GET',
+      credentials: 'include',
       signal: AbortSignal.timeout(timeout),
-      headers: {
-        Authorization: `Bearer ${soffit}`,
-      },
+      redirect: 'follow',
     })
 
     if (!response.ok)
@@ -78,11 +76,10 @@ function getItems(
 
 async function getEmailWidget(
   config: Config,
-  soffit: string,
+  _soffit: string,
 ): Promise<Partial<Widget>> {
   const response = await get(
     config.email.apiUri,
-    soffit,
     config.global.timeout,
   )
 
