@@ -42,7 +42,8 @@
       "Favoris",
       "Mediacentre",
       "Documents",
-      "MonCDI"
+      "MonCDI",
+      "CourrielEleves"
     ],
     "requiredKeys": [
       "Mediacentre"
