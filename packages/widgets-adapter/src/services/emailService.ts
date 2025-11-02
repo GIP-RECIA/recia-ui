@@ -84,6 +84,7 @@ async function getEmailWidget(
   )
 
   return {
+    subtitle: 'I18N$emailSubtitle$',
     notifications: response.messageNotReadCount,
     items: getItems(config, response),
   }
