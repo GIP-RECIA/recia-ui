@@ -14,7 +14,8 @@
         "loan": "Emprunt en cours : ",
         "loans": "Emprunts en cours : ",
         "returnDate": "A rendre avant le : ",
-        "emailSubjectNull": "(pas d'objet)"
+        "emailSubjectNull": "(pas d'objet)",
+        "emailSubtitle": "Vos 10 derniers courriels."
       }
     }
   }
