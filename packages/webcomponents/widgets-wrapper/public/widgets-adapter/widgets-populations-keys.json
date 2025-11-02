@@ -42,7 +42,8 @@
       "^Favoris$",
       "^Mediacentre$",
       "^Documents$",
-      "^MonCDI(?:TheresePlaniol)?$"
+      "^MonCDI(?:TheresePlaniol)?$",
+      "^CourrielEleves$"
     ],
     "requiredKeys": [
       "^Mediacentre$"

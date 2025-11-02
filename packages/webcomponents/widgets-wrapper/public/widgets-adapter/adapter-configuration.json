@@ -1,4 +1,7 @@
 {
+  "email": {
+    "apiUri": "/api-rest-mail/api/email/summary"
+  },
   "esidoc": {
     "apiUri": "/esidoc-api/empruntsUtilisateur"
   },
