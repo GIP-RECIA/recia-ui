@@ -16,12 +16,14 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Link } from '../../types/index.ts'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 import { componentName } from '../../../../common/config.ts'
+import star from '../../assets/svg/star.svg?raw'
+import starSolid from '../../assets/svg/starSolid.svg?raw'
 import langHelper from '../../helpers/langHelper.ts'
 import {
   addFavorite,
@@ -29,7 +31,6 @@ import {
 } from '../../stores/index.ts'
 import { Category } from '../../types/index.ts'
 import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
-import { getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -150,16 +151,11 @@ export class ReciaService extends LitElement {
             }
             <div class="favorite">
               <button
+                class="${classMap({ marked: this.isFavorite })}"
                 aria-label="${this.isFavorite ? msg(str`Retirer des favoris`) : msg(str`Ajouter aux favoris`)}"
                 @click="${this.toggleFavorite}"
               >
-                ${
-                  getIconWithStyle(
-                    this.isFavorite ? faStar : farStar,
-                    undefined,
-                    { marked: this.isFavorite },
-                  )
-                }
+                ${unsafeSVG(this.isFavorite ? starSolid : star)}
               </button>
             </div>
             ${
