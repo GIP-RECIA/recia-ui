@@ -105,18 +105,27 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
         @include unstyled-link;
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 0;
+        transition:
+          gap .15s ease-out;
 
         > .focus-indicator {
-          display: none;
+          font-size: 16px;
+          opacity: 0;
+          max-width: 0;
+          transition:
+            opacity .15s ease-out,
+            max-width .15s ease-out;
         }
 
         &:hover,
         &:focus-visible {
           outline: none;
+          gap: 8px;
 
           > .focus-indicator {
-            display: unset;
+            opacity: 1;
+            max-width: 1em;
             color: var(--#{$prefix}primary);
           }
 
