@@ -6,10 +6,9 @@
 button.drawer-toggle {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
   align-items: center;
   justify-content: center;
-  color: inherit;
   height: $header-height;
   width: 72px;
   font-size: var(--#{$prefix}font-size-xxs);
@@ -19,6 +18,9 @@ button.drawer-toggle {
   background-color: var(--#{$prefix}lighter-black);
   color: #FFF;
   z-index: 2;
+  transition:
+    background-color .15s ease-out,
+    gap .15s ease-out;
 
   > svg {
     height: 28px;
@@ -26,16 +28,25 @@ button.drawer-toggle {
   }
 
   > span {
-    display: none;
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    visibility: hidden;
+    transition:
+      opacity .15s ease-out,
+      max-height .15s ease-out;
   }
 
   &:hover,
   &:focus-visible {
     outline: none;
     background-color: var(--#{$prefix}primary);
+    gap: 4px;
 
     > span {
-      display: unset;
+      opacity: 1;
+      max-height: 1.15em;
+      visibility: visible;
     }
   }
 }
