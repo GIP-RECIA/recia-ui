@@ -205,7 +205,7 @@ export class ReciaNavigationDrawer extends LitElement {
         @click="${this.toggleDrawer}"
       >
         ${getSvgIcon(orgIconUrl ?? defaultOrgIconUrl)}
-        <span>${msg(str`Menu`)}</span>
+        <span>${this.isExpanded ? msg(str`Fermer`) : msg(str`Menu`)}</span>
       </button>
       <div
         id="navigation-drawer"
