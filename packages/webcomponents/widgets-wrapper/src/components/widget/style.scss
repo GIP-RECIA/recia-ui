@@ -245,7 +245,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
           &:focus-visible {
             outline: none;
             color: var(--#{$prefix}primary);
-            background-color: var(--#{$prefix}btn-secondary-hover); // TODO: replace with more lighter color
+            background-color: HEXToRGBA(var(--#{$prefix}btn-secondary-hover), .4);
 
             > .icon {
               color: var(--#{$prefix}primary);
