@@ -14,10 +14,6 @@
   <source>Accueil</source>
   <target>Home</target>
 </trans-unit>
-<trans-unit id="s4ac64bd974adacb4">
-  <source>Retourer à l'accueil</source>
-  <target>Back to home</target>
-</trans-unit>
 <trans-unit id="s8c72b686e1d78170">
   <source>Tous les services</source>
   <target>All services</target>
@@ -233,6 +229,10 @@ Please try reopening this file.</target>
 <trans-unit id="s0b1729a212cce6d0">
   <source>Menu <x id="0" equiv-text="${msg(str `Informations de l\'établissement`)}"/></source>
   <target><x id="0" equiv-text="${msg(str `Informations de l\'établissement`)}"/> menu</target>
+</trans-unit>
+<trans-unit id="s1ac8916da1fbf5d6">
+  <source>Retourner à l'accueil</source>
+  <target>Back to home</target>
 </trans-unit>
 </body>
 </file>

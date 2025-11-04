@@ -222,7 +222,7 @@ export class ReciaNavigationDrawer extends LitElement {
             this.itemTemplate({
               id: 'home',
               name: msg(str`Accueil`),
-              ariaLabel: msg(str`Retourer à l'accueil`),
+              ariaLabel: msg(str`Retourner à l'accueil`),
               icon: home,
               link: homeLink,
               isCurrent: homePage,
