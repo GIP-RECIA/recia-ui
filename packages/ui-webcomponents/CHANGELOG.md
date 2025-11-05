@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.7.3](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.2...ui-webcomponents/v1.7.3) (2025-11-05)
+
+
+### Features
+
+* **header:** add navigation drawer button animation ([423e8e2](https://github.com/GIP-RECIA/recia-ui/commit/423e8e2ce74bda5174496c52a4a311a5bc3f15d8))
+* **header:** add navigation drawer button changing text ([70f6bbf](https://github.com/GIP-RECIA/recia-ui/commit/70f6bbf40613a8867f4ed8c5851ea6c672a0433f))
+* **header:** increase drawer icons size ([09ffd58](https://github.com/GIP-RECIA/recia-ui/commit/09ffd581ff1f19f310263bb407b695c7c16b2590))
+* **header:** use or own favorite icon ([127a269](https://github.com/GIP-RECIA/recia-ui/commit/127a269324d04be879d275edd94db74324a03f9e))
+* **widgets-wrapper:** add hover and focus heading transition ([53ee3e4](https://github.com/GIP-RECIA/recia-ui/commit/53ee3e4c164e9adad28ed7fdbbc9c30d3723417b))
+* **widgets-wrapper:** add hover and focus transition ([a1091d4](https://github.com/GIP-RECIA/recia-ui/commit/a1091d4b7bdbca3c70b337c1a408e7709cff22af))
+* **widgets-wrapper:** more lighter item hover and focus background color ([45fc2fa](https://github.com/GIP-RECIA/recia-ui/commit/45fc2fab7987a737b54a207bd189e67acb1ee8c4))
+
+
+### Bug Fixes
+
+* **header:** icon rgaa issue ([dd4de6d](https://github.com/GIP-RECIA/recia-ui/commit/dd4de6d777ef13434e76b61d9e7355353772497a))
+* **header:** improve mobile service passing ([c5e424d](https://github.com/GIP-RECIA/recia-ui/commit/c5e424def2cb41b5b8258c49ce4f356de32cd682))
+* **header:** translation issue ([d4a8093](https://github.com/GIP-RECIA/recia-ui/commit/d4a8093bc002e54c391b803f715587cd6636a36d))
+* **wc:** improve outline animation ([d0b6ed0](https://github.com/GIP-RECIA/recia-ui/commit/d0b6ed0949361bf1241fa086c363fb1cda2e2114))
+
 ## [1.7.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.1...ui-webcomponents/v1.7.2) (2025-10-30)
 
 
