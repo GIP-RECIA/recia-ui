@@ -42,7 +42,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
   height: 100%;
   border: 1px solid var(--#{$prefix}stroke);
   box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
-  outline: 0;
+  outline: 0 solid transparent;
   outline-offset: -1px;
   transition:
     outline .15s ease-out,
