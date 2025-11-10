@@ -39,7 +39,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@types/lodash-es": "^4",
     "@types/regenerator-runtime": "^0",
-    "eslint": "^9.39.0",
+    "eslint": "^9.39.1",
     "eslint-plugin-format": "^1.0.2",
     "lodash-es": "^4.17.21",
     "regenerator-runtime": "^0.14.1",
