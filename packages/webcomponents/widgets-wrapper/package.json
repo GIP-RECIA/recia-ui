@@ -29,7 +29,7 @@
     "@lit/localize-tools": "^0.8.0",
     "@types/lodash-es": "^4",
     "@uportal/open-id-connect": "^1.40.2",
-    "eslint": "^9.39.0",
+    "eslint": "^9.39.1",
     "eslint-plugin-format": "^1.0.2",
     "lodash-es": "^4.17.21",
     "regenerator-runtime": "^0.14.1",
