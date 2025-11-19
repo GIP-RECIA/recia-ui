@@ -90,8 +90,8 @@ export class ReciaBottomSheet extends LitElement {
     this.removeEventListener('touchend', this.handleTouchEnd.bind(this))
   }
 
-  open(_: Event | undefined = undefined): void {
-    this.activeElement = document.activeElement as HTMLElement
+  open(e: Event | undefined = undefined): void {
+    this.activeElement = (e?.target ?? document.activeElement) as HTMLElement
     document.documentElement.style.overflowY = 'hidden'
     this.show = true
     setTimeout(() => {
