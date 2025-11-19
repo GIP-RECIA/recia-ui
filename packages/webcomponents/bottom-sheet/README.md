@@ -12,7 +12,6 @@
 
 | Nom          |   Type    | Obligatoire | Default | Description                         |
 | ------------ | :-------: | :---------: | :-----: | ----------------------------------- |
-| `open`       | `boolean` |   `false`   | `false` | Affiche la bottom sheet             |
 | `no-close`   | `boolean` |   `false`   | `false` | Masque la croix en haut pour fermer |
 | `no-drag`    | `boolean` |   `false`   | `false` | Masque la barre en haut             |
 | `no-mask`    | `boolean` |   `false`   | `false` | Retire le masque                    |
