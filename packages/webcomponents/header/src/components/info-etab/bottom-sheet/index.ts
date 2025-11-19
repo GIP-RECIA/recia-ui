@@ -17,7 +17,7 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
@@ -57,6 +57,7 @@ export class ReciaInfoEtabBottomSheet extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        a-label="${msg(str`Informations de l\'établissement`)}"
       >
         <r-info-etab-layout
           ${

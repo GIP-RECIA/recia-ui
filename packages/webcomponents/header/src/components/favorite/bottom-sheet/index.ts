@@ -18,7 +18,7 @@ import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { FavoriteSection } from '../../../types/index.ts'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { createRef, ref } from 'lit/directives/ref.js'
@@ -70,6 +70,7 @@ export class ReciaFavoriteBottomSheet extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        a-label="${msg(str`Vos favoris`)}"
         @close="${this.resetLayout}"
       >
         <r-favorite-layout

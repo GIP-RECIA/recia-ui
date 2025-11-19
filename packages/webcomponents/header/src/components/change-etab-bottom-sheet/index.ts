@@ -105,6 +105,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        a-label="${msg(str`Changer d\'établissement`)}"
         @close="${this.resetForm}"
       >
         <form

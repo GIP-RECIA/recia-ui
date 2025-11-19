@@ -21,6 +21,7 @@ import type { ServiceInfoLayout } from '../../../types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../../common/config.ts'
 import { preserveFromSpreading } from '../../../config.ts'
@@ -124,6 +125,7 @@ export class ReciaBottomSheetServiceInfo extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
+        a-label="${ifDefined(this.data?.name)}"
         @close="${this.reset}"
       >
         <r-service-info-layout
