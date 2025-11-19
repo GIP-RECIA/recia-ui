@@ -197,93 +197,98 @@ export class ReciaNavigationDrawer extends LitElement {
     }
 
     return html`
-      <button
-        class="drawer-toggle"
-        aria-expanded="${this.visible || this.isExpanded}"
-        aria-controls="navigation-drawer"
+      <nav
+        role="navigation"
         aria-label="${msg(str`Tiroir de navigation`)}"
-        @click="${this.toggleDrawer}"
       >
-        ${getSvgIcon(orgIconUrl ?? defaultOrgIconUrl)}
-        <span>${this.isExpanded ? msg(str`Fermer`) : msg(str`Menu`)}</span>
-      </button>
-      <div
-        id="navigation-drawer"
-        class="${classMap({
-          visible: this.visible,
-          expended: this.isExpanded,
-        })}navigation-drawer"
-      >
-        <div>
-          <span>${this.name}</span>
-        </div>
-        <ul ?inert="${!(this.visible || this.isExpanded)}">
-          ${
-            this.itemTemplate({
-              id: 'home',
-              name: msg(str`Accueil`),
-              ariaLabel: msg(str`Retourner à l'accueil`),
-              icon: home,
-              link: homeLink,
-              isCurrent: homePage,
-            })
-          }
-          <li>
-            <button
-              id="nav-all-services"
-              title="${msg(str`Tous les services`)}"
-              aria-label=""
-              class="${classMap({
-                active: this.isServicesLayout,
-              })}"
-              @click="${this.toggleServices}"
-            >
-              <div class="active-indicator"></div>
-              <div class="icon">
-                ${unsafeSVG(grid)}
-              </div>
-              <span class="text">${msg(str`Tous les services`)}</span>
-            </button>
-          </li>
-          <li id="nav-favorite">
-            <button
-              title="${msg(str`Favoris`)}"
-              class="favorites-bottom-sheet"
-              @click="${this.openFavoriteBottomSheet}"
-            >
-              <div class="active-indicator"></div>
-              <div class="icon">
-                ${unsafeSVG(star)}
-              </div>
-              <span class="text">${msg(str`Favoris`)}</span>
-            </button>
-            <r-favorite-dropdown
-              .data="${favoriteMenu}"
-              ?expended="${this.isExpanded}"
-              class="favorites-dropdown"
-              @open="${this.openFavoriteDropdown}"
-              @close="${this.closeFavoriteDropdown}"
-              @updated="${this.handleFavoriteUpdate}"
-            >
-           </r-favorite-dropdown>
-          </li>
-          ${
-            repeat(
-              drawerItems ?? [],
-              item => item.name,
-              item => this.itemTemplate(item),
-            )
-          }
-        </ul>
-      </div>
-      <div class="teleport">
-        <r-favorite-bottom-sheet
-          ${ref(this.favoriteBottomSheetRef)}
-          .data="${favoriteMenu}"
-          @updated="${this.handleFavoriteUpdate}"
+        <button
+          class="drawer-toggle"
+          aria-expanded="${this.visible || this.isExpanded}"
+          aria-controls="navigation-drawer"
+          aria-label="${msg(str`Tiroir de navigation`)}"
+          @click="${this.toggleDrawer}"
         >
-        </r-favorite-bottom-sheet>
-      </div>
+          ${getSvgIcon(orgIconUrl ?? defaultOrgIconUrl)}
+          <span>${this.isExpanded ? msg(str`Fermer`) : msg(str`Menu`)}</span>
+        </button>
+        <div
+          id="navigation-drawer"
+          class="${classMap({
+            visible: this.visible,
+            expended: this.isExpanded,
+          })}navigation-drawer"
+        >
+          <div>
+            <span>${this.name}</span>
+          </div>
+          <ul>
+            ${
+              this.itemTemplate({
+                id: 'home',
+                name: msg(str`Accueil`),
+                ariaLabel: msg(str`Retourner à l'accueil`),
+                icon: home,
+                link: homeLink,
+                isCurrent: homePage,
+              })
+            }
+            <li>
+              <button
+                id="nav-all-services"
+                title="${msg(str`Tous les services`)}"
+                aria-label=""
+                class="${classMap({
+                  active: this.isServicesLayout,
+                })}"
+                @click="${this.toggleServices}"
+              >
+                <div class="active-indicator"></div>
+                <div class="icon">
+                  ${unsafeSVG(grid)}
+                </div>
+                <span class="text">${msg(str`Tous les services`)}</span>
+              </button>
+            </li>
+            <li id="nav-favorite">
+              <button
+                title="${msg(str`Favoris`)}"
+                class="favorites-bottom-sheet"
+                @click="${this.openFavoriteBottomSheet}"
+              >
+                <div class="active-indicator"></div>
+                <div class="icon">
+                  ${unsafeSVG(star)}
+                </div>
+                <span class="text">${msg(str`Favoris`)}</span>
+              </button>
+              <r-favorite-dropdown
+                .data="${favoriteMenu}"
+                ?expended="${this.isExpanded}"
+                class="favorites-dropdown"
+                @open="${this.openFavoriteDropdown}"
+                @close="${this.closeFavoriteDropdown}"
+                @updated="${this.handleFavoriteUpdate}"
+              >
+             </r-favorite-dropdown>
+            </li>
+            ${
+              repeat(
+                drawerItems ?? [],
+                item => item.name,
+                item => this.itemTemplate(item),
+              )
+            }
+          </ul>
+        </div>
+        <div class="teleport">
+          <r-favorite-bottom-sheet
+            ${ref(this.favoriteBottomSheetRef)}
+            .data="${favoriteMenu}"
+            @updated="${this.handleFavoriteUpdate}"
+          >
+          </r-favorite-bottom-sheet>
+        </div>
+      </nav>
     `
   }
 

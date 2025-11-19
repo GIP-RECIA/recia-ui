@@ -52,6 +52,7 @@ button.drawer-toggle {
 }
 
 .navigation-drawer {
+  visibility: hidden;
   display: flex;
   flex-direction: column;
   transform: translateX(-$drawer-width);
@@ -65,6 +66,7 @@ button.drawer-toggle {
   color: #FFF;
   font-size: var(--#{$prefix}font-size-sm);
   transition:
+    visibility .15s cubic-bezier(0.4, 0, 0.2, 1),
     transform .15s cubic-bezier(0.4, 0, 0.2, 1),
     width .15s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -188,6 +190,7 @@ button.drawer-toggle {
   }
 
   &.expended {
+    visibility: visible;
     width: $drawer-expended-width;
     transform: translateX(0);
 
@@ -211,6 +214,7 @@ button.drawer-toggle {
 
   @media (width >= map.get($grid-breakpoints, md)) {
     &.visible {
+      visibility: visible;
       transform: translateX(0);
     }
 
