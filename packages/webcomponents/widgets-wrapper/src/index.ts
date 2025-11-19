@@ -253,6 +253,7 @@ export class ReciaWidgetsWrapper extends LitElement {
       return
     }
 
+    const handler = currentWidget.handler ?? key
     const baseWidgetData: Widget = {
       ...currentWidget,
       deletable: !this.wrapperConfig.requiredKeys.includes(key),
@@ -272,7 +273,7 @@ export class ReciaWidgetsWrapper extends LitElement {
             (_, match) => langHelper.localTranslation(`items.${match}`, match),
           ),
       )
-      let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${key}`, '')
+      let emptyText: string | undefined = langHelper.localTranslation(`empty-text.${handler}`, '')
       emptyText = emptyText !== '' ? emptyText : undefined
 
       this.widgetDataMap.set(key, {

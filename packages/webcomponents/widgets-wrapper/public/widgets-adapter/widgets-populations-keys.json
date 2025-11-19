@@ -4,14 +4,14 @@
       "National_tut"
     ],
     "allowedKeys": [
-      "Favoris",
-      "Mediacentre",
-      "Documents"
+      "^Favoris$",
+      "^Mediacentre$",
+      "^Document$s"
     ],
     "requiredKeys": [],
     "defaultKeys": [
-      "Mediacentre",
-      "Documents"
+      "^Mediacentre$",
+      "^Document$s"
     ]
   },
   {
@@ -19,17 +19,17 @@
       "National_elv"
     ],
     "allowedKeys": [
-      "Favoris",
-      "Mediacentre",
-      "Documents",
-      "MonCDI"
+      "^Favoris$",
+      "^Mediacentre$",
+      "^Documents$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ],
     "requiredKeys": [
-      "Mediacentre"
+      "^Mediacentre$"
     ],
     "defaultKeys": [
-      "Documents",
-      "MonCDI"
+      "^Documents$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ]
   },
   {
@@ -38,17 +38,17 @@
       "National_doc"
     ],
     "allowedKeys": [
-      "Favoris",
-      "Mediacentre",
-      "Documents",
-      "MonCDI"
+      "^Favoris$",
+      "^Mediacentre$",
+      "^Documents$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ],
     "requiredKeys": [
-      "Mediacentre"
+      "^Mediacentre$"
     ],
     "defaultKeys": [
-      "Documents",
-      "MonCDI"
+      "^Documents$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ]
   },
   {
@@ -58,17 +58,17 @@
       "National_eta"
     ],
     "allowedKeys": [
-      "Favoris",
-      "Mediacentre",
-      "Documents",
-      "MonCDI"
+      "^Favoris$",
+      "^Mediacentre$",
+      "^Documents$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ],
     "requiredKeys": [
-      "Documents"
+      "^Documents$"
     ],
     "defaultKeys": [
-      "Mediacentre",
-      "MonCDI"
+      "^Mediacentre$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ]
   },
   {
@@ -76,14 +76,14 @@
       "National_aca"
     ],
     "allowedKeys": [
-      "Favoris",
-      "Documents"
+      "^Favoris$",
+      "^Documents$"
     ],
     "requiredKeys": [
-      "Documents"
+      "^Documents$"
     ],
     "defaultKeys": [
-      "Favoris"
+      "^Favoris$"
     ]
   },
   {
@@ -91,16 +91,16 @@
       "National_col"
     ],
     "allowedKeys": [
-      "Favoris",
-      "Documents",
-      "MonCDI"
+      "^Favoris$",
+      "^Documents$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ],
     "requiredKeys": [
-      "Documents"
+      "^Documents$"
     ],
     "defaultKeys": [
-      "Favoris",
-      "MonCDI"
+      "^Favoris$",
+      "^MonCDI(?:TheresePlaniol)?$"
     ]
   }
 ]

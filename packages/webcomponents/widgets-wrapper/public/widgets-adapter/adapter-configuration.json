@@ -10,7 +10,10 @@
     "timeout": 10000,
     "populationsKeysUri": "./widgets-adapter/widgets-populations-keys.json",
     "portletInfoUri": "/portail/api/portlet/{fname}.json",
-    "portletRegistryUri": "/portail/api/v4-3/dlm/portletRegistry.json?category=All categories"
+    "portletRegistryUri": "/portail/api/v4-3/dlm/portletRegistry.json?category=All categories",
+    "overrideHandler": {
+      "^MonCDI(?:TheresePlaniol)?$": "MonCDI"
+    }
   },
   "mediacentre": {
     "apiFavorisUri": "/mediacentre-api/api/resources/favorites",

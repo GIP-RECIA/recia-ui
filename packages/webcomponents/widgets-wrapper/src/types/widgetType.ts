@@ -33,6 +33,7 @@ export interface Widget {
   loading?: boolean
   isError?: boolean
   errorMessage?: string
+  handler?: string
 }
 
 export interface WidgetItem {

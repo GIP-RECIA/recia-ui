@@ -61,7 +61,7 @@ class WidgetAdapter {
   ): Promise<WidgetsWrapperConfig> {
     if (!this.widgetWrapperConfig) {
       this.widgetWrapperConfig = await ConfigService.getWidgetsWrapperConfig(
-        this.config.global.populationsKeysUri,
+        this.config,
         ENTPersonProfils.map(profil => profil.toLocaleLowerCase()),
         this.services,
       )
@@ -71,14 +71,23 @@ class WidgetAdapter {
   }
 
   async getWidget(key: string, soffit: string): Promise<Widget> {
-    const baseData = this.widgetWrapperConfig!.availableWidgets.find(({ uid }) => uid === key)!
-    const complementaryData = await this.widgetHandlers[key](soffit)
-    const widgetData: Widget = {
+    if (!this.widgetWrapperConfig)
+      throw new Error('widgetWrapperConfig is not defined')
+
+    const baseData = this.widgetWrapperConfig.availableWidgets.find(({ uid }) => uid === key)
+    if (!baseData)
+      throw new Error(`widget key '${key}' does not exist!`)
+
+    let complementaryData: Partial<Widget> = {}
+    if (baseData.handler)
+      complementaryData = await this.widgetHandlers[baseData.handler](soffit)
+    else
+      console.warn(`no handler for key '${key}'`)
+
+    return {
       ...baseData,
       ...complementaryData,
     }
-
-    return widgetData
   }
 }
 

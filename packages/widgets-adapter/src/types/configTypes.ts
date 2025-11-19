@@ -21,5 +21,6 @@ export type Config = {
     portletInfoUri: string
     context: string
     portletRegistryUri: string
+    overrideHandler: Record<string, string>
   }
 } & Record<string, Record<string, any>>
