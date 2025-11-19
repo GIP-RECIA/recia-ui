@@ -21,6 +21,7 @@ import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../common/config.ts'
@@ -31,6 +32,9 @@ import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
 export class ReciaBottomSheet extends LitElement {
+  @property({ type: String, attribute: 'a-label' })
+  aLabel?: string
+
   @property({ type: Boolean, attribute: 'no-close' })
   closeIcon: boolean = false
 
@@ -191,6 +195,7 @@ export class ReciaBottomSheet extends LitElement {
             ${ref(this.sheetRef)}
             role="dialog"
             aria-modal="true"
+            aria-label="${ifDefined(this.aLabel)}"
             class="sheet${classMap({
               'slide-down': this.closeRequested,
               'no-padding': this.noPadding,
