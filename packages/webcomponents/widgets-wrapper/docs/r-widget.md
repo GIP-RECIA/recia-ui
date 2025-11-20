@@ -14,24 +14,25 @@
 
 ## Propriétés
 
-| Nom              |                Type                 | Obligatoire |   Default   | Description                                                                   |
-| ---------------- | :---------------------------------: | :---------: | :---------: | ----------------------------------------------------------------------------- |
-| `uid`            |              `string`               |   `false`   | `undefined` | Identifiant unique                                                            |
-| `name`           |              `string`               |   `false`   | `undefined` | Titre                                                                         |
-| `subtitle`       |              `string`               |   `false`   | `undefined` | Sous titre                                                                    |
-| `notifications`  |              `number`               |   `false`   | `undefined` | Nombre de notifications                                                       |
+| Nom              |                 Type                 | Obligatoire |   Default   | Description                                                                   |
+| ---------------- | :----------------------------------: | :---------: | :---------: | ----------------------------------------------------------------------------- |
+| `uid`            |               `string`               |   `false`   | `undefined` | Identifiant unique                                                            |
+| `name`           |               `string`               |   `false`   | `undefined` | Titre                                                                         |
+| `subtitle`       |               `string`               |   `false`   | `undefined` | Sous titre                                                                    |
+| `notifications`  |               `number`               |   `false`   | `undefined` | Nombre de notifications                                                       |
 | `link`           |  [`Link`](../src/types/LinkType.ts)  |   `false`   | `undefined` | Lien d’entête                                                                 |
 | `items`          | [`Item[]`](../src/types/ItemType.ts) |   `false`   | `undefined` | Liste des éléments à afficher                                                 |
-| `empty-icon`     |              `string`               |   `false`   | `undefined` | SVG lors ce qu'il n'y a pas d'éléments à afficher                             |
-| `empty-text`     |              `string`               |   `false`   | `undefined` | Texte lors ce qu'il n'y a pas d'éléments à afficher                           |
-| `empty-discover` |              `boolean`              |   `false`   |   `false`   | Affiche un lien vers le service lors ce qu'il n'y a pas d'éléments à afficher |
-| `manage`         |              `boolean`              |   `false`   |   `false`   | Affiche l'overlay de gestion                                                  |
-| `deletable`      |              `boolean`              |   `false`   |   `false`   | Affiche le bouton de suppression sur l'overlay de gestion                     |
-| `noPrevious`     |              `boolean`              |   `false`   |   `false`   | Retire le bouton de déplacement vers la gauche sur l'overlay de gestion       |
-| `noNext`         |              `boolean`              |   `false`   |   `false`   | Retire le bouton de déplacement vers la droite sur l'overlay de gestion       |
-| `loading`        |              `boolean`              |   `false`   |   `false`   | Affiche l'overlay de chargement                                               |
-| `isError`        |              `boolean`              |   `false`   | `undefined` | Affiche le rendu d'erreur                                                     |
-| `errorMessage`   |              `string`               |   `false`   | `undefined` | Texte du rendu d'erreur                                                       |
+| `empty-icon`     |               `string`               |   `false`   | `undefined` | SVG lors ce qu'il n'y a pas d'éléments à afficher                             |
+| `empty-text`     |               `string`               |   `false`   | `undefined` | Texte lors ce qu'il n'y a pas d'éléments à afficher                           |
+| `empty-discover` |              `boolean`               |   `false`   |   `false`   | Affiche un lien vers le service lors ce qu'il n'y a pas d'éléments à afficher |
+| `manage`         |              `boolean`               |   `false`   |   `false`   | Affiche l'overlay de gestion                                                  |
+| `deletable`      |              `boolean`               |   `false`   |   `false`   | Affiche le bouton de suppression sur l'overlay de gestion                     |
+| `noPrevious`     |              `boolean`               |   `false`   |   `false`   | Retire le bouton de déplacement vers la gauche sur l'overlay de gestion       |
+| `noNext`         |              `boolean`               |   `false`   |   `false`   | Retire le bouton de déplacement vers la droite sur l'overlay de gestion       |
+| `loading`        |              `boolean`               |   `false`   |   `false`   | Affiche l'overlay de chargement                                               |
+| `isError`        |              `boolean`               |   `false`   | `undefined` | Affiche le rendu d'erreur                                                     |
+| `errorMessage`   |               `string`               |   `false`   | `undefined` | Texte du rendu d'erreur                                                       |
+| `placeholder`    |              `boolean`               |   `false`   |   `false`   | Affiche l'overlay d'espace reservé                                            |
 
 ## Évènements
 
