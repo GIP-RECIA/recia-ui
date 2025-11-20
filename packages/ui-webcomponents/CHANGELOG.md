@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.8.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.4...ui-webcomponents/v1.8.0) (2025-11-20)
+
+
+### Features
+
+* **bottom-sheet:** add `aria-label` (RGAA) ([d798131](https://github.com/GIP-RECIA/recia-ui/commit/d7981310b18471b70f393229bd4534cd0e4a0499))
+* **bottom-sheet:** improve close focus on shadow dom (RGAA) ([374941d](https://github.com/GIP-RECIA/recia-ui/commit/374941d9687bbefc3ac03f2cb3eb20ceddba7d65))
+* **header:** improve navigation drawer (RGAA) ([d81be08](https://github.com/GIP-RECIA/recia-ui/commit/d81be0863502e0ba27d57f259f9251a5b3aeeed6))
+* **header:** improve service accessibility (RGAA) ([b02decd](https://github.com/GIP-RECIA/recia-ui/commit/b02decd9552daf3790c187f7da6775c6914cc367))
+* **header:** use label for bottom sheet (RGAA) ([e276689](https://github.com/GIP-RECIA/recia-ui/commit/e27668989d45071c12d9e2bc52cb54354af86560))
+* **widgets:** override widget handler ([3cf987a](https://github.com/GIP-RECIA/recia-ui/commit/3cf987a72428072235a45c7390a2781b23edd880))
+
+
+### Bug Fixes
+
+* **widgets-wrapper:** rename widget initialization function ([08331c8](https://github.com/GIP-RECIA/recia-ui/commit/08331c874e04e500cf2a807d9ab5f27577724d48))
+* **widgets-wrapper:** widget duplication when no stored preferences ([ae50be1](https://github.com/GIP-RECIA/recia-ui/commit/ae50be1f9337ccb948e952f1b4b8afd6c98cea41))
+
 ## [1.7.4](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.3...ui-webcomponents/v1.7.4) (2025-11-05)
 
 ## [1.7.3](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.2...ui-webcomponents/v1.7.3) (2025-11-05)
