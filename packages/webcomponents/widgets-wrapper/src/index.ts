@@ -92,7 +92,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
     document.addEventListener('init-widget', () => {
-      this.monInit()
+      this.initialize()
     })
   }
 
@@ -106,7 +106,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     document.addEventListener('update-favorites', this.updateFavorites.bind(this))
   }
 
-  async monInit(): Promise<void> {
+  async initialize(): Promise<void> {
     await TranslationService.init(`${this.localizationUri}?v=${window.WidgetAdapter.getVersion()}`)
     const soffit = await getToken(this.soffitUri)
     this.wrapperConfig = await window.WidgetAdapter.getConfig(soffit.decoded.ENTPersonProfils)
