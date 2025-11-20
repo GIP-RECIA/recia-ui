@@ -152,7 +152,7 @@ export class ReciaService extends LitElement {
             <div class="favorite">
               <button
                 class="${classMap({ marked: this.isFavorite })}"
-                aria-label="${this.isFavorite ? msg(str`Retirer des favoris`) : msg(str`Ajouter aux favoris`)}"
+                aria-label="${this.isFavorite ? msg(str`Retirer des favoris`) : msg(str`Ajouter aux favoris`)} - ${this.name}"
                 @click="${this.toggleFavorite}"
               >
                 ${unsafeSVG(this.isFavorite ? starSolid : star)}
@@ -163,6 +163,7 @@ export class ReciaService extends LitElement {
                 ? html`
                     <button
                       class="more"
+                      aria-label="${msg(str`En savoir plus`)} - ${this.name}"
                       @click="${this.openMore}"
                     >
                       ${msg(str`En savoir plus`)}
