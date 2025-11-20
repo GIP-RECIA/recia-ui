@@ -67,13 +67,13 @@ export class ReciaWidgetsWrapper extends LitElement {
   widgetDataMap: Map<string, Widget> = new Map()
 
   @state()
-  widgetToDisplayKeyArray: Array<string> = []
+  widgetToDisplayKeyArray: string[] = []
 
   @state()
   loading: boolean = true
 
   // used for cancel changes
-  widgetToDisplayKeyArrayBackup: Array<string> = []
+  widgetToDisplayKeyArrayBackup: string[] = []
 
   // store the bounded event used for listenning for click, and removing it when the dropdown is closed
   boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
@@ -112,30 +112,40 @@ export class ReciaWidgetsWrapper extends LitElement {
     this.wrapperConfig = await window.WidgetAdapter.getConfig(soffit.decoded.ENTPersonProfils)
 
     const {
-      displayedKeys,
-      defaultKeys,
+      displayedKeys: storedDisplayedKeys,
+      defaultKeys: storedDefaultKeys,
       noStoredDisplayedKeys,
     } = await FavoriteService.getUserFavoriteWidgets(this.getPrefsUri)
-    this.widgetToDisplayKeyArray = noStoredDisplayedKeys
+
+    let displayKeys = noStoredDisplayedKeys
       ? this.wrapperConfig.defaultKeys
-      : [...new Set(displayedKeys.filter(key => this.wrapperConfig.allowedKeys.includes(key)))]
+      : storedDisplayedKeys.filter(key => this.wrapperConfig.allowedKeys.includes(key))
 
-    const missingRequiredKeys = except(this.wrapperConfig.requiredKeys, this.widgetToDisplayKeyArray)
+    const missingRequiredKeys = except(this.wrapperConfig.requiredKeys, displayKeys)
     if (missingRequiredKeys.length > 0)
-      this.widgetToDisplayKeyArray = [...missingRequiredKeys, ...this.widgetToDisplayKeyArray]
+      displayKeys = [...missingRequiredKeys, ...displayKeys]
 
-    const missingDefaultKeys = except(this.wrapperConfig.defaultKeys, defaultKeys)
+    const missingDefaultKeys = noStoredDisplayedKeys
+      ? except(this.wrapperConfig.defaultKeys, displayKeys)
+      : except(this.wrapperConfig.defaultKeys, storedDefaultKeys)
     if (missingDefaultKeys.length > 0)
-      this.widgetToDisplayKeyArray = [...this.widgetToDisplayKeyArray, ...missingDefaultKeys]
+      displayKeys = [...displayKeys, ...missingDefaultKeys]
 
-    if (missingRequiredKeys || missingDefaultKeys) {
+    this.widgetToDisplayKeyArray = [...new Set(displayKeys)]
+
+    if (
+      missingRequiredKeys.length > 0
+      || missingDefaultKeys.length > 0
+      || !storedDefaultKeys.every(key => this.wrapperConfig.defaultKeys.includes(key))
+    ) {
       await FavoriteService.setUserFavoriteWidgets(
         this.putPrefsUri,
         this.widgetToDisplayKeyArray,
         this.wrapperConfig.defaultKeys,
       )
     }
-    [...new Set(this.widgetToDisplayKeyArray)].forEach((key) => {
+
+    this.widgetToDisplayKeyArray.forEach((key) => {
       this.buildWidget(key, soffit.encoded)
     })
     this.loading = false
