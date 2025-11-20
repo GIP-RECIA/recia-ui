@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.1.0](https://github.com/GIP-RECIA/recia-ui/compare/widgets-to-endpoints-adapter/v2.0.1...widgets-to-endpoints-adapter/v2.1.0) (2025-11-20)
+
+
+### Features
+
+* **widgets:** override widget handler ([3cf987a](https://github.com/GIP-RECIA/recia-ui/commit/3cf987a72428072235a45c7390a2781b23edd880))
+
 ## [2.0.1](https://github.com/GIP-RECIA/widgets-to-endpoints-adapter/compare/widgets-to-endpoints-adapter/v2.0.0...widgets-to-endpoints-adapter/v2.0.1) (2025-10-01)
 
 
