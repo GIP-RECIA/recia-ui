@@ -17,3 +17,6 @@ license-generate:
 
 build-webcomponents:
 	./scripts/build-wc.sh
+	@echo ""
+	@echo "yarn workspace @gip-recia/ui-webcomponents run release"
+	@echo "yarn workspace @gip-recia/ui-webcomponents npm publish"
