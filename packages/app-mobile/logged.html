@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+
+  <script vite-ignore src="/resource-server/webjars/gip-recia__ui-webcomponents/dist/r-widgets-wrapper.js" type="module" defer></script>
+  <script vite-ignore src="/resource-server/webjars/gip-recia__actualites/dist/actualites.min.js" type="module" defer></script>
+</head>
+<body>
+  <header>
+  </header>
+  <main>
+    <div class="container">
+      <header>
+        <h1>Bienvenue sur votre ENT, <span id="displayname"></span></h1>
+      </header>
+      <r-widgets-wrapper
+        localization-uri="/commun/widgets/wrapper/20251217/i18n.json"
+        soffit-uri="/portail/api/v5-1/userinfo?claims=private,ENTPersonGARIdentifiant,ESCOUAICourant,ESCOUAI,ENTPersonProfils&amp;groups="
+        widget-max-count="3"
+        get-prefs-uri="/portail/api/prefs/getentityonlyprefs/Widgets"
+        put-prefs-uri="/portail/api/prefs/putprefs?fname=Widgets"
+        adapter-source-uri="/resource-server/webjars/gip-recia__widgets-to-endpoints-adapter/dist/widgets-to-endpoints-adapter.js"
+        adapter-config-uri="/commun/widgets/adapter/20251217/adapter-configuration.json"
+      >
+      </r-widgets-wrapper>
+    </div>
+    <div class="container">
+      <carrousel-ui
+        user-info-api-url="/portail/api/v5-1/userinfo?claims=private&amp;groups="
+        get-user-news-url="/publisher/news/myNews/2"
+        get-item-by-id-url="/publisher/news/item/"
+        get-news-reading-informations-url="/publisher/news/readingInfos"
+        set-reading-url="/publisher/news/setNewsReading/"
+        all-news-page-url="/portail/p/News"
+        dnma-fname="News"
+        locale-key="News"
+        use-reading-state=""
+      >
+      </carrousel-ui>
+    </div>
+  </main>
+  <footer>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

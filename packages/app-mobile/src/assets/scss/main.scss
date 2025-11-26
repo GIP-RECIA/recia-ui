@@ -1,0 +1,181 @@
+@use 'sass:map';
+
+@use 'ress/dist/ress.min.css';
+
+@use '../../../../ui/src/assets/scss/mixins/banner';
+@use '../../../../ui/src/assets/scss/variables' as *;
+// @use '../../../ui/src/assets/scss/fonts';
+@use 'fonts';
+@use '../../../../ui/src/assets/scss/typo';
+// @use '../../../../ui/src/assets/scss/root';
+@use '../../../../ui/src/assets/scss/mixins';
+@use '../../../../ui/src/assets/scss/functions';
+@use '../../../../ui/src/assets/scss/global';
+
+@use '../../../../ui/src/assets/scss/containers';
+@use '../../../../ui/src/assets/scss/buttons';
+@use '../../../../ui/src/assets/scss/badge';
+@use '../../../../ui/src/assets/scss/switch';
+@use '../../../../ui/src/assets/scss/select';
+@use '../../../../ui/src/assets/scss/tags';
+@use '../../../../ui/src/assets/scss/fields';
+@use '../../../../ui/src/assets/scss/notification-dot';
+
+:root {
+  --#{$prefix}body: #{$body};
+  --#{$prefix}body-inverted: #{$body-inverted};
+  --#{$prefix}body-bg: #{$body-bg};
+
+  @each $color, $value in $colors {
+    --#{$prefix}#{$color}: #{$value};
+  }
+
+  @each $color, $value in $theme-colors {
+    --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}#{$color}-light: #{$value};
+  }
+
+  @each $color, $value in $theme-colors-dark {
+    --#{$prefix}#{$color}-inverted: #{$value};
+    --#{$prefix}#{$color}-dark: #{$value};
+  }
+
+  @each $type, $values in $categories {
+    --#{$prefix}#{$type}: #{map.get($values, color)};
+    --#{$prefix}#{$type}-hover: #{map.get($values, hover, color)};
+    --#{$prefix}#{$type}-hover-shadow: #{HEXToRGBA(map.get($values, hover, shadow, color), map.get($values, hover, shadow, opacity))};
+    --#{$prefix}#{$type}-text: #{map.get($values, text)};
+  }
+
+  @each $color, $value in $buttons {
+    --#{$prefix}btn-#{$color}: #{$value};
+    --#{$prefix}btn-#{$color}-light: #{$value};
+  }
+
+  @each $color, $value in $buttons-dark {
+    --#{$prefix}btn-#{$color}-inverted: #{$value};
+    --#{$prefix}btn-#{$color}-dark: #{$value};
+  }
+
+  @each $shadow, $value in $shadows {
+    --#{$prefix}shadow-#{$shadow}: #{$value};
+  }
+
+  --#{$prefix}font-size-base: #{$font-size-base};
+
+  --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, xs)});
+
+  @each $breakpoints, $value in $font-size-breakpoints {
+    --#{$prefix}font-size-#{$breakpoints}: calc(var(--#{$prefix}font-size-base) * #{$value});
+  }
+
+  @each $size, $value in $headings-font-sizes {
+    --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
+  }
+
+  @media screen and (width >= map.get($grid-breakpoints, lg)) {
+    --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
+
+    @each $size, $value in $headings-font-sizes-lg {
+      --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
+    }
+  }
+}
+
+@each $domain, $data in $domain-theme {
+  .#{'theme-#{map.get($data, id)}'} {
+    @each $color, $value in map.get($data, theme-colors) {
+      --#{$prefix}#{$color}: #{$value};
+      --#{$prefix}#{$color}-light: #{$value};
+    }
+
+    @each $color, $value in map.get($data, theme-colors-dark) {
+      --#{$prefix}#{$color}-inverted: #{$value};
+      --#{$prefix}#{$color}-dark: #{$value};
+    }
+
+    @each $color, $value in map.get($data, buttons) {
+      --#{$prefix}btn-#{$color}: #{$value};
+      --#{$prefix}btn-#{$color}-light: #{$value};
+    }
+
+    @each $color, $value in map.get($data, buttons-dark) {
+      --#{$prefix}btn-#{$color}-inverted: #{$value};
+      --#{$prefix}btn-#{$color}-dark: #{$value};
+    }
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--#{$prefix}body-bg);
+  font-family: $dm-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: var(--#{$prefix}body-font-size);
+  letter-spacing: 0;
+  color: var(--#{$prefix}body);
+
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    'header'
+    'alert'
+    'main'
+    'footer';
+
+  > header {
+    grid-area: header;
+  }
+
+  > .alert {
+    grid-area: alert;
+  }
+
+  > main {
+    grid-area: main;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: grid;
+    grid-auto-rows: min-content;
+    row-gap: 40px;
+
+    > * {
+      min-width: 0;
+    }
+  }
+
+  > footer {
+    grid-area: footer;
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > main {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      row-gap: 60px;
+    }
+  }
+}
+
+.wayf-layout {
+  > header > h1 > span {
+    display: block;
+    font-size: var(--#{$prefix}font-size-sm);
+    font-weight: normal;
+    line-height: 21px;
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > header > h1 > span {
+      display: unset;
+      font-size: unset;
+      font-weight: unset;
+      line-height: unset;
+    }
+  }
+}

@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "etc/webcomponent/project-skeleton",
+    "packages/app-mobile",
     "packages/ui",
     "packages/ui-webcomponents",
     "packages/webcomponents/*",
