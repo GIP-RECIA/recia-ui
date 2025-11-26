@@ -1,0 +1,25 @@
+{
+  "name": "app-mobile",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "",
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "ress": "^5.0.2",
+    "sass": "^1.94.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6"
+  }
+}
