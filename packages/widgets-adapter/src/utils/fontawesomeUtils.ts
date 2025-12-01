@@ -27,12 +27,10 @@ function getIconWithStyle(svgDefinition: IconDefinition, styles: string[] = [], 
       <svg
         style="${styles.join(' ')}"
         aria-hidden="true"
-        focusable="false"
         data-prefix="${prefix}"
         data-icon="${iconName}"
         class="${classes.join(' ')} svg-inline--fa fa-${iconName}"
         role="img"
-        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 ${width} ${height}"
       >
         ${

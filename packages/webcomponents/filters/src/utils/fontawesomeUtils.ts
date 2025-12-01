@@ -38,7 +38,6 @@ function getIconWithStyle(svgDefinition: IconDefinition, styles: Readonly<StyleI
       <svg
         style="${styleMap(styles)}"
         aria-hidden="true"
-        focusable="false"
         data-prefix="${prefix}"
         data-icon="${iconName}"
         class="${classMap({
@@ -47,7 +46,6 @@ function getIconWithStyle(svgDefinition: IconDefinition, styles: Readonly<StyleI
           [`fa-${iconName}`]: true,
         })}"
         role="img"
-        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 ${width} ${height}"
       >
         ${

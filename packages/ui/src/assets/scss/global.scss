@@ -1,7 +1,13 @@
+@use './mixins/screen-reader' as *;
+
 * {
   box-sizing: border-box;
 }
 
 .grow-1 {
   flex-grow: 1;
+}
+
+.sr-only {
+  @include sr-only;
 }
