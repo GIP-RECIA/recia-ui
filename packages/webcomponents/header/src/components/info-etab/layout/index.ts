@@ -122,7 +122,7 @@ export class ReciaInfoEtabLayout extends LitElement {
     return html`
       <li>
         ${getIcon(item.icon!)}
-        <div class="sr-only">${ReciaInfoEtabLayout.i18n()[item.id]}</div>
+        <span class="sr-only">${ReciaInfoEtabLayout.i18n()[item.id]}</span>
         ${
           item.link
             ? html`
