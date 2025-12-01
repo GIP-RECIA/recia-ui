@@ -315,7 +315,11 @@ export class ReciaSearch extends LitElement {
                       }
                     </ul>
                   `
-                : html`<div class="empty">${msg(str`Aucun résultat`)}</div>`
+                : html`
+                    <div class="empty">
+                      <span>${msg(str`Aucun résultat`)}</span>
+                    </div>
+                  `
             }
           </div>
         </div>

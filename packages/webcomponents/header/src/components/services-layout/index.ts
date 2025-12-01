@@ -191,7 +191,9 @@ export class ReciaServicesLayout extends LitElement {
                 </ul>
               `
             : html`
-                <div class="empty">${msg(str`Aucun service`)}</div>
+                <div class="empty">
+                  <span>${msg(str`Aucun service`)}</span>
+                </div>
               `
         }
       `
