@@ -229,20 +229,26 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
             flex-direction: column;
             overflow: hidden;
 
-            &.isNew {
+            > .isNew {
               font-weight: 900;
 
-              display: inline-block;
+              display: inline-flex;
+              gap: 5px;
+              flex-wrap: nowrap;
+              align-items: center;
+
+              >.title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
 
               &::before {
                 content: '';
-                display: inline-block;
                 width: 10px;
                 height: 10px;
                 background-color: var(--#{$prefix}primary);
                 border-radius: 50%;
-                margin-right: 8px;
-                vertical-align: middle;
+                flex-shrink: 0;
               }
             }
 
