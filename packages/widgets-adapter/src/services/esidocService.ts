@@ -42,7 +42,7 @@ async function get(
     if (!response.ok) {
       const errorPayload = await response.text()
       const errorStatus = response.status
-      if (errorPayload === 'interconnexion esidoc/ENT invalide' && errorStatus === 400) {
+      if (errorStatus === 400 && errorPayload === 'interconnexion esidoc/ENT invalide') {
         return 'I18N$interconnexionEsidocENTinvalide$'
       }
       throw new Error(response.statusText)
