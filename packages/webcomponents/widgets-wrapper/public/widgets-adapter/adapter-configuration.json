@@ -1,6 +1,6 @@
 {
   "email": {
-    "apiUri": "/api-rest-mail/api/email/summary"
+    "apiUri": "/mail-api/api/email/summary"
   },
   "esidoc": {
     "apiUri": "/esidoc-api/empruntsUtilisateur"
