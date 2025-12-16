@@ -156,8 +156,10 @@ export class ReciaWidget extends LitElement {
     const isNew: boolean = item.isNew ?? false
     const content: TemplateResult = html`
       ${getSvgIcon(item.icon)}
-      <div class=${classMap({ isNew })}">
-        <span>${item.name}</span>
+      <div>
+        <span class="${classMap({ isNew })}">
+          <span class="title">${item.name}</span>
+        </span>
         ${
           item.description
             ? html`<span class="description">${item.description}</span>`
