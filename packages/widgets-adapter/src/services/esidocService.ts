@@ -29,7 +29,7 @@ async function get(
   url: string,
   soffit: string,
   timeout: number,
-): Promise<EsidocApiResponse> {
+): Promise<EsidocApiResponse | string> {
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -39,8 +39,14 @@ async function get(
       },
     })
 
-    if (!response.ok)
+    if (!response.ok) {
+      const errorPayload = await response.text()
+      const errorStatus = response.status
+      if (errorPayload === 'interconnexion esidoc/ENT invalide' && errorStatus === 400) {
+        return 'I18N$interconnexionEsidocENTinvalide$'
+      }
       throw new Error(response.statusText)
+    }
 
     return await response.json()
   }
@@ -102,6 +108,13 @@ async function getEsidocWidget(
     soffit,
     config.global.timeout,
   )
+
+  if (typeof response === 'string') {
+    return {
+      isError: true,
+      errorMessage: response,
+    }
+  }
 
   return {
     subtitle: response.itemForResponseList.length === 0
