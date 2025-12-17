@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.9.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.8.0...ui-webcomponents/v1.9.0) (2025-12-17)
+
+
+### Features
+
+* **header:** improve empty message (RGAA) ([1364465](https://github.com/GIP-RECIA/recia-ui/commit/1364465ded840fbb9bfcf42284af1b2a78ca2b30))
+* **header:** improve info etab accessibility (RGAA) ([e10c8c4](https://github.com/GIP-RECIA/recia-ui/commit/e10c8c431ddd8e80e03d36759c74a01c65a45208))
+* **webcomponents:** add optional variable isNew to WidgetItem ([91c6aaf](https://github.com/GIP-RECIA/recia-ui/commit/91c6aaf80d28f5227aa51423106093ede957a7d4))
+* **widgets-adapter:** add email service ([c89a36b](https://github.com/GIP-RECIA/recia-ui/commit/c89a36baf972b9252987951a5dcbf6f90e556f2d))
+* **widgets-adapter:** add widget description in emailService ([5712d68](https://github.com/GIP-RECIA/recia-ui/commit/5712d68060414d7ecaf94324727a66246ba1aa1a))
+* **widgets-wrapper:** add emphasis to widget items having  isNew as true ([20ced54](https://github.com/GIP-RECIA/recia-ui/commit/20ced5469f8b9403b15b05f3f213b46126e93548))
+
+
+### Bug Fixes
+
+* **widgets-wrapper:** add missing separation line on md screen ([042d0f7](https://github.com/GIP-RECIA/recia-ui/commit/042d0f7a362dbd83a63462095248d73f0f42198f))
+* **widgets-wrapper:** fix ellipsis on widget items with emphasis ([9772a45](https://github.com/GIP-RECIA/recia-ui/commit/9772a4542a1c10ebb070add5ab653e750a1d76bf))
+
 ## [1.8.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.7.4...ui-webcomponents/v1.8.0) (2025-11-20)
 
 
