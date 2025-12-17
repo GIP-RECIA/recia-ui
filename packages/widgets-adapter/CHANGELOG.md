@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.3.0](https://github.com/GIP-RECIA/recia-ui/compare/widgets-to-endpoints-adapter/v2.1.0...widgets-to-endpoints-adapter/v2.3.0) (2025-12-17)
+
+
+### Features
+
+* **webcomponents:** add optional variable isNew to WidgetItem ([91c6aaf](https://github.com/GIP-RECIA/recia-ui/commit/91c6aaf80d28f5227aa51423106093ede957a7d4))
+* **widgets-adapter:** add email service ([c89a36b](https://github.com/GIP-RECIA/recia-ui/commit/c89a36baf972b9252987951a5dcbf6f90e556f2d))
+* **widgets-adapter:** add widget description in emailService ([5712d68](https://github.com/GIP-RECIA/recia-ui/commit/5712d68060414d7ecaf94324727a66246ba1aa1a))
+* **widgets-adapter:** override default error message with i18n key for ESIDOC interconnexion error ([9f64f99](https://github.com/GIP-RECIA/recia-ui/commit/9f64f99f64123bcd428a716ff251dcf800e8dba0))
+
+
+### Bug Fixes
+
+* **widgets-adapter:** fix email service fetch params ([23a1955](https://github.com/GIP-RECIA/recia-ui/commit/23a1955e9439c98301b8a90d96f55cc777a39b0b))
+
+## [2.2.0](https://github.com/GIP-RECIA/recia-ui/compare/widgets-to-endpoints-adapter/v2.1.0...widgets-to-endpoints-adapter/v2.2.0) (2025-12-17)
+
+
+### Features
+
+* **webcomponents:** add optional variable isNew to WidgetItem ([91c6aaf](https://github.com/GIP-RECIA/recia-ui/commit/91c6aaf80d28f5227aa51423106093ede957a7d4))
+* **widgets-adapter:** add email service ([c89a36b](https://github.com/GIP-RECIA/recia-ui/commit/c89a36baf972b9252987951a5dcbf6f90e556f2d))
+* **widgets-adapter:** add widget description in emailService ([5712d68](https://github.com/GIP-RECIA/recia-ui/commit/5712d68060414d7ecaf94324727a66246ba1aa1a))
+* **widgets-adapter:** override default error message with i18n key for ESIDOC interconnexion error ([9f64f99](https://github.com/GIP-RECIA/recia-ui/commit/9f64f99f64123bcd428a716ff251dcf800e8dba0))
+
+
+### Bug Fixes
+
+* **widgets-adapter:** fix email service fetch params ([23a1955](https://github.com/GIP-RECIA/recia-ui/commit/23a1955e9439c98301b8a90d96f55cc777a39b0b))
+
 ## [2.1.0](https://github.com/GIP-RECIA/recia-ui/compare/widgets-to-endpoints-adapter/v2.0.1...widgets-to-endpoints-adapter/v2.1.0) (2025-11-20)
 
 
