@@ -2150,7 +2150,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -3195,7 +3195,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -4197,7 +4197,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -4308,7 +4308,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -4711,7 +4711,7 @@ __metadata:
     eslint-plugin-format: "npm:^1.0.2"
     filters: "workspace:^"
     json-server: "npm:^0.17.4"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     match-sorter: "npm:^8.2.0"
     nanostores: "npm:^1.1.0"
@@ -5357,7 +5357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit@npm:^3.2.0, lit@npm:^3.3.1":
+"lit@npm:^3.2.0":
   version: 3.3.1
   resolution: "lit@npm:3.3.1"
   dependencies:
@@ -5365,6 +5365,17 @@ __metadata:
     lit-element: "npm:^4.2.0"
     lit-html: "npm:^3.3.0"
   checksum: 10/ec70ff33db610537fd7cfc608cc7728126ecfae2d5593aa94844c614d2f6840448f1b995a58aeba593b0bf0e8169af5988036c11d3c5b55313fe8e722417c17d
+  languageName: node
+  linkType: hard
+
+"lit@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "lit@npm:3.3.2"
+  dependencies:
+    "@lit/reactive-element": "npm:^2.1.0"
+    lit-element: "npm:^4.2.0"
+    lit-html: "npm:^3.3.0"
+  checksum: 10/0af8e06a0ef5bb6a84c3dd58b64b6b554baf4bc195d725951ae60bbd9999618364815dc4438bf949051e7f15497b71b2bb9f7514772b33c4526882bdfb805858
   languageName: node
   linkType: hard
 
@@ -6817,7 +6828,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -7145,7 +7156,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -8691,7 +8702,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.1"
@@ -8738,7 +8749,7 @@ __metadata:
     "@uportal/open-id-connect": "npm:^1.40.2"
     eslint: "npm:^9.39.2"
     eslint-plugin-format: "npm:^1.0.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.21"
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
