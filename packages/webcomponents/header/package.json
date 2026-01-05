@@ -58,7 +58,7 @@
     "eslint-plugin-format": "^1.0.2",
     "filters": "workspace:^",
     "json-server": "^0.17.4",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.22",
     "match-sorter": "^8.2.0",
     "nanostores": "^1.1.0",
     "regenerator-runtime": "^0.14.1",
