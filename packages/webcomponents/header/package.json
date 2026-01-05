@@ -47,7 +47,7 @@
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "@lit/localize-tools": "^0.8.0",
+    "@lit/localize-tools": "^0.8.1",
     "@nanostores/lit": "^0.2.3",
     "@types/lodash-es": "^4",
     "@types/regenerator-runtime": "^0",
