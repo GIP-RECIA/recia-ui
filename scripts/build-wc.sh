@@ -24,7 +24,7 @@ TARGET_DIR="$ROOT_DIR/packages/ui-webcomponents"
 PREFIX="r-"
 
 mkdir -p "$TARGET_DIR/dist"
-rm -rf "$TARGET_DIR/dist"/*
+rm -rf "$TARGET_DIR/dist/*"
 
 for dir in "$SOURCE_DIR"/*/; do
   if [ -f "${dir}package.json" ]; then
