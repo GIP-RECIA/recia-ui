@@ -23,12 +23,11 @@ SOURCE_DIR="$ROOT_DIR/packages/webcomponents"
 TARGET_DIR="$ROOT_DIR/packages/ui-webcomponents"
 PREFIX="r-"
 
-mkdir -p "$TARGET_DIR/dist" "$TARGET_DIR/docs"
-rm -rf "$TARGET_DIR/dist"/* "$TARGET_DIR/docs"/*
+mkdir -p "$TARGET_DIR/dist"
+rm -rf "$TARGET_DIR/dist"/*
 
 for dir in "$SOURCE_DIR"/*/; do
   if [ -f "${dir}package.json" ]; then
     cp "$dir"/dist/*.js* "$TARGET_DIR/dist" 2>/dev/null
-    cp "$dir"/README.md "$TARGET_DIR/docs/$PREFIX$(basename "$dir").md" 2>/dev/null
   fi
 done
