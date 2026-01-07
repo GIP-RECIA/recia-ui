@@ -70,6 +70,9 @@ export default ({ mode }: ConfigEnv) => {
           inlineDynamicImports: true,
           entryFileNames: fileName(name),
         },
+        external: [
+          /\/commun\/.*/,
+        ],
       },
     },
     define: {
