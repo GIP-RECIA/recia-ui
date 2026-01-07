@@ -1,8 +1,8 @@
+# r-info-etab-dropdown-info
+
 - [r-info-etab-dropdown-info](#r-info-etab-dropdown-info)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-
-# r-info-etab-dropdown-info
 
 ## Propriétés
 

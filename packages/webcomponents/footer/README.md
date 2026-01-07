@@ -1,7 +1,7 @@
+# r-footer
+
 - [r-footer](#r-footer)
   - [Propriétés](#propriétés)
-
-# r-footer
 
 ## Propriétés
 

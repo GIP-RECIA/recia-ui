@@ -1,6 +1,6 @@
 # widget-to-endpoints-adapter
 
-Nécessaire au fonctionnement du composant web [widgets-wrapper](https://github.com/GIP-RECIA/recia-ui/tree/main/packages/webcomponents/widgets-wrapper).
+Script qui sert d'intermédiaire entre [widgets-wrapper](../webcomponents/widgets-wrapper) et des API.
 
 ## Ajout d'un widget
 

@@ -1,3 +1,5 @@
+# r-user-menu
+
 - [r-user-menu](#r-user-menu)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
@@ -5,8 +7,6 @@
       - [Retour](#retour)
     - [`user-menu-event`](#user-menu-event)
       - [Retour](#retour-1)
-
-# r-user-menu
 
 ## Propriétés
 

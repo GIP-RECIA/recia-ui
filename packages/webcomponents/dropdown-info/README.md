@@ -1,7 +1,7 @@
+# r-dropdown-info
+
 - [r-dropdown-info](#r-dropdown-info)
   - [Propriétés](#propriétés)
-
-# r-dropdown-info
 
 ## Propriétés
 

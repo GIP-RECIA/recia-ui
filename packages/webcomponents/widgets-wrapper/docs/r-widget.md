@@ -1,3 +1,5 @@
+# r-widget
+
 - [r-widget](#r-widget)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
@@ -9,8 +11,6 @@
       - [Retour](#retour-2)
     - [`click-on-heading-link`](#click-on-heading-link)
       - [Retour](#retour-3)
-
-# r-widget
 
 ## Propriétés
 

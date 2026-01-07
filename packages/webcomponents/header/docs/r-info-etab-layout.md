@@ -1,8 +1,8 @@
+# r-info-etab-layout
+
 - [r-info-etab-layout](#r-info-etab-layout)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-
-# r-info-etab-layout
 
 ## Propriétés
 

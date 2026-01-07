@@ -1,10 +1,10 @@
+# r-dropdown-add
+
 - [r-dropdown-add](#r-dropdown-add)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
     - [`item-click`](#item-click)
       - [Retour](#retour)
-
-# r-dropdown-add
 
 ## Propriétés
 

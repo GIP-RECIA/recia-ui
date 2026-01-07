@@ -1,8 +1,8 @@
+# r-favorite-dropdown
+
 - [r-favorite-dropdown](#r-favorite-dropdown)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-
-# r-favorite-dropdown
 
 ## Propriétés
 

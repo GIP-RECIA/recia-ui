@@ -42,6 +42,9 @@ export class ReciaWidgetsWrapper extends LitElement {
   @property({ type: String, attribute: 'adapter-source-uri' })
   adapterSourceUri: string = ''
 
+  @property({ type: String, attribute: 'adapter-config-uri' })
+  adapterConfigUri: string = ''
+
   @property({ type: String, attribute: 'localization-uri' })
   localizationUri: string = ''
 
@@ -50,9 +53,6 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   @property({ type: String, attribute: 'soffit-uri' })
   soffitUri: string = ''
-
-  @property({ type: String, attribute: 'adapter-config-uri' })
-  adapterConfigUri: string = ''
 
   @property({ type: String, attribute: 'get-prefs-uri' })
   getPrefsUri: string = ''

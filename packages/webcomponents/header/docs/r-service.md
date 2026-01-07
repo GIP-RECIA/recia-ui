@@ -1,3 +1,5 @@
+# r-service
+
 - [r-service](#r-service)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
@@ -5,8 +7,6 @@
       - [Retour](#retour)
     - [`service-event`](#service-event)
       - [Retour](#retour-1)
-
-# r-service
 
 ## Propriétés
 

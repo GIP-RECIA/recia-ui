@@ -1,10 +1,10 @@
+# r-principal-container
+
 - [r-principal-container](#r-principal-container)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
     - [`user-menu-event`](#user-menu-event)
     - [`search-event`](#search-event)
-
-# r-principal-container
 
 ## Propriétés
 

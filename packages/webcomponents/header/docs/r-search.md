@@ -1,3 +1,5 @@
+# r-search
+
 - [r-search](#r-search)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
@@ -5,8 +7,6 @@
       - [Retour](#retour)
     - [`search-event`](#search-event)
       - [Retour](#retour-1)
-
-# r-search
 
 ## Propriétés
 

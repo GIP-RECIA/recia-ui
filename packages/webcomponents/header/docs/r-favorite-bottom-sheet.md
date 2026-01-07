@@ -1,8 +1,8 @@
+# r-favorite-bottom-sheet
+
 - [r-favorite-bottom-sheet](#r-favorite-bottom-sheet)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-
-# r-favorite-bottom-sheet
 
 ## Propriétés
 

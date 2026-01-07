@@ -1,3 +1,5 @@
+# r-widget
+
 - [r-widget](#r-widget)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
@@ -5,8 +7,6 @@
       - [Retour](#retour)
     - [`favorite-event`](#favorite-event)
       - [Retour](#retour-1)
-
-# r-widget
 
 ## Propriétés
 

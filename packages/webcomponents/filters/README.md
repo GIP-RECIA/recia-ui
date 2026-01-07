@@ -1,10 +1,10 @@
+# r-filters
+
 - [r-filters](#r-filters)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
     - [`update-filters`](#update-filters)
       - [Retour](#retour)
-
-# r-filters
 
 ## Propriétés
 

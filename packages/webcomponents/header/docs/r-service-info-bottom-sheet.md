@@ -1,8 +1,8 @@
+# r-service-info-bottom-sheet
+
 - [r-service-info-bottom-sheet](#r-service-info-bottom-sheet)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-
-# r-service-info-bottom-sheet
 
 ## Propriétés
 

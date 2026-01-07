@@ -1,3 +1,5 @@
+# r-bottom-sheet
+
 - [r-bottom-sheet](#r-bottom-sheet)
   - [Propriétés](#propriétés)
   - [Méthodes](#méthodes)
@@ -5,8 +7,6 @@
       - [Retour](#retour)
     - [`close`](#close)
       - [Retour](#retour-1)
-
-# r-bottom-sheet
 
 ## Propriétés
 

@@ -1,11 +1,11 @@
+# r-services-layout
+
 - [r-services-layout](#r-services-layout)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
     - [`close`](#close)
       - [Retour](#retour)
     - [`open-more`](#open-more)
-
-# r-services-layout
 
 ## Propriétés
 

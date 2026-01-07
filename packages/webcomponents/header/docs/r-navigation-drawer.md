@@ -1,10 +1,10 @@
+# r-navigation-drawer
+
 - [r-widget](#r-widget)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
     - [`item-click`](#item-click)
       - [Retour](#retour)
-
-# r-navigation-drawer
 
 ## Propriétés
 

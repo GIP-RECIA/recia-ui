@@ -1,3 +1,5 @@
+# r-service-info-layout
+
 - [r-service-info-layout](#r-service-info-layout)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
@@ -6,8 +8,6 @@
     - [`close`](#close)
     - [`service-info-event`](#service-info-event)
       - [Retour](#retour-1)
-
-# r-service-info-layout
 
 ## Propriétés
 

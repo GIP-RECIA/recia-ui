@@ -1,8 +1,8 @@
+# r-info-etab-bottom-sheet
+
 - [r-info-etab-bottom-sheet](#r-info-etab-bottom-sheet)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-
-# r-info-etab-bottom-sheet
 
 ## Propriétés
 
