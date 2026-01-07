@@ -1,6 +1,2 @@
 @use 'sass:color';
 @use '../variables' as *;
-
-@mixin set-color($background-color) {
-  color: if(color.channel($background-color, 'lightness', hsl) > 50, $black, $white);
-}
