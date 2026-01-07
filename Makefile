@@ -109,7 +109,7 @@ wc-release-%: check-main git-status-ok
 	fi
 	@yarn workspace $(WC_PKG) run release -- $*
 	@echo ""
-	@echo "ℹ Run `git push --follow-tags origin main && make wc-publish` to publish"
+	@echo "ℹ Run \`git push --follow-tags origin main && make wc-publish\` to publish"
 
 wc-publish: check-main git-status-ok check-wc-build
 	@yarn workspace $(WC_PKG) npm publish
