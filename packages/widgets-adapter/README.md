@@ -1,7 +1,5 @@
 # widget-to-endpoints-adapter
 
-Script qui sert d'intermédiaire entre [widgets-wrapper](../webcomponents/widgets-wrapper) et des API.
-
 ## Ajout d'un widget
 
 1. Ajouter une entrée à l'enum [WidgetKey](./src/types/widgetTypes.ts).

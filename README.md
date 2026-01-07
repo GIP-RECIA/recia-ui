@@ -1,36 +1,42 @@
 # recia-ui
 
-Composents Web
+Regroupement des éléments d'interface utilisateur (UI) utilisé dans l'ENT du GIP RECIA.
 
 - [recia-ui](#recia-ui)
+  - [Projets 🗒️](#projets-️)
+    - [ui](#ui)
+    - [ui-web-webcomponents](#ui-web-webcomponents)
+    - [web-components](#web-components)
+    - [widgets-adapter](#widgets-adapter)
   - [Prérequis 🚨](#prérequis-)
-  - [Setup 🧰](#setup-)
-    - [Initialisation 🛠️](#initialisation-️)
-    - [License 📔](#license-)
-  - [Composants](#composants)
+  - [Configuration 🧰](#configuration-)
+
+## Projets 🗒️
+
+### [ui](./packages/ui/)
+
+Intégrations des maquettes et styles utilisé globalement.
+
+### [ui-web-webcomponents](./packages/ui-webcomponents/)
+
+Paquet publié sur npm (`@gip-recia/ui-webcomponents`) et webjar contenant les fichiers compilés de chaque composant web.
+
+### [web-components](./packages/webcomponents/)
+
+Composants web de l'UI ENT du GIP RECIA.
+
+⚠️ Certains composants sont dépendants du [portail](https://github.com/GIP-RECIA/uPortal-start) pour fonctionner.
+
+### [widgets-adapter](./packages/widgets-adapter/)
+
+Script qui sert d'intermédiaire entre le composant web [r-widgets-wrapper](./packages/webcomponents/widgets-wrapper) et des API.
 
 ## Prérequis 🚨
 
 - [nvm](https://github.com/nvm-sh/nvm)
 - [docker](https://www.docker.com)
+- make
 
-## Setup 🧰
+## Configuration 🧰
 
-### Initialisation 🛠️
-
-```sh
-make init
-```
-
-### License 📔
-
-> ⚠️ docker doit être lancé
-
-```sh
-make license-check
-make license-generate
-```
-
-## Composants
-
-
+Le projet dispose d'un makefile listant les commandes disponnibles.
