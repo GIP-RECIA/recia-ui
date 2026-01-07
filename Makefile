@@ -99,9 +99,7 @@ license-commit:
 wc-build:
 	@./scripts/build-wc.sh
 	@echo ""
-	@echo "📦 ready to make a release and publish"
-	@echo "	make wc-release-[patch|minor|major]"
-	@echo "	make wc-publish"
+	@echo "ℹ Run \`make wc-release-[patch|minor|major]\` to create a release"
 
 wc-release-%: check-main git-status-ok
 	@if ! echo "$(RELEASE_TYPES)" | grep -qw "$*"; then \
@@ -110,6 +108,8 @@ wc-release-%: check-main git-status-ok
 		exit 1; \
 	fi
 	@yarn workspace $(WC_PKG) run release -- $*
+	@echo ""
+	@echo "ℹ Run `git push --follow-tags origin main && make wc-publish` to publish"
 
 wc-publish: check-main git-status-ok check-wc-build
 	@yarn workspace $(WC_PKG) npm publish
