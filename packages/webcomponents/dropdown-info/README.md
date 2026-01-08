@@ -2,6 +2,8 @@
 
 - [r-dropdown-info](#r-dropdown-info)
   - [Propriétés](#propriétés)
+  - [Slots](#slots)
+    - [default](#default)
 
 ## Propriétés
 
@@ -13,3 +15,9 @@
 | `tooltip-location` | [`Location`](./src/types/LocationType.ts) |   `false`   | `bottom right` | Emplacement du tooltip                             |
 | `no-padding`       |                 `boolean`                 |   `false`   |    `false`     | Supprime le padding                                |
 | `no-mask`          |                 `boolean`                 |   `false`   |    `false`     | Supprime le masque                                 |
+
+## Slots
+
+### default
+
+Contenu du dropdown.

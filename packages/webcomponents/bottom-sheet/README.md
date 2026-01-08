@@ -7,6 +7,8 @@
       - [Retour](#retour)
     - [`close`](#close)
       - [Retour](#retour-1)
+  - [Slots](#slots)
+    - [default](#default)
 
 ## Propriétés
 
@@ -31,3 +33,9 @@ Aucun
 #### Retour
 
 Aucun
+
+## Slots
+
+### default
+
+Contenu de la bottom sheet.
