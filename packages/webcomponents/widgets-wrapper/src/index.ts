@@ -75,9 +75,6 @@ export class ReciaWidgetsWrapper extends LitElement {
   // used for cancel changes
   widgetToDisplayKeyArrayBackup: string[] = []
 
-  // store the bounded event used for listenning for click, and removing it when the dropdown is closed
-  boundClickEventOnPage: { (e: Event): void, (this: Window, ev: MouseEvent): any } | undefined
-
   wrapperConfig: WidgetsWrapperConfig = {
     allowedKeys: [],
     requiredKeys: [],
@@ -306,10 +303,6 @@ export class ReciaWidgetsWrapper extends LitElement {
       })
     }
     this.requestUpdate()
-  }
-
-  removeClickEvent(): void {
-    window.removeEventListener('click', this.boundClickEventOnPage!)
   }
 
   canSave(): boolean {
