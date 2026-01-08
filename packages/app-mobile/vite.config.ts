@@ -25,7 +25,7 @@ export default ({ mode }: ConfigEnv) => {
   const { VITE_BASE_URI, VITE_ALLOWED_HOSTS } = process.env
 
   return defineConfig({
-    base: mode === 'development' ? VITE_BASE_URI : '/commun/app-mobile/',
+    base: VITE_BASE_URI,
     server: {
       allowedHosts: VITE_ALLOWED_HOSTS ? JSON.parse(VITE_ALLOWED_HOSTS) : undefined,
     },
@@ -33,9 +33,7 @@ export default ({ mode }: ConfigEnv) => {
       sourcemap: true,
       rollupOptions: {
         input: {
-          'main': './index.html',
-          'not-logged': './not-logged.html',
-          'logged': './logged.html',
+          logged: './logged.html',
         },
         external: [
           /\/commun\/.*/,

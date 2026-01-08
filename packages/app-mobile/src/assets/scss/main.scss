@@ -161,21 +161,3 @@ body {
     }
   }
 }
-
-.wayf-layout {
-  > header > h1 > span {
-    display: block;
-    font-size: var(--#{$prefix}font-size-sm);
-    font-weight: normal;
-    line-height: 21px;
-  }
-
-  @media (width >= map.get($grid-breakpoints, md)) {
-    > header > h1 > span {
-      display: unset;
-      font-size: unset;
-      font-weight: unset;
-      line-height: unset;
-    }
-  }
-}
