@@ -4,6 +4,7 @@ Regroupement des éléments d'interface utilisateur (UI) utilisé dans l'ENT du 
 
 - [recia-ui](#recia-ui)
   - [Projets 🗒️](#projets-️)
+    - [app-mobile](#app-mobile)
     - [ui](#ui)
     - [ui-web-webcomponents](#ui-web-webcomponents)
     - [web-components](#web-components)
@@ -12,6 +13,10 @@ Regroupement des éléments d'interface utilisateur (UI) utilisé dans l'ENT du 
   - [Configuration 🧰](#configuration-)
 
 ## Projets 🗒️
+
+### [app-mobile](./packages/app-mobile/)
+
+Pages web de l'[application mobile](https://github.com/GIP-RECIA/Application-mobile-POC).
 
 ### [ui](./packages/ui/)
 
