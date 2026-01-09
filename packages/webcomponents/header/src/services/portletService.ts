@@ -153,13 +153,13 @@ export default class PortletService {
             portlet.fname,
             {
               ...portlet,
-              categories: [category.name],
+              categories: [id],
             },
           )
         }
         else {
           existing.categories = Array.from(
-            new Set([...existing.categories, category.name]),
+            new Set([...existing.categories, id]),
           )
         }
       }

@@ -10,17 +10,17 @@
 
 ## Propriétés
 
-| Nom        |                      Type                      | Obligatoire |   Default   | Description                                           |
-| ---------- | :--------------------------------------------: | :---------: | :---------: | ----------------------------------------------------- |
-| `id`       |                    `number`                    |   `false`   | `undefined` | ID du service                                         |
-| `fname`    |                    `string`                    |   `false`   | `undefined` | Fname du service                                      |
-| `name`     |                    `string`                    |   `false`   | `undefined` | Nom d'affichage du service                            |
-| `category` | [`Category`](../src/types/categoryTypes.ts.ts) |   `false`   | `undefined` | Catégorie du service                                  |
-| `icon-url` |                    `string`                    |   `false`   | `undefined` | URL de l'icone (SVG) du service                       |
-| `link`     |      [`Link`](../src/types/linkTypes.ts)       |   `false`   | `undefined` | URL du service                                        |
-| `new`      |                   `boolean`                    |   `false`   |   `false`   | Le service est nouveau                                |
-| `favorite` |                   `boolean`                    |   `false`   |   `false`   | Le service est favori                                 |
-| `more`     |                   `boolean`                    |   `false`   |   `false`   | Le service as une fiche d'informations complémentaire |
+| Nom        |                Type                 | Obligatoire |   Default   | Description                                           |
+| ---------- | :---------------------------------: | :---------: | :---------: | ----------------------------------------------------- |
+| `id`       |              `number`               |   `false`   | `undefined` | ID du service                                         |
+| `fname`    |              `string`               |   `false`   | `undefined` | Fname du service                                      |
+| `name`     |              `string`               |   `false`   | `undefined` | Nom d'affichage du service                            |
+| `category` |              `number`               |   `false`   | `undefined` | Id de la catégorie du service                         |
+| `icon-url` |              `string`               |   `false`   | `undefined` | URL de l'icone (SVG) du service                       |
+| `link`     | [`Link`](../src/types/linkTypes.ts) |   `false`   | `undefined` | URL du service                                        |
+| `new`      |              `boolean`              |   `false`   |   `false`   | Le service est nouveau                                |
+| `favorite` |              `boolean`              |   `false`   |   `false`   | Le service est favori                                 |
+| `more`     |              `boolean`              |   `false`   |   `false`   | Le service as une fiche d'informations complémentaire |
 
 ## Évènements
 

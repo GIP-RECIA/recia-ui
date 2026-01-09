@@ -277,14 +277,14 @@ const $displayedCategories: ReadableAtom<Array<Category> | undefined> = batched(
   (categories, services) => {
     const servicesCategories = [...new Set(services?.flatMap(({ categories }) => categories))]
 
-    return categories?.filter(({ name }) => servicesCategories.includes(name))
+    return categories?.filter(({ id }) => servicesCategories.includes(id))
   },
 )
 
 const $categoryFilters: ReadableAtom<Array<Section>> = batched(
   [$displayedCategories, $selectedCategory],
   (categories, selectedCategory) => {
-    if (!categories?.map(({ name }) => name)?.includes(selectedCategory))
+    if (![...categories?.map(({ id }) => id.toString()) ?? [], defaultFilterKey].includes(selectedCategory))
       $selectedCategory.set(defaultFilterKey)
 
     return [
@@ -298,11 +298,11 @@ const $categoryFilters: ReadableAtom<Array<Section>> = batched(
             value: msg(str`Tous les services`),
             checked: defaultFilterKey === selectedCategory,
           },
-          ...(categories?.map(({ name }) => {
+          ...(categories?.map(({ id, name }) => {
             return {
-              key: name,
+              key: id.toString(),
               value: name,
-              checked: name === selectedCategory,
+              checked: id.toString() === selectedCategory,
             }
           })) ?? [],
         ],
@@ -663,6 +663,7 @@ async function removeFavorite(id: number): Promise<void> {
 export {
   $authenticated,
   $baseServicesLoad,
+  $categories,
   $categoryFilters,
   $debug,
   $favoriteMenu,

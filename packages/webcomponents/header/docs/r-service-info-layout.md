@@ -17,7 +17,7 @@
 | `icon-url`        |                   `string`                   |   `false`   | `undefined` | URL de l'icone (SVG) du service                    |
 | `name`            |                   `string`                   |   `false`   | `undefined` | Nom du service                                     |
 | `origin`          | [`Origin`](../src/types/serviceInfoTypes.ts) |   `false`   | `undefined` |                                                    |
-| `category`        | [`Category`](../src/types/categoryTypes.ts)  |   `false`   | `undefined` | Catégorie du service                               |
+| `category`        |                   `number`                   |   `false`   | `undefined` | Id de la catégorie du service                      |
 | `favorite-toggle` |                  `boolean`                   |   `false`   |   `false`   | Possibilité de mettre/retirer des favoris          |
 | `favorite`        |                  `boolean`                   |   `false`   |   `false`   | Le service est en favoris                          |
 | `description`     |                   `string`                   |   `false`   | `undefined` | Description du service (HTML)                      |

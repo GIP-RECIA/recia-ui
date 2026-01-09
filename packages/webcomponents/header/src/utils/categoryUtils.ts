@@ -14,21 +14,35 @@
  * limitations under the License.
  */
 
-import { CategoryKey } from '../types/index.ts'
+import type { Category } from '../types/index.ts'
+import { $categories } from '../stores/index.ts'
 
-const i18nCategories: Record<CategoryKey, string> = {
-  [CategoryKey.administrationSupport]: 'Administration & Support',
-  [CategoryKey.communicationCollaboration]: 'Communication & Collaboration',
-  [CategoryKey.documentsRessources]: 'Documents & Ressources numériques',
-  [CategoryKey.apprentissageSuivi]: 'Apprentissage & Suivi',
-  [CategoryKey.citoyensTerritoriaux]: 'Services Citoyens & Territoriaux',
-  [CategoryKey.rhGestion]: 'Services RH & Gestion',
+const classCategories: Record<number, string> = {
+  60: 'rhGestion',
+  61: 'citoyensTerritoriaux',
+  62: 'apprentissageSuivi',
+  63: 'administrationSupport',
+  64: 'communicationCollaboration',
+  65: 'documentsRessources',
 }
 
-function getCategoryTranslation(category: CategoryKey): string {
-  return i18nCategories[category]
+function getCategoryData(category: number | undefined): Partial<Category> & {
+  className: string
+} | undefined {
+  if (!category)
+    return
+
+  const categories = $categories.get()
+
+  if (!categories)
+    return { className: classCategories[category] }
+
+  return {
+    ...categories.find(({ id }) => category === id),
+    className: classCategories[category],
+  }
 }
 
 export {
-  getCategoryTranslation,
+  getCategoryData,
 }

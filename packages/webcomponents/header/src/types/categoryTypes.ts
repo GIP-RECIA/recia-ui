@@ -19,12 +19,3 @@ import type { PortletCategory } from './registryTypes.ts'
 export type Category = Pick<PortletCategory, 'name' | 'description'> & {
   id: number
 }
-
-export enum CategoryKey {
-  administrationSupport = 'administrationSupport',
-  communicationCollaboration = 'communicationCollaboration',
-  documentsRessources = 'documentsRessources',
-  apprentissageSuivi = 'apprentissageSuivi',
-  citoyensTerritoriaux = 'citoyensTerritoriaux',
-  rhGestion = 'rhGestion',
-}

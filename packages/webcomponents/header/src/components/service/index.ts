@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { PropertyValues, TemplateResult } from 'lit'
+import type { TemplateResult } from 'lit'
 import type { Link } from '../../types/index.ts'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -29,8 +29,7 @@ import {
   addFavorite,
   removeFavorite,
 } from '../../stores/index.ts'
-import { CategoryKey } from '../../types/index.ts'
-import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
+import { getCategoryData } from '../../utils/categoryUtils.ts'
 import { getSvgIconService } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -46,8 +45,8 @@ export class ReciaService extends LitElement {
   @property({ type: String })
   name?: string
 
-  @property({ type: String })
-  category?: CategoryKey
+  @property({ type: Number })
+  category?: number
 
   @property({ type: String, attribute: 'icon-url' })
   iconUrl?: string
@@ -70,15 +69,6 @@ export class ReciaService extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     updateWhenLocaleChanges(this)
-  }
-
-  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('category')) {
-      if (!this.category || !Object.values(CategoryKey).includes(this.category)) {
-        this.category = undefined
-      }
-    }
-    return true
   }
 
   async toggleFavorite(_: Event): Promise<void> {
@@ -113,9 +103,11 @@ export class ReciaService extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
+    const { name, className } = getCategoryData(this.category) ?? {}
+
     return this.link && this.name
       ? html`
-          <div class="service ${this.category}">
+          <div class="service ${className}">
             ${
               this.isNew
                 ? html`
@@ -143,9 +135,9 @@ export class ReciaService extends LitElement {
                 : nothing
             }
             ${
-              this.category
+              name
                 ? html`
-                    <span class="category">${getCategoryTranslation(this.category)}</span>
+                    <span class="category">${name}</span>
                   `
                 : nothing
             }

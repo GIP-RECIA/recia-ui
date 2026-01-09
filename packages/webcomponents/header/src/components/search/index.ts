@@ -35,7 +35,7 @@ import {
   $searchResults,
   updateServices,
 } from '../../stores/index.ts'
-import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
+import { getCategoryData } from '../../utils/categoryUtils.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import { highlight } from '../../utils/stringUtils.ts'
@@ -229,6 +229,8 @@ export class ReciaSearch extends LitElement {
   itemTemplate(item: Service): TemplateResult {
     const searchQueryString = $searchQueryString.get()
 
+    const { name, className } = getCategoryData(item.category) ?? {}
+
     return html`
         <li>
           <a
@@ -240,12 +242,8 @@ export class ReciaSearch extends LitElement {
             <div>
               <header>
                 ${
-                  item.category
-                    ? html`
-                        <span class="result-tag ${item.category}">
-                          ${getCategoryTranslation(item.category)}
-                        </span>
-                      `
+                  name
+                    ? html`<span class="result-tag ${className}">${name}</span>`
                     : nothing
                 }
                 <span class="result-title">

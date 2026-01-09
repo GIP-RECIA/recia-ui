@@ -30,8 +30,8 @@ import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
-import { CategoryKey, Origin } from '../../../types/index.ts'
-import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
+import { Origin } from '../../../types/index.ts'
+import { getCategoryData } from '../../../utils/categoryUtils.ts'
 import { getIcon, getIconWithStyle } from '../../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
@@ -51,8 +51,8 @@ export class ReciaServiceInfoLayout extends LitElement {
   @property({ type: String })
   origin?: Origin
 
-  @property({ type: String })
-  category?: CategoryKey
+  @property({ type: Number })
+  category?: number
 
   @property({ type: Boolean, attribute: 'favorite-toggle' })
   canTogglefavorite: boolean = false
@@ -254,6 +254,8 @@ export class ReciaServiceInfoLayout extends LitElement {
     if (this.error)
       return this.errorTemplate()
 
+    const { name, className } = getCategoryData(this.category) ?? {}
+
     return html`
       <div class="service-info">
         <header>
@@ -271,12 +273,8 @@ export class ReciaServiceInfoLayout extends LitElement {
                   : nothing
               }
               ${
-                this.category && Object.values(CategoryKey).includes(this.category)
-                  ? html`
-                      <span class="tag-category ${this.category}">
-                        ${getCategoryTranslation(this.category)}
-                      </span>
-                    `
+                name
+                  ? html`<span class="tag-category ${className}">${name}</span>`
                   : nothing
               }
             </div>
