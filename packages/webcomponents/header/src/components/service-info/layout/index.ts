@@ -30,7 +30,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
-import { Category, Origin } from '../../../types/index.ts'
+import { CategoryKey, Origin } from '../../../types/index.ts'
 import { getCategoryTranslation } from '../../../utils/categoryUtils.ts'
 import { getIcon, getIconWithStyle } from '../../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../../utils/iconUtils.ts'
@@ -52,7 +52,7 @@ export class ReciaServiceInfoLayout extends LitElement {
   origin?: Origin
 
   @property({ type: String })
-  category?: Category
+  category?: CategoryKey
 
   @property({ type: Boolean, attribute: 'favorite-toggle' })
   canTogglefavorite: boolean = false
@@ -271,7 +271,7 @@ export class ReciaServiceInfoLayout extends LitElement {
                   : nothing
               }
               ${
-                this.category && Object.values(Category).includes(this.category)
+                this.category && Object.values(CategoryKey).includes(this.category)
                   ? html`
                       <span class="tag-category ${this.category}">
                         ${getCategoryTranslation(this.category)}

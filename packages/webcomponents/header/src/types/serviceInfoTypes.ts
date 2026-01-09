@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Category } from './categoryTypes.ts'
+import type { CategoryKey } from './categoryTypes.ts'
 import type { Link } from './linkTypes.ts'
 
 export enum Origin {
@@ -27,7 +27,7 @@ export interface ServiceInfoLayout {
   'icon-url'?: string
   'name'?: string
   'origin'?: Origin
-  'category'?: Category
+  'category'?: CategoryKey
   'favorite-toggle'?: boolean
   'favorite'?: boolean
   'description'?: string
@@ -40,7 +40,7 @@ export interface ServiceInfoLayout {
 export interface ServiceInfoApiResponse {
   description: string
   video_link?: string
-  categorie_principale?: Category
+  categorie_principale?: CategoryKey
   tutorials?: Array<Link>
   resource_link?: string
   populations_cible?: Array<string>
@@ -50,7 +50,7 @@ export interface ServiceInfoApiResponse {
 
 export interface ServiceInfo {
   fname: string
-  categoriePrincipale?: Category
+  categoriePrincipale?: CategoryKey
   doesInfoExist: boolean
   newService?: boolean
 }

@@ -17,6 +17,7 @@
 import type { ReadableAtom } from 'nanostores'
 import type { Section } from '../../../filters/src/types/SectionType.ts'
 import type {
+  Category,
   FavoriteSection,
   HeaderProperties,
   InfoEtabData,
@@ -86,6 +87,8 @@ const $baseServices = atom<Array<Service> | undefined>()
 const $baseServicesLoad = atom<LoadingState>(LoadingState.UNLOADED)
 
 const $services = atom<Array<Service> | undefined>()
+
+const $categories = atom<Array<Category> | undefined>()
 
 const $layout = atom<LayoutApiResponse | undefined>()
 
@@ -269,19 +272,19 @@ const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   },
 )
 
-const $categories: ReadableAtom<Array<string> | undefined> = batched(
-  [$searchResultServices],
-  (services) => {
-    return [
-      ...new Set(services?.flatMap(({ categories }) => categories)),
-    ].sort((a, b) => alphaSort(a, b, 'asc'))
+const $displayedCategories: ReadableAtom<Array<Category> | undefined> = batched(
+  [$categories, $searchResultServices],
+  (categories, services) => {
+    const servicesCategories = [...new Set(services?.flatMap(({ categories }) => categories))]
+
+    return categories?.filter(({ name }) => servicesCategories.includes(name))
   },
 )
 
 const $categoryFilters: ReadableAtom<Array<Section>> = batched(
-  [$categories, $selectedCategory],
+  [$displayedCategories, $selectedCategory],
   (categories, selectedCategory) => {
-    if (!categories?.includes(selectedCategory))
+    if (!categories?.map(({ name }) => name)?.includes(selectedCategory))
       $selectedCategory.set(defaultFilterKey)
 
     return [
@@ -295,11 +298,11 @@ const $categoryFilters: ReadableAtom<Array<Section>> = batched(
             value: msg(str`Tous les services`),
             checked: defaultFilterKey === selectedCategory,
           },
-          ...(categories?.map((category) => {
+          ...(categories?.map(({ name }) => {
             return {
-              key: category,
-              value: category,
-              checked: category === selectedCategory,
+              key: name,
+              value: name,
+              checked: name === selectedCategory,
             }
           })) ?? [],
         ],
@@ -574,7 +577,7 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
     return
 
   $baseServicesLoad.set(LoadingState.LOADING)
-  const [services, layout] = await Promise.all([
+  const [servicesData, layout] = await Promise.all([
     ServicesService.get(soffit, getDomainLink(portletApiUrl), getDomainLink(servicesInfoApiUrl)),
     LayoutService.get(soffit, getDomainLink(layoutApiUrl)),
   ])
@@ -583,14 +586,18 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
     ? [...new Set(FavoritesService.getFromLayout(layout)?.map(Number))]
     : undefined
 
-  $baseServicesLoad.set(services ? LoadingState.LOADED : LoadingState.ERROR)
+  $baseServicesLoad.set(servicesData ? LoadingState.LOADED : LoadingState.ERROR)
+  const { services, categories } = servicesData ?? {}
 
   $favoritesIds.set(favoriteIds)
   $baseServices.set(services?.sort((a, b) => alphaSort(a.name, b.name, 'asc')))
+  $categories.set(categories?.sort((a, b) => alphaSort(a.name, b.name, 'asc')))
   $layout.set(layout)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Services', services)
+    // eslint-disable-next-line no-console
+    console.info('Categories', categories)
     // eslint-disable-next-line no-console
     console.info('Layout', layout)
   }
@@ -656,7 +663,6 @@ async function removeFavorite(id: number): Promise<void> {
 export {
   $authenticated,
   $baseServicesLoad,
-  $categories,
   $categoryFilters,
   $debug,
   $favoriteMenu,

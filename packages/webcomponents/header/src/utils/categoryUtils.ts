@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { Category } from '../types/index.ts'
+import { CategoryKey } from '../types/index.ts'
 
-const i18nCategories: Record<Category, string> = {
-  [Category.administrationSupport]: 'Administration & Support',
-  [Category.communicationCollaboration]: 'Communication & Collaboration',
-  [Category.documentsRessources]: 'Documents & Ressources numériques',
-  [Category.apprentissageSuivi]: 'Apprentissage & Suivi',
-  [Category.citoyensTerritoriaux]: 'Services Citoyens & Territoriaux',
-  [Category.rhGestion]: 'Services RH & Gestion',
+const i18nCategories: Record<CategoryKey, string> = {
+  [CategoryKey.administrationSupport]: 'Administration & Support',
+  [CategoryKey.communicationCollaboration]: 'Communication & Collaboration',
+  [CategoryKey.documentsRessources]: 'Documents & Ressources numériques',
+  [CategoryKey.apprentissageSuivi]: 'Apprentissage & Suivi',
+  [CategoryKey.citoyensTerritoriaux]: 'Services Citoyens & Territoriaux',
+  [CategoryKey.rhGestion]: 'Services RH & Gestion',
 }
 
-function getCategoryTranslation(category: Category): string {
+function getCategoryTranslation(category: CategoryKey): string {
   return i18nCategories[category]
 }
 

@@ -29,7 +29,7 @@ import {
   addFavorite,
   removeFavorite,
 } from '../../stores/index.ts'
-import { Category } from '../../types/index.ts'
+import { CategoryKey } from '../../types/index.ts'
 import { getCategoryTranslation } from '../../utils/categoryUtils.ts'
 import { getSvgIconService } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
@@ -47,7 +47,7 @@ export class ReciaService extends LitElement {
   name?: string
 
   @property({ type: String })
-  category?: Category
+  category?: CategoryKey
 
   @property({ type: String, attribute: 'icon-url' })
   iconUrl?: string
@@ -74,7 +74,7 @@ export class ReciaService extends LitElement {
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('category')) {
-      if (!this.category || !Object.values(Category).includes(this.category)) {
+      if (!this.category || !Object.values(CategoryKey).includes(this.category)) {
         this.category = undefined
       }
     }

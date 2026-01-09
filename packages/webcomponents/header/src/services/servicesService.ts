@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import type { Service, Soffit } from '../types/index.ts'
-import { Category } from '../types/index.ts'
+import type { Category, Service, Soffit } from '../types/index.ts'
+import { CategoryKey } from '../types/index.ts'
 import { getServiceLink } from '../utils/linkUtils.ts'
 import { truncate } from '../utils/stringUtils.ts'
 import InfoService from './infoService.ts'
@@ -26,14 +26,22 @@ export default class ServicesService {
     soffit: Soffit,
     portletApiUrl: string,
     servicesInfoApiUrl: string,
-  ): Promise<Array<Service> | undefined> {
-    const [portlets, portletsInfo] = await Promise.all([
+  ): Promise<
+    {
+      services: Service[]
+      categories: Category[]
+    }
+    | undefined
+  > {
+    const [portletsData, portletsInfo] = await Promise.all([
       PortletService.getAll(soffit, portletApiUrl),
       InfoService.getAll(servicesInfoApiUrl),
     ])
 
-    if (!portlets)
+    if (!portletsData)
       return undefined
+
+    const { portlets, categories } = portletsData
 
     const services: Array<Service> = portlets.map((portlet) => {
       const {
@@ -56,7 +64,7 @@ export default class ServicesService {
       } = portletsInfo
         ? (portletsInfo.find(el => el.fname === fname) ?? {})
         : {}
-      const category = categoriePrincipale && Object.values(Category).includes(categoriePrincipale)
+      const category = categoriePrincipale && Object.values(CategoryKey).includes(categoriePrincipale)
         ? categoriePrincipale
         : undefined
 
@@ -89,6 +97,9 @@ export default class ServicesService {
       }
     })
 
-    return services
+    return {
+      services,
+      categories,
+    }
   }
 }
