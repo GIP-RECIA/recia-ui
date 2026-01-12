@@ -14,49 +14,32 @@
  * limitations under the License.
  */
 
-import type { DrawerItem } from './drawerTypes.ts'
+import type { LitElement } from 'lit'
+import type { ReciaHeader } from '../index.ts'
 
-export interface HeaderProperties {
-  messages: unknown
-  domain: string
-  defaultOrgLogoUrl: string
-  defaultOrgIconUrl: string
-  defaultAvatarUrl: string
-  contextApiUrl: string
-  favoriteApiUrl: string
-  layoutApiUrl: string
-  portletApiUrl: string
-  organizationApiUrl: string
-  userInfoApiUrl: string
-  sessionApiUrl: string
-  templateApiUrl: string
-  signOutUrl: string
-  signInUrl: string
-  casUrl: string
-  userInfoPortletUrl: string
-  switchOrgApiUrl: string
-  switchOrgPortletUrl: string
-  orgAttributeName: string
-  userAllOrgsIdAttributeName: string
-  orgTypeAttributeName: string
-  orgLogoUrlAttributeName: string
-  orgPostalCodeAttributeName: string
-  orgStreetAttributeName: string
-  orgCityAttributeName: string
-  orgMailAttributeName: string
-  orgPhoneAttributeName: string
-  orgWebsiteAttributeName: string
-  sessionRenewDisable: boolean
-  portletInfoApiUrl: string
-  serviceInfoApiUrl: string
-  servicesInfoApiUrl: string
-  categoryClassMapping: Record<number, string>
-  dnmaUrl: string
-  fname: string
-  drawerItems: Array<DrawerItem>
-  navigationDrawerVisible: boolean
-  homePage: boolean
-  starter: boolean
-  cacheBusterVersion: string
-  debug: boolean
-}
+export type HeaderProperties = Omit<
+  ReciaHeader,
+  | keyof LitElement
+  | keyof HTMLElement
+  | 'render'
+  | 'update'
+  | 'requestUpdate'
+  | 'connectedCallback'
+  | 'disconnectedCallback'
+  | 'isNavigationDrawerExpanded'
+  | 'isServicesLayout'
+  | 'isFavoriteDropdown'
+  | 'isSearchOpen'
+  | 'isSearching'
+  | 'serviceInfoRef'
+  | 'changeEtabRef'
+  | 'infoEtabRef'
+>
+
+export type SettingsHeaderProperties = Exclude<
+  keyof HeaderProperties,
+  | 'templateApiPath'
+  | 'sessionRenewDisable'
+  | 'marginTop'
+  | 'debug'
+>

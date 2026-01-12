@@ -20,7 +20,7 @@ import type { Ref } from 'lit/directives/ref.js'
 import type { ReciaInfoEtabBottomSheet } from './components/info-etab/bottom-sheet/index.ts'
 import type { ReciaBottomSheetServiceInfo } from './components/service-info/bottom-sheet/index.ts'
 import type { LangRef } from './helpers/langHelper.ts'
-import type { DrawerItem, HeaderProperties } from './types/index.ts'
+import type { DrawerItem, HeaderProperties, SettingsHeaderProperties } from './types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -63,7 +63,7 @@ import 'regenerator-runtime/runtime.js'
 
 const listenEvents: Array<string> = ['mousemove', 'click', 'keypress']
 
-const availablePropsKeys: Array<(keyof HeaderProperties)> = [
+const settingsPropsKeys = [
   'messages',
   'domain',
   'defaultOrgLogoUrl',
@@ -104,7 +104,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'homePage',
   'starter',
   'cacheBusterVersion',
-]
+] as const satisfies readonly SettingsHeaderProperties[]
 
 @localized()
 @useStores($authenticated)
@@ -298,9 +298,9 @@ export class ReciaHeader extends LitElement {
     if (_changedProperties.has('templateApiPath')) {
       this.templateApiUrl = this.templateApiPath
     }
-    if (availablePropsKeys.some(key => _changedProperties.has(key))) {
+    if (settingsPropsKeys.some(key => _changedProperties.has(key))) {
       const updatedSettings = Object.fromEntries(
-        availablePropsKeys.map(key => [key, this[key]]).filter(([_, value]) => value !== undefined),
+        settingsPropsKeys.map(key => [key, this[key]]).filter(([_, value]) => value !== undefined),
       ) as Partial<HeaderProperties>
 
       updateSettings(updatedSettings)
