@@ -179,7 +179,7 @@ $domain-theme: (                // 18, 36 and 45 are same
 );
 
 $categories: (
-  default: (
+  category-default: (
     color: #858585,
     hover: (
       color: #5B5B5B,
@@ -190,7 +190,7 @@ $categories: (
     ),
     text: $black
   ),
-  administrationSupport: (
+  category-pink: (
     color: #EC407A,
     hover: (
       color: #F60086,
@@ -201,7 +201,7 @@ $categories: (
     ),
     text: $black
   ),
-  rhGestion: (
+  category-purple: (
     color: #AB47BC,
     hover: (
       color: #C400F3,
@@ -212,7 +212,7 @@ $categories: (
     ),
     text: $white
   ),
-  communicationCollaboration: (
+  category-indigo: (
     color: #5747BC,
     hover: (
       color: #665BE7,
@@ -223,7 +223,7 @@ $categories: (
     ),
     text: $white
   ),
-  apprentissageSuivi: (
+  category-yellow: (
     color: #FFAC2F,
     hover: (
       color: #F5C72E,
@@ -234,7 +234,7 @@ $categories: (
     ),
     text: $black
   ),
-  citoyensTerritoriaux: (
+  category-cyan: (
     color: #26C6DA,
     hover: (
       color: #70EAF5,
@@ -245,7 +245,7 @@ $categories: (
     ),
     text: $black
   ),
-  documentsRessources: (
+  category-lightGreen: (
     color: #66BB6A,
     hover: (
       color: #4EF186,

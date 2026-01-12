@@ -126,7 +126,7 @@
   }
 
   @each $type, $values in $categories {
-    @if $type == default {
+    @if $type == category-default {
       --#{$prefix}service: var(--#{$prefix}#{$type});
       --#{$prefix}service-hover: var(--#{$prefix}#{$type}-hover);
       --#{$prefix}service-hover-shadow: var(--#{$prefix}#{$type}-hover-shadow);
