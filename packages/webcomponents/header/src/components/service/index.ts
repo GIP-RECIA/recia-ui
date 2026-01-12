@@ -29,7 +29,7 @@ import {
   addFavorite,
   removeFavorite,
 } from '../../stores/index.ts'
-import { getCategoryData } from '../../utils/categoryUtils.ts'
+import { getCategory } from '../../utils/categoryUtils.ts'
 import { getSvgIconService } from '../../utils/iconUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -103,7 +103,7 @@ export class ReciaService extends LitElement {
   }
 
   render(): TemplateResult | typeof nothing {
-    const { name, className } = getCategoryData(this.category) ?? {}
+    const { name, className } = getCategory(this.category) ?? {}
 
     return this.link && this.name
       ? html`

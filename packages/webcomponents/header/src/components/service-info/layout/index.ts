@@ -31,7 +31,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { componentName } from '../../../../../common/config.ts'
 import langHelper from '../../../helpers/langHelper.ts'
 import { Origin } from '../../../types/index.ts'
-import { getCategoryData } from '../../../utils/categoryUtils.ts'
+import { getCategory } from '../../../utils/categoryUtils.ts'
 import { getIcon, getIconWithStyle } from '../../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../../utils/iconUtils.ts'
 import { setLocale } from '../../../utils/localizationUtils.ts'
@@ -254,7 +254,7 @@ export class ReciaServiceInfoLayout extends LitElement {
     if (this.error)
       return this.errorTemplate()
 
-    const { name, className } = getCategoryData(this.category) ?? {}
+    const { name, className } = getCategory(this.category) ?? {}
 
     return html`
       <div class="service-info">

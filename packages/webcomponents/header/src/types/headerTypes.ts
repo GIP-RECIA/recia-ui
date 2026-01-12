@@ -50,6 +50,7 @@ export interface HeaderProperties {
   portletInfoApiUrl: string
   serviceInfoApiUrl: string
   servicesInfoApiUrl: string
+  categoryClassMapping: Record<number, string>
   dnmaUrl: string
   fname: string
   drawerItems: Array<DrawerItem>

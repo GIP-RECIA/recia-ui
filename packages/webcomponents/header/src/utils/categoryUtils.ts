@@ -15,34 +15,30 @@
  */
 
 import type { Category } from '../types/index.ts'
-import { $categories } from '../stores/index.ts'
+import { $categories, $settings } from '../stores/index.ts'
 
-const classCategories: Record<number, string> = {
-  60: 'rhGestion',
-  61: 'citoyensTerritoriaux',
-  62: 'apprentissageSuivi',
-  63: 'administrationSupport',
-  64: 'communicationCollaboration',
-  65: 'documentsRessources',
-}
-
-function getCategoryData(category: number | undefined): Partial<Category> & {
+function getCategory(categoryId: number | undefined): Category & {
   className: string
 } | undefined {
-  if (!category)
+  if (!categoryId)
     return
 
   const categories = $categories.get()
+  const { categoryClassMapping } = $settings.get() ?? {}
 
-  if (!categories)
-    return { className: classCategories[category] }
+  if (!categories || !categoryClassMapping)
+    return
+
+  const cat = categories.find(({ id }) => categoryId === id)
+  if (!cat)
+    return
 
   return {
-    ...categories.find(({ id }) => category === id),
-    className: classCategories[category],
+    ...cat,
+    className: categoryClassMapping[categoryId],
   }
 }
 
 export {
-  getCategoryData,
+  getCategory,
 }

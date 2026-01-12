@@ -96,6 +96,7 @@ const availablePropsKeys: Array<(keyof HeaderProperties)> = [
   'portletInfoApiUrl',
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
+  'categoryClassMapping',
   'dnmaUrl',
   'fname',
   'drawerItems',
@@ -212,6 +213,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'services-info-api-url' })
   servicesInfoApiUrl?: string
+
+  @property({ type: Object, attribute: 'category-class-mapping' })
+  categoryClassMapping?: Record<number, string>
 
   @property({ type: String, attribute: 'dnma-url' })
   dnmaUrl?: string
