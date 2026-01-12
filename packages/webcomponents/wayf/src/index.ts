@@ -32,7 +32,7 @@ export class ReciaWayf extends LitElement {
   casUrl?: string
 
   @property({ type: Array, attribute: 'idp-ids' })
-  idpIds?: Array<IdpId>
+  idpIds?: IdpId[]
 
   @property({ type: String, attribute: 'svg-url' })
   svgUrl?: string = `./${name}.spritemap.svg`

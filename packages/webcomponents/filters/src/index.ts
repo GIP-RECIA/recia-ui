@@ -36,7 +36,7 @@ import { setLocale } from './utils/localizationUtils.ts'
 @localized()
 export class ReciaFilters extends LitElement {
   @property({ type: Array })
-  data: Array<Section> | null = null
+  data: Section[] | null = null
 
   @property({ type: Boolean })
   loading: boolean = false
@@ -48,7 +48,7 @@ export class ReciaFilters extends LitElement {
   loadingSectionsItems?: number
 
   @state()
-  checked: Map<string, Array<string>> = new Map()
+  checked: Map<string, string[]> = new Map()
 
   @state()
   activeFilters?: number

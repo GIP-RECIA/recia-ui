@@ -42,10 +42,10 @@ export class ReciaFooter extends LitElement {
   templateApiPath?: string
 
   @property({ type: Array, attribute: 'top-links' })
-  topLinks?: Array<Link>
+  topLinks?: Link[]
 
   @property({ type: Array, attribute: 'bottom-links' })
-  bottomLinks?: Array<Link>
+  bottomLinks?: Link[]
 
   @state()
   template?: Template

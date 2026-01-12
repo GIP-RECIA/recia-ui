@@ -17,9 +17,9 @@
 export interface Template {
   name: string
   logoPath: string
-  sponsors?: Array<{
+  sponsors?: {
     name: string
     url: string
     logoPath: string
-  }>
+  }[]
 }

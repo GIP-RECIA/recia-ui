@@ -50,8 +50,8 @@ export default class FavoriteService {
 
   static async setUserFavoriteWidgets(
     url: string,
-    displayedKeys: Array<string>,
-    defaultKeys: Array<string>,
+    displayedKeys: string[],
+    defaultKeys: string[],
   ): Promise<void> {
     try {
       const response = await fetch(url, {

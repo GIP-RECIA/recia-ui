@@ -24,7 +24,7 @@
 detail: {
   activeFilters: {
     id: string
-    checked: Array<string>
+    checked: string[]
   }
 }
 ```

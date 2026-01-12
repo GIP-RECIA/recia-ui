@@ -59,7 +59,7 @@ export class ReciaWidget extends LitElement {
   link?: Link
 
   @property({ type: Array })
-  items?: Array<WidgetItem>
+  items?: WidgetItem[]
 
   @property({ type: String, attribute: 'empty-icon' })
   emptyIcon?: string

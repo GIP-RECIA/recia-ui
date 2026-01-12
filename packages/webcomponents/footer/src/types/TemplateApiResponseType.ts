@@ -16,27 +16,27 @@
 
 export interface TemplateApiResponse {
   version: string
-  data: Array<TemplateApiData>
+  data: TemplateApiData[]
 }
 
 interface TemplateApiData {
   identity: {
     Id: string
     name: string
-    domains?: Array<string>
-    uai?: Array<string>
+    domains?: string[]
+    uai?: string[]
   }
-  images: Array<{
+  images: {
     Id: string
     name: string
     path?: string
     url?: string
-    parameters?: Array<{
+    parameters?: {
       propertie: string
       value: string
-    }>
-  }>
-  colors: Array<{
+    }[]
+  }[]
+  colors: {
     Id: string
     hexa: string
     rgb: {
@@ -44,18 +44,18 @@ interface TemplateApiData {
       g: number
       b: number
     }
-  }>
-  sponsors: Array<{
+  }[]
+  sponsors: {
     Id: string
     name: string
     url?: string
     logo: {
       path?: string
       url?: string
-      parameters?: Array<{
+      parameters?: {
         propertie: string
         value: string
-      }>
+      }[]
     }
-  }>
+  }[]
 }

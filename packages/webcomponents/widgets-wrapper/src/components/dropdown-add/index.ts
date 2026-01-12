@@ -31,7 +31,7 @@ import styles from './style.scss?inline'
 @localized()
 export class ReciaDropdownAdd extends LitElement {
   @property({ type: Array })
-  items?: Array<Widget>
+  items?: Widget[]
 
   @property({ type: Boolean })
   disabled: boolean = false
