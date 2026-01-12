@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.10.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.9.0...ui-webcomponents/v1.10.0) (2026-01-12)
+
+
+### Features
+
+* **header:** add attribute `category-class-mapping` for choosing category class ([379631b](https://github.com/GIP-RECIA/recia-ui/commit/379631bb0bffdc1c81c37e0a1450779ab41f1a9b))
+* **header:** get all categories from registry ([3dbf27d](https://github.com/GIP-RECIA/recia-ui/commit/3dbf27dc4876e0cf37bbeae7af201dfca8999c64))
+* **header:** use id for categories instead of string ([9140fec](https://github.com/GIP-RECIA/recia-ui/commit/9140fec245014a11258e0491abd6503c6f2374b3))
+
 ## [1.9.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.8.0...ui-webcomponents/v1.9.0) (2025-12-17)
 
 
