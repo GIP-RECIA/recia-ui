@@ -126,7 +126,7 @@ export class ReciaNavigationDrawer extends LitElement {
   }
 
   handleFavoriteUpdate(e: CustomEvent): void {
-    const { newValue }: { newValue?: Array<UpdatedFavoriteSection> } = e.detail
+    const { newValue }: { newValue?: UpdatedFavoriteSection[] } = e.detail
     if (!newValue)
       return
 

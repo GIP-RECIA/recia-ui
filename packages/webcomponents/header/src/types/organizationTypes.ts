@@ -21,7 +21,7 @@ export interface OrganizationApiResponse {
   description: string
   otherAttributes: Record<
     string,
-    Array<string | number | boolean>
+    (string | number | boolean)[]
   >
   code: string
 }
@@ -37,5 +37,5 @@ export type Organization = Omit<OrganizationApiResponse, 'otherAttributes'> & {
 
 export interface Organizations {
   current: Organization
-  other: Array<Organization>
+  other: Organization[]
 }

@@ -82,17 +82,17 @@ const $userInfo = atom<UserInfo | undefined>()
 
 const $organizations = atom<Organizations | undefined>()
 
-const $baseServices = atom<Array<Service> | undefined>()
+const $baseServices = atom<Service[] | undefined>()
 
 const $baseServicesLoad = atom<LoadingState>(LoadingState.UNLOADED)
 
-const $services = atom<Array<Service> | undefined>()
+const $services = atom<Service[] | undefined>()
 
-const $categories = atom<Array<Category> | undefined>()
+const $categories = atom<Category[] | undefined>()
 
 const $layout = atom<LayoutApiResponse | undefined>()
 
-const $favoritesIds = atom<Array<number> | undefined>()
+const $favoritesIds = atom<number[] | undefined>()
 
 const $searchQueryString = atom<string>('')
 
@@ -165,18 +165,18 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
   },
 )
 
-const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
+const $favorites: ReadableAtom<Service[] | undefined> = batched(
   [$baseServices, $favoritesIds],
   (services, favoriteIds) => {
     if (!services || !favoriteIds)
       return undefined
 
-    let favorites: Array<Service> | undefined = favoriteIds
+    let favorites: Service[] | undefined = favoriteIds
       ?.map(id => services?.find(service => service.id === id))
       .filter(service => service !== undefined)
     favorites = favorites && favorites?.length > 0 ? favorites : undefined
 
-    let filterdServices: Array<Service> | undefined = services.map((service) => {
+    let filterdServices: Service[] | undefined = services.map((service) => {
       return {
         ...service,
         favorite: favorites ? favorites.includes(service) : false,
@@ -193,7 +193,7 @@ const $favorites: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
-const $searchResultServices: ReadableAtom<Array<Service> | undefined> = batched(
+const $searchResultServices: ReadableAtom<Service[] | undefined> = batched(
   [$services, $searchQueryString],
   (services, search) => {
     if (!services)
@@ -216,7 +216,7 @@ const $searchResultServices: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
-const $filteredServices: ReadableAtom<Array<Service> | undefined> = batched(
+const $filteredServices: ReadableAtom<Service[] | undefined> = batched(
   [$searchResultServices, $selectedCategory],
   (services, category) => {
     if (!services)
@@ -239,7 +239,7 @@ const $filteredServices: ReadableAtom<Array<Service> | undefined> = batched(
   },
 )
 
-const $favoriteMenu: ReadableAtom<Array<FavoriteSection>> = batched(
+const $favoriteMenu: ReadableAtom<FavoriteSection[]> = batched(
   [$favorites, $baseServicesLoad],
   (favorites, baseServicesLoad) => {
     return [
@@ -257,7 +257,7 @@ const $favoriteMenu: ReadableAtom<Array<FavoriteSection>> = batched(
   },
 )
 
-const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
+const $searchResults: ReadableAtom<SearchSection[] | undefined> = batched(
   [$searchResultServices, $baseServicesLoad],
   (services, baseServicesLoad) => {
     return [
@@ -272,7 +272,7 @@ const $searchResults: ReadableAtom<Array<SearchSection> | undefined> = batched(
   },
 )
 
-const $displayedCategories: ReadableAtom<Array<Category> | undefined> = batched(
+const $displayedCategories: ReadableAtom<Category[] | undefined> = batched(
   [$categories, $searchResultServices],
   (categories, services) => {
     const servicesCategories = [...new Set(services?.flatMap(({ categories }) => categories))]
@@ -281,7 +281,7 @@ const $displayedCategories: ReadableAtom<Array<Category> | undefined> = batched(
   },
 )
 
-const $categoryFilters: ReadableAtom<Array<Section>> = batched(
+const $categoryFilters: ReadableAtom<Section[]> = batched(
   [$displayedCategories, $selectedCategory],
   (categories, selectedCategory) => {
     if (![...categories?.map(({ id }) => id.toString()) ?? [], defaultFilterKey].includes(selectedCategory))
@@ -604,7 +604,7 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
 }
 
 async function updateFavoritesFromFavorites(
-  newValue: Array<UpdatedFavoriteSection>,
+  newValue: UpdatedFavoriteSection[],
 ): Promise<void> {
   const soffit = $soffit.get()
   const layout = $layout.get()

@@ -31,7 +31,7 @@ export interface ServiceInfoLayout {
   'favorite'?: boolean
   'description'?: string
   'video'?: string
-  'ressources'?: Array<Link>
+  'ressources'?: Link[]
   'ressources-link'?: Link
   'launch-link'?: Link
 }
@@ -40,10 +40,10 @@ export interface ServiceInfoApiResponse {
   description: string
   video_link?: string
   categorie_principale?: number
-  tutorials?: Array<Link>
+  tutorials?: Link[]
   resource_link?: string
-  populations_cible?: Array<string>
-  contextes_cible?: Array<string>
+  populations_cible?: string[]
+  contextes_cible?: string[]
   responsable?: string
 }
 

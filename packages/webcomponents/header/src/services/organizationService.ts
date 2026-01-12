@@ -28,7 +28,7 @@ export default class OrganizationService {
   static async get(
     soffit: Soffit,
     orgApiUrl: string,
-    orgIds: Array<string>,
+    orgIds: string[],
     currentOrgId: string,
     typeAttribute: string,
     logoAttribute: string,
@@ -65,7 +65,7 @@ export default class OrganizationService {
         return undefined
       }
 
-      const mappedOrgs: Array<Organization> = Object.values(orgs).map((org) => {
+      const mappedOrgs: Organization[] = Object.values(orgs).map((org) => {
         const { id, name, displayName, description, code } = org
 
         const postalCode = getAs<string>(org, postalCodeAttribute)

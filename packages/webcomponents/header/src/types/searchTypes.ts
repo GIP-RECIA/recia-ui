@@ -19,7 +19,7 @@ import type { Service } from './serviceTypes.ts'
 export interface SearchSection {
   id: string
   name: string
-  items: Array<Service>
+  items: Service[]
   loading?: boolean
   loadingItems?: number
 }

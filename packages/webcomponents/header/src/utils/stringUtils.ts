@@ -82,7 +82,7 @@ function highlight(text: string, searchTerm: string): TemplateResult {
   const normalizedText = normalize(text)
   const normalizedSearch = normalize(searchTerm)
 
-  const parts: Array<string | TemplateResult> = []
+  const parts: (string | TemplateResult)[] = []
   let lastIndex = 0
 
   let index = normalizedText.indexOf(normalizedSearch)

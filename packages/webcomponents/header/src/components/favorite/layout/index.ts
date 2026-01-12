@@ -44,7 +44,7 @@ import styles from './style.scss?inline'
 @localized()
 export class ReciaFavoriteLayout extends LitElement {
   @property({ type: Array })
-  data?: Array<FavoriteSection>
+  data?: FavoriteSection[]
 
   @property({ type: Boolean })
   loading: boolean = false
@@ -56,7 +56,7 @@ export class ReciaFavoriteLayout extends LitElement {
   loadingSectionsItems?: number
 
   @state()
-  tmpData?: Array<FavoriteSection>
+  tmpData?: FavoriteSection[]
 
   @state()
   isManage: boolean = false
@@ -96,11 +96,11 @@ export class ReciaFavoriteLayout extends LitElement {
     this.isManage = !this.isManage
   }
 
-  getDiffs(): Array<UpdatedFavoriteSection> | undefined {
+  getDiffs(): UpdatedFavoriteSection[] | undefined {
     if (!this.data || !this.tmpData)
       return undefined
 
-    const changes: Array<UpdatedFavoriteSection> = []
+    const changes: UpdatedFavoriteSection[] = []
 
     this.tmpData.forEach((newData) => {
       const oldData = this.data?.find(({ id }) => id === newData.id)

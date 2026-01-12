@@ -31,8 +31,8 @@ export default class UserInfoService {
       picture,
       email,
       currentOrgId: getAs<string>(soffit, orgIdAttribute),
-      orgIds: getAs<Array<string>>(soffit, orgIdsAttribute, []),
-      hasOtherOrgs: getAs<Array<string>>(soffit, orgIdsAttribute, []).length > 1,
+      orgIds: getAs<string[]>(soffit, orgIdsAttribute, []),
+      hasOtherOrgs: getAs<string[]>(soffit, orgIdsAttribute, []).length > 1,
     }
 
     if (!userInfo.displayName || !userInfo.currentOrgId) {

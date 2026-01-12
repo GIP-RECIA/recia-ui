@@ -19,6 +19,6 @@ export interface UserInfo {
   picture?: string
   email: string
   currentOrgId?: string
-  orgIds?: Array<string>
+  orgIds?: string[]
   hasOtherOrgs: boolean
 }

@@ -67,7 +67,7 @@ export class ReciaServiceInfoLayout extends LitElement {
   video?: string
 
   @property({ type: Array })
-  ressources?: Array<Link>
+  ressources?: Link[]
 
   @property({ type: Object, attribute: 'ressources-link' })
   ressourcesLink?: Link

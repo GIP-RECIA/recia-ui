@@ -42,7 +42,7 @@ export default class ServicesService {
 
     const { portlets, categories } = portletsData
 
-    const services: Array<Service> = portlets.map((portlet) => {
+    const services: Service[] = portlets.map((portlet) => {
       const {
         id,
         fname,
@@ -64,7 +64,7 @@ export default class ServicesService {
         ? (portletsInfo.find(el => el.fname === fname) ?? {})
         : {}
 
-      let keywords: Array<string> = description.split('   ')
+      let keywords: string[] = description.split('   ')
       keywords.shift()
       keywords = keywords.filter(val => val.trim().length > 0)
       if (keywords.length > 0)

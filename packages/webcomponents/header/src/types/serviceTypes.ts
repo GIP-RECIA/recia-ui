@@ -25,7 +25,7 @@ export interface Service {
   iconUrl?: string
   link: Link
   description?: string
-  keywords?: Array<string>
+  keywords?: string[]
   new?: boolean
   favorite?: boolean
   more?: boolean

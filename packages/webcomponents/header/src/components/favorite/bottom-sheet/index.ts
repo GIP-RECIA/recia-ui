@@ -32,7 +32,7 @@ import 'bottom-sheet'
 @localized()
 export class ReciaFavoriteBottomSheet extends LitElement {
   @property({ type: Array })
-  data?: Array<FavoriteSection>
+  data?: FavoriteSection[]
 
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
 

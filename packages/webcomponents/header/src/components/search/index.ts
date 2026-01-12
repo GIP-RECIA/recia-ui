@@ -102,7 +102,7 @@ export class ReciaSearch extends LitElement {
   }
 
   handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
-    const catchEvents: Array<EventTarget> = [
+    const catchEvents: EventTarget[] = [
       this.parentNodeElement?.querySelector('.search-button') as EventTarget,
       this.parentNodeElement?.querySelector('r-user-menu')?.shadowRoot?.querySelector('button#search') as EventTarget,
     ]

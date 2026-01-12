@@ -19,7 +19,7 @@ import type { Service } from './serviceTypes.ts'
 export interface FavoriteSection {
   id: FavoriteSectionId
   name: string
-  items: Array<Service>
+  items: Service[]
   emptyText: string
   canDelete?: boolean
   canMove?: boolean
@@ -28,7 +28,7 @@ export interface FavoriteSection {
 }
 
 export type UpdatedFavoriteSection = FavoriteSection & {
-  deleted: Array<Service>
+  deleted: Service[]
   orderHasChanged: boolean
 }
 

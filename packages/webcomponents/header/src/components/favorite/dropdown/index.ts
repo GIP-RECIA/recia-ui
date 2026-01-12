@@ -35,7 +35,7 @@ export class ReciaFavoriteDropdown extends LitElement {
   expended: boolean = false
 
   @property({ type: Array })
-  data?: Array<FavoriteSection>
+  data?: FavoriteSection[]
 
   @state()
   isExpanded: boolean = false

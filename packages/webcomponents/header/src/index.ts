@@ -61,7 +61,7 @@ import './components/info-etab/bottom-sheet/index.ts'
 import './components/service-info/bottom-sheet/index.ts'
 import 'regenerator-runtime/runtime.js'
 
-const listenEvents: Array<string> = ['mousemove', 'click', 'keypress']
+const listenEvents: string[] = ['mousemove', 'click', 'keypress']
 
 const settingsPropsKeys = [
   'messages',
@@ -113,7 +113,7 @@ const settingsPropsKeys = [
 @useStores($settings)
 export class ReciaHeader extends LitElement {
   @property({ type: Array })
-  messages?: Array<LangRef>
+  messages?: LangRef[]
 
   @property({ type: String })
   domain: string = window.location.hostname
@@ -224,7 +224,7 @@ export class ReciaHeader extends LitElement {
   fname?: string
 
   @property({ type: Array, attribute: 'drawer-items' })
-  drawerItems?: Array<DrawerItem>
+  drawerItems?: DrawerItem[]
 
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   navigationDrawerVisible: boolean = false
