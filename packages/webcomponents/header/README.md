@@ -49,7 +49,6 @@
 | `navigation-drawer-visible`       |   `boolean`    |   `false`   |          `false`           | Affiche le tiroir de navigation (écran > md)                                                              |
 | `home-page`                       |   `boolean`    |   `false`   |          `false`           | Met le lien accueil du tiroir de navigation en actif                                                      |
 | `starter`                         |   `boolean`    |   `false`   |          `false`           | Active le bouton "didacticiel" dans le menu utilisateur                                                   |
-| `margin-top`                      |   `boolean`    |   `false`   |          `false`           | Ajoute un mage en haute au body de la hauteur du composant                                                |
 | `cache-buster-version`            |    `string`    |   `false`   |        `undefined`         | Version permettant le bypass des caches navigateurs                                                       |
 | `debug`                           |   `boolean`    |   `false`   |          `false`           | Active le mode debug                                                                                      |
 
