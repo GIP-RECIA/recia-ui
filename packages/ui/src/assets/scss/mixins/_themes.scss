@@ -1,0 +1,50 @@
+@use 'sass:map';
+@use '../variables' as *;
+
+@mixin dark {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+
+      --#{$prefix}body: #{$body-dark};
+      --#{$prefix}body-inverted: #{$body-inverted-dark};
+      --#{$prefix}body-bg: #{$body-bg-dark};
+
+      @each $color, $value in $theme-colors-dark {
+        --#{$prefix}#{$color}: #{$value};
+      }
+
+      @each $color, $value in $theme-colors {
+        --#{$prefix}#{$color}-inverted: #{$value};
+      }
+
+      @each $color, $value in $buttons-dark {
+        --#{$prefix}btn-#{$color}: #{$value};
+      }
+
+      @each $color, $value in $buttons {
+        --#{$prefix}btn-#{$color}-inverted: #{$value};
+      }
+    }
+
+    @each $domain, $data in $domain-theme {
+      .#{'theme-#{map.get($data, id)}'} {
+        @each $color, $value in map.get($data, theme-colors-dark) {
+          --#{$prefix}#{$color}: #{$value};
+        }
+
+        @each $color, $value in map.get($data, theme-colors) {
+          --#{$prefix}#{$color}-inverted: #{$value};
+        }
+
+        @each $color, $value in map.get($data, buttons-dark) {
+          --#{$prefix}btn-#{$color}: #{$value};
+        }
+
+        @each $color, $value in map.get($data, buttons) {
+          --#{$prefix}btn-#{$color}-inverted: #{$value};
+        }
+      }
+    }
+  }
+}

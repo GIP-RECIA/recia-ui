@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+@each $domain, $data in $domain-theme {
+  .#{'theme-#{map.get($data, id)}'} {
+    @each $color, $value in map.get($data, theme-colors) {
+      --#{$prefix}#{$color}: #{$value};
+      --#{$prefix}#{$color}-light: #{$value};
+    }
+
+    @each $color, $value in map.get($data, theme-colors-dark) {
+      --#{$prefix}#{$color}-inverted: #{$value};
+      --#{$prefix}#{$color}-dark: #{$value};
+    }
+
+    @each $color, $value in map.get($data, buttons) {
+      --#{$prefix}btn-#{$color}: #{$value};
+      --#{$prefix}btn-#{$color}-light: #{$value};
+    }
+
+    @each $color, $value in map.get($data, buttons-dark) {
+      --#{$prefix}btn-#{$color}-inverted: #{$value};
+      --#{$prefix}btn-#{$color}-dark: #{$value};
+    }
+  }
+}

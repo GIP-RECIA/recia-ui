@@ -1,87 +1,12 @@
 @use 'sass:map';
 @use '../../variables' as *;
-@use '../../../../../ui/src/assets/scss/functions' as *;
 @use '../../../../../ui/src/assets/scss/variables' as *;
+@use '../../../../../ui/src/assets/scss/root';
+@use '../../../../../ui/src/assets/scss/mixins' as *;
+@use '../../../../../ui/src/assets/scss/themes';
 
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-BoldItalic.ttf') format('truetype');
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/commun/fonts/DM_Sans/static/DMSans-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sora';
-  src: url('/commun/fonts/Sora/static/Sora-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sora';
-  src: url('/commun/fonts/Sora/static/Sora-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sora';
-  src: url('/commun/fonts/Sora/static/Sora-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
+@include dm-sans;
+@include sora;
 
 html {
   &.services-layout,
@@ -107,91 +32,8 @@ body {
 }
 
 :root {
-  --#{$prefix}body: #{$body};
-  --#{$prefix}body-inverted: #{$body-inverted};
-  --#{$prefix}body-bg: #{$body-bg};
-
-  @each $color, $value in $colors {
-    --#{$prefix}#{$color}: #{$value};
-  }
-
-  @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}: #{$value};
-    --#{$prefix}#{$color}-light: #{$value};
-  }
-
-  @each $color, $value in $theme-colors-dark {
-    --#{$prefix}#{$color}-inverted: #{$value};
-    --#{$prefix}#{$color}-dark: #{$value};
-  }
-
-  @each $type, $values in $categories {
-    --#{$prefix}#{$type}: #{map.get($values, color)};
-    --#{$prefix}#{$type}-hover: #{map.get($values, hover, color)};
-    --#{$prefix}#{$type}-hover-shadow: #{HEXToRGBA(map.get($values, hover, shadow, color), map.get($values, hover, shadow, opacity))};
-    --#{$prefix}#{$type}-text: #{map.get($values, text)};
-  }
-
-  @each $color, $value in $buttons {
-    --#{$prefix}btn-#{$color}: #{$value};
-    --#{$prefix}btn-#{$color}-light: #{$value};
-  }
-
-  @each $color, $value in $buttons-dark {
-    --#{$prefix}btn-#{$color}-inverted: #{$value};
-    --#{$prefix}btn-#{$color}-dark: #{$value};
-  }
-
-  @each $shadow, $value in $shadows {
-    --#{$prefix}shadow-#{$shadow}: #{$value};
-  }
-
-  --#{$prefix}font-size-base: #{$font-size-base};
-
-  --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, xs)});
-
-  @each $breakpoints, $value in $font-size-breakpoints {
-    --#{$prefix}font-size-#{$breakpoints}: calc(var(--#{$prefix}font-size-base) * #{$value});
-  }
-
-  @each $size, $value in $headings-font-sizes {
-    --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
-  }
-
   --#{$prefix}drawer-width: #{$drawer-width};
   --#{$prefix}header-height: #{$header-height};
-
-  @media screen and (width >= map.get($grid-breakpoints, lg)) {
-    --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
-
-    @each $size, $value in $headings-font-sizes-lg {
-      --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
-    }
-  }
-}
-
-@each $domain, $data in $domain-theme {
-  .#{'theme-#{map.get($data, id)}'} {
-    @each $color, $value in map.get($data, theme-colors) {
-      --#{$prefix}#{$color}: #{$value};
-      --#{$prefix}#{$color}-light: #{$value};
-    }
-
-    @each $color, $value in map.get($data, theme-colors-dark) {
-      --#{$prefix}#{$color}-inverted: #{$value};
-      --#{$prefix}#{$color}-dark: #{$value};
-    }
-
-    @each $color, $value in map.get($data, buttons) {
-      --#{$prefix}btn-#{$color}: #{$value};
-      --#{$prefix}btn-#{$color}-light: #{$value};
-    }
-
-    @each $color, $value in map.get($data, buttons-dark) {
-      --#{$prefix}btn-#{$color}-inverted: #{$value};
-      --#{$prefix}btn-#{$color}-dark: #{$value};
-    }
-  }
 }
 
 r-header,

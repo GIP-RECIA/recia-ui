@@ -1,7 +1,9 @@
 @use 'sass:map';
-
 @use 'recia-style' as *;
 
+/*!
+ * Layers
+ */
 @use 'layers/actions';
 @use 'layers/alert';
 @use 'layers/bottom-sheet';
@@ -22,52 +24,20 @@
 @use 'layers/wayf';
 @use 'layers/widgets';
 
-@each $domain, $data in $domain-theme {
-  .dev-playground.#{'dom-#{$domain}'} {
-    @each $color, $value in map.get($data, theme-colors) {
-      --#{$prefix}#{$color}: #{$value};
-      --#{$prefix}#{$color}-light: #{$value};
-    }
+/*!
+ * Fonts
+ */
+@include dm-sans('../../fonts/DM_Sans/static');
+@include sora('../../fonts/Sora/static');
 
-    @each $color, $value in map.get($data, theme-colors-dark) {
-      --#{$prefix}#{$color}-inverted: #{$value};
-      --#{$prefix}#{$color}-dark: #{$value};
-    }
+/*!
+* Theme
+*/
+@include dark;
 
-    @each $color, $value in map.get($data, buttons) {
-      --#{$prefix}btn-#{$color}: #{$value};
-      --#{$prefix}btn-#{$color}-light: #{$value};
-    }
-
-    @each $color, $value in map.get($data, buttons-dark) {
-      --#{$prefix}btn-#{$color}-inverted: #{$value};
-      --#{$prefix}btn-#{$color}-dark: #{$value};
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .dev-playground.#{'dom-#{$domain}'} {
-      color-scheme: dark;
-
-      @each $color, $value in map.get($data, theme-colors-dark) {
-        --#{$prefix}#{$color}: #{$value};
-      }
-
-      @each $color, $value in map.get($data, theme-colors) {
-        --#{$prefix}#{$color}-inverted: #{$value};
-      }
-
-      @each $color, $value in map.get($data, buttons-dark) {
-        --#{$prefix}btn-#{$color}: #{$value};
-      }
-
-      @each $color, $value in map.get($data, buttons) {
-        --#{$prefix}btn-#{$color}-inverted: #{$value};
-      }
-    }
-  }
-}
-
+/*!
+ * Required
+ */
 html {
   font-size: var(--#{$prefix}font-size-base);
 }
@@ -81,6 +51,9 @@ body {
   letter-spacing: 0;
   color: var(--#{$prefix}body);
 
+  /*!
+   * Custom
+   */
   &.dev-playground {
     height: 100vh;
     display: grid;

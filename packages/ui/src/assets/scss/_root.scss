@@ -53,36 +53,8 @@
   @each $size, $value in $headings-font-sizes {
     --#{$prefix}font-size-h#{$size}: calc(var(--#{$prefix}font-size-base) * #{$value});
   }
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-
-    --#{$prefix}body: #{$body-dark};
-    --#{$prefix}body-inverted: #{$body-inverted-dark};
-    --#{$prefix}body-bg: #{$body-bg-dark};
-
-    @each $color, $value in $theme-colors-dark {
-      --#{$prefix}#{$color}: #{$value};
-    }
-
-    @each $color, $value in $theme-colors {
-      --#{$prefix}#{$color}-inverted: #{$value};
-    }
-
-    @each $color, $value in $buttons-dark {
-      --#{$prefix}btn-#{$color}: #{$value};
-    }
-
-    @each $color, $value in $buttons {
-      --#{$prefix}btn-#{$color}-inverted: #{$value};
-    }
-  }
-}
-
-@media screen and (width >= map.get($grid-breakpoints, lg)) {
-  :root {
+  @media screen and (width >= map.get($grid-breakpoints, lg)) {
     --#{$prefix}body-font-size: calc(var(--#{$prefix}font-size-base) * #{map.get($font-size-breakpoints, sm)});
 
     @each $size, $value in $headings-font-sizes-lg {

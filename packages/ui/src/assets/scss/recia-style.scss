@@ -1,3 +1,8 @@
+/*!
+ * ress v5.0.2 by Filipe Linhares - https://github.com/filipelinhares/ress
+ * License - https://github.com/filipelinhares/ress/blob/master/LICENSE.md
+ * Copyright 2016 Filipe Linhares
+ */
 @forward 'ress/dist/ress.min.css';
 
 @forward '@fortawesome/fontawesome-free/css/solid.min.css';
@@ -5,12 +10,12 @@
 
 @forward 'mixins/banner';
 @forward 'variables';
-@forward 'fonts';
 @forward 'typo';
 @forward 'root';
 @forward 'mixins';
 @forward 'functions';
 @forward 'global';
+@forward 'themes';
 
 @forward 'containers';
 @forward 'buttons';
