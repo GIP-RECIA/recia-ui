@@ -40,10 +40,10 @@ r-header,
 r-footer,
 extended-uportal-header,
 extended-uportal-footer {
-  font-family: "DM Sans", "sans-serif";
+  font-family: $dm-sans;
   font-style: normal;
   font-weight: normal;
-  font-size: var(--recia-body-font-size);
+  font-size: var(--#{$prefix}body-font-size);
   letter-spacing: 0;
-  color: var(--recia-body);
+  color: var(--#{$prefix}body);
 }
