@@ -291,8 +291,10 @@ export class ReciaHeader extends LitElement {
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('debug'))
       $debug.set(this.debug)
-    if (_changedProperties.has('templateApiPath'))
+    if (_changedProperties.has('templateApiPath')) {
+      console.warn('You\'re using deprecated \'template-api-path\' attribute ! Use \'template-api-url\' insted.')
       this.templateApiUrl = this.templateApiPath
+    }
     if (settingsPropsKeys.some(key => _changedProperties.has(key))) {
       const updatedSettings = Object.fromEntries(
         settingsPropsKeys.map(key => [key, this[key]]).filter(([_, value]) => value !== undefined),
