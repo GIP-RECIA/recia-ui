@@ -105,7 +105,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
-        a-label="${msg(str`Changer d\'établissement`)}"
+        a-label="${msg(str`Changer d'établissement`)}"
         @close="${this.resetForm}"
       >
         <form
@@ -114,7 +114,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
           @submit="${this.submitForm}"
         >
           <header>
-            <h1>${msg(str`Changer d\'établissement`)}</h1>
+            <h1>${msg(str`Changer d'établissement`)}</h1>
           </header>
           <div class="content">
             <fieldset>
@@ -154,7 +154,7 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
               ${msg(str`Fermer`)}
             </button>
             <button type="submit" class="btn-primary">
-              ${msg(str`Changer d\'établissement`)}
+              ${msg(str`Changer d'établissement`)}
             </button>
           </footer>
         </form>

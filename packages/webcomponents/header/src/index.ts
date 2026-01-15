@@ -292,7 +292,7 @@ export class ReciaHeader extends LitElement {
     if (_changedProperties.has('debug'))
       $debug.set(this.debug)
     if (_changedProperties.has('templateApiPath')) {
-      console.warn('You\'re using deprecated \'template-api-path\' attribute ! Use \'template-api-url\' insted.')
+      console.warn(`You're using deprecated 'template-api-path' attribute ! Use 'template-api-url' insted.`)
       this.templateApiUrl = this.templateApiPath
     }
     if (settingsPropsKeys.some(key => _changedProperties.has(key))) {

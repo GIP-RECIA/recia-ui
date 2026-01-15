@@ -43,7 +43,7 @@ export class ReciaInfoEtabDropdownInfo extends LitElement {
   render(): TemplateResult {
     return html`
       <r-dropdown-info
-        label="${msg(str`Informations de l\'établissement`)}"
+        label="${msg(str`Informations de l'établissement`)}"
         tooltip
         no-padding
       >

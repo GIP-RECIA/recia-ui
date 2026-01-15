@@ -57,7 +57,7 @@ export class ReciaInfoEtabBottomSheet extends LitElement {
     return html`
       <r-bottom-sheet
         ${ref(this.bottomSheetRef)}
-        a-label="${msg(str`Informations de l\'établissement`)}"
+        a-label="${msg(str`Informations de l'établissement`)}"
       >
         <r-info-etab-layout
           ${

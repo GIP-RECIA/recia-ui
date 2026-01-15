@@ -184,8 +184,8 @@ export class ReciaUserMenu extends LitElement {
       [UserMenuItem.Search]: msg(str`Rechercher`),
       [UserMenuItem.Notification]: msg(str`Notifications`),
       [UserMenuItem.Account]: msg(str`Mon profil`),
-      [UserMenuItem.InfoEtab]: msg(str`Informations de l\'établissement`),
-      [UserMenuItem.ChangeEtab]: msg(str`Changer d\'établissement`),
+      [UserMenuItem.InfoEtab]: msg(str`Informations de l'établissement`),
+      [UserMenuItem.ChangeEtab]: msg(str`Changer d'établissement`),
       [UserMenuItem.Starter]: msg(str`Lancer le didacticiel`),
       [UserMenuItem.Logout]: msg(str`Déconnexion`),
     }
