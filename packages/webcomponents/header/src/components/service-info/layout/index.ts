@@ -146,106 +146,106 @@ export class ReciaServiceInfoLayout extends LitElement {
   ressourcesTemplate(): TemplateResult | typeof nothing {
     return this.ressources && this.ressources.length > 0
       ? html`
-        <section class="ressources">
-          <h2 class="h3">${msg(str`Ressources disponibles`)}</h2>
-          <ul>
+          <section class="ressources">
+            <h2 class="h3">${msg(str`Ressources disponibles`)}</h2>
+            <ul>
+              ${
+                repeat(
+                  this.ressources,
+                  link => link,
+                  link => html`
+                      <li>
+                        <a
+                          href="${link.href}"
+                          target="${link.target ?? nothing}"
+                          rel="${link.rel ?? nothing}"
+                        >
+                          ${link.name}
+                        </a>
+                      </li>
+                    `,
+                )
+              }
+            </ul>
             ${
-              repeat(
-                this.ressources,
-                link => link,
-                link => html`
-                  <li>
+              this.ressourcesLink
+                ? html`
                     <a
-                      href="${link.href}"
-                      target="${link.target ?? nothing}"
-                      rel="${link.rel ?? nothing}"
+                      href="${this.ressourcesLink.href}"
+                      class="btn-secondary small"
                     >
-                      ${link.name}
+                      ${msg(str`Voir toutes les ressources`)}
+                      ${getIcon(faArrowRight)}
                     </a>
-                  </li>
-                `,
-              )
+                  `
+                : nothing
             }
-          </ul>
-          ${
-            this.ressourcesLink
-              ? html`
-                  <a
-                    href="${this.ressourcesLink.href}"
-                    class="btn-secondary small"
-                  >
-                    ${msg(str`Voir toutes les ressources`)}
-                    ${getIcon(faArrowRight)}
-                  </a>
-                `
-              : nothing
-          }
-        </section>
+          </section>
         `
       : nothing
   }
 
   skeletonTemplate(): TemplateResult {
     return html`
-        <div class="service-info">
-          <header inert>
-            <div class="heading">
-              <div class="icon skeleton"></div>
-              <div class="heading-text">
-                <h1 class="skeleton"></h1>
-                <span class="tag-category skeleton"></span>
-              </div>
+      <div class="service-info">
+        <header inert>
+          <div class="heading">
+            <div class="icon skeleton"></div>
+            <div class="heading-text">
+              <h1 class="skeleton"></h1>
+              <span class="tag-category skeleton"></span>
             </div>
-          </header>
-          <div class="content" inert>
-            <section class="description">
-              <h2 class="h3">${msg(str`Description`)}</h2>
-              <div class="skeleton">
-                <p></p>
-                <p></p>
-                <p></p>
-              </div>
-            </section>
-            <section class="first-step">
-              <h2 class="h3">${msg(str`Premiers pas avec le service`)}</h2>
-              <div class="video">
-                <div class="skeleton"></div>
-              </div>
-            </section>
           </div>
-          <footer>
-            <button
-              class="btn-secondary close"
-              @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
-            >
-              ${msg(str`Fermer`)}
-            </button>
-          </footer>
+        </header>
+        <div class="content" inert>
+          <section class="description">
+            <h2 class="h3">${msg(str`Description`)}</h2>
+            <div class="skeleton">
+              <p></p>
+              <p></p>
+              <p></p>
+            </div>
+          </section>
+          <section class="first-step">
+            <h2 class="h3">${msg(str`Premiers pas avec le service`)}</h2>
+            <div class="video">
+              <div class="skeleton"></div>
+            </div>
+          </section>
         </div>
-      `
+        <footer>
+          <button
+            class="btn-secondary close"
+            @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
+          >
+            ${msg(str`Fermer`)}
+          </button>
+        </footer>
+      </div>
+    `
   }
 
   errorTemplate(): TemplateResult {
     return html`
-        <div class="service-info">
-          <div class="content">
-            <div class="error">
-              ${getIconWithStyle(faExclamationTriangle, undefined, { icon: true })}
-              <p>
-                ${msg(str`Une erreur est survenue lors de la récupération des informations du service.\nTentez de rouvrir cette fiche.`)}
-              </p>
-            </div>
+      <div class="service-info">
+        <div class="content">
+          <div class="error">
+            ${getIconWithStyle(faExclamationTriangle, undefined, { icon: true })}
+            <p>
+              ${msg(str`Une erreur est survenue lors de la récupération des informations du service.\nTentez de rouvrir cette fiche.`)}
+            </p>
           </div>
-          <footer>
-            <button
-              class="btn-secondary close"
-              @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
-            >
-              ${msg(str`Fermer`)}
-            </button>
-          </footer>
         </div>
-      `
+        <footer>
+          <button
+            class="btn-secondary close"
+            @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
+          >
+            ${msg(str`Fermer`)}
+          </button>
+        </footer>
+      </div>
+    `
   }
 
   render(): TemplateResult {

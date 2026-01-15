@@ -122,27 +122,27 @@ export class ReciaServicesLayout extends LitElement {
 
   errorTemplate(): TemplateResult {
     return html`
-        <div class="error">
-          ${getIcon(faWarning)}
-          <p>
-            ${msg(str`Une erreur est survenue lors de la récupération des services.\nTentez de rafraichir la page.`)}
-          </p>
-        </div>
-      `
+      <div class="error">
+        ${getIcon(faWarning)}
+        <p>
+          ${msg(str`Une erreur est survenue lors de la récupération des services.\nTentez de rafraichir la page.`)}
+        </p>
+      </div>
+    `
   }
 
   skeletonTemplate(): TemplateResult {
     return html`
-        <r-filters
-          loading
-          loding-sections="1"
-          loding-sections-items="9"
-        >
-        </r-filters>
-        <ul>
-          ${map(range(20), () => html`<li class="skeleton"></li>`)}
-        </ul>
-      `
+      <r-filters
+        loading
+        loding-sections="1"
+        loding-sections-items="9"
+      >
+      </r-filters>
+      <ul>
+        ${map(range(20), () => html`<li class="skeleton"></li>`)}
+      </ul>
+    `
   }
 
   tilesTemplate(): TemplateResult {
@@ -150,53 +150,53 @@ export class ReciaServicesLayout extends LitElement {
     const services = $filteredServices.get() ?? []
 
     return html`
-        ${
-          filters[0].items.length > 1
-            ? html`
-                <r-filters
-                  .data="${filters}"
-                  @update-filters="${this.updateFilters}"
-                >
-                </r-filters>
-              `
-            : nothing
-        }
-        ${
-          services.length > 0
-            ? html`
-                <ul>
-                  ${
-                    repeat(
-                      services,
-                      service => service.id,
-                      service => html`
-                          <li>
-                            <r-service
-                              id="${service.id}"
-                              .fname="${service.fname}"
-                              name="${service.name}"
-                              category="${service.category ?? nothing}"
-                              icon-url="${service.iconUrl ?? nothing}"
-                              .link="${service.link}"
-                              ?new="${service.new}"
-                              ?favorite="${service.favorite}"
-                              ?more="${service.more}"
-                              @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
-                            >
-                            </r-service>
-                          </li>
-                        `,
-                    )
-                  }
-                </ul>
-              `
-            : html`
-                <div class="empty">
-                  <span>${msg(str`Aucun service`)}</span>
-                </div>
-              `
-        }
-      `
+      ${
+        filters[0].items.length > 1
+          ? html`
+              <r-filters
+                .data="${filters}"
+                @update-filters="${this.updateFilters}"
+              >
+              </r-filters>
+            `
+          : nothing
+      }
+      ${
+        services.length > 0
+          ? html`
+              <ul>
+                ${
+                  repeat(
+                    services,
+                    service => service.id,
+                    service => html`
+                        <li>
+                          <r-service
+                            id="${service.id}"
+                            .fname="${service.fname}"
+                            name="${service.name}"
+                            category="${service.category ?? nothing}"
+                            icon-url="${service.iconUrl ?? nothing}"
+                            .link="${service.link}"
+                            ?new="${service.new}"
+                            ?favorite="${service.favorite}"
+                            ?more="${service.more}"
+                            @open-more="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
+                          >
+                          </r-service>
+                        </li>
+                      `,
+                  )
+                }
+              </ul>
+            `
+          : html`
+              <div class="empty">
+                <span>${msg(str`Aucun service`)}</span>
+              </div>
+            `
+      }
+    `
   }
 
   render(): TemplateResult {

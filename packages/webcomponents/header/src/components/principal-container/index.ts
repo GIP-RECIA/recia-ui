@@ -116,23 +116,23 @@ export class ReciaPrincipalContainer extends LitElement {
           ${
             search
               ? html`
-                <div
-                  class="${classMap({
-                    'visible': this.searchOpen,
-                    'navigation-drawer-visible': this.isNavigationDrawerVisible,
-                    'searching': this.isSearching,
-                  })}middle"
-                >
-                  <r-search
-                    ?open="${this.searchOpen}"
-                    ?no-results="${this.servicesOpen}"
-                    @event="${(e: CustomEvent) => {
-                      this.dispatchEvent(new CustomEvent('search-event', e))
-                    }}"
+                  <div
+                    class="${classMap({
+                      'visible': this.searchOpen,
+                      'navigation-drawer-visible': this.isNavigationDrawerVisible,
+                      'searching': this.isSearching,
+                    })}middle"
                   >
-                  </r-search>
-                </div>
-              `
+                    <r-search
+                      ?open="${this.searchOpen}"
+                      ?no-results="${this.servicesOpen}"
+                      @event="${(e: CustomEvent) => {
+                        this.dispatchEvent(new CustomEvent('search-event', e))
+                      }}"
+                    >
+                    </r-search>
+                  </div>
+                `
               : nothing
           }
           <div class="end">
@@ -212,34 +212,34 @@ export class ReciaPrincipalContainer extends LitElement {
     const { signInUrl, casUrl, defaultOrgIconUrl, orgIconUrl } = $settings.get()
 
     return html`
-        <div class="principal-container not-logged">
-          <div class="start">
-            <svg class="simple" aria-hidden="true">
-              <use href="${orgIconUrl ?? defaultOrgIconUrl}#icone"></use>
-            </svg>
-          </div>
-          <div class="end">
-            ${
-              signInUrl
-                ? html`
-                    <a
-                      id="${UserMenuItem.Logout}"
-                      href="${
-                        casUrl
-                          ? getDomainLink(casUrl) + getDomainLink(signInUrl)
-                          : getDomainLink(signInUrl)
-                      }"
-                      target="_self"
-                    >
-                      ${msg(str`Accéder à l'ENT`)}
-                      ${getIcon(faArrowRightToBracket)}
-                    </a>
-                  `
-                : nothing
-            }
-          </div>
+      <div class="principal-container not-logged">
+        <div class="start">
+          <svg class="simple" aria-hidden="true">
+            <use href="${orgIconUrl ?? defaultOrgIconUrl}#icone"></use>
+          </svg>
         </div>
-      `
+        <div class="end">
+          ${
+            signInUrl
+              ? html`
+                  <a
+                    id="${UserMenuItem.Logout}"
+                    href="${
+                      casUrl
+                        ? getDomainLink(casUrl) + getDomainLink(signInUrl)
+                        : getDomainLink(signInUrl)
+                    }"
+                    target="_self"
+                  >
+                    ${msg(str`Accéder à l'ENT`)}
+                    ${getIcon(faArrowRightToBracket)}
+                  </a>
+                `
+              : nothing
+          }
+        </div>
+      </div>
+    `
   }
 
   render(): TemplateResult {

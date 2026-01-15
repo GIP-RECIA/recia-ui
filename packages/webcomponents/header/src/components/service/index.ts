@@ -136,9 +136,7 @@ export class ReciaService extends LitElement {
             }
             ${
               name
-                ? html`
-                    <span class="category">${name}</span>
-                  `
+                ? html`<span class="category">${name}</span>`
                 : nothing
             }
             <div class="favorite">

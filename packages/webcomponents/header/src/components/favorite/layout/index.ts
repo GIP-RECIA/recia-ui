@@ -343,13 +343,13 @@ export class ReciaFavoriteLayout extends LitElement {
               !this.isManage ? this.data ?? [] : this.tmpData ?? [],
               section => section.id,
               section => html`
-                <li id="${section.id}">
-                  <header>
-                    <span>${section.name}</span>
-                  </header>
-                  ${
-                    section.loading
-                      ? html`
+                  <li id="${section.id}">
+                    <header>
+                      <span>${section.name}</span>
+                    </header>
+                    ${
+                      section.loading
+                        ? html`
                             <ul>
                               ${
                                 map(
@@ -359,8 +359,8 @@ export class ReciaFavoriteLayout extends LitElement {
                               }
                             </ul>
                           `
-                      : section.items.length > 0
-                        ? html`
+                        : section.items.length > 0
+                          ? html`
                               <ul>
                                 ${
                                   repeat(
@@ -371,7 +371,7 @@ export class ReciaFavoriteLayout extends LitElement {
                                 }
                               </ul>
                             `
-                        : html`
+                          : html`
                               <div
                                 id="favorite-section-${section.id}-empty"
                                 tabindex="-1"
@@ -385,9 +385,9 @@ export class ReciaFavoriteLayout extends LitElement {
                                 </span>
                               </div>
                             `
-                  }
-                </li>
-              `,
+                    }
+                  </li>
+                `,
             )
           }
         </ul>

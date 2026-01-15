@@ -232,33 +232,33 @@ export class ReciaSearch extends LitElement {
     const { name, className } = getCategory(item.category) ?? {}
 
     return html`
-        <li>
-          <a
-            href="${item.link.href}"
-            target="${item.link.target ?? nothing}"
-            rel="${item.link.rel ?? nothing}"
-            @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
-          >
-            <div>
-              <header>
-                ${
-                  name
-                    ? html`<span class="result-tag ${className}">${name}</span>`
-                    : nothing
-                }
-                <span class="result-title">
-                  ${highlight(item.name, searchQueryString)}
-                </span>
-              </header>
+      <li>
+        <a
+          href="${item.link.href}"
+          target="${item.link.target ?? nothing}"
+          rel="${item.link.rel ?? nothing}"
+          @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
+        >
+          <div>
+            <header>
               ${
-                item.description
-                  ? html`<span>${highlight(item.description, searchQueryString)}</span>`
+                name
+                  ? html`<span class="result-tag ${className}">${name}</span>`
                   : nothing
               }
-            </div>
-          </a>
-        </li>
-      `
+              <span class="result-title">
+                ${highlight(item.name, searchQueryString)}
+              </span>
+            </header>
+            ${
+              item.description
+                ? html`<span>${highlight(item.description, searchQueryString)}</span>`
+                : nothing
+            }
+          </div>
+        </a>
+      </li>
+    `
   }
 
   render(): TemplateResult {
