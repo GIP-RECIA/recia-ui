@@ -15,11 +15,13 @@
  */
 
 import type { TemplateResult } from 'lit'
+import type { Ref } from 'lit/directives/ref.js'
 import type { FavoriteSection } from '../../../types/index.ts'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 import { componentName } from '../../../../../common/config.ts'
@@ -39,6 +41,8 @@ export class ReciaFavoriteDropdown extends LitElement {
 
   @state()
   isExpanded: boolean = false
+
+  private contentRef: Ref<HTMLElement> = createRef()
 
   constructor() {
     super()
@@ -63,14 +67,18 @@ export class ReciaFavoriteDropdown extends LitElement {
   }
 
   toggle(_: Event | undefined = undefined): void {
-    if (!this.isExpanded)
+    if (!this.isExpanded) {
       this.dispatchEvent(new CustomEvent('open'))
-    else this.dispatchEvent(new CustomEvent('close'))
-    this.isExpanded = !this.isExpanded
+      this.isExpanded = true
+    }
+    else {
+      this.close()
+    }
   }
 
   close(_: Event | undefined = undefined, resetFocus: boolean = true): void {
     this.dispatchEvent(new CustomEvent('close'))
+    this.contentRef.value?.scrollTo({ top: 0 })
     this.isExpanded = false
     if (resetFocus)
       this.shadowRoot?.getElementById('dropdown-favorites-button')?.focus()
@@ -123,7 +131,10 @@ export class ReciaFavoriteDropdown extends LitElement {
           })}"
         >
           <div class="active-indicator"></div>
-          <div class="content">
+          <div
+            ${ref(this.contentRef)}
+            class="content"
+          >
             <r-favorite-layout
               .data="${this.data}"
               @updated="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"

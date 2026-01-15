@@ -77,10 +77,15 @@ export class ReciaServicesLayout extends LitElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
-    if (_changedProperties.has('show') && this.show === true) {
-      setTimeout(() => {
-        this.layoutRef.value?.focus()
-      }, 150)
+    if (_changedProperties.has('show')) {
+      if (this.show === true) {
+        setTimeout(() => {
+          this.layoutRef.value?.focus()
+        }, 150)
+      }
+      else {
+        this.layoutRef.value?.scrollTo({ top: 0 })
+      }
     }
     return true
   }
