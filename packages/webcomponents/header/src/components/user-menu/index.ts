@@ -274,7 +274,7 @@ export class ReciaUserMenu extends LitElement {
           ${ref(this.buttonRef)}
           aria-expanded="${this.isExpanded}"
           aria-controls="user-menu"
-          aria-label="${msg(str`Menu mon compte`)}"
+          aria-label="${msg(str`Menu utilisateur`)}"
           @click="${this.toggle}"
         >
           ${

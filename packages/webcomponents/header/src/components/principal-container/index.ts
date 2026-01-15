@@ -89,7 +89,7 @@ export class ReciaPrincipalContainer extends LitElement {
                       <button
                         id="${UserMenuItem.InfoEtab}"
                         class="btn-secondary-toggle circle"
-                        aria-label="${msg(str`Menu ${msg(str`Informations de l\'établissement`)}`)}"
+                        aria-label="${msg(str`Menu informations de l\'établissement`)}"
                         @click="${(_: Event) => {
                           this.dispatchEvent(new CustomEvent('user-menu-event', {
                             detail: {

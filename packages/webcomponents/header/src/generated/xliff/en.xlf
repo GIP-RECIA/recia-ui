@@ -196,10 +196,6 @@ Do you agree to log out now?</target>
   <source>Déconnexion</source>
   <target>Logout</target>
 </trans-unit>
-<trans-unit id="s0879a675a2208eb0">
-  <source>Menu mon compte</source>
-  <target>My account menu</target>
-</trans-unit>
 <trans-unit id="sc139bbab63351fe2">
   <source>Accéder à l'ENT</source>
   <target>Access the ENT</target>
@@ -226,13 +222,17 @@ Please try reopening this file.</target>
   <source>Informations de l'établissement</source>
   <target>Institution information</target>
 </trans-unit>
-<trans-unit id="s0b1729a212cce6d0">
-  <source>Menu <x id="0" equiv-text="${msg(str `Informations de l\'établissement`)}"/></source>
-  <target><x id="0" equiv-text="${msg(str `Informations de l\'établissement`)}"/> menu</target>
-</trans-unit>
 <trans-unit id="s1ac8916da1fbf5d6">
   <source>Retourner à l'accueil</source>
   <target>Back to home</target>
+</trans-unit>
+<trans-unit id="s81489f3c55eb70cd">
+  <source>Menu utilisateur</source>
+  <target>User menu</target>
+</trans-unit>
+<trans-unit id="se7036a0f025bd641">
+  <source>Menu informations de l'établissement</source>
+  <target>Institution information menu</target>
 </trans-unit>
 </body>
 </file>
