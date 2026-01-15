@@ -204,7 +204,7 @@ export class ReciaFavoriteLayout extends LitElement {
                 ? html`
                     <div class="action-delete">
                       <button
-                        aria-label="${msg(str`Supprimer le favori`)}"
+                        aria-label="${msg(str`Supprimer le favori`)} - ${item.name}"
                         @click="${() => this.deleteItem(id, item)}"
                       >
                         ${getIcon(faTimes)}
@@ -218,7 +218,7 @@ export class ReciaFavoriteLayout extends LitElement {
                 ? html`
                     <div class="action-back">
                       <button
-                        aria-label="${msg(str`Réordonner vers la gauche`)}"
+                        aria-label="${msg(str`Réordonner vers la gauche`)} - ${item.name}"
                         @click="${() => this.moveItem(id, item, '-1')}"
                       >
                         ${getIcon(faArrowLeft)}
@@ -227,7 +227,7 @@ export class ReciaFavoriteLayout extends LitElement {
                     <div class="grow-1"></div>
                     <div class="action-next">
                       <button
-                        aria-label="${msg(str`Réordonner vers la droite`)}"
+                        aria-label="${msg(str`Réordonner vers la droite`)} - ${item.name}"
                         @click="${() => this.moveItem(id, item, '+1')}"
                       >
                         ${getIcon(faArrowRight)}
