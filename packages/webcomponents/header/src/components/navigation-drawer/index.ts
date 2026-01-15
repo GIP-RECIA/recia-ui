@@ -236,7 +236,6 @@ export class ReciaNavigationDrawer extends LitElement {
               <button
                 id="nav-all-services"
                 title="${msg(str`Tous les services`)}"
-                aria-label=""
                 class="${classMap({
                   active: this.isServicesLayout,
                 })}"
