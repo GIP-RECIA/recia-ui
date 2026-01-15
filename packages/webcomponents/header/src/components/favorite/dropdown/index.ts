@@ -17,6 +17,7 @@
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { FavoriteSection } from '../../../types/index.ts'
+import type { ReciaFavoriteLayout } from '../layout/index.ts'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -43,6 +44,10 @@ export class ReciaFavoriteDropdown extends LitElement {
   isExpanded: boolean = false
 
   private contentRef: Ref<HTMLElement> = createRef()
+
+  private favoriteLayoutRef: Ref<ReciaFavoriteLayout> = createRef()
+
+  private buttonRef: Ref<HTMLElement> = createRef()
 
   constructor() {
     super()
@@ -81,7 +86,7 @@ export class ReciaFavoriteDropdown extends LitElement {
     this.contentRef.value?.scrollTo({ top: 0 })
     this.isExpanded = false
     if (resetFocus)
-      this.shadowRoot?.getElementById('dropdown-favorites-button')?.focus()
+      this.buttonRef.value?.focus()
   }
 
   handleKeyPress(e: KeyboardEvent): void {
@@ -98,7 +103,7 @@ export class ReciaFavoriteDropdown extends LitElement {
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
       this.close(undefined, false)
-      this.shadowRoot?.querySelector('r-favorite-layout')?.dispatchEvent(new CustomEvent('reset'))
+      this.favoriteLayoutRef.value?.dispatchEvent(new CustomEvent('reset'))
     }
   }
 
@@ -106,6 +111,7 @@ export class ReciaFavoriteDropdown extends LitElement {
     return html`
       <div class="dropdown-favorites">
         <button
+          ${ref(this.buttonRef)}
           id="dropdown-favorites-button"
           title="${msg(str`Favoris`)}"
           aria-label="${msg(str`Menu favoris`)}"

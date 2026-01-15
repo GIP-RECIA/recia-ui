@@ -18,6 +18,7 @@ import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { FavoriteSection } from '../../../types/index.ts'
+import type { ReciaFavoriteLayout } from '../layout/index.ts'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
@@ -35,6 +36,8 @@ export class ReciaFavoriteBottomSheet extends LitElement {
   data?: FavoriteSection[]
 
   private bottomSheetRef: Ref<ReciaBottomSheet> = createRef()
+
+  private favoriteLayoutRef: Ref<ReciaFavoriteLayout> = createRef()
 
   constructor() {
     super()
@@ -63,7 +66,7 @@ export class ReciaFavoriteBottomSheet extends LitElement {
   }
 
   resetLayout(_: CustomEvent): void {
-    this.shadowRoot?.querySelector('r-favorite-layout')?.dispatchEvent(new CustomEvent('reset'))
+    this.favoriteLayoutRef.value?.dispatchEvent(new CustomEvent('reset'))
   }
 
   render(): TemplateResult {
@@ -74,6 +77,7 @@ export class ReciaFavoriteBottomSheet extends LitElement {
         @close="${this.resetLayout}"
       >
         <r-favorite-layout
+          ${ref(this.favoriteLayoutRef)}
           .data="${this.data}"
           @updated="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
         >

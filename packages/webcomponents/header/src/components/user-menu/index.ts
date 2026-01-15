@@ -16,6 +16,7 @@
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import type { PropertyValues, TemplateResult } from 'lit'
+import type { Ref } from 'lit/directives/ref.js'
 import type { Link, UserMenuConfig } from '../../types/index.ts'
 import {
   faArrowRightFromBracket,
@@ -30,6 +31,7 @@ import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { keyed } from 'lit/directives/keyed.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { componentName } from '../../../../common/config.ts'
@@ -88,6 +90,8 @@ export class ReciaUserMenu extends LitElement {
   @state()
   localConfig?: Partial<UserMenuConfig>
 
+  private buttonRef: Ref<HTMLElement> = createRef()
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -141,7 +145,7 @@ export class ReciaUserMenu extends LitElement {
   close(_: Event | undefined = undefined, resetFocus: boolean = true): void {
     this.isExpanded = false
     if (resetFocus)
-      this.shadowRoot?.getElementById('eyebrow-button')?.focus()
+      this.buttonRef.value?.focus()
   }
 
   handleKeyPress(e: KeyboardEvent): void {
@@ -267,7 +271,7 @@ export class ReciaUserMenu extends LitElement {
         >
         </div>
         <button
-          id="eyebrow-button"
+          ${ref(this.buttonRef)}
           aria-expanded="${this.isExpanded}"
           aria-controls="user-menu"
           aria-label="${msg(str`Menu mon compte`)}"
