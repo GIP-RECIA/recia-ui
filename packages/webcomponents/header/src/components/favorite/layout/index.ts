@@ -121,7 +121,7 @@ export class ReciaFavoriteLayout extends LitElement {
     return changes
   }
 
-  deleteItem(sectionId: string, item: Service): void {
+  deleteItem(sectionId: string, item: Service, index: number): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section
@@ -130,6 +130,17 @@ export class ReciaFavoriteLayout extends LitElement {
 
       return { ...section, items }
     })
+
+    const sectionItems = this.tmpData!.find(({ id }) => sectionId === id)?.items
+    if (!sectionItems || sectionItems.length === 0) {
+      this.shadowRoot?.querySelector(`#favorite-section-${sectionId}-empty`)?.focus()
+    }
+    else {
+      const newIndex = index <= sectionItems.length - 1 ? index : index - 1
+      this.shadowRoot?.querySelector(
+        `#favorite-section-${sectionId}-item-${sectionItems[newIndex].id} .action-delete > button`,
+      )?.focus()
+    }
   }
 
   moveItem(sectionId: string, item: Service, newPosition: '-1' | '+1'): void {
@@ -153,6 +164,20 @@ export class ReciaFavoriteLayout extends LitElement {
 
       return { ...section, items }
     })
+
+    const sectionItems = this.tmpData!.find(({ id }) => sectionId === id)?.items
+    const action = sectionItems?.[0]?.id === item.id
+      ? 'next'
+      : sectionItems?.slice(-1)[0]?.id === item.id
+        ? 'back'
+        : newPosition === '+1'
+          ? 'next'
+          : 'back'
+    setTimeout(() => {
+      this.shadowRoot?.querySelector(
+        `#favorite-section-${sectionId}-item-${item.id} .action-${action} > button`,
+      )?.focus()
+    }, 10)
   }
 
   handleLinkClick(e: Event, fname: string | undefined): void {
@@ -194,7 +219,7 @@ export class ReciaFavoriteLayout extends LitElement {
       : nothing
   }
 
-  itemTemplate(section: FavoriteSection, item: Service): TemplateResult {
+  itemTemplate(section: FavoriteSection, item: Service, index: number): TemplateResult {
     const { id, canDelete, canMove } = section
     const actionTemplate: TemplateResult | typeof nothing = this.isManage
       ? html`
@@ -205,7 +230,7 @@ export class ReciaFavoriteLayout extends LitElement {
                     <div class="action-delete">
                       <button
                         aria-label="${msg(str`Supprimer le favori`)} - ${item.name}"
-                        @click="${() => this.deleteItem(id, item)}"
+                        @click="${() => this.deleteItem(id, item, index)}"
                       >
                         ${getIcon(faTimes)}
                       </button>
@@ -244,7 +269,10 @@ export class ReciaFavoriteLayout extends LitElement {
 
     return html`
       <li>
-        <div class="favorite ${className}">
+        <div
+          id="favorite-section-${section.id}-item-${item.id}"
+          class="favorite ${className}"
+        >
           ${actionTemplate}
           ${getSvgIconService(item.iconUrl)}
           <a
@@ -303,7 +331,6 @@ export class ReciaFavoriteLayout extends LitElement {
       <div class="favorite-layout">
         <header>
           <h2>${msg(str`Vos favoris`)}</h2>
-
           ${
             !(this.data ?? []).some(section => section.loading)
               ? this.manageTemplate()
@@ -339,13 +366,17 @@ export class ReciaFavoriteLayout extends LitElement {
                                   repeat(
                                     section.items,
                                     item => item.id,
-                                    item => this.itemTemplate(section, item),
+                                    (item, index) => this.itemTemplate(section, item, index),
                                   )
                                 }
                               </ul>
                             `
                         : html`
-                              <div class="empty">
+                              <div
+                                id="favorite-section-${section.id}-empty"
+                                tabindex="-1"
+                                class="empty"
+                              >
                                 <span class="text">
                                   ${msg(str`Vous n'avez`)}
                                   <span class="large">
