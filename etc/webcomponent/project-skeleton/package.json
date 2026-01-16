@@ -23,8 +23,8 @@
       }
     }
   },
-  "main": "./dist/r-bottom-sheet.js",
-  "module": "./dist/r-bottom-sheet.js",
+  "main": "./dist/r-project-skeleton.js",
+  "module": "./dist/r-project-skeleton.js",
   "files": [
     "dist"
   ],
