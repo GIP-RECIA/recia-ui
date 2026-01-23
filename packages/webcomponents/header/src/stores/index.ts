@@ -23,6 +23,7 @@ import type {
   InfoEtabData,
   LayoutApiResponse,
   Link,
+  Organization,
   Organizations,
   SearchSection,
   Service,
@@ -55,6 +56,7 @@ import { getDomainLink, removeProtocol } from '../utils/linkUtils.ts'
 import { difference } from '../utils/objectUtils.ts'
 import { onDiff } from '../utils/storeUtils.ts'
 import { alphaSort } from '../utils/stringUtils.ts'
+import { updateTheme } from '../utils/themeUtils.ts'
 
 interface TmpSettings {
   search: boolean
@@ -401,6 +403,17 @@ $userInfo.listen(onDiff((diffs) => {
     updateOrganization()
 }))
 
+$organizations.listen(onDiff((diffs) => {
+  const { uaiThemeMapping } = $settings.get()
+
+  if (diffs.has('current') && uaiThemeMapping) {
+    const theme: string | undefined = uaiThemeMapping[(diffs.get('current') as Organization)?.code]
+
+    if (theme)
+      updateTheme(theme)
+  }
+}))
+
 $favoritesIds.listen(() => {
   document.dispatchEvent(new CustomEvent('update-favorites'))
 })
@@ -471,11 +484,7 @@ async function updateTemplate(
   if (!template)
     return
 
-  document.body.classList.forEach((cls) => {
-    if (cls.startsWith('theme-'))
-      document.body.classList.remove(cls)
-  })
-  document.body.classList.add(`theme-${template.id}`)
+  updateTheme(template.id)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Template', template)

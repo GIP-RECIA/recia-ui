@@ -97,6 +97,7 @@ const settingsPropsKeys = [
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
   'categoryClassMapping',
+  'uaiThemeMapping',
   'dnmaUrl',
   'fname',
   'drawerItems',
@@ -216,6 +217,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: Object, attribute: 'category-class-mapping' })
   categoryClassMapping?: Record<number, string>
+
+  @property({ type: Object, attribute: 'uai-theme-mapping' })
+  uaiThemeMapping?: Record<string, string>
 
   @property({ type: String, attribute: 'dnma-url' })
   dnmaUrl?: string
