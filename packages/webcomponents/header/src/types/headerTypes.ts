@@ -40,6 +40,5 @@ export type SettingsHeaderProperties = Exclude<
   keyof HeaderProperties,
   | 'templateApiPath'
   | 'sessionRenewDisable'
-  | 'marginTop'
   | 'debug'
 >
