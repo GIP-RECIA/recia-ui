@@ -43,6 +43,7 @@
 | `portlet-info-api-url`            |         `string`         |   `false`   |        `undefined`         | URL/path de l'API portlet du portail                                                                      |
 | `service-info-api-url`            |         `string`         |   `false`   |        `undefined`         | URL/path de l'API d'information sur le service                                                            |
 | `services-info-api-url`           |         `string`         |   `false`   |        `undefined`         | URL/path de l'API d'information sur les services                                                          |
+| `category-class-mapping`          | `Record<number, string>` |   `false`   |        `undefined`         | Associe une classe à l'id d'une catégorie                                                                 |
 | `uai-theme-mapping`               | `Record<string, string>` |   `false`   |        `undefined`         | Force un thème en fonction de l'UAI                                                                       |
 | `dnma-url`                        |         `string`         |   `false`   |        `undefined`         | URL/path du script de marquage DNMA                                                                       |
 | `fname`                           |         `string`         |   `false`   |        `undefined`         | fname du service dans lequel le composant est intégré                                                     |
