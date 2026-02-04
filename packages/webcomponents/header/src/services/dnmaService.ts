@@ -17,7 +17,7 @@
 export default class DnmaService {
   static init(
     dnmaUrl: string,
-    fname: string,
+    fname: string | undefined,
   ): void {
     if (document.querySelector('script#dnma'))
       return
@@ -35,7 +35,7 @@ export default class DnmaService {
       dnmaSetupScript.text = `
         try {
           if (ENT4DNMA) {
-            ENT4DNMA.markPage('${fname}');
+            ENT4DNMA.markPage('${fname ?? ''}');
             ENT4DNMA.markOnEvent('click-portlet-card');
             ENT4DNMA.markOnEvent('favorite-event');
             ENT4DNMA.markOnEvent('service-event');

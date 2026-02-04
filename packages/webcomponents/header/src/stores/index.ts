@@ -367,6 +367,7 @@ const $infoEtabData: ReadableAtom<Partial<InfoEtabData> | undefined> = batched(
 
 $settings.listen(onDiff((diffs) => {
   const authenticated = $authenticated.get()
+  const { fname } = $settings.get() ?? {}
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
   if (authenticated && diffs.has('navigationDrawerVisible')) {
@@ -375,6 +376,8 @@ $settings.listen(onDiff((diffs) => {
     else
       document.body.classList.remove('navigation-drawer-visible')
   }
+  if (diffs.has('dnmaUrl'))
+    DnmaService.init(diffs.get('dnmaUrl') as string, fname)
 }))
 
 $soffit.listen(onDiff((diffs) => {
@@ -419,12 +422,10 @@ $favoritesIds.listen(() => {
 })
 
 $authenticated.listen((value) => {
-  const { navigationDrawerVisible, dnmaUrl, fname } = $settings.get() ?? {}
+  const { navigationDrawerVisible } = $settings.get() ?? {}
   if (value) {
     if (navigationDrawerVisible === true)
       document.body.classList.add('navigation-drawer-visible')
-    if (dnmaUrl)
-      DnmaService.init(dnmaUrl, fname ?? '')
   }
   else {
     document.body.classList.remove('navigation-drawer-visible')
