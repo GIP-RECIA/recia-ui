@@ -23,6 +23,7 @@ import type {
 import { attributeSeparator } from '../config.ts'
 import { $debug } from '../stores/index.ts'
 import { getAs } from '../utils/objectUtils.ts'
+import { alphaSort } from '../utils/stringUtils.ts'
 
 export default class OrganizationService {
   static async get(
@@ -102,7 +103,9 @@ export default class OrganizationService {
       }
       else {
         return {
-          other: mappedOrgs.filter(org => org.id !== currentOrgId),
+          other: mappedOrgs
+            .filter(org => org.id !== currentOrgId)
+            .sort((a, b) => alphaSort(a.name, b.name, 'asc')),
           current: currentOrg,
         }
       }
