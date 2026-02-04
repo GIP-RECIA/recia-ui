@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.11.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.10.0...ui-webcomponents/v1.11.0) (2026-02-04)
+
+
+### Features
+
+* **header:** add `uai-theme-mapping` attribute ([b4818d3](https://github.com/GIP-RECIA/recia-ui/commit/b4818d38094007d1bc02d1993bcd54f0b4115895))
+* **header:** add warn for deprecated attribute ([e804f7f](https://github.com/GIP-RECIA/recia-ui/commit/e804f7ffc582322ef43159262e028008506d463e))
+* **header:** improve favorite layout (RGAA) ([2acc3d0](https://github.com/GIP-RECIA/recia-ui/commit/2acc3d0a321d321312338873d5e2bedcfa698a7a))
+* **header:** improve favorite layout (RGAA) ([49d0c3d](https://github.com/GIP-RECIA/recia-ui/commit/49d0c3ddf4737217e453ebe5c2e7d5c6cac306bc))
+* **header:** improve favorite layout (RGAA) ([6017e97](https://github.com/GIP-RECIA/recia-ui/commit/6017e9705783996ecec4d3e84bf61bad3f8c2a84))
+* **header:** initialize DNMA even if not authenticated ([62a6a21](https://github.com/GIP-RECIA/recia-ui/commit/62a6a216a15eef09a7599ae5f2befee77fb3f179))
+* **header:** scroll to top on close favorite dropdown or services layout ([61de6b3](https://github.com/GIP-RECIA/recia-ui/commit/61de6b3520a0fd61de727aa2ba57ac71ba95815b))
+* **header:** sort structures by name ([636cfd8](https://github.com/GIP-RECIA/recia-ui/commit/636cfd89c3f9138b9fb405548109b99e30d0605b))
+
+
+### Bug Fixes
+
+* **bottom-sheet:** add missing fontawsome style sheet ([777d122](https://github.com/GIP-RECIA/recia-ui/commit/777d12220ff032e4539363c5437102339f7c9457))
+* **header:** translations ([d6a4afb](https://github.com/GIP-RECIA/recia-ui/commit/d6a4afbcdef9605c7041071b6ba1deadc4d3bccb))
+* **page-layout:** types on build ([55bccdb](https://github.com/GIP-RECIA/recia-ui/commit/55bccdbd52c8c8420df1456885d270a8f65f6993))
+
 ## [1.10.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.9.0...ui-webcomponents/v1.10.0) (2026-01-12)
 
 
