@@ -190,7 +190,7 @@ export class ReciaNavigationDrawer extends LitElement {
 
   render(): TemplateResult {
     const favoriteMenu = $favoriteMenu.get()
-    const { contextApiUrl, drawerItems, defaultOrgIconUrl, orgIconUrl, homePage } = $settings.get() ?? {}
+    const { contextApiUrl, drawerItems, defaultOrgIconUrl, orgIconUrl, homePage } = $settings.get()
     const homeLink: Link = {
       href: getDomainLink(contextApiUrl ?? '/'),
       target: '_self',

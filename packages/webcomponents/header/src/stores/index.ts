@@ -316,7 +316,7 @@ const $categoryFilters: ReadableAtom<Section[]> = batched(
 const $infoEtabData: ReadableAtom<Partial<InfoEtabData> | undefined> = batched(
   [$organizations],
   (organizations) => {
-    const { defaultOrgIconUrl, orgIconUrl } = $settings.get() ?? {}
+    const { defaultOrgIconUrl, orgIconUrl } = $settings.get()
     if (!organizations)
       return undefined
 
@@ -367,7 +367,7 @@ const $infoEtabData: ReadableAtom<Partial<InfoEtabData> | undefined> = batched(
 
 $settings.listen(onDiff((diffs) => {
   const authenticated = $authenticated.get()
-  const { fname } = $settings.get() ?? {}
+  const { fname } = $settings.get()
   if (diffs.has('userInfoApiUrl'))
     updateSoffit()
   if (authenticated && diffs.has('navigationDrawerVisible')) {
@@ -422,7 +422,7 @@ $favoritesIds.listen(() => {
 })
 
 $authenticated.listen((value) => {
-  const { navigationDrawerVisible } = $settings.get() ?? {}
+  const { navigationDrawerVisible } = $settings.get()
   if (value) {
     if (navigationDrawerVisible === true)
       document.body.classList.add('navigation-drawer-visible')

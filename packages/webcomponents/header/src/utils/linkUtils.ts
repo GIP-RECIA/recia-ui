@@ -22,7 +22,7 @@ function getServiceLink(
   alternativeMaximizedLink: string | undefined,
   alternativeMaximizedLinkTarget: string | undefined,
 ): Link {
-  const { contextApiUrl } = $settings.get() ?? {}
+  const { contextApiUrl } = $settings.get()
 
   return {
     href: alternativeMaximizedLink
@@ -43,7 +43,7 @@ function getDomainLink(
   if (import.meta.env.DEV)
     return path
 
-  const { domain } = $settings.get() ?? {}
+  const { domain } = $settings.get()
 
   if (path.startsWith('http'))
     return path
@@ -52,7 +52,7 @@ function getDomainLink(
 }
 
 function isCurrentPage(link: string): boolean {
-  const { contextApiUrl } = $settings.get() ?? {}
+  const { contextApiUrl } = $settings.get()
   const { origin, href, pathname } = window.location
 
   const currentPath = pathname.split('.')[0]

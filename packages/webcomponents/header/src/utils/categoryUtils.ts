@@ -24,7 +24,7 @@ function getCategory(categoryId: number | undefined): Category & {
     return
 
   const categories = $categories.get()
-  const { categoryClassMapping } = $settings.get() ?? {}
+  const { categoryClassMapping } = $settings.get()
 
   if (!categories || !categoryClassMapping)
     return
