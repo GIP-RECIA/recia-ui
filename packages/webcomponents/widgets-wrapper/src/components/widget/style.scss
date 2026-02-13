@@ -315,7 +315,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
     }
   }
 
-  &:not(:has(.actions)) {
+  &:not(:has(> .actions)) {
     &:hover,
     &:has(:focus-visible) {
       outline: 2px solid var(--#{$prefix}primary);
@@ -323,7 +323,21 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
     }
   }
 
-  &:has(.actions) {
+  &:has(> .actions) {
+    > header {
+      > div {
+        display: inline-flex !important;
+      }
+
+      > button {
+        display: none;
+      }
+    }
+
+    > .menu {
+      display: block !important;
+    }
+
     &:hover,
     &:has(:focus-visible) {
       box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
@@ -336,6 +350,16 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
     &-skeleton,
     &-placeholder {
       height: $skeleton-placeholder-height-md;
+    }
+
+    > .actions {
+      @media (hover: none) or (pointer: coarse) {
+        inset: 0 -6px;
+
+        > .action-delete {
+          right: 6 + 6px;
+        }
+      }
     }
 
     > header {

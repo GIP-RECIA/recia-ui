@@ -29,6 +29,14 @@
 
   > .actions {
     @include actions;
+
+    @media (hover: none) or (pointer: coarse) {
+      inset: 0 -2px;
+
+      > .action-delete {
+        right: 6 + 2px;
+      }
+    }
   }
 
   > .icon {
