@@ -623,10 +623,10 @@ async function updateFavoritesFromFavorites(
     return
 
   newValue.forEach((section) => {
-    const { id, deleted, items } = section
+    const { id, deleted, items, orderHasChanged } = section
     const deletedIds = deleted.map(item => item.id)
 
-    if (id === FavoriteSectionId.Services) {
+    if (id === FavoriteSectionId.Services && (deletedIds.length > 0 || orderHasChanged)) {
       deletedIds.forEach((id) => {
         FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
       })
