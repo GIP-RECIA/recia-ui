@@ -22,7 +22,9 @@ import type {
 import { getDomainLink } from '../utils/linkUtils.ts'
 
 export default class InfoService {
-  static async get(serviceInfoApiUrl: string): Promise<Partial<ServiceInfoLayout> | undefined> {
+  static async get(
+    serviceInfoApiUrl: string,
+  ): Promise<Partial<ServiceInfoLayout> | undefined> {
     try {
       const options = {
         method: 'GET',

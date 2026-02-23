@@ -86,7 +86,12 @@ export default class FavoritesService {
     favoriteApiUrl: string,
     channelId: string | number,
   ): Promise<boolean> {
-    return await FavoritesService.toggle(soffit, favoriteApiUrl, 'addFavorite', channelId)
+    return await FavoritesService.toggle(
+      soffit,
+      favoriteApiUrl,
+      'addFavorite',
+      channelId,
+    )
   }
 
   static async remove(
@@ -94,6 +99,11 @@ export default class FavoritesService {
     favoriteApiUrl: string,
     channelId: string | number,
   ): Promise<boolean> {
-    return await FavoritesService.toggle(soffit, favoriteApiUrl, 'removeFavorite', channelId)
+    return await FavoritesService.toggle(
+      soffit,
+      favoriteApiUrl,
+      'removeFavorite',
+      channelId,
+    )
   }
 }
