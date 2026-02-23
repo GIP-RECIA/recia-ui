@@ -72,6 +72,7 @@ const settingsPropsKeys = [
   'contextApiUrl',
   'favoriteApiUrl',
   'layoutApiUrl',
+  'groupsApiUrl',
   'portletApiUrl',
   'organizationApiUrl',
   'userInfoApiUrl',
@@ -96,6 +97,11 @@ const settingsPropsKeys = [
   'portletInfoApiUrl',
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
+  'mediacentreConfigUrl',
+  'mediacentreFavoriteApiUrl',
+  'mediacentrePortalFavoriteApiUrlGet',
+  'mediacentrePortalFavoriteApiUrlPut',
+  'mediacentreRedirectUrlPattern',
   'categoryClassMapping',
   'uaiThemeMapping',
   'dnmaUrl',
@@ -136,6 +142,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'layout-api-url' })
   layoutApiUrl?: string
+
+  @property({ type: String, attribute: 'groups-api-url' })
+  groupsApiUrl?: string
 
   @property({ type: String, attribute: 'portlet-api-url' })
   portletApiUrl?: string
@@ -214,6 +223,21 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'services-info-api-url' })
   servicesInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'mediacentre-config-url' })
+  mediacentreConfigUrl?: string
+
+  @property({ type: String, attribute: 'mediacentre-favorite-api-url' })
+  mediacentreFavoriteApiUrl?: string
+
+  @property({ type: String, attribute: 'mediacentre-portal-favorite-api-url-get' })
+  mediacentrePortalFavoriteApiUrlGet?: string
+
+  @property({ type: String, attribute: 'mediacentre-portal-favorite-api-url-put' })
+  mediacentrePortalFavoriteApiUrlPut?: string
+
+  @property({ type: String, attribute: 'mediacentre-redirect-url-pattern' })
+  mediacentreRedirectUrlPattern?: string
 
   @property({ type: Object, attribute: 'category-class-mapping' })
   categoryClassMapping?: Record<number, string>

@@ -17,7 +17,7 @@
 import type { TemplateResult } from 'lit'
 import type {
   FavoriteSection,
-  Service,
+  ServiceAndServiceResource,
   UpdatedFavoriteSection,
 } from '../../../types/index.ts'
 import {
@@ -127,7 +127,7 @@ export class ReciaFavoriteLayout extends LitElement {
     return changes
   }
 
-  deleteItem(sectionId: string, item: Service, index: number): void {
+  deleteItem(sectionId: string, item: ServiceAndServiceResource, index: number): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section
@@ -149,7 +149,7 @@ export class ReciaFavoriteLayout extends LitElement {
     }
   }
 
-  moveItem(sectionId: string, item: Service, newPosition: '-1' | '+1'): void {
+  moveItem(sectionId: string, item: ServiceAndServiceResource, newPosition: '-1' | '+1'): void {
     this.tmpData = this.tmpData!.map((section) => {
       if (section.id !== sectionId)
         return section
@@ -186,11 +186,14 @@ export class ReciaFavoriteLayout extends LitElement {
     }, 10)
   }
 
-  handleLinkClick(e: Event, fname: string | undefined): void {
+  handleLinkClick(e: Event, fname: string | undefined, dnmaName: string | undefined): void {
     document.dispatchEvent(new CustomEvent('favorite-event', {
       detail: {
         event: e,
         fname,
+        ...(() => {
+          return dnmaName ? { SERVICE: dnmaName } : {}
+        })(),
       },
       bubbles: true,
       composed: true,
@@ -225,7 +228,7 @@ export class ReciaFavoriteLayout extends LitElement {
       : nothing
   }
 
-  itemTemplate(section: FavoriteSection, item: Service, index: number): TemplateResult {
+  itemTemplate(section: FavoriteSection, item: ServiceAndServiceResource, index: number): TemplateResult {
     const { id, canDelete, canMove } = section
     const actionTemplate: TemplateResult | typeof nothing = this.isManage
       ? html`
@@ -287,7 +290,7 @@ export class ReciaFavoriteLayout extends LitElement {
             rel="${item.link.rel ?? nothing}"
             class="name"
             ?inert="${this.isManage}"
-            @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
+            @click="${(e: Event) => this.handleLinkClick(e, item.fname, item.dnmaName)}"
           >
             <span>${item.name}</span>
             <span aria-hidden="true"></span>

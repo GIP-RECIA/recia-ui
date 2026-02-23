@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-import type { ServiceAndServiceResource } from './serviceTypes.ts'
-
-export interface FavoriteSection {
-  id: FavoriteSectionId
-  name: string
-  items: ServiceAndServiceResource[]
-  emptyText: string
-  canDelete?: boolean
-  canMove?: boolean
-  loading?: boolean
-  loadingItems?: number
+function fromBase64(b64: string): string {
+  const binary = atob(b64)
+  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0))
+  return new TextDecoder().decode(bytes)
 }
 
-export type UpdatedFavoriteSection = FavoriteSection & {
-  deleted: ServiceAndServiceResource[]
-  orderHasChanged: boolean
+function toBase64(str: string): string {
+  const utf8 = new TextEncoder().encode(str)
+  let binary = ''
+  utf8.forEach(byte => binary += String.fromCharCode(byte))
+  return btoa(binary)
 }
 
-export enum FavoriteSectionId {
-  Services = 'services',
-  Mediacentre = 'mediacentre',
+export {
+  fromBase64,
+  toBase64,
 }

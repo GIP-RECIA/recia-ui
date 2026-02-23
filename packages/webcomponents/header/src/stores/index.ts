@@ -27,6 +27,7 @@ import type {
   Organizations,
   SearchSection,
   Service,
+  ServiceAndServiceResource,
   Soffit,
   Template,
   UpdatedFavoriteSection,
@@ -41,6 +42,7 @@ import { defaultFilterKey } from '../config.ts'
 import DnmaService from '../services/dnmaService.ts'
 import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
+import MediacentreService from '../services/mediacentreService.ts'
 import OrganizationService from '../services/organizationService.ts'
 import ServicesService from '../services/servicesService.ts'
 import SoffitService from '../services/soffitService.ts'
@@ -95,6 +97,10 @@ const $categories = atom<Category[] | undefined>()
 const $layout = atom<LayoutApiResponse | undefined>()
 
 const $favoritesIds = atom<number[] | undefined>()
+
+const $mediacentreFavorites = atom<ServiceAndServiceResource[] | undefined>()
+
+const $mediacentreFavoritesLoad = atom<LoadingState>(LoadingState.UNLOADED)
 
 const $searchQueryString = atom<string>('')
 
@@ -241,21 +247,71 @@ const $filteredServices: ReadableAtom<Service[] | undefined> = batched(
   },
 )
 
+const $mediacentreFavoritesAvailable: ReadableAtom<boolean> = batched(
+  [$settings],
+  (settings) => {
+    const {
+      groupsApiUrl,
+      mediacentreConfigUrl,
+      mediacentreFavoriteApiUrl,
+      mediacentrePortalFavoriteApiUrlGet,
+      mediacentreRedirectUrlPattern,
+    } = settings
+
+    return !(
+      !groupsApiUrl
+      || !mediacentreConfigUrl
+      || !mediacentreFavoriteApiUrl
+      || !mediacentrePortalFavoriteApiUrlGet
+      || !mediacentreRedirectUrlPattern
+    )
+  },
+)
+
 const $favoriteMenu: ReadableAtom<FavoriteSection[]> = batched(
-  [$favorites, $baseServicesLoad],
-  (favorites, baseServicesLoad) => {
+  [
+    $settings,
+    $favorites,
+    $baseServicesLoad,
+    $mediacentreFavoritesAvailable,
+    $mediacentreFavorites,
+    $mediacentreFavoritesLoad,
+  ],
+  (
+    settings,
+    favorites,
+    baseServicesLoad,
+    mediacentreFavoritesAvailable,
+    mediacentreFavorites,
+    mediacentreFavoritesLoad,
+  ) => {
+    const mediacentreActions = !!settings.mediacentrePortalFavoriteApiUrlPut
+
     return [
       {
         id: FavoriteSectionId.Services,
         name: msg(str`Services`),
-        items: (favorites ?? []),
+        items: favorites ?? [],
         emptyText: msg(str`Aucun service favori`),
         canDelete: true,
         loading:
           baseServicesLoad === LoadingState.UNLOADED
           || baseServicesLoad === LoadingState.LOADING,
       },
-    ]
+      mediacentreFavoritesAvailable
+        ? {
+            id: FavoriteSectionId.Mediacentre,
+            name: msg(str`Médiacentre`),
+            items: mediacentreFavorites ?? [],
+            emptyText: msg(str`Aucun favori Médiacentre`),
+            canDelete: mediacentreActions,
+            canMove: mediacentreActions,
+            loading:
+          mediacentreFavoritesLoad === LoadingState.UNLOADED
+          || mediacentreFavoritesLoad === LoadingState.LOADING,
+          }
+        : undefined,
+    ].filter(item => item !== undefined)
   },
 )
 
@@ -613,25 +669,79 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
   }
 }
 
+async function updateMediadentreFavorites(forceUpdate: boolean = false): Promise<void> {
+  const {
+    groupsApiUrl,
+    mediacentreConfigUrl,
+    mediacentreFavoriteApiUrl,
+    mediacentrePortalFavoriteApiUrlGet,
+    mediacentreRedirectUrlPattern,
+  } = $settings.get()
+  const soffit = $soffit.get()
+  if (
+    !soffit
+    || !groupsApiUrl
+    || !mediacentreConfigUrl
+    || !mediacentreFavoriteApiUrl
+    || !mediacentrePortalFavoriteApiUrlGet
+    || !mediacentreRedirectUrlPattern
+  ) {
+    return
+  }
+
+  if ($mediacentreFavoritesLoad.get() === LoadingState.LOADING)
+    return
+
+  if (!forceUpdate && $mediacentreFavorites.get() !== undefined)
+    return
+
+  $mediacentreFavoritesLoad.set(LoadingState.LOADING)
+  const mediacentreFavorites = await MediacentreService.getFavorites(
+    soffit,
+    getDomainLink(groupsApiUrl),
+    getDomainLink(mediacentreConfigUrl),
+    getDomainLink(mediacentreFavoriteApiUrl),
+    getDomainLink(mediacentrePortalFavoriteApiUrlGet),
+    mediacentreRedirectUrlPattern,
+  )
+  $mediacentreFavoritesLoad.set(mediacentreFavorites ? LoadingState.LOADED : LoadingState.ERROR)
+  $mediacentreFavorites.set(mediacentreFavorites)
+  if ($debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Mediacentre favorites', mediacentreFavorites)
+  }
+}
+
 async function updateFavoritesFromFavorites(
   newValue: UpdatedFavoriteSection[],
 ): Promise<void> {
   const soffit = $soffit.get()
-  const layout = $layout.get()
-  const { favoriteApiUrl } = $settings.get()
-  if (!soffit || !favoriteApiUrl || !layout)
-    return
+  const { favoriteApiUrl, mediacentrePortalFavoriteApiUrlPut } = $settings.get()
 
   newValue.forEach((section) => {
     const { id, deleted, items, orderHasChanged } = section
     const deletedIds = deleted.map(item => item.id)
 
-    if (id === FavoriteSectionId.Services && (deletedIds.length > 0 || orderHasChanged)) {
+    if (
+      id === FavoriteSectionId.Services
+      && (deletedIds.length > 0 || orderHasChanged)
+      && soffit
+      && favoriteApiUrl
+    ) {
       deletedIds.forEach((id) => {
         FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
       })
       const newFavoriteIds = items.map(item => Number(item.id))
       $favoritesIds.set(newFavoriteIds)
+    }
+
+    if (
+      id === FavoriteSectionId.Mediacentre
+      && (deletedIds.length > 0 || orderHasChanged)
+      && mediacentrePortalFavoriteApiUrlPut
+    ) {
+      MediacentreService.putFavorites(getDomainLink(mediacentrePortalFavoriteApiUrlPut), items)
+      $mediacentreFavorites.set(items)
     }
   })
 }
@@ -693,6 +803,7 @@ export {
   addFavorite,
   removeFavorite,
   updateFavoritesFromFavorites,
+  updateMediadentreFavorites,
   updateServices,
   updateSettings,
   updateSoffit,

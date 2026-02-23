@@ -30,3 +30,15 @@ export interface Service {
   favorite?: boolean
   more?: boolean
 }
+
+export type ServiceAndServiceResource = Pick<
+  Service,
+  'fname'
+  | 'name'
+  | 'category'
+  | 'iconUrl'
+  | 'link'
+> & {
+  id: number | string
+  dnmaName?: string
+}

@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-import type { ServiceAndServiceResource } from './serviceTypes.ts'
+export type MediacentreApiResponse = MediacentreRessource[]
 
-export interface FavoriteSection {
-  id: FavoriteSectionId
-  name: string
-  items: ServiceAndServiceResource[]
-  emptyText: string
-  canDelete?: boolean
-  canMove?: boolean
-  loading?: boolean
-  loadingItems?: number
+export interface MediacentreRessource {
+  idRessource: string
+  nomRessource: string
+  typePresentation: TypePresentation
 }
 
-export type UpdatedFavoriteSection = FavoriteSection & {
-  deleted: ServiceAndServiceResource[]
-  orderHasChanged: boolean
+export interface TypePresentation {
+  code: string
+  nom: string
 }
 
-export enum FavoriteSectionId {
-  Services = 'services',
-  Mediacentre = 'mediacentre',
+export interface MediacentreConfigApiResponse {
+  configListMap: ConfigListMap
+}
+
+export interface ConfigListMap {
+  groups: ConfigGroup[]
+}
+
+export interface ConfigGroup {
+  key: string
+  value: string
 }
