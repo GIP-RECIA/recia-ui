@@ -85,15 +85,21 @@ export class ReciaFavoriteLayout extends LitElement {
   }
 
   toggleManage(save: boolean = false): void {
+    const delay = save ? 300 : 0
+
     if (!this.isManage) {
       this.tmpData = this.data ? [...this.data] : undefined
     }
     else {
       if (save)
         this.dispatchEvent(new CustomEvent('updated', { detail: { newValue: this.getDiffs() } }))
-      this.tmpData = undefined
+      setTimeout(() => {
+        this.tmpData = undefined
+      }, delay)
     }
-    this.isManage = !this.isManage
+    setTimeout(() => {
+      this.isManage = !this.isManage
+    }, delay)
   }
 
   getDiffs(): UpdatedFavoriteSection[] | undefined {
