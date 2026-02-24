@@ -13,18 +13,18 @@
 Les composants web utilisent un style global provenant du projet ui ainsi qu'une configuration globale.
 Ces élément sont défini dans le dossier [`common`](./common/).
 
-## [r-bottom-sheet](./packages/webcomponents/bottom-sheet/)
+## [r-bottom-sheet](./bottom-sheet/)
 
-## [r-dropdown-info](./packages/webcomponents/dropdown-info/)
+## [r-dropdown-info](./dropdown-info/)
 
-## [r-filters](./packages/webcomponents/filters/)
+## [r-filters](./filters/)
 
-## [r-footer](./packages/webcomponents/footer/)
+## [r-footer](./footer/)
 
-## [r-header](./packages/webcomponents/header/)
+## [r-header](./header/)
 
-## [r-page-layout](./packages/webcomponents/page-layout/)
+## [r-page-layout](./page-layout/)
 
-## [r-wayf](./packages/webcomponents/wayf/)
+## [r-wayf](./wayf/)
 
-## [r-widgets-wrapper](./packages/webcomponents/widgets-wrapper/)
+## [r-widgets-wrapper](./widgets-wrapper/)
