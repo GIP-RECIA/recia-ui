@@ -379,10 +379,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dprint/markdown@npm:^0.20.0":
-  version: 0.20.0
-  resolution: "@dprint/markdown@npm:0.20.0"
-  checksum: 10/ae7b0b3ef5f600a1a63706d6c45529b99448ba493694671ec29c90c46bb103048eedc25c9d83e9ce74fbb989e8a7fdfb6019af05e0c9b466993688fd65801bd5
+"@dprint/markdown@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@dprint/markdown@npm:0.21.1"
+  checksum: 10/f93f1eaad6c3dc51209438313c0a48463d638019afc254c4a1e57e970b8d652ef80e290c88218d48bfd435c8e3be3f97eae59f09e5fa2de4e9c9a13357963b74
   languageName: node
   linkType: hard
 
@@ -822,7 +822,7 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^7.1.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.1.0"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     ress: "npm:^5.0.2"
     sass: "npm:^1.97.3"
     typescript: "npm:^5.9.3"
@@ -842,7 +842,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     "@types/regenerator-runtime": "npm:^0"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lodash-es: "npm:^4.17.23"
     regenerator-runtime: "npm:^0.14.1"
     typescript: "npm:^5.9.3"
@@ -1080,6 +1080,139 @@ __metadata:
   dependencies:
     semver: "npm:^7.3.5"
   checksum: 10/405c4490e1ff11cf299775449a3c254a366a4b1ffc79d87159b0ee7d5558ac9f6a2f8c0735fd6ff3873cef014cb1a44a5f9127cb6a1b2dbc408718cca9365b5a
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-android-arm-eabi@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-android-arm-eabi@npm:0.35.0"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-android-arm64@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-android-arm64@npm:0.35.0"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-darwin-arm64@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-darwin-arm64@npm:0.35.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-darwin-x64@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-darwin-x64@npm:0.35.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-freebsd-x64@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-freebsd-x64@npm:0.35.0"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-arm-gnueabihf@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-arm-gnueabihf@npm:0.35.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-arm-musleabihf@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-arm-musleabihf@npm:0.35.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-arm64-gnu@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-arm64-gnu@npm:0.35.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-arm64-musl@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-arm64-musl@npm:0.35.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-ppc64-gnu@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-ppc64-gnu@npm:0.35.0"
+  conditions: os=linux & cpu=ppc64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-riscv64-gnu@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-riscv64-gnu@npm:0.35.0"
+  conditions: os=linux & cpu=riscv64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-riscv64-musl@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-riscv64-musl@npm:0.35.0"
+  conditions: os=linux & cpu=riscv64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-s390x-gnu@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-s390x-gnu@npm:0.35.0"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-x64-gnu@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-x64-gnu@npm:0.35.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-linux-x64-musl@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-linux-x64-musl@npm:0.35.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-openharmony-arm64@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-openharmony-arm64@npm:0.35.0"
+  conditions: os=openharmony & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-win32-arm64-msvc@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-win32-arm64-msvc@npm:0.35.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-win32-ia32-msvc@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-win32-ia32-msvc@npm:0.35.0"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@oxfmt/binding-win32-x64-msvc@npm:0.35.0":
+  version: 0.35.0
+  resolution: "@oxfmt/binding-win32-x64-msvc@npm:0.35.0"
+  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -2165,7 +2298,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -3214,7 +3347,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -3630,21 +3763,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-format@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "eslint-plugin-format@npm:1.3.1"
+"eslint-plugin-format@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "eslint-plugin-format@npm:2.0.0"
   dependencies:
     "@dprint/formatter": "npm:^0.5.1"
-    "@dprint/markdown": "npm:^0.20.0"
+    "@dprint/markdown": "npm:^0.21.1"
     "@dprint/toml": "npm:^0.7.0"
     eslint-formatting-reporter: "npm:^0.0.0"
     eslint-parser-plain: "npm:^0.1.1"
     ohash: "npm:^2.0.11"
-    prettier: "npm:^3.7.4"
-    synckit: "npm:^0.11.11"
+    oxfmt: "npm:^0.35.0"
+    prettier: "npm:^3.8.1"
+    synckit: "npm:^0.11.12"
   peerDependencies:
-    eslint: ^8.40.0 || ^9.0.0
-  checksum: 10/1bcf1851ccbcc440510e465e61d8fdfc98cda456e44fd9982993eb8daaabe7089fe56aa6f125cc9a25f46cb0edcfc0e31c757944790c38a18f0dd5ede3a32542
+    eslint: ^8.40.0 || ^9.0.0 || ^10.0.0
+  checksum: 10/4200625c4acee250204b02b6cbae5870e05bba42f95c03892af8401cc5a110b8556216491709e83581489375a9b3caf9fb275ebe9b5d909059a6b48b117a7716
   languageName: node
   linkType: hard
 
@@ -4235,7 +4369,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -4335,7 +4469,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -4743,7 +4877,7 @@ __metadata:
     bottom-sheet: "workspace:^"
     concurrently: "npm:^9.2.1"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     filters: "workspace:^"
     json-server: "npm:^0.17.4"
     lit: "npm:^3.3.2"
@@ -6674,6 +6808,75 @@ __metadata:
   languageName: node
   linkType: hard
 
+"oxfmt@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "oxfmt@npm:0.35.0"
+  dependencies:
+    "@oxfmt/binding-android-arm-eabi": "npm:0.35.0"
+    "@oxfmt/binding-android-arm64": "npm:0.35.0"
+    "@oxfmt/binding-darwin-arm64": "npm:0.35.0"
+    "@oxfmt/binding-darwin-x64": "npm:0.35.0"
+    "@oxfmt/binding-freebsd-x64": "npm:0.35.0"
+    "@oxfmt/binding-linux-arm-gnueabihf": "npm:0.35.0"
+    "@oxfmt/binding-linux-arm-musleabihf": "npm:0.35.0"
+    "@oxfmt/binding-linux-arm64-gnu": "npm:0.35.0"
+    "@oxfmt/binding-linux-arm64-musl": "npm:0.35.0"
+    "@oxfmt/binding-linux-ppc64-gnu": "npm:0.35.0"
+    "@oxfmt/binding-linux-riscv64-gnu": "npm:0.35.0"
+    "@oxfmt/binding-linux-riscv64-musl": "npm:0.35.0"
+    "@oxfmt/binding-linux-s390x-gnu": "npm:0.35.0"
+    "@oxfmt/binding-linux-x64-gnu": "npm:0.35.0"
+    "@oxfmt/binding-linux-x64-musl": "npm:0.35.0"
+    "@oxfmt/binding-openharmony-arm64": "npm:0.35.0"
+    "@oxfmt/binding-win32-arm64-msvc": "npm:0.35.0"
+    "@oxfmt/binding-win32-ia32-msvc": "npm:0.35.0"
+    "@oxfmt/binding-win32-x64-msvc": "npm:0.35.0"
+    tinypool: "npm:2.1.0"
+  dependenciesMeta:
+    "@oxfmt/binding-android-arm-eabi":
+      optional: true
+    "@oxfmt/binding-android-arm64":
+      optional: true
+    "@oxfmt/binding-darwin-arm64":
+      optional: true
+    "@oxfmt/binding-darwin-x64":
+      optional: true
+    "@oxfmt/binding-freebsd-x64":
+      optional: true
+    "@oxfmt/binding-linux-arm-gnueabihf":
+      optional: true
+    "@oxfmt/binding-linux-arm-musleabihf":
+      optional: true
+    "@oxfmt/binding-linux-arm64-gnu":
+      optional: true
+    "@oxfmt/binding-linux-arm64-musl":
+      optional: true
+    "@oxfmt/binding-linux-ppc64-gnu":
+      optional: true
+    "@oxfmt/binding-linux-riscv64-gnu":
+      optional: true
+    "@oxfmt/binding-linux-riscv64-musl":
+      optional: true
+    "@oxfmt/binding-linux-s390x-gnu":
+      optional: true
+    "@oxfmt/binding-linux-x64-gnu":
+      optional: true
+    "@oxfmt/binding-linux-x64-musl":
+      optional: true
+    "@oxfmt/binding-openharmony-arm64":
+      optional: true
+    "@oxfmt/binding-win32-arm64-msvc":
+      optional: true
+    "@oxfmt/binding-win32-ia32-msvc":
+      optional: true
+    "@oxfmt/binding-win32-x64-msvc":
+      optional: true
+  bin:
+    oxfmt: bin/oxfmt
+  checksum: 10/8f44ec5378519597fdb9005589e2ae9d1499b8d5fc9046985e1208a934647a96ce1263c18f4a62f7e6eb725c8e53a8fde2d75497a83d0383f1bcbc36a66e82c1
+  languageName: node
+  linkType: hard
+
 "p-limit@npm:^1.1.0":
   version: 1.3.0
   resolution: "p-limit@npm:1.3.0"
@@ -6784,7 +6987,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -7070,12 +7273,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.7.4":
-  version: 3.7.4
-  resolution: "prettier@npm:3.7.4"
+"prettier@npm:^3.8.1":
+  version: 3.8.1
+  resolution: "prettier@npm:3.8.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10/b4d00ea13baed813cb777c444506632fb10faaef52dea526cacd03085f01f6db11fc969ccebedf05bf7d93c3960900994c6adf1b150e28a31afd5cfe7089b313
+  checksum: 10/3da1cf8c1ef9bea828aa618553696c312e951f810bee368f6887109b203f18ee869fe88f66e65f9cf60b7cb1f2eae859892c860a300c062ff8ec69c381fc8dbd
   languageName: node
   linkType: hard
 
@@ -7105,7 +7308,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -8104,7 +8307,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"synckit@npm:^0.11.11, synckit@npm:^0.6.2 || ^0.7.3 || ^0.11.5":
+"synckit@npm:^0.11.12":
+  version: 0.11.12
+  resolution: "synckit@npm:0.11.12"
+  dependencies:
+    "@pkgr/core": "npm:^0.2.9"
+  checksum: 10/2f51978bfed81aaf0b093f596709a72c49b17909020f42b43c5549f9c0fe18b1fe29f82e41ef771172d729b32e9ce82900a85d2b87fa14d59f886d4df8d7a329
+  languageName: node
+  linkType: hard
+
+"synckit@npm:^0.6.2 || ^0.7.3 || ^0.11.5":
   version: 0.11.11
   resolution: "synckit@npm:0.11.11"
   dependencies:
@@ -8171,6 +8383,13 @@ __metadata:
     fdir: "npm:^6.5.0"
     picomatch: "npm:^4.0.3"
   checksum: 10/d72bd826a8b0fa5fa3929e7fe5ba48fceb2ae495df3a231b6c5408cd7d8c00b58ab5a9c2a76ba56a62ee9b5e083626f1f33599734bed1ffc4b792406408f0ca2
+  languageName: node
+  linkType: hard
+
+"tinypool@npm:2.1.0":
+  version: 2.1.0
+  resolution: "tinypool@npm:2.1.0"
+  checksum: 10/c11cfe84e8147d5bf198fe04ea789c068dfa8656c7f3483c76a7408c02d108b2e07d7301458021a0a98952d4a760efb6212ab49a01bac085c4aed3d6ee40ab2d
   languageName: node
   linkType: hard
 
@@ -8608,7 +8827,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.1"
     "@types/lodash-es": "npm:^4"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     ress: "npm:^5.0.2"
@@ -8655,7 +8874,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     "@uportal/open-id-connect": "npm:^1.40.2"
     eslint: "npm:^9.39.2"
-    eslint-plugin-format: "npm:^1.3.1"
+    eslint-plugin-format: "npm:^2.0.0"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.17.23"
     regenerator-runtime: "npm:^0.14.1"
