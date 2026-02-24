@@ -477,6 +477,10 @@ $favoritesIds.listen(() => {
   document.dispatchEvent(new CustomEvent('update-favorites'))
 })
 
+$mediacentreFavorites.listen(() => {
+  document.dispatchEvent(new CustomEvent('update-mediacentre-favorites'))
+})
+
 $authenticated.listen((value) => {
   const { navigationDrawerVisible } = $settings.get()
   if (value) {
