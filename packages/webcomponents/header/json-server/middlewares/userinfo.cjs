@@ -9,7 +9,8 @@ module.exports = function (req, res, next) {
       res.setHeader('Content-Type', 'text/plain')
       res.send(data)
     }
-    catch (err) {
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    catch (_) {
       res.status(500).send('Erreur de lecture du fichier')
     }
   }

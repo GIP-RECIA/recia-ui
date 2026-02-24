@@ -60,7 +60,7 @@ class SpreadAttributesDirective extends Directive {
 
 const spreadAttributes: (
   attrs: AttributeMap,
-  preserve?: PreserveFilter
+  preserve?: PreserveFilter,
 ) => DirectiveResult<typeof SpreadAttributesDirective> = directive(SpreadAttributesDirective)
 
 export { spreadAttributes }
