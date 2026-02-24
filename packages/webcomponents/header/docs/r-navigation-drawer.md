@@ -1,10 +1,16 @@
 # r-navigation-drawer
 
-- [r-widget](#r-widget)
+- [r-navigation-drawer](#r-navigation-drawer)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
-    - [`item-click`](#item-click)
+    - [`toggle`](#toggle)
       - [Retour](#retour)
+    - [`toggle-services-layout`](#toggle-services-layout)
+      - [Retour](#retour-1)
+    - [`toggle-favorite-dropdown`](#toggle-favorite-dropdown)
+      - [Retour](#retour-2)
+    - [`launch`](#launch)
+      - [Retour](#retour-3)
 
 ## Propriétés
 

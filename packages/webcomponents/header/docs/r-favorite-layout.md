@@ -1,6 +1,6 @@
-# r-widget
+# r-favorite-layout
 
-- [r-widget](#r-widget)
+- [r-favorite-layout](#r-favorite-layout)
   - [Propriétés](#propriétés)
   - [Évènements](#évènements)
     - [`updated`](#updated)
