@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.12.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.11.0...ui-webcomponents/v1.12.0) (2026-02-24)
+
+
+### Features
+
+* **header:** add event when mediacentre favorites are updated ([26009f7](https://github.com/GIP-RECIA/recia-ui/commit/26009f767d33652c4283af5cb77d98fe5cc45c55))
+* **header:** add groups and preferences services ([23c5afb](https://github.com/GIP-RECIA/recia-ui/commit/23c5afbbdfb100c84d9fbcb9d4bbf61cc9f26e6a))
+* **header:** add mediacentre favorites ([f29a5fe](https://github.com/GIP-RECIA/recia-ui/commit/f29a5fe228034a79ece5e8fa87fc2159322dcfbc))
+* **header:** add mediacentre translations ([9500006](https://github.com/GIP-RECIA/recia-ui/commit/9500006b5bcffc897abee96798fb8a874bc91068))
+* **header:** add transition between favorite change ([678fbac](https://github.com/GIP-RECIA/recia-ui/commit/678fbacf3c2e80b42436f13a59b30c62a86b680f))
+* **header:** reset mediacentre on structure change ([77eb68f](https://github.com/GIP-RECIA/recia-ui/commit/77eb68f4401bf23914c1fb109d1c9f60b60e1a98))
+* **wc:** show action buttons in mobile ([14eabac](https://github.com/GIP-RECIA/recia-ui/commit/14eabaca4f3b8cdebd43b773a93f7c0a61fe1eef))
+
+
+### Bug Fixes
+
+* **header:** eslint issues ([c69d4dd](https://github.com/GIP-RECIA/recia-ui/commit/c69d4dd4f957413bbef7bbc4d7a2156f6dd3eb82))
+
 ## [1.11.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.10.0...ui-webcomponents/v1.11.0) (2026-02-04)
 
 
