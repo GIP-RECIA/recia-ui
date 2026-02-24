@@ -457,6 +457,8 @@ $userInfo.listen(onDiff((diffs) => {
     $services.set(undefined)
     $layout.set(undefined)
     $favoritesIds.set(undefined)
+    $mediacentreFavoritesLoad.set(LoadingState.UNLOADED)
+    $mediacentreFavorites.set(undefined)
   }
   if (diffs.has('currentOrgId') || diffs.has('orgIds'))
     updateOrganization()
