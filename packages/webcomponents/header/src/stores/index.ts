@@ -474,11 +474,13 @@ $organizations.listen(onDiff((diffs) => {
 }))
 
 $favoritesIds.listen(() => {
-  document.dispatchEvent(new CustomEvent('update-favorites'))
+  if ($baseServicesLoad.value === LoadingState.LOADED)
+    document.dispatchEvent(new CustomEvent('update-favorites'))
 })
 
 $mediacentreFavorites.listen(() => {
-  document.dispatchEvent(new CustomEvent('update-mediacentre-favorites'))
+  if ($mediacentreFavoritesLoad.value === LoadingState.LOADED)
+    document.dispatchEvent(new CustomEvent('update-mediacentre-favorites'))
 })
 
 $authenticated.listen((value) => {
@@ -651,18 +653,16 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
     ServicesService.get(soffit, getDomainLink(portletApiUrl), getDomainLink(servicesInfoApiUrl)),
     LayoutService.get(soffit, getDomainLink(layoutApiUrl)),
   ])
-
   const favoriteIds = layout
     ? [...new Set(FavoritesService.getFromLayout(layout)?.map(Number))]
     : undefined
-
-  $baseServicesLoad.set(servicesData ? LoadingState.LOADED : LoadingState.ERROR)
   const { services, categories } = servicesData ?? {}
 
   $favoritesIds.set(favoriteIds)
   $baseServices.set(services?.sort((a, b) => alphaSort(a.name, b.name, 'asc')))
   $categories.set(categories?.sort((a, b) => alphaSort(a.name, b.name, 'asc')))
   $layout.set(layout)
+  $baseServicesLoad.set(servicesData ? LoadingState.LOADED : LoadingState.ERROR)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Services', services)
@@ -708,8 +708,8 @@ async function updateMediadentreFavorites(forceUpdate: boolean = false): Promise
     getDomainLink(mediacentrePortalFavoriteApiUrlGet),
     mediacentreRedirectUrlPattern,
   )
-  $mediacentreFavoritesLoad.set(mediacentreFavorites ? LoadingState.LOADED : LoadingState.ERROR)
   $mediacentreFavorites.set(mediacentreFavorites)
+  $mediacentreFavoritesLoad.set(mediacentreFavorites ? LoadingState.LOADED : LoadingState.ERROR)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Mediacentre favorites', mediacentreFavorites)
