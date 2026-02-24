@@ -77,14 +77,14 @@ export class ReciaNavigationDrawer extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    window.addEventListener('keyup', this.handleOutsideEvents.bind(this))
-    window.addEventListener('click', this.handleOutsideEvents.bind(this))
+    document.addEventListener('keyup', this.handleOutsideEvents.bind(this))
+    document.addEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
-    window.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
-    window.removeEventListener('click', this.handleOutsideEvents.bind(this))
+    document.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
+    document.removeEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
   handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {

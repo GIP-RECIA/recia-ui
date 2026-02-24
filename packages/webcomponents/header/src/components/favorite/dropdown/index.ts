@@ -60,15 +60,15 @@ export class ReciaFavoriteDropdown extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.addEventListener('keyup', this.handleKeyPress.bind(this))
-    window.addEventListener('keyup', this.handleOutsideEvents.bind(this))
-    window.addEventListener('click', this.handleOutsideEvents.bind(this))
+    document.addEventListener('keyup', this.handleOutsideEvents.bind(this))
+    document.addEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.removeEventListener('keyup', this.handleKeyPress.bind(this))
-    window.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
-    window.removeEventListener('click', this.handleOutsideEvents.bind(this))
+    document.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
+    document.removeEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
   toggle(_: Event | undefined = undefined): void {
