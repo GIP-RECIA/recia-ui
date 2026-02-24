@@ -301,9 +301,9 @@ const $favoriteMenu: ReadableAtom<FavoriteSection[]> = batched(
       mediacentreFavoritesAvailable
         ? {
             id: FavoriteSectionId.Mediacentre,
-            name: msg(str`Médiacentre`),
+            name: 'Médiacentre',
             items: mediacentreFavorites ?? [],
-            emptyText: msg(str`Aucun favori Médiacentre`),
+            emptyText: msg(str`Aucun favori ${'Médiacentre'}`),
             canDelete: mediacentreActions,
             canMove: mediacentreActions,
             loading:

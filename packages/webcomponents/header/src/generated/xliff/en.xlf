@@ -234,6 +234,10 @@ Please try reopening this file.</target>
   <source>Menu informations de l'établissement</source>
   <target>Institution information menu</target>
 </trans-unit>
+<trans-unit id="s4e540c9cd0860d6c">
+  <source>Aucun favori <x id="0" equiv-text="${'Médiacentre'}"/></source>
+  <target>No <x id="0" equiv-text="${'Médiacentre'}"/> favorite</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
