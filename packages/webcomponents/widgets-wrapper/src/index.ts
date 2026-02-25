@@ -101,6 +101,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     scriptAdapter.src = `${this.adapterSourceUri}${uriHasParam ? '&' : '?'}configUri=${this.adapterConfigUri}`
     document.body.appendChild(scriptAdapter)
     document.addEventListener('update-favorites', this.updateFavorites.bind(this))
+    document.addEventListener('update-mediacentre-favorites', this.updateMediacentreFavorites.bind(this))
   }
 
   async initialize(): Promise<void> {
@@ -164,6 +165,11 @@ export class ReciaWidgetsWrapper extends LitElement {
   async updateFavorites(): Promise<void> {
     const soffit = await getToken(this.soffitUri)
     await this.buildWidget('Favoris', soffit.encoded, true)
+  }
+
+  async updateMediacentreFavorites(): Promise<void> {
+    const soffit = await getToken(this.soffitUri)
+    await this.buildWidget('Mediacentre', soffit.encoded, true)
   }
 
   handleMove(e: CustomEvent): void {

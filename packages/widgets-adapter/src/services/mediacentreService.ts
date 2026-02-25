@@ -85,45 +85,48 @@ async function getConfig(
 function getItems(
   config: Config,
   data: MediacentreApiResponse,
+  mediacentreFavorites: any,
 ): WidgetItem[] {
-  return data.map((item) => {
-    const displayName: string = item.nomRessource
-    const hasSpecialChar: boolean = displayName.match(/[^A-Z1-9]+/i) != null
-    const displayNameForRedirection: string = hasSpecialChar
-      ? toBase64(displayName)
-      : displayName
-    const href = config.mediacentre.redirectLinkPattern
-      .replace('{fname}', item.idRessource)
-      .replace('{name}', displayNameForRedirection)
-      .replace('{b64}', hasSpecialChar.toString())
+  return data
+    .sort((a, b) => mediacentreFavorites.indexOf(a.idRessource) - mediacentreFavorites.indexOf(b.idRessource))
+    .map((item) => {
+      const displayName: string = item.nomRessource
+      const hasSpecialChar: boolean = displayName.match(/[^A-Z1-9]+/i) != null
+      const displayNameForRedirection: string = hasSpecialChar
+        ? toBase64(displayName)
+        : displayName
+      const href = config.mediacentre.redirectLinkPattern
+        .replace('{fname}', item.idRessource)
+        .replace('{name}', displayNameForRedirection)
+        .replace('{b64}', hasSpecialChar.toString())
 
-    return {
-      id: item.idRessource,
-      name: item.nomRessource,
-      icon: '/images/portlet_icons/Mediacentre.svg',
-      link: {
-        href,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-      },
-      dispatchEvents: [
-        {
-          type: 'click-portlet-card',
-          detail: {
-            fname: WidgetKey.MEDIACENTRE,
-            SERVICE: item.typePresentation.code,
-          },
+      return {
+        id: item.idRessource,
+        name: item.nomRessource,
+        icon: '/images/portlet_icons/Mediacentre.svg',
+        link: {
+          href,
+          target: '_blank',
+          rel: 'noopener noreferrer',
         },
-      ],
-    }
-  })
+        dispatchEvents: [
+          {
+            type: 'click-portlet-card',
+            detail: {
+              fname: WidgetKey.MEDIACENTRE,
+              SERVICE: item.typePresentation.code,
+            },
+          },
+        ],
+      }
+    })
 }
 
 async function getMediacentreWidget(
   config: Config,
   soffit: string,
 ): Promise<Partial<Widget>> {
-  const [groupArrayRaw, mediacentreConfig, favorites] = await Promise.all([
+  const [groups, mConfig, prefs] = await Promise.all([
     GroupService.get(
       config.mediacentre.userRigthsApiUri,
       soffit,
@@ -140,23 +143,25 @@ async function getMediacentreWidget(
     ),
   ])
 
-  const regExpArray = mediacentreConfig.configListMap.groups.map(
+  const regExpArray = mConfig.configListMap.groups.map(
     ({ value }) => new RegExp(value),
   )
-  const groupArrayFiltered = groupArrayRaw.groups
+  const filteredGroups = groups.groups
     .map(group => group.name)
     .filter(name => regExpArray.some(regex => regex.test(name)))
 
+  const { mediacentreFavorites } = prefs
+
   const response = await getFavorites(
     config.mediacentre.apiFavorisUri,
-    favorites.mediacentreFavorites,
+    mediacentreFavorites,
     soffit,
-    groupArrayFiltered,
+    filteredGroups,
     config.global.timeout,
   )
 
   return {
-    items: getItems(config, response),
+    items: getItems(config, response, mediacentreFavorites),
   }
 }
 
