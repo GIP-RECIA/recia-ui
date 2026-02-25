@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.4.0](https://github.com/GIP-RECIA/recia-ui/compare/widgets-to-endpoints-adapter/v2.3.0...widgets-to-endpoints-adapter/v2.4.0) (2026-02-25)
+
+
+### Features
+
+* **wc:** refresh mediacentre widget on widget on favorite mediacentre change ([286a748](https://github.com/GIP-RECIA/recia-ui/commit/286a7486d0cb8ae4ffcc5aa8754e0bb81c5e8878))
+
+
+### Bug Fixes
+
+* **header:** eslint issues ([c69d4dd](https://github.com/GIP-RECIA/recia-ui/commit/c69d4dd4f957413bbef7bbc4d7a2156f6dd3eb82))
+
 ## [2.3.0](https://github.com/GIP-RECIA/recia-ui/compare/widgets-to-endpoints-adapter/v2.1.0...widgets-to-endpoints-adapter/v2.3.0) (2025-12-17)
 
 
