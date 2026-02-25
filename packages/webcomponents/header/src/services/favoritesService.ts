@@ -18,7 +18,6 @@ import type {
   FavoriteContent,
   FavoriteLayout,
   LayoutApiResponse,
-  Soffit,
 } from '../types/index.ts'
 
 export default class FavoritesService {
@@ -51,23 +50,17 @@ export default class FavoritesService {
   }
 
   private static async toggle(
-    soffit: Soffit,
     favoriteApiUrl: string,
     action: 'addFavorite' | 'removeFavorite',
     channelId: string | number,
   ): Promise<boolean> {
     try {
-      const { token } = soffit
-
       if (typeof channelId === 'number')
         channelId = channelId.toString()
       const getParams = new URLSearchParams({ action, channelId })
       const response = await fetch(`${favoriteApiUrl}?${getParams}`, {
         method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-          Authorization: token,
-        },
+        credentials: 'include',
       })
 
       if (!response.ok)
@@ -82,12 +75,10 @@ export default class FavoritesService {
   }
 
   static async add(
-    soffit: Soffit,
     favoriteApiUrl: string,
     channelId: string | number,
   ): Promise<boolean> {
     return await FavoritesService.toggle(
-      soffit,
       favoriteApiUrl,
       'addFavorite',
       channelId,
@@ -95,12 +86,10 @@ export default class FavoritesService {
   }
 
   static async remove(
-    soffit: Soffit,
     favoriteApiUrl: string,
     channelId: string | number,
   ): Promise<boolean> {
     return await FavoritesService.toggle(
-      soffit,
       favoriteApiUrl,
       'removeFavorite',
       channelId,

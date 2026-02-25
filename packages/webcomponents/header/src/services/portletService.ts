@@ -21,7 +21,6 @@ import type {
   PortletFromRegistry,
   PortletRegistryApiResponse,
   ServiceInfoLayout,
-  Soffit,
 } from '../types/index.ts'
 import { $services } from '../stores/index.ts'
 import { getServiceLink } from '../utils/linkUtils.ts'
@@ -88,7 +87,6 @@ export default class PortletService {
   }
 
   static async getAll(
-    soffit: Soffit,
     portletApiUrl: string,
   ): Promise<
     {
@@ -98,13 +96,9 @@ export default class PortletService {
     | undefined
   > {
     try {
-      const { token } = soffit
       const response = await fetch(portletApiUrl, {
         method: 'GET',
-        credentials: 'same-origin',
-        headers: {
-          Authorization: token,
-        },
+        credentials: 'include',
       })
 
       if (!response.ok)

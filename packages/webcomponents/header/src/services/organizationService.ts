@@ -18,7 +18,6 @@ import type {
   Organization,
   OrganizationApiResponse,
   Organizations,
-  Soffit,
 } from '../types/index.ts'
 import { attributeSeparator } from '../config.ts'
 import { $debug } from '../stores/index.ts'
@@ -27,7 +26,6 @@ import { alphaSort } from '../utils/stringUtils.ts'
 
 export default class OrganizationService {
   static async get(
-    soffit: Soffit,
     orgApiUrl: string,
     orgIds: string[],
     currentOrgId: string,
@@ -42,15 +40,11 @@ export default class OrganizationService {
   ): Promise<Organizations | undefined> {
     try {
       const debug = $debug.get()
-      const { token } = soffit
 
       const getParams = new URLSearchParams({ ids: orgIds.toString() })
       const response = await fetch(`${orgApiUrl}?${getParams}`, {
         method: 'GET',
-        credentials: 'same-origin',
-        headers: {
-          Authorization: token,
-        },
+        credentials: 'include',
       })
 
       if (!response.ok)

@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-import type { LayoutApiResponse, Soffit } from '../types/index.ts'
+import type { LayoutApiResponse } from '../types/index.ts'
 
 export default class LayoutService {
   static async get(
-    soffit: Soffit,
     layoutApiUrl: string,
   ): Promise<LayoutApiResponse | undefined> {
     try {
-      const { token } = soffit
-
       const response = await fetch(layoutApiUrl, {
         method: 'GET',
-        credentials: 'same-origin',
-        headers: {
-          Authorization: token,
-        },
+        credentials: 'include',
       })
 
       if (!response.ok)

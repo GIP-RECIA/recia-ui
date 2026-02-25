@@ -21,6 +21,7 @@ export default class PreferencesService {
     try {
       const response = await fetch(preferencesApiUrl, {
         method: 'GET',
+        credentials: 'include',
       })
 
       if (!response.ok)
@@ -41,6 +42,7 @@ export default class PreferencesService {
     try {
       const response = await fetch(preferencesApiUrl, {
         method: 'PUT',
+        credentials: 'include',
         body: JSON.stringify(body),
       })
 

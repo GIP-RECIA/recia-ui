@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Category, Service, Soffit } from '../types/index.ts'
+import type { Category, Service } from '../types/index.ts'
 import { getServiceLink } from '../utils/linkUtils.ts'
 import { truncate } from '../utils/stringUtils.ts'
 import InfoService from './infoService.ts'
@@ -22,7 +22,6 @@ import PortletService from './portletService.ts'
 
 export default class ServicesService {
   static async get(
-    soffit: Soffit,
     portletApiUrl: string,
     servicesInfoApiUrl: string,
   ): Promise<
@@ -33,7 +32,7 @@ export default class ServicesService {
     | undefined
   > {
     const [portletsData, portletsInfo] = await Promise.all([
-      PortletService.getAll(soffit, portletApiUrl),
+      PortletService.getAll(portletApiUrl),
       InfoService.getAll(servicesInfoApiUrl),
     ])
 

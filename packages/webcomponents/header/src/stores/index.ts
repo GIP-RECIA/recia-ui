@@ -601,7 +601,6 @@ function updateUserInfo(): void {
 }
 
 async function updateOrganization(): Promise<void> {
-  const soffit = $soffit.get()
   const {
     organizationApiUrl,
     orgTypeAttributeName,
@@ -614,11 +613,10 @@ async function updateOrganization(): Promise<void> {
     orgWebsiteAttributeName,
   } = $settings.get()
   const { orgIds, currentOrgId } = $userInfo.get() ?? {}
-  if (!soffit || !organizationApiUrl || !orgIds || !currentOrgId)
+  if (!organizationApiUrl || !orgIds || !currentOrgId)
     return
 
   const response = await OrganizationService.get(
-    soffit,
     getDomainLink(organizationApiUrl),
     orgIds,
     currentOrgId,
@@ -640,8 +638,7 @@ async function updateOrganization(): Promise<void> {
 
 async function updateServices(forceUpdate: boolean = false): Promise<void> {
   const { layoutApiUrl, portletApiUrl, servicesInfoApiUrl } = $settings.get()
-  const soffit = $soffit.get()
-  if (!soffit || !layoutApiUrl || !portletApiUrl || !servicesInfoApiUrl)
+  if (!layoutApiUrl || !portletApiUrl || !servicesInfoApiUrl)
     return
 
   if ($baseServicesLoad.get() === LoadingState.LOADING)
@@ -652,8 +649,8 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
 
   $baseServicesLoad.set(LoadingState.LOADING)
   const [servicesData, layout] = await Promise.all([
-    ServicesService.get(soffit, getDomainLink(portletApiUrl), getDomainLink(servicesInfoApiUrl)),
-    LayoutService.get(soffit, getDomainLink(layoutApiUrl)),
+    ServicesService.get(getDomainLink(portletApiUrl), getDomainLink(servicesInfoApiUrl)),
+    LayoutService.get(getDomainLink(layoutApiUrl)),
   ])
   const favoriteIds = layout
     ? [...new Set(FavoritesService.getFromLayout(layout)?.map(Number))]
@@ -721,7 +718,6 @@ async function updateMediadentreFavorites(forceUpdate: boolean = false): Promise
 async function updateFavoritesFromFavorites(
   newValue: UpdatedFavoriteSection[],
 ): Promise<void> {
-  const soffit = $soffit.get()
   const { favoriteApiUrl, mediacentrePortalFavoriteApiUrlPut } = $settings.get()
 
   newValue.forEach((section) => {
@@ -731,11 +727,10 @@ async function updateFavoritesFromFavorites(
     if (
       id === FavoriteSectionId.Services
       && (deletedIds.length > 0 || orderHasChanged)
-      && soffit
       && favoriteApiUrl
     ) {
       deletedIds.forEach((id) => {
-        FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
+        FavoritesService.remove(getDomainLink(favoriteApiUrl), id)
       })
       const newFavoriteIds = items.map(item => Number(item.id))
       $favoritesIds.set(newFavoriteIds)
@@ -753,32 +748,30 @@ async function updateFavoritesFromFavorites(
 }
 
 async function addFavorite(id: number): Promise<void> {
-  const soffit = $soffit.get()
   const { favoriteApiUrl } = $settings.get()
   const favoritesIds = $favoritesIds.get()
-  if (!soffit || !favoriteApiUrl)
+  if (!favoriteApiUrl)
     return
 
   if (favoritesIds && favoritesIds.findIndex(el => el === id) !== -1)
     return
 
-  const response = await FavoritesService.add(soffit, getDomainLink(favoriteApiUrl), id)
+  const response = await FavoritesService.add(getDomainLink(favoriteApiUrl), id)
   if (response)
     $favoritesIds.set([...(favoritesIds ?? []), id])
 }
 
 async function removeFavorite(id: number): Promise<void> {
-  const soffit = $soffit.get()
   const { favoriteApiUrl } = $settings.get()
   const favoritesIds = $favoritesIds.get()
-  if (!soffit || !favoriteApiUrl || !favoritesIds)
+  if (!favoriteApiUrl || !favoritesIds)
     return
 
   const index = favoritesIds.findIndex(el => el === id)
   if (index === -1)
     return
 
-  const response = await FavoritesService.remove(soffit, getDomainLink(favoriteApiUrl), id)
+  const response = await FavoritesService.remove(getDomainLink(favoriteApiUrl), id)
   if (response) {
     const newFavoritesIds = [...favoritesIds]
     newFavoritesIds.splice(index, 1)
