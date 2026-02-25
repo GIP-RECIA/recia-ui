@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.13.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.12.1...ui-webcomponents/v1.13.0) (2026-02-25)
+
+
+### Features
+
+* **wc:** refresh mediacentre widget on widget on favorite mediacentre change ([286a748](https://github.com/GIP-RECIA/recia-ui/commit/286a7486d0cb8ae4ffcc5aa8754e0bb81c5e8878))
+
 ## [1.12.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.12.0...ui-webcomponents/v1.12.1) (2026-02-25)
 
 
