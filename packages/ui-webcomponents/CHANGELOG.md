@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.12.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.12.0...ui-webcomponents/v1.12.1) (2026-02-25)
+
+
+### Features
+
+* **header:** use credentials include instead of soffit ([2af4b6a](https://github.com/GIP-RECIA/recia-ui/commit/2af4b6adbc52b9a284c5aa1c41a72eb6350f39be))
+
 ## [1.12.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.11.0...ui-webcomponents/v1.12.0) (2026-02-24)
 
 
