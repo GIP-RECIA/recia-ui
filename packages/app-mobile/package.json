@@ -19,7 +19,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^7.6.1",
     "eslint": "^10.0.2",
-    "eslint-plugin-format": "^2.0.0",
+    "eslint-plugin-format": "^2.0.1",
     "ress": "^5.0.2",
     "sass": "^1.97.3",
     "typescript": "^5.9.3",
