@@ -50,6 +50,7 @@
     "@lit/localize-tools": "^0.8.1",
     "@nanostores/lit": "^0.2.3",
     "@types/lodash-es": "^4",
+    "@types/node": "^24",
     "@types/regenerator-runtime": "^0",
     "@uportal/open-id-connect": "^1.40.2",
     "bottom-sheet": "workspace:^",
