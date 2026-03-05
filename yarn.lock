@@ -1528,13 +1528,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trysound/sax@npm:0.2.0":
-  version: 0.2.0
-  resolution: "@trysound/sax@npm:0.2.0"
-  checksum: 10/7379713eca480ac0d9b6c7b063e06b00a7eac57092354556c81027066eb65b61ea141a69d0cc2e15d32e05b2834d4c9c2184793a5e36bbf5daf05ee5676af18c
-  languageName: node
-  linkType: hard
-
 "@types/debug@npm:^4.0.0":
   version: 4.1.12
   resolution: "@types/debug@npm:4.1.12"
@@ -4047,14 +4040,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-xml-builder@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "fast-xml-builder@npm:1.0.0"
+  checksum: 10/06c04d80545e5c9f4d1d6cca00567b5cc09953a92c6328fa48cfb4d7f42630313b8c2bb62e9cb81accee7bb5e1c5312fcae06c3d20dbe52d969a5938233316da
+  languageName: node
+  linkType: hard
+
 "fast-xml-parser@npm:^5.2.5":
-  version: 5.3.6
-  resolution: "fast-xml-parser@npm:5.3.6"
+  version: 5.4.2
+  resolution: "fast-xml-parser@npm:5.4.2"
   dependencies:
+    fast-xml-builder: "npm:^1.0.0"
     strnum: "npm:^2.1.2"
   bin:
     fxparser: src/cli/cli.js
-  checksum: 10/03527ab0bdf49d960fdc8f6088cd0715c052e06b68b39459da87b1a1fbb3439a855b2d83cbf3c400e983b8e668b396296b072a4dd5c63403cf1e618c9326b6df
+  checksum: 10/12585d5dd77113411d01cf41818cfecbbaf8f3d9e8448b1c35f50a7eb51205408bc8db27af5733173a77f96f72d7e121d9e675674f71334569157c77845aba39
   languageName: node
   linkType: hard
 
@@ -4742,9 +4743,9 @@ __metadata:
   linkType: hard
 
 "immutable@npm:^5.0.2":
-  version: 5.0.3
-  resolution: "immutable@npm:5.0.3"
-  checksum: 10/9aca1c783951bb204d7036fbcefac6dd42e7c8ad77ff54b38c5fc0924e6e16ce2d123c95db47c1170ba63dd3f6fc7aa74a29be7adef984031936c4cd1e9e8554
+  version: 5.1.5
+  resolution: "immutable@npm:5.1.5"
+  checksum: 10/7aec2740239772ec8e92e793c991bd809203a97694f4ff3a18e50e28f9a6b02393ad033d87b458037bdf8c0ea37d4446d640e825f6171df3405cf6cf300ce028
   languageName: node
   linkType: hard
 
@@ -6155,11 +6156,11 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^3.0.4":
-  version: 3.1.2
-  resolution: "minimatch@npm:3.1.2"
+  version: 3.1.5
+  resolution: "minimatch@npm:3.1.5"
   dependencies:
     brace-expansion: "npm:^1.1.7"
-  checksum: 10/e0b25b04cd4ec6732830344e5739b13f8690f8a012d73445a4a19fbc623f5dd481ef7a5827fde25954cd6026fede7574cc54dc4643c99d6c6b653d6203f94634
+  checksum: 10/b11a7ee5773cd34c1a0c8436cdbe910901018fb4b6cb47aa508a18d567f6efd2148507959e35fba798389b161b8604a2d704ccef751ea36bd4582f9852b7d63f
   languageName: node
   linkType: hard
 
@@ -7518,6 +7519,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sax@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "sax@npm:1.5.0"
+  checksum: 10/9012ff37dda7a7ac5da45db2143b04036103e8bef8d586c3023afd5df6caf0ebd7f38017eee344ad2e2247eded7d38e9c42cf291d8dd91781352900ac0fd2d9f
+  languageName: node
+  linkType: hard
+
 "scslre@npm:^0.3.0":
   version: 0.3.0
   resolution: "scslre@npm:0.3.0"
@@ -8000,19 +8008,19 @@ __metadata:
   linkType: hard
 
 "svgo@npm:^3.3.2":
-  version: 3.3.2
-  resolution: "svgo@npm:3.3.2"
+  version: 3.3.3
+  resolution: "svgo@npm:3.3.3"
   dependencies:
-    "@trysound/sax": "npm:0.2.0"
     commander: "npm:^7.2.0"
     css-select: "npm:^5.1.0"
     css-tree: "npm:^2.3.1"
     css-what: "npm:^6.1.0"
     csso: "npm:^5.0.5"
     picocolors: "npm:^1.0.0"
+    sax: "npm:^1.5.0"
   bin:
     svgo: ./bin/svgo
-  checksum: 10/82fdea9b938884d808506104228e4d3af0050d643d5b46ff7abc903ff47a91bbf6561373394868aaf07a28f006c4057b8fbf14bbd666298abdd7cc590d4f7700
+  checksum: 10/f3c1b4d05d1704483e53515d5995af5f06a2718df85e3a8320f57bb256b8dc926b84c87a1a9b98e9d3ca1224314cc0676a803bdd03163508292f2d45c7077096
   languageName: node
   linkType: hard
 
@@ -8033,15 +8041,15 @@ __metadata:
   linkType: hard
 
 "tar@npm:^7.4.3":
-  version: 7.5.9
-  resolution: "tar@npm:7.5.9"
+  version: 7.5.10
+  resolution: "tar@npm:7.5.10"
   dependencies:
     "@isaacs/fs-minipass": "npm:^4.0.0"
     chownr: "npm:^3.0.0"
     minipass: "npm:^7.1.2"
     minizlib: "npm:^3.1.0"
     yallist: "npm:^5.0.0"
-  checksum: 10/1213cdde9c22d6acf8809ba5d2a025212ce3517bc99c4a4c6981b7dc0489bf3b164db9c826c9517680889194c9ba57448c8ff0da35eca9a60bb7689bf0b3897d
+  checksum: 10/98ba6421a250b233c36a54f7441647bdfee1ed0b916cd57850259a3602154d996f5b8422f67ef5c8ce77f582ed938054775c2873fc7c901e0c7530ed50febc40
   languageName: node
   linkType: hard
 
