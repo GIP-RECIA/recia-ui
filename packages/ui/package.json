@@ -1,6 +1,5 @@
 {
   "name": "@gip-recia/ui",
-  "type": "module",
   "version": "1.0.0",
   "contributors": [
     {
@@ -25,15 +24,15 @@
     "./mixins/*": "./src/assets/scss/mixins/*"
   },
   "files": [
-    "./src/assets/scss/",
-    "./src/fonts/"
+    "src/assets/scss",
+    "src/fonts"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "build": "sass --style=compressed --error-css --update src/assets/scss/index.scss dist/recia-style.css",
-    "test:unit": "echo No tests available"
+    "release": "yarn run -T commit-and-tag-version -t 'ui/v' --path . --release-as $1 || echo 'Please specify a version type (yarn run release -- [patch, minor, major])'"
   },
   "peerDependencies": {
     "@antfu/eslint-config": "^7.6.1",
