@@ -1,0 +1,155 @@
+@use 'sass:map';
+@use '../../recia-style' as *;
+
+.user-menu {
+  position: relative;
+  width: fit-content;
+
+  > button {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    border-radius: 50px;
+    // max-width: 235px; TODO
+
+    > .picture {
+      flex: 0 0 auto;
+      height: 46px;
+      width: 46px;
+      border-radius: 50%;
+      // box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
+    }
+
+    > .info {
+      flex: 0 1 auto;
+      display: none;
+      align-items: baseline;
+      flex-direction: column;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      > .displayname {
+        font-size: var(--#{$prefix}font-size-md);
+        font-weight: bold;
+      }
+
+      > .function {
+        font-size: var(--#{$prefix}font-size-xs);
+      }
+    }
+
+    > svg {
+      flex: 0 0 auto;
+      display: none;
+      opacity: .3;
+      margin-right: 12px;
+      color: var(--#{$prefix}basic-black);
+      transition: rotate .2s ease-in-out;
+    }
+
+    &:hover,
+    &:focus-visible {
+      > svg {
+        opacity: 1;
+      }
+    }
+
+    &:focus-visible {
+      outline: 4px solid var(--#{$prefix}primary);
+    }
+  }
+
+  > ul {
+    @include unstyled-list;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 248px;
+    max-width: calc(100vw - 32px);
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: 8px;
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    overflow: hidden;
+    z-index: 1000;
+
+    > li {
+      > a,
+      > button {
+        @include unstyled-link;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 16px;
+        padding: 14px 12px;
+        text-wrap: nowrap;
+        font-size: var(--#{$prefix}font-size-sm);
+        width: 100%;
+
+        > svg {
+          min-width: var(--#{$prefix}body-font-size);
+          opacity: .3;
+        }
+
+        &#notification {
+          position: relative;
+
+          > .badge {
+            position: absolute;
+            right: 12px;
+          }
+        }
+
+        &#logout {
+          color: var(--#{$prefix}system-red);
+        }
+
+        &:hover,
+        &:focus-visible {
+          font-weight: 500;
+          background-color:var(--#{$prefix}hover);
+          outline: none;
+
+          > svg {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($custom-breakpoints, user-info)) {
+    > ul > li:has(> button#search) {
+      display: none;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    > .notification-dot {
+      display: none;
+    }
+
+    > button {
+      > .info {
+        display: flex;
+      }
+
+      > svg {
+        display: unset;
+      }
+    }
+
+    > ul > li {
+      &:has(
+        > button#notification,
+        > button#info-etab
+      ) {
+        display: none;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid HEXToRGBA($black, .1);
+      }
+    }
+  }
+}

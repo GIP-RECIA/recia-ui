@@ -1,0 +1,392 @@
+// Color system
+
+$white: #FFF;
+$black: #000;
+
+$favorite: #FFAA46;
+$stroke: #E9E9E9;               // A utiliser pour tous les contours et délimitations
+$tutorial: #171717;             // Tutorial background card
+$basic-grey: #F4F4F4;           // Couleur de fond du footer haut
+$basic-black: #1E1E1E;          // Couleur du texte et des icônes, background color du bouton primaire par défaut
+$basic-black-lighter: #737373;  // A utiliser lorsque le texte est de moindre importance
+$lighter-black: #2C2C2C;        // Couleur de fond du drawer et du footer bas
+
+$system-blue: #005099;
+$system-red: #AD1919;
+
+$colors: (
+  favorite: $favorite,
+  stroke: $stroke,
+  tutorial: $tutorial,
+  basic-grey: $basic-grey,
+  basic-black: $basic-black,
+  basic-black-lighter: $basic-black-lighter,
+  lighter-black: $lighter-black,
+  system-blue: $system-blue,
+  system-red: $system-red,
+);
+
+$primary: #0062BC;
+$primary-dark: #57AEFF;
+
+$hover: #F8F8F8;                // Couleur des élément interaftifs en hover (ex: dropdown item)
+$hover-dark: #262626;
+
+$theme-colors: (
+  primary: $primary,
+  hover: $hover
+);
+
+$theme-colors-dark: (
+  primary: $primary-dark,
+  hover: $hover-dark
+);
+
+$domain-theme: (                // 18, 36 and 45 are same
+  agri: (
+    id: 'agri',
+    theme-colors: (
+      primary: #37872A,
+    ),
+    theme-colors-dark: (
+      primary: #87B77F,
+    ),
+    buttons: (
+      primary-pressed: #275F1D,
+      secondary-hover: #EBF3EA,
+      secondary-pressed: #D7E7D4
+    ),
+    buttons-dark: (
+      primary-pressed: #AFCFAA,
+      secondary-hover: #1D1F1C,
+      secondary-pressed: #282F27
+    ),
+  ),
+  18: (
+    id: 'chercan',
+    theme-colors: (
+      primary: #004899,
+    ),
+    theme-colors-dark: (
+      primary: #6691C2,
+    ),
+    buttons: (
+      primary-pressed: #00326B,
+      secondary-hover: #E6EDF5,
+      secondary-pressed: #CCDAEB
+    ),
+    buttons-dark: (
+      primary-pressed: #99B6D6,
+      secondary-hover: #1B1D20,
+      secondary-pressed: #232A31
+    ),
+  ),
+  28: (
+    id: 'colleges-eureliens',
+    theme-colors: (
+      primary: #AE9E22,
+    ),
+    theme-colors-dark: (
+      primary: #AE9E22,
+    ),
+    buttons: (
+      primary-pressed: #8C7F1A,
+      secondary-hover: #F5F3E6,
+      secondary-pressed: #EBE8CC
+    ),
+    buttons-dark: (
+      primary-pressed: #8C7F1A,
+      secondary-hover: #1F1F1C,
+      secondary-pressed: #2F2E27
+    ),
+  ),
+  36: (
+    id: 'colleges-indre',
+    theme-colors: (
+      primary: #004899,
+    ),
+    theme-colors-dark: (
+      primary: #6691C2,
+    ),
+    buttons: (
+      primary-pressed: #00326B,
+      secondary-hover: #E6EDF5,
+      secondary-pressed: #CCDAEB
+    ),
+    buttons-dark: (
+      primary-pressed: #99B6D6,
+      secondary-hover: #1B1D20,
+      secondary-pressed: #232A31
+    ),
+  ),
+  37: (
+    id: 'touraine-eschool',
+    theme-colors: (
+      primary: #C60440,
+    ),
+    theme-colors-dark: (
+      primary: #DD688C,
+    ),
+    buttons: (
+      primary-pressed: #8B032D,
+      secondary-hover: #F9E6EC,
+      secondary-pressed: #F4CDD9
+    ),
+    buttons-dark: (
+      primary-pressed: #E89BB3,
+      secondary-hover: #211B1D,
+      secondary-pressed: #352429
+    ),
+  ),
+  41: (
+    id: 'colleges-41',
+    theme-colors: (
+      primary: #007EB4,
+    ),
+    theme-colors-dark: (
+      primary: #66B2D2,
+    ),
+    buttons: (
+      primary-pressed: #00587E,
+      secondary-hover: #E6F2F8,
+      secondary-pressed: #CCE5F0
+    ),
+    buttons-dark: (
+      primary-pressed: #90CDE1,
+      secondary-hover: #1B1F20,
+      secondary-pressed: #232F33
+    ),
+  ),
+  45: (
+    id: 'colleges-45',
+    theme-colors: (
+      primary: #004899,
+    ),
+    theme-colors-dark: (
+      primary: #6691C2,
+    ),
+    buttons: (
+      primary-pressed: #00326B,
+      secondary-hover: #E6EDF5,
+      secondary-pressed: #CCDAEB
+    ),
+    buttons-dark: (
+      primary-pressed: #99B6D6,
+      secondary-hover: #1B1D20,
+      secondary-pressed: #232A31
+    ),
+  ),
+);
+
+$categories: (
+  category-default: (
+    color: #858585,
+    hover: (
+      color: #5B5B5B,
+      shadow: (
+        color: #161616,
+        opacity: .15,
+      ),
+    ),
+    text: $black
+  ),
+  category-pink: (
+    color: #EC407A,
+    hover: (
+      color: #F60086,
+      shadow: (
+        color: #EC407A,
+        opacity: .2,
+      ),
+    ),
+    text: $black
+  ),
+  category-purple: (
+    color: #AB47BC,
+    hover: (
+      color: #C400F3,
+      shadow: (
+        color: #C400F3,
+        opacity: .1,
+      ),
+    ),
+    text: $white
+  ),
+  category-indigo: (
+    color: #5747BC,
+    hover: (
+      color: #665BE7,
+      shadow: (
+        color: #665BE7,
+        opacity: .15,
+      ),
+    ),
+    text: $white
+  ),
+  category-yellow: (
+    color: #FFAC2F,
+    hover: (
+      color: #F5C72E,
+      shadow: (
+        color: #9D7A06,
+        opacity: .15,
+      ),
+    ),
+    text: $black
+  ),
+  category-cyan: (
+    color: #26C6DA,
+    hover: (
+      color: #70EAF5,
+      shadow: (
+        color: #06829D,
+        opacity: .15,
+      ),
+    ),
+    text: $black
+  ),
+  category-lightGreen: (
+    color: #66BB6A,
+    hover: (
+      color: #4EF186,
+      shadow: (
+        color: #069D28,
+        opacity: .15,
+      ),
+    ),
+    text: $black
+  ),
+);
+
+// Shadow
+
+// x y blur spread
+$shadows: (
+  neutral: 0 4px 15.9px 0,
+  strong: 0 4px 24.4px 0,
+  hover: 0 4px 26px 0,
+  low-elevation: 0 2px 6px 0,
+  low-elevation-avatar-notif: 0 1px 24px 0,
+);
+
+// Prefix for :root CSS variables
+
+$prefix: recia-;
+
+// Spacing
+
+// Body
+
+$body: $basic-black;
+$body-dark: $white;
+$body-inverted: $body-dark;
+$body-inverted-dark: $body;
+
+$body-bg: $white;
+$body-bg-dark: $basic-black;
+
+// Links
+
+// Paragraphs
+
+// Grid breakpoints
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+$custom-breakpoints: (
+  user-info: 502px,
+);
+
+// Grid containers
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+// Typography
+
+$font-family-sans-serif: 'sans-serif';
+$sora: 'Sora', $font-family-sans-serif;
+$dm-sans: 'DM Sans', $font-family-sans-serif;
+
+$headings-font-family: $sora;
+
+$font-size-base: 1rem; // 16px
+
+$headings-font-sizes: (
+  1: 1.25,  // 20px
+  2: 1.125, // 18px
+  3: 1,     // 16px
+  4: 0.875, // 14px
+  // 5: ,
+  // 6: ,
+);
+
+$headings-font-sizes-lg: (
+  1: 1.5,   // 24px
+  2: 1.25,  // 20px
+  3: 1,     // 16px
+  4: 0.875, // 14px
+  // 5: ,
+  // 6: ,
+);
+
+$font-size-breakpoints: (
+  xxs: 0.625, // 10px
+  xs: 0.75,   // 12px
+  sm: 0.875,  // 14px
+  md: 1,      // 16px
+  lg: 1.125,  // 18px
+  xl: 1.25,   // 20px
+  xxl: 1.5,   // 24px
+);
+
+// Buttons
+
+$btn-primary: $white;
+$btn-primary-dark: $basic-black;
+$btn-primary-pressed: #004584;
+$btn-primary-pressed-dark: #8AC7FF;
+
+$btn-secondary: $basic-black;
+$btn-secondary-dark: $white;
+$btn-secondary-hover: #E6EFF8;
+$btn-secondary-hover-dark: #1A1F23;
+$btn-secondary-pressed: #CCE0F2;
+$btn-secondary-pressed-dark: #212E3A;
+
+$btn-primary-bg: $basic-black;
+$btn-primary-bg-dark: $white;
+$btn-secondary-bg: $basic-grey;
+$btn-secondary-bg-dark: $basic-black;
+
+$buttons: (
+  primary: $btn-primary,
+  primary-pressed: $btn-primary-pressed,
+  secondary: $btn-secondary,
+  secondary-hover: $btn-secondary-hover,
+  secondary-pressed: $btn-secondary-pressed,
+  primary-bg: $btn-primary-bg,
+  secondary-bg: $btn-secondary-bg,
+);
+
+$buttons-dark: (
+  primary: $btn-primary-dark,
+  primary-pressed: $btn-primary-pressed-dark,
+  secondary: $btn-secondary-dark,
+  secondary-hover: $btn-secondary-hover-dark,
+  secondary-pressed: $btn-secondary-pressed-dark,
+  primary-bg: $btn-primary-bg-dark,
+  secondary-bg: $btn-secondary-bg-dark,
+);

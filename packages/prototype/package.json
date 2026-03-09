@@ -1,0 +1,41 @@
+{
+  "name": "@gip-recia/prototype",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test:unit": "echo No tests available"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^7.6.1",
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-regular-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@types/node": "^24",
+    "eslint": "^10.0.2",
+    "eslint-plugin-format": "^2.0.1",
+    "ress": "^5.0.2",
+    "sass": "^1.97.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-svg-spritemap": "^1.0.13"
+  }
+}

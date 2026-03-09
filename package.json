@@ -4,6 +4,7 @@
   "workspaces": [
     "etc/webcomponent/project-skeleton",
     "packages/app-mobile",
+    "packages/prototype",
     "packages/ui",
     "packages/ui-webcomponents",
     "packages/webcomponents/*",

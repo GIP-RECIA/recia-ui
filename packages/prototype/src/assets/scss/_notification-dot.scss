@@ -1,0 +1,12 @@
+@use 'variables' as *;
+
+.notification-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background-color: var(--#{$prefix}primary);
+}
+

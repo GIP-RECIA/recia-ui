@@ -1,0 +1,76 @@
+@use '../variables' as *;
+@use '../functions/colors' as *;
+@use 'button' as *;
+
+@mixin input-tag {
+  position: absolute;
+  opacity: 0;
+
+  ~ label {
+    @include button-and-tag;
+    padding: 8px 16px;
+    font-family: $dm-sans;
+    font-weight: 500;
+    font-size: var(--#{$prefix}font-size-sm);
+    height: 100%;
+  }
+
+  &:hover ~ label,
+  &:focus-visible ~ label {
+    background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+    color: var(--#{$prefix}primary);
+  }
+
+  &:focus-visible ~ label {
+    outline: 3px solid var(--#{$prefix}primary);
+  }
+
+  &:checked {
+    ~ label {
+      background-color: var(--#{$prefix}btn-primary-bg);
+      color: var(--#{$prefix}btn-primary);
+      box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
+    }
+
+    &:hover ~ label,
+    &:focus-visible ~ label {
+      background-color: var(--#{$prefix}primary);
+    }
+
+    &:focus-visible ~ label {
+      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
+    }
+  }
+
+  &:disabled ~ label,
+  &.disabled ~ label {
+    opacity: 0.33;
+    pointer-events: none;
+  }
+
+  &.circle ~ label {
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+  }
+
+  &.small {
+    ~ label {
+      padding: 4px 12px;
+    }
+
+    &.circle ~ label {
+      width: 26px;
+      height: 26px;
+      padding: 4px;
+    }
+  }
+
+  @media (hover: none) or (pointer: coarse) {
+    &:not(:checked) ~ label {
+      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      color: var(--#{$prefix}primary);
+    }
+  }
+}

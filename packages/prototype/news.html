@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recia UI</title>
+</head>
+
+<body class="dev-playground">
+  <header>
+    <div class="header">
+      <div class="mask" style="display: none;"></div>
+      <button class="drawer-toggle" aria-controls="navigation-drawer" aria-label="Tiroir de navigation">
+        <svg aria-hidden="true">
+          <use xlink:href="./spritemap.svg#NOC-simple"></use>
+        </svg>
+        <span>Menu</span>
+      </button>
+      <div id="navigation-drawer" class="navigation-drawer visible">
+        <div>
+          <span>Lycée international de Palaiseau</span>
+        </div>
+        <ul>
+          <li>
+            <a href="logged.html" title="Accueil" aria-label="Retourer à l'accueil" class="back-home">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-house"></i>
+              </div>
+              <span class="text">Accueil</span>
+            </a>
+          </li>
+          <li class="dropdown-services">
+            <button title="Tous les services">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-grip"></i>
+              </div>
+              <span class="text">Tous les services</span>
+            </button>
+          </li>
+          <li class="dropdown-favorites">
+            <button title="Favoris">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <span class="text">Favoris</span>
+            </button>
+            <div style="display: none;">
+              <div class="active-indicator"></div>
+              <div class="favorite-layout">
+                <header>
+                  <h2>Vos favoris</h2>
+                  <div class="grow-1"></div>
+                  <button class="btn-secondary small">Gérer<i class="fa-solid fa-gear"></i></button>
+                </header>
+                <ul>
+                  <li>
+                    <header>
+                      <span>Services</span>
+                    </header>
+                    <ul>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#carte-mentale"></use>
+                          </svg>
+                          <a href="./service.html?service=/wisemapping" class="name">
+                            <span>Carte mentale</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="tag-category category-yellow">Apprentissage</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#capytale"></use>
+                          </svg>
+                          <a href="#" class="name">
+                            <span>Capytale</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="tag-category category-yellow">Apprentissage</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#nextcloud"></use>
+                          </svg>
+                          <a href="#" class="name">
+                            <span>Espaces Nextcloud</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="tag-category category-indigo">Espace collaboratif</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#POD"></use>
+                          </svg>
+                          <a href="./service.html?service=/POD" class="name">
+                            <span>Plateforme vidéo</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                          <p class="tag-category category-purple">Documentation</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <header>
+                      <span>Mediacentre</span>
+                    </header>
+                    <ul>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#NOC-simple"></use>
+                          </svg>
+                          <a href="#" class="name">
+                            <span>Pix</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#NOC-simple"></use>
+                          </svg>
+                          <a href="#" class="name">
+                            <span>Peraltrees</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="favorite">
+                          <div class="actions disabled">
+                            <div class="action-delete">
+                              <button aria-label="Supprimer le favoris">
+                                <i class="fa-solid fa-times"></i>
+                              </button>
+                            </div>
+                            <div class="action-back">
+                              <button aria-label="Réordonner vers la gauche">
+                                <i class="fa-solid fa-arrow-left"></i>
+                              </button>
+                            </div>
+                            <div class="grow-1"></div>
+                            <div class="action-next">
+                              <button aria-label="Réordonner vers la droite">
+                                <i class="fa-solid fa-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="./spritemap.svg#NOC-simple"></use>
+                          </svg>
+                          <a href="#" class="name">
+                            <span>EduMalin</span>
+                            <span aria-hidden="true"></span>
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="#" title="Mediacentre">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+              <span class="text">Mediacentre</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" title="Tutoriels">
+              <div class="active-indicator"></div>
+              <div class="icon">
+                <i class="fa-solid fa-message"></i>
+              </div>
+              <span class="text">Tutoriels</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="topbar">
+        <div class="principal-container">
+          <div class="start">
+            <span>Lycée international de Palaiseau</span>
+            <div class="dropdown-info">
+              <button class="btn-secondary-toggle circle" aria-expanded="false" aria-controls="dropdown-info-menu" aria-label="Menu fiche établissement">
+                <i class="fa-solid fa-circle-info"></i>
+              </button>
+              <div class="tooltip bottom right">
+                <span>Fiche établissement</span>
+              </div>
+              <div class="mask" style="display: none;"></div>
+              <div id="dropdown-info-menu" class="menu top right no-padding" style="display: none;">
+                <div class="info-etab">
+                  <div class="image-container">
+                    <img src="https://placehold.co/600x800" alt="">
+                  </div>
+                  <div class="content-container">
+                    <header>
+                      <svg aria-hidden="true">
+                        <use xlink:href="/svg/NOC-simple.svg#simple"></use>
+                      </svg>
+                      <div class="heading">
+                        <span class="etab">Lycée international de Palaiseau</span>
+                        <span class="acad">Académie Orléans-Tours</span>
+                      </div>
+                    </header>
+                    <div class="content">
+                      <div class="image">
+                        <img src="https://placehold.co/600x800" alt="">
+                      </div>
+                      <address>
+                        <ul>
+                          <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            17-19 Cr Pierre Vasseur, 91120 Palaiseau
+                          </li>
+                          <li>
+                            <i class="fa-solid fa-at"></i>
+                            <a href="mailto:ce.0912433a@ac-versailles.fr">ce.0912433a@ac-versailles.fr</a>
+                          </li>
+                          <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+33 (0)1.85.37.13.15">+33 (0)1.85.37.13.15</a>
+                          </li>
+                        </ul>
+                      </address>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="middle">
+            <div>
+              <div class="search">
+                <div class="search-field">
+                  <div class="start">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </div>
+                  <div class="middle">
+                    <input type="text" placeholder="Rechercher un service" title="Rechercher un service">
+                  </div>
+                  <div class="end">
+                    <button class="btn-tertiary circle" aria-label="Effacer la recherche" style="display: none;">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
+                <ul class="search-results" style="display: none;">
+                  <li>
+                    <div class="section-name">
+                      <span>Services</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <header>
+                            <span class="result-tag category-indigo">Espace collaboratif</span><span class="result-title">Espaces Nextcloud</span>
+                          </header>
+                          <span>Espaces de <strong>stockage</strong> cloud de l'ENT</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="section-name">
+                      <span>Médiacentre</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <header>
+                            <span class="result-title">Apprendre tous les secrets de Nextcloud</span>
+                          </header>
+                          <span>Les espaces de <strong>stockage</strong> Nextcloud offrent bien plus de fonctionnalités que vous ne le pensiez : ...</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="section-name">
+                      <span>Actualités</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <header>
+                            <span class="result-tag">Collectivités</span>
+                            <span class="result-title">Espaces de <strong>stockage</strong> Nextcloud inaccessibles du 13/04 au 15/04</span>
+                          </header>
+                          <span>Ce week-end, les espaces de <strong>stockage</strong> cloud de l'ENT subiront une interruption de maintenance l...</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <header>
+                            <span class="result-tag">Etablissement</span>
+                            <span class="result-title">Attention aux piratage des espaces de <strong>stockage</strong></span>
+                          </header>
+                          <span>Depuis le début de l'année scolaire, plus d'une dizaine de comptes étudiants ont été piratés, résul...</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="end">
+            <button class="btn-secondary circle search-button" aria-label="Rechercher dans l'ENT">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="user-menu">
+              <div class="notification-dot top right"></div>
+              <button aria-expanded="false" aria-controls="user-menu" aria-label="Menu mon compte">
+                <img src="https://placehold.co/46x46" alt="" class="picture"/>
+                <div class="info">
+                  <span class="displayname">Anaïs Durant</span>
+                  <span class="function">Enseignante</span>
+                </div>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <ul id="user-menu" style="display: none;">
+                <li>
+                  <button id="search" aria-label="Rechercher dans l'ENT">
+                    Rechercher
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </li>
+                <li>
+                  <button id="notification">
+                    <span>Notifications</span>
+                    <div class="badge">4</div>
+                  </button>
+                </li>
+                <li>
+                  <a href="./service.html?service=/MCE" id="settings">
+                    Mon profil
+                    <i class="fa-solid fa-gear"></i>
+                  </a>
+                </li>
+                <li>
+                  <button id="info-etab">
+                    Infos de l'établissement
+                    <i class="fa-solid fa-info-circle"></i>
+                  </button>
+                </li>
+                <li>
+                  <button id="change-etab">
+                    Changer d'établissement
+                    <i class="fa-solid fa-right-left"></i>
+                  </button>
+                </li>
+                <li>
+                  <button id="starter">
+                    Lancer le didacticiel
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </li>
+                <li>
+                  <a href="./index.html" id="logout">
+                    Déconnexion
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="notification">
+              <div class="notification-dot top right"></div>
+              <button class="btn-secondary circle" aria-controls="notification-drawer" aria-expanded="false" aria-label="Tiroir de notifications">
+                <i class="fa-solid fa-bell"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="services-layout" class="services-layout" style="display: none;">
+        <div class="container page-layout">
+          <header>
+            <div class="heading">
+              <button class="btn-tertiary circle"><i class="fa-solid fa-arrow-left"></i></button>
+              <h1>Toutes les services</h1>
+            </div>
+            <div class="sort">
+              <label for="services-sort">Trier par :</label>
+              <select name="" id="services-sort">
+                <button>
+                  <selectedcontent></selectedcontent>
+                </button>
+                <option value="pop-up">Popularité<i class="fa-solid fa-arrow-up"></i></option>
+                <option value="pop-down">Popularité<i class="fa-solid fa-arrow-down"></i></option>
+                <option value="pop-up">Alphabétique<i class="fa-solid fa-arrow-up"></i></option>
+                <option value="pop-down">Alphabétique<i class="fa-solid fa-arrow-down"></i></option>
+              </select>
+            </div>
+          </header>
+          <div class="filters">
+            <header>
+              <button aria-expanded="false" aria-controls="services-filters">
+                <span class="heading">Filtres</span>
+                <div class="grow-1"></div>
+                <i class="folded-indicator fa-solid fa-chevron-down"></i>
+              </button>
+              <span class="heading">Filtres</span>
+            </header>
+            <ul id="services-filters" class="menu" style="display: none;">
+              <li>
+                <ul>
+                  <li>
+                    <button class="tag active">Tous les services</button>
+                  </li>
+                  <li>
+                    <button class="tag">Nouveautés</button>
+                  </li>
+                  <li>
+                    <button class="tag">Collaboratif</button>
+                  </li>
+                  <li>
+                    <button class="tag">Apprentissage</button>
+                  </li>
+                  <li>
+                    <button class="tag">Communication</button>
+                  </li>
+                  <li>
+                    <button class="tag">Documentation</button>
+                  </li>
+                  <li>
+                    <button class="tag">Vie scolaire</button>
+                  </li>
+                  <li>
+                    <button class="tag">Paramètres</button>
+                  </li>
+                  <li>
+                    <button class="tag">Orientation</button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <ul>
+            <li>
+              <div class="service category-indigo">
+                <div class="new">
+                  <span class="new">nouveau</span>
+                </div>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#nextcloud"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Espaces Nextcloud</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Espace collaboratif</span>
+                <div class="favorite">
+                  <button aria-label="Retirer des favoris">
+                    <i class="fa-solid fa-star marked"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-indigo">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#actualites"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Actualités</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Communication</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-yellow">
+                <div class="new">
+                  <span class="new">nouveau</span>
+                </div>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#carte-mentale"></use>
+                </svg>
+                <a href="./service.html?service=/wisemapping" class="name">
+                  <h3>Carte mentale</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Apprentissage</span>
+                <div class="favorite">
+                  <button aria-label="Retirer des favoris">
+                    <i class="fa-solid fa-star marked"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-yellow">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#capytale"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Capytale</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Apprentissage</span>
+                <div class="favorite">
+                  <button aria-label="Retirer des favoris">
+                    <i class="fa-solid fa-star marked"></i>
+                  </button>
+                </div>
+                <button class="more">En savoir plus</button>
+              </div>
+            </li>
+            <li>
+              <div class="service category-indigo">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#mail"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Messagerie</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Communication</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-purple">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#POD"></use>
+                </svg>
+                <a href="./service.html?service=/POD" class="name">
+                  <h3>Plateforme vidéo</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Documentation</span>
+                <div class="favorite">
+                  <button aria-label="Retirer des favoris">
+                    <i class="fa-solid fa-star marked"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-purple">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#mediacentre"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>MédiaCentre</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Documentation</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-cyan">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#orientation"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Kiosque de l'orientation</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Orientation</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-lightGreen">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#MCE"></use>
+                </svg>
+                <a href="./service.html?service=/MCE" class="name">
+                  <h3>Mon compte ENT</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Paramètres</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-default">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#espace-vie-scolaire"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Menus du restaurant scolaire</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Vie scolaire</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-cyan">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#orientation"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Orientation</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Orientation</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-lightGreen">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Aide du portail ENT</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Paramètres</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="service category-purple">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="./spritemap.svg#documentations"></use>
+                </svg>
+                <a href="#" class="name">
+                  <h3>Documents</h3>
+                  <span aria-hidden="true"></span>
+                </a>
+                <span class="category">Documentation</span>
+                <div class="favorite">
+                  <button aria-label="Ajouter aux favoris">
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="notification-drawer" class="notification-drawer">
+        <button class="btn-tertiary circle close" aria-label="Fermer la modale">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="empty">
+          <i class="icon fa-solid fa-bell-slash"></i>
+          <span class="text">
+            Vous n'avez<span class="large">Aucune notification</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="alert">
+    <div class="icon">
+      <i class="fa-solid fa-bullhorn"></i>
+    </div>
+    <div class="text">
+      <p>Espaces de stockage Nextcloud inaccessible du 13/04 au 15/04.</p>
+      <a href="#" class="link">En savoir plus</a>
+    </div>
+    <button class="close" aria-label="Fermer l'alerte">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <main>
+    <div class="container page-layout">
+      <header>
+        <div class="heading">
+          <button class="btn-tertiary circle" title="Revenir en arrière d'une page"><i class="fa-solid fa-arrow-left"></i></button>
+          <h1>Toutes les actualités</h1>
+        </div>
+        <ul class="switch">
+          <li>
+            <input id="news-read-state-all" type="radio" name="news-read-state-switch" checked>
+            <label for="news-read-state-all">Toutes</label>
+          </li>
+          <li>
+            <input id="news-read-state-readed" type="radio" name="news-read-state-switch">
+            <label for="news-read-state-readed">Lues</label>
+          </li>
+          <li>
+            <input id="news-read-state-unread" type="radio" name="news-read-state-switch">
+            <label for="news-read-state-unread">Non lues</label>
+          </li>
+        </ul>
+      </header>
+
+      <section class="filters">
+        <header>
+          <button aria-expanded="false" aria-controls="news-filters">
+            <span class="heading">Filtres</span>
+            <span class="badge">1</span>
+            <div class="grow-1"></div>
+            <i class="folded-indicator fa-solid fa-chevron-down"></i>
+          </button>
+          <span class="heading">Filtres</span>
+        </header>
+        <ul id="news-filters" class="menu" style="display: none;">
+          <li>
+            <header>
+              <span>Par source :</span>
+            </header>
+            <ul>
+              <li>
+                <button class="tag">Toures les sources</button>
+              </li>
+              <li>
+                <button class="tag active">Lycée international de Palaiseau</button>
+              </li>
+              <li>
+                <button class="tag">Département d'Eure-et-Loir</button>
+              </li>
+              <li>
+                <button class="tag">Région Centre-Val de Loire</button>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <header>
+              <span>Par rubrique :</span>
+            </header>
+            <ul>
+              <li>
+                <button class="tag active">Toures les rubriques</button>
+              </li>
+              <li>
+                <button class="tag">Vie scolaire</button>
+              </li>
+              <li>
+                <button class="tag">Pédagogie</button>
+              </li>
+              <li>
+                <button class="tag">Direction</button>
+              </li>
+              <li>
+                <button class="tag">Services et gestion</button>
+              </li>
+              <li>
+                <button class="tag">Sport et culture</button>
+              </li>
+              <li>
+                <button class="tag">CDI</button>
+              </li>
+              <li>
+                <button class="tag">Santé et social</button>
+              </li>
+              <li>
+                <button class="tag">Documentation</button>
+              </li>
+              <li>
+                <button class="tag">Autre</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+      </section>
+    </div>
+  </main>
+
+  <div id="bottom-sheet-info" class="bottom-sheet" role="dialog" aria-modal="true" style="display: none;">
+    <div class="mask"></div>
+    <div class="container scrollable-container">
+      <div class="grow-1"></div>
+      <div class="sheet">
+        <div class="dragable"></div>
+        <button class="btn-tertiary circle close" aria-label="Fermer la modale">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="info-etab padding">
+          <div class="image-container">
+            <img src="https://placehold.co/600x800" alt="">
+          </div>
+          <div class="content-container">
+            <header>
+              <svg aria-hidden="true">
+                <use xlink:href="/svg/NOC-simple.svg#simple"></use>
+              </svg>
+              <div class="heading">
+                <span class="etab">Lycée international de Plaiseau</span>
+                <span class="acad">Académie Orléans-Tours</span>
+              </div>
+            </header>
+            <div class="content">
+              <div class="image">
+                <img src="https://placehold.co/600x800" alt="">
+              </div>
+              <address>
+                <ul>
+                  <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    17-19 Cr Pierre Vasseur, 91120 Palaiseau
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-at"></i>
+                    <a href="mailto:ce.0912433a@ac-versailles.fr">ce.0912433a@ac-versailles.fr</a>
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+33 (0)1.85.37.13.15">+33 (0)1.85.37.13.15</a>
+                  </li>
+                </ul>
+              </address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bottom-sheet-service-more" class="bottom-sheet" role="dialog" aria-modal="true" style="display: none;">
+    <div class="mask"></div>
+    <div class="container scrollable-container">
+      <div class="grow-1"></div>
+      <div class="sheet">
+        <div class="dragable"></div>
+        <button class="btn-tertiary circle close" aria-label="Fermer la modale">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="service-info">
+          <header>
+            <div class="heading">
+              <svg class="logo" aria-hidden="true">
+                <use xlink:href="./spritemap.svg#capytale"></use>
+              </svg>
+              <div class="text">
+                <h1>Capytale</h1>
+                <span class="origin">service tiers</span>
+                <span class="tag-category category-yellow">Apprentissage</span>
+              </div>
+            </div>
+            <button class="btn-secondary"><i class="fa-regular fa-star"></i>Ajouter aux favoris</button>
+          </header>
+          <div class="content">
+            <section class="description">
+              <h2 class="h3">Description</h2>
+              <div>
+                <p>Capytale est un service web proposé par l'académie de Paris en lien avec la Drane Orléans-Tours. Il permet la création et le partage entre enseignants et élèves d'activités utilisant les langages Python, HTML/CSS/JS, SQL ou les blocs de <a href="#">Scratch</a>.</p>
+                <p>Capytale est un environnement de travail en ligne destiné aux enseignants (essentiellement en <a href="#">SNT</a>, NSI, mathématiques, STI, technologie, informatique) et à leurs élèves des niveaux collèges et lycées (classes préparatoires incluses).</p>
+              </div>
+            </section>
+            <section class="first-step">
+              <h2 class="h3">Permiers pas avec le service</h2>
+              <div class="video">
+                <img src="https://placehold.co/1920x1080" />
+              </div>
+            </section>
+            <section class="tutorials">
+              <h2 class="h3">Tutoriels disponibles (8)</h2>
+              <ul>
+                <li><a href="#">Ajouter des documents à un dossier</a></li>
+                <li><a href="#">Partager l'accès à un document</a></li>
+                <li><a href="#">Retrouver une version de fichier dans les logs</a></li>
+                <li><a href="#">Structurer son arborescence de dossiers</a></li>
+              </ul>
+              <a href="#" class="btn-secondary small">Voir tous les tutoriels<i class="fa-solid fa-arrow-right"></i></a>
+            </section>
+          </div>
+          <footer>
+            <button class="btn-secondary close">Fermer</button>
+            <a href="#" class="btn-primary launch">Lancer le service<i class="fa-solid fa-arrow-right"></i></a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bottom-sheet-favorites" class="bottom-sheet" role="dialog" aria-modal="true" style="display: none;">
+    <div class="mask"></div>
+    <div class="container scrollable-container">
+      <div class="grow-1"></div>
+      <div class="sheet">
+        <div class="dragable"></div>
+        <button class="btn-tertiary circle close" aria-label="Fermer la modale">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="favorite-layout">
+          <header>
+            <h2>Vos favoris</h2>
+            <div class="grow-1"></div>
+            <button class="btn-secondary small">Gérer<i class="fa-solid fa-gear"></i></button>
+          </header>
+          <ul>
+            <li>
+              <header>
+                <span>Services</span>
+              </header>
+              <ul>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#carte-mentale"></use>
+                    </svg>
+                    <a href="./service.html?service=/wisemapping" class="name">
+                      <span>Carte mentale</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                    <p class="tag-category category-yellow">Apprentissage</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#capytale"></use>
+                    </svg>
+                    <a href="#" class="name">
+                      <span>Capytale</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                    <p class="tag-category category-yellow">Apprentissage</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#nextcloud"></use>
+                    </svg>
+                    <a href="#" class="name">
+                      <span>Espaces Nextcloud</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                    <p class="tag-category category-indigo">Espace collaboratif</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#POD"></use>
+                    </svg>
+                    <a href="./service.html?service=/POD" class="name">
+                      <span>Plateforme vidéo</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                    <p class="tag-category category-purple">Documentation</p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <header>
+                <span>Mediacentre</span>
+              </header>
+              <ul>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#NOC-simple"></use>
+                    </svg>
+                    <a href="#" class="name">
+                      <span>Pix</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#NOC-simple"></use>
+                    </svg>
+                    <a href="#" class="name">
+                      <span>Peraltrees</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="favorite">
+                    <div class="actions disabled">
+                      <div class="action-delete">
+                        <button aria-label="Supprimer le favoris">
+                          <i class="fa-solid fa-times"></i>
+                        </button>
+                      </div>
+                      <div class="action-back">
+                        <button aria-label="Réordonner vers la gauche">
+                          <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                      </div>
+                      <div class="grow-1"></div>
+                      <div class="action-next">
+                        <button aria-label="Réordonner vers la droite">
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="./spritemap.svg#NOC-simple"></use>
+                    </svg>
+                    <a href="#" class="name">
+                      <span>EduMalin</span>
+                      <span aria-hidden="true"></span>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bottom-sheet-news" class="bottom-sheet" role="dialog" aria-modal="true" style="display: none;">
+    <div class="mask"></div>
+    <div class="container scrollable-container">
+      <div class="grow-1"></div>
+      <div class="sheet">
+        <div class="dragable"></div>
+        <button class="btn-tertiary circle close" aria-label="Fermer la modale">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="news-content-layout">
+          <header>
+          </header>
+          <div class="content">
+          </div>
+          <footer>
+            <button class="btn-secondary readstate">Marquer comme non lu</button>
+            <button class="btn-primary close">Fermer</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer">
+      <div class="top">
+        <div class="container">
+          <img src="./svg/netocentre.svg" class="logo" alt="">
+          <ul class="links">
+            <li><a href="#">Découvrir l'ENT</a></li>
+            <li><a href="#">Toute l'actualité</a></li>
+            <li><a href="#">Signaler un bug</a></li>
+            <li><a href="#">Plan du site</a></li>
+            <li><a href="#">Mentions légales et CGU</a></li>
+            <li><a href="#">Accessibilité : partiellement conforme</a></li>
+          </ul>
+          <ul class="parteners">
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/69x59" />
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/105x60" />
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/101x59" />
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/59x60" />
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/102x59" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="container">
+          <ul class="links">
+            <li><a href="#">Apereo.org</a></li>
+            <li><a href="#">ESUP-Portail</a></li>
+            <li>©2024 - Net O'Centre</li>
+          </ul>
+          <span class="made-by"><i class="fa-solid fa-heart"></i> Fait avec amour par le GIP RECIA</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

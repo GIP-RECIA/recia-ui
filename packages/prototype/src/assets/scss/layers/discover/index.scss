@@ -1,0 +1,104 @@
+@use 'sass:map';
+@use '../../recia-style' as *;
+
+.discover {
+  > .video {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+
+    > * {
+      width: 100%;
+      border-radius: 4px
+    }
+  }
+
+  > .section {
+    > .nav {
+      @include unstyled-list;
+      margin-bottom: 24px;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      > li > button {
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--#{$prefix}stroke);
+        font-weight: bold;
+        font-size: var(--#{$prefix}font-size-sm);
+        border-radius: 3.5px 3.5px 0 0 ;
+
+        &.active {
+          border-color: var(--#{$prefix}basic-black);
+          background-color: HEXToRGBA(var(--#{$prefix}system-blue), .1);
+        }
+
+        &:hover,
+        &:focus-visible {
+          border-color: var(--#{$prefix}primary);
+          color: var(--#{$prefix}primary);
+        }
+      }
+    }
+
+    > p {
+      margin-bottom: 24px;
+    }
+
+    > .tiles {
+      @include unstyled-list;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+
+      > li > a {
+        @include unstyled-link;
+        outline: 1px solid var(--#{$prefix}stroke);
+        border-radius: 10px;
+        background-color: var(--#{$prefix}body-bg);
+        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+        padding: 16px;
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        > span {
+          font-weight: 500;
+        }
+
+        &:hover,
+        &:focus-visible {
+          color: var(--#{$prefix}primary);
+          outline: 1px solid var(--#{$prefix}primary);
+          box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+        }
+      }
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, md)) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 24px;
+
+    > .video {
+      margin-bottom: unset;
+
+      > * {
+        max-width: 25vw;
+      }
+    }
+
+    > .section > .tiles > li > a > svg {
+      display: none;
+    }
+  }
+
+  @media (width >= map.get($grid-breakpoints, xl)) {
+    > .video > * {
+      max-width: 345px;
+    }
+  }
+
+}
