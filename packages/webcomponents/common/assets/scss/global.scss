@@ -1,15 +1,17 @@
 @use 'ress/dist/ress.min.css';
 
-@forward '../../../../prototype/src/assets/scss/mixins/banner';
-@forward '../../../../prototype/src/assets/scss/variables';
-@forward '../../../../prototype/src/assets/scss/typo';
-@forward '../../../../prototype/src/assets/scss/mixins';
-@forward '../../../../prototype/src/assets/scss/functions';
-@forward '../../../../prototype/src/assets/scss/global';
+@forward '@gip-recia/ui/core/variables';
+@forward '@gip-recia/ui/core/typo';
+@forward '@gip-recia/ui/functions';
+@forward '@gip-recia/ui/mixins';
+@forward '@gip-recia/ui/global';
 
-@forward '../../../../prototype/src/assets/scss/containers';
-@forward '../../../../prototype/src/assets/scss/buttons';
-@forward '../../../../prototype/src/assets/scss/badge';
-@forward '../../../../prototype/src/assets/scss/select';
-@forward '../../../../prototype/src/assets/scss/tags';
-@forward '../../../../prototype/src/assets/scss/notification-dot';
+@forward '@gip-recia/ui/components/badge';
+@forward '@gip-recia/ui/components/buttons';
+// @forward '@gip-recia/ui/components/fields';
+@forward '@gip-recia/ui/components/notification-dot';
+@forward '@gip-recia/ui/components/select';
+// @forward '@gip-recia/ui/components/switch';
+@forward '@gip-recia/ui/components/tags';
+
+@forward '@gip-recia/ui/layouts/containers';

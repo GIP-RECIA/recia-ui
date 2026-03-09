@@ -1,4 +1,4 @@
-@use '../../../../prototype/src/assets/scss/recia-style.scss' as *;
+@use '@gip-recia/ui' as *;
 
 html {
   font-size: var(--#{$prefix}font-size-base);
