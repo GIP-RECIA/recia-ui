@@ -34,7 +34,7 @@
     "build:service-info-layout": "tsc && vite build --config vite-info.config.ts",
     "preview": "vite preview",
     "test:unit": "echo No tests available",
-    "build:style": "sass --style=compressed --error-css src/assets/scss/:src/assets/css/",
+    "build:style": "sass --style=compressed --error-css --no-source-map src/assets/scss/:src/assets/css/",
     "dev:json-server": "json-server ./json-server/api.json -c ./json-server/config.json",
     "dev:all": "concurrently --kill-others -n 'json,sass,vite' -c auto --pad-prefix 'yarn dev:json-server' 'yarn build:style --watch' 'yarn dev'"
   },
