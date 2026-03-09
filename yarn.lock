@@ -755,6 +755,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-regular-svg-icons": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
+    "@gip-recia/ui": "workspace:^"
     "@types/node": "npm:^24"
     eslint: "npm:^10.0.2"
     eslint-plugin-format: "npm:^2.0.1"

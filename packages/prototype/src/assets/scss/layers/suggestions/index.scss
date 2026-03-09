@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use 'sass:math';
-@use '../../recia-style' as *;
+@use '@gip-recia/ui' as *;
 @use '../header/variables' as *;
 
 $service-width: 150px;

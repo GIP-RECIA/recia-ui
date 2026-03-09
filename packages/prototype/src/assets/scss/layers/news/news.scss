@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../recia-style' as *;
+@use '@gip-recia/ui' as *;
 
 @mixin news {
   display: flex;

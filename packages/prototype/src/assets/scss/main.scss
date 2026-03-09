@@ -1,5 +1,17 @@
 @use 'sass:map';
-@use 'recia-style' as *;
+
+/*!
+ * ress v5.0.2 by Filipe Linhares - https://github.com/filipelinhares/ress
+ * License - https://github.com/filipelinhares/ress/blob/master/LICENSE.md
+ * Copyright 2016 Filipe Linhares
+ */
+@forward 'ress/dist/ress.min.css';
+
+@forward '@fortawesome/fontawesome-free/css/solid.min.css';
+@forward '@fortawesome/fontawesome-free/css/regular.min.css';
+
+
+@use '@gip-recia/ui' as *;
 
 /*!
  * Layers
