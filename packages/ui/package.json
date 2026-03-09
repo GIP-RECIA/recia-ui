@@ -32,7 +32,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "sass --style=compressed --error-css src/assets/scss/index.scss dist/recia-style.css",
+    "build": "sass --style=compressed --error-css --update src/assets/scss/index.scss dist/recia-style.css",
     "test:unit": "echo No tests available"
   },
   "peerDependencies": {

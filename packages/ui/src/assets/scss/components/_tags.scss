@@ -11,41 +11,23 @@ input[type='checkbox'].tag {
   @include input-tag;
 }
 
-:not(button).tag-category {
-  @include button-and-tag;
-  cursor: inherit;
-  padding: 4px 10px;
-  font-family: $dm-sans;
-  font-weight: 500;
-  font-size: var(--#{$prefix}font-size-xs);
+:not(button).tag {
+  @include not-button-tag;
 
-  background-color: var(--#{$prefix}stroke);
-
-  @each $type, $values in $categories {
-    &.#{$type} {
-      background-color: var(--#{$prefix}#{$type});
-      color: var(--#{$prefix}#{$type}-text);
-    }
+  &-primary {
+    @include not-button-tag;
+    background-color: var(--#{$prefix}btn-primary-bg);
+    color: var(--#{$prefix}btn-primary);
   }
 
-  &.disabled {
-    opacity: 0.33;
-  }
+  &-category {
+    @include not-button-tag;
 
-  &.circle {
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
-    padding: 8px;
-  }
-
-  &.small {
-    padding: 4px 12px;
-
-    &.circle {
-      width: 26px;
-      height: 26px;
-      padding: 4px;
+    @each $type, $values in $categories {
+      &.#{$type} {
+        background-color: var(--#{$prefix}#{$type});
+        color: var(--#{$prefix}#{$type}-text);
+      }
     }
   }
 }
