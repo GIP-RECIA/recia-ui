@@ -1,7 +1,7 @@
 {
   "name": "dropdown-info",
   "type": "module",
-  "version": "0.0.0",
+  "private": true,
   "description": "",
   "contributors": [
     {
