@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use '../core/variables' as *;
 
 @mixin unstyled-link {
   color: inherit;

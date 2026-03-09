@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use 'variables' as *;
+@use 'core/variables' as *;
 
 @each $domain, $data in $domain-theme {
   .#{'theme-#{map.get($data, id)}'} {

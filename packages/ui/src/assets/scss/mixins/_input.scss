@@ -1,5 +1,4 @@
-@use '../variables' as *;
-@use '../functions/colors' as *;
+@use '../core/variables' as *;
 @use 'button' as *;
 
 @mixin input-tag {
@@ -17,7 +16,7 @@
 
   &:hover ~ label,
   &:focus-visible ~ label {
-    background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+    background-color: HEXToRGBA(var(--#{$prefix}primary), 0.05);
     color: var(--#{$prefix}primary);
   }
 
@@ -29,7 +28,7 @@
     ~ label {
       background-color: var(--#{$prefix}btn-primary-bg);
       color: var(--#{$prefix}btn-primary);
-      box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
+      box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, 0.2);
     }
 
     &:hover ~ label,
@@ -38,7 +37,7 @@
     }
 
     &:focus-visible ~ label {
-      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
+      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), 0.3);
     }
   }
 
@@ -69,7 +68,7 @@
 
   @media (hover: none) or (pointer: coarse) {
     &:not(:checked) ~ label {
-      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      background-color: HEXToRGBA(var(--#{$prefix}primary), 0.05);
       color: var(--#{$prefix}primary);
     }
   }

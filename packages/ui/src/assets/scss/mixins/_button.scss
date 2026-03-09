@@ -1,5 +1,4 @@
-@use '../variables' as *;
-@use '../functions/colors' as *;
+@use '../core/variables' as *;
 @use 'link' as *;
 
 @mixin button-and-tag {
@@ -25,7 +24,7 @@
   &:not(.active) {
     &:hover,
     &:focus-visible {
-      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      background-color: HEXToRGBA(var(--#{$prefix}primary), 0.05);
       color: var(--#{$prefix}primary);
     }
 
@@ -37,7 +36,7 @@
   &.active {
     background-color: var(--#{$prefix}btn-primary-bg);
     color: var(--#{$prefix}btn-primary);
-    box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, .2);
+    box-shadow: var(--#{$prefix}shadow-low-elevation) HEXToRGBA($black, 0.2);
 
     &:hover,
     &:focus-visible {
@@ -45,7 +44,7 @@
     }
 
     &:focus-visible {
-      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), .3);
+      outline: 3px solid HEXToRGBA(var(--#{$prefix}primary), 0.3);
     }
   }
 
@@ -74,7 +73,7 @@
 
   @media (hover: none) or (pointer: coarse) {
     &:not(.active) {
-      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      background-color: HEXToRGBA(var(--#{$prefix}primary), 0.05);
       color: var(--#{$prefix}primary);
     }
   }

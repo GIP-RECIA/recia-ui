@@ -1,7 +1,7 @@
 {
   "name": "@gip-recia/ui",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "contributors": [
     {
       "name": "Quentin Guillemin",
@@ -10,31 +10,36 @@
     }
   ],
   "license": "Apache-2.0",
+  "exports": {
+    ".": "./src/assets/scss/index.scss",
+    "./*": "./src/assets/scss/*",
+    "./components": "./src/assets/scss/components/index.scss",
+    "./components/*": "./src/assets/scss/components/*",
+    "./core": "./src/assets/scss/core/index.scss",
+    "./core/*": "./src/assets/scss/core/*",
+    "./functions": "./src/assets/scss/functions/index.scss",
+    "./functions/*": "./src/assets/scss/functions/*",
+    "./layouts": "./src/assets/scss/layouts/index.scss",
+    "./layouts/*": "./src/assets/scss/layouts/*",
+    "./mixins": "./src/assets/scss/mixins/index.scss",
+    "./mixins/*": "./src/assets/scss/mixins/*"
+  },
   "files": [
-    "dist"
+    "./src/assets/scss/",
+    "./src/fonts/"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "dev": "vite --host",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "build": "sass --style=compressed --error-css src/assets/scss/index.scss dist/recia-style.css",
     "test:unit": "echo No tests available"
   },
-  "devDependencies": {
+  "peerDependencies": {
     "@antfu/eslint-config": "^7.6.1",
-    "@fortawesome/fontawesome-free": "^7.2.0",
-    "@fortawesome/fontawesome-svg-core": "^7.2.0",
-    "@fortawesome/free-regular-svg-icons": "^7.2.0",
-    "@fortawesome/free-solid-svg-icons": "^7.2.0",
-    "@types/node": "^24",
     "eslint": "^10.0.2",
     "eslint-plugin-format": "^2.0.1",
     "ress": "^5.0.2",
-    "sass": "^1.97.3",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-plugin-svg-spritemap": "^1.0.13"
+    "sass": "^1.97.3"
   }
 }
