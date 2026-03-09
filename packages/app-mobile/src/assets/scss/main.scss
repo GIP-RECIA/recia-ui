@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../../prototype/src/assets/scss/recia-style.scss' as *;
+@use '@gip-recia/ui' as *;
 
 @include dm-sans;
 @include sora;

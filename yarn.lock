@@ -772,15 +772,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@gip-recia/ui@workspace:packages/ui":
+"@gip-recia/ui@workspace:^, @gip-recia/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@gip-recia/ui@workspace:packages/ui"
   peerDependencies:
     "@antfu/eslint-config": ^7.6.1
-    "@fortawesome/fontawesome-free": ^7.2.0
-    "@fortawesome/fontawesome-svg-core": ^7.2.0
-    "@fortawesome/free-regular-svg-icons": ^7.2.0
-    "@fortawesome/free-solid-svg-icons": ^7.2.0
     eslint: ^10.0.2
     eslint-plugin-format: ^2.0.1
     ress: ^5.0.2
@@ -2001,6 +1997,7 @@ __metadata:
   resolution: "app-mobile@workspace:packages/app-mobile"
   dependencies:
     "@antfu/eslint-config": "npm:^7.6.1"
+    "@gip-recia/ui": "workspace:^"
     "@types/node": "npm:^24"
     eslint: "npm:^10.0.2"
     eslint-plugin-format: "npm:^2.0.1"
