@@ -9,6 +9,17 @@
     }
   ],
   "license": "Apache-2.0",
+  "homepage": "https://github.com/GIP-RECIA/recia-ui/tree/main/packages/ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GIP-RECIA/recia-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GIP-RECIA/recia-ui/issues"
+  },
+  "keywords": [
+    "gip-recia"
+  ],
   "exports": {
     ".": "./src/assets/scss/index.scss",
     "./*": "./src/assets/scss/*",
