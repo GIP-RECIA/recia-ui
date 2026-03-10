@@ -35,8 +35,7 @@
     "./mixins/*": "./src/assets/scss/mixins/*"
   },
   "files": [
-    "src/assets/scss",
-    "src/fonts"
+    "src/assets/scss/**/*"
   ],
   "publishConfig": {
     "access": "public"
