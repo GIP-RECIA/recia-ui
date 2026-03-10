@@ -1,4 +1,5 @@
 @use '../core/variables' as *;
+@use '../functions' as *;
 @use 'link' as *;
 
 @mixin button-and-tag {

@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../core/variables' as *;
+@use '../functions' as *;
 
 .tooltip {
   display: none;
