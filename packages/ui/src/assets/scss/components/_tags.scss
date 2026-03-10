@@ -16,7 +16,7 @@ input[type='checkbox'].tag {
 
   &-primary {
     @include not-button-tag;
-    background-color: var(--#{$prefix}btn-primary-bg);
+    background-color: var(--#{$prefix}btn-primary);
     color: var(--#{$prefix}btn-primary);
   }
 
