@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.2](https://github.com/GIP-RECIA/recia-ui/compare/ui/v1.0.1...ui/v1.0.2) (2026-03-10)
+
+
+### Bug Fixes
+
+* **ui:** missing functions imports ([fe8da3c](https://github.com/GIP-RECIA/recia-ui/commit/fe8da3cb67ba0c44603048484b93087363d87e7e))
+* **ui:** tag primary color ([b3b69b7](https://github.com/GIP-RECIA/recia-ui/commit/b3b69b7ab2247a0251600629b75d7e623fa97f96))
+
 ## [1.0.1](https://github.com/GIP-RECIA/recia-ui/compare/ui/v1.0.0...ui/v1.0.1) (2026-03-10)
 
 ## 1.0.0 (2026-03-09)
