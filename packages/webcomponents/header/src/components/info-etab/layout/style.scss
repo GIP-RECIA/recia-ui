@@ -90,6 +90,7 @@
             align-items: center;
 
             > svg {
+              flex-shrink: 0;
               font-size: var(--#{$prefix}font-size-md);
               width: 22px;
               opacity: .3;
