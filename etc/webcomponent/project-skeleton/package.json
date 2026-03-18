@@ -46,7 +46,7 @@
     "@gip-recia/ui": "workspace:^",
     "@lit/localize-tools": "^0.8.1",
     "@types/lodash-es": "^4",
-    "@types/node": "^24",
+    "@types/node": "^25",
     "eslint": "^10.0.2",
     "eslint-plugin-format": "^2.0.1",
     "lodash-es": "^4.17.23",
