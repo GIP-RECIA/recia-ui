@@ -346,17 +346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:^20.4.3":
-  version: 20.4.3
-  resolution: "@commitlint/types@npm:20.4.3"
-  dependencies:
-    conventional-commits-parser: "npm:^6.3.0"
-    picocolors: "npm:^1.1.1"
-  checksum: 10/a61640a8e1ca25c2ccaf503f30ab12214e8908b4a9a7dd584b18553f0193cfca0ecc33cb34c1bd0fb95e3e63a2fbd8560678f397f9c37d0331055ba420a0a41d
-  languageName: node
-  linkType: hard
-
-"@commitlint/types@npm:^20.5.0":
+"@commitlint/types@npm:^20.4.3, @commitlint/types@npm:^20.5.0":
   version: 20.5.0
   resolution: "@commitlint/types@npm:20.5.0"
   dependencies:
