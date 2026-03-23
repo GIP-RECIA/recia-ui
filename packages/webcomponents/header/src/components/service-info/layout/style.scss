@@ -14,15 +14,19 @@
 
 .service-info {
   > header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     > .heading {
       display: flex;
-      column-gap: 6px;
-      margin-bottom: 16px;
+      gap: 8px;
+      align-items: center;
 
       > .icon {
         flex: 0 0 auto;
-        height: 100px;
-        width: 100px;
+        height: 70px;
+        width: 70px;
         color: HEXToRGBA($black, .3);
 
         &.skeleton {
@@ -226,9 +230,20 @@
     }
   }
 
+  @media (width >= map.get($grid-breakpoints, sm)) {
+    > header {
+      gap: 8px;
+
+      > .heading > .icon {
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+
   @media (width >= map.get($grid-breakpoints, md)) {
     > header {
-      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
       padding-right: 24px;
