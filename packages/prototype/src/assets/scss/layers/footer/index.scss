@@ -119,7 +119,7 @@
   @media (width >= map.get($grid-breakpoints, md)) {
     margin-top: unset;
 
-    > .top >.container {
+    > .top > .container {
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;

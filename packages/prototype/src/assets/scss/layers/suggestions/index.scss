@@ -14,7 +14,7 @@ $service-width: 150px;
     }
 
     > a {
-      display: none
+      display: none;
     }
   }
 
@@ -63,7 +63,10 @@ $service-width: 150px;
           @each $name, $value in $grid-breakpoints {
             @if $value != 0 {
               @media screen and (width >= $value) {
-                margin-left: max(50vw - #{math.div(map.get($container-max-widths, $name) + $service-width + $drawer-width, 2)}, 0px);
+                margin-left: max(
+                  50vw - #{math.div(map.get($container-max-widths, $name) + $service-width + $drawer-width, 2)},
+                  0px
+                );
               }
             }
           }

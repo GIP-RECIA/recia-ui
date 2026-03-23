@@ -1,35 +1,42 @@
 <!doctype html>
 <html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark">
-  <script type="module" src="/index.ts"></script>
-</head>
+  <body>
+    <section class="container">
+      <section>
+        <h2>6 idp ids</h2>
 
-<body>
-  <section class="container">
-    <section>
-      <h2>6 idp ids</h2>
+        <r-wayf
+          cas-url="#"
+          idp-ids='["parentEleveEN-IdP", "eleves-parents", "catel-IdP", "agri-IdP", "RCVL-IdP", "autres-publics"]'
+        >
+        </r-wayf>
+      </section>
 
-      <r-wayf
-        cas-url="#"
-        idp-ids='["parentEleveEN-IdP", "eleves-parents", "catel-IdP", "agri-IdP", "RCVL-IdP", "autres-publics"]'
-      >
-      </r-wayf>
+      <section>
+        <h2>3 idp ids</h2>
+
+        <r-wayf
+          cas-url="#"
+          idp-ids='["parentEleveEN-IdP", "catel-IdP", "autres-publics"]'
+        >
+        </r-wayf>
+      </section>
     </section>
-
-    <section>
-      <h2>3 idp ids</h2>
-
-      <r-wayf
-        cas-url="#"
-        idp-ids='["parentEleveEN-IdP", "catel-IdP", "autres-publics"]'
-      >
-      </r-wayf>
-    </section>
-  </section>
-</body>
-
+  </body>
 </html>

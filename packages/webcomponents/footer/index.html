@@ -1,20 +1,27 @@
 <!doctype html>
 <html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark">
-  <script type="module" src="/index.ts"></script>
-</head>
+  <body>
+    <section class="container"></section>
 
-<body>
-  <section class="container">
-  </section>
-
-  <r-footer
-    template-api-url="/commun/portal_template_api.tpl.json"
-    top-links='[
+    <r-footer
+      template-api-url="/commun/portal_template_api.tpl.json"
+      top-links='[
       {
         "name": "Mentions légales et CGU",
         "href": "#",
@@ -26,7 +33,7 @@
         "target": "_blank"
       }
     ]'
-    bottom-links='[
+      bottom-links='[
       {
         "name": "Apereo.org",
         "href": "https://www.apereo.org",
@@ -38,11 +45,9 @@
         "target": "_blank"
       }
     ]'
-  >
-  </r-footer>
+    >
+    </r-footer>
 
-  <script>
-  </script>
-</body>
-
+    <script></script>
+  </body>
 </html>

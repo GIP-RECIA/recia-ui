@@ -14,7 +14,7 @@
     width: 244px;
     overflow: hidden;
 
-    > img  {
+    > img {
       position: absolute;
       inset: 0;
       object-fit: cover;
@@ -70,7 +70,7 @@
         margin-bottom: 24px;
         border-radius: 4px;
 
-        > img  {
+        > img {
           object-fit: cover;
           height: 100%;
           width: 100%;
@@ -94,7 +94,7 @@
             > svg {
               font-size: var(--#{$prefix}font-size-md);
               width: 22px;
-              opacity: .3;
+              opacity: 0.3;
             }
 
             > a {
@@ -148,7 +148,7 @@
           font-weight: unset;
           font-size: var(--#{$prefix}font-size-md);
           line-height: 24px;
-          opacity: .8;
+          opacity: 0.8;
 
           > li {
             > svg {

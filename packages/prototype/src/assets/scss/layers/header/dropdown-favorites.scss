@@ -8,7 +8,7 @@
     position: absolute;
     background-color: var(--#{$prefix}body-bg);
     border-radius: 0 8px 8px 0;
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
     overflow: hidden;
     top: 0;
     left: 100%;
@@ -16,7 +16,7 @@
     max-width: calc(100vw - calc(var(--#{$prefix}drawer-width) + 16px));
     padding: 22px 34px;
     color: var(--#{$prefix}body);
-    transition: max-width .3s ease-in-out;
+    transition: max-width 0.3s ease-in-out;
 
     > .active-indicator {
       position: absolute;

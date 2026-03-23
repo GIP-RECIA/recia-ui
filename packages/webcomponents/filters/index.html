@@ -1,150 +1,153 @@
 <!doctype html>
 <html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark">
-  <script type="module" src="/index.ts"></script>
-</head>
+  <body>
+    <section class="container">
+      <r-filters></r-filters>
 
-<body>
-  <section class="container">
-    <r-filters>
-    </r-filters>
+      <button id="update">Update data</button>
+    </section>
 
-    <button id="update">Update data</button>
-  </section>
+    <section class="container">
+      <r-filters loading> </r-filters>
+    </section>
 
-  <section class="container">
-    <r-filters
-      loading
-    >
-    </r-filters>
-  </section>
-
-  <script>
-    const filters = document.querySelector('r-filters')
-    const data = [
-      {
-        "id": "source",
-        "name": "Par source :",
-        "type": "checkbox",
-        "items": [
-          {
-            "key": "all",
-            "value": "Toures les sources"
-          },
-          {
-            "key": "lycee-internationnal-palaiseau",
-            "value": "Lycée international de Palaiseau"
-          },
-          {
-            "key": "eure-et-loire",
-            "value": "Département d'Eure-et-Loir"
-          },
-          {
-            "key": "rcvdl",
-            "value": "Région Centre-Val de Loire"
-          }
-        ]
-      },
-      {
-        "id": "rubrique",
-        "name": "Par rubrique :",
-        "type": "radio",
-        "items": [
-          {
-            "key": "all",
-            "value": "Toures les rubriques"
-          },
-          {
-            "key": "vie-scoalire",
-            "value": "Vie scolaire"
-          },
-          {
-            "key": "pedagogie",
-            "value": "Pédagogie"
-          },
-          {
-            "key": "direction",
-            "value": "Direction"
-          },
-          {
-            "key": "services-et-gestion",
-            "value": "Services et gestion"
-          },
-          {
-            "key": "sport-et-culture",
-            "value": "Sport et culture"
-          },
-          {
-            "key": "cdi",
-            "value": "CDI"
-          },
-          {
-            "key": "sante-et-social",
-            "value": "Santé et social"
-          },
-          {
-            "key": "documentation",
-            "value": "Documentation"
-          },
-          {
-            "key": "autre",
-            "value": "Autre"
-          }
-        ]
-      }
-    ]
-    filters.data = data;
-    filters.addEventListener('update-filters', (e) => {
-      console.table(e.detail.activeFilters)
-    })
-
-    document.querySelector('button#update').addEventListener('click', () => {
-      filters.data = [
+    <script>
+      const filters = document.querySelector('r-filters')
+      const data = [
         {
-          "id": "source",
-          "name": "Par source :",
-          "type": "checkbox",
-          "items": [
+          id: 'source',
+          name: 'Par source :',
+          type: 'checkbox',
+          items: [
             {
-              "key": "all",
-              "value": "Toures les sources"
+              key: 'all',
+              value: 'Toures les sources',
             },
             {
-              "key": "rcvdl",
-              "value": "Région Centre-Val de Loire"
-            }
-          ]
+              key: 'lycee-internationnal-palaiseau',
+              value: 'Lycée international de Palaiseau',
+            },
+            {
+              key: 'eure-et-loire',
+              value: "Département d'Eure-et-Loir",
+            },
+            {
+              key: 'rcvdl',
+              value: 'Région Centre-Val de Loire',
+            },
+          ],
         },
         {
-          "id": "rubrique",
-          "name": "Par rubrique :",
-          "type": "radio",
-          "items": [
+          id: 'rubrique',
+          name: 'Par rubrique :',
+          type: 'radio',
+          items: [
             {
-              "key": "all",
-              "value": "Toures les rubriques"
+              key: 'all',
+              value: 'Toures les rubriques',
             },
             {
-              "key": "sante-et-social",
-              "value": "Santé et social"
+              key: 'vie-scoalire',
+              value: 'Vie scolaire',
             },
             {
-              "key": "documentation",
-              "value": "Documentation"
+              key: 'pedagogie',
+              value: 'Pédagogie',
             },
             {
-              "key": "autre",
-              "value": "Autre"
-            }
-          ]
-        }
-      ];
-    })
-  </script>
-</body>
+              key: 'direction',
+              value: 'Direction',
+            },
+            {
+              key: 'services-et-gestion',
+              value: 'Services et gestion',
+            },
+            {
+              key: 'sport-et-culture',
+              value: 'Sport et culture',
+            },
+            {
+              key: 'cdi',
+              value: 'CDI',
+            },
+            {
+              key: 'sante-et-social',
+              value: 'Santé et social',
+            },
+            {
+              key: 'documentation',
+              value: 'Documentation',
+            },
+            {
+              key: 'autre',
+              value: 'Autre',
+            },
+          ],
+        },
+      ]
+      filters.data = data
+      filters.addEventListener('update-filters', (e) => {
+        console.table(e.detail.activeFilters)
+      })
 
+      document.querySelector('button#update').addEventListener('click', () => {
+        filters.data = [
+          {
+            id: 'source',
+            name: 'Par source :',
+            type: 'checkbox',
+            items: [
+              {
+                key: 'all',
+                value: 'Toures les sources',
+              },
+              {
+                key: 'rcvdl',
+                value: 'Région Centre-Val de Loire',
+              },
+            ],
+          },
+          {
+            id: 'rubrique',
+            name: 'Par rubrique :',
+            type: 'radio',
+            items: [
+              {
+                key: 'all',
+                value: 'Toures les rubriques',
+              },
+              {
+                key: 'sante-et-social',
+                value: 'Santé et social',
+              },
+              {
+                key: 'documentation',
+                value: 'Documentation',
+              },
+              {
+                key: 'autre',
+                value: 'Autre',
+              },
+            ],
+          },
+        ]
+      })
+    </script>
+  </body>
 </html>

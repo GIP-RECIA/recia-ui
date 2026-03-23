@@ -6,7 +6,7 @@
     outline: 1px solid var(--#{$prefix}stroke);
     border-radius: 10px;
     background-color: var(--#{$prefix}body-bg);
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
     padding: 25px 20px;
     margin-bottom: 16px;
 
@@ -49,28 +49,28 @@
       text-align: unset;
       justify-content: unset;
       font-weight: 500;
-      letter-spacing: -.25px;
+      letter-spacing: -0.25px;
       font-size: var(--#{$prefix}font-size-sm);
       outline: 1px solid var(--#{$prefix}stroke);
       border-radius: 10px;
       background-color: var(--#{$prefix}body-bg);
-      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+      box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
       padding: 16px;
       flex: 1;
       transition:
-        outline .15s ease-in,
-        box-shadow .15s ease-in;
+        outline 0.15s ease-in,
+        box-shadow 0.15s ease-in;
 
       > svg {
         font-size: 46px;
         margin: 0 8px;
-        transition: color .15s ease-in;
+        transition: color 0.15s ease-in;
       }
 
       &:hover,
       &:focus-visible {
         outline: 2px solid var(--#{$prefix}primary);
-        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+        box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
 
         > svg {
           color: var(--#{$prefix}primary);
@@ -89,7 +89,7 @@
       margin-bottom: 24px;
       max-width: 432px;
 
-      > form > button[type="submit"] {
+      > form > button[type='submit'] {
         align-self: flex-end;
         width: fit-content;
       }

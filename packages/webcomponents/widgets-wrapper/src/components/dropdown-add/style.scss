@@ -15,7 +15,7 @@
     max-width: calc(100vw - 32px);
     background-color: var(--#{$prefix}body-bg);
     border-radius: 8px;
-    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
     overflow: hidden;
     z-index: 1000;
 
@@ -31,7 +31,7 @@
       &:hover,
       &:focus-visible {
         font-weight: 500;
-        background-color:var(--#{$prefix}hover);
+        background-color: var(--#{$prefix}hover);
         outline: none;
       }
     }
@@ -39,7 +39,7 @@
 
   @media (width >= map.get($grid-breakpoints, md)) {
     > ul > li:not(:last-child) {
-      border-bottom: 1px solid HEXToRGBA($black, .1);
+      border-bottom: 1px solid HEXToRGBA($black, 0.1);
     }
   }
 }

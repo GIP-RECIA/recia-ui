@@ -8,7 +8,7 @@
   color: var(--#{$prefix}body);
   overflow-y: auto;
   background-color: var(--#{$prefix}body-bg);
-  transition: margin-left .3s ease-in-out;
+  transition: margin-left 0.3s ease-in-out;
 
   > div {
     margin-top: 32px;
@@ -19,7 +19,7 @@
       font-size: var(--#{$prefix}font-size-sm);
       display: flex;
       align-items: center;
-      column-gap: 15px
+      column-gap: 15px;
     }
 
     > ul {

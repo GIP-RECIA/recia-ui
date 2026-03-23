@@ -46,9 +46,9 @@
     > svg {
       flex: 0 0 auto;
       display: none;
-      opacity: .3;
+      opacity: 0.3;
       margin-right: 12px;
-      transition: rotate .2s ease-in-out;
+      transition: rotate 0.2s ease-in-out;
     }
 
     &:hover,
@@ -72,7 +72,7 @@
     max-width: calc(100vw - 32px);
     background-color: var(--#{$prefix}body-bg);
     border-radius: 8px;
-    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
     overflow: hidden;
     z-index: 1000;
 
@@ -91,7 +91,7 @@
 
         > svg {
           min-width: var(--#{$prefix}body-font-size);
-          opacity: .3;
+          opacity: 0.3;
         }
 
         &#notification {
@@ -110,7 +110,7 @@
         &:hover,
         &:focus-visible {
           font-weight: 500;
-          background-color:var(--#{$prefix}hover);
+          background-color: var(--#{$prefix}hover);
           outline: none;
 
           > svg {
@@ -147,17 +147,13 @@
     }
 
     > ul > li {
-      &:has(
-        > button#notification,
-        > button#info-etab
-      ) {
+      &:has(> button#notification, > button#info-etab) {
         display: none;
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid HEXToRGBA($black, .1);
+        border-bottom: 1px solid HEXToRGBA($black, 0.1);
       }
     }
   }
 }
-

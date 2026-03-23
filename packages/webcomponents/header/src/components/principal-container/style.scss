@@ -110,12 +110,12 @@
     z-index: -1;
     visibility: hidden;
     transition:
-      margin-left .15s cubic-bezier(0.4, 0, 0.2, 1),
-      transform .15s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-left 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
     &.visible {
       visibility: visible;
-      animation: search-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: search-slide-down 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
     &.searching {
@@ -146,7 +146,7 @@
 
   @media (width >= map.get($grid-breakpoints, md)) and (height >= map.get($grid-breakpoints, md)) {
     > .start {
-      > .tooltip-container:has(> button#info-etab)  {
+      > .tooltip-container:has(> button#info-etab) {
         display: none;
       }
 
@@ -181,7 +181,7 @@
       visibility: visible;
 
       &.visible {
-        animation: search-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        animation: search-slide-down 0.15s cubic-bezier(0.4, 0, 0.2, 1) backwards;
       }
     }
 

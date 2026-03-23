@@ -9,7 +9,7 @@
   border-radius: 10px;
   border-top: 11px solid var(--#{$prefix}service);
   background-color: var(--#{$prefix}body-bg);
-  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
   padding: 5px 16px 16px;
   position: relative;
   display: flex;
@@ -18,8 +18,8 @@
   text-align: center;
   width: 100%;
   transition:
-    border-color .3s ease-out,
-    box-shadow .3s ease-out;
+    border-color 0.3s ease-out,
+    box-shadow 0.3s ease-out;
 
   > .new {
     position: absolute;
@@ -38,7 +38,7 @@
     top: 12px;
     right: 12px;
     z-index: 1;
-    transition: opacity .3s ease-out;
+    transition: opacity 0.3s ease-out;
 
     > button {
       display: inline-flex;
@@ -51,7 +51,7 @@
         width: 20px;
         margin: 2px;
         color: var(--#{$prefix}stroke);
-        transition: color .3s ease-out;
+        transition: color 0.3s ease-out;
 
         &.marked {
           color: var(--#{$prefix}favorite);
@@ -70,7 +70,7 @@
     height: 40px;
     width: 40px;
     color: var(--#{$prefix}stroke);
-    transition: color .3s ease-out;
+    transition: color 0.3s ease-out;
     margin-bottom: 8px;
   }
 
@@ -83,7 +83,7 @@
       margin: 0;
     }
 
-    > span[aria-hidden="true"] {
+    > span[aria-hidden='true'] {
       position: absolute;
       inset: -11px 0 0;
       border-radius: 10px;
@@ -98,7 +98,7 @@
     flex: 0 0 auto;
     order: 1;
     font-size: var(--#{$prefix}font-size-xxs);
-    opacity: .5;
+    opacity: 0.5;
     margin-bottom: 4px;
   }
 
@@ -114,10 +114,10 @@
     max-height: 2em;
     overflow: hidden;
     transition:
-      max-height .3s ease-out,
-      padding-top .3s ease-out,
-      padding-bottom .3s ease-out,
-      margin-top .3s ease-out;
+      max-height 0.3s ease-out,
+      padding-top 0.3s ease-out,
+      padding-bottom 0.3s ease-out,
+      margin-top 0.3s ease-out;
 
     &:focus-visible {
       outline: 2px dotted var(--#{$prefix}system-blue);

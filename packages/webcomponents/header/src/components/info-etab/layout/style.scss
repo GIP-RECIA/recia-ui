@@ -18,13 +18,13 @@
     aspect-ratio: 9 / 4;
     width: 100%;
 
-    > img  {
+    > img {
       position: absolute;
       inset: 0;
       object-fit: cover;
       height: 100%;
       width: 100%;
-      background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+      background-color: HEXToRGBA(var(--#{$prefix}primary), 0.05);
     }
   }
 
@@ -68,9 +68,9 @@
         overflow: hidden;
         margin-bottom: 24px;
         border-radius: 4px;
-        background-color: HEXToRGBA(var(--#{$prefix}primary), .05);
+        background-color: HEXToRGBA(var(--#{$prefix}primary), 0.05);
 
-        > img  {
+        > img {
           object-fit: cover;
           height: 100%;
           width: 100%;
@@ -95,7 +95,7 @@
               flex-shrink: 0;
               font-size: var(--#{$prefix}font-size-md);
               width: 22px;
-              opacity: .3;
+              opacity: 0.3;
             }
 
             > a {
@@ -133,7 +133,7 @@
           font-weight: unset;
           font-size: var(--#{$prefix}font-size-md);
           line-height: 24px;
-          opacity: .8;
+          opacity: 0.8;
 
           > li {
             > svg {

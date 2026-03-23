@@ -1,76 +1,74 @@
 <!doctype html>
 <html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+    <style>
+      r-dropdown-info {
+        display: inline-block;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark">
-  <script type="module" src="/index.ts"></script>
-  <style>
-    r-dropdown-info {
-      display: inline-block;
-    }
-  </style>
-</head>
+  <body>
+    <section class="container">
+      <r-dropdown-info>
+        default
+        <button>Test</button>
+      </r-dropdown-info>
 
-<body>
-  <section class="container">
-    <r-dropdown-info>
-      default
-      <button>Test</button>
-    </r-dropdown-info>
+      <r-dropdown-info no-padding>no padding</r-dropdown-info>
 
-    <r-dropdown-info
-      no-padding
-    >
-      no padding
-    </r-dropdown-info>
+      <r-dropdown-info no-mask>no mask</r-dropdown-info>
 
-    <r-dropdown-info
-      no-mask
-    >
-      no mask
-    </r-dropdown-info>
+      <r-dropdown-info
+        location="bottom right"
+        tooltip
+        tooltip-location="bottom right"
+        label="Dropdown Info"
+      >
+        bottom right
+      </r-dropdown-info>
 
-    <r-dropdown-info
-      location="bottom right"
-      tooltip
-      tooltip-location="bottom right"
-      label="Dropdown Info"
-    >
-      bottom right
-    </r-dropdown-info>
+      <r-dropdown-info
+        location="bottom left"
+        tooltip
+        tooltip-location="bottom left"
+        label="Dropdown Info"
+      >
+        bottom left
+      </r-dropdown-info>
 
-    <r-dropdown-info
-      location="bottom left"
-      tooltip
-      tooltip-location="bottom left"
-      label="Dropdown Info"
-    >
-      bottom left
-    </r-dropdown-info>
+      <r-dropdown-info
+        location="top right"
+        tooltip
+        tooltip-location="top right"
+        label="Dropdown Info"
+      >
+        top right
+      </r-dropdown-info>
 
-    <r-dropdown-info
-      location="top right"
-      tooltip
-      tooltip-location="top right"
-      label="Dropdown Info"
-    >
-      top right
-    </r-dropdown-info>
+      <r-dropdown-info
+        location="top left"
+        tooltip
+        tooltip-location="top left"
+        label="Dropdown Info"
+      >
+        top left
+      </r-dropdown-info>
+    </section>
 
-    <r-dropdown-info
-      location="top left"
-      tooltip
-      tooltip-location="top left"
-      label="Dropdown Info"
-    >
-      top left
-    </r-dropdown-info>
-  </section>
-
-  <script>
-  </script>
-</body>
-
+    <script></script>
+  </body>
 </html>

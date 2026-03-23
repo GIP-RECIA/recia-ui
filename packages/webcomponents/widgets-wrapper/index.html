@@ -1,47 +1,48 @@
 <!doctype html>
 <html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark">
-  <script type="module" src="/index.ts"></script>
-</head>
+  <body>
+    <section class="container">
+      <r-widgets-wrapper
+        localization-uri="./widgets-wrapper/i18n.json"
+        soffit-uri="/portail/api/v5-1/userinfo?claims=private,ENTPersonGARIdentifiant,ESCOUAICourant,ESCOUAI,ENTPersonProfils&groups="
+        widget-max-count="6"
+        get-prefs-uri="/portail/api/prefs/getentityonlyprefs/Widgets"
+        put-prefs-uri="/portail/api/prefs/putprefs?fname=Widgets"
+        adapter-source-uri="./widgets-adapter/widgets-to-endpoints-adapter.js"
+        adapter-config-uri="./widgets-adapter/adapter-configuration.json"
+      >
+      </r-widgets-wrapper>
+    </section>
 
-<body>
-  <section class="container">
-    <r-widgets-wrapper
-      localization-uri="./widgets-wrapper/i18n.json"
-      soffit-uri="/portail/api/v5-1/userinfo?claims=private,ENTPersonGARIdentifiant,ESCOUAICourant,ESCOUAI,ENTPersonProfils&groups="
-      widget-max-count="6"
-      get-prefs-uri="/portail/api/prefs/getentityonlyprefs/Widgets"
-      put-prefs-uri="/portail/api/prefs/putprefs?fname=Widgets"
-      adapter-source-uri="./widgets-adapter/widgets-to-endpoints-adapter.js"
-      adapter-config-uri="./widgets-adapter/adapter-configuration.json"
-    >
-    </r-widgets-wrapper>
-  </section>
+    <script>
+      const documentEvents = ['init-widget', 'click-portlet-card', 'recia-actu-modal']
+      documentEvents.forEach((listener) => {
+        document.addEventListener(listener, (e) => {
+          if (!e.detail) {
+            console.log(e.type)
+            return
+          }
 
-  <script>
-    const documentEvents = [
-      'init-widget',
-      'click-portlet-card',
-      'recia-actu-modal',
-      'openSearchEsidoc'
-    ]
-    documentEvents.forEach((listener) => {
-      document.addEventListener(listener, (e) => {
-        if (!e.detail) {
-          console.log(e.type)
-          return
-        }
-
-        if (e.detail.event)
-          e.detail.event.preventDefault()
-        console.log(e.type, e.detail)
+          if (e.detail.event) e.detail.event.preventDefault()
+          console.log(e.type, e.detail)
+        })
       })
-    })
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

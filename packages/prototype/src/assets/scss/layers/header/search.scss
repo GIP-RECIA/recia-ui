@@ -4,13 +4,10 @@
 .search {
   flex: 0 1 434px;
   position: relative;
-  transition: flex-basis .15s ease-out;
+  transition: flex-basis 0.15s ease-out;
 
   &:hover,
-  &:has(
-    :focus-visible,
-    input:not(:placeholder-shown)
-  ) {
+  &:has(:focus-visible, input:not(:placeholder-shown)) {
     flex-basis: 600px;
   }
 
@@ -24,7 +21,7 @@
     > .start {
       display: inline-flex;
       margin-left: 12px;
-      opacity: .7;
+      opacity: 0.7;
 
       > svg {
         font-size: 16px;
@@ -47,7 +44,7 @@
     > .end {
       display: inline-flex;
       margin-right: 3px;
-      opacity: .7;
+      opacity: 0.7;
 
       > button {
         display: inline-flex;
@@ -62,7 +59,7 @@
     &:hover,
     &:has(input:focus-visible) {
       outline: 2px solid var(--#{$prefix}primary);
-      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
 
       > .start > svg {
         color: var(--#{$prefix}primary);
@@ -81,7 +78,7 @@
     flex-direction: column;
     row-gap: 8px;
     border-radius: 8px;
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
     max-height: calc(100vh - 126px);
     overflow-y: auto;
 
@@ -105,7 +102,7 @@
         > li > a {
           @include unstyled-link;
           display: block;
-          background-color: #F8F8F8;
+          background-color: #f8f8f8;
           border-radius: 4px;
           padding: 8px 10px;
           outline: none;
@@ -143,7 +140,7 @@
 
           &:hover,
           &:focus-visible {
-            background-color: #F0F0F0;
+            background-color: #f0f0f0;
 
             > header > .result-title {
               color: var(--#{$prefix}primary);

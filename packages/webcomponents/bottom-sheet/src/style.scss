@@ -30,7 +30,7 @@
   > .mask {
     position: absolute;
     inset: 0;
-    background-color: rgba(#000000, .25);
+    background-color: rgba(#000000, 0.25);
   }
 
   > .container {
@@ -59,14 +59,14 @@
       border-radius: 8px 8px 0 0;
       margin-top: 54px;
       padding: 16px;
-      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
-      animation: slide-up .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
+      animation: slide-up 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
       > .dragable {
         align-self: center;
         height: 6px;
         width: 104px;
-        opacity: .33;
+        opacity: 0.33;
         background-color: var(--#{$prefix}lighter-black);
         border-radius: 3px;
         margin-bottom: 16px;
@@ -78,7 +78,7 @@
         top: 16px;
         right: 16px;
         font-size: 20px;
-        opacity: .5;
+        opacity: 0.5;
         z-index: 1;
 
         &:hover,
@@ -89,7 +89,7 @@
       }
 
       &.slide-down {
-        animation: slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation: slide-down 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
       &.no-padding {

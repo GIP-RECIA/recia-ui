@@ -14,7 +14,7 @@
 
 .filters {
   border-radius: 10px;
-  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+  box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
 
   > header {
     > button {
@@ -33,7 +33,7 @@
         font-size: 16px;
         margin: 8px;
         color: var(--#{$prefix}basic-black);
-        transition: rotate .2s ease-in-out;
+        transition: rotate 0.2s ease-in-out;
       }
 
       &:hover,
@@ -179,7 +179,7 @@
           gap: 14px;
         }
 
-        &:not(:last-child){
+        &:not(:last-child) {
           &::after {
             content: none;
           }

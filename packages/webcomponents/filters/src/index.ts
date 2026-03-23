@@ -87,7 +87,7 @@ export class ReciaFilters extends LitElement {
   }
 
   updateActiveFilters(): void {
-    const activeFilters = [...this.checked.entries()].map(([key, value]) => {
+    const activeFilters = Array.from(this.checked.entries(), ([key, value]) => {
       const firstKey = this.data?.find(section => section.id === key)?.items[0].key
 
       return { id: key, checked: value.filter(it => it !== firstKey) }

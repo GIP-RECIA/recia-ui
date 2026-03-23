@@ -13,13 +13,13 @@
     position: fixed;
     inset: 0;
     z-index: 3;
-    background-color: rgba(#000000, .25);
+    background-color: rgba(#000000, 0.25);
   }
 
   > .topbar {
     position: relative;
     background-color: var(--#{$prefix}body-bg);
-    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
 
     > .not-logged {
       display: flex;
@@ -52,7 +52,7 @@
       content: '';
       display: block;
       height: 0;
-      transition: height .15s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: height 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &.search-open::after {

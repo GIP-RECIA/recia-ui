@@ -27,7 +27,7 @@
         flex: 0 0 auto;
         height: 70px;
         width: 70px;
-        color: HEXToRGBA($black, .3);
+        color: HEXToRGBA($black, 0.3);
 
         &.skeleton {
           border-radius: 4px;

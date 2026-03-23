@@ -9,7 +9,7 @@
 
     > * {
       width: 100%;
-      border-radius: 4px
+      border-radius: 4px;
     }
   }
 
@@ -26,11 +26,11 @@
         border-bottom: 1px solid var(--#{$prefix}stroke);
         font-weight: bold;
         font-size: var(--#{$prefix}font-size-sm);
-        border-radius: 3.5px 3.5px 0 0 ;
+        border-radius: 3.5px 3.5px 0 0;
 
         &.active {
           border-color: var(--#{$prefix}basic-black);
-          background-color: HEXToRGBA(var(--#{$prefix}system-blue), .1);
+          background-color: HEXToRGBA(var(--#{$prefix}system-blue), 0.1);
         }
 
         &:hover,
@@ -57,7 +57,7 @@
         outline: 1px solid var(--#{$prefix}stroke);
         border-radius: 10px;
         background-color: var(--#{$prefix}body-bg);
-        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+        box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
         padding: 16px;
         display: block;
         width: 100%;
@@ -71,7 +71,7 @@
         &:focus-visible {
           color: var(--#{$prefix}primary);
           outline: 1px solid var(--#{$prefix}primary);
-          box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+          box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
         }
       }
     }
@@ -100,5 +100,4 @@
       max-width: 345px;
     }
   }
-
 }

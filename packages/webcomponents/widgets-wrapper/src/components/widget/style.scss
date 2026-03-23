@@ -40,12 +40,12 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
   border-radius: 10px;
   height: 100%;
   border: 1px solid var(--#{$prefix}stroke);
-  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .05);
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.05);
   outline-color: transparent;
   outline-offset: -1px;
   transition:
-    outline .15s ease-out,
-    box-shadow .15s ease-out;
+    outline 0.15s ease-out,
+    box-shadow 0.15s ease-out;
 
   &-skeleton,
   &-placeholder {
@@ -110,16 +110,15 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
         display: inline-flex;
         align-items: center;
         gap: 0;
-        transition:
-          gap .15s ease-out;
+        transition: gap 0.15s ease-out;
 
         > .focus-indicator {
           font-size: 16px;
           opacity: 0;
           max-width: 0;
           transition:
-            opacity .15s ease-out,
-            max-width .15s ease-out;
+            opacity 0.15s ease-out,
+            max-width 0.15s ease-out;
         }
 
         &:hover,
@@ -145,10 +144,10 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
         font-size: 16px;
         margin: 4px;
         color: var(--#{$prefix}basic-black);
-        transition: rotate .2s ease-in-out;
+        transition: rotate 0.2s ease-in-out;
       }
 
-      &[aria-expanded="true"] {
+      &[aria-expanded='true'] {
         border-bottom-left-radius: unset;
         border-bottom-right-radius: unset;
       }
@@ -167,7 +166,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
   > .menu {
     overflow: hidden;
     border-radius: 0 0 10px 10px;
-    animation: widget-slide-down .15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: widget-slide-down 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
     > * {
       height: $menu-height;
@@ -198,16 +197,16 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
             height: 20px;
             width: 20px;
             color: var(--#{$prefix}basic-black);
-            opacity: .3;
+            opacity: 0.3;
 
-            &[class*="fa-"] {
+            &[class*='fa-'] {
               height: 18px;
               width: 18px;
             }
 
             &.error,
             &.warn {
-              opacity: .6;
+              opacity: 0.6;
             }
 
             &.error {
@@ -215,12 +214,12 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
             }
 
             &.warn {
-              color: #FFAA46 !important;
+              color: #ffaa46 !important;
             }
           }
 
           > img.icon {
-            opacity: .5;
+            opacity: 0.5;
           }
 
           > div {
@@ -236,7 +235,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
               flex-wrap: nowrap;
               align-items: center;
 
-              >.title {
+              > .title {
                 overflow: hidden;
                 text-overflow: ellipsis;
               }
@@ -258,7 +257,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
 
               &.description {
                 font-size: var(--#{$prefix}font-size-xs);
-                opacity: .6;
+                opacity: 0.6;
               }
             }
           }
@@ -267,7 +266,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
           &:focus-visible {
             outline: none;
             color: var(--#{$prefix}primary);
-            background-color: HEXToRGBA(var(--#{$prefix}btn-secondary-hover), .4);
+            background-color: HEXToRGBA(var(--#{$prefix}btn-secondary-hover), 0.4);
 
             > .icon {
               color: var(--#{$prefix}primary);
@@ -291,7 +290,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
         font-size: 38px;
         margin-bottom: 14px;
         color: var(--#{$prefix}basic-black);
-        opacity: .1;
+        opacity: 0.1;
       }
 
       > .text {
@@ -318,7 +317,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
     &:hover,
     &:has(:focus-visible) {
       outline: 2px solid var(--#{$prefix}primary);
-      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
     }
   }
 
@@ -339,12 +338,12 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
 
     &:hover,
     &:has(:focus-visible) {
-      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
     }
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
 
     &-skeleton,
     &-placeholder {

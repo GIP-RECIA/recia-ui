@@ -6,7 +6,8 @@
 .dropdown-favorites {
   position: relative;
 
-  > button { // TODO: need to be merged with navigation drawer css
+  > button {
+    // TODO: need to be merged with navigation drawer css
     position: relative;
     display: flex;
     align-items: center;
@@ -37,7 +38,7 @@
       flex: 0 0 $drawer-width;
       display: inline-flex;
       justify-content: center;
-      transition: opacity .15s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
       > svg {
         height: 22px;
@@ -77,7 +78,7 @@
 
     &.expended {
       > .icon {
-        opacity: .33;
+        opacity: 0.33;
       }
 
       > .text {
@@ -90,7 +91,7 @@
     position: absolute;
     background-color: var(--#{$prefix}body-bg);
     border-radius: 0 8px 8px 0;
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
     overflow: hidden;
     top: 0;
     left: 100%;

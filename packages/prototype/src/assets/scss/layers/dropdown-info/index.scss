@@ -24,14 +24,14 @@
     position: fixed;
     inset: 0;
     z-index: 1050;
-    background-color: rgba(#000000, .25);
+    background-color: rgba(#000000, 0.25);
   }
 
   > .menu {
     position: absolute;
     background-color: var(--#{$prefix}body-bg);
     border-radius: 10px;
-    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
     overflow: hidden;
     z-index: 1055;
     padding: 32px;

@@ -10,13 +10,13 @@ ul {
   text-align: center;
   font-size: var(--#{$prefix}font-size-xxs);
   font-weight: 500;
-  letter-spacing: -.25px;
+  letter-spacing: -0.25px;
 
   > li > a {
     @include unstyled-link;
     border: 1px solid var(--#{$prefix}stroke);
     border-radius: 10px;
-    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
     padding: 12px;
     display: inline-block;
     width: 100%;
@@ -24,16 +24,16 @@ ul {
     outline-color: transparent;
     outline-offset: -1px;
     transition:
-      outline .15s ease-in,
-      box-shadow .15s ease-in;
+      outline 0.15s ease-in,
+      box-shadow 0.15s ease-in;
 
     > svg {
       display: block;
       margin: 0 auto 8px auto;
       height: 64px;
       width: 64px;
-      color: HEXToRGBA(var(--#{$prefix}basic-black), .33);
-      transition: color .15s ease-in;
+      color: HEXToRGBA(var(--#{$prefix}basic-black), 0.33);
+      transition: color 0.15s ease-in;
 
       @media (hover: none) or (pointer: coarse) {
         color: var(--#{$prefix}primary);
@@ -47,7 +47,7 @@ ul {
     &:hover,
     &:focus-visible {
       outline: 2px solid var(--#{$prefix}primary);
-      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+      box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
 
       > svg {
         color: var(--#{$prefix}primary);

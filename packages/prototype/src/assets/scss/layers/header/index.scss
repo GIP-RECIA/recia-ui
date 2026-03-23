@@ -9,28 +9,28 @@
 
 body {
   &.transition-active {
-    transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: margin-left 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &.transition-active .header {
     > .navigation-drawer {
       transition:
-        transform .15s cubic-bezier(0.4, 0, 0.2, 1),
-        width .15s cubic-bezier(0.4, 0, 0.2, 1);
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     > .topbar > .principal-container > .middle {
       transition:
-        margin-left .15s cubic-bezier(0.4, 0, 0.2, 1),
-        transform .15s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-left 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     > .services-layout {
-      transition: margin-left .15s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: margin-left 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     > .notification-drawer {
-      transition: transform .15s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -56,7 +56,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 3;
-    background-color: rgba(#000000, .25);
+    background-color: rgba(#000000, 0.25);
   }
 
   > button {
@@ -73,7 +73,7 @@ body {
     top: 0;
     left: 0;
     background-color: var(--#{$prefix}lighter-black);
-    color: #FFF;
+    color: #fff;
     z-index: 2;
 
     > svg {
@@ -104,7 +104,7 @@ body {
   > .topbar {
     position: relative;
     background-color: var(--#{$prefix}body-bg);
-    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+    box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
 
     > * {
       padding: 16px;
@@ -150,7 +150,7 @@ body {
       content: '';
       display: block;
       height: 0;
-      transition: height .15s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: height 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &:has(> .principal-container > .middle.visible)::after {

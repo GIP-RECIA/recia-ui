@@ -14,7 +14,7 @@
     }
   }
 
-  > ul  {
+  > ul {
     @include unstyled-list;
 
     > li {
@@ -28,7 +28,7 @@
         padding: 4px 10px;
       }
 
-      > ul  {
+      > ul {
         @include unstyled-list;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -50,7 +50,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    > ul > li > ul  {
+    > ul > li > ul {
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 16px;
     }
