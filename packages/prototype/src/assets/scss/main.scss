@@ -10,13 +10,11 @@
 @forward '@fortawesome/fontawesome-free/css/solid.min.css';
 @forward '@fortawesome/fontawesome-free/css/regular.min.css';
 
-
 @use '@gip-recia/ui' as *;
 
 /*!
  * Layers
  */
-@use 'layers/actions';
 @use 'layers/alert';
 @use 'layers/bottom-sheet';
 @use 'layers/discover';

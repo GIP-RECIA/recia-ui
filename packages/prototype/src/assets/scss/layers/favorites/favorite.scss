@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '@gip-recia/ui' as *;
-@use '../actions' as *;
 
 @mixin favorite {
   border-radius: 10px;
@@ -24,7 +23,7 @@
     flex: 0 0 auto;
     height: 24px;
     width: 24px;
-    opacity: .2;
+    opacity: 0.2;
   }
 
   > .name {
@@ -35,7 +34,7 @@
       font-size: var(--#{$prefix}font-size-xs);
     }
 
-    > span[aria-hidden="true"] {
+    > span[aria-hidden='true'] {
       position: absolute;
       inset: 0;
       border-radius: 10px;
@@ -53,14 +52,14 @@
   &:hover,
   &:has(:focus-visible) {
     outline: 2px solid var(--#{$prefix}primary);
-    box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), .2);
+    box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
   }
 
   &:has(.actions:not(.disabled)) {
     &:hover,
     &:has(:focus-visible) {
       outline: none;
-      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, .1);
+      box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
     }
   }
 }
