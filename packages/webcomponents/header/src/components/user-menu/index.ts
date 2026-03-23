@@ -241,6 +241,7 @@ export class ReciaUserMenu extends LitElement {
                 `
               : html`
                   <button
+                    type="button"
                     id="${item.id}"
                     @click="${(e: Event) => this.emitEvent(e, 'button', item.id)}"
                   >
@@ -272,6 +273,7 @@ export class ReciaUserMenu extends LitElement {
         </div>
         <button
           ${ref(this.buttonRef)}
+          type="button"
           aria-expanded="${this.isExpanded}"
           aria-controls="user-menu"
           aria-label="${msg(str`Menu utilisateur`)}"

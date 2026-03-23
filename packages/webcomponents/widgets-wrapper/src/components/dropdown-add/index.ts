@@ -99,6 +99,7 @@ export class ReciaDropdownAdd extends LitElement {
     return html`
       <div class="dropdown">
         <button
+          type="button"
           id="add"
           class="btn-secondary small"
           ?disabled="${this.disabled}"
@@ -128,6 +129,7 @@ export class ReciaDropdownAdd extends LitElement {
               ({ uid, name }) => html`
                 <li>
                   <button
+                    type="button"
                     @click="${(e: Event) => this.handleItemClick(e, uid)}"
                   >
                     ${name}

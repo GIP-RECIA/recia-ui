@@ -174,7 +174,9 @@ export class ReciaFilters extends LitElement {
     return html`
         <div class="filters" inert>
           <header>
-            <button>
+            <button
+              type="button"
+            >
                <span class="heading skeleton"></span>
             </button>
             <span class="heading skeleton"></span>
@@ -224,6 +226,7 @@ export class ReciaFilters extends LitElement {
       <div class="filters">
         <header>
           <button
+            type="button"
             aria-expanded="${this.isExpanded}"
             aria-controls="filter-menu"
             @click="${this.toggle}"

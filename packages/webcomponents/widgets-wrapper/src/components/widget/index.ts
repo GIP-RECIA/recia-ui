@@ -186,6 +186,7 @@ export class ReciaWidget extends LitElement {
               `
             : html`
                 <button
+                  type="button"
                   title="${title}"
                   @click="${(e: Event) => this.clickOnItem(e, item)}"
                 >
@@ -271,6 +272,7 @@ export class ReciaWidget extends LitElement {
                 ? html`
                     <div class="action-delete">
                       <button
+                        type="button"
                         aria-label="${msg(str`Supprimer le widget`)}"
                         @click="${() => this.deleteWidget()}"
                       >
@@ -285,6 +287,7 @@ export class ReciaWidget extends LitElement {
                 ? html`
                     <div class="action-back">
                       <button
+                        type="button"
                         aria-label="${msg(str`Réordonner vers la gauche`)}"
                         @click="${() => this.moveWidget('-1')}"
                       >
@@ -300,6 +303,7 @@ export class ReciaWidget extends LitElement {
                 ? html`
                     <div class="action-next">
                       <button
+                        type="button"
                         aria-label="${msg(str`Réordonner vers la droite`)}"
                         @click="${() => this.moveWidget('+1')}"
                       >
@@ -332,6 +336,7 @@ export class ReciaWidget extends LitElement {
         ${this.actionTemplate()}
         <header ?inert="${this.manage || this.loading || this.placeholder}">
           <button
+            type="button"
             aria-expanded="${this.isExpanded}"
             aria-controls="widget-${slug}-menu"
             aria-label="Widget ${this.name}"

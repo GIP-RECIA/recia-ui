@@ -141,6 +141,7 @@ export class ReciaService extends LitElement {
             }
             <div class="favorite">
               <button
+                type="button"
                 class="${classMap({ marked: this.isFavorite })}"
                 aria-label="${this.isFavorite ? msg(str`Retirer des favoris`) : msg(str`Ajouter aux favoris`)} - ${this.name}"
                 @click="${this.toggleFavorite}"
@@ -152,6 +153,7 @@ export class ReciaService extends LitElement {
               this.more
                 ? html`
                     <button
+                      type="button"
                       class="more"
                       aria-label="${msg(str`En savoir plus`)} - ${this.name}"
                       @click="${this.openMore}"

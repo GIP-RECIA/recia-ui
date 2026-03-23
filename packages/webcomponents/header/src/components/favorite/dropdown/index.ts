@@ -112,6 +112,7 @@ export class ReciaFavoriteDropdown extends LitElement {
       <div class="dropdown-favorites">
         <button
           ${ref(this.buttonRef)}
+          type="button"
           id="dropdown-favorites-button"
           title="${msg(str`Favoris`)}"
           aria-label="${msg(str`Menu favoris`)}"

@@ -153,7 +153,10 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
             >
               ${msg(str`Fermer`)}
             </button>
-            <button type="submit" class="btn-primary">
+            <button
+              type="submit"
+              class="btn-primary"
+            >
               ${msg(str`Changer d'établissement`)}
             </button>
           </footer>

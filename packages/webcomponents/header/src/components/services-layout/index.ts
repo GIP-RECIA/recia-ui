@@ -221,6 +221,7 @@ export class ReciaServicesLayout extends LitElement {
           <header>
             <div class="heading">
               <button
+                type="button"
                 class="btn-tertiary circle"
                 aria-label="${msg(str`Fermer le menu`)}"
                 @click="${this.closeMenu}"
@@ -235,7 +236,9 @@ export class ReciaServicesLayout extends LitElement {
                     <div class="sort">
                       <label for="services-sort">Trier par :</label>
                       <select name="" id="services-sort">
-                        <button>
+                        <button
+                          type="button"
+                        >
                           <selectedcontent></selectedcontent>
                         </button>
                         <option value="pop-up">Popularité<i class="fa-solid fa-arrow-up"></i></option>

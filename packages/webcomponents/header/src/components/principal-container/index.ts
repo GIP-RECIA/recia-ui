@@ -87,6 +87,7 @@ export class ReciaPrincipalContainer extends LitElement {
                 ? html`
                     <div class="tooltip-container">
                       <button
+                        type="button"
                         id="${UserMenuItem.InfoEtab}"
                         class="btn-secondary-toggle circle"
                         aria-label="${msg(str`Menu informations de l'établissement`)}"
@@ -153,6 +154,7 @@ export class ReciaPrincipalContainer extends LitElement {
                       >
                       </div>
                       <button
+                        type="button"
                         class="btn-secondary circle search-button"
                         aria-label="${msg(str`Rechercher dans l'ENT`)}"
                         @click="${(_: Event) => {
@@ -192,6 +194,7 @@ export class ReciaPrincipalContainer extends LitElement {
                     <div class="notification">
                       <div class="notification-dot top right"></div>
                       <button
+                        type="button"
                         class="btn-secondary circle"
                         aria-controls="notification-drawer"
                         aria-expanded="false"

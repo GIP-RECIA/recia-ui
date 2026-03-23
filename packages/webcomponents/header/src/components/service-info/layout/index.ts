@@ -215,6 +215,7 @@ export class ReciaServiceInfoLayout extends LitElement {
         </div>
         <footer>
           <button
+            type="button"
             class="btn-secondary close"
             @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
           >
@@ -238,6 +239,7 @@ export class ReciaServiceInfoLayout extends LitElement {
         </div>
         <footer>
           <button
+            type="button"
             class="btn-secondary close"
             @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
           >
@@ -283,6 +285,7 @@ export class ReciaServiceInfoLayout extends LitElement {
             this.canTogglefavorite
               ? html`
                   <button
+                    type="button"
                     class="btn-secondary"
                     @click="${this.toggleFavorite}"
                   >
@@ -315,6 +318,7 @@ export class ReciaServiceInfoLayout extends LitElement {
         </div>
         <footer>
           <button
+            type="button"
             class="btn-secondary close"
             @click="${() => this.dispatchEvent(new CustomEvent('close'))}"
           >

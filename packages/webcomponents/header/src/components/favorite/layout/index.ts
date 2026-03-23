@@ -205,6 +205,7 @@ export class ReciaFavoriteLayout extends LitElement {
       ? html`
           <div class="actions">
             <button
+              type="button"
               class="btn-secondary small"
               @click="${() => this.toggleManage()}"
             >
@@ -215,6 +216,7 @@ export class ReciaFavoriteLayout extends LitElement {
               this.isManage
                 ? html`
                     <button
+                      type="button"
                       class="btn-secondary small"
                       @click="${() => this.toggleManage(true)}"
                     >
@@ -238,6 +240,7 @@ export class ReciaFavoriteLayout extends LitElement {
                 ? html`
                     <div class="action-delete">
                       <button
+                        type="button"
                         aria-label="${msg(str`Supprimer le favori`)} - ${item.name}"
                         @click="${() => this.deleteItem(id, item, index)}"
                       >
@@ -252,6 +255,7 @@ export class ReciaFavoriteLayout extends LitElement {
                 ? html`
                     <div class="action-back">
                       <button
+                        type="button"
                         aria-label="${msg(str`Réordonner vers la gauche`)} - ${item.name}"
                         @click="${() => this.moveItem(id, item, '-1')}"
                       >
@@ -261,6 +265,7 @@ export class ReciaFavoriteLayout extends LitElement {
                     <div class="grow-1"></div>
                     <div class="action-next">
                       <button
+                        type="button"
                         aria-label="${msg(str`Réordonner vers la droite`)} - ${item.name}"
                         @click="${() => this.moveItem(id, item, '+1')}"
                       >

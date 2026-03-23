@@ -135,6 +135,7 @@ export class ReciaDropdownInfo extends LitElement {
     return html`
       <div class="dropdown-info">
         <button
+          type="button"
           id="dropdown-info-button"
           class="${classMap({
             active: this.isExpanded,

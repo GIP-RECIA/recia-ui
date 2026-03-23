@@ -34,8 +34,15 @@ export class ReciaNotificationDrawer extends LitElement {
 
   render(): TemplateResult {
     return html`
-      <div id="notification-drawer" class="notification-drawer">
-        <button class="btn-tertiary circle close" aria-label="Fermer la modale">
+      <div
+        id="notification-drawer"
+        class="notification-drawer"
+      >
+        <button
+          type="button"
+          class="btn-tertiary circle close"
+          aria-label="Fermer la modale"
+        >
           <i class="fa-solid fa-times"></i>
         </button>
         <div class="empty">

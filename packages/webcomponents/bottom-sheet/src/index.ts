@@ -206,6 +206,7 @@ export class ReciaBottomSheet extends LitElement {
               !this.closeIcon
                 ? html`
                     <button
+                      type="button"
                       class="btn-tertiary circle close"
                       aria-label="${msg(str`Fermer la modale`)}"
                       @click="${this.close}"

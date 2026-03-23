@@ -428,6 +428,7 @@ export class ReciaWidgetsWrapper extends LitElement {
               !this.isEditingWidgetsPrefs
                 ? html`
                     <button
+                      type="button"
                       class="btn-secondary small"
                       ?disabled="${
                         Array.from(this.widgetDataMap.values()).some(x => x.loading)
@@ -455,6 +456,7 @@ export class ReciaWidgetsWrapper extends LitElement {
                     >
                     </r-dropdown-add>
                     <button
+                      type="button"
                       class="btn-secondary small"
                       @click="${this.clickOnAnnuler}"
                     >
@@ -467,6 +469,7 @@ export class ReciaWidgetsWrapper extends LitElement {
                       ${getIcon(faXmark)}
                     </button>
                     <button
+                      type="button"
                       class="btn-secondary small"
                       ?disabled="${!this.canSave()}"
                       title="Save"

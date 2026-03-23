@@ -177,6 +177,7 @@ export class ReciaNavigationDrawer extends LitElement {
       : html`
           <li>
             <button
+              type="button"
               id="nav-${item.id}"
               title="${item.name}"
               aria-label="${item.ariaLabel ?? nothing}"
@@ -205,6 +206,7 @@ export class ReciaNavigationDrawer extends LitElement {
         aria-label="${msg(str`Tiroir de navigation`)}"
       >
         <button
+          type="button"
           class="drawer-toggle"
           aria-expanded="${this.visible || this.isExpanded}"
           aria-controls="navigation-drawer"
@@ -237,6 +239,7 @@ export class ReciaNavigationDrawer extends LitElement {
             }
             <li>
               <button
+                type="button"
                 id="nav-all-services"
                 title="${msg(str`Tous les services`)}"
                 class="${classMap({
@@ -253,6 +256,7 @@ export class ReciaNavigationDrawer extends LitElement {
             </li>
             <li id="nav-favorite">
               <button
+                type="button"
                 title="${msg(str`Favoris`)}"
                 class="favorites-bottom-sheet"
                 @click="${this.openFavoriteBottomSheet}"
