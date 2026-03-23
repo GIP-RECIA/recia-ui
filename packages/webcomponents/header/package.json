@@ -56,7 +56,7 @@
     "@uportal/open-id-connect": "^1.40.2",
     "bottom-sheet": "workspace:^",
     "concurrently": "^9.2.1",
-    "eslint": "^10.0.3",
+    "eslint": "^10.1.0",
     "eslint-plugin-format": "^2.0.1",
     "filters": "workspace:^",
     "json-server": "^0.17.4",
