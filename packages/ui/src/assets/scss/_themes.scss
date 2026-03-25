@@ -2,7 +2,7 @@
 @use 'core/variables' as *;
 
 @each $domain, $data in $domain-theme {
-  .#{'theme-#{map.get($data, id)}'} {
+  .#{'#{$prefix}theme-#{map.get($data, id)}'} {
     @each $color, $value in map.get($data, theme-colors) {
       --#{$prefix}#{$color}: #{$value};
       --#{$prefix}#{$color}-light: #{$value};

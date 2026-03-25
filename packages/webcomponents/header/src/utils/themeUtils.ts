@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-function updateTheme(theme: string) {
+function updateTheme(theme: string, prefix: string = 'recia-') {
   document.body.classList.forEach((cls) => {
-    if (cls.startsWith('theme-'))
+    if (cls.startsWith(`${prefix}-theme-`))
       document.body.classList.remove(cls)
   })
-  document.body.classList.add(`theme-${theme}`)
+  document.body.classList.add(`${prefix}-theme-${theme}`)
 }
 
 export {
