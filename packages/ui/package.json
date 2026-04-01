@@ -44,11 +44,11 @@
     "build": "sass --style=compressed --error-css --update src/assets/scss/index.scss dist/recia-style.css",
     "release": "yarn run -T commit-and-tag-version -t 'ui/v' --path . --release-as $1 || echo 'Please specify a version type (yarn run release -- [patch, minor, major])'"
   },
-  "peerDependencies": {
-    "@antfu/eslint-config": "^7.6.1",
-    "eslint": "^10.0.2",
+  "devDependencies": {
+    "@antfu/eslint-config": "^8.0.0",
+    "eslint": "^10.1.0",
     "eslint-plugin-format": "^2.0.1",
     "ress": "^5.0.2",
-    "sass": "^1.97.3"
+    "sass": "^1.98.0"
   }
 }

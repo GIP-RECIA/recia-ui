@@ -807,12 +807,12 @@ __metadata:
 "@gip-recia/ui@workspace:^, @gip-recia/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@gip-recia/ui@workspace:packages/ui"
-  peerDependencies:
-    "@antfu/eslint-config": ^7.6.1
-    eslint: ^10.0.2
-    eslint-plugin-format: ^2.0.1
-    ress: ^5.0.2
-    sass: ^1.97.3
+  dependencies:
+    "@antfu/eslint-config": "npm:^8.0.0"
+    eslint: "npm:^10.1.0"
+    eslint-plugin-format: "npm:^2.0.1"
+    ress: "npm:^5.0.2"
+    sass: "npm:^1.98.0"
   languageName: unknown
   linkType: soft
 
