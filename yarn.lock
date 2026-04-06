@@ -800,7 +800,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
     vite-plugin-svg-spritemap: "npm:^1.0.13"
   languageName: unknown
   linkType: soft
@@ -839,7 +839,7 @@ __metadata:
     lodash-es: "npm:^4.18.1"
     regenerator-runtime: "npm:^0.14.1"
     typescript: "npm:^5.9.3"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -2050,7 +2050,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -2183,7 +2183,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -3217,7 +3217,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -4239,7 +4239,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -4341,7 +4341,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -4729,7 +4729,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -6830,7 +6830,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -7151,7 +7151,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
@@ -8540,9 +8540,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "vite@npm:7.3.1"
+"vite@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "vite@npm:7.3.2"
   dependencies:
     esbuild: "npm:^0.27.0"
     fdir: "npm:^6.5.0"
@@ -8591,7 +8591,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/62e48ffa4283b688f0049005405a004447ad38ffc99a0efea4c3aa9b7eed739f7402b43f00668c0ee5a895b684dc953d62f0722d8a92c5b2f6c95f051bceb208
+  checksum: 10/c5f7a9a60011c41c836cedf31c8ee7624102aff9b6a7f3aab2ff47639721bba0916f81994c3a3ea6577a16c4f0dfee1e7dbd244e0da8edd5954e3c6d48daaaa2
   languageName: node
   linkType: hard
 
@@ -8639,7 +8639,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
     vite-plugin-svg-spritemap: "npm:^1.0.13"
   languageName: unknown
   linkType: soft
@@ -8696,7 +8696,7 @@ __metadata:
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
     unplugin-dts: "npm:^1.0.0-beta.6"
-    vite: "npm:^7.3.1"
+    vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
 
