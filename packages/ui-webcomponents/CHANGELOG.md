@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.13.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.0...ui-webcomponents/v1.13.1) (2026-04-23)
+
+
+### Features
+
+* **header:** add notification drawer toggle logic ([01c5ef0](https://github.com/GIP-RECIA/recia-ui/commit/01c5ef08afdd05618c6b8d6d9613754be58e5eea))
+* type all buttons ([1c2f885](https://github.com/GIP-RECIA/recia-ui/commit/1c2f885cc03814a15fb71c048969655b43c6afdf))
+
+
+### Bug Fixes
+
+* **header:** info etab logo ([f8cd697](https://github.com/GIP-RECIA/recia-ui/commit/f8cd697c7180113dbb7d02fb6addef312626d5eb))
+* **header:** navigation drawer structure name visibility (RGAA) ([987c8d2](https://github.com/GIP-RECIA/recia-ui/commit/987c8d2160657220b8e9af60d286641f580bccb6))
+* **header:** overflow cropped in info etab ([de9fb14](https://github.com/GIP-RECIA/recia-ui/commit/de9fb143311031afba8d356373021e71140899ca))
+* **header:** service info render on small screen ([b435427](https://github.com/GIP-RECIA/recia-ui/commit/b435427274f018f8a7ba875950fa07988666f7b0))
+* **header:** services layout back button position ([9ddb9f9](https://github.com/GIP-RECIA/recia-ui/commit/9ddb9f93841592dd9a5090abb440ccaad40e7a69))
+* **header:** services layout focus (RGAA) ([88ac39e](https://github.com/GIP-RECIA/recia-ui/commit/88ac39eb4eaf9105bddc59dbdd34876293e19c1b))
+* **wayf:** outline transition ([4579cdb](https://github.com/GIP-RECIA/recia-ui/commit/4579cdb8863c7838cb09e41bca7bef1ac5a2f20e))
+* **widgets-wrapper:** outline transition ([6ec1ffe](https://github.com/GIP-RECIA/recia-ui/commit/6ec1ffef06ed9bb589c47e999ff45dd521e7f586))
+
 ## [1.13.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.12.1...ui-webcomponents/v1.13.0) (2026-02-25)
 
 
