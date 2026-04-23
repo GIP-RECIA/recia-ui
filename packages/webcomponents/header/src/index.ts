@@ -273,6 +273,9 @@ export class ReciaHeader extends LitElement {
   isNavigationDrawerExpanded: boolean = false
 
   @state()
+  isNotificationDrawerExpanded: boolean = false
+
+  @state()
   isServicesLayout: boolean = false
 
   @state()
@@ -363,6 +366,14 @@ export class ReciaHeader extends LitElement {
     this.isNavigationDrawerExpanded = isExpanded
   }
 
+  toggleNotification(e: CustomEvent): void {
+    const { isExpanded } = e.detail
+    if (!isExpanded === undefined || typeof isExpanded !== 'boolean')
+      return
+
+    this.isNotificationDrawerExpanded = isExpanded
+  }
+
   async toggleServicesLayout(e: CustomEvent): Promise<void> {
     const { show } = e.detail
     if (!show === undefined || typeof show !== 'boolean')
@@ -397,6 +408,7 @@ export class ReciaHeader extends LitElement {
         this.isSearchOpen = true
         break
       case UserMenuItem.Notification:
+        this.toggleNotification(new CustomEvent(e.type, { detail: { isExpanded: true } }))
         break
       case UserMenuItem.Account:
         break
@@ -428,7 +440,7 @@ export class ReciaHeader extends LitElement {
     const authenticated = $authenticated.get()
     const infoEtabData = $infoEtabData.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
-    const { serviceInfoApiUrl, portletInfoApiUrl, navigationDrawerVisible } = $settings.get()
+    const { notifications, serviceInfoApiUrl, portletInfoApiUrl, navigationDrawerVisible } = $settings.get()
     const isNavigationDrawerVisible = navigationDrawerVisible || this.isServicesLayout || this.isFavoriteDropdown
 
     return html`
@@ -463,12 +475,14 @@ export class ReciaHeader extends LitElement {
         >
           <r-principal-container
             ?navigation-drawer-visible="${isNavigationDrawerVisible}"
+            ?notification-drawer-visible="${this.isNotificationDrawerExpanded}"
             name="${orgName}"
             ?search-open="${this.isSearchOpen}"
             ?searching="${this.isSearching}"
             ?services-open="${this.isServicesLayout}"
             @user-menu-event="${this.handleUserMenuEvent}"
             @search-event="${this.handleSearchEvent}"
+            @toggle-notification-drawer="${this.toggleNotification}"
           >
           </r-principal-container>
         </div>
@@ -482,8 +496,17 @@ export class ReciaHeader extends LitElement {
                   @open-more="${this.openMore}"
                 >
                 </r-services-layout>
-                <r-notification-drawer>
-                </r-notification-drawer>
+                ${
+                  notifications
+                    ? html`
+                        <r-notification-drawer
+                          ?expanded="${this.isNotificationDrawerExpanded}"
+                          @close="${this.toggleNotification}"
+                        >
+                        </r-notification-drawer>
+                      `
+                    : nothing
+                }
               `
             : nothing
         }

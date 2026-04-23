@@ -4,6 +4,7 @@
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .notification-drawer {
+  visibility: hidden;
   position: fixed;
   top: $header-height;
   bottom: 0;
@@ -16,6 +17,9 @@
   clip-path: inset(0 0 0 -32px);
   padding: 16px;
   transform: translateX(320px + 32);
+  transition:
+    visibility 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   > .close {
     position: absolute;
@@ -59,7 +63,14 @@
   }
 
   &.expended {
+    visibility: visible;
     transform: translateX(0);
+  }
+
+  &:focus-visible {
+    outline: 2px dotted var(--#{$prefix}primary);
+    outline-offset: -2px;
+    border-radius: 10px;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {

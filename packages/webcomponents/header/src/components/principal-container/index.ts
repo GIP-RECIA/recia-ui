@@ -52,6 +52,9 @@ export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
 
+  @property({ type: Boolean, attribute: 'notification-drawer-visible' })
+  isNotificationDrawerVisible: boolean = false
+
   @property({ type: Boolean, attribute: 'searching' })
   isSearching: boolean = false
 
@@ -196,9 +199,16 @@ export class ReciaPrincipalContainer extends LitElement {
                       <button
                         type="button"
                         class="btn-secondary circle"
+                        aria-expanded="${this.isNotificationDrawerVisible}"
                         aria-controls="notification-drawer"
-                        aria-expanded="false"
                         aria-label="${msg(str`Tiroir de notifications`)}"
+                        @click="${(_: Event) => {
+                          this.dispatchEvent(new CustomEvent('toggle-notification-drawer', {
+                            detail: {
+                              isExpanded: !this.isNotificationDrawerVisible,
+                            },
+                          }))
+                        }}"
                       >
                         ${getIcon(faBell)}
                       </button>

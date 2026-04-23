@@ -14,16 +14,27 @@
  * limitations under the License.
  */
 
-import type { TemplateResult } from 'lit'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import type { PropertyValues, TemplateResult } from 'lit'
+import type { Ref } from 'lit/directives/ref.js'
+import { faBellSlash, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { css, html, LitElement, unsafeCSS } from 'lit'
+import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { componentName } from '../../../../common/config.ts'
 import langHelper from '../../helpers/langHelper.ts'
+import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
 export class ReciaNotificationDrawer extends LitElement {
+  @property({ type: Boolean, attribute: 'expanded' })
+  isExpanded: boolean = false
+
+  private layoutRef: Ref<HTMLElement> = createRef()
+
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -32,23 +43,82 @@ export class ReciaNotificationDrawer extends LitElement {
     updateWhenLocaleChanges(this)
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    document.addEventListener('keyup', this.handleOutsideEvents.bind(this))
+    document.addEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    document.removeEventListener('keyup', this.handleOutsideEvents.bind(this))
+    document.removeEventListener('click', this.handleOutsideEvents.bind(this))
+  }
+
+  protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
+    if (_changedProperties.has('isExpanded')) {
+      if (this.isExpanded === true) {
+        setTimeout(() => {
+          this.layoutRef.value?.focus()
+        }, 150)
+      }
+    }
+    return true
+  }
+
+  handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
+    const catchEvents: EventTarget[] = [
+      this.parentNode
+        ?.querySelector('r-principal-container')
+        ?.shadowRoot
+        ?.querySelector('r-user-menu')
+        ?.shadowRoot
+        ?.querySelector('button#notification') as EventTarget,
+      this.parentNode
+        ?.querySelector('r-principal-container')
+        ?.shadowRoot
+        ?.querySelector('.notification > button') as EventTarget,
+    ]
+    if (
+      this.isExpanded
+      && e.target instanceof HTMLElement
+      && !(
+        this.contains(e.target)
+        || e.composedPath().includes(this)
+        || catchEvents?.some(event => e.composedPath().includes(event))
+      )
+    ) {
+      this.closeDrawer()
+    }
+  }
+
+  closeDrawer(_: Event | undefined = undefined): void {
+    this.dispatchEvent(new CustomEvent('close', { detail: { isExpanded: false } }))
+  }
+
   render(): TemplateResult {
     return html`
       <div
+        ${ref(this.layoutRef)}
         id="notification-drawer"
-        class="notification-drawer"
+        tabindex="-1"
+        class="${classMap({
+          expended: this.isExpanded,
+        })}notification-drawer"
       >
         <button
           type="button"
           class="btn-tertiary circle close"
-          aria-label="Fermer la modale"
+          aria-label="${msg(str`Fermer le tiroir notification`)}"
+          @click="${this.closeDrawer}"
         >
-          <i class="fa-solid fa-times"></i>
+          ${getIcon(faTimes)}
         </button>
         <div class="empty">
-          <i class="icon fa-solid fa-bell-slash"></i>
+          ${getIconWithStyle(faBellSlash, undefined, { icon: true })}
           <span class="text">
-            Vous n'avez<span class="large">Aucune notification</span>
+            ${msg(str`Vous n'avez`)}
+            <span class="large">${msg(str`Aucune notification`)}</span>
           </span>
         </div>
       </div>

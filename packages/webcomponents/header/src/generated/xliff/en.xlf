@@ -238,6 +238,14 @@ Please try reopening this file.</target>
   <source>Aucun favori <x id="0" equiv-text="${'Médiacentre'}"/></source>
   <target>No <x id="0" equiv-text="${'Médiacentre'}"/> favorite</target>
 </trans-unit>
+<trans-unit id="s94c8acbfcc0796b5">
+  <source>Aucune notification</source>
+  <target>no notification</target>
+</trans-unit>
+<trans-unit id="sdd2761afe5940863">
+  <source>Fermer le tiroir notification</source>
+  <target>Close notification drawer</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
