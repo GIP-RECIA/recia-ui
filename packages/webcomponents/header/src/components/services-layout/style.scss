@@ -54,7 +54,7 @@
   }
 }
 
-.services-layout {
+#services-layout {
   position: fixed;
   inset: $header-height 0 0 0;
   z-index: -1;
@@ -121,6 +121,12 @@
       justify-content: center;
       height: 100px;
     }
+  }
+
+  &:focus-visible {
+    outline: 2px dotted var(--#{$prefix}primary);
+    outline-offset: -2px;
+    border-radius: 10px;
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
