@@ -56,8 +56,6 @@ export class ReciaSearch extends LitElement {
 
   private inputRef: Ref<HTMLInputElement> = createRef()
 
-  private parentNodeElement: ParentNode | null | undefined
-
   constructor() {
     super()
     const lang = langHelper.getPageLang()
@@ -80,10 +78,6 @@ export class ReciaSearch extends LitElement {
     document.removeEventListener('click', this.handleOutsideEvents.bind(this))
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues): void {
-    this.parentNodeElement = this.shadowRoot?.host.parentNode?.parentNode
-  }
-
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('isOpen') && this.isOpen === true) {
       this.inputRef.value?.focus()
@@ -103,8 +97,14 @@ export class ReciaSearch extends LitElement {
 
   handleOutsideEvents(e: KeyboardEvent | MouseEvent): void {
     const catchEvents: EventTarget[] = [
-      this.parentNodeElement?.querySelector('.search-button') as EventTarget,
-      this.parentNodeElement?.querySelector('r-user-menu')?.shadowRoot?.querySelector('button#search') as EventTarget,
+      this.parentNode
+        ?.parentNode
+        ?.querySelector('.search-button') as EventTarget,
+      this.parentNode
+        ?.parentNode
+        ?.querySelector('r-user-menu')
+        ?.shadowRoot
+        ?.querySelector('button#search') as EventTarget,
     ]
     if (
       this.isOpen
