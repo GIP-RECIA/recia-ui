@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.13.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.1...ui-webcomponents/v1.13.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **filters:** mobile separator ([b611270](https://github.com/GIP-RECIA/recia-ui/commit/b61127025188131033fae929f8c95ef9a1612c5d))
+
 ## [1.13.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.0...ui-webcomponents/v1.13.1) (2026-04-23)
 
 
