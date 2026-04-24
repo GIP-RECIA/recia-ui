@@ -2,7 +2,6 @@
   "name": "wayf",
   "type": "module",
   "private": true,
-  "description": "",
   "contributors": [
     {
       "name": "Quentin Guillemin",

@@ -1,8 +1,7 @@
 {
   "name": "app-mobile",
   "type": "module",
-  "version": "0.0.0",
-  "description": "",
+  "private": true,
   "contributors": [
     {
       "name": "Quentin Guillemin",

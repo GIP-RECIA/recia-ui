@@ -2,7 +2,6 @@
   "name": "widgets-wrapper",
   "type": "module",
   "private": true,
-  "description": "",
   "contributors": [
     {
       "name": "Quentin Guillemin",

@@ -2,7 +2,6 @@
   "name": "bottom-sheet",
   "type": "module",
   "private": true,
-  "description": "",
   "contributors": [
     {
       "name": "Quentin Guillemin",
