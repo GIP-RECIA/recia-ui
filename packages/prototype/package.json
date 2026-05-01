@@ -20,7 +20,7 @@
     "test:unit": "echo No tests available"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^8.0.0",
+    "@antfu/eslint-config": "^8.2.0",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-regular-svg-icons": "^7.2.0",
