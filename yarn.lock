@@ -4717,7 +4717,7 @@ __metadata:
     json-server: "npm:^0.17.4"
     lit: "npm:^3.3.2"
     lodash-es: "npm:^4.18.1"
-    match-sorter: "npm:^8.2.0"
+    match-sorter: "npm:^8.3.0"
     nanostores: "npm:^1.2.0"
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
@@ -5530,13 +5530,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"match-sorter@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "match-sorter@npm:8.2.0"
+"match-sorter@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "match-sorter@npm:8.3.0"
   dependencies:
     "@babel/runtime": "npm:^7.23.8"
     remove-accents: "npm:0.5.0"
-  checksum: 10/4f96acc9dd6b35f6e65cfff0462a6a0305206e5f9966cc08311c36ae4709da91ab7cc6aec6b541f7ca3305dcb9a0a92b2ac87b5844735a13d3345f829d618403
+  checksum: 10/bf3f36a0844270dcc87edd639ef06534b07be2061e5dd0dc35b1168f8e16cab4897a0b471f0762e44102c95b80ff1392147f6ee96ac6fc28ef76652ea48c1f82
   languageName: node
   linkType: hard
 
