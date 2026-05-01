@@ -1866,7 +1866,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@volar/typescript@npm:^2.4.17":
+"@volar/typescript@npm:^2.4.26":
   version: 2.4.28
   resolution: "@volar/typescript@npm:2.4.28"
   dependencies:
@@ -2168,7 +2168,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -3202,7 +3202,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -4225,7 +4225,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -4327,7 +4327,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -4715,7 +4715,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -6816,7 +6816,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -7137,7 +7137,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
@@ -8424,12 +8424,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-dts@npm:^1.0.0-beta.6":
-  version: 1.0.0-beta.6
-  resolution: "unplugin-dts@npm:1.0.0-beta.6"
+"unplugin-dts@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "unplugin-dts@npm:1.0.0"
   dependencies:
     "@rollup/pluginutils": "npm:^5.1.4"
-    "@volar/typescript": "npm:^2.4.17"
+    "@volar/typescript": "npm:^2.4.26"
     compare-versions: "npm:^6.1.1"
     debug: "npm:^4.4.0"
     kolorist: "npm:^1.8.0"
@@ -8439,7 +8439,7 @@ __metadata:
   peerDependencies:
     "@microsoft/api-extractor": ">=7"
     "@rspack/core": ^1
-    "@vue/language-core": ~3.0.1
+    "@vue/language-core": ~3.1.5
     esbuild: "*"
     rolldown: "*"
     rollup: ">=3"
@@ -8463,7 +8463,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/07c7ab7b456044e50c1458c6baf2a3104390936a91963b1237706dd15a896f2a2f8399963fbffb51c16d8e0b6ae4f096a4f0d16bd8815176a7e239bb19c3e99e
+  checksum: 10/637efd2aa60d62c569bdb273db95c8ade5c1758fa2446e15d30d9267702d5bd9c2ffe2a0c50c06744f28424bfafaa5d1e9e96ad67924143351203b2188cd3bfb
   languageName: node
   linkType: hard
 
@@ -8646,7 +8646,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
     vite-plugin-svg-spritemap: "npm:^1.0.13"
   languageName: unknown
@@ -8703,7 +8703,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.98.0"
     typescript: "npm:^5.9.3"
-    unplugin-dts: "npm:^1.0.0-beta.6"
+    unplugin-dts: "npm:^1.0.0"
     vite: "npm:^7.3.2"
   languageName: unknown
   linkType: soft
