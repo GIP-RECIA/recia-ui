@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.13.4](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.3...ui-webcomponents/v1.13.4) (2026-05-28)
+
+
+### Bug Fixes
+
+* **bottom-sheet:** improve accessibility (RGAA) ([83fbd92](https://github.com/GIP-RECIA/recia-ui/commit/83fbd9278da5509285be888537fdeab080034840))
+
 ## [1.13.3](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.2...ui-webcomponents/v1.13.3) (2026-05-28)
 
 
