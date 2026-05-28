@@ -95,7 +95,7 @@ export class ReciaBottomSheet extends LitElement {
     document.documentElement.style.overflowY = 'hidden'
     this.show = true
     setTimeout(() => {
-      this.containerRef.value!.focus()
+      this.sheetRef.value!.focus()
     }, this.animationDuration)
   }
 
@@ -189,11 +189,12 @@ export class ReciaBottomSheet extends LitElement {
             ? html`<div class="mask"></div>`
             : nothing
         }
-        <div ${ref(this.containerRef)} tabindex="-1" class="container">
+        <div ${ref(this.containerRef)} class="container">
           <div ${ref(this.growRef)} class="grow-1"></div>
           <div
             ${ref(this.sheetRef)}
             role="dialog"
+            tabindex="-1"
             aria-modal="true"
             aria-label="${ifDefined(this.aLabel)}"
             class="sheet${classMap({

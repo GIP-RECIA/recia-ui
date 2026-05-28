@@ -43,14 +43,6 @@
     scrollbar-width: none;
     scroll-behavior: smooth;
 
-    &:focus-visible {
-      outline: none;
-
-      > .sheet {
-        outline: 2px dotted var(--#{$prefix}primary);
-      }
-    }
-
     > .sheet {
       position: relative;
       display: flex;
@@ -86,6 +78,10 @@
           opacity: 1;
           color: inherit;
         }
+      }
+
+      &:focus-visible {
+        outline: 2px dotted var(--#{$prefix}primary);
       }
 
       &.slide-down {
