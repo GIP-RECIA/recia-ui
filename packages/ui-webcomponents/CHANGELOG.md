@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.13.3](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.2...ui-webcomponents/v1.13.3) (2026-05-28)
+
+
+### Bug Fixes
+
+* **header:** theme class name ([e4c2050](https://github.com/GIP-RECIA/recia-ui/commit/e4c20501fb20b8fc68d7059a53a1acab9e45f397))
+
 ## [1.13.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.1...ui-webcomponents/v1.13.2) (2026-04-23)
 
 
