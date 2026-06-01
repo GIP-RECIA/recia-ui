@@ -926,9 +926,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit/localize-tools@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "@lit/localize-tools@npm:0.8.1"
+"@lit/localize-tools@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "@lit/localize-tools@npm:0.8.2"
   dependencies:
     "@lit/localize": "npm:^0.12.0"
     "@parse5/tools": "npm:^0.3.0"
@@ -943,7 +943,7 @@ __metadata:
     typescript: "npm:~5.9.0"
   bin:
     lit-localize: bin/lit-localize.js
-  checksum: 10/d5ef1db81c76c05b3e474c3ba2000fdf88866a8e795745658bed5f4173c7c9ed876dc242e1ba8f3d6b2a070694aeee52df07f0712ef58208de91170f3072c638
+  checksum: 10/a2555659df09a5c7d544ccb068e7fe7dd2d71eb634ced3a3218f61a3075d9a67f31df0afbe6070c0ea5095e0ae835469617569c5125ce5c79b47cb225f847c31
   languageName: node
   linkType: hard
 
@@ -2164,7 +2164,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -3198,7 +3198,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -4234,7 +4234,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -4336,7 +4336,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -4714,7 +4714,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@nanostores/lit": "npm:^0.2.3"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
@@ -6783,7 +6783,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -7104,7 +7104,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -8613,7 +8613,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     eslint: "npm:^10.3.0"
@@ -8668,7 +8668,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
     "@lit/localize": "npm:^0.12.2"
-    "@lit/localize-tools": "npm:^0.8.1"
+    "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     "@uportal/open-id-connect": "npm:^1.40.2"
