@@ -47,7 +47,7 @@
     "@fortawesome/free-regular-svg-icons": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@gip-recia/ui": "workspace:^",
-    "@lit/localize-tools": "^0.8.1",
+    "@lit/localize-tools": "^0.8.2",
     "@nanostores/lit": "^0.2.3",
     "@types/lodash-es": "^4",
     "@types/node": "^24",
