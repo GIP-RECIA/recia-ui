@@ -35,12 +35,13 @@ export default ({ mode }: ConfigEnv) => {
     publicDir: mode === 'development' ? undefined : false,
     plugins: [
       dts({
-        entryRoot: `./${name}/src`,
+        entryRoot: './src',
         insertTypesEntry: true,
         exclude: [
           './src/generated/',
           './src/helpers/',
           './src/utils/',
+          './src/services/',
         ],
         tsconfigPath: './tsconfig.json',
       }),

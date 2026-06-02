@@ -35,7 +35,7 @@ export default ({ mode }: ConfigEnv) => {
     publicDir: mode === 'development' ? undefined : false,
     plugins: [
       dts({
-        entryRoot: `./${name}/src`,
+        entryRoot: './src',
         insertTypesEntry: true,
         exclude: [
           './src/generated/',
