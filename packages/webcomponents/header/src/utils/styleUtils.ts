@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { componentName } from '../../../common/config'
+import { componentName } from 'common/config.ts'
 import { name } from '../../package.json'
 import injectedStyle from '../assets/css/injectedStyle.css?inline'
 

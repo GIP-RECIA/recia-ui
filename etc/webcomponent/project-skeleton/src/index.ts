@@ -16,8 +16,8 @@
 
 import type { TemplateResult } from 'lit'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'

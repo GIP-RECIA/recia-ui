@@ -2176,6 +2176,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -2548,6 +2549,12 @@ __metadata:
   checksum: 10/f57f4b11710de94686c56d9b6675202ece3bbc5f09524c239536f5ec62473348087d853119770190e454bf2979ca8993c8b9f18f7dd55e8cb602b8974b7520d5
   languageName: node
   linkType: hard
+
+"common@workspace:^, common@workspace:packages/webcomponents/common":
+  version: 0.0.0-use.local
+  resolution: "common@workspace:packages/webcomponents/common"
+  languageName: unknown
+  linkType: soft
 
 "compare-func@npm:^2.0.0":
   version: 2.0.0
@@ -3216,6 +3223,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -4244,6 +4252,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -4346,6 +4355,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -4728,6 +4738,7 @@ __metadata:
     "@types/regenerator-runtime": "npm:^0"
     "@uportal/open-id-connect": "npm:^1.40.2"
     bottom-sheet: "workspace:^"
+    common: "workspace:^"
     concurrently: "npm:^9.2.1"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
@@ -6787,6 +6798,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -7108,6 +7120,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -8633,6 +8646,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
@@ -8689,6 +8703,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     "@uportal/open-id-connect": "npm:^1.40.2"
+    common: "workspace:^"
     eslint: "npm:^10.4.1"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"

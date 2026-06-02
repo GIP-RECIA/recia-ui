@@ -16,10 +16,10 @@
 
 /* eslint-disable node/prefer-global/process */
 import type { ConfigEnv } from 'vite'
+import { fileName, libName } from 'common/config.ts'
 import dts from 'unplugin-dts/vite'
 import { defineConfig, loadEnv } from 'vite'
 import { svgSpritemap } from 'vite-plugin-svg-spritemap'
-import { fileName, libName } from '../common/config.ts'
 import { name } from './package.json'
 
 // https://vitejs.dev/config/
