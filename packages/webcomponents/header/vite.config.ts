@@ -29,7 +29,7 @@ export default ({ mode }: ConfigEnv) => {
 
   const proxy = VITE_PROXY_ROUTES
     ? Object.fromEntries(
-        JSON.parse(VITE_PROXY_ROUTES).map(route => [
+        JSON.parse(VITE_PROXY_ROUTES).map((route: string) => [
           route,
           {
             target: 'http://localhost:3000',
