@@ -16,9 +16,9 @@
 
 import type { TemplateResult } from 'lit'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
-import { componentName } from '../../../../../common/config.ts'
 import { preserveFromSpreading } from '../../../config.ts'
 import { spreadAttributes } from '../../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../../helpers/langHelper.ts'

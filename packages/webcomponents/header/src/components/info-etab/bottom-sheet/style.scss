@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../../../common/assets/scss/global' as *;
+@use 'common/assets/scss/global' as *;
 
 @media (width >= map.get($grid-breakpoints, md)) {
   r-info-etab-layout {

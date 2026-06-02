@@ -1,0 +1,16 @@
+{
+  "name": "common",
+  "type": "module",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "exports": {
+    "./*": "./*"
+  }
+}

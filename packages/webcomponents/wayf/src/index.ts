@@ -16,10 +16,10 @@
 
 import type { TemplateResult } from 'lit'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { componentName } from '../../common/config.ts'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
