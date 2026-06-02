@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import type { Link } from 'common/types/index.ts'
 import type { TemplateResult } from 'lit'
-import type { Link } from '../../types/linkType.ts'
 import type { WidgetItem } from '../../types/widgetType.ts'
 import {
   faAnglesRight,

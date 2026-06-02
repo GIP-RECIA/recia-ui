@@ -14,9 +14,4 @@
  * limitations under the License.
  */
 
-export interface Link {
-  name?: string
-  href: string
-  target?: string
-  rel?: string
-}
+export * from './linkTypes.ts'

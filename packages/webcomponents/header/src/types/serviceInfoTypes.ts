@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Link } from './linkTypes.ts'
+import type { Link } from 'common/types/index.ts'
 
 export enum Origin {
   native = 'native',

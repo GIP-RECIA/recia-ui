@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import type { Link } from 'common/types/index.ts'
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Link } from '../../../types/index.ts'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import {
   faArrowRight,

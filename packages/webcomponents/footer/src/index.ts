@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import type { Link } from 'common/types/index.ts'
 import type { PropertyValues, TemplateResult } from 'lit'
-import type { Link } from './types/LinkType.ts'
 import type { Template } from './types/TemplateType.ts'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'

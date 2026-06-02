@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
+import type { Link } from 'common/types/index.ts'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type {
-  DrawerItem,
-  Link,
-  UpdatedFavoriteSection,
-} from '../../types/index.ts'
+import type { DrawerItem, UpdatedFavoriteSection } from '../../types/index.ts'
 import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'

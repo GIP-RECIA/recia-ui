@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Link } from '../types/linkTypes.ts'
+import type { Link } from 'common/types/index.ts'
 
 function getServiceLink(
   context: string,

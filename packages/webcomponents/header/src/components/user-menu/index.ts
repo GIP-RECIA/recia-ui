@@ -15,9 +15,10 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import type { Link } from 'common/types/index.ts'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { Link, UserMenuConfig } from '../../types/index.ts'
+import type { UserMenuConfig } from '../../types/index.ts'
 import {
   faArrowRightFromBracket,
   faChevronDown,

@@ -15,7 +15,7 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import type { Link } from './linkTypes.ts'
+import type { Link } from 'common/types/index.ts'
 
 export enum UserMenuItem {
   Search = 'search',

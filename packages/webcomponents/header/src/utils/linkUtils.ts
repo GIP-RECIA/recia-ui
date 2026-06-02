@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Link } from '../types/index.ts'
+import type { Link } from 'common/types/index.ts'
 import { $settings } from '../stores/index.ts'
 
 function getServiceLink(
