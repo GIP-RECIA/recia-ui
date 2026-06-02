@@ -20,7 +20,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/r-footer.js"
       }
-    }
+    },
+    "./types/*": "./src/types/*"
   },
   "main": "./dist/r-footer.js",
   "module": "./dist/r-footer.js",

@@ -20,7 +20,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/r-header.js"
       }
-    }
+    },
+    "./types/*": "./src/types/*"
   },
   "main": "./dist/r-header.js",
   "module": "./dist/r-header.js",

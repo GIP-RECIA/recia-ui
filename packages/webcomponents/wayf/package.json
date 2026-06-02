@@ -20,7 +20,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/r-wayf.js"
       }
-    }
+    },
+    "./types/*": "./src/types/*"
   },
   "main": "./dist/r-wayf.js",
   "module": "./dist/r-wayf.js",

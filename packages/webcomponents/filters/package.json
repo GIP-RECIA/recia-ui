@@ -20,7 +20,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/r-filters.js"
       }
-    }
+    },
+    "./types/*": "./src/types/*"
   },
   "main": "./dist/r-filters.js",
   "module": "./dist/r-filters.js",

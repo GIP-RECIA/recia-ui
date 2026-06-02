@@ -20,7 +20,8 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/r-project-skeleton.js"
       }
-    }
+    },
+    "./types/*": "./src/types/*"
   },
   "main": "./dist/r-project-skeleton.js",
   "module": "./dist/r-project-skeleton.js",

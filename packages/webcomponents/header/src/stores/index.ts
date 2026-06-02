@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import type { Section } from 'filters/types/SectionType.ts'
 import type { ReadableAtom } from 'nanostores'
-import type { Section } from '../../../filters/src/types/SectionType.ts'
 import type {
   Category,
   FavoriteSection,
