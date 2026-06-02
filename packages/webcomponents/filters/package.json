@@ -24,9 +24,6 @@
   },
   "main": "./dist/r-filters.js",
   "module": "./dist/r-filters.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

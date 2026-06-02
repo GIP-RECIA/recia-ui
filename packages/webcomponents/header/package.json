@@ -24,9 +24,6 @@
   },
   "main": "./dist/r-header.js",
   "module": "./dist/r-header.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && yarn build:style && vite build",

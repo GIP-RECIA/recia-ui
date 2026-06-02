@@ -24,9 +24,6 @@
   },
   "main": "./dist/r-widgets-wrapper.js",
   "module": "./dist/r-widgets-wrapper.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

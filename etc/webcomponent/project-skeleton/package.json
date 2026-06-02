@@ -24,9 +24,6 @@
   },
   "main": "./dist/r-project-skeleton.js",
   "module": "./dist/r-project-skeleton.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

@@ -24,9 +24,6 @@
   },
   "main": "./dist/r-wayf.js",
   "module": "./dist/r-wayf.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

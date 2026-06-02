@@ -24,9 +24,6 @@
   },
   "main": "./dist/r-bottom-sheet.js",
   "module": "./dist/r-bottom-sheet.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
