@@ -95,7 +95,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Build web components
-        run: ./scripts/each-wc.sh run build
+        run: ./scripts/wc-each.sh run build
 
       - name: Test web components
-        run: ./scripts/each-wc.sh run test:unit
+        run: ./scripts/wc-each.sh run test:unit
