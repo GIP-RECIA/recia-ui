@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-./scripts/each-wc.sh run build
+./scripts/wc-each.sh run build
 
 ROOT_DIR=$(pwd)
 SOURCE_DIR="$ROOT_DIR/packages/webcomponents"

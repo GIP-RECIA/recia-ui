@@ -97,7 +97,7 @@ license-commit:
 	@./scripts/license.sh 3
 
 wc-build:
-	@./scripts/build-wc.sh
+	@./scripts/wc-build.sh
 	@echo ""
 	@echo "ℹ️ Run \`make wc-release-[patch|minor|major]\` to create a release"
 
