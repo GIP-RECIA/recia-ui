@@ -30,6 +30,10 @@
   <source>Personnel de la Région Centre-Val de Loire</source>
   <target>Centre-Val de Loire region staff</target>
 </trans-unit>
+<trans-unit id="sdfa0e3058780c9f8">
+  <source>Personnel du département d'Eure-et-Loir</source>
+  <target>Eure-et-Loir department staff</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

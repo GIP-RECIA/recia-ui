@@ -52,6 +52,7 @@ export class ReciaWayf extends LitElement {
       [IdpId.Catel]: msg(str`Personnel de l'éducation nationale`),
       [IdpId.Agri]: msg(str`Personnel de l'enseignement agricole`),
       [IdpId.RCVL]: msg(str`Personnel de la Région Centre-Val de Loire`),
+      [IdpId.CD28]: msg(str`Personnel du département d'Eure-et-Loir`),
       [IdpId.AutresPublics]: msg(str`Autre public\n(utilisateur local, entreprise,...)`),
     }
   }

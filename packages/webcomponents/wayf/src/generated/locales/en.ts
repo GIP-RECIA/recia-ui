@@ -15,6 +15,7 @@
 'sd362dba1c8aa8f6f': str`Agricultural education staff`,
 'sd76deeb0fc71eb13': str`Student or parent in the national education
 (ÉduConnect)`,
+'sdfa0e3058780c9f8': str`Eure-et-Loir department staff`,
 'seb3f3765a51f4055': str`Other public
 (local user, company,...)`,
     };

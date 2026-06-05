@@ -1,1 +1,4 @@
-../../../../prototype/src/icons/wayf/profile0.svg
+<svg width="144" height="144" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.6 17.8C35.7 17.8 35.5 17.7 35.5 17.7L54.9 37V17.8L75.2 18V76.1H20.5L20.8 56.1H39.6L20.6 38.6V17.8Z" fill="#3B3B3B"/>
+<path d="M126 17.6V70.8C126 92 112 123 73.2 124H20V111H73.2C98.9 109 111 94.8 113 70.8V17.6H126Z" fill="#3B3B3B"/>
+</svg>

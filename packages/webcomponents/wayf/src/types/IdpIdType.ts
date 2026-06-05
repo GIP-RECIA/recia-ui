@@ -20,5 +20,6 @@ export enum IdpId {
   Catel = 'catel-IdP',
   Agri = 'agri-IdP',
   RCVL = 'RCVL-IdP',
+  CD28 = 'cd28-IdP',
   AutresPublics = 'autres-publics',
 }
