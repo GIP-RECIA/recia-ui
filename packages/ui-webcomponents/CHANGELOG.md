@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.14.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.4...ui-webcomponents/v1.14.0) (2026-06-05)
+
+
+### Features
+
+* **wayf:** profile ([64efcf9](https://github.com/GIP-RECIA/recia-ui/commit/64efcf94fac196ff850de5cc3fc222d5f6399058))
+
+
+### Bug Fixes
+
+* create package for common due to ts 6 ([6989f0c](https://github.com/GIP-RECIA/recia-ui/commit/6989f0c4b6505201f2e4c57b6768b7cac6564968))
+
 ## [1.13.4](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.3...ui-webcomponents/v1.13.4) (2026-05-28)
 
 
