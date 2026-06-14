@@ -2185,7 +2185,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -3232,7 +3232,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -4261,7 +4261,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -4364,7 +4364,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -4753,7 +4753,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -6807,7 +6807,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -7129,7 +7129,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
@@ -8432,9 +8432,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-dts@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "unplugin-dts@npm:1.0.0"
+"unplugin-dts@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "unplugin-dts@npm:1.0.2"
   dependencies:
     "@rollup/pluginutils": "npm:^5.1.4"
     "@volar/typescript": "npm:^2.4.26"
@@ -8471,7 +8471,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/637efd2aa60d62c569bdb273db95c8ade5c1758fa2446e15d30d9267702d5bd9c2ffe2a0c50c06744f28424bfafaa5d1e9e96ad67924143351203b2188cd3bfb
+  checksum: 10/8c8eadf927933f5d2bf6b25dffc773f6c212a1e7bccac764a7396934bc8bda0be20650038b843654be8e4b74102c308235034ebcbe519a776245465f4d779ee3
   languageName: node
   linkType: hard
 
@@ -8655,7 +8655,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
     vite-plugin-svg-spritemap: "npm:^1.0.13"
   languageName: unknown
@@ -8713,7 +8713,7 @@ __metadata:
     ress: "npm:^5.0.2"
     sass: "npm:^1.101.0"
     typescript: "npm:^6.0.3"
-    unplugin-dts: "npm:^1.0.0"
+    unplugin-dts: "npm:^1.0.2"
     vite: "npm:^7.3.5"
   languageName: unknown
   linkType: soft
