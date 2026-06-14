@@ -50,7 +50,7 @@
     "ress": "^5.0.2",
     "sass": "^1.100.0",
     "typescript": "^6.0.3",
-    "unplugin-dts": "^1.0.0",
+    "unplugin-dts": "^1.0.2",
     "vite": "^7.3.5"
   }
 }
