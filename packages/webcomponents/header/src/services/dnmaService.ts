@@ -16,10 +16,10 @@
 
 export default class DnmaService {
   static init(
-    dnmaUrl: string,
+    dnmaUrl: string | undefined,
     fname: string | undefined,
   ): void {
-    if (document.querySelector('script#dnma'))
+    if (!dnmaUrl || document.querySelector('script#dnma'))
       return
 
     if (!dnmaUrl.includes('?v='))

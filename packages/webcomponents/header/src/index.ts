@@ -17,10 +17,19 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import type { ReciaInfoEtabBottomSheet } from './components/info-etab/bottom-sheet/index.ts'
-import type { ReciaBottomSheetServiceInfo } from './components/service-info/bottom-sheet/index.ts'
+import type {
+  ReciaInfoEtabBottomSheet,
+} from './components/info-etab/bottom-sheet/index.ts'
+import type {
+  ReciaBottomSheetServiceInfo,
+} from './components/service-info/bottom-sheet/index.ts'
 import type { LangRef } from './helpers/langHelper.ts'
-import type { DrawerItem, HeaderProperties, SettingsHeaderProperties } from './types/index.ts'
+import type {
+  DrawerItem,
+  HeaderProperties,
+  ScriptLoad,
+  SettingsHeaderProperties,
+} from './types/index.ts'
 import { localized, updateWhenLocaleChanges } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { componentName } from 'common/config.ts'
@@ -111,6 +120,7 @@ const settingsPropsKeys = [
   'homePage',
   'starter',
   'cacheBusterVersion',
+  'scripts',
 ] as const satisfies readonly SettingsHeaderProperties[]
 
 @localized()
@@ -265,6 +275,9 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'cache-buster-version' })
   cacheBusterVersion?: string
+
+  @property({ type: Array, attribute: 'scripts' })
+  scripts?: ScriptLoad[]
 
   @property({ type: Boolean })
   debug: boolean = false
