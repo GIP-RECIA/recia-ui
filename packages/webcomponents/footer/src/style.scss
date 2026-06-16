@@ -48,6 +48,8 @@
         padding: 24px;
 
         > li {
+          display: contents;
+
           > a {
             flex: 0 0 auto;
             display: inline-block;
