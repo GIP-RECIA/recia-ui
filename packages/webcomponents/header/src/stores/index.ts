@@ -45,7 +45,7 @@ import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
 import MediacentreService from '../services/mediacentreService.ts'
 import OrganizationService from '../services/organizationService.ts'
-import ScriptLoader from '../services/scriptLoader.ts'
+import scriptLoaderService from '../services/scriptLoaderService.ts'
 import ServicesService from '../services/servicesService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
@@ -437,7 +437,7 @@ $settings.listen(onDiff((diffs) => {
   if (diffs.has('dnmaUrl'))
     DnmaService.init(diffs.get('dnmaUrl') as string | undefined, fname)
   if (diffs.has('scripts'))
-    ScriptLoader.load(diffs.get('scripts') as ScriptLoad[] | undefined)
+    scriptLoaderService.load(diffs.get('scripts') as ScriptLoad[] | undefined)
 }))
 
 $soffit.listen(onDiff((diffs) => {

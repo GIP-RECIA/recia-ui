@@ -15,9 +15,24 @@
  */
 
 import type { ScriptLoad } from '../types/index.ts'
+import { $settings } from '../stores/index.ts'
 
-export default class ScriptLoader {
+export default class ScriptLoaderService {
   private static addedUrls: Set<string> = new Set()
+
+  private static isDomainAllowded(path: string): boolean {
+    if (!path.startsWith('http'))
+      return true
+
+    const { domain } = $settings.get()
+    const { hostname } = new URL(path)
+    const { hostname: locationHostname } = window.location
+
+    return (
+      (domain && hostname === domain)
+      || (hostname === locationHostname)
+    )
+  }
 
   static load(urls: ScriptLoad[] | undefined): void {
     if (!urls)
@@ -25,6 +40,17 @@ export default class ScriptLoader {
 
     urls.forEach(({ src, cacheBuster }) => {
       const originalSrc = src
+
+      if (!import.meta.env.DEV) {
+        const { domain } = $settings.get()
+        if (!this.isDomainAllowded(originalSrc)) {
+          console.error(`Not allowded script domain: ${originalSrc}`)
+          return
+        }
+        else if (!originalSrc.startsWith('http')) {
+          src = `https://${domain}${originalSrc.startsWith('/') ? '' : '/'}${originalSrc}`
+        }
+      }
 
       if (
         this.addedUrls.has(originalSrc)

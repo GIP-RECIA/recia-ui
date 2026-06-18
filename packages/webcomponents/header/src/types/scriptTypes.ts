@@ -16,5 +16,5 @@
 
 export interface ScriptLoad {
   src: string
-  cacheBuster?: number
+  cacheBuster?: number // seconds
 }
