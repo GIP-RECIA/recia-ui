@@ -1,5 +1,8 @@
 @use '@gip-recia/ui' as *;
 
+@include dm-sans;
+@include sora;
+
 html {
   font-size: var(--#{$prefix}font-size-base);
 
