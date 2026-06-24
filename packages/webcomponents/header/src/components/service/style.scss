@@ -74,23 +74,24 @@
     transition: opacity 0.3s ease-out;
   }
 
-  > .name {
+  > h3 {
     flex: 0 0 auto;
-    @include unstyled-link;
     order: 2;
+    margin: 0;
 
-    > h3 {
-      margin: 0;
-    }
+    > a {
+      @include unstyled-link;
 
-    > span[aria-hidden='true'] {
-      position: absolute;
-      inset: -11px 0 0;
-      border-radius: 10px;
-    }
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -11px 0 0;
+        border-radius: 10px;
+      }
 
-    &:focus-visible {
-      outline: none;
+      &:focus-visible {
+        outline: none;
+      }
     }
   }
 
@@ -172,7 +173,7 @@
       font-size: var(--#{$prefix}font-size-xs);
     }
 
-    > .name {
+    > h3 {
       font-size: var(--#{$prefix}font-size-md);
     }
   }

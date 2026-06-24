@@ -121,16 +121,16 @@ export class ReciaService extends LitElement {
             ${
               this.link
                 ? html`
-                    <a
-                      href="${this.link.href}"
-                      target="${this.link.target ?? nothing}"
-                      rel="${this.link.rel ?? nothing}"
-                      class="name"
-                      @click="${this.handleLinkClick}"
-                    >
-                      <h3>${this.name}</h3>
-                      <span aria-hidden="true"></span>
-                    </a>
+                    <h3>
+                      <a
+                        href="${this.link.href}"
+                        target="${this.link.target ?? nothing}"
+                        rel="${this.link.rel ?? nothing}"
+                        @click="${this.handleLinkClick}"
+                      >
+                        ${this.name}
+                      </a>
+                    </h3>
                   `
                 : nothing
             }
