@@ -147,11 +147,15 @@
                 overflow: hidden;
 
                 > header {
+                  display: flex;
+                  align-items: center;
+                  gap: 4px;
+                  margin-bottom: 4px;
+
                   > .result-title {
                     font-family: $sora;
                     font-size: var(--#{$prefix}font-size-sm);
                     line-height: 140%;
-                    margin-bottom: 4px;
                   }
 
                   > .result-tag {
@@ -159,7 +163,6 @@
                     font-family: $dm-sans;
                     font-size: var(--#{$prefix}font-size-xs);
                     font-weight: 500;
-                    margin-right: 4px;
                     padding: 4px 10px;
                     border-radius: 13px;
                     background-color: var(--#{$prefix}stroke);
