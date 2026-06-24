@@ -45,15 +45,13 @@
     color: var(--#{$prefix}service, $black);
   }
 
-  > .name {
+  > a {
     flex: 0 0 auto;
     @include unstyled-link;
+    font-size: var(--#{$prefix}font-size-xs);
 
-    > span {
-      font-size: var(--#{$prefix}font-size-xs);
-    }
-
-    > span[aria-hidden='true'] {
+    &::before {
+      content: '';
       position: absolute;
       inset: 0;
       border-radius: 10px;

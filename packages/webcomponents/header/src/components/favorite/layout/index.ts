@@ -293,12 +293,10 @@ export class ReciaFavoriteLayout extends LitElement {
             href="${item.link.href}"
             target="${item.link.target ?? nothing}"
             rel="${item.link.rel ?? nothing}"
-            class="name"
             ?inert="${this.isManage}"
             @click="${(e: Event) => this.handleLinkClick(e, item.fname, item.dnmaName)}"
           >
-            <span>${item.name}</span>
-            <span aria-hidden="true"></span>
+            ${item.name}
           </a>
         </div>
       </li>
