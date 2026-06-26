@@ -28,6 +28,7 @@ import { styleMap } from 'lit/directives/style-map.js'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
+import { focusTrap } from './utils/ay11Utils.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
@@ -178,6 +179,13 @@ export class ReciaBottomSheet extends LitElement {
     }
   }
 
+  private focusTrap(e: KeyboardEvent): void {
+    if (!this.sheetRef.value)
+      return
+
+    focusTrap(this.sheetRef.value, e)
+  }
+
   render(): TemplateResult {
     return html`
       <div
@@ -201,6 +209,7 @@ export class ReciaBottomSheet extends LitElement {
               'slide-down': this.closeRequested,
               'no-padding': this.noPadding,
             })}"
+            @keydown="${this.focusTrap}"
           >
             ${!this.dragIcon ? html`<div class="dragable"></div>` : nothing}
             ${
