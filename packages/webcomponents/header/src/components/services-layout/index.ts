@@ -37,6 +37,7 @@ import {
   $selectedCategory,
 } from '../../stores/index.ts'
 import { LoadingState } from '../../types/index.ts'
+import { focusTrap, getActiveElement } from '../../utils/ay11Utils.ts'
 import { getIcon } from '../../utils/fontawesomeUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
@@ -56,7 +57,7 @@ export class ReciaServicesLayout extends LitElement {
 
   private layoutRef: Ref<HTMLElement> = createRef()
 
-  private activeElement: HTMLElement | undefined
+  private previousFocus: HTMLElement | undefined
 
   constructor() {
     super()
@@ -79,6 +80,9 @@ export class ReciaServicesLayout extends LitElement {
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {
     if (_changedProperties.has('show')) {
       if (this.show === true) {
+        const active = getActiveElement()
+        if (active instanceof HTMLElement)
+          this.previousFocus = active
         setTimeout(() => {
           this.layoutRef.value?.focus()
         }, 150)
@@ -93,7 +97,7 @@ export class ReciaServicesLayout extends LitElement {
   closeMenu(_: Event, resetFocus: boolean = true): void {
     this.dispatchEvent(new CustomEvent('close', { detail: { show: false } }))
     if (resetFocus)
-      this.activeElement?.focus()
+      this.previousFocus?.focus()
   }
 
   handleKeyPress(e: KeyboardEvent): void {
@@ -101,6 +105,15 @@ export class ReciaServicesLayout extends LitElement {
       e.preventDefault()
       this.closeMenu(e)
     }
+  }
+
+  private focusTrap(e: KeyboardEvent): void {
+    if (!this.layoutRef.value)
+      return
+
+    const parent = this.parentElement
+    if (parent instanceof Element)
+      focusTrap(parent, e)
   }
 
   updateFilters(e: CustomEvent): void {
@@ -209,13 +222,17 @@ export class ReciaServicesLayout extends LitElement {
       <div
         ${ref(this.layoutRef)}
         id="services-layout"
+        role="dialog"
         tabindex="-1"
+        aria-modal="true"
+        aria-labelledby="#all-services-title"
         class="${classMap({
           'navigation-drawer-visible': this.isNavigationDrawerVisible,
         })}services-layout"
         style="${styleMap({
           display: this.show ? undefined : 'none',
         })}"
+        @keydown="${this.focusTrap}"
       >
         <div class="container page-layout">
           <header>
@@ -228,7 +245,7 @@ export class ReciaServicesLayout extends LitElement {
               >
                 ${getIcon(faArrowLeft)}
               </button>
-              <h1>${msg(str`Tous les services`)}</h1>
+              <h1 id="#all-services-title">${msg(str`Tous les services`)}</h1>
             </div>
             ${
               false
