@@ -28,7 +28,7 @@ import { styleMap } from 'lit/directives/style-map.js'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
 import styles from './style.scss?inline'
-import { focusTrap } from './utils/ay11Utils.ts'
+import { focusTrap, getActiveElement } from './utils/ay11Utils.ts'
 import { getIcon } from './utils/fontawesomeUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 
@@ -63,7 +63,7 @@ export class ReciaBottomSheet extends LitElement {
   private currentY: number = 0
   private growHeight: number = 0
   private isDragging: boolean = false
-  private activeElement: HTMLElement | undefined
+  private previousFocus?: HTMLElement
 
   constructor() {
     super()
@@ -91,8 +91,10 @@ export class ReciaBottomSheet extends LitElement {
     this.removeEventListener('touchend', this.handleTouchEnd.bind(this))
   }
 
-  open(e: Event | undefined = undefined): void {
-    this.activeElement = (e?.target ?? document.activeElement) as HTMLElement
+  open(_: Event | undefined = undefined): void {
+    const active = getActiveElement()
+    if (active instanceof HTMLElement)
+      this.previousFocus = active
     document.documentElement.style.overflowY = 'hidden'
     this.show = true
     setTimeout(() => {
@@ -109,7 +111,7 @@ export class ReciaBottomSheet extends LitElement {
       setTimeout(() => {
         document.documentElement.style.overflowY = ''
         this.show = false
-        this.activeElement?.focus()
+        this.previousFocus?.focus()
         this.closeRequested = false
         this.growRef.value!.style.marginTop = ''
         this.dispatchEvent(new CustomEvent('close'))
