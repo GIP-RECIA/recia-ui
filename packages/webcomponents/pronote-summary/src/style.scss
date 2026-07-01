@@ -1,0 +1,124 @@
+@use 'sass:map';
+@use 'common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+#summary-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.redirect {
+  // align-items: end;
+  justify-content: end;
+
+  display: none;
+
+  &.mobile-only {
+    display: flex;
+  }
+}
+
+todo pass order .case {
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  // border: unset;
+
+  // padding: 10px;
+}
+.cadre {
+  flex-direction: row;
+}
+.numero {
+  order: 2;
+  display: none;
+  &.mobile-only {
+    display: block;
+  }
+  // font-size: unset;
+  // font-weight: unset;
+}
+
+.case {
+  display: flex;
+}
+
+.texte {
+  order: 1;
+  text-align: left;
+  flex: 1;
+  justify-content: start;
+}
+
+@media (width >= map.get($grid-breakpoints, sm)) {
+  .redirect {
+    display: flex;
+    &.mobile-only {
+      display: none;
+    }
+  }
+  .cadre {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .case {
+    width: 140px;
+    height: 140px;
+    // border: 1px solid #ccc;
+    box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
+
+    border-radius: 8px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  .numero {
+    grid-column: 2;
+    grid-row: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: unset;
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    &.mobile-only {
+      display: none;
+    }
+  }
+
+  .texte {
+    order: unset;
+    grid-column: 1 / 4;
+    grid-row: 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 0 6px;
+    overflow-wrap: break-word; // ou word-break: break-word;
+  }
+}
+
+/*
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);**/
