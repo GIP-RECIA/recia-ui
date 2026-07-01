@@ -20,6 +20,12 @@
 <trans-unit id="s733bfbdb6756e2c7">
   <source>Impossible de charger le résumé</source>
 </trans-unit>
+<trans-unit id="sfc4f271598555e7f">
+  <source>Accéder au récapitulatif</source>
+</trans-unit>
+<trans-unit id="s8519fa317ed144f6">
+  <source>Résumé de Pronote</source>
+</trans-unit>
 </body>
 </file>
 </xliff>
