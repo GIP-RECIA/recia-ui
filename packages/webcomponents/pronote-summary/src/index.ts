@@ -20,13 +20,16 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { name } from '../package.json'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 
 @localized()
 export class ReciaPronoteSummary extends LitElement {
+  @property({ type: Number, attribute: 'max-elements' })
+  maxElements: number = 5
+
   @state()
   loading: boolean = true
 
@@ -43,7 +46,8 @@ export class ReciaPronoteSummary extends LitElement {
     super.connectedCallback()
   }
 
-  getSummary(): void {
+  async getSummary(): Promise<void> {
+    await new Promise(res => setTimeout(res, 3000))
     this.summary = [
       { description: 'devoirs', count: 3 },
       { description: 'visites_infirmerie', count: 4 },
@@ -86,7 +90,7 @@ export class ReciaPronoteSummary extends LitElement {
       }
     }
     else {
-      // todo handle when loading
+      elements.push(this.skeletonTemplates())
     }
 
     return html`
@@ -109,6 +113,21 @@ export class ReciaPronoteSummary extends LitElement {
       </div>
     </div>
   `
+  }
+
+  skeletonTemplates(): TemplateResult[] {
+    const elements = []
+
+    for (let i = 0; i < this.maxElements; i++) {
+      elements.push(
+        html`
+            <div class="case loading">
+            </div>
+            `,
+      )
+    }
+
+    return elements
   }
 
   static styles = css`${unsafeCSS(styles)}`
