@@ -106,7 +106,7 @@ export class ReciaPronoteSummary extends LitElement {
     const elements = []
 
     if (!this.loading) {
-      if (this.summary) {
+      if (this.summary && !this.isError) {
         for (let i = 0; i < this.summary.length; i++) {
           elements.push(
             html`
@@ -134,11 +134,11 @@ export class ReciaPronoteSummary extends LitElement {
     }
 
     return html`
-    <h2>Résumé de Pronote</h2>
+    <h2>${msg('Résumé de Pronote')}</h2>
     <div id="summary-wrapper">
       <div  class="redirect">
         <a class="btn-tertiary small">
-          Redirection vers page
+          ${msg('Accéder au récapitulatif')}
               ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>
       </div>
@@ -147,7 +147,7 @@ export class ReciaPronoteSummary extends LitElement {
       </div>
       <div class="redirect mobile-only">
         <a class="btn-tertiary small">
-          Redirection vers page
+          ${msg('Accéder au récapitulatif')}
           ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>
       </div>
