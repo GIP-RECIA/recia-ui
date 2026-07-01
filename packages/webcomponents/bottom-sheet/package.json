@@ -51,7 +51,7 @@
     "sass": "^1.101.0",
     "tabbable": "^6.5.0",
     "typescript": "^6.0.3",
-    "unplugin-dts": "^1.0.2",
+    "unplugin-dts": "^1.0.3",
     "vite": "^7.3.5"
   }
 }
