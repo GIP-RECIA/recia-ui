@@ -17,6 +17,9 @@
 <trans-unit id="sb7a8f51a81d6fd1b">
   <source>Punition(s) et sanction(s)</source>
 </trans-unit>
+<trans-unit id="s733bfbdb6756e2c7">
+  <source>Impossible de charger le résumé</source>
+</trans-unit>
 </body>
 </file>
 </xliff>
