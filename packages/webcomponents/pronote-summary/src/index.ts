@@ -15,36 +15,43 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { SummaryResponse } from './types/pronoteSummaryType'
+import type { SummaryElement } from './types/pronoteSummaryType'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
+import { state } from 'lit/decorators.js'
 import { name } from '../package.json'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 
 @localized()
 export class ReciaPronoteSummary extends LitElement {
+  @state()
+  loading: boolean = true
+
+  @state()
+  summary: SummaryElement[] | undefined = undefined
+
   constructor() {
     super()
     updateWhenLocaleChanges(this)
+    this.getSummary()
   }
 
   connectedCallback(): void {
     super.connectedCallback()
   }
 
-  getSummary(): SummaryResponse {
-    return {
-      data: [
-        { description: 'devoirs', count: 3 },
-        { description: 'visites_infirmerie', count: 4 },
-        { description: 'messages_non_lu', count: 143 },
-        { description: 'absences_et_retards', count: 32 },
-        { description: 'punitions_et_sanctions', count: 7 },
-      ],
-    }
+  getSummary(): void {
+    this.summary = [
+      { description: 'devoirs', count: 3 },
+      { description: 'visites_infirmerie', count: 4 },
+      { description: 'messages_non_lu', count: 143 },
+      { description: 'absences_et_retards', count: 32 },
+      { description: 'punitions_et_sanctions', count: 7 },
+    ]
+    this.loading = false
   }
 
   conversionMap = new Map<string, string>([
@@ -56,20 +63,30 @@ export class ReciaPronoteSummary extends LitElement {
   ])
 
   render(): TemplateResult {
-    const summary: SummaryResponse = this.getSummary()
-
     const elements = []
 
-    for (let i = 0; i < summary.data.length; i++) {
-      elements.push(html`
-      <div class="case">
-        <div class="numero">${summary.data[i].count}</div>
-        <div class="texte">
-          ${this.conversionMap.get(summary.data[i].description)}
-        </div>
-        <div class="numero mobile-only">${summary.data[i].count}</div>
-
-        </div>`)
+    if (!this.loading) {
+      if (this.summary) {
+        for (let i = 0; i < this.summary.length; i++) {
+          elements.push(
+            html`
+            <div class="case">
+              <div class="numero">${this.summary[i].count}</div>
+              <div class="texte">
+                ${this.conversionMap.get(this.summary[i].description)}
+              </div>
+              <div class="numero mobile-only">${this.summary[i].count}</div>
+            </div>
+            `,
+          )
+        }
+      }
+      else {
+        // todo handle exception
+      }
+    }
+    else {
+      // todo handle when loading
     }
 
     return html`
