@@ -816,7 +816,7 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     "@types/regenerator-runtime": "npm:^0"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
@@ -1660,12 +1660,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24":
-  version: 24.13.2
-  resolution: "@types/node@npm:24.13.2"
+"@types/node@npm:^26":
+  version: 26.0.1
+  resolution: "@types/node@npm:26.0.1"
   dependencies:
-    undici-types: "npm:~7.18.0"
-  checksum: 10/2b8cb95ada191ecc788fef91d7cdb86dff24f6895b510e1fb495cc001832709fa8fc3e1eeb27d64bda52b3f74f9e91acf42431e98e3e6876de1e53acce7f7602
+    undici-types: "npm:~8.3.0"
+  checksum: 10/c312909c89c4f52291084d5b8b67c119f3c3adce9bdd5e57da74cb4d05059021b2b2b6b5eb52ccb086d66397b5793864e4d48b17d608ab42c27cfc193d337823
   languageName: node
   linkType: hard
 
@@ -2043,7 +2043,7 @@ __metadata:
   dependencies:
     "@antfu/eslint-config": "npm:^9.1.0"
     "@gip-recia/ui": "workspace:^"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
     ress: "npm:^5.0.2"
@@ -2173,7 +2173,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -3226,7 +3226,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -4255,7 +4255,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -4358,7 +4358,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -4738,7 +4738,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@nanostores/lit": "npm:^0.2.3"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     "@types/regenerator-runtime": "npm:^0"
     "@uportal/open-id-connect": "npm:^1.40.2"
     bottom-sheet: "workspace:^"
@@ -6802,7 +6802,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -7124,7 +7124,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -7148,7 +7148,7 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@gip-recia/ui": "workspace:^"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
     ress: "npm:^5.0.2"
@@ -8362,10 +8362,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~7.18.0":
-  version: 7.18.2
-  resolution: "undici-types@npm:7.18.2"
-  checksum: 10/e61a5918f624d68420c3ca9d301e9f15b61cba6e97be39fe2ce266dd6151e4afe424d679372638826cb506be33952774e0424141200111a9857e464216c009af
+"undici-types@npm:~8.3.0":
+  version: 8.3.0
+  resolution: "undici-types@npm:8.3.0"
+  checksum: 10/6681d2837ac75a75ac1cc46090aa2b8ddc7c6b8ecc295a6cdb06838752a730da3d8afeecf05e5ab7903160eafad3a8b6ffa1927e5ded260590f4d4fef18646d5
   languageName: node
   linkType: hard
 
@@ -8646,7 +8646,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     common: "workspace:^"
     eslint: "npm:^10.5.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -8702,7 +8702,7 @@ __metadata:
     "@lit/localize": "npm:^0.12.2"
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
-    "@types/node": "npm:^24"
+    "@types/node": "npm:^26"
     "@uportal/open-id-connect": "npm:^1.40.2"
     common: "workspace:^"
     eslint: "npm:^10.5.0"

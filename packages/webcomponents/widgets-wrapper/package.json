@@ -43,7 +43,7 @@
     "@gip-recia/ui": "workspace:^",
     "@lit/localize-tools": "^0.8.2",
     "@types/lodash-es": "^4",
-    "@types/node": "^24",
+    "@types/node": "^26",
     "@uportal/open-id-connect": "^1.40.2",
     "common": "workspace:^",
     "eslint": "^10.5.0",
