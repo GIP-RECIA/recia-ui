@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { SummaryElement } from './types/pronoteSummaryType'
+import type { SummaryElement, SummaryResponse } from './types/pronoteSummaryType'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
@@ -30,15 +30,29 @@ export class ReciaPronoteSummary extends LitElement {
   @property({ type: Number, attribute: 'max-elements' })
   maxElements: number = 5
 
+  @property({ type: Number, attribute: 'timeout' })
+  timeout: number = 30000
+
+  @property({ type: String, attribute: 'url-pronote-api' })
+  urlPronoteApi: string = ''
+
   @state()
   loading: boolean = true
 
   @state()
   summary: SummaryElement[] | undefined = undefined
 
+  @state()
+  isError: boolean = false
+
+  errorMessage: string = msg('Impossible de charger le résumé')
+
   constructor() {
     super()
     updateWhenLocaleChanges(this)
+  }
+
+  firstUpdated() {
     this.getSummary()
   }
 
@@ -47,15 +61,37 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   async getSummary(): Promise<void> {
-    await new Promise(res => setTimeout(res, 3000))
-    this.summary = [
-      { description: 'devoirs', count: 3 },
-      { description: 'visites_infirmerie', count: 4 },
-      { description: 'messages_non_lu', count: 143 },
-      { description: 'absences_et_retards', count: 32 },
-      { description: 'punitions_et_sanctions', count: 7 },
-    ]
-    this.loading = false
+    try {
+      const response = await fetch(this.urlPronoteApi, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+        credentials: 'include',
+        signal: AbortSignal.timeout(this.timeout),
+        redirect: 'follow',
+      })
+
+      if (!response.ok) {
+        const errorBody = await response.json()
+        throw new Error(
+          `HTTP error ${response.status}: ${errorBody}`,
+        )
+      }
+
+      const summary: SummaryResponse = await response.json()
+
+      this.summary = summary.data
+      if (this.summary === undefined) {
+        this.isError = true
+      }
+    }
+    catch {
+      this.isError = false
+    }
+    finally {
+      this.loading = false
+    }
   }
 
   conversionMap = new Map<string, string>([
@@ -86,7 +122,11 @@ export class ReciaPronoteSummary extends LitElement {
         }
       }
       else {
-        // todo handle exception
+        elements.push(html`
+          <div>
+            ${this.errorMessage}
+          </div>
+          `)
       }
     }
     else {
