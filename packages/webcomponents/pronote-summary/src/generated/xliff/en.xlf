@@ -4,27 +4,35 @@
 <body>
 <trans-unit id="sfbfc027d3b0a6627">
   <source>Devoir(s) à faire</source>
+  <target>Assignement(s)</target>
 </trans-unit>
 <trans-unit id="sd43ed3546808badc">
   <source>Visite(s) à l'infirmerie</source>
+  <target>Infirmary visit(s)</target>
 </trans-unit>
 <trans-unit id="s3910fc49270600a2">
   <source>Message(s) non lu</source>
+  <target>Message(s) not</target>
 </trans-unit>
 <trans-unit id="s9b71970d3cc1dab1">
   <source>Absence(s) et retard(s)</source>
+  <target>Absence(s) and lateness</target>
 </trans-unit>
 <trans-unit id="sb7a8f51a81d6fd1b">
   <source>Punition(s) et sanction(s)</source>
+  <target>Punishment(s) and sanction(s)</target>
 </trans-unit>
 <trans-unit id="s733bfbdb6756e2c7">
   <source>Impossible de charger le résumé</source>
+  <target>Could not fetch summary</target>
 </trans-unit>
 <trans-unit id="sfc4f271598555e7f">
   <source>Accéder au récapitulatif</source>
+  <target>Go to summary</target>
 </trans-unit>
 <trans-unit id="s8519fa317ed144f6">
   <source>Résumé de Pronote</source>
+  <target>Pronote summary</target>
 </trans-unit>
 </body>
 </file>
