@@ -21,6 +21,8 @@ import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { ref } from 'lit/directives/ref.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { name } from '../package.json'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
@@ -40,12 +42,27 @@ export class ReciaPronoteSummary extends LitElement {
   loading: boolean = true
 
   @state()
-  summary: SummaryElement[] | undefined = undefined
+  summaries: Map<string, SummaryElement[]> | undefined = undefined
 
   @state()
   isError: boolean = false
 
+  @state()
+  isParent: boolean = false
+
+  @state()
+  summaryKey: string = 'default'
+
+  @state()
+  selectedTabId: string = 'child-selector-id-0'
+
   errorMessage: string = msg('Impossible de charger le résumé')
+
+  selectedTabIdPrefix: string = 'child-selector-id-'
+
+  tabPannelPrefix = 'tabpanel-children-'
+
+  buttonsRef: HTMLButtonElement[] = []
 
   constructor() {
     super()
@@ -72,22 +89,20 @@ export class ReciaPronoteSummary extends LitElement {
         redirect: 'follow',
       })
 
-      if (!response.ok) {
-        const errorBody = await response.json()
-        throw new Error(
-          `HTTP error ${response.status}: ${errorBody}`,
-        )
+      if (response.ok) {
+        const json = (await response.json()) as SummaryResponse
+
+        this.summaries = new Map(Object.entries(json.data))
+        this.summaryKey = this.summaries!.keys()!.next()!.value!
+        this.isParent = json.profil === 'Parent'
+        this.isError = false
       }
-
-      const summary: SummaryResponse = await response.json()
-
-      this.summary = summary.data
-      if (this.summary === undefined) {
+      else {
         this.isError = true
       }
     }
     catch {
-      this.isError = false
+      this.isError = true
     }
     finally {
       this.loading = false
@@ -103,36 +118,6 @@ export class ReciaPronoteSummary extends LitElement {
   ])
 
   render(): TemplateResult {
-    const elements = []
-
-    if (!this.loading) {
-      if (this.summary && !this.isError) {
-        for (let i = 0; i < this.summary.length; i++) {
-          elements.push(
-            html`
-            <div class="case">
-              <div class="numero">${this.summary[i].count}</div>
-              <div class="texte">
-                ${this.conversionMap.get(this.summary[i].description)}
-              </div>
-              <div class="numero mobile-only">${this.summary[i].count}</div>
-            </div>
-            `,
-          )
-        }
-      }
-      else {
-        elements.push(html`
-          <div>
-            ${this.errorMessage}
-          </div>
-          `)
-      }
-    }
-    else {
-      elements.push(this.skeletonTemplates())
-    }
-
     return html`
     <h2>${msg('Résumé de Pronote')}</h2>
     <div id="summary-wrapper">
@@ -142,9 +127,7 @@ export class ReciaPronoteSummary extends LitElement {
               ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>
       </div>
-      <div class="cadre">
-        ${elements}
-      </div>
+        ${this.content()}
       <div class="redirect mobile-only">
         <a class="btn-tertiary small">
           ${msg('Accéder au récapitulatif')}
@@ -153,6 +136,116 @@ export class ReciaPronoteSummary extends LitElement {
       </div>
     </div>
   `
+  }
+
+  content(): TemplateResult | TemplateResult[] {
+    if (this.loading) {
+      return this.skeletonTemplates()
+    }
+
+    try {
+      if (this.isParent) {
+        return this.parentContent()
+      }
+      else {
+        return this.studentContent()
+      }
+    }
+    catch {
+      return html`
+        <div>
+          ${this.errorMessage}
+        </div>
+      `
+    }
+  }
+
+  parentContent(): TemplateResult[] {
+    const elements: TemplateResult[] = []
+    type Entry = [string, SummaryElement[]]
+
+    const entries: Entry[] = [
+      ...(this.summaries ?? new Map<string, SummaryElement[]>()),
+    ]
+
+    elements.push(html`<div>
+      ${repeat<Entry>(
+        entries,
+        ([key]) => key,
+        ([key, _value], index): TemplateResult => {
+          const id: string = `child-selector-id-${index}`
+
+          return html`
+      <button
+       id="${id}"
+       role="tab"
+       aria-selected=${this.selectedTabId === id}
+       aria-controls="${this.tabPannelPrefix + index}"
+       @keydown="${this.onKeydown}"
+       @click="${() => this.setSelected(index)}"
+       tabindex="${this.selectedTabId === id ? 0 : -1}"
+       ${ref((el) => {
+          if (el)
+            this.buttonsRef[index] = el as HTMLButtonElement
+        })}
+       class="${this.selectedTabId === `child-selector-id-${index}` ? 'active tag' : 'tag'}"
+       >
+        ${key.replace(/\$.+/, '')}
+      </button>
+    `
+        },
+      ) as unknown as TemplateResult}
+    </div>`)
+
+    elements.push(html`
+      <div>
+        ${repeat<Entry>(
+          entries,
+          ([key]) => key,
+          ([key, _value], index): TemplateResult => {
+            const idOfButton: string = `child-selector-id-${index}`
+            const idPannel: string = `child-pannel-id-${index}`
+            return html`
+      <div
+      id="${idPannel}"
+      role="tabpanel"
+      tabindex="${this.selectedTabId === idOfButton ? 0 : -1}"
+      class="${this.selectedTabId !== idOfButton ? 'is-hidden' : ''}"
+      aria-labelledby="${idOfButton}"
+
+       >
+        ${this.studentContent(key)}
+      </div>
+    `
+          },
+        ) as unknown as TemplateResult}
+      </div>`)
+    return elements
+  }
+
+  studentContent(key: string = 'default'): TemplateResult[] {
+    const summary: SummaryElement[] | undefined = this.summaries?.get(key)
+    if (summary && !this.isError) {
+      const elements = []
+      elements.push(
+        html`
+        <div class="cadre">
+            ${repeat(summary, summaryElement => summaryElement.description, summaryElement =>
+              html`
+            <div class="case">
+              <div class="numero">${summaryElement.count}</div>
+              <div class="texte">
+                ${this.conversionMap.get(summaryElement.description)}
+              </div>
+              <div class="numero mobile-only">${summaryElement.count}</div>
+            </div>
+            `)}
+        </div>`,
+      )
+      return elements
+    }
+
+    throw new Error('_')
   }
 
   skeletonTemplates(): TemplateResult[] {
@@ -169,6 +262,64 @@ export class ReciaPronoteSummary extends LitElement {
 
     return elements
   }
+
+  // TABS METHODS
+
+  setSelected(index: number): void {
+    this.selectedTabId = this.selectedTabIdPrefix + index
+    this.buttonsRef[index]?.focus()
+  }
+
+  idToNumber(id: string): number {
+    if (id.startsWith(this.selectedTabIdPrefix)) {
+      const remaining: string = id.substring(this.selectedTabIdPrefix.length)
+      const idNum: number = parseInt(remaining)
+      return idNum
+    }
+    throw new Error('Invalid id')
+  }
+
+  numberToId(num: number): string {
+    return this.selectedTabIdPrefix + num
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    let flag = false
+    const idAsNum: number = this.idToNumber(this.selectedTabId)
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.selectedTabId = idAsNum === 0 ? this.numberToId(this.buttonsRef.length - 1) : this.numberToId(idAsNum - 1)
+        flag = true
+        break
+
+      case 'ArrowRight':
+        this.selectedTabId = idAsNum === this.buttonsRef.length - 1 ? this.numberToId(0) : this.numberToId(idAsNum + 1)
+        flag = true
+        break
+
+      case 'Home':
+        this.selectedTabId = this.numberToId(0)
+        flag = true
+        break
+
+      case 'End':
+        this.selectedTabId = this.numberToId(this.buttonsRef.length - 1)
+        flag = true
+        break
+
+      default:
+        break
+    }
+
+    this.buttonsRef[this.idToNumber(this.selectedTabId)]?.focus()
+
+    if (flag) {
+      event.stopPropagation()
+      event.preventDefault()
+    }
+  }
+
+  // END TABS METHODS
 
   static styles = css`${unsafeCSS(styles)}`
 }

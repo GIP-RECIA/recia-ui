@@ -15,7 +15,8 @@
  */
 
 export interface SummaryResponse {
-  data: SummaryElement[]
+  profil: 'Parent' | 'Eleve'
+  data: Map<string, SummaryElement[]>
 }
 
 export interface SummaryElement {
