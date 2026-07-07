@@ -29,7 +29,6 @@
 }
 
 .redirect {
-  // align-items: end;
   justify-content: end;
 
   &.mobile-only {
@@ -44,9 +43,6 @@ todo pass order .case {
   display: flex;
   justify-content: space-between;
   align-items: start;
-  // border: unset;
-
-  // padding: 10px;
 }
 .cadre {
   flex-direction: row;
@@ -57,8 +53,6 @@ todo pass order .case {
   &.mobile-only {
     display: block;
   }
-  // font-size: unset;
-  // font-weight: unset;
 }
 
 .case {
@@ -110,7 +104,6 @@ todo pass order .case {
   .case {
     width: 140px;
     height: 140px;
-    // border: 1px solid #ccc;
     box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
 
     border-radius: 8px;
@@ -148,7 +141,7 @@ todo pass order .case {
 
     text-align: center;
     padding: 0 6px;
-    overflow-wrap: break-word; // ou word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -162,14 +155,3 @@ todo pass order .case {
   gap: 12px;
   padding-bottom: 12px;
 }
-
-/*
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px,
-);**/
