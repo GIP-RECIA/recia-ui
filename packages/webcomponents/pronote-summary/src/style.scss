@@ -139,6 +139,13 @@ todo pass order .case {
   display: none;
 }
 
+.tab-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
 /*
 
 $grid-breakpoints: (

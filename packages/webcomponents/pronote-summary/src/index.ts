@@ -173,7 +173,7 @@ export class ReciaPronoteSummary extends LitElement {
       ...(this.summaries ?? new Map<string, SummaryElement[]>()),
     ]
 
-    elements.push(html`<div>
+    elements.push(html`<div class="tab-btn-wrapper">
       ${repeat<Entry>(
         entries,
         ([key]) => key,
