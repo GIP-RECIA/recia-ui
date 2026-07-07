@@ -21,6 +21,8 @@ import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { map } from 'lit/directives/map.js'
+import { range } from 'lit/directives/range.js'
 import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { name } from '../package.json'
@@ -251,19 +253,15 @@ export class ReciaPronoteSummary extends LitElement {
     throw new Error('_')
   }
 
-  skeletonTemplates(): TemplateResult[] {
-    const elements = []
-
-    for (let i = 0; i < this.maxElements; i++) {
-      elements.push(
-        html`
+  skeletonTemplates(): TemplateResult {
+    return html`
+    <div class="cadre">
+      ${map(range(this.maxElements), () => html`
             <div class="case loading">
             </div>
-            `,
-      )
-    }
-
-    return elements
+            `)}
+    </div>
+    `
   }
 
   // TABS METHODS
