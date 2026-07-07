@@ -38,6 +38,9 @@ export class ReciaPronoteSummary extends LitElement {
   @property({ type: String, attribute: 'url-pronote-api' })
   urlPronoteApi: string = ''
 
+  @property({ type: String, attribute: 'url-redirect' })
+  urlRedirect: string = ''
+
   @state()
   loading: boolean = true
 
@@ -122,14 +125,14 @@ export class ReciaPronoteSummary extends LitElement {
     <h2>${msg('Résumé de Pronote')}</h2>
     <div id="summary-wrapper">
       <div  class="redirect">
-        <a class="btn-tertiary small">
+        <a class="btn-tertiary small" href="${this.urlRedirect}" rel=“noopener noreferrer”>
           ${msg('Accéder au récapitulatif')}
               ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>
       </div>
         ${this.content()}
-      <div class="redirect mobile-only">
-        <a class="btn-tertiary small">
+      <div class="redirect mobile-only" >
+        <a class="btn-tertiary small" href="${this.urlRedirect}" rel=“noopener noreferrer”>
           ${msg('Accéder au récapitulatif')}
           ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>
