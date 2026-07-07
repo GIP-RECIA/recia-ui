@@ -17,11 +17,20 @@
   flex-direction: column !important;
 }
 
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: row;
+
+  a {
+    display: none;
+  }
+}
+
 .redirect {
   // align-items: end;
   justify-content: end;
-
-  display: none;
 
   &.mobile-only {
     display: flex;
@@ -76,13 +85,21 @@ todo pass order .case {
   justify-content: start;
 }
 
-@media (width >= map.get($grid-breakpoints, sm)) {
+@media (width >= map.get($grid-breakpoints, lg)) {
   .redirect {
-    display: flex;
     &.mobile-only {
       display: none;
     }
   }
+
+  .title-wrapper {
+    a {
+      display: unset;
+    }
+  }
+}
+
+@media (width >= map.get($grid-breakpoints, sm)) {
   .cadre {
     display: flex;
     flex-direction: row;
