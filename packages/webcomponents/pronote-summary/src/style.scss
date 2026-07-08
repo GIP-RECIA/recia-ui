@@ -79,9 +79,15 @@
   }
 
   .title-wrapper {
+    display: flex;
+    align-items: center;
+    h2 {
+      margin-bottom: 0px;
+    }
     a {
       display: inline-flex;
     }
+    margin-bottom: 12px;
   }
 }
 
@@ -96,22 +102,20 @@
   .case {
     width: 140px;
     height: 140px;
+    padding: 16px;
     box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
 
     border-radius: 8px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    display: block;
   }
 
   .numero {
-    grid-column: 2;
-    grid-row: 2;
-
-    display: flex;
+    height: auto;
+    display: block;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    align-self: center;
 
     font-size: 2rem;
     font-weight: bold;
@@ -122,10 +126,7 @@
   }
 
   .texte {
-    grid-column: 1 / 4;
-    grid-row: 3;
-
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
 
