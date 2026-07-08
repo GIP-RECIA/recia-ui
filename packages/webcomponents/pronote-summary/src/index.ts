@@ -167,8 +167,14 @@ export class ReciaPronoteSummary extends LitElement {
 
   parentContent(): TemplateResult[] {
     const elements: TemplateResult[] = []
-    type Entry = [string, SummaryElement[]]
 
+    if (this.summaries?.size === 1) {
+      elements.push(html`<div>${this.studentContent(this.summaries.keys().next().value)}</div>`)
+    }
+
+    return elements
+
+    type Entry = [string, SummaryElement[]]
     const entries: Entry[] = [
       ...(this.summaries ?? new Map<string, SummaryElement[]>()),
     ]
