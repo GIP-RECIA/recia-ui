@@ -107,21 +107,28 @@
 
 @media (width >= map.get($grid-breakpoints, sm)) {
   .cadre {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    flex-wrap: wrap;
+    @include unstyled-list;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 15px;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: -0.25px;
   }
 
   .tabpanel {
-    width: fit-content;
+    width: auto;
   }
 
   .case {
-    width: 140px;
-    height: 140px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
     padding: 16px;
     box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
+    display: inline-block;
+    padding: 12px;
 
     border-radius: 8px;
     display: block;
