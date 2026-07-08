@@ -170,9 +170,8 @@ export class ReciaPronoteSummary extends LitElement {
 
     if (this.summaries?.size === 1) {
       elements.push(html`<div>${this.studentContent(this.summaries.keys().next().value)}</div>`)
+      return elements
     }
-
-    return elements
 
     type Entry = [string, SummaryElement[]]
     const entries: Entry[] = [
