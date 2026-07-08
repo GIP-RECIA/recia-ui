@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+  </head>
+
+  <body class="container">
+    <section>
+      <r-tablist
+        id-prefix="a"
+        tabs='["A - A", "A - B", "A - C"]'
+        active-tab="0"
+      >
+      </r-tablist>
+
+      <r-tabpanel
+        id-prefix="a"
+        index="0"
+        active
+      >
+        A - A
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="a"
+        index="1"
+      >
+        A - B
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="a"
+        index="2"
+      >
+        A - C
+      </r-tabpanel>
+    </section>
+
+    <section>
+      <r-tablist
+        id-prefix="b"
+        tabs='["B - A", "B - B", "B - C"]'
+        active-tab="1"
+      >
+      </r-tablist>
+
+      <r-tabpanel
+        id-prefix="b"
+        index="0"
+      >
+        B - A
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="b"
+        index="1"
+        active
+      >
+        B - B
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="b"
+        index="2"
+      >
+        B - C
+      </r-tabpanel>
+    </section>
+
+    <script></script>
+  </body>
+</html>

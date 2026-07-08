@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use 'common/assets/scss/global' as *;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+
+ul {
+  @include unstyled-list;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
