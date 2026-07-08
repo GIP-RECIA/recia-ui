@@ -124,7 +124,7 @@ export class ReciaPronoteSummary extends LitElement {
 
   render(): TemplateResult {
     return html`
-    <div class="title-wrapper"><h2>${msg('Résumé de Pronote')}</h2>
+    <div class="title-wrapper"><h2>${msg('Résumé de Pronote (7 derniers jours)')}</h2>
     <a class="btn-tertiary small" href="${this.urlRedirect}" rel=“noopener noreferrer”>
           ${msg('accéder au récapitulatif')}
               ${getIconWithStyle(faArrowRight, undefined, { icon: true })}

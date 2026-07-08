@@ -26,13 +26,13 @@
   <source>Impossible de charger le résumé</source>
   <target>Could not fetch summary</target>
 </trans-unit>
-<trans-unit id="s8519fa317ed144f6">
-  <source>Résumé de Pronote</source>
-  <target>Pronote summary</target>
-</trans-unit>
 <trans-unit id="sca2091790a49209f">
   <source>accéder au récapitulatif</source>
   <target>go to summary</target>
+</trans-unit>
+<trans-unit id="s8191b5b961e859e5">
+  <source>Résumé de Pronote (7 derniers jours)</source>
+  <target>Pronote summary (last 7 days)</target>
 </trans-unit>
 </body>
 </file>
