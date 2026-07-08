@@ -22,7 +22,10 @@
   justify-content: space-between;
   align-items: start;
   flex-direction: row;
-
+  margin-bottom: var(--recia-font-size-base);
+  h2 {
+    margin-bottom: 0px;
+  }
   a {
     display: none;
   }
@@ -81,13 +84,9 @@
   .title-wrapper {
     display: flex;
     align-items: center;
-    h2 {
-      margin-bottom: 0px;
-    }
     a {
       display: inline-flex;
     }
-    margin-bottom: 12px;
   }
 }
 
