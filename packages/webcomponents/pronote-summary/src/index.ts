@@ -215,7 +215,7 @@ export class ReciaPronoteSummary extends LitElement {
       id="${idPannel}"
       role="tabpanel"
       tabindex="${this.selectedTabId === idOfButton ? 0 : -1}"
-      class="${this.selectedTabId !== idOfButton ? 'is-hidden' : ''}"
+      class="${this.selectedTabId !== idOfButton ? 'is-hidden tabpanel' : 'tabpanel'}"
       aria-labelledby="${idOfButton}"
 
        >
