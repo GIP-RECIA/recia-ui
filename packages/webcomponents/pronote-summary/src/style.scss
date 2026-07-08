@@ -40,6 +40,21 @@
   }
 }
 
+.tabpanel {
+  width: auto;
+  &:focus-visible {
+    outline: 2px solid var(--#{$prefix}primary);
+    box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
+    border-radius: 10px;
+  }
+
+  &:has(:focus-visible) {
+    outline: 2px solid var(--#{$prefix}primary);
+    box-shadow: var(--#{$prefix}shadow-hover) HEXToRGBA(var(--#{$prefix}primary), 0.2);
+    border-radius: 10px;
+  }
+}
+
 .cadre {
   flex-direction: row;
 }
@@ -96,6 +111,10 @@
     flex-direction: row;
     gap: 12px;
     flex-wrap: wrap;
+  }
+
+  .tabpanel {
+    width: fit-content;
   }
 
   .case {
