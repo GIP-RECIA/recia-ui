@@ -242,7 +242,6 @@ export class ReciaPronoteSummary extends LitElement {
               <div class="texte">
                 ${this.conversionMap.get(summaryElement.description)}
               </div>
-              <div class="numero mobile-only">${summaryElement.count}</div>
             </li>
             `)}
             </ul>`,
