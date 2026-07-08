@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="light dark"
+    />
+    <script
+      type="module"
+      src="/index.ts"
+    ></script>
+  </head>
+
+  <body class="container">
+    <section>
+      <r-tablist
+        id-prefix="a"
+        tabs='["A - A", "A - B", "A - C"]'
+        active-tab="0"
+        switch-tabpanel
+      >
+      </r-tablist>
+
+      <r-tabpanel
+        id-prefix="a"
+        index="0"
+        active
+      >
+        <p>
+          A - A
+          <br />
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab ducimus repudiandae dignissimos obcaecati
+          provident ipsam a odio quia at fugit. Officia illum facilis maiores, sunt dolor quam illo sit necessitatibus?
+        </p>
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="a"
+        index="1"
+      >
+        <p>
+          A - B
+          <br />
+          Dolorem aliquid mollitia nesciunt quidem error similique soluta libero, quod ab vero ullam cupiditate quia
+          perferendis fugit nemo hic explicabo sint voluptatibus. Earum, quam vel rem quaerat ab perspiciatis
+          voluptatum.
+        </p>
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="a"
+        index="2"
+      >
+        <p>
+          A - C
+          <br />
+          Quaerat expedita in, voluptate alias porro cumque hic culpa reiciendis rem, illum tenetur nihil tempora animi
+          debitis dolores. Cupiditate facilis amet fugiat suscipit molestiae id, officiis dolorem sequi tempore
+          repudiandae?
+        </p>
+      </r-tabpanel>
+    </section>
+
+    <section>
+      <r-tablist
+        id-prefix="b"
+        tabs='["B - A", "B - B", "B - C"]'
+        active-tab="1"
+        switch-tabpanel
+      >
+      </r-tablist>
+
+      <r-tabpanel
+        id-prefix="b"
+        index="0"
+      >
+        <p>
+          B - A
+          <br />
+          Corporis magnam possimus totam soluta explicabo perferendis eos expedita a magni, necessitatibus tempore.
+          Temporibus doloremque vero deserunt similique necessitatibus. Ullam sunt placeat quisquam expedita numquam
+          quos at porro, laudantium mollitia!
+        </p>
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="b"
+        index="1"
+        active
+      >
+        <p>
+          B - B
+          <br />
+          Iusto natus possimus quidem quas, delectus illo facilis cum sequi excepturi aliquam molestiae blanditiis dicta
+          ad consequuntur accusamus laudantium voluptate dignissimos. Rerum quam quibusdam doloremque eligendi. Rem
+          debitis illum exercitationem?
+        </p>
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="b"
+        index="2"
+      >
+        <p>
+          B - C
+          <br />
+          Quaerat sit eaque temporibus? Minus beatae aliquid rerum incidunt fuga quos adipisci molestias, voluptatibus
+          sunt exercitationem laborum eaque iure quo. Optio perferendis vel libero quia non iste doloremque voluptatibus
+          ea?
+        </p>
+      </r-tabpanel>
+    </section>
+
+    <section>
+      <div>
+        <r-tablist
+          id-prefix="c"
+          tabs='["C - A", "C - B", "C - C"]'
+          active-tab="2"
+        >
+        </r-tablist>
+      </div>
+
+      <r-tabpanel
+        id-prefix="c"
+        index="0"
+      >
+        <p>
+          C - A
+          <br />
+          Cumque, id odio molestiae voluptas sed tenetur ipsa suscipit deleniti et voluptate dolorem optio excepturi
+          quam! Vero laboriosam itaque error iste. Ipsa rerum laudantium itaque consequuntur inventore sint ad labore.
+        </p>
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="c"
+        index="1"
+      >
+        <p>
+          C - B
+          <br />
+          Architecto debitis, nulla sequi hic maiores, repudiandae nam eius magni voluptate dolorem vitae! Repudiandae
+          facere eaque minus inventore non officia, accusamus nam sunt laboriosam animi magnam voluptates consectetur
+          rem amet.
+        </p>
+      </r-tabpanel>
+
+      <r-tabpanel
+        id-prefix="c"
+        index="2"
+        active
+      >
+        <p>
+          C - C
+          <br />
+          Earum soluta animi aliquam! Dolor, reiciendis provident maiores quis itaque maxime temporibus. Libero eos
+          earum explicabo ipsam tenetur. Corporis veritatis, mollitia nesciunt error molestiae eaque fugiat praesentium
+          quod voluptas temporibus!
+        </p>
+      </r-tabpanel>
+    </section>
+
+    <script>
+      document.querySelectorAll('r-tablist:not([switch-tabpanel])').forEach((tablist) => {
+        tablist.addEventListener('set-active-tab', (e) => {
+          const { idPrefix, activeTab, oldActiveTab } = e.detail
+
+          document
+            .querySelector(`r-tabpanel[id-prefix="${idPrefix}"][index="${oldActiveTab}"]`)
+            .removeAttribute('active')
+          document
+            .querySelector(`r-tabpanel[id-prefix="${idPrefix}"][index="${activeTab}"]`)
+            .setAttribute('active', true)
+        })
+      })
+    </script>
+  </body>
+</html>

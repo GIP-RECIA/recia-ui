@@ -1,0 +1,57 @@
+{
+  "name": "tabs",
+  "type": "module",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/r-tabs.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/r-tabs.js"
+      }
+    },
+    "./types/*": "./src/types/*"
+  },
+  "main": "./dist/r-tabs.js",
+  "module": "./dist/r-tabs.js",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test:unit": "echo No tests available"
+  },
+  "dependencies": {
+    "@lit/localize": "^0.12.2",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.1.0",
+    "@fortawesome/fontawesome-svg-core": "^7.3.0",
+    "@fortawesome/free-regular-svg-icons": "^7.3.0",
+    "@fortawesome/free-solid-svg-icons": "^7.3.0",
+    "@gip-recia/ui": "workspace:^",
+    "@lit/localize-tools": "^0.8.2",
+    "@types/lodash-es": "^4",
+    "@types/node": "^24",
+    "common": "workspace:^",
+    "eslint": "^10.6.0",
+    "eslint-plugin-format": "^2.0.1",
+    "lodash-es": "^4.18.1",
+    "ress": "^5.0.2",
+    "sass": "^1.101.0",
+    "typescript": "^6.0.3",
+    "unplugin-dts": "^1.0.3",
+    "vite": "^7.3.5"
+  }
+}
