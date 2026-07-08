@@ -49,7 +49,6 @@ todo pass order .case {
   flex-direction: row;
 }
 .numero {
-  order: 2;
   display: none;
   &.mobile-only {
     display: block;
@@ -74,7 +73,6 @@ todo pass order .case {
 }
 
 .texte {
-  order: 1;
   text-align: left;
   flex: 1;
   justify-content: start;
@@ -121,7 +119,6 @@ todo pass order .case {
     display: flex;
     align-items: center;
     justify-content: center;
-    order: unset;
 
     font-size: 2rem;
     font-weight: bold;
@@ -132,7 +129,6 @@ todo pass order .case {
   }
 
   .texte {
-    order: unset;
     grid-column: 1 / 4;
     grid-row: 3;
 
