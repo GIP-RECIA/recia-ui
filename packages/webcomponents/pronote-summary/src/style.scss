@@ -41,16 +41,17 @@
   flex-direction: row;
 }
 .numero {
-  display: none;
+  text-align: right;
   &.mobile-only {
     display: block;
   }
 }
 
 .case {
-  display: flex;
   height: 1.5em;
-
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
   &.loading {
     &:first-child {
       border-radius: 8px 8px 0 0;
