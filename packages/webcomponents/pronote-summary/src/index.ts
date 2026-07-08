@@ -234,18 +234,18 @@ export class ReciaPronoteSummary extends LitElement {
       const elements = []
       elements.push(
         html`
-        <div class="cadre">
+        <ul class="cadre">
             ${repeat(summary, summaryElement => summaryElement.description, summaryElement =>
               html`
-            <div class="case">
+            <li class="case">
               <div class="numero">${summaryElement.count}</div>
               <div class="texte">
                 ${this.conversionMap.get(summaryElement.description)}
               </div>
               <div class="numero mobile-only">${summaryElement.count}</div>
-            </div>
+            </li>
             `)}
-        </div>`,
+            </ul>`,
       )
       return elements
     }
