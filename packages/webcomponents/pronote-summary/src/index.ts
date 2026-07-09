@@ -45,6 +45,12 @@ export class ReciaPronoteSummary extends LitElement {
   @property({ type: String, attribute: 'url-redirect' })
   urlRedirect: string = ''
 
+  @property({ type: String, attribute: 'dnma-event-name' })
+  dnmaEventName: string = ''
+
+  @property({ type: String, attribute: 'fname' })
+  fname: string = ''
+
   @state()
   loading: boolean = true
 
@@ -78,6 +84,19 @@ export class ReciaPronoteSummary extends LitElement {
     super.connectedCallback()
   }
 
+  sendDnmaEvent() {
+    const eventDNMA: CustomEvent = new CustomEvent(
+      this.dnmaEventName,
+      {
+        detail:
+      {
+        fname: this.fname,
+      },
+      },
+    )
+    document.dispatchEvent(eventDNMA)
+  }
+
   async fetchSummary(): Promise<void> {
     try {
       const summaryResponse = await getSummary(this.urlPronoteApi, this.timeout)
@@ -106,7 +125,11 @@ export class ReciaPronoteSummary extends LitElement {
   render(): TemplateResult {
     return html`
     <div class="title-wrapper"><h2>${msg('Résumé de Pronote (7 derniers jours)')}</h2>
-    <a class="btn-tertiary small" href="${this.urlRedirect}" rel=“noopener noreferrer”>
+    <a
+      class="btn-tertiary small"
+      @click="${this.sendDnmaEvent}"
+      href="${this.urlRedirect}"
+      rel=“noopener noreferrer”>
           ${msg('accéder au récapitulatif')}
               ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>
@@ -115,7 +138,11 @@ export class ReciaPronoteSummary extends LitElement {
     <div id="summary-wrapper">
         ${this.content()}
       <div class="redirect mobile-only" >
-        <a class="btn-tertiary small" href="${this.urlRedirect}" rel=“noopener noreferrer”>
+        <a
+        class="btn-tertiary small"
+        @click="${this.sendDnmaEvent}"
+        href="${this.urlRedirect}"
+        rel=“noopener noreferrer”>
           ${msg('accéder au récapitulatif')}
           ${getIconWithStyle(faArrowRight, undefined, { icon: true })}
         </a>

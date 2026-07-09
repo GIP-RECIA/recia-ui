@@ -11,3 +11,5 @@
 | `url-redirect`       | `string` |   `true`    |   ``    | URL/path du service de restitution des informations Pronote                                                                 |
 | `timeout`            | `number` |   `false`   | `30000` | Timeout de la requête à l'API Pronote                                                                                       |
 | `max-elements`       | `number` |   `false`   |   `5`   | Nombre de skeletons à afficher lors du chargement du composant                                                              |
+| `dnma-event-name`    | `string` |   `true`    |   ``    | Nom de l'évènement DNMA envoyé lors du click sur le lien de redirection vers la page de restitution                         |
+| `fname`              | `string` |   `true`    |   ``    | Fname du service                                                                                                            |
