@@ -26,6 +26,7 @@ import { range } from 'lit/directives/range.js'
 import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { name } from '../package.json'
+import { TabPanelHandler } from './handlers/tabPanelHandler'
 import { getSummary } from './services/apiService'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
@@ -59,19 +60,13 @@ export class ReciaPronoteSummary extends LitElement {
   @state()
   summaryKey: string = 'default'
 
-  @state()
-  selectedTabId: string = 'child-selector-id-0'
-
   errorMessage: string = msg('Impossible de charger le résumé')
 
-  selectedTabIdPrefix: string = 'child-selector-id-'
-
-  tabPannelPrefix = 'tabpanel-children-'
-
-  buttonsRef: HTMLButtonElement[] = []
+  tabPannelHandler: TabPanelHandler
 
   constructor() {
     super()
+    this.tabPannelHandler = new TabPanelHandler('child-selector-id-', 'tabpanel-children-', () => this.requestUpdate())
     updateWhenLocaleChanges(this)
   }
 
@@ -169,22 +164,21 @@ export class ReciaPronoteSummary extends LitElement {
         entries,
         ([key]) => key,
         ([key, _value], index): TemplateResult => {
-          const id: string = `child-selector-id-${index}`
-
           return html`
       <button
-       id="${id}"
+       id="${this.tabPannelHandler.getButtonId(index)}"
        role="tab"
-       aria-selected=${this.selectedTabId === id}
-       aria-controls="${this.tabPannelPrefix + index}"
-       @keydown="${this.onKeydown}"
-       @click="${() => this.setSelected(index)}"
-       tabindex="${this.selectedTabId === id ? 0 : -1}"
-       ${ref((el) => {
-          if (el)
-            this.buttonsRef[index] = el as HTMLButtonElement
+       aria-selected=${this.tabPannelHandler.getAriaSelected(index)}
+       aria-controls="${this.tabPannelHandler.getAriaControl(index)}"
+       @keydown="${this.tabPannelHandler.onKeydown}"
+       @click="${() => this.tabPannelHandler.setSelected(index)}"
+       tabindex="${this.tabPannelHandler.getTabIndex(index)}"
+       ${ref((el: Element | undefined) => {
+          if (el instanceof HTMLButtonElement) {
+            this.tabPannelHandler.addButton(el, index)
+          }
         })}
-       class="${this.selectedTabId === `child-selector-id-${index}` ? 'active tag' : 'tag'}"
+       class="${this.tabPannelHandler.getAriaSelected(index) ? 'active tag' : 'tag'}"
        >
         ${key.replace(/\$.+/, '')}
       </button>
@@ -199,15 +193,13 @@ export class ReciaPronoteSummary extends LitElement {
           entries,
           ([key]) => key,
           ([key, _value], index): TemplateResult => {
-            const idOfButton: string = `child-selector-id-${index}`
-            const idPannel: string = `child-pannel-id-${index}`
             return html`
       <div
-      id="${idPannel}"
+      id="${this.tabPannelHandler.getPanelId(index)}"
       role="tabpanel"
-      tabindex="${this.selectedTabId === idOfButton ? 0 : -1}"
-      class="${this.selectedTabId !== idOfButton ? 'is-hidden tabpanel' : 'tabpanel'}"
-      aria-labelledby="${idOfButton}"
+      tabindex="${this.tabPannelHandler.getTabIndex(index)}"
+      class="${!this.tabPannelHandler.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
+      aria-labelledby="${this.tabPannelHandler.getButtonId(index)}"
 
        >
         ${this.studentContent(key)}
@@ -253,64 +245,6 @@ export class ReciaPronoteSummary extends LitElement {
     </div>
     `
   }
-
-  // TABS METHODS
-
-  setSelected(index: number): void {
-    this.selectedTabId = this.selectedTabIdPrefix + index
-    this.buttonsRef[index]?.focus()
-  }
-
-  idToNumber(id: string): number {
-    if (id.startsWith(this.selectedTabIdPrefix)) {
-      const remaining: string = id.substring(this.selectedTabIdPrefix.length)
-      const idNum: number = parseInt(remaining)
-      return idNum
-    }
-    throw new Error('Invalid id')
-  }
-
-  numberToId(num: number): string {
-    return this.selectedTabIdPrefix + num
-  }
-
-  onKeydown(event: KeyboardEvent) {
-    let flag = false
-    const idAsNum: number = this.idToNumber(this.selectedTabId)
-    switch (event.key) {
-      case 'ArrowLeft':
-        this.selectedTabId = idAsNum === 0 ? this.numberToId(this.buttonsRef.length - 1) : this.numberToId(idAsNum - 1)
-        flag = true
-        break
-
-      case 'ArrowRight':
-        this.selectedTabId = idAsNum === this.buttonsRef.length - 1 ? this.numberToId(0) : this.numberToId(idAsNum + 1)
-        flag = true
-        break
-
-      case 'Home':
-        this.selectedTabId = this.numberToId(0)
-        flag = true
-        break
-
-      case 'End':
-        this.selectedTabId = this.numberToId(this.buttonsRef.length - 1)
-        flag = true
-        break
-
-      default:
-        break
-    }
-
-    this.buttonsRef[this.idToNumber(this.selectedTabId)]?.focus()
-
-    if (flag) {
-      event.stopPropagation()
-      event.preventDefault()
-    }
-  }
-
-  // END TABS METHODS
 
   static styles = css`${unsafeCSS(styles)}`
 }
