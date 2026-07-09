@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { SummaryElement, SummaryResponse } from './types/pronoteSummaryType'
+import type { SummaryElement } from './types/pronoteSummaryType'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
@@ -26,6 +26,7 @@ import { range } from 'lit/directives/range.js'
 import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { name } from '../package.json'
+import { getSummary } from './services/apiService'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 
@@ -75,36 +76,21 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   firstUpdated() {
-    this.getSummary()
+    this.fetchSummary()
   }
 
   connectedCallback(): void {
     super.connectedCallback()
   }
 
-  async getSummary(): Promise<void> {
+  async fetchSummary(): Promise<void> {
     try {
-      const response = await fetch(this.urlPronoteApi, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
-        credentials: 'include',
-        signal: AbortSignal.timeout(this.timeout),
-        redirect: 'follow',
-      })
+      const summaryResponse = await getSummary(this.urlPronoteApi, this.timeout)
 
-      if (response.ok) {
-        const json = (await response.json()) as SummaryResponse
-
-        this.summaries = new Map(Object.entries(json.data))
-        this.summaryKey = this.summaries!.keys()!.next()!.value!
-        this.isParent = json.profil === 'Parent'
-        this.isError = false
-      }
-      else {
-        this.isError = true
-      }
+      this.summaries = new Map(Object.entries(summaryResponse.data))
+      this.summaryKey = this.summaries!.keys()!.next()!.value!
+      this.isParent = summaryResponse.profil === 'Parent'
+      this.isError = false
     }
     catch {
       this.isError = true
