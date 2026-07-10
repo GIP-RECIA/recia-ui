@@ -16,7 +16,7 @@
 
 import type { Link } from 'common/types/index.ts'
 import type { TemplateResult } from 'lit'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
@@ -68,7 +68,6 @@ export class ReciaService extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   async toggleFavorite(_: Event): Promise<void> {

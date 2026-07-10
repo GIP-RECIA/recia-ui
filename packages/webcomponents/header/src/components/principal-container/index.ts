@@ -16,7 +16,7 @@
 
 import type { TemplateResult } from 'lit'
 import { faArrowRightToBracket, faBell, faCircleInfo, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -72,7 +72,6 @@ export class ReciaPrincipalContainer extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   authenticatedTemplate(): TemplateResult {

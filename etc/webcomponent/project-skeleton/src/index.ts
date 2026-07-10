@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { name } from '../package.json'
@@ -30,7 +30,6 @@ export class ReciaProjectSkeleton extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   render(): TemplateResult {

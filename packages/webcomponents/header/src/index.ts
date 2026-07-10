@@ -30,7 +30,7 @@ import type {
   ScriptLoad,
   SettingsHeaderProperties,
 } from './types/index.ts'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -311,7 +311,6 @@ export class ReciaHeader extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
     this.initDebugEventsListener()
   }
 

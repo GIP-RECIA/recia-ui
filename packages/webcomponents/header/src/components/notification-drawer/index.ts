@@ -17,7 +17,7 @@
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import { faBellSlash, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
@@ -40,7 +40,6 @@ export class ReciaNotificationDrawer extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   connectedCallback(): void {

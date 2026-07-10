@@ -18,7 +18,7 @@ import type { Link } from 'common/types/index.ts'
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Template } from './types/TemplateType.ts'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
@@ -55,7 +55,6 @@ export class ReciaFooter extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues<this>): boolean {

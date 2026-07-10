@@ -17,7 +17,7 @@
 import type { ReciaBottomSheet } from 'bottom-sheet'
 import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { state } from 'lit/decorators.js'
@@ -42,7 +42,6 @@ export class ReciaInfoEtabBottomSheet extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   open(): void {

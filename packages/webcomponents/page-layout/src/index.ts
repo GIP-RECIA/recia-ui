@@ -17,7 +17,7 @@
 import type { Link } from 'common/types/index.ts'
 import type { TemplateResult } from 'lit'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { localized, updateWhenLocaleChanges } from '@lit/localize'
+import { localized } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
@@ -41,7 +41,6 @@ export class ReciaPageLayout extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   render(): TemplateResult | typeof nothing {

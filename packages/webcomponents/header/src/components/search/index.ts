@@ -18,7 +18,7 @@ import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { SearchSection, Service } from '../../types/index.ts'
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -61,7 +61,6 @@ export class ReciaSearch extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   connectedCallback(): void {

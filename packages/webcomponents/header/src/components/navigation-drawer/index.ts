@@ -19,7 +19,7 @@ import type { TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
 import type { DrawerItem, UpdatedFavoriteSection } from '../../types/index.ts'
 import type { ReciaFavoriteBottomSheet } from '../favorite/bottom-sheet/index.ts'
-import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
@@ -69,7 +69,6 @@ export class ReciaNavigationDrawer extends LitElement {
     const lang = langHelper.getPageLang()
     setLocale(lang)
     langHelper.setLocale(lang)
-    updateWhenLocaleChanges(this)
   }
 
   connectedCallback(): void {
