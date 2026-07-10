@@ -16,7 +16,6 @@
 
 export enum IdpId {
   ParentEleveEN = 'parentEleveEN-IdP',
-  ElevesParents = 'eleves-parents',
   Catel = 'catel-IdP',
   Agri = 'agri-IdP',
   RCVL = 'RCVL-IdP',
