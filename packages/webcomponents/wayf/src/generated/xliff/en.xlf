@@ -14,17 +14,9 @@
   <target>Student or parent in the national education
 (ÉduConnect)</target>
 </trans-unit>
-<trans-unit id="s14b0408f1aced5cd">
-  <source>Élève ou parent de l'enseignement agricole</source>
-  <target>Student or parent in agricultural education</target>
-</trans-unit>
 <trans-unit id="s97a3d79692bf6b4a">
   <source>Personnel de l'éducation nationale</source>
   <target>National education staff</target>
-</trans-unit>
-<trans-unit id="sd362dba1c8aa8f6f">
-  <source>Personnel de l'enseignement agricole</source>
-  <target>Agricultural education staff</target>
 </trans-unit>
 <trans-unit id="s1bcb1fb4564acdca">
   <source>Personnel de la Région Centre-Val de Loire</source>
@@ -33,6 +25,11 @@
 <trans-unit id="sdfa0e3058780c9f8">
   <source>Personnel du département d'Eure-et-Loir</source>
   <target>Eure-et-Loir department staff</target>
+</trans-unit>
+<trans-unit id="s4a27e1a8c902f0e7">
+  <source>Élève, parent ou personnel de l'enseignement agricole (ÉduAgri)</source>
+  <target>Student, parent or education staff in the agricultural
+(ÉduAgri)</target>
 </trans-unit>
 </body>
 </file>
