@@ -114,12 +114,37 @@ export class ReciaPronoteSummary extends LitElement {
     }
   }
 
-  conversionMap = new Map<string, string>([
-    ['devoirs', msg('Devoir(s) à faire')],
-    ['visites_infirmerie', msg('Visite(s) à l\'infirmerie')],
-    ['messages_non_lu', msg('Message(s) non lu')],
-    ['absences_et_retards', msg('Absence(s) et retard(s)')],
-    ['punitions_et_sanctions', msg('Punition(s) et sanction(s)')],
+  conversionMap = new Map<string, (count: number) => string>([
+    [
+      'devoirs',
+      count => count <= 1
+        ? msg('Devoir à faire')
+        : msg('Devoirs à faire'),
+    ],
+    [
+      'visites_infirmerie',
+      count => count <= 1
+        ? msg('Visite à l\'infirmerie')
+        : msg('Visites à l\'infirmerie'),
+    ],
+    [
+      'messages_non_lu',
+      count => count <= 1
+        ? msg('Message non lu')
+        : msg('Messages non lus'),
+    ],
+    [
+      'absences_et_retards',
+      count => count <= 1
+        ? msg('Absence ou retard')
+        : msg('Absences ou retards'),
+    ],
+    [
+      'punitions_et_sanctions',
+      count => count <= 1
+        ? msg('Punition ou sanction')
+        : msg('Punitions ou sanctions'),
+    ],
   ])
 
   render(): TemplateResult {
@@ -250,7 +275,8 @@ export class ReciaPronoteSummary extends LitElement {
             <li class="case">
               <div class="numero">${summaryElement.count}</div>
               <div class="texte">
-                ${this.conversionMap.get(summaryElement.description)}
+                ${this.conversionMap.get(summaryElement.description)?.(summaryElement.count)
+                ?? summaryElement.description}
               </div>
             </li>
             `)}
