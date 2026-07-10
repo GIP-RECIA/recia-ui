@@ -2,26 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="sfbfc027d3b0a6627">
-  <source>Devoir(s) à faire</source>
-  <target>Assignement(s)</target>
-</trans-unit>
-<trans-unit id="sd43ed3546808badc">
-  <source>Visite(s) à l'infirmerie</source>
-  <target>Infirmary visit(s)</target>
-</trans-unit>
-<trans-unit id="s3910fc49270600a2">
-  <source>Message(s) non lu</source>
-  <target>Message(s) not</target>
-</trans-unit>
-<trans-unit id="s9b71970d3cc1dab1">
-  <source>Absence(s) et retard(s)</source>
-  <target>Absence(s) and lateness</target>
-</trans-unit>
-<trans-unit id="sb7a8f51a81d6fd1b">
-  <source>Punition(s) et sanction(s)</source>
-  <target>Punishment(s) and sanction(s)</target>
-</trans-unit>
 <trans-unit id="s733bfbdb6756e2c7">
   <source>Impossible de charger le résumé</source>
   <target>Could not fetch summary</target>
@@ -33,6 +13,46 @@
 <trans-unit id="s8191b5b961e859e5">
   <source>Résumé de Pronote (7 derniers jours)</source>
   <target>Pronote summary (last 7 days)</target>
+</trans-unit>
+<trans-unit id="sde69ffbd6db923f7">
+  <source>Devoir à faire</source>
+  <target>Assignement</target>
+</trans-unit>
+<trans-unit id="sd8f8d43899ca2ab2">
+  <source>Devoirs à faire</source>
+    <target>Assignements</target>
+</trans-unit>
+<trans-unit id="s14a531ecd42dc8f2">
+  <source>Visite à l'infirmerie</source>
+   <target>Infirmary visit</target>
+</trans-unit>
+<trans-unit id="sc4f308473f4d9cbf">
+  <source>Visites à l'infirmerie</source>
+  <target>Infirmary visits</target>
+</trans-unit>
+<trans-unit id="sa018bd2bd5637192">
+  <source>Message non lu</source>
+  <target>Message not read</target>
+</trans-unit>
+<trans-unit id="sc2e584f7dd80c622">
+  <source>Messages non lus</source>
+  <target>Unread messages</target>
+</trans-unit>
+<trans-unit id="s24987773a5b77b9c">
+  <source>Absence ou retard</source>
+  <target>Absence or lateness</target>
+</trans-unit>
+<trans-unit id="s40752e05827dceaa">
+  <source>Absences ou retards</source>
+  <target>Absences or lateness</target>
+</trans-unit>
+<trans-unit id="s8c7eb03fc9c7c414">
+  <source>Punition ou sanction</source>
+  <target>Punishment or sanction</target>
+</trans-unit>
+<trans-unit id="sa5f815c8df39824c">
+  <source>Punitions ou sanctions</source>
+  <target>Punishments or sanctions</target>
 </trans-unit>
 </body>
 </file>
