@@ -99,12 +99,12 @@ export class ReciaPronoteSummary extends LitElement {
     this.tabPannelHandlerResumeCours = new TabPanelHandler(this.selectedTabIdPrefixResumeCours, this.tabPannelPrefixResumeCours, () => this.requestUpdate())
     this.tabPannelHandlerTravailAFaire = new TabPanelHandler(this.selectedTabIdPrefixTravailAFaire, this.tabPannelPrefixTravailAFaire, () => this.requestUpdate())
     updateWhenLocaleChanges(this)
-    this.isExpandedMap.set('absences', true)
-    this.isExpandedMap.set('retards', true)
-    this.isExpandedMap.set('infirmerie', true)
-    this.isExpandedMap.set('punitions', true)
-    this.isExpandedMap.set('sanctions', true)
-    this.isExpandedMap.set('observations', true)
+    this.isExpandedMap.set('absences', false)
+    this.isExpandedMap.set('retards', false)
+    this.isExpandedMap.set('infirmerie', false)
+    this.isExpandedMap.set('punitions', false)
+    this.isExpandedMap.set('sanctions', false)
+    this.isExpandedMap.set('observations', false)
   }
 
   firstUpdated() {
