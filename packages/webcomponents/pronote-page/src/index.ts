@@ -32,6 +32,17 @@ import { TabPanelHandler } from './handlers/tabPanelHandler'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 
+const _allowedValues = [
+  'absences',
+  'retards',
+  'infirmerie',
+  'punitions',
+  'sanctions',
+  'observations',
+] as const
+
+type AllowedValues = typeof _allowedValues[number]
+
 @localized()
 export class ReciaPronoteSummary extends LitElement {
   @property({ type: Number, attribute: 'max-elements' })
@@ -78,7 +89,7 @@ export class ReciaPronoteSummary extends LitElement {
   isExpandedVieScolaire: boolean = false
 
   @state()
-  isExpandedMap: Map<'absences' | 'retards' | 'infirmerie' | 'punitions' | 'sanctions' | 'observations', boolean> = new Map()
+  isExpandedMap: Map<AllowedValues, boolean> = new Map()
 
   tabPannelHandlerResumeCours: TabPanelHandler
   tabPannelHandlerTravailAFaire: TabPanelHandler
@@ -395,22 +406,45 @@ export class ReciaPronoteSummary extends LitElement {
         })}"
        >
 
-      <!-- <h3>${msg('Absence -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.absenceList?.length ?? 0)})</h3> -->
 
-      <button
+
+      ${this.absences()}
+      ${this.retards()}
+      ${this.infirmeries()}
+      ${this.punitions()}
+      ${this.sanctions()}
+      ${this.observations()}
+</div>
+    `
+  }
+
+  vieScolaireCategoryHeader(mapKey: AllowedValues, buttonValue: string) {
+    return html`
+    <button
          class="h3-wrapper"
-         aria-expanded="${this.isExpandedMap.get('absences')!}"
-         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set('absences', !this.isExpandedMap.get('absences')) }}" >
-        <h3>${msg('Absence -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.absenceList?.length ?? 0)})</h3>
+         aria-expanded="${this.isExpandedMap.get(mapKey)!}"
+         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set(mapKey, !this.isExpandedMap.get(mapKey)) }}" >
+        <h3>${buttonValue}</h3>
         <div class="grow-1"></div>
         ${
           getIconWithStyle(
             faChevronDown,
-            { rotate: this.isExpandedMap.get('absences') ? '180deg' : undefined },
+            { rotate: this.isExpandedMap.get(mapKey) ? '180deg' : undefined },
             { 'folded-indicator': true },
           )
         }
-      </button>
+      </button>`
+  }
+
+  absences(): TemplateResult {
+    const count = this.responseEleveDto?.vieScolaireDto?.absenceList?.length ?? 0
+    return html`
+
+    ${this.vieScolaireCategoryHeader(
+      'absences',
+      msg(count < 2 ? `Absence (${count})` : `Absences (${count})`),
+    )}
+
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
           display: this.isExpandedMap.get('absences') ? undefined : 'none',
@@ -428,21 +462,17 @@ export class ReciaPronoteSummary extends LitElement {
             })
           }
       </div>
+`
+  }
 
-      <button
-         class="h3-wrapper"
-         aria-expanded="${this.isExpandedMap.get('retards')!}"
-         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set('retards', !this.isExpandedMap.get('retards')) }}" >
-        <h3>${msg('Retard -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.retardList?.length ?? 0)})</h3>
-        <div class="grow-1"></div>
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedMap.get('retards') ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
+  retards(): TemplateResult {
+    const count = this.responseEleveDto?.vieScolaireDto?.retardList?.length ?? 0
+    return html`
+
+    ${this.vieScolaireCategoryHeader(
+      'retards',
+      msg(count < 2 ? `Retard (${count})` : `Retards (${count})`),
+    )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
           display: this.isExpandedMap.get('retards') ? undefined : 'none',
@@ -458,31 +488,16 @@ export class ReciaPronoteSummary extends LitElement {
               `
             })
           }
-      </div>
-      ${this.infirmeries()}
-      ${this.punitions()}
-      ${this.sanctions()}
-      ${this.observations()}
-</div>
-    `
+      </div>`
   }
 
   infirmeries(): TemplateResult {
+    const count = this.responseEleveDto?.vieScolaireDto?.passageInfirmerieList?.length ?? 0
     return html`
-     <button
-         class="h3-wrapper"
-         aria-expanded="${this.isExpandedMap.get('infirmerie')!}"
-         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set('infirmerie', !this.isExpandedMap.get('infirmerie')) }}" >
-        <h3>${msg('Passage infirmerie -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.retardList?.length ?? 0)})</h3>
-        <div class="grow-1"></div>
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedMap.get('infirmerie') ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
+    ${this.vieScolaireCategoryHeader(
+      'infirmerie',
+      msg(count < 2 ? `Passage infirmerie (${count})` : `Passages infirmerie (${count})`),
+    )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
           display: this.isExpandedMap.get('infirmerie') ? undefined : 'none',
@@ -501,21 +516,12 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   punitions(): TemplateResult {
+    const count = this.responseEleveDto?.vieScolaireDto?.punitionList?.length ?? 0
     return html`
-     <button
-         class="h3-wrapper"
-         aria-expanded="${this.isExpandedMap.get('punitions')!}"
-         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set('punitions', !this.isExpandedMap.get('punitions')) }}" >
-        <h3>${msg('Punition -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.punitionList?.length ?? 0)})</h3>
-        <div class="grow-1"></div>
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedMap.get('punitions') ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
+    ${this.vieScolaireCategoryHeader(
+      'punitions',
+      msg(count < 2 ? `Punition (${count})` : `Punitions (${count})`),
+    )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
           display: this.isExpandedMap.get('punitions') ? undefined : 'none',
@@ -538,21 +544,13 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   sanctions(): TemplateResult {
+    const count = this.responseEleveDto?.vieScolaireDto?.sanctionList?.length ?? 0
     return html`
-     <button
-         class="h3-wrapper"
-         aria-expanded="${this.isExpandedMap.get('sanctions')!}"
-         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set('sanctions', !this.isExpandedMap.get('sanctions')) }}" >
-        <h3>${msg('Sanction -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.sanctionList?.length ?? 0)})</h3>
-        <div class="grow-1"></div>
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedMap.get('sanctions') ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
+
+    ${this.vieScolaireCategoryHeader(
+      'sanctions',
+      msg(count < 2 ? `Sanction (${count})` : `Sanctions (${count})`),
+    )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
           display: this.isExpandedMap.get('sanctions') ? undefined : 'none',
@@ -574,21 +572,13 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   observations(): TemplateResult {
+    const count = this.responseEleveDto?.vieScolaireDto?.observationList?.length ?? 0
     return html`
-     <button
-         class="h3-wrapper"
-         aria-expanded="${this.isExpandedMap.get('observations')!}"
-         @click="${() => { this.isExpandedMap = new Map(this.isExpandedMap).set('observations', !this.isExpandedMap.get('observations')) }}" >
-        <h3>${msg('Observation -- TODO PLURAL')} (${(this.responseEleveDto?.vieScolaireDto?.observationList?.length ?? 0)})</h3>
-        <div class="grow-1"></div>
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedMap.get('observations') ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
+
+    ${this.vieScolaireCategoryHeader(
+      'observations',
+      msg(count < 2 ? `Observation (${count})` : `Observations (${count})`),
+    )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
           display: this.isExpandedMap.get('observations') ? undefined : 'none',
