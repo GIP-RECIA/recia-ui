@@ -454,10 +454,10 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.absenceList ?? [], absence => absence, (absence, indexAbsence) => {
               return html`
                 ${indexAbsence > 0 ? html`<hr/>` : ''}
-                <p><span>Du : </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateDebut))}</p>
-                <p><span>Au : </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateFin))}</p>
-                <p><span>Justifiée : </span>${msg(absence.justifie ? 'oui' : 'non')}</p>
-                <p><span>Motif : </span>${absence.motif}</p>
+                <p><span>${msg('Du : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateDebut))}</p>
+                <p><span>${msg('Au : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateFin))}</p>
+                <p><span>${msg('Justifiée : ')} </span>${msg(absence.justifie ? 'oui' : 'non')}</p>
+                <p><span>${msg('Motif : ')} </span>${absence.motif}</p>
               `
             })
           }
@@ -482,9 +482,9 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.retardList ?? [], retard => retard.date, (retard, indexRetard) => {
               return html`
                 ${indexRetard > 0 ? html`<hr/>` : ''}
-                <p><span>Le : </span>${this.formatterDateTime.format(this.parseXsdDateTime(retard.date))}</p>
-                <p><span>Justifié : </span>${msg(retard.justifie ? 'oui' : 'non')}</p>
-                <p><span>Motif : </span>${retard.motif}</p>
+                <p><span>${msg('Le : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(retard.date))}</p>
+                <p><span>${msg('Justifié : ')} </span>${msg(retard.justifie ? 'oui' : 'non')}</p>
+                <p><span>${msg('Motif : ')} </span>${retard.motif}</p>
               `
             })
           }
@@ -507,7 +507,7 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.passageInfirmerieList ?? [], infirmerie => infirmerie.date, (infirmerie, indexInfirmerie) => {
               return html`
                 ${indexInfirmerie > 0 ? html`<hr/>` : ''}
-                <p><span>Le : </span>${this.formatterDateTime.format(this.parseXsdDateTime(infirmerie.date))}</p>
+                <p><span>${msg('Le : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(infirmerie.date))}</p>
               `
             })
           }
@@ -531,11 +531,11 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.punitionList ?? [], punition => punition.date + punition.nature + punition.matiere, (punition, indexPunition) => {
               return html`
                 ${indexPunition > 0 ? html`<hr/>` : ''}
-                <p><span>Le : </span>${this.formatter.format(this.parseXsdDate(punition.date))}</p>
-                <p><span>Nature : </span>${punition.nature}</p>
-                ${punition.matiere ? html`<p><span>Matiere : </span>${punition.matiere ?? ''}</p>` : ''}
-                <p><span>Motif : </span>${punition.motif}</p>
-                <p><span>Circonstances : </span>${punition.circonstances ?? ''}</p>
+                <p><span>${msg('Le : ')} </span>${this.formatter.format(this.parseXsdDate(punition.date))}</p>
+                <p><span>${msg('Nature : ')} </span>${punition.nature}</p>
+                ${punition.matiere ? html`<p><span>${msg('Matière : ')} </span>${punition.matiere ?? ''}</p>` : ''}
+                <p><span>${msg('Motif : ')} </span>${punition.motif}</p>
+                <p><span>${msg('Circonstances : ')} </span>${punition.circonstances ?? ''}</p>
               `
             })
           }
@@ -559,11 +559,11 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.sanctionList ?? [], sanction => sanction.date + sanction.nature + sanction.motif, (sanction, indexSanction) => {
               return html`
                 ${indexSanction > 0 ? html`<hr/>` : ''}
-                <p><span>Le : </span>${this.formatter.format(this.parseXsdDate(sanction.date))}</p>
-                <p><span>Nature : </span>${sanction.nature}</p>
-                ${sanction.duree ? html` <p><span>Durée : </span>${sanction.duree}</p>` : ''}
-                <p><span>Motif : </span>${sanction.motif}</p>
-                <p><span>Circonstances : </span>${sanction.circonstances ?? ''}</p>
+                <p><span>${msg('Le : ')} </span>${this.formatter.format(this.parseXsdDate(sanction.date))}</p>
+                <p><span>${msg('Nature : ')} </span>${sanction.nature}</p>
+                ${sanction.duree ? html` <p><span>${msg('Durée : ')} </span>${sanction.duree}</p>` : ''}
+                <p><span>${msg('Motif : ')} </span>${sanction.motif}</p>
+                <p><span>${msg('Circonstances : ')} </span>${sanction.circonstances ?? ''}</p>
               `
             })
           }
@@ -587,10 +587,10 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.observationList ?? [], observation => observation, (observation, indexObservation) => {
               return html`
                 ${indexObservation > 0 ? html`<hr/>` : ''}
-                <p><span>Le : </span>${this.formatter.format(this.parseXsdDate(observation.date))}</p>
-                ${observation.matiere ? html`<p><span>Matiere : </span>${observation.matiere}</p>` : ''}
-                <p><span>Demandeur : </span>${observation.demandeur}</p>
-                <p><span>Observation : </span>${observation.observation}</p>
+                <p><span>${msg('Le : ')} </span>${this.formatter.format(this.parseXsdDate(observation.date))}</p>
+                ${observation.matiere ? html`<p><span>${msg('Matière : ')} </span>${observation.matiere}</p>` : ''}
+                <p><span>${msg('Demandeur : ')} </span>${observation.demandeur}</p>
+                <p><span>${msg('Observation : ')} </span>${observation.observation}</p>
 
               `
             })
