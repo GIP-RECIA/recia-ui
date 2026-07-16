@@ -156,6 +156,15 @@ export class ReciaPronoteSummary extends LitElement {
   ])
 
   render(): TemplateResult {
+    if (!this.responseEleveDto) {
+      if (this.loading) {
+        return html`<p>${msg('Chargement en cours')}</p>`
+      }
+      if (this.isError) {
+        return html`<p>${msg('Une erreur est survenue')}</p>`
+      }
+    }
+
     return html`
     <div>
       ${this.resumeCours()}
