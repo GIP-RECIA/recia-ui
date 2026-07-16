@@ -23,7 +23,7 @@ export type ResponseEleveDto = ResponseDto & {
   resumeDeCoursDtoList: ResumeDeCoursDto[] | null | undefined
   travailAFaireDtoList: TravailAfaireDto[] | null | undefined
   vieScolaireDto: VieScolaireDto | null | undefined
-  devoirDtoList: DevoirDto | null | undefined
+  devoirDtoList: DevoirDto[] | null | undefined
 
 }
 
