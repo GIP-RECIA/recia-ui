@@ -170,10 +170,10 @@ export class ReciaPronoteSummary extends LitElement {
 
     return html`
     <div>
-      ${this.resumeCours()}
-      ${this.travailAFaire()}
-      ${this.vieScolaire()}
-      ${this.devoirs()}
+      <div class="section-wrapper">${this.resumeCours()}</div>
+      <div class="section-wrapper">${this.travailAFaire()}</div>
+      <div class="section-wrapper">${this.vieScolaire()}</div>
+      <div class="section-wrapper">${this.devoirs()}</div>
     </div>
   `
   }

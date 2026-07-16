@@ -58,6 +58,44 @@ hr {
   border-width: 1px;
 }
 
+.devoirs-content {
+  height: fit-content;
+  overflow-y: scroll;
+  max-height: 40vh;
+}
+
+.resume-content {
+  .tabpanel {
+    height: fit-content;
+    overflow-y: scroll;
+    max-height: 40vh;
+  }
+}
+
+.vie-scolaire-content {
+  height: fit-content;
+  overflow-y: scroll;
+  max-height: 40vh;
+}
+
+.taf-content {
+  .tabpannel {
+    height: 400px;
+    overflow-y: scroll;
+    max-height: 40vh;
+  }
+}
+
+.section-wrapper {
+  margin-top: 12px;
+  &:first {
+    margin-top: 0px;
+  }
+  border-radius: 8px;
+  box-shadow: var(--#{$prefix}shadow-neutral) HEXToRGBA($black, 0.1);
+  padding: 8px;
+}
+
 #summary-wrapper {
   display: flex !important;
   flex-direction: column !important;
