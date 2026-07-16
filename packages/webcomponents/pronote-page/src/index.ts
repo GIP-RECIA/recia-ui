@@ -432,7 +432,14 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   devoirs(): TemplateResult {
-    // todo if error
+    if (this.responseEleveDto?.devoirDtoList === undefined || this.responseEleveDto.devoirDtoList === null) {
+      return html`
+      <div class="h2-wrapper">
+        <h2>${msg('Devoir')}</h2>
+      </div>
+      <p>${('Impossible de récupérer les informations relatives aux derniers devoirs reçus')}</p>
+      `
+    }
     return html`
     <div>
 
