@@ -89,6 +89,9 @@ export class ReciaPronoteSummary extends LitElement {
   isExpandedVieScolaire: boolean = false
 
   @state()
+  isExpandedDevoirs: boolean = false
+
+  @state()
   isExpandedMap: Map<AllowedValues, boolean> = new Map()
 
   tabPannelHandlerResumeCours: TabPanelHandler
@@ -170,6 +173,7 @@ export class ReciaPronoteSummary extends LitElement {
       ${this.resumeCours()}
       ${this.travailAFaire()}
       ${this.vieScolaire()}
+      ${this.devoirs()}
     </div>
   `
   }
@@ -424,6 +428,55 @@ export class ReciaPronoteSummary extends LitElement {
       ${this.sanctions()}
       ${this.observations()}
 </div>
+    `
+  }
+
+  devoirs(): TemplateResult {
+    // todo if error
+    return html`
+    <div>
+
+      <button class="h2-wrapper" aria-expanded="${this.isExpandedDevoirs}" @click="${() => { this.isExpandedDevoirs = !this.isExpandedDevoirs }}" >
+        <h2>${msg(this.responseEleveDto!.devoirDtoList!.length < 2 ? 'Devoir' : 'Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
+        <div class="grow-1"></div>
+        ${
+          getIconWithStyle(
+            faChevronDown,
+            { rotate: this.isExpandedDevoirs ? '180deg' : undefined },
+            { 'folded-indicator': true },
+          )
+        }
+      </button>
+       <div class="devoirs-content"
+       style="${styleMap({
+          display: this.isExpandedDevoirs ? undefined : 'none',
+        })}"
+       >
+       ${
+          repeat(this.responseEleveDto?.devoirDtoList?.sort((a, b) => {
+            if (a === undefined || a === null) {
+              return 1
+            }
+            if (b === undefined || b === null) {
+              return -1
+            }
+            if (a === b) {
+              return 0
+            }
+
+            return a.date < b.date ? -1 : 1
+          }) ?? [], devoir => devoir, (devoir, indexDevoir) => {
+            return html`
+          ${indexDevoir > 0 ? html`<hr/>` : ''}
+          <div><span>${msg('Matière : ')}</span>${devoir.matiere}</div>
+          <div><span>${msg('Date : ')}</span>${devoir.date ? this.formatter.format(this.parseXsdDate(devoir.date)) : ''}</div>
+          <div><span>${msg('Note : ')}</span>${devoir.note}/${devoir.bareme}</div>
+
+          `
+          })
+        }
+      </div>
+    </div>
     `
   }
 
