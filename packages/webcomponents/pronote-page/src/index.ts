@@ -197,7 +197,7 @@ export class ReciaPronoteSummary extends LitElement {
     <div>
 
       <button class="h2-wrapper" aria-expanded="${this.isExpandedResumeCours}" @click="${() => { this.isExpandedResumeCours = !this.isExpandedResumeCours }}" >
-        <h2>${msg('Résumés de cours')}</h2>
+        <h2>${msg(this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? 'Résumé de cours' : 'Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
         <div class="grow-1"></div>
         ${
           getIconWithStyle(
@@ -313,7 +313,7 @@ export class ReciaPronoteSummary extends LitElement {
     <div>
 
       <button class="h2-wrapper" aria-expanded="${this.isExpandedTravailAFaire}" @click="${() => { this.isExpandedTravailAFaire = !this.isExpandedTravailAFaire }}" >
-        <h2>${msg('Travail à faire')}</h2>
+        <h2>${msg('Travail à faire')} (${this.responseEleveDto?.travailAFaireDtoList?.length})</h2>
         <div class="grow-1"></div>
         ${
           getIconWithStyle(
