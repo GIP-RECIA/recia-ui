@@ -163,11 +163,30 @@ todo pass order .case {
   justify-content: start;
 }
 
+.not-expanded {
+  display: none;
+}
+.widescreen {
+  display: none;
+}
+
 @media (width >= map.get($grid-breakpoints, lg)) {
   .redirect {
     &.mobile-only {
       display: none;
     }
+  }
+
+  .widescreen {
+    display: block;
+  }
+
+  .h2-wrapper {
+    display: none;
+  }
+
+  .not-expanded {
+    display: block;
   }
 
   .title-wrapper {
@@ -177,7 +196,13 @@ todo pass order .case {
   }
 }
 
-@media (width >= map.get($grid-breakpoints, sm)) {
+@media (width >= map.get($grid-breakpoints, lg)) {
+  .page-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
   .cadre {
     display: flex;
     flex-direction: row;

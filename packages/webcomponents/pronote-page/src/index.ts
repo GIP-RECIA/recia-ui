@@ -169,7 +169,7 @@ export class ReciaPronoteSummary extends LitElement {
     }
 
     return html`
-    <div>
+    <div class="page-content">
       <div class="section-wrapper">${this.resumeCours()}</div>
       <div class="section-wrapper">${this.travailAFaire()}</div>
       <div class="section-wrapper">${this.vieScolaire()}</div>
@@ -196,6 +196,7 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
+      <h2 class="widescreen">${msg(this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? 'Résumé de cours' : 'Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedResumeCours}" @click="${() => { this.isExpandedResumeCours = !this.isExpandedResumeCours }}" >
         <h2>${msg(this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? 'Résumé de cours' : 'Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
         <div class="grow-1"></div>
@@ -209,12 +210,7 @@ export class ReciaPronoteSummary extends LitElement {
       </button>
       <!-- a devenir tabs selections de jours -->
 
-       <div class="resume-content"
-       style="${styleMap({
-          display: this.isExpandedResumeCours ? undefined : 'none',
-        })}"
-
-       >
+       <div class="${this.isExpandedResumeCours ? 'not-expanded resume-content' : 'resume-content'}">
       <div class="date-selector">
         ${
           repeat(sortedDates, item => item, (item, index) => html`
@@ -312,6 +308,7 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
+      <h2 class="widescreen">${msg('Travail à faire')} (${this.responseEleveDto?.travailAFaireDtoList?.length})</h2>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedTravailAFaire}" @click="${() => { this.isExpandedTravailAFaire = !this.isExpandedTravailAFaire }}" >
         <h2>${msg('Travail à faire')} (${this.responseEleveDto?.travailAFaireDtoList?.length})</h2>
         <div class="grow-1"></div>
@@ -325,11 +322,7 @@ export class ReciaPronoteSummary extends LitElement {
       </button>
       <!-- a devenir tabs selections de jours -->
 
-       <div class="taf-content"
-       style="${styleMap({
-          display: this.isExpandedTravailAFaire ? undefined : 'none',
-        })}"
-       >
+    <div class="${this.isExpandedResumeCours ? 'not-expanded taf-content' : 'taf-content'}">
       <div class="date-selector">
         ${
           repeat(sortedDates, item => item, (item, index) => html`
@@ -400,6 +393,7 @@ export class ReciaPronoteSummary extends LitElement {
     // todo if error
 
     return html`
+    <h2 class="widescreen">${msg('Vie scolaire')} (${this.vieScolaireEventCount()})</h2>
     <button class="h2-wrapper" aria-expanded="${this.isExpandedVieScolaire}" @click="${() => { this.isExpandedVieScolaire = !this.isExpandedVieScolaire }}" >
       <h2>${msg('Vie scolaire')} (${this.vieScolaireEventCount()})</h2>
       <div class="grow-1"></div>
@@ -413,11 +407,8 @@ export class ReciaPronoteSummary extends LitElement {
       </button>
       <!-- a devenir tabs selections de jours -->
 
-       <div class="vie-scolaire-content"
-       style="${styleMap({
-          display: this.isExpandedVieScolaire ? undefined : 'none',
-        })}"
-       >
+       <div class="${this.isExpandedResumeCours ? 'not-expanded vie-scolaire-content' : 'vie-scolaire-content'}">
+
 
 
 
@@ -434,6 +425,7 @@ export class ReciaPronoteSummary extends LitElement {
   devoirs(): TemplateResult {
     if (this.responseEleveDto?.devoirDtoList === undefined || this.responseEleveDto.devoirDtoList === null) {
       return html`
+       <h2 class="widescreen">${msg('Devoir')}</h2>
       <div class="h2-wrapper">
         <h2>${msg('Devoir')}</h2>
       </div>
@@ -443,6 +435,7 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
+      <h2 class="widescreen">${msg(this.responseEleveDto!.devoirDtoList!.length < 2 ? 'Devoir' : 'Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedDevoirs}" @click="${() => { this.isExpandedDevoirs = !this.isExpandedDevoirs }}" >
         <h2>${msg(this.responseEleveDto!.devoirDtoList!.length < 2 ? 'Devoir' : 'Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
         <div class="grow-1"></div>
@@ -454,11 +447,8 @@ export class ReciaPronoteSummary extends LitElement {
           )
         }
       </button>
-       <div class="devoirs-content"
-       style="${styleMap({
-          display: this.isExpandedDevoirs ? undefined : 'none',
-        })}"
-       >
+             <div class="${this.isExpandedResumeCours ? 'not-expanded devoirs-content' : 'devoirs-content'}">
+
        ${
           repeat(this.responseEleveDto?.devoirDtoList?.sort((a, b) => {
             if (a === undefined || a === null) {
