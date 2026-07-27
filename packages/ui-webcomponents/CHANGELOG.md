@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.15.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.14.0...ui-webcomponents/v1.15.0) (2026-07-27)
+
+
+### Features
+
+* **bottom-sheet:** add focus trap (RGAA) ([e5d09fa](https://github.com/GIP-RECIA/recia-ui/commit/e5d09fad38681c69ac9ad205ceb904957704f8ce))
+* **bottom-sheet:** replace focus on close (RGAA) ([d7f8249](https://github.com/GIP-RECIA/recia-ui/commit/d7f82494a3c012d8c1093c4171e1d615a2c6c7fc))
+* **header:** add script loader ([5aaa25a](https://github.com/GIP-RECIA/recia-ui/commit/5aaa25a914a94bc451a1683e138d6cef4f5ba769))
+* **header:** consider service list as dialog (RGAA) ([b813214](https://github.com/GIP-RECIA/recia-ui/commit/b8132143a535435220b0cccafdf3036b117410ec))
+* **header:** restrict script loader to portal domain ([1a55e66](https://github.com/GIP-RECIA/recia-ui/commit/1a55e66bfe8885d1604181500edfb5195d2d320d))
+* **tabs:** init component ([5e7ec5f](https://github.com/GIP-RECIA/recia-ui/commit/5e7ec5fc87bc97bf17b237eab563299819ac15e9))
+
+
+### Bug Fixes
+
+* **footer:** partners icon list item size ([91c57d5](https://github.com/GIP-RECIA/recia-ui/commit/91c57d5d4ad67f5a13384d5e7a63e7b7419ae2d9))
+* **header:** improve service link (RGAA) ([13b2b30](https://github.com/GIP-RECIA/recia-ui/commit/13b2b30dd34fc12ca9a2c72e64801a9a94a056e0))
+
 ## [1.14.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.13.4...ui-webcomponents/v1.14.0) (2026-06-05)
 
 
