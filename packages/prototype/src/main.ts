@@ -520,6 +520,7 @@ const themes = [
   'touraine-eschool',
   'colleges-41',
   'colleges-45',
+  'entkapreunion',
 ]
 let currentTheme = 0
 const lsTheme = localStorage.getItem('theme')

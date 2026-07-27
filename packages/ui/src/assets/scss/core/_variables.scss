@@ -61,7 +61,7 @@ $domain-theme: (                // 18, 36 and 45 are same
         secondary-hover: #1d1f1c,
         secondary-pressed: #282f27,
       ),
-    ),
+  ),
   18: (
     id: 'chercan',
     theme-colors: (
@@ -175,7 +175,26 @@ $domain-theme: (                // 18, 36 and 45 are same
       secondary-hover: #1b1d20,
       secondary-pressed: #232a31,
     ),
-  )
+  ),
+  entkapreunion: (
+    id: 'entkapreunion',
+    theme-colors: (
+      primary: #0066b3,
+    ),
+    theme-colors-dark: (
+      primary: #6691c2,
+    ),
+    buttons: (
+      primary-pressed: #00326b,
+      secondary-hover: #e6edf5,
+      secondary-pressed: #ccdaeb,
+    ),
+    buttons-dark: (
+      primary-pressed: #99b6d6,
+      secondary-hover: #1b1d20,
+      secondary-pressed: #232a31,
+    ),
+  ),
 );
 
 $categories: (
