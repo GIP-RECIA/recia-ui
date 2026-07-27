@@ -465,6 +465,8 @@ iframe?.addEventListener('load', () => {
  * Dev tools
  */
 
+const prefix = 'recia-'
+
 const body = document.querySelector('body')
 const devContainer = document.createElement('div')
 devContainer.style = `
@@ -484,7 +486,7 @@ let isDevTools = false
 const devToolsButton = document.createElement('button')
 devToolsButton.textContent = 'DT'
 devToolsButton.style = `
-  background-color: var(--recia-primary, bisque);
+  background-color: var(--${prefix}primary, bisque);
   border-radius: 50%;
   font-size: 10px;
   font-weight: bold;
@@ -503,7 +505,7 @@ devItems.style = `
 
 const buttonStyle = `
   padding: 16px;
-  background-color: var(--recia-primary, bisque);
+  background-color: var(--${prefix}primary, bisque);
   border-radius: 50px;
   font-weight: bold;
   color: white;
@@ -523,7 +525,7 @@ let currentTheme = 0
 const lsTheme = localStorage.getItem('theme')
 if (lsTheme !== null)
   currentTheme = JSON.parse(lsTheme).currentTheme
-body?.classList.add(`theme-${themes[currentTheme]}`)
+body?.classList.add(`${prefix}theme-${themes[currentTheme]}`)
 
 const themeButton = document.createElement('button')
 themeButton.textContent = themes[currentTheme]
@@ -582,7 +584,7 @@ function switchTheme(): void {
     newTheme = themes[currentTheme]
   }
   localStorage.setItem('theme', JSON.stringify({ currentTheme }))
-  body?.classList.replace(`theme-${oldTheme}`, `theme-${newTheme}`)
+  body?.classList.replace(`${prefix}theme-${oldTheme}`, `${prefix}theme-${newTheme}`)
   themeButton.textContent = newTheme
 }
 
