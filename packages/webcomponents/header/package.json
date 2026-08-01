@@ -65,7 +65,7 @@
     "ress": "^5.0.2",
     "sass": "^1.102.0",
     "tabbable": "^6.5.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "unplugin-dts": "^1.0.3",
     "vite": "^7.3.5"
   }
