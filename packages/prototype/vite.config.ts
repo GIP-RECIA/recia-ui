@@ -21,7 +21,7 @@ import { svgSpritemap } from 'vite-plugin-svg-spritemap'
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  const env = loadEnv(mode, process.cwd())
 
   return defineConfig({
     base: mode === 'development' ? undefined : '/commun/new-ui',
