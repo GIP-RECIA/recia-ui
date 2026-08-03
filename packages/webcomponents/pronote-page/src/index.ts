@@ -17,7 +17,7 @@
 import type { TemplateResult } from 'lit'
 import type { ResponseEleveDto } from './types/pronoteType'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import DOMPurify from 'dompurify'
 import { css, html, LitElement, unsafeCSS } from 'lit'
@@ -131,14 +131,6 @@ export class ReciaPronoteSummary extends LitElement {
     }
   }
 
-  conversionMap = new Map<string, string>([
-    ['devoirs', msg('Devoir(s) à faire')],
-    ['visites_infirmerie', msg('Visite(s) à l\'infirmerie')],
-    ['messages_non_lu', msg('Message(s) non lu')],
-    ['absences_et_retards', msg('Absence(s) et retard(s)')],
-    ['punitions_et_sanctions', msg('Punition(s) et sanction(s)')],
-  ])
-
   render(): TemplateResult {
     if (!this.responseEleveDto) {
       if (this.loading) {
@@ -177,9 +169,9 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
-      <h2 class="widescreen">${msg(this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? 'Résumé de cours' : 'Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
+      <h2 class="widescreen">${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedResumeCours}" @click="${() => { this.isExpandedResumeCours = !this.isExpandedResumeCours }}" >
-        <h2>${msg(this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? 'Résumé de cours' : 'Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
+        <h2>${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
         <div class="grow-1"></div>
         ${
           getIconWithStyle(
@@ -246,11 +238,11 @@ export class ReciaPronoteSummary extends LitElement {
                 <p class="categorie tag">${cdc.categorie}</p>
                 <p class="descriptif" >${unsafeHTML(this.safeHtml(cdc.descriptif ?? ''))}</p>
                   ${
-                    this.elementList(msg('Pièces jointes -- TODO PLURIEL'), cdc.pieceJointeList)
+                    this.elementList(cdc.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
                   }
 
                 ${
-                  this.elementList(msg('Sites internets -- TODO PLURIEL'), cdc.siteInternetList)
+                  this.elementList(cdc.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), cdc.siteInternetList)
                 }
 
 
@@ -347,11 +339,11 @@ export class ReciaPronoteSummary extends LitElement {
             <h3>${taf.matiere}</h3>
                 <p class="descriptif" >${unsafeHTML(this.safeHtml(taf.descriptif ?? ''))}</p>
                   ${
-                    this.elementList(msg('Pièces jointes -- TODO PLURIEL'), taf.pieceJointeList)
+                    this.elementList(taf.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
                   }
 
                 ${
-                  this.elementList(msg('Sites internets -- TODO PLURIEL'), taf.siteInternetList)
+                  this.elementList(taf.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
                 }
 
 
@@ -416,9 +408,9 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
-      <h2 class="widescreen">${msg(this.responseEleveDto!.devoirDtoList!.length < 2 ? 'Devoir' : 'Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
+      <h2 class="widescreen">${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedDevoirs}" @click="${() => { this.isExpandedDevoirs = !this.isExpandedDevoirs }}" >
-        <h2>${msg(this.responseEleveDto!.devoirDtoList!.length < 2 ? 'Devoir' : 'Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
+        <h2>${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
         <div class="grow-1"></div>
         ${
           getIconWithStyle(
@@ -482,7 +474,9 @@ export class ReciaPronoteSummary extends LitElement {
 
     ${this.vieScolaireCategoryHeader(
       'absences',
-      msg(count < 2 ? `Absence (${count})` : `Absences (${count})`),
+      count < 2
+        ? msg(str`Absence (${count})`)
+        : msg(str`Absences (${count})`),
     )}
 
        <div class="vie-scolaire-categorie-content"
@@ -496,7 +490,7 @@ export class ReciaPronoteSummary extends LitElement {
                 ${indexAbsence > 0 ? html`<hr/>` : ''}
                 <p><span>${msg('Du : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateDebut))}</p>
                 <p><span>${msg('Au : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateFin))}</p>
-                <p><span>${msg('Justifiée : ')} </span>${msg(absence.justifie ? 'oui' : 'non')}</p>
+                <p><span>${msg('Justifiée : ')} </span>${absence.justifie ? msg('oui') : msg('non')}</p>
                 <p><span>${msg('Motif : ')} </span>${absence.motif}</p>
               `
             })
@@ -511,7 +505,9 @@ export class ReciaPronoteSummary extends LitElement {
 
     ${this.vieScolaireCategoryHeader(
       'retards',
-      msg(count < 2 ? `Retard (${count})` : `Retards (${count})`),
+      count < 2
+        ? msg(str`Retard (${count})`)
+        : msg(str`Retards (${count})`),
     )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
@@ -523,7 +519,7 @@ export class ReciaPronoteSummary extends LitElement {
               return html`
                 ${indexRetard > 0 ? html`<hr/>` : ''}
                 <p><span>${msg('Le : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(retard.date))}</p>
-                <p><span>${msg('Justifié : ')} </span>${msg(retard.justifie ? 'oui' : 'non')}</p>
+                <p><span>${msg('Justifié : ')} </span>${retard.justifie ? msg('oui') : msg('non')}</p>
                 <p><span>${msg('Motif : ')} </span>${retard.motif}</p>
               `
             })
@@ -536,7 +532,9 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     ${this.vieScolaireCategoryHeader(
       'infirmerie',
-      msg(count < 2 ? `Passage infirmerie (${count})` : `Passages infirmerie (${count})`),
+      count < 2
+        ? msg(str`Passage infirmerie (${count})`)
+        : msg(str`Passages infirmerie (${count})`),
     )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
@@ -560,7 +558,9 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     ${this.vieScolaireCategoryHeader(
       'punitions',
-      msg(count < 2 ? `Punition (${count})` : `Punitions (${count})`),
+      count < 2
+        ? msg(str`Punition (${count})`)
+        : msg(str`Punitions (${count})`),
     )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
@@ -589,7 +589,9 @@ export class ReciaPronoteSummary extends LitElement {
 
     ${this.vieScolaireCategoryHeader(
       'sanctions',
-      msg(count < 2 ? `Sanction (${count})` : `Sanctions (${count})`),
+      count < 2
+        ? msg(str`Sanction (${count})`)
+        : msg(str`Sanctions (${count})`),
     )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
@@ -617,7 +619,9 @@ export class ReciaPronoteSummary extends LitElement {
 
     ${this.vieScolaireCategoryHeader(
       'observations',
-      msg(count < 2 ? `Observation (${count})` : `Observations (${count})`),
+      count < 2
+        ? msg(str`Observation (${count})`)
+        : msg(str`Observations (${count})`),
     )}
        <div class="vie-scolaire-categorie-content"
        style="${styleMap({
@@ -644,7 +648,7 @@ export class ReciaPronoteSummary extends LitElement {
       return html``
     }
     return html`
-    <p>${msg(title)}</p>
+    <p>${title}</p>
      <ul>
                   ${repeat(values, value => value, value =>
                       html`
