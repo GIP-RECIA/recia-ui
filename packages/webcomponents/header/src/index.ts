@@ -40,6 +40,7 @@ import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { debounce, throttle } from 'lodash-es'
 import { name } from '../package.json'
+import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
 import SessionService from './services/sessionService.ts'
 import SoffitService from './services/soffitService.ts'
@@ -316,7 +317,7 @@ export class ReciaHeader extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    injectStyle()
+    injectStyle(componentName(name), injectedStyle)
     addScrollbarWidthListeners()
     listenEvents.forEach(event =>
       document.addEventListener(event, this.handleUserAction.bind(this)),

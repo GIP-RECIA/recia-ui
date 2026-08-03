@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-import { componentName } from 'common/config.ts'
-import { name } from '../../package.json'
-import injectedStyle from '../assets/css/injectedStyle.css?inline'
-
 function calculateScrollbarWidth(_: Event): void {
   document.documentElement.style.setProperty(
     '--scrollbar-width',
@@ -37,15 +33,14 @@ function removeScrollbarWidthListeners(): void {
   window.removeEventListener('load', calculateScrollbarWidth)
 }
 
-function injectStyle(): void {
-  const id = componentName(name)
+function injectStyle(id: string, content: string): void {
   let style = document.head.querySelector<HTMLStyleElement>(`style#${id}`)
   if (style)
     return
 
   style = document.createElement('style')
   style.id = id
-  style.textContent = injectedStyle
+  style.textContent = content
   document.head.appendChild(style)
   window.addEventListener('load', () => {
     document.body.classList.add('transition-active')
