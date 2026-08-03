@@ -1850,6 +1850,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript/old@npm:typescript@^6":
+  version: 6.0.3
+  resolution: "typescript@npm:6.0.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/0ef2357a4cffd916b52b683a021cdab0f81eea4e9aa35f2d254581c9a5106da02224e3392e1b0ed42b7a48f80c966e5f52b8e1a27941fa0523c1705a9c2e0330
+  languageName: node
+  linkType: hard
+
 "@typescript/typescript-aix-ppc64@npm:7.0.2":
   version: 7.0.2
   resolution: "@typescript/typescript-aix-ppc64@npm:7.0.2"
@@ -1987,6 +1997,17 @@ __metadata:
   version: 7.0.2
   resolution: "@typescript/typescript-win32-x64@npm:7.0.2"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@typescript/typescript6@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "@typescript/typescript6@npm:6.0.2"
+  dependencies:
+    "@typescript/old": "npm:typescript@^6"
+  bin:
+    tsc6: bin/tsc6
+  checksum: 10/e214aa9b2783ac924498ebbb42a4419e1d8681acc10d26daa145e938d6da0ecde46ad36690fc4e9083a4b47cf73cdc83f2c2054f32e07f10920768956c2b00a1
   languageName: node
   linkType: hard
 
@@ -2330,6 +2351,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -3364,6 +3386,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -4382,6 +4405,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -4485,6 +4509,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -4861,6 +4886,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
     "@types/regenerator-runtime": "npm:^0"
+    "@typescript/typescript6": "npm:^6.0.2"
     "@uportal/open-id-connect": "npm:^1.40.2"
     bottom-sheet: "workspace:^"
     common: "workspace:^"
@@ -6909,6 +6935,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -8217,6 +8244,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -8891,6 +8919,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
@@ -8954,6 +8983,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/typescript6": "npm:^6.0.2"
     "@uportal/open-id-connect": "npm:^1.40.2"
     common: "workspace:^"
     eslint: "npm:^10.8.0"

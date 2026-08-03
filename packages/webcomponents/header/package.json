@@ -50,6 +50,7 @@
     "@types/lodash-es": "^4",
     "@types/node": "^24",
     "@types/regenerator-runtime": "^0",
+    "@typescript/typescript6": "^6.0.2",
     "@uportal/open-id-connect": "^1.40.2",
     "bottom-sheet": "workspace:^",
     "common": "workspace:^",

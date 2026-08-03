@@ -43,6 +43,7 @@
     "@lit/localize-tools": "^0.8.2",
     "@types/lodash-es": "^4",
     "@types/node": "^24",
+    "@typescript/typescript6": "^6.0.2",
     "common": "workspace:^",
     "eslint": "^10.8.0",
     "eslint-plugin-format": "^2.0.1",
