@@ -53,6 +53,6 @@
     "typescript": "^6.0.3",
     "unplugin-dts": "^1.0.3",
     "vite": "^7.3.5",
-    "vite-plugin-svg-spritemap": "^1.0.13"
+    "vite-plugin-svg-spritemap": "^2.0.0"
   }
 }
