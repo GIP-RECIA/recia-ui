@@ -33,7 +33,7 @@ export default ({ mode }: ConfigEnv) => {
       sourcemap: true,
     },
     define: {
-      'process.env': { NODE_ENV: process.env.NODE_ENV },
+      'process.env.NODE_ENV': JSON.stringify(mode),
     },
   })
 }

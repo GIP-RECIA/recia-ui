@@ -60,7 +60,7 @@ export default ({ mode }: ConfigEnv) => {
       },
     },
     define: {
-      'process.env': { NODE_ENV: process.env.NODE_ENV },
+      'process.env.NODE_ENV': JSON.stringify(mode),
     },
   })
 }
