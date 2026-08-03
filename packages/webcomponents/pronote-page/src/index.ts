@@ -183,7 +183,7 @@ export class ReciaPronoteSummary extends LitElement {
       </button>
       <!-- a devenir tabs selections de jours -->
 
-       <div class="${this.isExpandedResumeCours ? 'not-expanded resume-content' : 'resume-content'}">
+       <div class="${this.isExpandedResumeCours ? 'resume-content' : 'not-expanded resume-content'}">
       <div class="date-selector">
         ${
           repeat(sortedDates, item => item, (item, index) => html`
@@ -295,7 +295,7 @@ export class ReciaPronoteSummary extends LitElement {
       </button>
       <!-- a devenir tabs selections de jours -->
 
-    <div class="${this.isExpandedResumeCours ? 'not-expanded taf-content' : 'taf-content'}">
+    <div class="${this.isExpandedTravailAFaire ? 'taf-content' : 'not-expanded taf-content'}">
       <div class="date-selector">
         ${
           repeat(sortedDates, item => item, (item, index) => html`
@@ -380,7 +380,7 @@ export class ReciaPronoteSummary extends LitElement {
       </button>
       <!-- a devenir tabs selections de jours -->
 
-       <div class="${this.isExpandedResumeCours ? 'not-expanded vie-scolaire-content' : 'vie-scolaire-content'}">
+       <div class="${this.isExpandedVieScolaire ? 'vie-scolaire-content' : 'not-expanded vie-scolaire-content'}">
 
 
 
@@ -420,7 +420,7 @@ export class ReciaPronoteSummary extends LitElement {
           )
         }
       </button>
-             <div class="${this.isExpandedResumeCours ? 'not-expanded devoirs-content' : 'devoirs-content'}">
+             <div class="${this.isExpandedDevoirs ? 'devoirs-content' : 'not-expanded devoirs-content'}">
 
        ${
           repeat(this.responseEleveDto?.devoirDtoList?.sort((a, b) => {
