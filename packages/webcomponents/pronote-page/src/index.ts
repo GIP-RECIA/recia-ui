@@ -29,6 +29,7 @@ import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { name } from '../package.json'
 import { TabPanelHandler } from './handlers/tabPanelHandler'
+import { formatter, formatterDateTime, parseXsdDate, parseXsdDateTime } from './helpers/dateHelper'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
@@ -171,7 +172,7 @@ export class ReciaPronoteSummary extends LitElement {
     const dateMap: Map<string, Date> = new Map()
 
     this.responseEleveDto?.resumeDeCoursDtoList?.map(x => x.date).forEach((value) => {
-      const dateParsed: Date = this.parseXsdDate(value)
+      const dateParsed: Date = parseXsdDate(value)
       dateMap.set(value, dateParsed)
     })
 
@@ -218,7 +219,7 @@ export class ReciaPronoteSummary extends LitElement {
             })}
        class="${this.tabPannelHandlerResumeCours.getAriaSelected(index) ? 'active tag' : 'tag'}"
           >
-          ${this.formatter.format(dateMap.get(item))}
+          ${formatter.format(dateMap.get(item))}
         </button>
 
 
@@ -286,7 +287,7 @@ export class ReciaPronoteSummary extends LitElement {
     const dateMap: Map<string, Date> = new Map()
 
     this.responseEleveDto?.travailAFaireDtoList?.map(x => x.pourLe).forEach((value) => {
-      const dateParsed: Date = this.parseXsdDate(value)
+      const dateParsed: Date = parseXsdDate(value)
       dateMap.set(value, dateParsed)
     })
 
@@ -335,7 +336,7 @@ export class ReciaPronoteSummary extends LitElement {
             })}
        class="${this.tabPannelHandlerTravailAFaire.getAriaSelected(index) ? 'active tag' : 'tag'}"
           >
-          ${this.formatter.format(dateMap.get(item))}
+          ${formatter.format(dateMap.get(item))}
         </button>
 
 
@@ -470,7 +471,7 @@ export class ReciaPronoteSummary extends LitElement {
             return html`
           ${indexDevoir > 0 ? html`<hr/>` : ''}
           <div><span>${msg('Matière : ')}</span>${devoir.matiere}</div>
-          <div><span>${msg('Date : ')}</span>${devoir.date ? this.formatter.format(this.parseXsdDate(devoir.date)) : ''}</div>
+          <div><span>${msg('Date : ')}</span>${devoir.date ? formatter.format(parseXsdDate(devoir.date)) : ''}</div>
           <div><span>${msg('Note : ')}</span>${devoir.note}/${devoir.bareme}</div>
 
           `
@@ -519,8 +520,8 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.absenceList ?? [], absence => absence, (absence, indexAbsence) => {
               return html`
                 ${indexAbsence > 0 ? html`<hr/>` : ''}
-                <p><span>${msg('Du : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateDebut))}</p>
-                <p><span>${msg('Au : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(absence.dateFin))}</p>
+                <p><span>${msg('Du : ')} </span>${formatterDateTime.format(parseXsdDateTime(absence.dateDebut))}</p>
+                <p><span>${msg('Au : ')} </span>${formatterDateTime.format(parseXsdDateTime(absence.dateFin))}</p>
                 <p><span>${msg('Justifiée : ')} </span>${absence.justifie ? msg('oui') : msg('non')}</p>
                 <p><span>${msg('Motif : ')} </span>${absence.motif}</p>
               `
@@ -549,7 +550,7 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.retardList ?? [], retard => retard.date, (retard, indexRetard) => {
               return html`
                 ${indexRetard > 0 ? html`<hr/>` : ''}
-                <p><span>${msg('Le : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(retard.date))}</p>
+                <p><span>${msg('Le : ')} </span>${formatterDateTime.format(parseXsdDateTime(retard.date))}</p>
                 <p><span>${msg('Justifié : ')} </span>${retard.justifie ? msg('oui') : msg('non')}</p>
                 <p><span>${msg('Motif : ')} </span>${retard.motif}</p>
               `
@@ -576,7 +577,7 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.passageInfirmerieList ?? [], infirmerie => infirmerie.date, (infirmerie, indexInfirmerie) => {
               return html`
                 ${indexInfirmerie > 0 ? html`<hr/>` : ''}
-                <p><span>${msg('Le : ')} </span>${this.formatterDateTime.format(this.parseXsdDateTime(infirmerie.date))}</p>
+                <p><span>${msg('Le : ')} </span>${formatterDateTime.format(parseXsdDateTime(infirmerie.date))}</p>
               `
             })
           }
@@ -602,7 +603,7 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.punitionList ?? [], punition => punition.date + punition.nature + punition.matiere, (punition, indexPunition) => {
               return html`
                 ${indexPunition > 0 ? html`<hr/>` : ''}
-                <p><span>${msg('Le : ')} </span>${this.formatter.format(this.parseXsdDate(punition.date))}</p>
+                <p><span>${msg('Le : ')} </span>${formatter.format(parseXsdDate(punition.date))}</p>
                 <p><span>${msg('Nature : ')} </span>${punition.nature}</p>
                 ${punition.matiere ? html`<p><span>${msg('Matière : ')} </span>${punition.matiere ?? ''}</p>` : ''}
                 <p><span>${msg('Motif : ')} </span>${punition.motif}</p>
@@ -632,7 +633,7 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.sanctionList ?? [], sanction => sanction.date + sanction.nature + sanction.motif, (sanction, indexSanction) => {
               return html`
                 ${indexSanction > 0 ? html`<hr/>` : ''}
-                <p><span>${msg('Le : ')} </span>${this.formatter.format(this.parseXsdDate(sanction.date))}</p>
+                <p><span>${msg('Le : ')} </span>${formatter.format(parseXsdDate(sanction.date))}</p>
                 <p><span>${msg('Nature : ')} </span>${sanction.nature}</p>
                 ${sanction.duree ? html` <p><span>${msg('Durée : ')} </span>${sanction.duree}</p>` : ''}
                 <p><span>${msg('Motif : ')} </span>${sanction.motif}</p>
@@ -662,7 +663,7 @@ export class ReciaPronoteSummary extends LitElement {
             repeat(this.responseEleveDto?.vieScolaireDto?.observationList ?? [], observation => observation, (observation, indexObservation) => {
               return html`
                 ${indexObservation > 0 ? html`<hr/>` : ''}
-                <p><span>${msg('Le : ')} </span>${this.formatter.format(this.parseXsdDate(observation.date))}</p>
+                <p><span>${msg('Le : ')} </span>${formatter.format(parseXsdDate(observation.date))}</p>
                 ${observation.matiere ? html`<p><span>${msg('Matière : ')} </span>${observation.matiere}</p>` : ''}
                 <p><span>${msg('Demandeur : ')} </span>${observation.demandeur}</p>
                 <p><span>${msg('Observation : ')} </span>${observation.observation}</p>
@@ -690,18 +691,6 @@ export class ReciaPronoteSummary extends LitElement {
                 </ul>`
   }
 
-  formatter = new Intl.DateTimeFormat('fr-FR', {
-    day: 'numeric',
-    month: 'short',
-  })
-
-  formatterDateTime = new Intl.DateTimeFormat('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    hour: 'numeric',
-    minute: '2-digit',
-  })
-
   vieScolaireEventCount(): number {
     return this.responseEleveDto?.vieScolaireDto
       ? (this.responseEleveDto.vieScolaireDto.absenceList?.length ?? 0)
@@ -718,16 +707,6 @@ export class ReciaPronoteSummary extends LitElement {
       ALLOWED_TAGS: ['p', 'strong', 'em', 'i', 'br'],
       ALLOWED_ATTR: ['href', 'target'],
     })
-  }
-
-  parseXsdDate(date: string): Date {
-    const [year, month, day] = date.split('-').map(Number)
-    return new Date(year, month - 1, day)
-  }
-
-  parseXsdDateTime(date: string): Date {
-    const [year, month, day, hours, minutes, seconds] = date.split(/[\-T:]/).map(Number)
-    return new Date(year, month - 1, day, hours, minutes, seconds)
   }
 
   static styles = css`${unsafeCSS(styles)}`
