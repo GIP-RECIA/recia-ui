@@ -15,7 +15,7 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { ResponseDto, ResponseEleveDto } from './types/pronoteType'
+import type { ResponseEleveDto } from './types/pronoteType'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
@@ -29,6 +29,7 @@ import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { name } from '../package.json'
 import { TabPanelHandler } from './handlers/tabPanelHandler'
+import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 
@@ -120,27 +121,7 @@ export class ReciaPronoteSummary extends LitElement {
 
   async getSummary(): Promise<void> {
     try {
-      const response = await fetch(this.urlPronoteApi, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
-        credentials: 'include',
-        signal: AbortSignal.timeout(this.timeout),
-        redirect: 'follow',
-      })
-
-      if (response.ok) {
-        const json = (await response.json()) as ResponseDto
-
-        if (json.profil === 'Eleve') {
-          const jsonEleve = json as ResponseEleveDto
-          this.responseEleveDto = jsonEleve
-        }
-      }
-      else {
-        this.isError = true
-      }
+      this.responseEleveDto = await getResponseEleveDto(this.urlPronoteApi, this.timeout)
     }
     catch {
       this.isError = true
