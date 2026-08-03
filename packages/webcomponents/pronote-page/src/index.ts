@@ -19,7 +19,6 @@ import type { ResponseEleveDto } from './types/pronoteType'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
-import DOMPurify from 'dompurify'
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { ref } from 'lit/directives/ref.js'
@@ -30,6 +29,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { name } from '../package.json'
 import { TabPanelHandler } from './handlers/tabPanelHandler'
 import { formatter, formatterDateTime, parseXsdDate, parseXsdDateTime } from './helpers/dateHelper'
+import { safeHtml } from './helpers/safeHtml'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
@@ -253,7 +253,7 @@ export class ReciaPronoteSummary extends LitElement {
 
                 <h4>${cdc.titre}</h4>
                 <p class="categorie tag">${cdc.categorie}</p>
-                <p class="descriptif" >${unsafeHTML(this.safeHtml(cdc.descriptif ?? ''))}</p>
+                <p class="descriptif" >${unsafeHTML(safeHtml(cdc.descriptif ?? ''))}</p>
                   ${
                     this.elementList(cdc.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
                   }
@@ -359,7 +359,7 @@ export class ReciaPronoteSummary extends LitElement {
             >
              ${tafIndex > 0 ? html`<hr/>` : ''}
             <h3>${taf.matiere}</h3>
-                <p class="descriptif" >${unsafeHTML(this.safeHtml(taf.descriptif ?? ''))}</p>
+                <p class="descriptif" >${unsafeHTML(safeHtml(taf.descriptif ?? ''))}</p>
                   ${
                     this.elementList(taf.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
                   }
@@ -700,13 +700,6 @@ export class ReciaPronoteSummary extends LitElement {
       + (this.responseEleveDto.vieScolaireDto.sanctionList?.length ?? 0)
       + (this.responseEleveDto.vieScolaireDto.observationList?.length ?? 0)
       : 0
-  }
-
-  safeHtml(htmlText: string): string {
-    return DOMPurify.sanitize(htmlText, {
-      ALLOWED_TAGS: ['p', 'strong', 'em', 'i', 'br'],
-      ALLOWED_ATTR: ['href', 'target'],
-    })
   }
 
   static styles = css`${unsafeCSS(styles)}`
