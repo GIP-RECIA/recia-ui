@@ -20,7 +20,7 @@ import { fileName, libName } from 'common/config.ts'
 import dts from 'unplugin-dts/vite'
 import { defineConfig, loadEnv } from 'vite'
 import { svgSpritemap } from 'vite-plugin-svg-spritemap'
-import { name } from './package.json'
+import { name } from './package.json' with { type: 'json' }
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
@@ -60,7 +60,6 @@ export default ({ mode }: ConfigEnv) => {
       },
       rollupOptions: {
         output: {
-          inlineDynamicImports: true,
           entryFileNames: fileName(name),
         },
       },
