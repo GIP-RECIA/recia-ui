@@ -18,7 +18,7 @@
 
 import { setDevEnv } from 'common/config.ts'
 import { name as libName } from '../../ui-webcomponents/package.json'
-import { name } from './package.json' with { type: 'json' }
+import { name } from './package.json'
 
 import './src/index.ts'
 import 'common/assets/scss/dev.scss'
