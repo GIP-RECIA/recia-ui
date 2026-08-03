@@ -28,5 +28,6 @@ excludes=()
 for name in $(yarn workspaces list --json | jq -r 'select(.location | startswith("packages/webcomponents/") | not) | .name'); do
   excludes+=(--exclude "$name")
 done
+excludes+=(--exclude "common")
 
 yarn workspaces foreach -A --topological-dev "${excludes[@]}" "${command_parts[@]}"
