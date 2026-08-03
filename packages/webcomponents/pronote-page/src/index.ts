@@ -33,6 +33,7 @@ import { safeHtml } from './helpers/safeHtml'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
 import { notificationsTemplate } from './templates/notificationsTemplate'
+import { titledLinkListTemplate } from './templates/titledLinkListTemplate'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 
 const _allowedValues = [
@@ -245,11 +246,11 @@ export class ReciaPronoteSummary extends LitElement {
                 <p class="categorie tag">${cdc.categorie}</p>
                 <p class="descriptif" >${unsafeHTML(safeHtml(cdc.descriptif ?? ''))}</p>
                   ${
-                    this.elementList(cdc.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
+                    titledLinkListTemplate(cdc.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
                   }
 
                 ${
-                  this.elementList(cdc.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), cdc.siteInternetList)
+                  titledLinkListTemplate(cdc.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), cdc.siteInternetList)
                 }
 
 
@@ -351,11 +352,11 @@ export class ReciaPronoteSummary extends LitElement {
             <h3>${taf.matiere}</h3>
                 <p class="descriptif" >${unsafeHTML(safeHtml(taf.descriptif ?? ''))}</p>
                   ${
-                    this.elementList(taf.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
+                    titledLinkListTemplate(taf.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
                   }
 
                 ${
-                  this.elementList(taf.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
+                  titledLinkListTemplate(taf.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
                 }
 
 
@@ -663,22 +664,6 @@ export class ReciaPronoteSummary extends LitElement {
           }
       </div>
 `
-  }
-
-  elementList(title: string, values: string[] | undefined | null): TemplateResult {
-    if (values === undefined || values === null || values.length === 0) {
-      return html``
-    }
-    return html`
-    <p>${title}</p>
-     <ul>
-                  ${repeat(values, value => value, value =>
-                      html`
-                    <li><a href=${value}>${value}</a></li>
-                    `)
-
-                  }
-                </ul>`
   }
 
   vieScolaireEventCount(): number {
