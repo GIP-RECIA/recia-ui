@@ -28,7 +28,16 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+}
+
+.badge {
+  margin-left: auto;
 }
 
 .h3-wrapper {
@@ -178,7 +187,11 @@ todo pass order .case {
   }
 
   .widescreen {
-    display: block;
+    display: flex;
+    margin-bottom: 12px;
+    h2 {
+      margin-bottom: 0px;
+    }
   }
 
   .h2-wrapper {

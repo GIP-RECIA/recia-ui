@@ -20,7 +20,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import DOMPurify from 'dompurify'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { ref } from 'lit/directives/ref.js'
 
@@ -151,6 +151,17 @@ export class ReciaPronoteSummary extends LitElement {
   `
   }
 
+  notificationsTemplate(count: number): TemplateResult | typeof nothing {
+    return count > 0
+      ? html`
+          <span class="badge lg">
+            ${count}
+            <span class="sr-only">${msg(str`nombre`)}</span>
+          </span>
+        `
+      : nothing
+  }
+
   resumeCours(): TemplateResult {
     // todo if loading
 
@@ -169,10 +180,15 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
-      <h2 class="widescreen">${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
+
+     <div class="widescreen">
+      <h2 >${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}</h2>
+      ${this.notificationsTemplate(this.responseEleveDto?.resumeDeCoursDtoList?.length ?? 0)}
+    </div>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedResumeCours}" @click="${() => { this.isExpandedResumeCours = !this.isExpandedResumeCours }}" >
-        <h2>${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')} (${this.responseEleveDto?.resumeDeCoursDtoList?.length})</h2>
+        <h2>${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}</h2>
         <div class="grow-1"></div>
+        ${this.notificationsTemplate(this.responseEleveDto?.resumeDeCoursDtoList?.length ?? 0)}
         ${
           getIconWithStyle(
             faChevronDown,
@@ -281,10 +297,15 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
-      <h2 class="widescreen">${msg('Travail à faire')} (${this.responseEleveDto?.travailAFaireDtoList?.length})</h2>
+
+     <div class="widescreen">
+     <h2>${msg('Travail à faire')}</h2>
+      ${this.notificationsTemplate(this.responseEleveDto?.travailAFaireDtoList?.length ?? 0)}
+    </div>
       <button class="h2-wrapper" aria-expanded="${this.isExpandedTravailAFaire}" @click="${() => { this.isExpandedTravailAFaire = !this.isExpandedTravailAFaire }}" >
-        <h2>${msg('Travail à faire')} (${this.responseEleveDto?.travailAFaireDtoList?.length})</h2>
+        <h2>${msg('Travail à faire')}</h2>
         <div class="grow-1"></div>
+        ${this.notificationsTemplate(this.responseEleveDto?.travailAFaireDtoList?.length ?? 0)}
         ${
           getIconWithStyle(
             faChevronDown,
@@ -366,10 +387,14 @@ export class ReciaPronoteSummary extends LitElement {
     // todo if error
 
     return html`
-    <h2 class="widescreen">${msg('Vie scolaire')} (${this.vieScolaireEventCount()})</h2>
-    <button class="h2-wrapper" aria-expanded="${this.isExpandedVieScolaire}" @click="${() => { this.isExpandedVieScolaire = !this.isExpandedVieScolaire }}" >
-      <h2>${msg('Vie scolaire')} (${this.vieScolaireEventCount()})</h2>
+      <div class="widescreen">
+     <h2>${msg('Vie scolaire')}</h2>
+      ${this.notificationsTemplate(this.vieScolaireEventCount() ?? 0)}
+   </div>
+      <button class="h2-wrapper" aria-expanded="${this.isExpandedVieScolaire}" @click="${() => { this.isExpandedVieScolaire = !this.isExpandedVieScolaire }}" >
+      <h2>${msg('Vie scolaire')}</h2>
       <div class="grow-1"></div>
+            ${this.notificationsTemplate(this.vieScolaireEventCount() ?? 0)}
       ${
         getIconWithStyle(
           faChevronDown,
@@ -408,10 +433,16 @@ export class ReciaPronoteSummary extends LitElement {
     return html`
     <div>
 
-      <h2 class="widescreen">${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
+    <div class="widescreen">
+      <h2 >${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')}</h2>
+      ${this.notificationsTemplate(this.responseEleveDto?.devoirDtoList?.length ?? 0)}
+    </div>
+
       <button class="h2-wrapper" aria-expanded="${this.isExpandedDevoirs}" @click="${() => { this.isExpandedDevoirs = !this.isExpandedDevoirs }}" >
-        <h2>${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')} (${this.responseEleveDto?.devoirDtoList?.length})</h2>
+        <h2>${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')}
+      </h2>
         <div class="grow-1"></div>
+          ${this.notificationsTemplate(this.responseEleveDto?.devoirDtoList?.length ?? 0)}
         ${
           getIconWithStyle(
             faChevronDown,
