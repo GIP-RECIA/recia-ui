@@ -21,20 +21,16 @@ import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
-import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
-import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { name } from '../package.json'
-import { TabPanelHandler } from './handlers/tabPanelHandler'
 import { formatter, formatterDateTime, parseXsdDate, parseXsdDateTime } from './helpers/dateHelper'
-import { safeHtml } from './helpers/safeHtml'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
 import { notificationsTemplate } from './templates/notificationsTemplate'
-import { titledLinkListTemplate } from './templates/titledLinkListTemplate'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
 import './components/resumeCours/index.ts'
+import './components/travailAFaire/index.ts'
 
 const _allowedValues = [
   'absences',
@@ -75,13 +71,6 @@ export class ReciaPronoteSummary extends LitElement {
 
   errorMessage: string = msg('Impossible de charger le résumé')
 
-  selectedTabIdPrefixTravailAFaire: string = 'tab-travail-a-faire-id-'
-
-  tabPannelPrefixTravailAFaire = 'tabpanel-travail-a-faire-'
-
-  @state()
-  isExpandedTravailAFaire: boolean = false
-
   @state()
   isExpandedVieScolaire: boolean = false
 
@@ -91,11 +80,8 @@ export class ReciaPronoteSummary extends LitElement {
   @state()
   isExpandedMap: Map<AllowedValues, boolean> = new Map()
 
-  tabPannelHandlerTravailAFaire: TabPanelHandler
-
   constructor() {
     super()
-    this.tabPannelHandlerTravailAFaire = new TabPanelHandler(this.selectedTabIdPrefixTravailAFaire, this.tabPannelPrefixTravailAFaire, () => this.requestUpdate())
     updateWhenLocaleChanges(this)
     this.isExpandedMap.set('absences', false)
     this.isExpandedMap.set('retards', false)
@@ -143,116 +129,16 @@ export class ReciaPronoteSummary extends LitElement {
         >
        </r-resume-cours>
       </div>
-      <div class="section-wrapper">${this.travailAFaire()}</div>
+      <div class="section-wrapper">
+        <r-travail-a-faire
+          .travailAFaireDtoList='${this.responseEleveDto?.travailAFaireDtoList}'
+        >
+       </r-travail-a-faire>
+      </div>
       <div class="section-wrapper">${this.vieScolaire()}</div>
       <div class="section-wrapper">${this.devoirs()}</div>
     </div>
   `
-  }
-
-  travailAFaire(): TemplateResult {
-    // todo if loading
-
-    // todo if error
-
-    // const dates: Set<Date> = new Set()
-    const dateStringArray: Set<string> = new Set(this.responseEleveDto?.travailAFaireDtoList?.map(x => x.pourLe))
-    const dateMap: Map<string, Date> = new Map()
-
-    this.responseEleveDto?.travailAFaireDtoList?.map(x => x.pourLe).forEach((value) => {
-      const dateParsed: Date = parseXsdDate(value)
-      dateMap.set(value, dateParsed)
-    })
-
-    const sortedDates = Array.from(dateStringArray).sort()
-
-    // sort dates
-
-    return html`
-    <div>
-
-
-     <div class="widescreen">
-     <h2>${msg('Travail à faire')}</h2>
-      ${notificationsTemplate(this.responseEleveDto?.travailAFaireDtoList?.length ?? 0)}
-    </div>
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedTravailAFaire}" @click="${() => { this.isExpandedTravailAFaire = !this.isExpandedTravailAFaire }}" >
-        <h2>${msg('Travail à faire')}</h2>
-        <div class="grow-1"></div>
-        ${notificationsTemplate(this.responseEleveDto?.travailAFaireDtoList?.length ?? 0)}
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedTravailAFaire ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
-      <!-- a devenir tabs selections de jours -->
-
-    <div class="${this.isExpandedTravailAFaire ? 'taf-content' : 'not-expanded taf-content'}">
-      <div class="date-selector">
-        ${
-          repeat(sortedDates, item => item, (item, index) => html`
-          <button
-            id="${this.tabPannelHandlerTravailAFaire.getButtonId(index)}"
-            role="tab"
-            aria-selected=${this.tabPannelHandlerTravailAFaire.getAriaSelected(index)}
-            aria-controls="${this.tabPannelHandlerTravailAFaire.getAriaControl(index)}"
-            @keydown="${this.tabPannelHandlerTravailAFaire.onKeydown}"
-            @click="${() => this.tabPannelHandlerTravailAFaire.setSelected(index)}"
-            tabindex="${this.tabPannelHandlerTravailAFaire.getTabIndex(index)}"
-            ${ref((el: Element | undefined) => {
-              if (el instanceof HTMLButtonElement) {
-                this.tabPannelHandlerTravailAFaire.addButton(el, index)
-              }
-            })}
-       class="${this.tabPannelHandlerTravailAFaire.getAriaSelected(index) ? 'active tag' : 'tag'}"
-          >
-          ${formatter.format(dateMap.get(item))}
-        </button>
-
-
-          `)
-        }
-      </div>
-      ${
-        repeat(sortedDates, unparsedDate => unparsedDate, (unparsedDate, index) => html`
-          <div
-          id="${this.tabPannelHandlerTravailAFaire.getPanelId(index)}"
-      role="tabpanel"
-      tabindex="${this.tabPannelHandlerTravailAFaire.getTabIndex(index)}"
-      class="${!this.tabPannelHandlerTravailAFaire.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
-      aria-labelledby="${this.tabPannelHandlerTravailAFaire.getButtonId(index)}">
-          ${
-            repeat(this.responseEleveDto?.travailAFaireDtoList?.filter(x => x.pourLe === unparsedDate) ?? [], taf => taf, (taf, tafIndex) => {
-              return html`
-            <div
-
-            >
-             ${tafIndex > 0 ? html`<hr/>` : ''}
-            <h3>${taf.matiere}</h3>
-                <p class="descriptif" >${unsafeHTML(safeHtml(taf.descriptif ?? ''))}</p>
-                  ${
-                    titledLinkListTemplate(taf.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
-                  }
-
-                ${
-                  titledLinkListTemplate(taf.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
-                }
-
-
-            </div>
-            `
-            })
-          }
-          </div>
-
-          `)
-      }
-      </div>
-    </div>
-    `
   }
 
   vieScolaire(): TemplateResult {
