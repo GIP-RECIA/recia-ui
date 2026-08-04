@@ -22,7 +22,6 @@ import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { ref } from 'lit/directives/ref.js'
-
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -35,6 +34,7 @@ import styles from './style.scss?inline'
 import { notificationsTemplate } from './templates/notificationsTemplate'
 import { titledLinkListTemplate } from './templates/titledLinkListTemplate'
 import { getIconWithStyle } from './utils/fontawesomeUtils'
+import './components/resumeCours/index.ts'
 
 const _allowedValues = [
   'absences',
@@ -75,16 +75,9 @@ export class ReciaPronoteSummary extends LitElement {
 
   errorMessage: string = msg('Impossible de charger le résumé')
 
-  selectedTabIdPrefixResumeCours: string = 'tab-resume-cours-id-'
   selectedTabIdPrefixTravailAFaire: string = 'tab-travail-a-faire-id-'
 
-  tabPannelPrefixResumeCours = 'tabpanel-resume-cours-'
   tabPannelPrefixTravailAFaire = 'tabpanel-travail-a-faire-'
-
-  buttonsRefResumeCours: HTMLButtonElement[] = []
-
-  @state()
-  isExpandedResumeCours: boolean = false
 
   @state()
   isExpandedTravailAFaire: boolean = false
@@ -98,12 +91,10 @@ export class ReciaPronoteSummary extends LitElement {
   @state()
   isExpandedMap: Map<AllowedValues, boolean> = new Map()
 
-  tabPannelHandlerResumeCours: TabPanelHandler
   tabPannelHandlerTravailAFaire: TabPanelHandler
 
   constructor() {
     super()
-    this.tabPannelHandlerResumeCours = new TabPanelHandler(this.selectedTabIdPrefixResumeCours, this.tabPannelPrefixResumeCours, () => this.requestUpdate())
     this.tabPannelHandlerTravailAFaire = new TabPanelHandler(this.selectedTabIdPrefixTravailAFaire, this.tabPannelPrefixTravailAFaire, () => this.requestUpdate())
     updateWhenLocaleChanges(this)
     this.isExpandedMap.set('absences', false)
@@ -146,126 +137,17 @@ export class ReciaPronoteSummary extends LitElement {
 
     return html`
     <div class="page-content">
-      <div class="section-wrapper">${this.resumeCours()}</div>
+      <div class="section-wrapper">
+        <r-resume-cours
+          .resumeDeCoursDtoList='${this.responseEleveDto?.resumeDeCoursDtoList}'
+        >
+       </r-resume-cours>
+      </div>
       <div class="section-wrapper">${this.travailAFaire()}</div>
       <div class="section-wrapper">${this.vieScolaire()}</div>
       <div class="section-wrapper">${this.devoirs()}</div>
     </div>
   `
-  }
-
-  resumeCours(): TemplateResult {
-    // todo if loading
-
-    // todo if error
-
-    const dateStringArray: Set<string> = new Set(this.responseEleveDto?.resumeDeCoursDtoList?.map(x => x.date))
-    const dateMap: Map<string, Date> = new Map()
-
-    this.responseEleveDto?.resumeDeCoursDtoList?.map(x => x.date).forEach((value) => {
-      const dateParsed: Date = parseXsdDate(value)
-      dateMap.set(value, dateParsed)
-    })
-
-    const sortedDates = Array.from(dateStringArray).sort()
-
-    return html`
-    <div>
-
-
-     <div class="widescreen">
-      <h2 >${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}</h2>
-      ${notificationsTemplate(this.responseEleveDto?.resumeDeCoursDtoList?.length ?? 0)}
-    </div>
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedResumeCours}" @click="${() => { this.isExpandedResumeCours = !this.isExpandedResumeCours }}" >
-        <h2>${this.responseEleveDto!.resumeDeCoursDtoList!.length < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}</h2>
-        <div class="grow-1"></div>
-        ${notificationsTemplate(this.responseEleveDto?.resumeDeCoursDtoList?.length ?? 0)}
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedResumeCours ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
-      <!-- a devenir tabs selections de jours -->
-
-       <div class="${this.isExpandedResumeCours ? 'resume-content' : 'not-expanded resume-content'}">
-      <div class="date-selector">
-        ${
-          repeat(sortedDates, item => item, (item, index) => html`
-          <button
-            id="${this.tabPannelHandlerResumeCours.getButtonId(index)}"
-            role="tab"
-            aria-selected=${this.tabPannelHandlerResumeCours.getAriaSelected(index)}
-            aria-controls="${this.tabPannelHandlerResumeCours.getAriaControl(index)}"
-            @keydown="${this.tabPannelHandlerResumeCours.onKeydown}"
-            @click="${() => this.tabPannelHandlerResumeCours.setSelected(index)}"
-            tabindex="${this.tabPannelHandlerResumeCours.getTabIndex(index)}"
-            ${ref((el: Element | undefined) => {
-              if (el instanceof HTMLButtonElement) {
-                this.tabPannelHandlerResumeCours.addButton(el, index)
-              }
-            })}
-       class="${this.tabPannelHandlerResumeCours.getAriaSelected(index) ? 'active tag' : 'tag'}"
-          >
-          ${formatter.format(dateMap.get(item))}
-        </button>
-
-
-          `)
-        }
-      </div>
-
-
-      ${
-        repeat(sortedDates, unparsedDate => unparsedDate, (unparsedDate, index) => html`
-          <div
-          id="${this.tabPannelHandlerResumeCours.getPanelId(index)}"
-      role="tabpanel"
-      tabindex="${this.tabPannelHandlerResumeCours.getTabIndex(index)}"
-      class="${!this.tabPannelHandlerResumeCours.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
-      aria-labelledby="${this.tabPannelHandlerResumeCours.getButtonId(index)}">
-
-
-
-          ${
-            repeat(this.responseEleveDto?.resumeDeCoursDtoList?.filter(x => x.date === unparsedDate) ?? [], cours => cours.id, (cours, indexCours) => {
-              return html`
-            <div
-
-            >
-               ${indexCours > 0 ? html`<hr/>` : ''}
-
-            <h3>${cours.matiere}</h3>
-            ${repeat(cours.contenuDeCoursList ?? [], cdc => cdc, cdc =>
-              html`
-
-                <h4>${cdc.titre}</h4>
-                <p class="categorie tag">${cdc.categorie}</p>
-                <p class="descriptif" >${unsafeHTML(safeHtml(cdc.descriptif ?? ''))}</p>
-                  ${
-                    titledLinkListTemplate(cdc.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
-                  }
-
-                ${
-                  titledLinkListTemplate(cdc.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), cdc.siteInternetList)
-                }
-
-
-              `)}
-            </div>
-            `
-            })
-          }
-          </div>
-
-          `)
-      }
-      </div>
-    </div>
-    `
   }
 
   travailAFaire(): TemplateResult {
