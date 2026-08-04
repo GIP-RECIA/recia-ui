@@ -107,13 +107,10 @@ export class TravailAFaire extends LitElement {
       class="${!this.tabPannelHandlerTravailAFaire.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
       aria-labelledby="${this.tabPannelHandlerTravailAFaire.getButtonId(index)}">
           ${
-            repeat(this.travailAFaireDtoList?.filter(x => x.pourLe === unparsedDate) ?? [], taf => taf, (taf, tafIndex) => {
+            repeat(this.travailAFaireDtoList?.filter(x => x.pourLe === unparsedDate) ?? [], taf => taf, (taf) => {
               return html`
-            <div
 
-            >
-             ${tafIndex > 0 ? html`<hr/>` : ''}
-            <h3>${taf.matiere}</h3>
+            <h3 class="course">${taf.matiere}</h3>
                 <p class="descriptif" >${unsafeHTML(safeHtml(taf.descriptif ?? ''))}</p>
                   ${
                     titledLinkListTemplate((taf.pieceJointeList?.length ?? 0) > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
@@ -126,7 +123,7 @@ export class TravailAFaire extends LitElement {
             `
             })
           }
-          </div>
+
 
           `)
       }

@@ -20,6 +20,10 @@
   flex-grow: 1;
 }
 
+h4 {
+  margin-bottom: 0px;
+}
+
 .h2-wrapper {
   h2 {
     margin-bottom: 0px;
@@ -43,6 +47,13 @@ h2 {
 .grade {
   font-weight: bold;
   font-size: 1.2em;
+}
+
+h3.course {
+  &:not(:first-child) {
+    margin-top: 12px;
+  }
+  margin-bottom: 0px;
 }
 
 .h3-wrapper {

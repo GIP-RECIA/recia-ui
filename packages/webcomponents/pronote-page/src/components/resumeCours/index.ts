@@ -106,14 +106,11 @@ export class ResumeCours extends LitElement {
           class="${!this.tabPannelHandlerResumeCours.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
           aria-labelledby="${this.tabPannelHandlerResumeCours.getButtonId(index)}">
           ${
-            repeat(this.resumeDeCoursDtoList?.filter(x => x.date === unparsedDate) ?? [], cours => cours.id, (cours, indexCours) => {
+            repeat(this.resumeDeCoursDtoList?.filter(x => x.date === unparsedDate) ?? [], cours => cours.id, (cours) => {
               return html`
-            <div
 
-            >
-               ${indexCours > 0 ? html`<hr/>` : ''}
 
-            <h3>${cours.matiere}</h3>
+            <h3 class="course">${cours.matiere}</h3>
             ${repeat(cours.contenuDeCoursList ?? [], cdc => cdc, cdc =>
               html`
 
@@ -134,7 +131,6 @@ export class ResumeCours extends LitElement {
             `
             })
           }
-          </div>
         `)
       }
   </r-pronote-discoverable-section>
