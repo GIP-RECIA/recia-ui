@@ -16,21 +16,17 @@
 
 import type { TemplateResult } from 'lit'
 import type { ResponseEleveDto } from './types/pronoteType'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
-import { repeat } from 'lit/directives/repeat.js'
 import { name } from '../package.json'
-import { formatter, parseXsdDate } from './helpers/dateHelper'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
-import { notificationsTemplate } from './templates/notificationsTemplate'
-import { getIconWithStyle } from './utils/fontawesomeUtils'
 import './components/resumeCours/index.ts'
 import './components/travailAFaire/index.ts'
 import './components/vieScolaire/index.ts'
+import './components/devoirs/index.ts'
 
 @localized()
 export class ReciaPronoteSummary extends LitElement {
@@ -59,9 +55,6 @@ export class ReciaPronoteSummary extends LitElement {
   responseEleveDto: ResponseEleveDto | undefined
 
   errorMessage: string = msg('Impossible de charger le résumé')
-
-  @state()
-  isExpandedDevoirs: boolean = false
 
   constructor() {
     super()
@@ -118,70 +111,14 @@ export class ReciaPronoteSummary extends LitElement {
         >
        </r-vie-scolaire>
       </div>
-      <div class="section-wrapper">${this.devoirs()}</div>
+      <div class="section-wrapper">
+        <r-devoirs
+            .devoirDtoList='${this.responseEleveDto?.devoirDtoList}'
+          >
+        </r-devoirs>
+      </div>
     </div>
   `
-  }
-
-  devoirs(): TemplateResult {
-    if (this.responseEleveDto?.devoirDtoList === undefined || this.responseEleveDto.devoirDtoList === null) {
-      return html`
-       <h2 class="widescreen">${msg('Devoir')}</h2>
-      <div class="h2-wrapper">
-        <h2>${msg('Devoir')}</h2>
-      </div>
-      <p>${('Impossible de récupérer les informations relatives aux derniers devoirs reçus')}</p>
-      `
-    }
-    return html`
-    <div>
-
-    <div class="widescreen">
-      <h2 >${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')}</h2>
-      ${notificationsTemplate(this.responseEleveDto?.devoirDtoList?.length ?? 0)}
-    </div>
-
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedDevoirs}" @click="${() => { this.isExpandedDevoirs = !this.isExpandedDevoirs }}" >
-        <h2>${this.responseEleveDto!.devoirDtoList!.length < 2 ? msg('Devoir') : msg('Devoirs')}
-      </h2>
-        <div class="grow-1"></div>
-          ${notificationsTemplate(this.responseEleveDto?.devoirDtoList?.length ?? 0)}
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedDevoirs ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
-             <div class="${this.isExpandedDevoirs ? 'devoirs-content' : 'not-expanded devoirs-content'}">
-
-       ${
-          repeat(this.responseEleveDto?.devoirDtoList?.sort((a, b) => {
-            if (a === undefined || a === null) {
-              return 1
-            }
-            if (b === undefined || b === null) {
-              return -1
-            }
-            if (a === b) {
-              return 0
-            }
-
-            return a.date < b.date ? -1 : 1
-          }) ?? [], devoir => devoir, (devoir, indexDevoir) => {
-            return html`
-          ${indexDevoir > 0 ? html`<hr/>` : ''}
-          <div><span>${msg('Matière : ')}</span>${devoir.matiere}</div>
-          <div><span>${msg('Date : ')}</span>${devoir.date ? formatter.format(parseXsdDate(devoir.date)) : ''}</div>
-          <div><span>${msg('Note : ')}</span>${devoir.note}/${devoir.bareme}</div>
-
-          `
-          })
-        }
-      </div>
-    </div>
-    `
   }
 
   static styles = css`${unsafeCSS(styles)}`
