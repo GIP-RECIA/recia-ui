@@ -40,6 +40,11 @@ h2 {
   margin-left: auto;
 }
 
+.grade {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 .h3-wrapper {
   h3 {
     margin-bottom: 0px;
@@ -60,10 +65,11 @@ ul {
 }
 
 hr {
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   height: 1px;
-  border-style: dashed;
+  border-style: ridge;
+  opacity: 30%;
   border-width: 1px;
 }
 

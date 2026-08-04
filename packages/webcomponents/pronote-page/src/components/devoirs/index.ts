@@ -68,10 +68,8 @@ export class Devoirs extends LitElement {
           }) ?? [], devoir => devoir, (devoir, indexDevoir) => {
             return html`
           ${indexDevoir > 0 ? html`<hr/>` : ''}
-          <div><span>${msg('Matière : ')}</span>${devoir.matiere}</div>
+          <div class="grade">${devoir.matiere}${msg(' :')} ${devoir.note}/${devoir.bareme}</div>
           <div><span>${msg('Date : ')}</span>${devoir.date ? formatter.format(parseXsdDate(devoir.date)) : ''}</div>
-          <div><span>${msg('Note : ')}</span>${devoir.note}/${devoir.bareme}</div>
-
           `
           })
         }
