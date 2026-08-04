@@ -16,11 +16,10 @@
 
 import type { TemplateResult } from 'lit'
 import type { TravailAfaireDto } from '../../types/pronoteType'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg } from '@lit/localize'
 import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -28,17 +27,12 @@ import { TabPanelHandler } from '../../handlers/tabPanelHandler'
 import { formatter, parseXsdDate } from '../../helpers/dateHelper'
 import { safeHtml } from '../../helpers/safeHtml'
 import styles from '../../style.scss?inline'
-import { notificationsTemplate } from '../../templates/notificationsTemplate'
 import { titledLinkListTemplate } from '../../templates/titledLinkListTemplate'
-import { getIconWithStyle } from '../../utils/fontawesomeUtils'
 
 @localized()
 export class TravailAFaire extends LitElement {
   @property({ type: Array, attribute: 'travail-a-faire-dto-list' })
   travailAFaireDtoList?: TravailAfaireDto[]
-
-  @state()
-  isExpandedTravailAFaire: boolean = false
 
   tabPannelHandlerTravailAFaire: TabPanelHandler
 
@@ -70,28 +64,15 @@ export class TravailAFaire extends LitElement {
     // sort dates
 
     return html`
-    <div>
 
 
-     <div class="widescreen">
-     <h2>${msg('Travail à faire')}</h2>
-      ${notificationsTemplate(this.travailAFaireDtoList?.length ?? 0)}
-    </div>
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedTravailAFaire}" @click="${() => { this.isExpandedTravailAFaire = !this.isExpandedTravailAFaire }}" >
-        <h2>${msg('Travail à faire')}</h2>
-        <div class="grow-1"></div>
-        ${notificationsTemplate(this.travailAFaireDtoList?.length ?? 0)}
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedTravailAFaire ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
-      <!-- a devenir tabs selections de jours -->
+      <r-pronote-discoverable-section
+        display-title='${msg('Travail à faire')}'
+        content-classes='taf-content'
+        count=${this.travailAFaireDtoList?.length ?? 0}
+      >
+  <!-- a devenir tabs selections de jours -->
 
-    <div class="${this.isExpandedTravailAFaire ? 'taf-content' : 'not-expanded taf-content'}">
       <div class="date-selector">
         ${
           repeat(sortedDates, item => item, (item, index) => html`
@@ -141,8 +122,6 @@ export class TravailAFaire extends LitElement {
                 ${
                   titledLinkListTemplate(taf.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
                 }
-
-
             </div>
             `
             })
@@ -151,8 +130,7 @@ export class TravailAFaire extends LitElement {
 
           `)
       }
-      </div>
-    </div>
+      </r-pronote-discoverable-section>
     `
   }
 

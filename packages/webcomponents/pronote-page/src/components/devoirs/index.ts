@@ -16,24 +16,19 @@
 
 import type { TemplateResult } from 'lit'
 import type { DevoirDto } from '../../types/pronoteType'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg } from '@lit/localize'
 import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { formatter, parseXsdDate } from '../../helpers/dateHelper'
 import styles from '../../style.scss?inline'
-import { notificationsTemplate } from '../../templates/notificationsTemplate'
-import { getIconWithStyle } from '../../utils/fontawesomeUtils'
+import '../pronoteDiscoverableSection/index.ts'
 
 @localized()
 export class Devoirs extends LitElement {
   @property({ type: Array, attribute: 'devoir-dto-list' })
   devoirDtoList?: DevoirDto[]
-
-  @state()
-  isExpandedDevoirs: boolean = false
 
   constructor() {
     super()
@@ -50,28 +45,13 @@ export class Devoirs extends LitElement {
       `
     }
     return html`
-    <div>
 
-    <div class="widescreen">
-      <h2 >${this.devoirDtoList?.length ?? 0 < 2 ? msg('Devoir') : msg('Devoirs')}</h2>
-      ${notificationsTemplate(this.devoirDtoList?.length ?? 0)}
-    </div>
 
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedDevoirs}" @click="${() => { this.isExpandedDevoirs = !this.isExpandedDevoirs }}" >
-        <h2>${this.devoirDtoList.length ?? 0 < 2 ? msg('Devoir') : msg('Devoirs')}
-      </h2>
-        <div class="grow-1"></div>
-          ${notificationsTemplate(this.devoirDtoList?.length ?? 0)}
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedDevoirs ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
-             <div class="${this.isExpandedDevoirs ? 'devoirs-content' : 'not-expanded devoirs-content'}">
-
+    <r-pronote-discoverable-section
+      display-title='${(this.devoirDtoList?.length ?? 0) < 2 ? msg('Devoir') : msg('Devoirs')}'
+      content-classes='devoirs-content'
+      count=${this.devoirDtoList?.length ?? 0}
+    >
        ${
           repeat(this.devoirDtoList?.sort((a, b) => {
             if (a === undefined || a === null) {
@@ -95,8 +75,11 @@ export class Devoirs extends LitElement {
           `
           })
         }
-      </div>
-    </div>
+    </r-pronote-discoverable-section>
+
+
+
+
     `
   }
 

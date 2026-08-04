@@ -16,11 +16,10 @@
 
 import type { TemplateResult } from 'lit'
 import type { ResumeDeCoursDto } from '../../types/pronoteType'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg } from '@lit/localize'
 import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -28,17 +27,13 @@ import { TabPanelHandler } from '../../handlers/tabPanelHandler'
 import { formatter, parseXsdDate } from '../../helpers/dateHelper'
 import { safeHtml } from '../../helpers/safeHtml'
 import styles from '../../style.scss?inline'
-import { notificationsTemplate } from '../../templates/notificationsTemplate'
 import { titledLinkListTemplate } from '../../templates/titledLinkListTemplate'
-import { getIconWithStyle } from '../../utils/fontawesomeUtils'
+import '../pronoteDiscoverableSection/index.ts'
 
 @localized()
 export class ResumeCours extends LitElement {
   @property({ type: Array, attribute: 'resume-cours-dto-list' })
   resumeDeCoursDtoList?: ResumeDeCoursDto[]
-
-  @state()
-  isExpandedResumeCours: boolean = false
 
   tabPannelHandlerResumeCours: TabPanelHandler
 
@@ -67,26 +62,14 @@ export class ResumeCours extends LitElement {
     const sortedDates = Array.from(dateStringArray).sort()
 
     return html`
-    <div>
-     <div class="widescreen">
-      <h2>${this.resumeDeCoursDtoList?.length ?? 0 < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}</h2>
-      ${notificationsTemplate(this.resumeDeCoursDtoList?.length ?? 0)}
-    </div>
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedResumeCours}" @click="${() => { this.isExpandedResumeCours = !this.isExpandedResumeCours }}" >
-        <h2>${this.resumeDeCoursDtoList?.length ?? 0 < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}</h2>
-        <div class="grow-1"></div>
-        ${notificationsTemplate(this.resumeDeCoursDtoList?.length ?? 0)}
-        ${
-          getIconWithStyle(
-            faChevronDown,
-            { rotate: this.isExpandedResumeCours ? '180deg' : undefined },
-            { 'folded-indicator': true },
-          )
-        }
-      </button>
-      <!-- a devenir tabs selections de jours -->
 
-       <div class="${this.isExpandedResumeCours ? 'resume-content' : 'not-expanded resume-content'}">
+ <r-pronote-discoverable-section
+      display-title='${this.resumeDeCoursDtoList?.length ?? 0 < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}'
+      content-classes='resume-content'
+      count=${this.resumeDeCoursDtoList?.length ?? 0}
+    >
+         <!-- a devenir tabs selections de jours -->
+
       <div class="date-selector">
         ${
           repeat(sortedDates, item => item, (item, index) => html`
@@ -154,8 +137,7 @@ export class ResumeCours extends LitElement {
           </div>
         `)
       }
-      </div>
-    </div>
+  </r-pronote-discoverable-section>
     `
   }
 

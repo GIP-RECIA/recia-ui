@@ -25,7 +25,6 @@ import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
 import { formatter, formatterDateTime, parseXsdDate, parseXsdDateTime } from '../../helpers/dateHelper'
 import styles from '../../style.scss?inline'
-import { notificationsTemplate } from '../../templates/notificationsTemplate'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils'
 
 const _allowedValues = [
@@ -43,9 +42,6 @@ type AllowedValues = typeof _allowedValues[number]
 export class VieScolaire extends LitElement {
   @property({ type: Array, attribute: 'vie-scolaire-dto' })
   vieScolaireDto?: VieScolaireDto
-
-  @state()
-  isExpandedVieScolaire: boolean = false
 
   @state()
   isExpandedMap: Map<AllowedValues, boolean> = new Map()
@@ -66,36 +62,18 @@ export class VieScolaire extends LitElement {
     // todo if error
 
     return html`
-      <div class="widescreen">
-     <h2>${msg('Vie scolaire')}</h2>
-      ${notificationsTemplate(this.vieScolaireEventCount() ?? 0)}
-   </div>
-      <button class="h2-wrapper" aria-expanded="${this.isExpandedVieScolaire}" @click="${() => { this.isExpandedVieScolaire = !this.isExpandedVieScolaire }}" >
-      <h2>${msg('Vie scolaire')}</h2>
-      <div class="grow-1"></div>
-            ${notificationsTemplate(this.vieScolaireEventCount() ?? 0)}
-      ${
-        getIconWithStyle(
-          faChevronDown,
-          { rotate: this.isExpandedVieScolaire ? '180deg' : undefined },
-          { 'folded-indicator': true },
-        )
-      }
-      </button>
-      <!-- a devenir tabs selections de jours -->
-
-       <div class="${this.isExpandedVieScolaire ? 'vie-scolaire-content' : 'not-expanded vie-scolaire-content'}">
-
-
-
-
-      ${this.absences()}
-      ${this.retards()}
-      ${this.infirmeries()}
-      ${this.punitions()}
-      ${this.sanctions()}
-      ${this.observations()}
-</div>
+    <r-pronote-discoverable-section
+      display-title='${msg('Vie scolaire')}'
+      content-classes='vie-scolaire-content'
+      count=${this.vieScolaireEventCount() ?? 0}
+    >
+        ${this.absences()}
+        ${this.retards()}
+        ${this.infirmeries()}
+        ${this.punitions()}
+        ${this.sanctions()}
+        ${this.observations()}
+    </r-pronote-discoverable-section>
     `
   }
 
