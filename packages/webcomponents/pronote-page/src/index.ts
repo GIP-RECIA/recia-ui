@@ -49,9 +49,6 @@ export class ReciaPronoteSummary extends LitElement {
   isParent: boolean = false
 
   @state()
-  selectedTabId: string = 'tab-resume-cours-id-0'
-
-  @state()
   responseEleveDto: ResponseEleveDto | undefined
 
   errorMessage: string = msg('Impossible de charger le résumé')
