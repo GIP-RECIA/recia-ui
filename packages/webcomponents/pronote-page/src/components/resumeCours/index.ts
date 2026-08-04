@@ -121,11 +121,11 @@ export class ResumeCours extends LitElement {
                 <p class="categorie tag">${cdc.categorie}</p>
                 <p class="descriptif" >${unsafeHTML(safeHtml(cdc.descriptif ?? ''))}</p>
                   ${
-                    titledLinkListTemplate(cdc.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
+                    titledLinkListTemplate((cdc.pieceJointeList?.length ?? 0) > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), cdc.pieceJointeList)
                   }
 
                 ${
-                  titledLinkListTemplate(cdc.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), cdc.siteInternetList)
+                  titledLinkListTemplate((cdc.siteInternetList?.length ?? 0) > 1 ? msg('Sites internets') : msg('Site internet'), cdc.siteInternetList)
                 }
 
 

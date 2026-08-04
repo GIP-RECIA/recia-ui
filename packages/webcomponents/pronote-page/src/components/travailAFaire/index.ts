@@ -116,11 +116,11 @@ export class TravailAFaire extends LitElement {
             <h3>${taf.matiere}</h3>
                 <p class="descriptif" >${unsafeHTML(safeHtml(taf.descriptif ?? ''))}</p>
                   ${
-                    titledLinkListTemplate(taf.pieceJointeList?.length ?? 0 > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
+                    titledLinkListTemplate((taf.pieceJointeList?.length ?? 0) > 1 ? msg('Pièces jointes') : msg('Pièce jointe'), taf.pieceJointeList)
                   }
 
                 ${
-                  titledLinkListTemplate(taf.siteInternetList?.length ?? 0 > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
+                  titledLinkListTemplate((taf.siteInternetList?.length ?? 0) > 1 ? msg('Sites internets') : msg('Site internet'), taf.siteInternetList)
                 }
             </div>
             `
