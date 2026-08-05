@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.15.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.15.0...ui-webcomponents/v1.15.1) (2026-08-05)
+
+### Features
+
+* add entkapreunion theme ([dd6713a](https://github.com/GIP-RECIA/recia-ui/commit/dd6713a08348309f3405828bee7ad29f5b85bcb8))
+
+### Bug Fixes
+
+* vite 8 process is not defined ([852a82e](https://github.com/GIP-RECIA/recia-ui/commit/852a82ececbafd66be9effa105efe29c35232159))
 ## [1.15.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.14.0...ui-webcomponents/v1.15.0) (2026-07-27)
 
 
