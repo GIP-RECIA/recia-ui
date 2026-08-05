@@ -20,10 +20,8 @@ import { localized, msg } from '@lit/localize'
 import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
-import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { TabPanelHandler } from '../../handlers/tabPanelHandler'
 import { formatter, parseXsdDate } from '../../helpers/dateHelper'
 import { safeHtml } from '../../helpers/safeHtml'
 import styles from '../../style.scss?inline'
@@ -34,15 +32,10 @@ export class TravailAFaire extends LitElement {
   @property({ type: Array, attribute: 'travail-a-faire-dto-list' })
   travailAFaireDtoList?: TravailAfaireDto[]
 
-  tabPannelHandlerTravailAFaire: TabPanelHandler
-
-  selectedTabIdPrefixTravailAFaire: string = 'tab-travail-a-faire-id-'
-
   tabPannelPrefixTravailAFaire = 'tabpanel-travail-a-faire-'
 
   constructor() {
     super()
-    this.tabPannelHandlerTravailAFaire = new TabPanelHandler(this.selectedTabIdPrefixTravailAFaire, this.tabPannelPrefixTravailAFaire, () => this.requestUpdate())
   }
 
   render(): TemplateResult {
@@ -71,41 +64,21 @@ export class TravailAFaire extends LitElement {
         content-classes='taf-content'
         count=${this.travailAFaireDtoList?.length ?? 0}
       >
-  <!-- a devenir tabs selections de jours -->
 
-      <div class="date-selector">
-        ${
-          repeat(sortedDates, item => item, (item, index) => html`
-          <button
-            id="${this.tabPannelHandlerTravailAFaire.getButtonId(index)}"
-            role="tab"
-            aria-selected=${this.tabPannelHandlerTravailAFaire.getAriaSelected(index)}
-            aria-controls="${this.tabPannelHandlerTravailAFaire.getAriaControl(index)}"
-            @keydown="${this.tabPannelHandlerTravailAFaire.onKeydown}"
-            @click="${() => this.tabPannelHandlerTravailAFaire.setSelected(index)}"
-            tabindex="${this.tabPannelHandlerTravailAFaire.getTabIndex(index)}"
-            ${ref((el: Element | undefined) => {
-              if (el instanceof HTMLButtonElement) {
-                this.tabPannelHandlerTravailAFaire.addButton(el, index)
-              }
-            })}
-       class="${this.tabPannelHandlerTravailAFaire.getAriaSelected(index) ? 'active tag' : 'tag'}"
-          >
-          ${formatter.format(dateMap.get(item))}
-        </button>
+      <r-tablist
+        id-prefix="${this.tabPannelPrefixTravailAFaire}"
+        .tabs='${sortedDates.map(x => formatter.format(dateMap.get(x)))}'
+        active-tab="0"
+        switch-tabpanel
+      ></r-tablist>
 
-
-          `)
-        }
-      </div>
       ${
         repeat(sortedDates, unparsedDate => unparsedDate, (unparsedDate, index) => html`
-          <div
-          id="${this.tabPannelHandlerTravailAFaire.getPanelId(index)}"
-      role="tabpanel"
-      tabindex="${this.tabPannelHandlerTravailAFaire.getTabIndex(index)}"
-      class="${!this.tabPannelHandlerTravailAFaire.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
-      aria-labelledby="${this.tabPannelHandlerTravailAFaire.getButtonId(index)}">
+          <r-tabpanel
+        id-prefix="${this.tabPannelPrefixTravailAFaire}"
+        index="${index}"
+        ?active="${index === 0}"
+      >
           ${
             repeat(this.travailAFaireDtoList?.filter(x => x.pourLe === unparsedDate) ?? [], taf => taf, (taf) => {
               return html`
@@ -123,7 +96,7 @@ export class TravailAFaire extends LitElement {
             `
             })
           }
-
+          </r-tabpanel>
 
           `)
       }
