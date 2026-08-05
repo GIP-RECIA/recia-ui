@@ -42,9 +42,15 @@ export class ResumeCours extends LitElement {
   }
 
   render(): TemplateResult {
-    // todo if loading
-
-    // todo if error
+    if (this.resumeDeCoursDtoList === undefined || this.resumeDeCoursDtoList === null) {
+      return html`
+       <h2 class="widescreen">${msg('Vie scolaire')}</h2>
+      <div class="h2-wrapper">
+        <h2>${msg('Devoir')}</h2>
+      </div>
+      <p>${(msg('Aucun cours n\'a eu lieu lors des 7 derniers jours.'))}</p>
+      `
+    }
 
     const dateStringArray: Set<string> = new Set(this.resumeDeCoursDtoList?.map(x => x.date))
     const dateMap: Map<string, Date> = new Map()

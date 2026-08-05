@@ -39,11 +39,16 @@ export class TravailAFaire extends LitElement {
   }
 
   render(): TemplateResult {
-    // todo if loading
+    if (this.travailAFaireDtoList === undefined || this.travailAFaireDtoList === null) {
+      return html`
+       <h2 class="widescreen">${msg('Vie scolaire')}</h2>
+      <div class="h2-wrapper">
+        <h2>${msg('Devoir')}</h2>
+      </div>
+      <p>${(msg('Aucun travail à faire n\'a été assigné lors des 7 derniers jour. Tout travail assigné avant cette période ne sera visible que dans votre espace Pronote.'))}</p>
+      `
+    }
 
-    // todo if error
-
-    // const dates: Set<Date> = new Set()
     const dateStringArray: Set<string> = new Set(this.travailAFaireDtoList?.map(x => x.pourLe))
     const dateMap: Map<string, Date> = new Map()
 

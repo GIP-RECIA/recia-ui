@@ -168,6 +168,22 @@
   <source>nombre</source>
   <target>count</target>
 </trans-unit>
+<trans-unit id="s80540ef8d790be23">
+  <source>Aucun travail à faire n'a été assigné lors des 7 derniers jour. Tout travail assigné avant cette période ne sera visible que dans votre espace Pronote.</source>
+  <target>No work has been assigned in the last 7 days. Any work assigned before this period will only be visible in your Pronote account.</target>
+</trans-unit>
+<trans-unit id="s0ce5ca4e2ed658f0">
+  <source>Aucun devoir n'a été noté lors des 7 derniers jours.</source>
+  <target>No assignments have been marked in the last 7 days.</target>
+</trans-unit>
+<trans-unit id="s0c56d55db04927a5">
+  <source>Aucun évènement de vie scolaire n'est survenu lors des 7 derniers jours.</source>
+  <target>No school-related events have occurred in the last 7 days.</target>
+</trans-unit>
+<trans-unit id="s3b608afd9ecabd30">
+  <source>Aucun cours n'a eu lieu lors des 7 derniers jours.</source>
+  <target>No classes have been held in the last 7 days.</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

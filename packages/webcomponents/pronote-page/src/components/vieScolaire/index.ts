@@ -35,9 +35,15 @@ export class VieScolaire extends LitElement {
   }
 
   render(): TemplateResult {
-    // todo if loading
-
-    // todo if error
+    if (this.vieScolaireDto === undefined || this.vieScolaireDto === null) {
+      return html`
+       <h2 class="widescreen">${msg('Vie scolaire')}</h2>
+      <div class="h2-wrapper">
+        <h2>${msg('Devoir')}</h2>
+      </div>
+      <p>${(msg('Aucun évènement de vie scolaire n\'est survenu lors des 7 derniers jours.'))}</p>
+      `
+    }
 
     return html`
     <r-pronote-discoverable-section

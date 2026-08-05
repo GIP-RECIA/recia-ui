@@ -41,7 +41,7 @@ export class Devoirs extends LitElement {
       <div class="h2-wrapper">
         <h2>${msg('Devoir')}</h2>
       </div>
-      <p>${('Impossible de récupérer les informations relatives aux derniers devoirs reçus')}</p>
+      <p>${(msg('Aucun devoir n\'a été noté lors des 7 derniers jours.'))}</p>
       `
     }
     return html`
