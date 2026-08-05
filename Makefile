@@ -4,7 +4,7 @@ WC_PKG = @gip-recia/ui-webcomponents
 WC_DIR = /packages/ui-webcomponents/dist
 RELEASE_TYPES = patch minor major
 
- help default:
+help default:
 	@echo "📦 Available commands"
 	@echo
 	@echo " init                             > Initialize project"
