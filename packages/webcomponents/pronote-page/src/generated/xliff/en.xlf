@@ -61,10 +61,6 @@
   <source>Date : </source>
   <target>Date: </target>
 </trans-unit>
-<trans-unit id="se9a34805bd3b3325">
-  <source>Note : </source>
-  <target>Grade: </target>
-</trans-unit>
 <trans-unit id="s78e1b627faf220e9">
   <source>Absence (<x id="0" equiv-text="${count}"/>)</source>
   <target>Absence (<x id="0" equiv-text="${count}"/>)</target>
@@ -158,11 +154,19 @@
 </trans-unit>
 <trans-unit id="sffe3dec66fc8c9a4">
   <source>Demandeur : </source>
-  <source>From: </source>
+  <target>From: </target>
 </trans-unit>
 <trans-unit id="sb51a1c9e41641bf5">
   <source>Observation : </source>
   <target>Observation: </target>
+</trans-unit>
+<trans-unit id="s07c58e07b48ea83f">
+  <source> :</source>
+  <target>:</target>
+</trans-unit>
+<trans-unit id="secb20b8b64fd17c0">
+  <source>nombre</source>
+  <target>count</target>
 </trans-unit>
 </body>
 </file>
