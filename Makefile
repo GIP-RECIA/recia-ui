@@ -11,6 +11,7 @@ RELEASE_TYPES = patch minor major
 	@echo " clean                            > Clean project"
 	@echo " dedupe                           > De-duplicate yarn dependencies"
 	@echo " license                          > Generate missing licenses"
+	@echo " wc-new NAME=<name>               > Generate new web component"
 	@echo " wc-build                         > Build web components"
 	@echo " wc-release-[patch|minor|major]   > Create a release"
 	@echo " wc-publish                       > Publish to npm"
@@ -28,6 +29,7 @@ RELEASE_TYPES = patch minor major
 	license-check \
 	license-generate \
 	license-commit \
+	wc-new \
 	wc-build \
 	wc-release-% \
 	wc-publish
@@ -95,6 +97,13 @@ license-generate:
 
 license-commit:
 	@./scripts/license.sh 3
+
+wc-new:
+	@if [ -z "$(NAME)" ]; then \
+		echo "Usage: make wc-new NAME=<nom>"; \
+		exit 1; \
+	fi
+	@./scripts/wc-new.sh $(NAME)
 
 wc-build:
 	@./scripts/wc-build.sh
