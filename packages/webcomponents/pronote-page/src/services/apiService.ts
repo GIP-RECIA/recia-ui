@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import type { ResponseEleveDto } from '../types/pronoteType'
+import type { ResponseDto } from '../types/pronoteType'
 
-export async function getResponseEleveDto(url: string, timeout: number): Promise<ResponseEleveDto> {
+export async function getResponseEleveDto(url: string, timeout: number): Promise<ResponseDto> {
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -29,7 +29,7 @@ export async function getResponseEleveDto(url: string, timeout: number): Promise
     })
 
     if (response.ok) {
-      const json = (await response.json()) as ResponseEleveDto
+      const json = (await response.json()) as ResponseDto
 
       return json
     }

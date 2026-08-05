@@ -15,11 +15,12 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { ResponseEleveDto } from './types/pronoteType'
+import type { ResponseDto } from './types/pronoteType'
 import { localized, msg, updateWhenLocaleChanges } from '@lit/localize'
 import { componentName } from 'common/config.ts'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { name } from '../package.json'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
@@ -27,6 +28,9 @@ import './components/resumeCours/index.ts'
 import './components/travailAFaire/index.ts'
 import './components/vieScolaire/index.ts'
 import './components/devoirs/index.ts'
+import './components/pronoteInformationGrid/index.ts'
+import '../../tabs/src/components/tabpanel/index.ts'
+import '../../tabs/src/components/tablist/index.ts'
 
 @localized()
 export class ReciaPronoteSummary extends LitElement {
@@ -49,9 +53,11 @@ export class ReciaPronoteSummary extends LitElement {
   isParent: boolean = false
 
   @state()
-  responseEleveDto: ResponseEleveDto | undefined
+  responseDto: ResponseDto | undefined
 
   errorMessage: string = msg('Impossible de charger le résumé')
+
+  prefixChildrenPannel: string = 'children-selection-prefix'
 
   constructor() {
     super()
@@ -68,7 +74,7 @@ export class ReciaPronoteSummary extends LitElement {
 
   async getSummary(): Promise<void> {
     try {
-      this.responseEleveDto = await getResponseEleveDto(this.urlPronoteApi, this.timeout)
+      this.responseDto = await getResponseEleveDto(this.urlPronoteApi, this.timeout)
     }
     catch {
       this.isError = true
@@ -79,7 +85,7 @@ export class ReciaPronoteSummary extends LitElement {
   }
 
   render(): TemplateResult {
-    if (!this.responseEleveDto) {
+    if (!this.responseDto) {
       if (this.loading) {
         return html`<p>${msg('Chargement en cours')}</p>`
       }
@@ -88,34 +94,50 @@ export class ReciaPronoteSummary extends LitElement {
       }
     }
 
-    return html`
-    <div class="page-content">
-      <div class="section-wrapper">
-        <r-resume-cours
-          .resumeDeCoursDtoList='${this.responseEleveDto?.resumeDeCoursDtoList}'
-        >
-       </r-resume-cours>
-      </div>
-      <div class="section-wrapper">
-        <r-travail-a-faire
-          .travailAFaireDtoList='${this.responseEleveDto?.travailAFaireDtoList}'
-        >
-       </r-travail-a-faire>
-      </div>
-      <div class="section-wrapper">
-        <r-vie-scolaire
-          .vieScolaireDto='${this.responseEleveDto?.vieScolaireDto}'
-        >
-       </r-vie-scolaire>
-      </div>
-      <div class="section-wrapper">
-        <r-devoirs
-            .devoirDtoList='${this.responseEleveDto?.devoirDtoList}'
-          >
-        </r-devoirs>
-      </div>
+    if (this.responseDto === undefined) {
+      return html`<p>${msg('Une erreur est survenue')}</p>`
+    }
+
+    if (this.responseDto?.profil === 'Eleve' || (this.responseDto?.profil === 'Parent' && this.responseDto.eleveDtoList.length === 1)) {
+      return html`
+        <r-pronote-information-grid
+        .eleveDto=${this.responseDto?.eleveDtoList[0]}>
+        </r-pronote-information-grid>
+        `
+    }
+    else {
+      const keys: (string | undefined)[] | undefined = this.responseDto.eleveDtoList.map(x => x.prenom?.replace(/\$.+/, ''))
+
+      return html`
+      <div>
+       <r-tablist
+        id-prefix="${this.prefixChildrenPannel}"
+        .tabs='${keys}'
+        active-tab="0"
+        switch-tabpanel
+      ></r-tablist>
+
+      ${
+        repeat(this.responseDto.eleveDtoList, dto => dto.prenom, (dto, index) => {
+          return html`
+          <r-tabpanel
+        id-prefix="${this.prefixChildrenPannel}"
+        index="${index}"
+        ?active="${index === 0}"
+      >
+      <r-pronote-information-grid
+        .eleveDto=${dto}>
+        </r-pronote-information-grid>
+    </r-tabpanel>
     </div>
-  `
+          `
+        })
+      }
+
+      `
+    }
+
+    return html``
   }
 
   static styles = css`${unsafeCSS(styles)}`

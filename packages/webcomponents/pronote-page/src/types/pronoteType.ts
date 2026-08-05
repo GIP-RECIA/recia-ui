@@ -16,10 +16,12 @@
 
 export interface ResponseDto {
   profil: 'Eleve' | 'Parent'
+  eleveDtoList: EleveDto[]
 }
 
-export type ResponseEleveDto = ResponseDto & {
+export interface EleveDto {
 
+  prenom: string | undefined
   resumeDeCoursDtoList: ResumeDeCoursDto[] | null | undefined
   travailAFaireDtoList: TravailAfaireDto[] | null | undefined
   vieScolaireDto: VieScolaireDto | null | undefined
