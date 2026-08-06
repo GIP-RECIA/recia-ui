@@ -35,7 +35,7 @@ export class VieScolaire extends LitElement {
   }
 
   render(): TemplateResult {
-    if (this.vieScolaireDto === undefined || this.vieScolaireDto === null) {
+    if (this.vieScolaireDto === undefined || this.vieScolaireDto === null || this.vieScolaireEventCount() === 0) {
       return html`
        <h2 class="widescreen">${msg('Vie scolaire')}</h2>
       <div class="h2-wrapper">
