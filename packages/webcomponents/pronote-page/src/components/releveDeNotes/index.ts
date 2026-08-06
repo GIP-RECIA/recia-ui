@@ -15,18 +15,18 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { DevoirDto } from '../../types/pronoteType'
+import type { DevoirDto } from '../../types/pronoteType.ts'
 import { localized, msg } from '@lit/localize'
 import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { formatter, parseXsdDate } from '../../helpers/dateHelper'
+import { formatter, parseXsdDate } from '../../helpers/dateHelper.ts'
 import styles from '../../style.scss?inline'
 import '../pronoteDiscoverableSection/index.ts'
 
 @localized()
-export class Devoirs extends LitElement {
+export class ReleveDeNote extends LitElement {
   @property({ type: Array, attribute: 'devoir-dto-list' })
   devoirDtoList?: DevoirDto[]
 
@@ -37,9 +37,9 @@ export class Devoirs extends LitElement {
   render(): TemplateResult {
     if (this.devoirDtoList === undefined || this.devoirDtoList === null) {
       return html`
-       <h2 class="widescreen">${msg('Devoir')}</h2>
+       <h2 class="widescreen">${msg('Relevé de notes')}</h2>
       <div class="h2-wrapper">
-        <h2>${msg('Devoir')}</h2>
+        <h2>${msg('Relevé de notes')}</h2>
       </div>
       <p>${(msg('Aucun devoir n\'a été noté lors des 7 derniers jours.'))}</p>
       `
@@ -48,7 +48,7 @@ export class Devoirs extends LitElement {
 
 
     <r-pronote-discoverable-section
-      display-title='${(this.devoirDtoList?.length ?? 0) < 2 ? msg('Devoir') : msg('Devoirs')}'
+      display-title='${'Relevé de notes'}'
       content-classes='devoirs-content'
       count=${this.devoirDtoList?.length ?? 0}
     >
@@ -84,14 +84,14 @@ export class Devoirs extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName('devoirs')
+const tagName = componentName('releve-de-notes')
 
 if (!customElements.get(tagName)) {
-  customElements.define(tagName, Devoirs)
+  customElements.define(tagName, ReleveDeNote)
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    [tagName]: Devoirs
+    [tagName]: ReleveDeNote
   }
 }

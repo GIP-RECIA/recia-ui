@@ -13,14 +13,6 @@
   <source>Une erreur est survenue</source>
   <target>An error has occured</target>
 </trans-unit>
-<trans-unit id="se8a06d6f0e6e6fb7">
-  <source>Résumé de cours</source>
-  <target>Course summary</target>
-</trans-unit>
-<trans-unit id="sb036f6f62e6e3368">
-  <source>Résumés de cours</source>
-  <target>Course summaries</target>
-</trans-unit>
 <trans-unit id="se47db7e3e2502897">
   <source>Pièces jointes</source>
   <target>Attachments</target>
@@ -47,10 +39,6 @@
 </trans-unit>
 <trans-unit id="sf8c8bda43c7310f6">
   <source>Devoir</source>
-  <target>Assignment</target>
-</trans-unit>
-<trans-unit id="s302ac312b78511ff">
-  <source>Devoirs</source>
   <target>Assignment</target>
 </trans-unit>
 <trans-unit id="s144b2d6e92dd1b85">
@@ -183,6 +171,14 @@
 <trans-unit id="s3b608afd9ecabd30">
   <source>Aucun cours n'a eu lieu lors des 7 derniers jours.</source>
   <target>No classes have been held in the last 7 days.</target>
+</trans-unit>
+<trans-unit id="seb4f8386bbbb1f57">
+  <source>Cahier de textes</source>
+  <target>Textbook</target>
+</trans-unit>
+<trans-unit id="s83833535acf385e8">
+  <source>Relevé de notes</source>
+  <target>Transcript of grades</target>
 </trans-unit>
 </body>
 </file>

@@ -21,6 +21,10 @@ import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import styles from '../../style.scss?inline'
+import '../cahier-de-textes/index.ts'
+import '../travailAFaire/index.ts'
+import '../vieScolaire/index.ts'
+import '../releveDeNotes/index.ts'
 
 @localized()
 export class PronoteInformationGrid extends LitElement {
@@ -35,10 +39,10 @@ export class PronoteInformationGrid extends LitElement {
     return html`
     <div class="page-content">
       <div class="section-wrapper">
-        <r-resume-cours
+        <r-cahier-de-textes
           .resumeDeCoursDtoList='${this.eleveDto?.resumeDeCoursDtoList}'
         >
-       </r-resume-cours>
+       </r-cahier-de-textes>
       </div>
       <div class="section-wrapper">
         <r-travail-a-faire
@@ -53,10 +57,10 @@ export class PronoteInformationGrid extends LitElement {
        </r-vie-scolaire>
       </div>
       <div class="section-wrapper">
-        <r-devoirs
+        <r-releve-de-notes
             .devoirDtoList='${this.eleveDto?.devoirDtoList}'
           >
-        </r-devoirs>
+        </r-releve-de-notes>
       </div>
     </div>
   `

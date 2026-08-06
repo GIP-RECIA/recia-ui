@@ -15,23 +15,23 @@
  */
 
 import type { TemplateResult } from 'lit'
-import type { ResumeDeCoursDto } from '../../types/pronoteType'
+import type { ResumeDeCoursDto } from '../../types/pronoteType.ts'
 import { localized, msg } from '@lit/localize'
 import { componentName } from 'common/config.js'
 import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { formatter, parseXsdDate } from '../../helpers/dateHelper'
-import { safeHtml } from '../../helpers/safeHtml'
+import { formatter, parseXsdDate } from '../../helpers/dateHelper.ts'
+import { safeHtml } from '../../helpers/safeHtml.ts'
 import styles from '../../style.scss?inline'
-import { titledLinkListTemplate } from '../../templates/titledLinkListTemplate'
+import { titledLinkListTemplate } from '../../templates/titledLinkListTemplate.ts'
 import '../pronoteDiscoverableSection/index.ts'
 import '../../../../tabs/src/components/tablist/index.ts'
 import '../../../../tabs/src/components/tabpanel/index.ts'
 
 @localized()
-export class ResumeCours extends LitElement {
+export class CahierDeTextes extends LitElement {
   @property({ type: Array, attribute: 'resume-cours-dto-list' })
   resumeDeCoursDtoList?: ResumeDeCoursDto[]
 
@@ -44,9 +44,9 @@ export class ResumeCours extends LitElement {
   render(): TemplateResult {
     if (this.resumeDeCoursDtoList === undefined || this.resumeDeCoursDtoList === null) {
       return html`
-       <h2 class="widescreen">${msg('Vie scolaire')}</h2>
+       <h2 class="widescreen">${msg('Cahier de textes')}</h2>
       <div class="h2-wrapper">
-        <h2>${msg('Devoir')}</h2>
+        <h2>${msg('Cahier de textes')}</h2>
       </div>
       <p>${(msg('Aucun cours n\'a eu lieu lors des 7 derniers jours.'))}</p>
       `
@@ -64,7 +64,7 @@ export class ResumeCours extends LitElement {
 
     return html`
  <r-pronote-discoverable-section
-      display-title='${this.resumeDeCoursDtoList?.length ?? 0 < 2 ? msg('Résumé de cours') : msg('Résumés de cours')}'
+      display-title='${'Cahier de textes'}'
       content-classes='resume-content'
       count=${this.resumeDeCoursDtoList?.length ?? 0}
     >
@@ -117,14 +117,14 @@ export class ResumeCours extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName('resume-cours')
+const tagName = componentName('cahier-de-textes')
 
 if (!customElements.get(tagName)) {
-  customElements.define(tagName, ResumeCours)
+  customElements.define(tagName, CahierDeTextes)
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    [tagName]: ResumeCours
+    [tagName]: CahierDeTextes
   }
 }
