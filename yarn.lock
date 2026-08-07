@@ -6510,6 +6510,7 @@ __metadata:
     "@lit/localize-tools": "npm:^0.8.2"
     "@types/lodash-es": "npm:^4"
     "@types/node": "npm:^24"
+    "@typescript/native": "npm:typescript@^7.0.2"
     "@uportal/open-id-connect": "npm:^1.40.2"
     common: "workspace:^"
     dompurify: "npm:^3.4.12"
