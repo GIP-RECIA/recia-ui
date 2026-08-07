@@ -30,7 +30,7 @@ import { getIconWithStyle } from '../../utils/fontawesomeUtils'
 import 'tabs'
 
 @localized()
-export class ReciaPronoteShortSummary extends LitElement {
+export class ReciaPronoteSummary extends LitElement {
   @property({ type: Number, attribute: 'max-elements' })
   maxElements: number = 5
 
@@ -275,10 +275,10 @@ export class ReciaPronoteShortSummary extends LitElement {
   static styles = css`${unsafeCSS(styles)}`
 }
 
-const tagName = componentName('pronote-short-summary')
+const tagName = componentName('pronote-summary')
 
 if (!customElements.get(tagName)) {
-  customElements.define(tagName, ReciaPronoteShortSummary)
+  customElements.define(tagName, ReciaPronoteSummary)
 }
 
 declare global {
@@ -286,6 +286,6 @@ declare global {
     WidgetAdapter: any
   }
   interface HTMLElementTagNameMap {
-    [tagName]: ReciaPronoteShortSummary
+    [tagName]: ReciaPronoteSummary
   }
 }

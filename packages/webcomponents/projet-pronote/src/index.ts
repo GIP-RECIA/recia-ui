@@ -15,4 +15,4 @@
  */
 
 import './components/pronotePage/index.ts'
-import './components/pronoteShortSummary/index.ts'
+import './components/pronoteSummary/index.ts'
