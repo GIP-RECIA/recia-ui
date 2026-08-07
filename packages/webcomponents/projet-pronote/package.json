@@ -1,0 +1,58 @@
+{
+  "name": "projet-pronote",
+  "type": "module",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Ewann Roux",
+      "email": "ewann.roux@recia.fr",
+      "url": "https://github.com/EwannRoux"
+    }
+  ],
+  "license": "Apache-2.0",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/r-projet-pronote.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/r-projet-pronote.js"
+      }
+    },
+    "./types/*": "./src/types/*"
+  },
+  "main": "./dist/r-projet-pronote.js",
+  "module": "./dist/r-projet-pronote.js",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test:unit": "echo No tests available"
+  },
+  "dependencies": {
+    "@lit/localize": "^0.12.2",
+    "lit": "^3.3.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.2.0",
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-regular-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@gip-recia/ui": "workspace:^",
+    "@lit/localize-tools": "^0.8.2",
+    "@types/lodash-es": "^4",
+    "@types/node": "^24",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "common": "workspace:^",
+    "eslint": "^10.8.0",
+    "eslint-plugin-format": "^2.0.1",
+    "lodash-es": "^4.18.1",
+    "ress": "^5.0.2",
+    "sass": "^1.102.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "unplugin-dts": "^1.0.3",
+    "vite": "^8.2.0"
+  }
+}
