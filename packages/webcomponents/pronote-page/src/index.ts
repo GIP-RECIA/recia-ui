@@ -29,9 +29,6 @@ import 'tabs'
 
 @localized()
 export class ReciaPronoteSummary extends LitElement {
-  @property({ type: Number, attribute: 'max-elements' })
-  maxElements: number = 5
-
   @property({ type: Number, attribute: 'timeout' })
   timeout: number = 30000
 
