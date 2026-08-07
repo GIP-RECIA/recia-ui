@@ -27,8 +27,6 @@ import { safeHtml } from '../../helpers/safeHtml.ts'
 import styles from '../../style.scss?inline'
 import { titledLinkListTemplate } from '../../templates/titledLinkListTemplate.ts'
 import '../pronoteDiscoverableSection/index.ts'
-import '../../../../tabs/src/components/tablist/index.ts'
-import '../../../../tabs/src/components/tabpanel/index.ts'
 
 @localized()
 export class CahierDeTextes extends LitElement {

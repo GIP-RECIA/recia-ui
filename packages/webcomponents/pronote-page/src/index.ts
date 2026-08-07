@@ -25,8 +25,7 @@ import { name } from '../package.json'
 import { getResponseEleveDto } from './services/apiService'
 import styles from './style.scss?inline'
 import './components/pronoteInformationGrid/index.ts'
-import '../../tabs/src/components/tabpanel/index.ts'
-import '../../tabs/src/components/tablist/index.ts'
+import 'tabs'
 
 @localized()
 export class ReciaPronoteSummary extends LitElement {
