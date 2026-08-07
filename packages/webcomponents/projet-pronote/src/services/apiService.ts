@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import type { SummaryResponse } from '../types/pronoteSummaryType'
+
 import type { ResponseDto } from '../types/pronoteType'
 
 export async function getResponseEleveDto(url: string, timeout: number): Promise<ResponseDto> {
@@ -30,6 +32,35 @@ export async function getResponseEleveDto(url: string, timeout: number): Promise
 
     if (response.ok) {
       const json = (await response.json()) as ResponseDto
+
+      return json
+    }
+    else {
+      throw new Error('Fetch exception: invalid json')
+    }
+  }
+  catch (e: unknown) {
+    if (e instanceof Error) {
+      throw e
+    }
+    throw new Error(String(e))
+  }
+}
+
+export async function getSummary(url: string, timeout: number): Promise<SummaryResponse> {
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+      credentials: 'include',
+      signal: AbortSignal.timeout(timeout),
+      redirect: 'follow',
+    })
+
+    if (response.ok) {
+      const json = (await response.json()) as SummaryResponse
 
       return json
     }

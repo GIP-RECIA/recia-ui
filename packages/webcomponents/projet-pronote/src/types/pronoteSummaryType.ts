@@ -14,5 +14,12 @@
  * limitations under the License.
  */
 
-import './components/pronotePage/index.ts'
-import './components/pronoteShortSummary/index.ts'
+export interface SummaryResponse {
+  profil: 'Parent' | 'Eleve'
+  data: Map<string, SummaryElement[]>
+}
+
+export interface SummaryElement {
+  description: 'devoirs' | 'visites_infirmerie' | 'messages_non_lu' | 'absences_et_retards' | 'punitions_et_sanctions'
+  count: number
+}

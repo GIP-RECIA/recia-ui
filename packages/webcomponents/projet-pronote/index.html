@@ -17,8 +17,17 @@
   </head>
 
   <body class="container">
-    <section></section>
-    <r-pronote-page url-pronote-api="%VITE_API_URL%"> </r-pronote-page>
-    <script></script>
+    <section>
+      <r-pronote-short-summary
+        url-pronote-api="%VITE_API_URL_SUMMARY%"
+        url-redirect="%VITE_REDIRECT_URL%"
+        dnma-event-name="%VITE_DNMA_EVENT_NAME%"
+        fname="%VITE_FNAME%"
+        timeout="30000"
+      />
+    </section>
+    <section>
+      <r-pronote-page url-pronote-api="%VITE_API_URL%"> </r-pronote-page>
+    </section>
   </body>
 </html>
