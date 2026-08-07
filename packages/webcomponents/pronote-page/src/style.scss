@@ -117,7 +117,7 @@ hr {
 
 .section-wrapper {
   margin-top: 12px;
-  &:first {
+  &:first-child {
     margin-top: 0px;
   }
   border-radius: 8px;
