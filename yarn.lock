@@ -6483,6 +6483,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
+    dompurify: "npm:^3.4.12"
     eslint: "npm:^10.8.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"

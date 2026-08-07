@@ -14,4 +14,11 @@
  * limitations under the License.
  */
 
-import './components/pronotePage/index.ts'
+import DOMPurify from 'dompurify'
+
+export function safeHtml(htmlText: string): string {
+  return DOMPurify.sanitize(htmlText, {
+    ALLOWED_TAGS: ['p', 'strong', 'em', 'i', 'br'],
+    ALLOWED_ATTR: ['href', 'target'],
+  })
+}

@@ -14,4 +14,21 @@
  * limitations under the License.
  */
 
-import './components/pronotePage/index.ts'
+import type { TemplateResult } from 'lit'
+import { html } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
+
+export function titledLinkListTemplate(title: string, values: string[] | undefined | null): TemplateResult {
+  if (values === undefined || values === null || values.length === 0) {
+    return html``
+  }
+  return html`
+    <p>${title}</p>
+     <ul>
+      ${repeat(values, value => value, value =>
+          html`
+        <li><a href=${value}>${value}</a></li>
+        `)
+      }
+    </ul>`
+}

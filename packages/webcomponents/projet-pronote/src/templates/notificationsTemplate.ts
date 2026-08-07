@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
-import './components/pronotePage/index.ts'
+import type { TemplateResult } from 'lit'
+import { msg, str } from '@lit/localize'
+import { html, nothing } from 'lit'
+
+export function notificationsTemplate(count: number): TemplateResult | typeof nothing {
+  return count > 0
+    ? html`
+          <span class="badge lg">
+            ${count}
+            <span class="sr-only">${msg(str`nombre`)}</span>
+          </span>
+        `
+    : nothing
+}

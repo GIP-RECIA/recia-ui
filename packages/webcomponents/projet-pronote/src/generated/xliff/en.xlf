@@ -1,6 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
-<body/>
+<body>
+<trans-unit id="s733bfbdb6756e2c7">
+  <source>Impossible de charger le résumé</source>
+</trans-unit>
+<trans-unit id="s2fbba9b9f00e960e">
+  <source>Chargement en cours</source>
+  <target>Loading in progress</target>
+</trans-unit>
+<trans-unit id="s57054b9b09e19cf7">
+  <source>Une erreur est survenue</source>
+  <target>An error has occured</target>
+</trans-unit>
+<trans-unit id="se47db7e3e2502897">
+  <source>Pièces jointes</source>
+  <target>Attachments</target>
+</trans-unit>
+<trans-unit id="s627bd526b3ebe071">
+  <source>Pièce jointe</source>
+  <target>Attachment</target>
+</trans-unit>
+<trans-unit id="sf3bc5f9c5f4792bd">
+  <source>Sites internets</source>
+  <target>Websites</target>
+</trans-unit>
+<trans-unit id="saf0de15e22773fbb">
+  <source>Site internet</source>
+  <target>Website</target>
+</trans-unit>
+<trans-unit id="sdc3a6a9a5e910c77">
+  <source>Travail à faire</source>
+  <target>Homework</target>
+</trans-unit>
+<trans-unit id="sc0c87afaac2a5993">
+  <source>Vie scolaire</source>
+  <target>Student welfare</target>
+</trans-unit>
+<trans-unit id="sf8c8bda43c7310f6">
+  <source>Devoir</source>
+  <target>Assignment</target>
+</trans-unit>
+<trans-unit id="s144b2d6e92dd1b85">
+  <source>Matière : </source>
+  <target>School subject: </target>
+</trans-unit>
+<trans-unit id="sbf919175b64f8669">
+  <source>Date : </source>
+  <target>Date: </target>
+</trans-unit>
+<trans-unit id="s78e1b627faf220e9">
+  <source>Absence (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Absence (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s0d8f71927b41579c">
+  <source>Absences (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Absences (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="sd349d457f8dd0d4c">
+  <source>Du : </source>
+  <targe>From: </targe>
+</trans-unit>
+<trans-unit id="s103c8c996b3995f3">
+  <source>Au : </source>
+  <target>To: </target>
+</trans-unit>
+<trans-unit id="se4d58ffc754278cd">
+  <source>Justifiée : </source>
+  <target>Justified: </target>
+</trans-unit>
+<trans-unit id="s19f7ae1921bbf048">
+  <source>oui</source>7
+  <target>yes</target>
+</trans-unit>
+<trans-unit id="s215adc19258ea97c">
+  <source>non</source>
+  <target>no</target>
+</trans-unit>
+<trans-unit id="s2161c3d29ab7eea2">
+  <source>Motif : </source>
+  <target>Reason: </target>
+</trans-unit>
+<trans-unit id="se60954e8328f902c">
+  <source>Retard (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Lateness (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s72103893f495e32b">
+  <source>Retards (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Lateness (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s3a63cc1bb9cf9ce4">
+  <source>Le : </source>
+</trans-unit>
+<trans-unit id="s8cfa51ac60f451bc">
+  <source>Justifié : </source>
+  <target>Jusitfied: </target>
+</trans-unit>
+<trans-unit id="sec796c8e4611ff36">
+  <source>Passage infirmerie (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Infirmary passage (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s6b9f1ff8e3c903c7">
+  <source>Passages infirmerie (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Infirmary passages (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="sb367768dac7d0038">
+  <source>Punition (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Punishment (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s06c761e2763360df">
+  <source>Punitions (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Punishments (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s95d73ca7e319fd44">
+  <source>Nature : </source>
+  <target>Nature: </target>
+</trans-unit>
+<trans-unit id="s438c0f76ddd9e45a">
+  <source>Circonstances : </source>
+  <target>Circumstances: </target>
+</trans-unit>
+<trans-unit id="sd125ec7f9f6b8515">
+  <source>Sanction (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Sanction (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="sdb8a202571bbea30">
+  <source>Sanctions (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Sanctions (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s995190ca482bff84">
+  <source>Durée : </source>
+  <target>Duration: </target>
+</trans-unit>
+<trans-unit id="sbb0cb6e975201180">
+  <source>Observation (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Observation (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="s3dc7bcb8385f4397">
+  <source>Observations (<x id="0" equiv-text="${count}"/>)</source>
+  <target>Observations (<x id="0" equiv-text="${count}"/>)</target>
+</trans-unit>
+<trans-unit id="sffe3dec66fc8c9a4">
+  <source>Demandeur : </source>
+  <target>From: </target>
+</trans-unit>
+<trans-unit id="sb51a1c9e41641bf5">
+  <source>Observation : </source>
+  <target>Observation: </target>
+</trans-unit>
+<trans-unit id="s07c58e07b48ea83f">
+  <source> :</source>
+  <target>:</target>
+</trans-unit>
+<trans-unit id="secb20b8b64fd17c0">
+  <source>nombre</source>
+  <target>count</target>
+</trans-unit>
+<trans-unit id="s80540ef8d790be23">
+  <source>Aucun travail à faire n'a été assigné lors des 7 derniers jour. Tout travail assigné avant cette période ne sera visible que dans votre espace Pronote.</source>
+  <target>No work has been assigned in the last 7 days. Any work assigned before this period will only be visible in your Pronote account.</target>
+</trans-unit>
+<trans-unit id="s0ce5ca4e2ed658f0">
+  <source>Aucun devoir n'a été noté lors des 7 derniers jours.</source>
+  <target>No assignments have been marked in the last 7 days.</target>
+</trans-unit>
+<trans-unit id="s0c56d55db04927a5">
+  <source>Aucun évènement de vie scolaire n'est survenu lors des 7 derniers jours.</source>
+  <target>No school-related events have occurred in the last 7 days.</target>
+</trans-unit>
+<trans-unit id="s3b608afd9ecabd30">
+  <source>Aucun cours n'a eu lieu lors des 7 derniers jours.</source>
+  <target>No classes have been held in the last 7 days.</target>
+</trans-unit>
+<trans-unit id="seb4f8386bbbb1f57">
+  <source>Cahier de textes</source>
+  <target>Textbook</target>
+</trans-unit>
+<trans-unit id="s83833535acf385e8">
+  <source>Relevé de notes</source>
+  <target>Transcript of grades</target>
+</trans-unit>
+</body>
 </file>
 </xliff>
