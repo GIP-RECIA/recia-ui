@@ -82,15 +82,15 @@ export class ReciaPronoteSummary extends LitElement {
         return html`<p>${msg('Chargement en cours')}</p>`
       }
       if (this.isError) {
-        return html`<p>${msg('Une erreur est survenue')}</p>`
+        return this.errorTemplate()
       }
     }
 
-    if (this.responseDto === undefined) {
-      return html`<p>${msg('Une erreur est survenue')}</p>`
+    if (this.responseDto === undefined || this.responseDto.eleveDtoList === undefined || this.responseDto.profil === undefined) {
+      return this.errorTemplate()
     }
 
-    if (this.responseDto?.profil === 'Eleve' || (this.responseDto?.profil === 'Parent' && this.responseDto.eleveDtoList.length === 1)) {
+    if ((this.responseDto.profil === 'Eleve' || this.responseDto.profil === 'Parent') && this.responseDto.eleveDtoList.length === 1) {
       return html`
         <r-pronote-information-grid
         .eleveDto=${this.responseDto?.eleveDtoList[0]}>
@@ -98,6 +98,10 @@ export class ReciaPronoteSummary extends LitElement {
         `
     }
     else {
+      if (this.responseDto.eleveDtoList.some(x => x.prenom === undefined)) {
+        this.errorTemplate()
+      }
+
       const keys: (string | undefined)[] | undefined = this.responseDto.eleveDtoList.map(x => x.prenom?.replace(/\$.+/, ''))
 
       return html`
@@ -128,8 +132,10 @@ export class ReciaPronoteSummary extends LitElement {
 
       `
     }
+  }
 
-    return html``
+  errorTemplate(): TemplateResult {
+    return html`<p>${msg('Une erreur est survenue')}</p>`
   }
 
   static styles = css`${unsafeCSS(styles)}`
