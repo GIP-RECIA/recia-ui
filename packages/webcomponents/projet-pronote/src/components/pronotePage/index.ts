@@ -104,6 +104,7 @@ export class PronotePage extends LitElement {
       const keys: (string | undefined)[] | undefined = this.responseDto.eleveDtoList.map(x => x.prenom?.replace(/\$.+/, ''))
 
       return html`
+      <div>
        <r-tablist
         id-prefix="${this.prefixChildrenPannel}"
         .tabs='${keys}'
@@ -127,6 +128,7 @@ export class PronotePage extends LitElement {
           `
         })
       }
+    </div>
 
       `
     }
