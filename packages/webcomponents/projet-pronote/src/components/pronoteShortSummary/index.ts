@@ -23,12 +23,11 @@ import { css, html, LitElement, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
-import { ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { TabPanelHandler } from '../../handlers/tabPanelHandler'
 import { getSummary } from '../../services/apiService'
 import styles from '../../style.scss?inline'
 import { getIconWithStyle } from '../../utils/fontawesomeUtils'
+import 'tabs'
 
 @localized()
 export class ReciaPronoteShortSummary extends LitElement {
@@ -67,11 +66,10 @@ export class ReciaPronoteShortSummary extends LitElement {
 
   errorMessage: string = msg('Impossible de charger le résumé')
 
-  tabPannelHandler: TabPanelHandler
+  prefixChildrenPannel = 'shortSummaryTabPanel'
 
   constructor() {
     super()
-    this.tabPannelHandler = new TabPanelHandler('child-selector-id-', 'tabpanel-children-', () => this.requestUpdate())
     updateWhenLocaleChanges(this)
   }
 
@@ -197,69 +195,45 @@ export class ReciaPronoteShortSummary extends LitElement {
     }
   }
 
-  parentContent(): TemplateResult[] {
-    const elements: TemplateResult[] = []
-
-    if (this.summaries?.size === 1) {
-      elements.push(html`<div>${this.studentContent(this.summaries.keys().next().value)}</div>`)
-      return elements
+  parentContent(): TemplateResult {
+    if (this.summaries === undefined) {
+      return html`
+        <div>
+          ${this.errorMessage}
+        </div>
+      `
     }
 
-    type Entry = [string, SummaryElement[]]
-    const entries: Entry[] = [
-      ...(this.summaries ?? new Map<string, SummaryElement[]>()),
-    ]
+    if (this.summaries.size === 1) {
+      return html`<div>${this.studentContent(this.summaries.keys().next().value)}</div>`
+    }
 
-    elements.push(html`<div class="tab-btn-wrapper">
-      ${repeat<Entry>(
-        entries,
-        ([key]) => key,
-        ([key, _value], index): TemplateResult => {
+    const keys: (string | undefined)[] | undefined = Array.from(this.summaries.keys()).map(x => x.replace(/\$.+/, ''))
+
+    return html`
+       <r-tablist
+        id-prefix="${this.prefixChildrenPannel}"
+        .tabs='${keys}'
+        active-tab="0"
+        switch-tabpanel
+      ></r-tablist>
+
+      ${
+        repeat(this.summaries.entries(), ([key]) => key, ([key, _value], index) => {
           return html`
-      <button
-       id="${this.tabPannelHandler.getButtonId(index)}"
-       role="tab"
-       aria-selected=${this.tabPannelHandler.getAriaSelected(index)}
-       aria-controls="${this.tabPannelHandler.getAriaControl(index)}"
-       @keydown="${this.tabPannelHandler.onKeydown}"
-       @click="${() => this.tabPannelHandler.setSelected(index)}"
-       tabindex="${this.tabPannelHandler.getTabIndex(index)}"
-       ${ref((el: Element | undefined) => {
-          if (el instanceof HTMLButtonElement) {
-            this.tabPannelHandler.addButton(el, index)
-          }
-        })}
-       class="${this.tabPannelHandler.getAriaSelected(index) ? 'active tag' : 'tag'}"
-       >
-        ${key.replace(/\$.+/, '')}
-      </button>
-    `
-        },
-      ) as unknown as TemplateResult}
-    </div>`)
+          <r-tabpanel
+        id-prefix="${this.prefixChildrenPannel}"
+        index="${index}"
+        ?active="${index === 0}"
+      >
+       ${this.studentContent(key)}
+    </r-tabpanel>
+    </div>
+          `
+        })
+      }
 
-    elements.push(html`
-      <div>
-        ${repeat<Entry>(
-          entries,
-          ([key]) => key,
-          ([key, _value], index): TemplateResult => {
-            return html`
-      <div
-      id="${this.tabPannelHandler.getPanelId(index)}"
-      role="tabpanel"
-      tabindex="${this.tabPannelHandler.getTabIndex(index)}"
-      class="${!this.tabPannelHandler.getAriaSelected(index) ? 'is-hidden tabpanel' : 'tabpanel'}"
-      aria-labelledby="${this.tabPannelHandler.getButtonId(index)}"
-
-       >
-        ${this.studentContent(key)}
-      </div>
-    `
-          },
-        ) as unknown as TemplateResult}
-      </div>`)
-    return elements
+      `
   }
 
   studentContent(key: string = 'default'): TemplateResult[] {
