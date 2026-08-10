@@ -31,7 +31,6 @@ import {
   $infoEtabData,
   $searchQueryString,
   $settings,
-  $userInfo,
   $userMenu,
 } from '../../stores/index.ts'
 import { UserMenuItem } from '../../types/index.ts'
@@ -47,7 +46,7 @@ import '../info-etab/dropdown-info/index.ts'
 @useStores($infoEtabData)
 @useStores($searchQueryString)
 @useStores($settings)
-@useStores($userInfo)
+@useStores($userMenu)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
