@@ -108,9 +108,10 @@ const $searchQueryString = atom<string>('')
 
 const $selectedCategory = atom<string>(defaultFilterKey)
 
-const $authenticated: ReadableAtom<boolean> = batched($soffit, (newValue) => {
-  return newValue?.authenticated ?? false
-})
+const $authenticated: ReadableAtom<boolean> = batched(
+  [$soffit],
+  newValue => newValue?.authenticated ?? false,
+)
 
 const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
   [$userInfo, $settings, $organizations],
