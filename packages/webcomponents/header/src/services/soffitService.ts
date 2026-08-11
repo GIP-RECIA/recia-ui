@@ -17,11 +17,13 @@
 import type { Response } from '@uportal/open-id-connect'
 import type { Soffit } from '../types/index.ts'
 import oidc from '@uportal/open-id-connect'
-import { updateSoffit } from '../stores/index.ts'
+import UserActionService from './userActionService.ts'
 
 export default class SoffitService {
   static loading: boolean = false
-  static expireTime: number = 0
+  static timeout: ReturnType<typeof setTimeout> | null = null
+  static timeoutDefault: number = 60000
+  static timeoutDelay: number = SoffitService.timeoutDefault
 
   static async get(
     userInfoApiUrl: string,
@@ -31,7 +33,10 @@ export default class SoffitService {
       const response: Response = await oidc({ userInfoApiUrl })
       const { encoded, decoded } = response
 
-      SoffitService.expireTime = decoded.exp - 5
+      const timeout = (decoded.exp - decoded.iat - 5) * 1000
+      SoffitService.timeoutDelay = timeout > 0
+        ? timeout
+        : SoffitService.timeoutDefault
       SoffitService.loading = false
 
       return {
@@ -47,10 +52,22 @@ export default class SoffitService {
     }
   }
 
-  static async renew(): Promise<void> {
-    const currentTime = Math.ceil(Date.now() / 1000)
-    if (!SoffitService.loading && currentTime >= SoffitService.expireTime) {
-      await updateSoffit()
-    }
+  static renew(update: () => Promise<void>): void {
+    if (SoffitService.timeout)
+      clearTimeout(SoffitService.timeout)
+    SoffitService.timeout = setTimeout(
+      () => {
+        if (
+          UserActionService.hasUserAction
+          && !SoffitService.loading
+        ) {
+          update()
+        }
+        else {
+          SoffitService.timeout = null
+        }
+      },
+      SoffitService.timeoutDelay,
+    )
   }
 }

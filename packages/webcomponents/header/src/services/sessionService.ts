@@ -15,15 +15,18 @@
  */
 
 import type { Session, SessionApiResponse } from '../types/index.ts'
-import { $settings, updateSoffit } from '../stores/index.ts'
-import { getDomainLink } from '../utils/linkUtils.ts'
+import UserActionService from './userActionService.ts'
 
 export default class SessionService {
-  static timeout: number = 300000
+  static loading: boolean = false
+  static timeout: ReturnType<typeof setTimeout> | null = null
+  static timeoutDefault: number = 60000
+  static timeoutDelay: number = SessionService.timeoutDefault
 
   static async get(
     sessionApiUrl: string,
   ): Promise<Session | undefined> {
+    SessionService.loading = true
     try {
       const response = await fetch(sessionApiUrl, {
         method: 'GET',
@@ -42,7 +45,11 @@ export default class SessionService {
 
       const { sessionKey, timeoutMS } = data.person
 
-      SessionService.timeout = timeoutMS - 10000
+      const timeout = timeoutMS - 5000
+      SessionService.timeoutDelay = timeout > 0
+        ? timeout
+        : SessionService.timeoutDefault
+      SessionService.loading = false
 
       return {
         key: sessionKey,
@@ -51,18 +58,28 @@ export default class SessionService {
       }
     }
     catch (err) {
+      SessionService.loading = false
       console.error(err, sessionApiUrl)
       return undefined
     }
   }
 
-  static async renew(): Promise<void> {
-    const { sessionApiUrl } = $settings.get()
-    if (!sessionApiUrl)
-      return
-
-    const session = await SessionService.get(getDomainLink(sessionApiUrl))
-    if (!session?.isConnected)
-      updateSoffit()
+  static renew(update: () => Promise<void>): void {
+    if (SessionService.timeout)
+      clearTimeout(SessionService.timeout)
+    SessionService.timeout = setTimeout(
+      () => {
+        if (
+          UserActionService.hasUserAction
+          && !SessionService.loading
+        ) {
+          update()
+        }
+        else {
+          SessionService.timeout = null
+        }
+      },
+      SessionService.timeoutDelay,
+    )
   }
 }

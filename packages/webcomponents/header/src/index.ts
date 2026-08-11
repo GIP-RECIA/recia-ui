@@ -38,12 +38,10 @@ import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { styleMap } from 'lit/directives/style-map.js'
-import { debounce, throttle } from 'lodash-es'
 import { name } from '../package.json'
 import injectedStyle from './assets/css/injectedStyle.css?inline'
 import langHelper from './helpers/langHelper.ts'
-import SessionService from './services/sessionService.ts'
-import SoffitService from './services/soffitService.ts'
+import UserActionService from './services/userActionService.ts'
 import {
   $authenticated,
   $debug,
@@ -71,7 +69,12 @@ import './components/info-etab/bottom-sheet/index.ts'
 import './components/service-info/bottom-sheet/index.ts'
 import 'regenerator-runtime/runtime.js'
 
-const listenEvents: string[] = ['mousemove', 'click', 'keypress']
+const listenEvents: string[] = [
+  'mousemove',
+  'click',
+  'keydown',
+  'visibilitychange',
+]
 
 const settingsPropsKeys = [
   'messages',
@@ -320,7 +323,10 @@ export class ReciaHeader extends LitElement {
     injectStyle(componentName(name), injectedStyle)
     addScrollbarWidthListeners()
     listenEvents.forEach(event =>
-      document.addEventListener(event, this.handleUserAction.bind(this)),
+      document.addEventListener(
+        event,
+        UserActionService.userAction.bind(this),
+      ),
     )
   }
 
@@ -328,7 +334,10 @@ export class ReciaHeader extends LitElement {
     super.disconnectedCallback()
     removeScrollbarWidthListeners()
     listenEvents.forEach(event =>
-      document.removeEventListener(event, this.handleUserAction.bind(this)),
+      document.removeEventListener(
+        event,
+        UserActionService.userAction.bind(this),
+      ),
     )
   }
 
@@ -357,19 +366,6 @@ export class ReciaHeader extends LitElement {
         this.removeEventListener('update-soffit', updateSoffit)
     })
   }
-
-  handleUserAction(): void {
-    if (!$authenticated.value)
-      return
-
-    this.debounceRenewToken()
-    if (!this.sessionRenewDisable)
-      this.throttleRenewSession()
-  }
-
-  debounceRenewToken = debounce(SoffitService.renew.bind(this), 500)
-
-  throttleRenewSession = throttle(SessionService.renew.bind(this), SessionService.timeout)
 
   toggleDrawer(e: CustomEvent): void {
     const { isExpanded } = e.detail

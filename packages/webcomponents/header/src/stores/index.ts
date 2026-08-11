@@ -37,6 +37,7 @@ import type {
   UserMenuConfig,
 } from '../types/index.ts'
 import { msg, str } from '@lit/localize'
+import { throttle } from 'lodash-es'
 import { matchSorter } from 'match-sorter'
 import { atom, batched } from 'nanostores'
 import { defaultFilterKey } from '../config.ts'
@@ -47,6 +48,7 @@ import MediacentreService from '../services/mediacentreService.ts'
 import OrganizationService from '../services/organizationService.ts'
 import scriptLoaderService from '../services/scriptLoaderService.ts'
 import ServicesService from '../services/servicesService.ts'
+import SessionService from '../services/sessionService.ts'
 import SoffitService from '../services/soffitService.ts'
 import TemplateService from '../services/templateService.ts'
 import UserInfoService from '../services/userInfoService.ts'
@@ -439,6 +441,8 @@ $settings.listen(onDiff((diffs) => {
     DnmaService.init(diffs.get('dnmaUrl') as string | undefined, fname)
   if (diffs.has('scripts'))
     scriptLoaderService.load(diffs.get('scripts') as ScriptLoad[] | undefined)
+  if (diffs.has('sessionApiUrl'))
+    updateSession()
 }))
 
 $soffit.listen(onDiff((diffs) => {
@@ -568,15 +572,20 @@ async function updateSoffit(): Promise<void> {
     return
 
   let response = await SoffitService.get(getDomainLink(userInfoApiUrl))
-  if (response && !response.authenticated) {
-    if (casUrl && signInUrl) {
-      await fetch(getDomainLink(casUrl) + getDomainLink(signInUrl), {
-        method: 'GET',
-        mode: 'no-cors',
-        credentials: 'include',
-      }).then(async () => {
-        response = await SoffitService.get(getDomainLink(userInfoApiUrl))
-      })
+  if (response) {
+    if (!response.authenticated) {
+      if (casUrl && signInUrl) {
+        await fetch(getDomainLink(casUrl) + getDomainLink(signInUrl), {
+          method: 'GET',
+          mode: 'no-cors',
+          credentials: 'include',
+        }).then(async () => {
+          response = await SoffitService.get(getDomainLink(userInfoApiUrl))
+        })
+      }
+    }
+    else {
+      SoffitService.renew(updateSoffit)
     }
   }
 
@@ -784,6 +793,23 @@ async function removeFavorite(id: number): Promise<void> {
   }
 }
 
+async function updateSession(): Promise<void> {
+  const { sessionApiUrl, sessionRenewDisable } = $settings.get()
+  if (!sessionApiUrl || !!sessionRenewDisable)
+    return
+
+  const response = await SessionService.get(getDomainLink(sessionApiUrl))
+  if (response?.isConnected)
+    SessionService.renew(updateSession)
+}
+
+const renewSoffitAndSession = throttle(() => {
+  if (!SoffitService.timeout)
+    updateSoffit()
+  if (!SessionService.timeout)
+    updateSession()
+}, 5000)
+
 export {
   $authenticated,
   $baseServicesLoad,
@@ -806,9 +832,11 @@ export {
   $userMenu,
   addFavorite,
   removeFavorite,
+  renewSoffitAndSession,
   updateFavoritesFromFavorites,
   updateMediacentreFavorites,
   updateServices,
+  updateSession,
   updateSettings,
   updateSoffit,
 }
