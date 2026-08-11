@@ -32,6 +32,10 @@ h4 {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  &[aria-expanded='true'] {
+    margin-bottom: 12px;
+  }
   // justify-content: space-between;
 }
 
@@ -103,6 +107,18 @@ hr {
   max-height: 40vh;
 }
 
+.resume-content,
+.taf-content,
+.devoirs-content,
+.vie-scolaire-content {
+  padding: 12px;
+  &:focus-visible {
+    outline: 2px dotted var(--#{$prefix}system-blue);
+    outline-offset: 0px;
+    border-radius: 10px;
+  }
+}
+
 .vie-scolaire-content {
   height: fit-content;
   overflow-y: scroll;
@@ -116,7 +132,6 @@ hr {
 }
 
 .section-wrapper {
-  margin-top: 12px;
   &:first-child {
     margin-top: 0px;
   }
@@ -172,6 +187,12 @@ hr {
       display: unset;
     }
   }
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
 @media (width >= map.get($grid-breakpoints, lg)) {
@@ -243,7 +264,7 @@ hr {
   height: 1.5em;
   display: grid;
   grid-template-columns: 20px 1fr;
-  gap: 8px;
+  gap: 12px;
   &.loading {
     &:first-child {
       border-radius: 8px 8px 0 0;
@@ -340,4 +361,8 @@ hr {
   flex-direction: row;
   gap: 12px;
   padding-bottom: 12px;
+}
+.r-tablist {
+  margin-bottom: 12px !important;
+  display: block;
 }

@@ -71,6 +71,8 @@ export class TravailAFaire extends LitElement {
       >
 
       <r-tablist
+              class="r-tablist"
+
         id-prefix="${this.tabPannelPrefixTravailAFaire}"
         .tabs='${sortedDates.map(x => formatter.format(dateMap.get(x)))}'
         active-tab="0"

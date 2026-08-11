@@ -212,6 +212,7 @@ export class ReciaPronoteSummary extends LitElement {
 
     return html`
        <r-tablist
+        class="r-tablist"
         id-prefix="${this.prefixChildrenPannel}"
         .tabs='${keys}'
         active-tab="0"

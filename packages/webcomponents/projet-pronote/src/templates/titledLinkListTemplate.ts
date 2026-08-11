@@ -27,7 +27,7 @@ export function titledLinkListTemplate(title: string, values: string[] | undefin
      <ul>
       ${repeat(values, value => value, value =>
           html`
-        <li><a href=${value}>${value}</a></li>
+        <li><a  class="btn-terti ary" href=${value}>${value}</a></li>
         `)
       }
     </ul>`

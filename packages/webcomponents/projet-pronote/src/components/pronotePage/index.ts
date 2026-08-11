@@ -106,6 +106,7 @@ export class PronotePage extends LitElement {
       return html`
       <div>
        <r-tablist
+        class="r-tablist"
         id-prefix="${this.prefixChildrenPannel}"
         .tabs='${keys}'
         active-tab="0"

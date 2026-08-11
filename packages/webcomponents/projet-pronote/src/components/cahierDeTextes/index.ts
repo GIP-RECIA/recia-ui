@@ -67,6 +67,7 @@ export class CahierDeTextes extends LitElement {
       count=${this.resumeDeCoursDtoList?.length ?? 0}
     >
       <r-tablist
+              class="r-tablist"
         id-prefix="${this.tabPannelPrefixResumeCours}"
         .tabs='${sortedDates.map(x => formatter.format(dateMap.get(x)))}'
         active-tab="0"
