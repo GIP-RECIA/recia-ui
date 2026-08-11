@@ -677,7 +677,7 @@ async function updateServices(forceUpdate: boolean = false): Promise<void> {
   }
 }
 
-async function updateMediadentreFavorites(forceUpdate: boolean = false): Promise<void> {
+async function updateMediacentreFavorites(forceUpdate: boolean = false): Promise<void> {
   const {
     groupsApiUrl,
     mediacentreConfigUrl,
@@ -807,7 +807,7 @@ export {
   addFavorite,
   removeFavorite,
   updateFavoritesFromFavorites,
-  updateMediadentreFavorites,
+  updateMediacentreFavorites,
   updateServices,
   updateSettings,
   updateSoffit,

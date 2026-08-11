@@ -36,7 +36,7 @@ import {
   $favoriteMenu,
   $settings,
   updateFavoritesFromFavorites,
-  updateMediadentreFavorites,
+  updateMediacentreFavorites,
   updateServices,
 } from '../../stores/index.ts'
 import { getSvgIcon } from '../../utils/iconUtils.ts'
@@ -108,14 +108,14 @@ export class ReciaNavigationDrawer extends LitElement {
 
   openFavoriteBottomSheet(_: Event): void {
     updateServices()
-    updateMediadentreFavorites()
+    updateMediacentreFavorites()
     this.closeDrawer()
     this.favoriteBottomSheetRef.value!.dispatchEvent(new CustomEvent('open'))
   }
 
   openFavoriteDropdown(_: CustomEvent): void {
     updateServices()
-    updateMediadentreFavorites()
+    updateMediacentreFavorites()
     this.dispatchEvent(new CustomEvent('toggle-favorite-dropdown', { detail: { show: true } }))
     this.closeDrawer()
   }
