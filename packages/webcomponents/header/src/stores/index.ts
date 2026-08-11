@@ -566,27 +566,38 @@ async function updateTemplate(
   return template
 }
 
-async function updateSoffit(): Promise<void> {
+async function createPortalSession(): Promise<Soffit | undefined> {
   const { signInUrl, casUrl, userInfoApiUrl } = $settings.get()
+  if (!signInUrl || !casUrl || !userInfoApiUrl)
+    return
+
+  const url = getDomainLink(casUrl) + getDomainLink(signInUrl)
+  try {
+    await fetch(url, {
+      method: 'GET',
+      mode: 'no-cors',
+      credentials: 'include',
+    }).then(async () => {
+      return await SoffitService.get(getDomainLink(userInfoApiUrl))
+    })
+  }
+  catch (err) {
+    console.error(err, url)
+    return undefined
+  }
+}
+
+async function updateSoffit(): Promise<void> {
+  const { userInfoApiUrl } = $settings.get()
   if (!userInfoApiUrl)
     return
 
   let response = await SoffitService.get(getDomainLink(userInfoApiUrl))
   if (response) {
-    if (!response.authenticated) {
-      if (casUrl && signInUrl) {
-        await fetch(getDomainLink(casUrl) + getDomainLink(signInUrl), {
-          method: 'GET',
-          mode: 'no-cors',
-          credentials: 'include',
-        }).then(async () => {
-          response = await SoffitService.get(getDomainLink(userInfoApiUrl))
-        })
-      }
-    }
-    else {
+    if (!response.authenticated)
+      response = await createPortalSession()
+    else
       SoffitService.renew(updateSoffit)
-    }
   }
 
   $soffit.set(response)
