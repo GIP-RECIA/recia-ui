@@ -34,8 +34,7 @@ export default class MediacentreService {
 
       const response = await fetch(configUrl, {
         method: 'POST',
-        headers:
-        {
+        headers: {
           'Authorization': token,
           'Content-Type': 'application/json',
         },
@@ -135,11 +134,8 @@ export default class MediacentreService {
     mediacentrePortalFavoriteApiUrlPut: string,
     items: ServiceAndServiceResource[],
   ): Promise<void> {
-    PreferencesService.put(
-      mediacentrePortalFavoriteApiUrlPut,
-      {
-        mediacentreFavorites: items.map(item => item.id),
-      },
-    )
+    PreferencesService.put(mediacentrePortalFavoriteApiUrlPut, {
+      mediacentreFavorites: items.map(item => item.id),
+    })
   }
 }
