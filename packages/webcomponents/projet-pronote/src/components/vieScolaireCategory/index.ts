@@ -37,6 +37,7 @@ export class VieScolaireCategory extends LitElement {
 
   render(): TemplateResult {
     return html`
+   <div class="discoverable-wrapper">
         <button
              class="h3-wrapper"
              aria-expanded="${this.isExpanded}"
@@ -54,6 +55,7 @@ export class VieScolaireCategory extends LitElement {
       <div class="${this.isExpanded ? '' : 'not-expanded-always'}">
         <slot></slot>
       </div>
+    </div>
       `
   }
 

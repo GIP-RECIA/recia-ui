@@ -51,12 +51,14 @@ export class VieScolaire extends LitElement {
       content-classes='vie-scolaire-content'
       count=${this.vieScolaireEventCount() ?? 0}
     >
+    <div class="vie-scolaire-subcategory-wrapper">
         ${this.absences()}
         ${this.retards()}
         ${this.infirmeries()}
         ${this.punitions()}
         ${this.sanctions()}
         ${this.observations()}
+      </div>
     </r-pronote-discoverable-section>
     `
   }
