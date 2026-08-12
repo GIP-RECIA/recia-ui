@@ -23,6 +23,7 @@ import type {
   HeaderProperties,
   InfoEtabData,
   LayoutApiResponse,
+  Notif,
   Organization,
   Organizations,
   ScriptLoad,
@@ -45,6 +46,7 @@ import DnmaService from '../services/dnmaService.ts'
 import FavoritesService from '../services/favoritesService.ts'
 import LayoutService from '../services/layoutService.ts'
 import MediacentreService from '../services/mediacentreService.ts'
+import NotificationService from '../services/notificationService.ts'
 import OrganizationService from '../services/organizationService.ts'
 import scriptLoaderService from '../services/scriptLoaderService.ts'
 import ServicesService from '../services/servicesService.ts'
@@ -110,14 +112,54 @@ const $searchQueryString = atom<string>('')
 
 const $selectedCategory = atom<string>(defaultFilterKey)
 
+const $notifications = atom<Notif[] | undefined>()
+
 const $authenticated: ReadableAtom<boolean> = batched(
   [$soffit],
   newValue => newValue?.authenticated ?? false,
 )
 
+const $unnreadNotifications: ReadableAtom<number> = batched(
+  [$notifications],
+  notifications => (
+    !notifications
+      ? 0
+      : notifications.filter(({ read }) => !read).length
+
+  ),
+)
+
+const $groupedNotifications: ReadableAtom<Map<string, Map<string, Notif[]>>> = batched(
+  [$notifications],
+  (notifications) => {
+    if (!notifications) {
+      return new Map<string, Map<string, Notif[]>>()
+    }
+
+    return notifications.reduce(
+      (days, notif) => {
+        const { createdAt, service } = notif.notification.header.eventHeader
+
+        const day = createdAt.slice(0, 10)
+        if (!days.has(day))
+          days.set(day, new Map())
+
+        const services = days.get(day)!
+        if (!services.has(service))
+          services.set(service, [])
+
+        services.get(service)!.push(notif)
+
+        return days
+      },
+      new Map<string, Map<string, Notif[]>>(),
+    )
+  },
+)
+
 const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
-  [$userInfo, $settings, $organizations],
-  (userInfo, settings, organizations) => {
+  [$userInfo, $settings, $organizations, $unnreadNotifications],
+  (userInfo, settings, organizations, unnreadNotifications) => {
     if (!userInfo || !settings)
       return undefined
 
@@ -173,6 +215,7 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
     return {
       'picture': picture ?? defaultAvatarUrl,
       'display-name': displayName,
+      'notification': unnreadNotifications,
       config,
     }
   },
@@ -443,6 +486,8 @@ $settings.listen(onDiff((diffs) => {
     scriptLoaderService.load(diffs.get('scripts') as ScriptLoad[] | undefined)
   if (diffs.has('sessionApiUrl'))
     updateSession()
+  if (diffs.has('notificationsRefreshDelay'))
+    updateNotifications()
 }))
 
 $soffit.listen(onDiff((diffs) => {
@@ -468,6 +513,7 @@ $userInfo.listen(onDiff((diffs) => {
     $favoritesIds.set(undefined)
     $mediacentreFavoritesLoad.set(LoadingState.UNLOADED)
     $mediacentreFavorites.set(undefined)
+    updateNotifications()
   }
   if (
     diffs.has('sub')
@@ -836,9 +882,109 @@ async function updateSession(): Promise<void> {
   }
 }
 
+async function updateNotifications(): Promise<void> {
+  const {
+    notificationsApiUrl,
+    notificationsRefreshDelay,
+  } = $settings.get()
+  const soffit = $soffit.get()
+  if (
+    notificationsRefreshDelay
+    && notificationsRefreshDelay > 0
+    && notificationsRefreshDelay !== NotificationService.timeoutDelay
+  ) {
+    NotificationService.timeoutDelay = notificationsRefreshDelay
+  }
+  if (!soffit || !notificationsApiUrl)
+    return
+
+  const response = await NotificationService.getAll(
+    soffit,
+    getDomainLink(notificationsApiUrl),
+  )
+  if (response)
+    NotificationService.refresh(updateNotifications)
+
+  $notifications.set(response)
+  if ($debug.get()) {
+    // eslint-disable-next-line no-console
+    console.info('Notifications', response)
+  }
+}
+
+function readNotifications(notifIds: string[]): void {
+  let notifications = $notifications.get()
+  if (!notifications)
+    return
+
+  notifications = notifications.map(
+    (notif) => {
+      return notifIds.includes(notif.notification.header.notificationId)
+        ? { ...notif, read: true }
+        : notif
+    },
+  )
+  $notifications.set(notifications)
+}
+
+function deleteNotifications(notifIds: string[]): void {
+  let notifications = $notifications.get()
+  if (!notifications)
+    return
+
+  notifications = notifications.filter(
+    notif => !notifIds.includes(notif.notification.header.notificationId),
+  )
+  $notifications.set(notifications ?? [])
+}
+
+function getNotifications(
+  day: string,
+  service?: string,
+): Notif[] {
+  const notifications = $notifications.get()
+  if (!notifications)
+    return []
+
+  return notifications
+    .filter((notif) => {
+      const {
+        createdAt,
+        service: notificationService,
+      } = notif.notification.header.eventHeader
+
+      const notificationDay = createdAt.slice(0, 10)
+
+      return (
+        (!day || notificationDay === day)
+        && (!service || notificationService === service)
+      )
+    })
+}
+
+function getNotificationsIds(
+  day: string,
+  service?: string,
+): string[] {
+  const notifications = $notifications.get()
+  if (!notifications)
+    return []
+
+  return getNotifications(day, service)
+    .map(notif => notif.notification.header.notificationId)
+}
+
 const renewSoffitAndSession = throttle(() => {
-  if (!SoffitService.timeout)
-    updateSoffit()
+  if (!SoffitService.timeout) {
+    if (!NotificationService.timeout)
+      updateSoffit().then(() => updateNotifications())
+    else
+      updateSoffit()
+  }
+  else {
+    if (!NotificationService.timeout)
+      updateNotifications()
+  }
   if (!SessionService.timeout)
     updateSession()
 }, 5000)
@@ -852,6 +998,7 @@ export {
   $favoriteMenu,
   $favorites,
   $filteredServices,
+  $groupedNotifications,
   $infoEtabData,
   $organizations,
   $searchQueryString,
@@ -861,13 +1008,18 @@ export {
   $services,
   $settings,
   $soffit,
+  $unnreadNotifications,
   $userInfo,
   $userMenu,
   addFavorite,
+  deleteNotifications,
+  getNotificationsIds,
+  readNotifications,
   removeFavorite,
   renewSoffitAndSession,
   updateFavoritesFromFavorites,
   updateMediacentreFavorites,
+  updateNotifications,
   updateServices,
   updateSession,
   updateSettings,

@@ -16,19 +16,48 @@
 
 import type { PropertyValues, TemplateResult } from 'lit'
 import type { Ref } from 'lit/directives/ref.js'
-import { faBellSlash, faTimes } from '@fortawesome/free-solid-svg-icons'
+import type { Notif } from '../../types/index.ts'
+import {
+  faBellSlash,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str } from '@lit/localize'
+import { useStores } from '@nanostores/lit'
 import { componentName } from 'common/config.ts'
-import { css, html, LitElement, unsafeCSS } from 'lit'
+import {
+  differenceInCalendarDays,
+  format,
+  formatDistanceToNow,
+  intlFormatDistance,
+} from 'date-fns'
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { createRef, ref } from 'lit/directives/ref.js'
+import { repeat } from 'lit/directives/repeat.js'
+import { styleMap } from 'lit/directives/style-map.js'
 import langHelper from '../../helpers/langHelper.ts'
+import NotificationService from '../../services/notificationService.ts'
+import {
+  $groupedNotifications,
+  $services,
+  $settings,
+  $soffit,
+  deleteNotifications,
+  getNotificationsIds,
+} from '../../stores/index.ts'
+import { priorityMap } from '../../types/index.ts'
+import { getCategory } from '../../utils/categoryUtils.ts'
 import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
+import { getSvgIconService } from '../../utils/iconUtils.ts'
+import { getDomainLink } from '../../utils/linkUtils.ts'
 import { setLocale } from '../../utils/localizationUtils.ts'
 import styles from './style.scss?inline'
 
 @localized()
+@useStores($groupedNotifications)
+@useStores($services)
 export class ReciaNotificationDrawer extends LitElement {
   @property({ type: Boolean, attribute: 'expanded' })
   isExpanded: boolean = false
@@ -59,6 +88,11 @@ export class ReciaNotificationDrawer extends LitElement {
       if (this.isExpanded === true) {
         setTimeout(() => {
           this.layoutRef.value?.focus()
+        }, 150)
+      }
+      else {
+        setTimeout(() => {
+          this.layoutRef.value?.scrollTo({ top: 0 })
         }, 150)
       }
     }
@@ -95,8 +129,207 @@ export class ReciaNotificationDrawer extends LitElement {
     this.dispatchEvent(new CustomEvent('close', { detail: { isExpanded: false } }))
   }
 
-  render(): TemplateResult {
+  async delete(
+    notifIds: string[],
+  ): Promise<void> {
+    const { notificationsDeleteApiUrl, notificationsRefreshDelay } = $settings.get()
+    const soffit = $soffit.get()
+
+    if (!soffit || !notificationsDeleteApiUrl || !notificationsRefreshDelay)
+      return
+
+    const response = await NotificationService.action(
+      soffit,
+      notificationsDeleteApiUrl,
+      notifIds,
+    )
+    if (response)
+      deleteNotifications(notifIds)
+  }
+
+  dayTemplate(
+    day: string,
+    services: Map<string, Notif[]>,
+  ): TemplateResult {
+    const isToday = differenceInCalendarDays(day, new Date()) === 0
+
     return html`
+      <li>
+        <h2
+          title="${
+            ifDefined(!isToday ? format(day, 'P') : undefined)
+          }"
+        >
+          ${intlFormatDistance(day, new Date(), { unit: 'day' })}
+        </h2>
+
+        <ul>
+          ${
+            repeat(
+              services,
+              service => service,
+              ([key, value]) => this.serviceTemplate(day, key, value),
+            )
+          }
+        </ul>
+      </li>
+    `
+  }
+
+  serviceTemplate(
+    day: string,
+    service: string,
+    notifications: Notif[],
+  ): TemplateResult {
+    const { notificationsDeleteApiUrl } = $settings.get()
+    const notifIds = getNotificationsIds(day, service)
+    const services = $services.get()
+    const {
+      name,
+      iconUrl,
+      category,
+    } = services?.find(serv => serv.fname === service) ?? {}
+    const { className } = getCategory(category) ?? {}
+    let serviceName: string | undefined
+    if (services)
+      serviceName = name ?? service
+
+    return html`
+      <li>
+        <div class="header${classMap({
+          [className as string]: className !== undefined,
+          skeleton: services === undefined,
+        })}">
+          ${iconUrl ? getSvgIconService(iconUrl) : nothing}
+          <h3>${serviceName}</h3>
+          ${
+            notificationsDeleteApiUrl
+              ? html`
+                  <button
+                    type="button"
+                    aria-label="${
+                      msg(str`Supprimer les notifications ${serviceName} du ${format(day, 'P')}`)
+                    }"
+                    class="btn-secondary circle small"
+                    @click="${(_: Event) => this.delete(notifIds)}"
+                  >
+                    ${getIcon(faTimes)}
+                  </button>
+                `
+              : nothing
+          }
+        </div>
+
+        <ul>
+          ${
+            repeat(
+              notifications,
+              notif => notif.notification.header.notificationId,
+              notif => this.notificationTemplate(notif),
+            )
+          }
+        </ul>
+      </li>
+    `
+  }
+
+  notificationTemplate(
+    notification: Notif,
+  ): TemplateResult {
+    const { notificationsDeleteApiUrl } = $settings.get()
+    const {
+      notification: {
+        content: {
+          link,
+          message,
+          title,
+        },
+        header: {
+          eventHeader: {
+            createdAt,
+            priority,
+          },
+          notificationId,
+        },
+      },
+    } = notification
+    const { color, icon } = priorityMap[priority]
+    const isToday = differenceInCalendarDays(createdAt, new Date()) === 0
+
+    return html`
+      <li class="notif">
+        <div class="header">
+          ${
+            getIconWithStyle(
+              icon,
+              {
+                color,
+              },
+              {
+                icon: true,
+              },
+            )
+          }
+          <h4>
+            ${
+              link
+                ? html`
+                    <a
+                      href="${getDomainLink(link)}"
+                      target="_self"
+                    >
+                      ${title}
+                    </a>
+                  `
+                : title
+            }
+
+          </h4>
+        </div>
+        <p class="message">${message}</p>
+        <p
+          title="${ifDefined(isToday ? format(createdAt, 'p') : undefined)}"
+          class="createdAt"
+        >
+          ${
+            isToday
+              ? formatDistanceToNow(createdAt, { includeSeconds: true })
+              : format(createdAt, 'p')
+          }
+        </p>
+        ${
+          notificationsDeleteApiUrl
+            ? html`
+                <button
+                  type="button"
+                  aria-label="${msg(str`Supprimer la notification - ${title}`)}"
+                  class="btn-secondary circle small"
+                  @click="${(_: Event) => this.delete([notificationId])}"
+                >
+                  ${getIcon(faTimes)}
+                </button>
+              `
+            : nothing
+        }
+      </li>
+    `
+  }
+
+  render(): TemplateResult {
+    const groupedNotifications = $groupedNotifications.get()
+
+    return html`
+      <button
+        type="button"
+        class="btn-secondary circle close"
+        aria-label="${msg(str`Fermer le tiroir de notification`)}"
+        style="${styleMap({
+          display: this.isExpanded ? undefined : 'none',
+        })}"
+        @click="${this.closeDrawer}"
+      >
+        ${getIcon(faTimes)}
+      </button>
       <div
         ${ref(this.layoutRef)}
         id="notification-drawer"
@@ -104,22 +337,31 @@ export class ReciaNotificationDrawer extends LitElement {
         class="${classMap({
           expended: this.isExpanded,
         })}notification-drawer"
+        aria-label="${msg(str`Tiroir de notification`)}"
       >
-        <button
-          type="button"
-          class="btn-tertiary circle close"
-          aria-label="${msg(str`Fermer le tiroir notification`)}"
-          @click="${this.closeDrawer}"
-        >
-          ${getIcon(faTimes)}
-        </button>
-        <div class="empty">
-          ${getIconWithStyle(faBellSlash, undefined, { icon: true })}
-          <span class="text">
-            ${msg(str`Vous n'avez`)}
-            <span class="large">${msg(str`Aucune notification`)}</span>
-          </span>
-        </div>
+        ${
+          groupedNotifications && groupedNotifications.size > 0
+            ? html`
+                <ul>
+                  ${
+                    repeat(
+                      groupedNotifications,
+                      ([key, value]) => `${key}-${value.size}`,
+                      ([key, value]) => this.dayTemplate(key, value),
+                    )
+                  }
+                </ul>
+              `
+            : html`
+                <p class="empty">
+                  ${getIconWithStyle(faBellSlash, undefined, { icon: true })}
+                  <span class="text">
+                    ${msg(str`Vous n'avez`)}
+                    <span class="large">${msg(str`Aucune notification`)}</span>
+                  </span>
+                </p>
+              `
+        }
       </div>
     `
   }

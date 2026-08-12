@@ -40,9 +40,11 @@
 | `org-mail-attribute-name`                 |                   `string`                   |   `false`   |        `undefined`         | Attribut de l'API organisation donnant le mail de l'organisation courante de l'utilisateur                |
 | `org-phone-attribute-name`                |                   `string`                   |   `false`   |        `undefined`         | Attribut de l'API organisation donnant le numéro de téléphone de l'organisation courante de l'utilisateur |
 | `org-website-attribute-name`              |                   `string`                   |   `false`   |        `undefined`         | Attribut de l'API organisation donnant le site web de l'organisation courante de l'utilisateur            |
-| `disable-session-renew`                   |                  `boolean`                   |   `false`   |          `false`           | Désactive le renouvellement des sessions portail                                                          |
 | `portlet-info-api-url`                    |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API portlet du portail                                                                      |
 | `service-info-api-url`                    |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API d'information sur le service                                                            |
+| `notifications-api-url`                   |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API notifications                                                                           |
+| `notifications-delete-api-url`            |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API pour supprimer les notifications                                                        |
+| `notification-refresh-delay`              |                   `string`                   |   `false`   |        `undefined`         | Délais de rafraichissement des notifications                                                              |
 | `mediacentre-config-url`                  |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API Médiacentre donnant la configuration                                                    |
 | `mediacentre-favorite-api-url`            |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API Médiacentre donnant les ressources favorites                                            |
 | `mediacentre-portal-favorite-api-url-get` |                   `string`                   |   `false`   |        `undefined`         | URL/path de l'API get des préférences portail pour le Médiacentre                                         |
@@ -58,6 +60,7 @@
 | `starter`                                 |                  `boolean`                   |   `false`   |          `false`           | Active le bouton "didacticiel" dans le menu utilisateur                                                   |
 | `cache-buster-version`                    |                   `string`                   |   `false`   |        `undefined`         | Version permettant le bypass des caches navigateurs                                                       |
 | `scripts`                                 | [`ScriptLoad[]`](./src/types/scriptTypes.ts) |   `false`   |        `undefined`         | Liste de scripts à charger avec le composant                                                              |
+| `disable-session-renew`                   |                  `boolean`                   |   `false`   |          `false`           | Désactive le renouvellement des sessions portail                                                          |
 | `debug`                                   |                  `boolean`                   |   `false`   |          `false`           | Active le mode debug                                                                                      |
 
 ## Architecture
@@ -80,6 +83,7 @@
   - r-services-layout : [Source](./src/components/services-layout/index.ts) | [Doc](./docs/r-services-layout.md)
     - r-filters : [Source](../filters/src/index.ts) | [Doc](../filters/README.md)
     - r-service : [Source](./src/components/service/index.ts) | [Doc](./docs/r-service.md)
+  - r-notification-drawer: [Source](./src/components/notification-drawer/index.ts) | [Doc](./docs/r-notification-drawer.md)
   - r-service-info-bottom-sheet : [Source](./src/components/service-info/bottom-sheet/index.ts) | [Doc](./docs/r-service-info-bottom-sheet.md)
     - r-bottom-sheet : [Source](../bottom-sheet/src/index.ts) | [Doc](../bottom-sheet/README.md)
     - r-service-info-layout : [Source](./src/components/service-info/layout/index.ts) | [Doc](./docs/r-service-info-layout.md)

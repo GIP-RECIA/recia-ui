@@ -31,6 +31,7 @@ import {
   $infoEtabData,
   $searchQueryString,
   $settings,
+  $unnreadNotifications,
   $userMenu,
 } from '../../stores/index.ts'
 import { UserMenuItem } from '../../types/index.ts'
@@ -47,6 +48,7 @@ import '../info-etab/dropdown-info/index.ts'
 @useStores($searchQueryString)
 @useStores($settings)
 @useStores($userMenu)
+@useStores($unnreadNotifications)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
@@ -77,6 +79,7 @@ export class ReciaPrincipalContainer extends LitElement {
     const infoEtabData = $infoEtabData.get()
     const searchQueryString = $searchQueryString.get()
     const { search, notifications, infoEtab } = $settings.get()
+    const isUnreadNotifications = $unnreadNotifications.get() > 0
     const userMenu = $userMenu.get()
 
     return html`
@@ -193,7 +196,13 @@ export class ReciaPrincipalContainer extends LitElement {
               notifications
                 ? html`
                     <div class="notification">
-                      <div class="notification-dot top right"></div>
+                      <div
+                        class="notification-dot top right"
+                        style="${styleMap({
+                          display: isUnreadNotifications ? undefined : 'none',
+                        })}"
+                      >
+                      </div>
                       <button
                         type="button"
                         class="btn-secondary circle"

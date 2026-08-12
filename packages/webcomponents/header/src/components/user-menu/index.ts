@@ -263,7 +263,8 @@ export class ReciaUserMenu extends LitElement {
         <div
           class="notification-dot top right"
           style="${styleMap({
-            display: this.localConfig.notification !== false
+            display: this.localConfig.notification !== undefined
+              && this.localConfig.notification !== false
               && this.notification
               && this.notification > 0
               ? undefined

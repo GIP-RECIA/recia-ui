@@ -54,6 +54,7 @@
     "bottom-sheet": "workspace:^",
     "common": "workspace:^",
     "concurrently": "^10.0.4",
+    "date-fns": "^4.4.0",
     "eslint": "^10.8.0",
     "eslint-plugin-format": "^2.0.1",
     "filters": "workspace:^",

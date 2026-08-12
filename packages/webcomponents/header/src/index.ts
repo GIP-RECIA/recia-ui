@@ -48,12 +48,14 @@ import {
   $infoEtabData,
   $organizations,
   $settings,
+  updateNotifications,
   updateServices,
   updateSettings,
   updateSoffit,
 } from './stores/index.ts'
 import styles from './style.scss?inline'
 import { UserMenuItem } from './types/index.ts'
+import { setDateFnsLocale } from './utils/date-fnsUtils.ts'
 import { setLocale } from './utils/localizationUtils.ts'
 import {
   addScrollbarWidthListeners,
@@ -110,6 +112,9 @@ const settingsPropsKeys = [
   'portletInfoApiUrl',
   'serviceInfoApiUrl',
   'servicesInfoApiUrl',
+  'notificationsApiUrl',
+  'notificationsDeleteApiUrl',
+  'notificationsRefreshDelay',
   'mediacentreConfigUrl',
   'mediacentreFavoriteApiUrl',
   'mediacentrePortalFavoriteApiUrlGet',
@@ -125,6 +130,7 @@ const settingsPropsKeys = [
   'starter',
   'cacheBusterVersion',
   'scripts',
+  'sessionRenewDisable',
 ] as const satisfies readonly SettingsHeaderProperties[]
 
 @localized()
@@ -226,9 +232,6 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'org-website-attribute-name' })
   orgWebsiteAttributeName?: string
 
-  @property({ type: Boolean, attribute: 'disable-session-renew' })
-  sessionRenewDisable: boolean = false
-
   @property({ type: String, attribute: 'portlet-info-api-url' })
   portletInfoApiUrl?: string
 
@@ -237,6 +240,15 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: String, attribute: 'services-info-api-url' })
   servicesInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'notifications-api-url' })
+  notificationsApiUrl?: string
+
+  @property({ type: String, attribute: 'notifications-delete-api-url' })
+  notificationsDeleteApiUrl?: string
+
+  @property({ type: Number, attribute: 'notification-refresh-delay' })
+  notificationsRefreshDelay: number = 60000
 
   @property({ type: String, attribute: 'mediacentre-config-url' })
   mediacentreConfigUrl?: string
@@ -283,6 +295,9 @@ export class ReciaHeader extends LitElement {
   @property({ type: Array, attribute: 'scripts' })
   scripts?: ScriptLoad[]
 
+  @property({ type: Boolean, attribute: 'disable-session-renew' })
+  sessionRenewDisable: boolean = false
+
   @property({ type: Boolean })
   debug: boolean = false
 
@@ -316,6 +331,7 @@ export class ReciaHeader extends LitElement {
     setLocale(lang)
     langHelper.setLocale(lang)
     this.initDebugEventsListener()
+    setDateFnsLocale()
   }
 
   connectedCallback(): void {
@@ -360,10 +376,14 @@ export class ReciaHeader extends LitElement {
 
   initDebugEventsListener(): void {
     $debug.listen((value) => {
-      if (value === true)
+      if (value === true) {
         this.addEventListener('update-soffit', updateSoffit)
-      else
+        this.addEventListener('update-notifications', updateNotifications)
+      }
+      else {
         this.removeEventListener('update-soffit', updateSoffit)
+        this.removeEventListener('update-notifications', updateNotifications)
+      }
     })
   }
 
@@ -380,6 +400,8 @@ export class ReciaHeader extends LitElement {
     if (!isExpanded === undefined || typeof isExpanded !== 'boolean')
       return
 
+    if (isExpanded)
+      updateServices()
     this.isNotificationDrawerExpanded = isExpanded
   }
 

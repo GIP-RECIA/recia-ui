@@ -39,6 +39,5 @@ export type HeaderProperties = Omit<
 export type SettingsHeaderProperties = Exclude<
   keyof HeaderProperties,
   | 'templateApiPath'
-  | 'sessionRenewDisable'
   | 'debug'
 >

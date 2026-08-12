@@ -16,6 +16,7 @@
 
 // Component tag name prefix
 const prefix = 'r-'
+const cssPrefix = 'recia-'
 
 function componentName(name: string): string {
   return `${prefix}${name}`
@@ -42,5 +43,6 @@ export {
   fileName,
   libName,
   prefix,
+  cssPrefix,
   setDevEnv,
 }

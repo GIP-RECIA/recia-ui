@@ -33,9 +33,9 @@
     </r-header>
 
     <section class="container">
-      <button id="soffit-updater">Soffit updater</button>
-
       <button id="toggle-drawer">Toggle drawer</button>
+      <button id="soffit-updater">Soffit updater</button>
+      <button id="notifications-updater">Notifications updater</button>
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus et aliquam! Neque nam accusamus optio
@@ -186,11 +186,14 @@
 
     <script>
       const header = document.querySelector('r-header')
+      document.querySelector('#toggle-drawer').addEventListener('click', () => {
+        header.toggleAttribute('navigation-drawer-visible')
+      })
       document.querySelector('#soffit-updater').addEventListener('click', () => {
         header.dispatchEvent(new CustomEvent('update-soffit'))
       })
-      document.querySelector('#toggle-drawer').addEventListener('click', () => {
-        header.toggleAttribute('navigation-drawer-visible')
+      document.querySelector('#notifications-updater').addEventListener('click', () => {
+        header.dispatchEvent(new CustomEvent('update-notifications'))
       })
 
       const documentEvents = [
