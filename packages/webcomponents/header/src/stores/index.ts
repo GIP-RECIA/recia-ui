@@ -607,8 +607,14 @@ async function updateSoffit(): Promise<void> {
 
   $soffit.set(response)
   if ($debug.get()) {
+    let complementary: object | undefined
+    if (response) {
+      complementary = {
+        expire: new Date(response.exp * 1000).toLocaleString(),
+      }
+    }
     // eslint-disable-next-line no-console
-    console.info('Soffit', response)
+    console.info('Soffit', response, complementary)
   }
 }
 
@@ -817,6 +823,17 @@ async function updateSession(): Promise<void> {
   const response = await SessionService.get(getDomainLink(sessionApiUrl))
   if (response?.isConnected)
     SessionService.renew(updateSession)
+
+  if ($debug.get()) {
+    let complementary: object | undefined
+    if (response) {
+      complementary = {
+        expire: new Date(Date.now() + response.timeout).toLocaleString(),
+      }
+    }
+    // eslint-disable-next-line no-console
+    console.info('Session', response, complementary)
+  }
 }
 
 const renewSoffitAndSession = throttle(() => {
