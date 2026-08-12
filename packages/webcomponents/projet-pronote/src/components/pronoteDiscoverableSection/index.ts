@@ -44,7 +44,7 @@ export class PronoteDiscoverableSection extends LitElement {
 
   render(): TemplateResult {
     return html`
-    <div>
+    <div class="discoverable-wrapper">
 
     <div class="widescreen">
       <h2 >${this.displayTitle}</h2>
