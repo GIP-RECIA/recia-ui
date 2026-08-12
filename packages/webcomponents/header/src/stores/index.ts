@@ -460,7 +460,7 @@ $soffit.listen(onDiff((diffs) => {
 }))
 
 $userInfo.listen(onDiff((diffs) => {
-  if (diffs.has('currentOrgId')) {
+  if (diffs.has('sub') || diffs.has('currentOrgId')) {
     $baseServicesLoad.set(LoadingState.UNLOADED)
     $baseServices.set(undefined)
     $services.set(undefined)
@@ -469,8 +469,13 @@ $userInfo.listen(onDiff((diffs) => {
     $mediacentreFavoritesLoad.set(LoadingState.UNLOADED)
     $mediacentreFavorites.set(undefined)
   }
-  if (diffs.has('currentOrgId') || diffs.has('orgIds'))
+  if (
+    diffs.has('sub')
+    || diffs.has('currentOrgId')
+    || diffs.has('orgIds')
+  ) {
     updateOrganization()
+  }
 }))
 
 $organizations.listen(onDiff((diffs) => {

@@ -24,9 +24,15 @@ export default class UserInfoService {
     orgIdAttribute: string,
     orgIdsAttribute: string,
   ): UserInfo | undefined {
-    const { name, picture, email } = soffit
+    const {
+      sub,
+      name,
+      picture,
+      email,
+    } = soffit
 
     const userInfo: UserInfo = {
+      sub,
       displayName: name,
       picture,
       email,

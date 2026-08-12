@@ -15,6 +15,7 @@
  */
 
 export interface UserInfo {
+  sub: string
   displayName: string
   picture?: string
   email: string
