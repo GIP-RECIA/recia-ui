@@ -17,7 +17,7 @@ button.drawer-toggle {
   left: 0;
   background-color: var(--#{$prefix}lighter-black);
   color: #fff;
-  z-index: 2;
+  z-index: 3;
   transition:
     background-color 0.15s ease-out,
     gap 0.15s ease-out;
@@ -60,7 +60,7 @@ button.drawer-toggle {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   width: $drawer-width;
   background-color: var(--#{$prefix}lighter-black);
   color: #fff;

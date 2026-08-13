@@ -6,6 +6,10 @@
   position: relative;
   width: fit-content;
 
+  > .notification-dot {
+    z-index: 1;
+  }
+
   > button {
     display: flex;
     align-items: center;
