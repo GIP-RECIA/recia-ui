@@ -42,6 +42,10 @@ export class PronoteDiscoverableSection extends LitElement {
     super()
   }
 
+  pannelId(): string {
+    return `${this.displayTitle?.replaceAll(' ', '-')}-content`
+  }
+
   render(): TemplateResult {
     return html`
     <div class="discoverable-wrapper">
@@ -51,7 +55,7 @@ export class PronoteDiscoverableSection extends LitElement {
       ${notificationsTemplate(this.count)}
     </div>
 
-      <button class="h2-wrapper" aria-expanded="${this.isExpanded}" @click="${() => { this.isExpanded = !this.isExpanded }}" >
+      <button class="h2-wrapper" aria-controls="${this.pannelId()}" aria-expanded="${this.isExpanded}" @click="${() => { this.isExpanded = !this.isExpanded }}" >
         <h2>${this.displayTitle}
       </h2>
         <div class="grow-1"></div>
@@ -65,7 +69,7 @@ export class PronoteDiscoverableSection extends LitElement {
         }
       </button>
 
-      <div class="${`${this.contentClasses} ${this.isExpanded ? '' : 'not-expanded'}`}">
+      <div id=${this.pannelId()} class="${`${this.contentClasses} ${this.isExpanded ? '' : 'not-expanded'}`}">
         <slot></slot>
       </div>
     </div>
