@@ -22,21 +22,26 @@
 
 h4 {
   margin-bottom: 0px;
+  font-size: var(--recia-font-size-sm);
 }
 
 .h2-wrapper {
   h2 {
     margin-bottom: 0px;
+    font-size: var(--recia-font-size-sm);
   }
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
 
-  &[aria-expanded='true'] {
-    margin-bottom: 12px;
-  }
-  // justify-content: space-between;
+  // &[aria-expanded='true'] {
+  //   margin-bottom: 12px;
+  // }
+}
+
+button.h2-wrapper {
+  padding: 16px 12px;
 }
 
 h2 {
@@ -192,7 +197,7 @@ hr {
 .page-content {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 16px;
 }
 
 @media (width >= map.get($grid-breakpoints, lg)) {
@@ -363,7 +368,7 @@ hr {
   padding-bottom: 12px;
 }
 .r-tablist {
-  margin-bottom: 12px !important;
+  margin-bottom: 24px !important;
   display: block;
 }
 
@@ -372,7 +377,7 @@ hr {
 }
 
 .discoverable-wrapper {
-  padding: 8px;
+  //
   border-radius: 10px;
 }
 
@@ -391,4 +396,26 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.link-list-title {
+  text-decoration: underline;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+  &:focus-visible {
+    outline: none;
+    color: var(--#{$prefix}primary);
+  }
+  &:hover {
+    outline: none;
+    color: var(--#{$prefix}primary);
+  }
+}
+
+.folded-indicator {
+  transition: rotate 0.2s ease-in-out;
+  font-size: 16px;
 }

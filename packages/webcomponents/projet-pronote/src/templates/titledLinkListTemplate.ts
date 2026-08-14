@@ -23,7 +23,7 @@ export function titledLinkListTemplate(title: string, values: string[] | undefin
     return html``
   }
   return html`
-    <p>${title}</p>
+    <p class="link-list-title">${title}</p>
      <ul>
       ${repeat(values, value => value, value =>
           html`
