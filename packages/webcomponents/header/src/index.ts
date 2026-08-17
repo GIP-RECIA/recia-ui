@@ -45,6 +45,7 @@ import UserActionService from './services/userActionService.ts'
 import {
   $authenticated,
   $debug,
+  $features,
   $infoEtabData,
   $organizations,
   $settings,
@@ -131,6 +132,9 @@ const settingsPropsKeys = [
   'cacheBusterVersion',
   'scripts',
   'sessionRenewDisable',
+  'disableInfoEtab',
+  'disableSearch',
+  'disableNotifications',
 ] as const satisfies readonly SettingsHeaderProperties[]
 
 @localized()
@@ -138,6 +142,7 @@ const settingsPropsKeys = [
 @useStores($infoEtabData)
 @useStores($organizations)
 @useStores($settings)
+@useStores($features)
 export class ReciaHeader extends LitElement {
   @property({ type: Array })
   messages?: LangRef[]
@@ -297,6 +302,15 @@ export class ReciaHeader extends LitElement {
 
   @property({ type: Boolean, attribute: 'disable-session-renew' })
   sessionRenewDisable: boolean = false
+
+  @property({ type: Boolean, attribute: 'disable-info-etab' })
+  disableInfoEtab: boolean = false
+
+  @property({ type: Boolean, attribute: 'disable-search' })
+  disableSearch: boolean = false
+
+  @property({ type: Boolean, attribute: 'disable-notifications' })
+  disableNotifications: boolean = false
 
   @property({ type: Boolean })
   debug: boolean = false
@@ -471,8 +485,15 @@ export class ReciaHeader extends LitElement {
     const authenticated = $authenticated.get()
     const infoEtabData = $infoEtabData.get()
     const orgName = $organizations.get()?.current.displayName ?? ''
-    const { notifications, serviceInfoApiUrl, portletInfoApiUrl, navigationDrawerVisible } = $settings.get()
-    const isNavigationDrawerVisible = navigationDrawerVisible || this.isServicesLayout || this.isFavoriteDropdown
+    const {
+      serviceInfoApiUrl,
+      portletInfoApiUrl,
+      navigationDrawerVisible,
+    } = $settings.get()
+    const isNavigationDrawerVisible = navigationDrawerVisible
+      || this.isServicesLayout
+      || this.isFavoriteDropdown
+    const { notifications: featNotifications } = $features.get()
 
     return html`
       <div class="header">
@@ -528,7 +549,7 @@ export class ReciaHeader extends LitElement {
                 >
                 </r-services-layout>
                 ${
-                  notifications
+                  featNotifications
                     ? html`
                         <r-notification-drawer
                           ?expanded="${this.isNotificationDrawerExpanded}"

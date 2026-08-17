@@ -20,6 +20,7 @@ import type { ReadableAtom } from 'nanostores'
 import type {
   Category,
   FavoriteSection,
+  HeaderFeatures,
   HeaderProperties,
   InfoEtabData,
   LayoutApiResponse,
@@ -66,24 +67,22 @@ import { onDiff } from '../utils/storeUtils.ts'
 import { alphaSort } from '../utils/stringUtils.ts'
 import { updateTheme } from '../utils/themeUtils.ts'
 
-interface TmpSettings {
-  search: boolean
-  notifications: boolean
-  infoEtab: boolean
-}
-
 interface otherSettings {
   orgIconUrl: string
 }
 
 const $debug = atom<boolean>(false)
 
-const $settings = atom<Partial<HeaderProperties> & Partial<TmpSettings> & Partial<otherSettings>>({
+const $features = atom<HeaderFeatures>({
+  infoEtab: true,
+  search: true,
+  notifications: true,
+})
+
+const $settings = atom<Partial<HeaderProperties> & Partial<otherSettings>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
   cacheBusterVersion: Math.floor(Date.now() / (24 * 60 * 60 * 1000)).toString(),
-  search: true,
-  infoEtab: true,
 })
 
 const $soffit = atom<Soffit | undefined>()
@@ -158,8 +157,20 @@ const $groupedNotifications: ReadableAtom<Map<string, Map<string, Notif[]>>> = b
 )
 
 const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
-  [$userInfo, $settings, $organizations, $unnreadNotifications],
-  (userInfo, settings, organizations, unnreadNotifications) => {
+  [
+    $userInfo,
+    $settings,
+    $organizations,
+    $unnreadNotifications,
+    $features,
+  ],
+  (
+    userInfo,
+    settings,
+    organizations,
+    unnreadNotifications,
+    features,
+  ) => {
     if (!userInfo || !settings)
       return undefined
 
@@ -170,8 +181,13 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
       signOutUrl,
       switchOrgApiUrl,
       switchOrgPortletUrl,
+      starter,
     } = settings
-    const { search, notifications, infoEtab, starter } = settings
+    const {
+      infoEtab: featInfoEtab,
+      search: featSearch,
+      notifications: featNotifications,
+    } = features
     const { current, other } = organizations ?? {}
 
     let changeEtabLink: Link | null | undefined
@@ -185,8 +201,8 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
       changeEtabLink = null
 
     const config: UserMenuConfig = {
-      [UserMenuItem.Search]: search ? undefined : false,
-      [UserMenuItem.Notification]: notifications ? undefined : false,
+      [UserMenuItem.Search]: featSearch ? undefined : false,
+      [UserMenuItem.Notification]: featNotifications ? undefined : false,
       [UserMenuItem.Account]: userInfoPortletUrl
         ? {
             link: {
@@ -195,7 +211,7 @@ const $userMenu: ReadableAtom<Partial<UserMenu> | undefined> = batched(
             },
           }
         : false,
-      [UserMenuItem.InfoEtab]: infoEtab && current ? undefined : false,
+      [UserMenuItem.InfoEtab]: featInfoEtab && current ? undefined : false,
       [UserMenuItem.ChangeEtab]: hasOtherOrgs && other && other.length > 0 && changeEtabLink !== undefined
         ? {
             link: changeEtabLink,
@@ -488,6 +504,7 @@ $settings.listen(onDiff((diffs) => {
     updateSession()
   if (diffs.has('notificationsRefreshDelay'))
     updateNotifications()
+  updateFeatures()
 }))
 
 $soffit.listen(onDiff((diffs) => {
@@ -888,6 +905,9 @@ async function updateNotifications(): Promise<void> {
     notificationsRefreshDelay,
   } = $settings.get()
   const soffit = $soffit.get()
+  const {
+    notifications: featNotifications,
+  } = $features.get()
   if (
     notificationsRefreshDelay
     && notificationsRefreshDelay > 0
@@ -895,7 +915,7 @@ async function updateNotifications(): Promise<void> {
   ) {
     NotificationService.timeoutDelay = notificationsRefreshDelay
   }
-  if (!soffit || !notificationsApiUrl)
+  if (!featNotifications || !soffit || !notificationsApiUrl)
     return
 
   const response = await NotificationService.getAll(
@@ -989,6 +1009,37 @@ const renewSoffitAndSession = throttle(() => {
     updateSession()
 }, 5000)
 
+function updateFeatures() {
+  const {
+    userInfoApiUrl,
+    orgAttributeName,
+    organizationApiUrl,
+    notificationsApiUrl,
+    disableInfoEtab,
+    disableSearch,
+    disableNotifications,
+  } = $settings.get()
+  const features = $features.get()
+  const newFeatures: HeaderFeatures = {
+    infoEtab: !disableInfoEtab
+      && userInfoApiUrl !== undefined
+      && orgAttributeName !== undefined
+      && organizationApiUrl !== undefined,
+    search: !disableSearch,
+    notifications: !disableNotifications
+      && notificationsApiUrl !== undefined,
+  }
+
+  const diffs = difference(newFeatures, features)
+  if (diffs.size > 0) {
+    $features.set(newFeatures)
+    if ($debug.get()) {
+    // eslint-disable-next-line no-console
+      console.info('Features', newFeatures)
+    }
+  }
+}
+
 export {
   $authenticated,
   $baseServicesLoad,
@@ -997,6 +1048,7 @@ export {
   $debug,
   $favoriteMenu,
   $favorites,
+  $features,
   $filteredServices,
   $groupedNotifications,
   $infoEtabData,

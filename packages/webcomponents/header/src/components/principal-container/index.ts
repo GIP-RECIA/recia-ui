@@ -28,6 +28,7 @@ import { spreadAttributes } from '../../directives/spreadAttributesDirective.ts'
 import langHelper from '../../helpers/langHelper.ts'
 import {
   $authenticated,
+  $features,
   $infoEtabData,
   $searchQueryString,
   $settings,
@@ -46,9 +47,9 @@ import '../info-etab/dropdown-info/index.ts'
 @localized()
 @useStores($infoEtabData)
 @useStores($searchQueryString)
-@useStores($settings)
 @useStores($userMenu)
 @useStores($unnreadNotifications)
+@useStores($features)
 export class ReciaPrincipalContainer extends LitElement {
   @property({ type: Boolean, attribute: 'navigation-drawer-visible' })
   isNavigationDrawerVisible: boolean = false
@@ -78,16 +79,20 @@ export class ReciaPrincipalContainer extends LitElement {
   authenticatedTemplate(): TemplateResult {
     const infoEtabData = $infoEtabData.get()
     const searchQueryString = $searchQueryString.get()
-    const { search, notifications, infoEtab } = $settings.get()
     const isUnreadNotifications = $unnreadNotifications.get() > 0
     const userMenu = $userMenu.get()
+    const {
+      infoEtab: featInfoEtab,
+      search: featSearch,
+      notifications: featNotifications,
+    } = $features.get()
 
     return html`
         <div class="principal-container">
           <div class="start">
             <span>${this.name}</span>
             ${
-              infoEtab
+              featInfoEtab
                 ? html`
                     <div class="tooltip-container">
                       <button
@@ -119,7 +124,7 @@ export class ReciaPrincipalContainer extends LitElement {
             }
           </div>
           ${
-            search
+            featSearch
               ? html`
                   <div
                     class="${classMap({
@@ -142,7 +147,7 @@ export class ReciaPrincipalContainer extends LitElement {
           }
           <div class="end">
             ${
-              search
+              featSearch
                 ? html`
                     <div
                       class="search"
@@ -193,7 +198,7 @@ export class ReciaPrincipalContainer extends LitElement {
                 : nothing
             }
             ${
-              notifications
+              featNotifications
                 ? html`
                     <div class="notification">
                       <div

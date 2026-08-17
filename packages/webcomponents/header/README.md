@@ -62,6 +62,9 @@
 | `cache-buster-version`                    |                   `string`                   |   `false`   |        `undefined`         | Version permettant le bypass des caches navigateurs                                                       |
 | `scripts`                                 | [`ScriptLoad[]`](./src/types/scriptTypes.ts) |   `false`   |        `undefined`         | Liste de scripts à charger avec le composant                                                              |
 | `disable-session-renew`                   |                  `boolean`                   |   `false`   |          `false`           | Désactive le renouvellement des sessions portail                                                          |
+| `disable-info-etab`                       |                  `boolean`                   |   `false`   |          `false`           | Désactive la fiche d'information sur l'établissement                                                      |
+| `disable-search`                          |                  `boolean`                   |   `false`   |          `false`           | Désactive la recherche                                                                                    |
+| `disable-notifications`                   |                  `boolean`                   |   `false`   |          `false`           | Désactive le tiroir de notifications                                                                      |
 | `debug`                                   |                  `boolean`                   |   `false`   |          `false`           | Active le mode debug                                                                                      |
 
 ## Architecture

@@ -41,3 +41,9 @@ export type SettingsHeaderProperties = Exclude<
   | 'templateApiPath'
   | 'debug'
 >
+
+export interface HeaderFeatures {
+  infoEtab: boolean
+  search: boolean
+  notifications: boolean
+}
