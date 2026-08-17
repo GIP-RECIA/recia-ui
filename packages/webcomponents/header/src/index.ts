@@ -89,8 +89,9 @@ const settingsPropsKeys = [
   'layoutApiUrl',
   'groupsApiUrl',
   'portletApiUrl',
-  'organizationApiUrl',
   'userInfoApiUrl',
+  'orgAttributeName',
+  'userAllOrgsIdAttributeName',
   'sessionApiUrl',
   'templateApiUrl',
   'signOutUrl',
@@ -99,8 +100,7 @@ const settingsPropsKeys = [
   'userInfoPortletUrl',
   'switchOrgApiUrl',
   'switchOrgPortletUrl',
-  'orgAttributeName',
-  'userAllOrgsIdAttributeName',
+  'organizationApiUrl',
   'orgTypeAttributeName',
   'orgLogoUrlAttributeName',
   'orgPostalCodeAttributeName',
@@ -169,11 +169,14 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'portlet-api-url' })
   portletApiUrl?: string
 
-  @property({ type: String, attribute: 'organization-api-url' })
-  organizationApiUrl?: string
-
   @property({ type: String, attribute: 'user-info-api-url' })
   userInfoApiUrl?: string
+
+  @property({ type: String, attribute: 'user-org-id-attribute-name' })
+  orgAttributeName?: string
+
+  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
+  userAllOrgsIdAttributeName?: string
 
   @property({ type: String, attribute: 'session-api-url' })
   sessionApiUrl?: string
@@ -202,11 +205,8 @@ export class ReciaHeader extends LitElement {
   @property({ type: String, attribute: 'switch-org-portlet-url' })
   switchOrgPortletUrl?: string
 
-  @property({ type: String, attribute: 'user-org-id-attribute-name' })
-  orgAttributeName?: string
-
-  @property({ type: String, attribute: 'user-all-orgs-id-attribute-name' })
-  userAllOrgsIdAttributeName?: string
+  @property({ type: String, attribute: 'organization-api-url' })
+  organizationApiUrl?: string
 
   @property({ type: String, attribute: 'org-type-attribute-name' })
   orgTypeAttributeName?: string
