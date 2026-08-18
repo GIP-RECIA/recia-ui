@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.16.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.15.1...ui-webcomponents/v1.16.0) (2026-08-18)
+
+### Features
+
+* **header:** add expiration information ([83f2b3c](https://github.com/GIP-RECIA/recia-ui/commit/83f2b3cc935351a9db3b781736fdd757256e3f26))
+* **header:** add missing translations ([b4ee89b](https://github.com/GIP-RECIA/recia-ui/commit/b4ee89bcfab923360b414962edb03bd19e0219d9))
+* **header:** add notification event ([7822270](https://github.com/GIP-RECIA/recia-ui/commit/7822270c625e2f32ba71e94d370e6372215877a0))
+* **header:** disable header feature ([26e3fd6](https://github.com/GIP-RECIA/recia-ui/commit/26e3fd69807501ac1d849ebbe97bd74b6c89ce23))
+* **header:** improve store reset ([1792ab8](https://github.com/GIP-RECIA/recia-ui/commit/1792ab86da84891e2c859d2edaddc88fc3e35b2b))
+* **header:** notifications ([b571050](https://github.com/GIP-RECIA/recia-ui/commit/b5710501500cc562e25c7d40b41d0b2455969ae1))
+* **header:** reorder indexes for notifications ([a7bada9](https://github.com/GIP-RECIA/recia-ui/commit/a7bada9dfb78abcb5585916f6621684030be81c9))
+
+### Bug Fixes
+
+* **header:** improve soffit and session refresh before expiration ([8d538c0](https://github.com/GIP-RECIA/recia-ui/commit/8d538c0f4091e4d2b7163087eac47bcea68adfb6))
+* **header:** wrong store usage ([22758c0](https://github.com/GIP-RECIA/recia-ui/commit/22758c0b5acd0c63d212e8155bb688dcac25a028))
 ## [1.15.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.15.0...ui-webcomponents/v1.15.1) (2026-08-05)
 
 ### Features
