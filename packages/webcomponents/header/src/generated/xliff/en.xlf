@@ -242,9 +242,21 @@ Please try reopening this file.</target>
   <source>Aucune notification</source>
   <target>no notification</target>
 </trans-unit>
-<trans-unit id="sdd2761afe5940863">
-  <source>Fermer le tiroir notification</source>
+<trans-unit id="s96cda4b0bdffb7b3">
+  <source>Supprimer les notifications <x id="0" equiv-text="${serviceName}"/> du <x id="1" equiv-text="${format(day, 'P')}"/></source>
+  <target>Delete <x id="0" equiv-text="${serviceName}"/> notifications from <x id="1" equiv-text="${format(day, 'P')}"/></target>
+</trans-unit>
+<trans-unit id="s79d2f10870070403">
+  <source>Supprimer la notification - <x id="0" equiv-text="${title}"/></source>
+  <target>Delete notification - <x id="0" equiv-text="${title}"/></target>
+</trans-unit>
+<trans-unit id="s3c031e6c4c978ff6">
+  <source>Fermer le tiroir de notification</source>
   <target>Close notification drawer</target>
+</trans-unit>
+<trans-unit id="s3ee5c5545dbd01f8">
+  <source>Tiroir de notification</source>
+  <target>Notification drawer</target>
 </trans-unit>
 </body>
 </file>
