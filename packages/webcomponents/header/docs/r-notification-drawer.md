@@ -5,6 +5,8 @@
   - [Évènements](#évènements)
     - [`close`](#close)
       - [Retour](#retour)
+    - [`notification-event`](#notification-event)
+      - [Retour](#retour-1)
 
 ## Propriétés
 
@@ -23,5 +25,18 @@
 ```ts
 detail: {
   isExpanded: boolean
+}
+```
+
+### `notification-event`
+
+Évènement levé dans le document lors du clic sur le lien d'une notification.
+
+#### Retour
+
+```ts
+detail: {
+  event: Event
+  fname: string
 }
 ```

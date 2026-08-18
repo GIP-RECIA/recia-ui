@@ -129,6 +129,17 @@ export class ReciaNotificationDrawer extends LitElement {
     this.dispatchEvent(new CustomEvent('close', { detail: { isExpanded: false } }))
   }
 
+  handleLinkClick(e: Event, fname: string | undefined): void {
+    document.dispatchEvent(new CustomEvent('notification-event', {
+      detail: {
+        event: e,
+        fname,
+      },
+      bubbles: true,
+      composed: true,
+    }))
+  }
+
   async delete(
     notifIds: string[],
   ): Promise<void> {
@@ -185,6 +196,7 @@ export class ReciaNotificationDrawer extends LitElement {
     const notifIds = getNotificationsIds(day, service)
     const services = $services.get()
     const {
+      fname,
       name,
       iconUrl,
       category,
@@ -225,7 +237,7 @@ export class ReciaNotificationDrawer extends LitElement {
             repeat(
               notifications,
               notif => notif.notification.header.notificationId,
-              notif => this.notificationTemplate(notif),
+              notif => this.notificationTemplate(notif, fname),
             )
           }
         </ul>
@@ -235,6 +247,7 @@ export class ReciaNotificationDrawer extends LitElement {
 
   notificationTemplate(
     notification: Notif,
+    fname: string | undefined,
   ): TemplateResult {
     const { notificationsDeleteApiUrl } = $settings.get()
     const {
@@ -277,13 +290,13 @@ export class ReciaNotificationDrawer extends LitElement {
                     <a
                       href="${getDomainLink(link)}"
                       target="_self"
+                      @click="${(e: Event) => this.handleLinkClick(e, fname)}"
                     >
                       ${title}
                     </a>
                   `
                 : title
             }
-
           </h4>
         </div>
         <p class="message">${message}</p>
