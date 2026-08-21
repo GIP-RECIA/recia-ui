@@ -41,7 +41,7 @@ export class TravailAFaire extends LitElement {
   render(): TemplateResult {
     if (this.travailAFaireDtoList === undefined || this.travailAFaireDtoList === null) {
       return html`
-       <h2 class="widescreen">${msg('Vie scolaire')}</h2>
+       <h2 class="widescreen">${msg('Travail à faire')}</h2>
       <div class="h2-wrapper">
         <h2>${msg('Devoir')}</h2>
       </div>
