@@ -62,7 +62,7 @@ export class ReciaPronoteSummary extends LitElement {
   isParent: boolean = false
 
   @state()
-  summaryKey: string = 'default'
+  summaryKey: string = 'DEFAULT'
 
   errorMessage: string = msg('Impossible de charger le résumé')
 
@@ -237,7 +237,7 @@ export class ReciaPronoteSummary extends LitElement {
       `
   }
 
-  studentContent(key: string = 'default'): TemplateResult[] {
+  studentContent(key: string = 'DEFAULT'): TemplateResult[] {
     const summary: SummaryElement[] | undefined = this.summaries?.get(key)
     if (summary && !this.isError) {
       const elements = []
