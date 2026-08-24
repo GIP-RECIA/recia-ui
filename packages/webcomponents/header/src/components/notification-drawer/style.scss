@@ -43,7 +43,7 @@
   flex-direction: column;
   background-color: var(--#{$prefix}body-bg);
   box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
-  overflow-y: auto;
+  overflow: hidden auto;
   clip-path: inset(0 0 0 -32px);
   transform: translateX(320px + 32);
   transition:
@@ -93,7 +93,7 @@
             }
 
             > h3 {
-              flex: 1 0 auto;
+              flex: 1 1 auto;
               margin-bottom: unset;
             }
 
@@ -147,14 +147,15 @@
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                margin-right: 22px;
                 margin-bottom: 8px;
 
                 > .icon {
+                  align-self: flex-start;
                   font-size: var(--#{$prefix}font-size-lg);
                 }
 
                 > h4 {
-                  padding-right: 20px;
                   margin-bottom: unset;
 
                   > a {
@@ -175,6 +176,7 @@
 
               > .message {
                 margin-bottom: 16px;
+                white-space: pre;
               }
 
               > .createdAt {
