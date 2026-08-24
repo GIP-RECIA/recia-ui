@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.17.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.16.0...ui-webcomponents/v1.17.0) (2026-08-24)
+
+### Features
+
+* **header:** add notifications to json server ([1bece71](https://github.com/GIP-RECIA/recia-ui/commit/1bece71d7656619cb78b6766aa6e253a39b1f9c8))
+* **wayf:** remove ElevesParents and update Agri ([7279f0a](https://github.com/GIP-RECIA/recia-ui/commit/7279f0a5320d829443caab65cce2bb3b65e63770))
+
+### Bug Fixes
+
+* **header:** notification refresh if error ([a2c55f6](https://github.com/GIP-RECIA/recia-ui/commit/a2c55f69bb94327211028527c626843c99d935be))
 ## [1.16.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.15.1...ui-webcomponents/v1.16.0) (2026-08-18)
 
 ### Features
