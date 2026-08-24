@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.17.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.17.0...ui-webcomponents/v1.17.1) (2026-08-24)
+
+### Bug Fixes
+
+* **header:** notification x scroll ([334e031](https://github.com/GIP-RECIA/recia-ui/commit/334e031bea07844b6d15553af6bb9829ff26e8da))
 ## [1.17.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.16.0...ui-webcomponents/v1.17.0) (2026-08-24)
 
 ### Features
