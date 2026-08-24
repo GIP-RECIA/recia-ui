@@ -64,7 +64,7 @@
     "nanostores": "^1.4.2",
     "regenerator-runtime": "^0.14.1",
     "ress": "^6.0.0",
-    "sass": "^1.102.0",
+    "sass": "^1.103.1",
     "tabbable": "^6.5.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "unplugin-dts": "^1.0.3",
