@@ -6495,7 +6495,7 @@ __metadata:
     sass: "npm:^1.102.0"
     typescript: "npm:@typescript/typescript6@^6.0.2"
     vite: "npm:^8.2.0"
-    vite-plugin-svg-spritemap: "npm:^2.0.0"
+    vite-plugin-svg-spritemap: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
@@ -7580,9 +7580,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-svg-spritemap@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "vite-plugin-svg-spritemap@npm:2.0.0"
+"vite-plugin-svg-spritemap@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "vite-plugin-svg-spritemap@npm:2.0.1"
   dependencies:
     chokidar: "npm:^5.0.0"
     node-html-parser: "npm:^9.0.1"
@@ -7591,7 +7591,7 @@ __metadata:
     tinyglobby: "npm:^0.2.17"
   peerDependencies:
     vite: ^5 || ^6 || ^7 || ^8
-  checksum: 10/2c7d766352a5de2aab7615fd3cec912dd52b502dc12dd49b9e908cc7d9c3979cc19d17ee7f5fccb6f7a4cd22babbf670664fe168c80282ccf2dbb7c3f7f5dc5c
+  checksum: 10/9a3370a90bf53991daafd40fe267c54b79215aa90dee5d08296558120d1f1b53a88366123da6349c43c3f91ac12be3a065ec79858a4044b9de62516fa3868d43
   languageName: node
   linkType: hard
 
@@ -7706,7 +7706,7 @@ __metadata:
     typescript: "npm:@typescript/typescript6@^6.0.2"
     unplugin-dts: "npm:^1.0.3"
     vite: "npm:^8.2.0"
-    vite-plugin-svg-spritemap: "npm:^2.0.0"
+    vite-plugin-svg-spritemap: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
