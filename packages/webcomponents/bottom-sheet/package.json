@@ -48,7 +48,7 @@
     "eslint": "^10.8.0",
     "eslint-plugin-format": "^2.0.1",
     "lodash-es": "^4.18.1",
-    "ress": "^5.0.2",
+    "ress": "^6.0.0",
     "sass": "^1.102.0",
     "tabbable": "^6.5.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
