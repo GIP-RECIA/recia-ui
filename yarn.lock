@@ -186,7 +186,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^21.2.0, @commitlint/config-conventional@npm:^21.2.2":
+"@commitlint/config-conventional@npm:^21.2.2":
   version: 21.2.2
   resolution: "@commitlint/config-conventional@npm:21.2.2"
   dependencies:
@@ -6534,7 +6534,7 @@ __metadata:
   resolution: "recia-ui@workspace:."
   dependencies:
     "@commitlint/cli": "npm:^21.2.2"
-    "@commitlint/config-conventional": "npm:^21.2.0"
+    "@commitlint/config-conventional": "npm:^21.2.2"
     commit-and-tag-version: "npm:^13.1.2"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^17.3.0"
