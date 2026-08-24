@@ -4277,7 +4277,7 @@ __metadata:
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
     match-sorter: "npm:^8.3.0"
-    nanostores: "npm:^1.4.2"
+    nanostores: "npm:^1.5.2"
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^5.0.2"
     sass: "npm:^1.102.0"
@@ -5846,10 +5846,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanostores@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "nanostores@npm:1.4.2"
-  checksum: 10/548fcefceb755a4806b8da778663e63f4aba296b3fa485f251a70db81e82fcc753bc2f7db16d8b32227915e7412f5987f12e24770c56b436f14ac016fcca4617
+"nanostores@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "nanostores@npm:1.5.2"
+  checksum: 10/f7cc60d3492397a838cdf419184e7b10b4e8529d02c5e742bfba22d4d4b4247baa70e718a13f603d423d6e30af9102d1e37cba19ea8d2e1c3aa821f128f0225c
   languageName: node
   linkType: hard
 
