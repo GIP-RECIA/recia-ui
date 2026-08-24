@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-import { debounce } from 'lodash-es'
 import { $authenticated, renewSoffitAndSession } from '../stores/index.ts'
 
 export default class UserActionService {
   static hasUserAction: boolean = false
-
-  static debounceReset = debounce(
-    () => {
-      UserActionService.hasUserAction = false
-    },
-    120000,
-  )
+  static timeout: ReturnType<typeof setTimeout> | null = null
+  static timeoutDelay: number = 120000
 
   static userAction(e: Event): void {
     const authenticated = $authenticated.get()
@@ -40,10 +34,15 @@ export default class UserActionService {
     }
 
     renewSoffitAndSession()
-    if (UserActionService.hasUserAction)
+    if (UserActionService.timeout)
       return
 
     UserActionService.hasUserAction = true
-    UserActionService.debounceReset()
+    UserActionService.timeout = setTimeout(
+      () => {
+        UserActionService.hasUserAction = false
+      },
+      UserActionService.timeoutDelay,
+    )
   }
 }

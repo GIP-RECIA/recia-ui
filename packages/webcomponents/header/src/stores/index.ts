@@ -922,8 +922,7 @@ async function updateNotifications(): Promise<void> {
     soffit,
     getDomainLink(notificationsApiUrl),
   )
-  if (response)
-    NotificationService.refresh(updateNotifications)
+  NotificationService.refresh(updateNotifications)
 
   $notifications.set(response)
   if ($debug.get()) {
@@ -1073,7 +1072,6 @@ export {
   updateMediacentreFavorites,
   updateNotifications,
   updateServices,
-  updateSession,
   updateSettings,
   updateSoffit,
 }
