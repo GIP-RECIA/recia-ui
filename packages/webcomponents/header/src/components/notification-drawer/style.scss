@@ -151,7 +151,6 @@
                 margin-bottom: 8px;
 
                 > .icon {
-                  align-self: flex-start;
                   font-size: var(--#{$prefix}font-size-lg);
                 }
 
@@ -176,7 +175,8 @@
 
               > .message {
                 margin-bottom: 16px;
-                white-space: pre;
+                word-wrap: break-word;
+                white-space-collapse: break-spaces;
               }
 
               > .createdAt {
