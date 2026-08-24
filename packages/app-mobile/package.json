@@ -25,6 +25,6 @@
     "ress": "^6.0.0",
     "sass": "^1.103.1",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vite": "^8.2.0"
+    "vite": "^8.2.2"
   }
 }

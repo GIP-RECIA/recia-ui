@@ -46,6 +46,6 @@
     "lodash-es": "^4.18.1",
     "regenerator-runtime": "^0.14.1",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vite": "^8.2.0"
+    "vite": "^8.2.2"
   }
 }
