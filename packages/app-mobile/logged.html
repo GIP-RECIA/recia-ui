@@ -25,9 +25,6 @@
     <header></header>
     <main>
       <div class="container">
-        <header>
-          <h1>Bienvenue sur votre ENT, <span id="displayname"></span></h1>
-        </header>
         <r-widgets-wrapper
           localization-uri="/commun/widgets/wrapper/20251217/i18n.json"
           soffit-uri="/portail/api/v5-1/userinfo?claims=private,ENTPersonGARIdentifiant,ESCOUAICourant,ESCOUAI,ENTPersonProfils&amp;groups="
@@ -37,6 +34,7 @@
           adapter-source-uri="/resource-server/webjars/gip-recia__widgets-to-endpoints-adapter/dist/widgets-to-endpoints-adapter.js"
           adapter-config-uri="/commun/widgets/adapter/20251217/adapter-configuration.json"
         >
+          <h1 slot="header">Bienvenue sur votre ENT, <span id="displayname"></span></h1>
         </r-widgets-wrapper>
       </div>
       <div class="container">
