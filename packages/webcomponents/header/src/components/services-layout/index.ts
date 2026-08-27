@@ -151,12 +151,13 @@ export class ReciaServicesLayout extends LitElement {
   skeletonTemplate(): TemplateResult {
     return html`
       <r-filters
+        inert
         loading
         loding-sections="1"
         loding-sections-items="9"
       >
       </r-filters>
-      <ul>
+      <ul inert>
         ${map(range(20), () => html`<li class="skeleton"></li>`)}
       </ul>
     `

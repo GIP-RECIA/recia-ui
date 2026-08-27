@@ -308,7 +308,7 @@ export class ReciaFavoriteLayout extends LitElement {
           <header>
             <h2>${msg(str`Vos favoris`)}</h2>
           </header>
-          <ul>
+          <ul inert>
             ${
               map(
                 range(this.loadingSections ?? 1),
@@ -361,7 +361,7 @@ export class ReciaFavoriteLayout extends LitElement {
                     ${
                       section.loading
                         ? html`
-                            <ul>
+                            <ul inert>
                               ${
                                 map(
                                   range(section.loadingItems ?? 4),

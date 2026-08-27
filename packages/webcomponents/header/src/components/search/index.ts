@@ -207,7 +207,7 @@ export class ReciaSearch extends LitElement {
         <header>
           <span>${section.name}</span>
         </header>
-        <ul>
+        <ul ?inert="${section.loading}">
           ${
             !section.loading
               ? repeat(

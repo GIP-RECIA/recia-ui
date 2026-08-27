@@ -212,8 +212,12 @@ export class ReciaNotificationDrawer extends LitElement {
           [className as string]: className !== undefined,
           skeleton: services === undefined,
         })}">
-          ${iconUrl ? getSvgIconService(iconUrl) : nothing}
-          <h3>${serviceName}</h3>
+          ${
+            iconUrl
+              ? getSvgIconService(iconUrl)
+              : nothing
+          }
+          <h3 ?inert="${services === undefined}">${serviceName}</h3>
           ${
             notificationsDeleteApiUrl
               ? html`

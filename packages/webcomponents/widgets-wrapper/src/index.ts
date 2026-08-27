@@ -426,7 +426,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   skeletonTemplate(): TemplateResult {
     return html`
-        <ul class="widget-tiles">
+        <ul class="widget-tiles" inert>
           ${
             map(
               range(this.widgetMaxCount),
@@ -448,7 +448,7 @@ export class ReciaWidgetsWrapper extends LitElement {
           map(
             range(this.widgetMaxCount - this.widgetToDisplayKeyArray.length),
             () => html`
-              <li>
+              <li inert>
                 <r-widget placeholder>
                 </r-widget>
               </li>
