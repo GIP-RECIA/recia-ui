@@ -19,6 +19,7 @@
     }
 
     > .actions {
+      @include unstyled-list;
       display: flex;
       flex-wrap: wrap;
       flex-grow: 1;

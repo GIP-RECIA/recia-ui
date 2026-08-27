@@ -24,6 +24,7 @@ import { property, state } from 'lit/decorators.js'
 import { map } from 'lit/directives/map.js'
 import { range } from 'lit/directives/range.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { styleMap } from 'lit/directives/style-map.js'
 import { isEqual } from 'lodash-es'
 import { name } from '../package.json'
 import langHelper from './helpers/langHelper.ts'
@@ -195,6 +196,10 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.widgetToDisplayKeyArray[indexOther],
     ]
     this.requestUpdate()
+    const action = index === 1
+      ? 'next'
+      : 'back'
+    this.focusAction(uid, action)
   }
 
   moveWidgetForward(uid: string): void {
@@ -210,6 +215,20 @@ export class ReciaWidgetsWrapper extends LitElement {
       this.widgetToDisplayKeyArray[index],
     ]
     this.requestUpdate()
+    const action = index === this.widgetToDisplayKeyArray.length - 2
+      ? 'back'
+      : 'next'
+    this.focusAction(uid, action)
+  }
+
+  focusAction(uid: string, action: 'back' | 'next' | 'delete') {
+    setTimeout(() => {
+      this.shadowRoot?.querySelector(
+        `r-widget[uid="${uid}"]`,
+      )?.shadowRoot?.querySelector(
+        `.actions > .action-${action} > button`,
+      )?.focus()
+    }, 10)
   }
 
   clickOnGerer(): void {
@@ -226,6 +245,9 @@ export class ReciaWidgetsWrapper extends LitElement {
 
   async clickOnSauvegarder(): Promise<void> {
     this.isEditingWidgetsPrefs = false
+    this.shadowRoot?.querySelector(
+      '.widget-layout > header > .actions > li > button.toogle',
+    )?.focus()
     await FavoriteService.setUserFavoriteWidgets(
       this.putPrefsUri,
       this.widgetToDisplayKeyArray,
@@ -233,7 +255,7 @@ export class ReciaWidgetsWrapper extends LitElement {
     )
   }
 
-  async handleAddWidget(e: CustomEvent): Promise<void> {
+  async handleAddWidget(e: CustomEvent, nb: number): Promise<void> {
     const { key } = e.detail
     if (this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount())
       return
@@ -242,13 +264,31 @@ export class ReciaWidgetsWrapper extends LitElement {
     if (this.widgetToDisplayKeyArray.includes(key))
       return
 
+    if (nb <= 1) {
+      setTimeout(() => {
+        this.shadowRoot?.querySelector(
+          '.widget-layout > header > .actions > li > button.toogle',
+        )?.focus()
+      }, 300)
+    }
+
     const soffit = await getToken(this.soffitUri)
     this.widgetToDisplayKeyArray.push(key)
     this.buildWidget(key, soffit.encoded)
   }
 
   handleRemoveWidget(e: CustomEvent): void {
-    this.widgetToDisplayKeyArray = removeItem(this.widgetToDisplayKeyArray, e.detail.uid)
+    const uid: string = e.detail.uid
+    const index = this.widgetToDisplayKeyArray.indexOf(uid)
+    this.widgetToDisplayKeyArray = removeItem(this.widgetToDisplayKeyArray, uid)
+    if (this.widgetToDisplayKeyArray.length === 0) {
+      this.shadowRoot?.querySelector('.widget-layout > .content > .empty > p')?.focus()
+    }
+    else {
+      const newIndex = index <= this.widgetToDisplayKeyArray.length - 1 ? index : index - 1
+      const newUid = this.widgetToDisplayKeyArray[newIndex]
+      this.focusAction(newUid, 'delete')
+    }
   }
 
   async buildWidget(
@@ -322,23 +362,28 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     return html`
         ${
-          this.widgetToDisplayKeyArray.length === 0 && !this.isEditingWidgetsPrefs
+          this.widgetToDisplayKeyArray.length === 0
             ? html`
                 <div class="empty">
                   ${getIconWithStyle(faInfoCircle, undefined, { icon: true })}
-                  <p>${
-                    msg(str`${msg(str`Vous n'avez`)} aucun widget\nCliquez sur le bouton "${
-                      langHelper.localTranslation(
-                        'buttons.Gerer',
-                        msg(str`Gérer`),
-                      )
-                    }" pour en ajouter de nouveaux`)
+                  <p tabindex="-1">${
+                    this.isEditingWidgetsPrefs
+                      ? msg(str`${msg(str`Vous n'avez`)} aucun widget`)
+                      : msg(str`${msg(str`Vous n'avez`)} aucun widget\nCliquez sur le bouton "${
+                          langHelper.localTranslation(
+                            'buttons.Gerer',
+                            msg(str`Gérer`),
+                          )
+                        }" pour en ajouter de nouveaux`)
                   }</p>
                 </div>
               `
             : nothing
         }
-        <ul class="widget-tiles">
+        <ul
+          ?inert="${this.widgetToDisplayKeyArray.length === 0}"
+          class="widget-tiles"
+        >
           ${
             repeat(
               this.widgetToDisplayKeyArray.map(key => this.widgetDataMap.get(key)).filter(data => data !== undefined),
@@ -423,69 +468,72 @@ export class ReciaWidgetsWrapper extends LitElement {
         <header>
           <slot name="header"></slot>
           <h2 class="sr-only">${msg(str`Accès rapides`)}</h2>
-          <div class="actions">
-            ${
-              !this.isEditingWidgetsPrefs
-                ? html`
-                    <button
-                      type="button"
-                      class="btn-secondary small"
-                      ?disabled="${
-                        Array.from(this.widgetDataMap.values()).some(x => x.loading)
-                        || this.loading
-                      }"
-                      @click="${this.clickOnGerer}"
-                    >
-                      ${
-                        langHelper.localTranslation(
-                          'buttons.Gerer',
-                          msg(str`Gérer`),
-                        )
-                      }
-                      ${getIcon(faGear)}
-                    </button>
-                  `
-                : html`
-                    <r-dropdown-add
-                      .items="${nonUsed}"
-                      ?disabled="${
-                        this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
-                        || nonUsed.length === 0
-                      }"
-                      @item-click="${this.handleAddWidget}"
-                    >
-                    </r-dropdown-add>
-                    <button
-                      type="button"
-                      class="btn-secondary small"
-                      @click="${this.clickOnAnnuler}"
-                    >
-                      ${
-                        langHelper.localTranslation(
+          <ul class="actions">
+            <li
+              style="${styleMap({
+                display: this.isEditingWidgetsPrefs ? undefined : 'none',
+              })}"
+            >
+              <r-dropdown-add
+                .items="${nonUsed}"
+                ?disabled="${
+                  this.widgetToDisplayKeyArray.length >= this.getMaxWidgetsCount()
+                  || nonUsed.length === 0
+                }"
+
+                @item-click="${(e: CustomEvent) => this.handleAddWidget(e, nonUsed.length)}"
+              >
+              </r-dropdown-add>
+            </li>
+            <li>
+              <button
+                  type="button"
+                  class="btn-secondary small toogle"
+                  ?disabled="${
+                    Array.from(this.widgetDataMap.values()).some(x => x.loading)
+                    || this.loading
+                  }"
+                  @click="${
+                    this.isEditingWidgetsPrefs
+                      ? this.clickOnAnnuler
+                      : this.clickOnGerer
+                  }"
+                >
+                  ${
+                    this.isEditingWidgetsPrefs
+                      ? langHelper.localTranslation(
                           'buttons.Annuler',
                           msg(str`Annuler`),
                         )
-                      }
-                      ${getIcon(faXmark)}
-                    </button>
-                    <button
-                      type="button"
-                      class="btn-secondary small"
-                      ?disabled="${!this.canSave()}"
-                      title="Save"
-                      @click="${this.clickOnSauvegarder}"
-                    >
-                      ${
-                        langHelper.localTranslation(
-                          'buttons.Sauvegarder',
-                          msg(str`Enregistrer`),
+                      : langHelper.localTranslation(
+                          'buttons.Gerer',
+                          msg(str`Gérer`),
                         )
-                      }
-                      ${getIcon(faSave)}
-                    </button>
-                  `
-            }
-          </div>
+                  }
+                  ${getIcon(this.isEditingWidgetsPrefs ? faXmark : faGear)}
+                </button>
+            </li>
+            <li
+              style="${styleMap({
+                display: this.isEditingWidgetsPrefs ? undefined : 'none',
+              })}"
+            >
+              <button
+                type="button"
+                class="btn-secondary small save"
+                ?disabled="${!this.canSave()}"
+                @click="${this.clickOnSauvegarder}"
+              >
+                ${
+                  langHelper.localTranslation(
+                    'buttons.Sauvegarder',
+                    msg(str`Enregistrer`),
+                  )
+                }
+                ${getIcon(faSave)}
+              </button>
+            </li>
+          </ul>
         </header>
         <div class="content">
           ${this.contentTemplate()}

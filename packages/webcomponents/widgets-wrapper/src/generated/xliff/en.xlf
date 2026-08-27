@@ -68,6 +68,10 @@ Cliquez sur le bouton "<x id="1" equiv-text="${langHelper.localTranslation('butt
   <target><x id="0" equiv-text="${msg(str `Vous n'avez`)}"/> widget
 Click on "<x id="1" equiv-text="${langHelper.localTranslation('buttons.Gerer', msg(str `Gérer`))}"/>" button to add new ones</target>
 </trans-unit>
+<trans-unit id="s428a8f8c2872b52f">
+  <source><x id="0" equiv-text="${msg(str `Vous n'avez`)}"/> aucun widget</source>
+  <target><x id="0" equiv-text="${msg(str `Vous n'avez`)}"/> aucun widget</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

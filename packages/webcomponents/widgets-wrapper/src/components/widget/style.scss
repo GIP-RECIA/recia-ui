@@ -166,7 +166,6 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
   > .menu {
     overflow: hidden;
     border-radius: 0 0 10px 10px;
-    animation: widget-slide-down 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 
     > * {
       height: $menu-height;
@@ -386,7 +385,6 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
 
     > .menu {
       display: block !important;
-      animation: none;
 
       > * {
         height: $menu-height-md;

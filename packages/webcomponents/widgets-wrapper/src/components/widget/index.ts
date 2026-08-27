@@ -272,7 +272,7 @@ export class ReciaWidget extends LitElement {
                     <div class="action-delete">
                       <button
                         type="button"
-                        aria-label="${msg(str`Supprimer le widget`)}"
+                        aria-label="${msg(str`Supprimer le widget`)} - ${this.name}"
                         @click="${() => this.deleteWidget()}"
                       >
                         ${getIcon(faTimes)}
@@ -287,7 +287,7 @@ export class ReciaWidget extends LitElement {
                     <div class="action-back">
                       <button
                         type="button"
-                        aria-label="${msg(str`Réordonner vers la gauche`)}"
+                        aria-label="${msg(str`Réordonner vers la gauche`)} - ${this.name}"
                         @click="${() => this.moveWidget('-1')}"
                       >
                         ${getIcon(faArrowLeft)}
@@ -303,7 +303,7 @@ export class ReciaWidget extends LitElement {
                     <div class="action-next">
                       <button
                         type="button"
-                        aria-label="${msg(str`Réordonner vers la droite`)}"
+                        aria-label="${msg(str`Réordonner vers la droite`)} - ${this.name}"
                         @click="${() => this.moveWidget('+1')}"
                       >
                         ${getIcon(faArrowRight)}

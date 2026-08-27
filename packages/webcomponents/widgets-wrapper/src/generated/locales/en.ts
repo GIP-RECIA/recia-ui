@@ -12,6 +12,7 @@
       's0e86522d5b18fdc1': str`Delete widget`,
 's1c703460a5da79b1': str`Reorder to the left`,
 's3862381e95ec3dcf': str`notifications`,
+'s428a8f8c2872b52f': str`${0} aucun widget`,
 's5261563ad59a1fae': str`Manage`,
 's5ee26933a140671a': str`Cancel`,
 's622357f4a4e1195d': str`${0} widget
