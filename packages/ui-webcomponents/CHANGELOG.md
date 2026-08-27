@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.18.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.17.2...ui-webcomponents/v1.18.0) (2026-08-27)
+
+### Features
+
+* **widgets-wrapper:** add header slot ([4ccee60](https://github.com/GIP-RECIA/recia-ui/commit/4ccee600050f3d4d022bd079ed6db4a33c779c99))
+* **widgets-wrapper:** improve accessibility (RGAA) ([c449d31](https://github.com/GIP-RECIA/recia-ui/commit/c449d31d1b7931dacf89e480d6a24599f3f262c6))
 ## [1.17.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.17.1...ui-webcomponents/v1.17.2) (2026-08-24)
 
 ### Bug Fixes
