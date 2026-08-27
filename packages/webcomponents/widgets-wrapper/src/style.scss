@@ -6,8 +6,13 @@
   > header {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    align-items: center;
+    gap: 8px 6px;
     margin-bottom: 24px;
+
+    > ::slotted(*) {
+      margin-bottom: 0 !important;
+    }
 
     > h2 {
       margin-bottom: 0;
