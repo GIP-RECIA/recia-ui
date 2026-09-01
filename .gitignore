@@ -18,7 +18,7 @@ dist-ssr
 coverage
 .env
 *.local
-packages/ui-webcomponents/docs/
+workspace
 
 ### Tests ###
 playwright-report
