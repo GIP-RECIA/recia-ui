@@ -87,9 +87,9 @@
 
             > .icon {
               flex: 0 0 auto;
-              height: var(--#{$prefix}font-size-xxl);
-              width: var(--#{$prefix}font-size-xxl);
-              color: var(--#{$prefix}service-hover);
+              height: 24px;
+              width: 24px;
+              color: var(--#{$prefix}service);
             }
 
             > h3 {
@@ -104,10 +104,10 @@
 
             @each $type, $values in $categories {
               @if $type == category-default {
-                --#{$prefix}service-hover: var(--#{$prefix}#{$type}-hover);
+                --#{$prefix}service: var(--#{$prefix}#{$type});
               } @else {
                 &.#{$type} {
-                  --#{$prefix}service-hover: var(--#{$prefix}#{$type}-hover);
+                  --#{$prefix}service: var(--#{$prefix}#{$type});
                 }
               }
             }
