@@ -126,13 +126,13 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
                     (org, index) => html`
                         <li>
                           <input
-                            id="${org.id}"
+                            id="change-etab-struct-${org.id}"
                             type="radio"
                             name="etab"
                             value="${org.id}"
                             ?checked="${index === 0}"
                           >
-                          <label for="${org.id}">
+                          <label for="change-etab-struct-${org.id}">
                             ${getIconWithStyle(faHouse, undefined, { icon: true })}
                             <span>${org.displayName}</span>
                             <span class="small">(${org.code})</span>
