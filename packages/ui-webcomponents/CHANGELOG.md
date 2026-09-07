@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.18.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.18.1...ui-webcomponents/v1.18.2) (2026-09-07)
+
+### Bug Fixes
+
+* **header:** notification icon color ([60f8a23](https://github.com/GIP-RECIA/recia-ui/commit/60f8a23f1cb15bf86ee0170fd384504e5b633e58))
+* **header:** service link in chromium based browser ([0ee4352](https://github.com/GIP-RECIA/recia-ui/commit/0ee43527de1ae0d0940fb4146488d781aa1b806a))
 ## [1.18.1](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.18.0...ui-webcomponents/v1.18.1) (2026-08-27)
 
 ### Features
