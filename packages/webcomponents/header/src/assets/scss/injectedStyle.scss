@@ -1,11 +1,13 @@
 @use 'sass:map';
-@use '../../../../../../node_modules/@gip-recia/ui/src/assets/scss/mixins/banner';
-@use '../../../../../../node_modules/@gip-recia/ui/src/assets/scss/core/variables' as *;
-@use '../../../../../../node_modules/@gip-recia/ui/src/assets/scss/core/root';
+
 @use '../../variables' as *;
-@use '../../../../../../node_modules/@gip-recia/ui/src/assets/scss/functions' as *;
-@use '../../../../../../node_modules/@gip-recia/ui/src/assets/scss/mixins' as *;
-@use '../../../../../../node_modules/@gip-recia/ui/src/assets/scss/themes';
+
+@use 'pkg:@gip-recia/ui/mixins/banner';
+@use 'pkg:@gip-recia/ui/core/variables' as *;
+@use 'pkg:@gip-recia/ui/core/root';
+@use 'pkg:@gip-recia/ui/functions' as *;
+@use 'pkg:@gip-recia/ui/mixins' as *;
+@use 'pkg:@gip-recia/ui/themes';
 
 @include dm-sans;
 @include sora;
