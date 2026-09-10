@@ -11,7 +11,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "build": "sass -p node -s compressed --error-css --no-source-map src/assets/scss/:dist/assets/css/"
+    "build": "sass -p node -s compressed --error-css --update --no-source-map scss/:dist/"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.3.0",

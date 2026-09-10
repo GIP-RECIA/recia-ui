@@ -21,27 +21,27 @@
     "gip-recia"
   ],
   "exports": {
-    ".": "./src/assets/scss/index.scss",
-    "./*": "./src/assets/scss/*",
-    "./components": "./src/assets/scss/components/index.scss",
-    "./components/*": "./src/assets/scss/components/*",
-    "./core": "./src/assets/scss/core/index.scss",
-    "./core/*": "./src/assets/scss/core/*",
-    "./functions": "./src/assets/scss/functions/index.scss",
-    "./functions/*": "./src/assets/scss/functions/*",
-    "./layouts": "./src/assets/scss/layouts/index.scss",
-    "./layouts/*": "./src/assets/scss/layouts/*",
-    "./mixins": "./src/assets/scss/mixins/index.scss",
-    "./mixins/*": "./src/assets/scss/mixins/*"
+    ".": "./scss/index.scss",
+    "./*": "./scss/*",
+    "./components": "./scss/components/index.scss",
+    "./components/*": "./scss/components/*",
+    "./core": "./scss/core/index.scss",
+    "./core/*": "./scss/core/*",
+    "./functions": "./scss/functions/index.scss",
+    "./functions/*": "./scss/functions/*",
+    "./layouts": "./scss/layouts/index.scss",
+    "./layouts/*": "./scss/layouts/*",
+    "./mixins": "./scss/mixins/index.scss",
+    "./mixins/*": "./scss/mixins/*"
   },
   "files": [
-    "src/assets/scss/**/*"
+    "scss/**/*"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "sass --style=compressed --error-css --update src/assets/scss/index.scss dist/recia-style.css",
+    "build": "sass -s compressed --error-css --update --no-source-map scss/index.scss dist/recia-style.css",
     "release": "yarn run -T commit-and-tag-version -t 'ui/v' --path . --release-as $1 || echo 'Please specify a version type (yarn run release -- [patch, minor, major])'"
   },
   "devDependencies": {
