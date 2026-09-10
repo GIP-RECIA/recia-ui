@@ -7029,6 +7029,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"static-css@workspace:packages/scss-builder":
+  version: 0.0.0-use.local
+  resolution: "static-css@workspace:packages/scss-builder"
+  dependencies:
+    "@antfu/eslint-config": "npm:^9.3.0"
+    "@gip-recia/ui": "workspace:^"
+    eslint: "npm:^10.9.1"
+    eslint-plugin-format: "npm:^2.0.1"
+    ress: "npm:^6.0.0"
+    sass: "npm:^1.103.1"
+  languageName: unknown
+  linkType: soft
+
 "statuses@npm:~2.0.1, statuses@npm:~2.0.2":
   version: 2.0.2
   resolution: "statuses@npm:2.0.2"

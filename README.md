@@ -6,6 +6,7 @@ Regroupement des éléments d'interface utilisateur (UI) utilisé dans l'ENT du 
   - [Projets 🗒️](#projets-️)
     - [app-mobile](#app-mobile)
     - [prototype](#prototype)
+    - [scss-builder](#scss-builder)
     - [ui](#ui)
     - [ui-web-webcomponents](#ui-web-webcomponents)
     - [web-components](#web-components)
@@ -22,6 +23,10 @@ Pages web de l'[application mobile](https://github.com/GIP-RECIA/Application-mob
 ### [prototype](./packages/prototype/)
 
 Intégrations des maquettes.
+
+### [scss-builder](./packages/scss-builder/)
+
+Compilation de feuilles SCSS pour divers besoins dans l'ENT.
 
 ### [ui](./packages/ui/)
 

@@ -5,6 +5,7 @@
     "etc/webcomponent/project-skeleton",
     "packages/app-mobile",
     "packages/prototype",
+    "packages/scss-builder",
     "packages/ui",
     "packages/ui-webcomponents",
     "packages/webcomponents/*",

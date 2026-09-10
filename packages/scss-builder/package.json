@@ -1,0 +1,24 @@
+{
+  "name": "static-css",
+  "type": "module",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Quentin Guillemin",
+      "email": "quentin.guillemin@recia.fr",
+      "url": "https://github.com/Quentin-Guillemin"
+    }
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "sass -p node -s compressed --error-css --no-source-map src/assets/scss/:dist/assets/css/"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.3.0",
+    "@gip-recia/ui": "workspace:^",
+    "eslint": "^10.9.1",
+    "eslint-plugin-format": "^2.0.1",
+    "ress": "^6.0.0",
+    "sass": "^1.103.1"
+  }
+}

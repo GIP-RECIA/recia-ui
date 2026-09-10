@@ -1,0 +1,86 @@
+@use 'sass:map';
+
+@use 'pkg:ress/dist/ress.min.css';
+
+@use 'pkg:@gip-recia/ui/core' as *;
+@use 'pkg:@gip-recia/ui/functions' as *;
+@use 'pkg:@gip-recia/ui/mixins' as *;
+
+@use 'pkg:@gip-recia/ui/themes';
+@use 'pkg:@gip-recia/ui/layouts';
+
+@include dm-sans;
+@include sora;
+
+html {
+  font-size: 1.25rem;
+  line-height: 1.5;
+
+  > body {
+    background-color: var(--#{$prefix}body-bg);
+    font-family: $dm-sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--#{$prefix}body-font-size);
+    letter-spacing: 0;
+    color: var(--#{$prefix}body);
+
+    > main > .container {
+      padding-top: 16px;
+      padding-bottom: 16px;
+
+      @media screen and (width >= map.get($grid-breakpoints, xl)) {
+        max-width: 960px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        color: var(--#{$prefix}primary);
+      }
+
+      p,
+      blockquote,
+      ul,
+      ol {
+        &:not(:last-child) {
+          margin-bottom: 1em !important;
+        }
+      }
+
+      ul,
+      ol {
+        margin-left: 2em;
+
+        > li:not(:last-child) {
+          margin-bottom: 0.5em;
+        }
+      }
+
+      hr {
+        margin: 3rem 0;
+      }
+
+      a {
+        @include unstyled_link;
+        color: var(--#{$prefix}primary);
+
+        &:hover,
+        &:focus-visible {
+          text-decoration: underline;
+        }
+
+        &:focus-visible {
+          outline: none;
+          text-decoration-thickness: 0.2em;
+        }
+
+        @media (hover: none) {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
