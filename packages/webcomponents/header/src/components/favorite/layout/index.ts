@@ -49,10 +49,10 @@ export class ReciaFavoriteLayout extends LitElement {
   @property({ type: Boolean })
   loading: boolean = false
 
-  @property({ type: Number, attribute: 'loding-sections' })
+  @property({ type: Number, attribute: 'loading-sections' })
   loadingSections?: number
 
-  @property({ type: Number, attribute: 'loding-sections-items' })
+  @property({ type: Number, attribute: 'loading-sections-items' })
   loadingSectionsItems?: number
 
   @state()

@@ -153,8 +153,8 @@ export class ReciaServicesLayout extends LitElement {
       <r-filters
         inert
         loading
-        loding-sections="1"
-        loding-sections-items="9"
+        loading-sections="1"
+        loading-sections-items="9"
       >
       </r-filters>
       <ul inert>
