@@ -26,6 +26,7 @@ export default class PronoteService {
       const response = await fetch(pronoteApiUrl, {
         method: 'GET',
         credentials: 'include',
+        redirect: 'follow',
       })
 
       if (!response.ok)
