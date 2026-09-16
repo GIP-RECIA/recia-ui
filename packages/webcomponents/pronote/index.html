@@ -19,6 +19,44 @@
   <body class="container">
     <section></section>
 
+    <section>
+      <h2>r-pronote-summary</h2>
+
+      <section>
+        <h3>Child</h3>
+
+        <r-pronote-summary
+          pronote-api-url="./summary/child.json"
+          detail-link='{
+            "href": "#",
+            "target": "_self",
+            "rel": "noopener noreferrer"
+          }'
+        >
+        </r-pronote-summary>
+      </section>
+
+      <section>
+        <h3>Parent</h3>
+
+        <r-pronote-summary
+          pronote-api-url="./summary/parent.json"
+          detail-link='{
+            "href": "#",
+            "target": "_self",
+            "rel": "noopener noreferrer"
+          }'
+        >
+        </r-pronote-summary>
+      </section>
+    </section>
+
+    <section>
+      <h2>r-pronote-page</h2>
+
+      <r-pronote-page pronote-api-url=""></r-pronote-page>
+    </section>
+
     <script></script>
   </body>
 </html>

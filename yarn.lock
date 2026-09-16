@@ -6475,6 +6475,7 @@ __metadata:
     lodash-es: "npm:^4.18.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
+    tabs: "workspace:^"
     typescript: "npm:@typescript/typescript6@^6.0.2"
     unplugin-dts: "npm:^1.0.3"
     vite: "npm:^8.2.2"
@@ -7206,7 +7207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabs@workspace:packages/webcomponents/tabs":
+"tabs@workspace:^, tabs@workspace:packages/webcomponents/tabs":
   version: 0.0.0-use.local
   resolution: "tabs@workspace:packages/webcomponents/tabs"
   dependencies:

@@ -1,0 +1,13 @@
+[
+  {
+    "items": {
+      "devoirs": 3,
+      "visitesInfirmerie": 1,
+      "absencesEtRetards": 3,
+      "punitionsEtSanctions": 2,
+      "messagesNonLus": 2,
+      "informationsNonLues": 5,
+      "evaluationsDeCompetences": 1
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "displayName": "Lucas Dupont",
+    "items": {
+      "devoirs": 2,
+      "visitesInfirmerie": 0,
+      "absencesEtRetards": 2,
+      "punitionsEtSanctions": 0,
+      "evaluationsDeCompetences": 1
+    }
+  },
+  {
+    "displayName": "Emma Dupont",
+    "items": {
+      "devoirs": 1,
+      "visitesInfirmerie": 1,
+      "absencesEtRetards": 0,
+      "punitionsEtSanctions": 0,
+      "evaluationsDeCompetences": 0
+    }
+  }
+]

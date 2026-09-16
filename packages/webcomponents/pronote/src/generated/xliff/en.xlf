@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="en" source-language="fr" original="lit-localize-inputs" datatype="plaintext">
-<body/>
+<body>
+<trans-unit id="s24987773a5b77b9c">
+  <source>Absence ou retard</source>
+  <target>Absence or late arrival</target>
+</trans-unit>
+<trans-unit id="s40752e05827dceaa">
+  <source>Absences ou retards</source>
+  <target>Absences or late arrivals</target>
+</trans-unit>
+<trans-unit id="sde69ffbd6db923f7">
+  <source>Devoir à faire</source>
+  <target>Homework to do</target>
+</trans-unit>
+<trans-unit id="sd8f8d43899ca2ab2">
+  <source>Devoirs à faire</source>
+  <target>Homework to do</target>
+</trans-unit>
+<trans-unit id="sa018bd2bd5637192">
+  <source>Message non lu</source>
+  <target>Unread message</target>
+</trans-unit>
+<trans-unit id="sc2e584f7dd80c622">
+  <source>Messages non lus</source>
+  <target>Unread messages</target>
+</trans-unit>
+<trans-unit id="s8c7eb03fc9c7c414">
+  <source>Punition ou sanction</source>
+  <target>Punishment or sanction</target>
+</trans-unit>
+<trans-unit id="sa5f815c8df39824c">
+  <source>Punitions ou sanctions</source>
+  <target>Punishments or sanctions</target>
+</trans-unit>
+<trans-unit id="s14a531ecd42dc8f2">
+  <source>Visite à l'infirmerie</source>
+  <target>Visit to the infirmary</target>
+</trans-unit>
+<trans-unit id="sc4f308473f4d9cbf">
+  <source>Visites à l'infirmerie</source>
+  <target>Visits to the infirmary</target>
+</trans-unit>
+<trans-unit id="s1004762b1ff3eea5">
+  <source>Information non lu</source>
+  <target>Unread information</target>
+</trans-unit>
+<trans-unit id="s50c46f9f9218d770">
+  <source>Évaluation en cours</source>
+  <target>Assessment in progress</target>
+</trans-unit>
+<trans-unit id="sa148cb412a338a71">
+  <source>Évaluations en cours</source>
+  <target>Assessments in progress</target>
+</trans-unit>
+<trans-unit id="se67ae86332ee7cb8">
+  <source>Erreur</source>
+  <target>Error</target>
+</trans-unit>
+<trans-unit id="s7f210bf2a45185b6">
+  <source>Impossible de charger le contenu</source>
+  <target>Unable to load content</target>
+</trans-unit>
+<trans-unit id="sbcfceb6c59cacf63">
+  <source>voir plus d'informations</source>
+  <target>See more information</target>
+</trans-unit>
+<trans-unit id="se34905521fa3229d">
+  <source>Résumé Pronote</source>
+  <target>Pronote summary</target>
+</trans-unit>
+<trans-unit id="sad91bcc8cab5d8ed">
+  <source>7 derniers jours</source>
+  <target>Last 7 days</target>
+</trans-unit>
+<trans-unit id="secef9e2d181a0c11">
+  <source>Informations non lus</source>
+  <target>Unread information</target>
+</trans-unit>
+</body>
 </file>
 </xliff>
