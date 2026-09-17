@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.19.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.18.2...ui-webcomponents/v1.19.0) (2026-09-17)
+
+### Features
+
+* **pronote:** add pronote summary ([0cc401a](https://github.com/GIP-RECIA/recia-ui/commit/0cc401ab0a14e59b2e229d9b725701ca8cca0e4b))
+
+### Bug Fixes
+
+* **header:** notification delete domain ([79235da](https://github.com/GIP-RECIA/recia-ui/commit/79235dae681b94deb166dd03da4f6b430bc8d14f))
+* **pronote:** cas redirection ([2675beb](https://github.com/GIP-RECIA/recia-ui/commit/2675beb569c23199e895c1058ade19f49aca771f))
+* **wc:** remove unspecified headers (RGAA) ([c85cdc3](https://github.com/GIP-RECIA/recia-ui/commit/c85cdc3198b1a3de1f2498ce7e2c4bd12979954d))
+* **wc:** typo ([d7c199c](https://github.com/GIP-RECIA/recia-ui/commit/d7c199c6f38dcb60f4822ffa1f1d896de491ae2b))
 ## [1.18.2](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.18.1...ui-webcomponents/v1.18.2) (2026-09-07)
 
 ### Bug Fixes
