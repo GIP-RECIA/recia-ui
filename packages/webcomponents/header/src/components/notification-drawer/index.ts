@@ -151,7 +151,7 @@ export class ReciaNotificationDrawer extends LitElement {
 
     const response = await NotificationService.action(
       soffit,
-      notificationsDeleteApiUrl,
+      getDomainLink(notificationsDeleteApiUrl),
       notifIds,
     )
     if (response)
