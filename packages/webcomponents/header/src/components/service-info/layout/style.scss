@@ -13,7 +13,7 @@
 }
 
 .service-info {
-  > header {
+  > .header {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -231,7 +231,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, sm)) {
-    > header {
+    > .header {
       gap: 8px;
 
       > .heading > .icon {
@@ -242,7 +242,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    > header {
+    > .header {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;

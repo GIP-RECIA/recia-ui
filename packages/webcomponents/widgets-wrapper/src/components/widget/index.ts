@@ -333,7 +333,10 @@ export class ReciaWidget extends LitElement {
     return html`
       <div class="widget">
         ${this.actionTemplate()}
-        <header ?inert="${this.manage || this.loading || this.placeholder}">
+        <div
+          ?inert="${this.manage || this.loading || this.placeholder}"
+          class="header"
+        >
           <button
             type="button"
             aria-expanded="${this.isExpanded}"
@@ -372,7 +375,7 @@ export class ReciaWidget extends LitElement {
             <div class="grow-1"></div>
             ${this.notificationsTemplate()}
           </div>
-        </header>
+        </div>
         <div
           id="widget-${slug}-menu"
           class="menu"

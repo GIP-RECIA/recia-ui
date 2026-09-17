@@ -172,14 +172,14 @@ export class ReciaFilters extends LitElement {
   skeletonTemplate(): TemplateResult {
     return html`
         <div class="filters" inert>
-          <header>
+          <div class="header">
             <button
               type="button"
             >
                <span class="heading skeleton"></span>
             </button>
             <span class="heading skeleton"></span>
-          </header>
+          </div>
           <ul class="menu" style="display: none;">
             ${
               map(
@@ -189,9 +189,9 @@ export class ReciaFilters extends LitElement {
                       ${
                         (this.loadingSections ?? 1) > 1
                           ? html`
-                              <header>
+                              <div class="header">
                                 <span class="skeleton"></span>
-                              </header>
+                              </div>
                             `
                           : nothing
                       }
@@ -223,7 +223,7 @@ export class ReciaFilters extends LitElement {
 
     return html`
       <div class="filters">
-        <header>
+        <div class="header">
           <button
             type="button"
             aria-expanded="${this.isExpanded}"
@@ -247,7 +247,7 @@ export class ReciaFilters extends LitElement {
             }
           </button>
           <span class="heading">${msg(str`Filtres`)}</span>
-        </header>
+        </div>
         <ul
           id="filter-menu"
           class="menu"
@@ -264,9 +264,9 @@ export class ReciaFilters extends LitElement {
                   ${
                     this.data && this.data.length > 1
                       ? html`
-                          <header aria-hidden="true">
+                          <div aria-hidden="true" class="header">
                             <span>${section.name}</span>
-                          </header>
+                          </div>
                         `
                       : nothing
                   }

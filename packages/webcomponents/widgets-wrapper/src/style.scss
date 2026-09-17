@@ -3,7 +3,7 @@
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 
 .widget-layout {
-  > header {
+  > .header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -68,7 +68,7 @@
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
-    header {
+    > .header {
       margin-bottom: 32px;
     }
 

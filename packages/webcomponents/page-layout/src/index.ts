@@ -49,7 +49,7 @@ export class ReciaPageLayout extends LitElement {
 
     return html`
       <div class="page-layout">
-        <header>
+        <div class="header">
           <div class="heading">
             ${
               this.backLink
@@ -73,7 +73,7 @@ export class ReciaPageLayout extends LitElement {
             }
           </div>
           <slot name="header"></slot>
-        </header>
+        </div>
         <slot></slot>
       </div>
     `

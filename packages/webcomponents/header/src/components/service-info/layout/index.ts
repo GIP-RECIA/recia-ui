@@ -187,7 +187,7 @@ export class ReciaServiceInfoLayout extends LitElement {
   skeletonTemplate(): TemplateResult {
     return html`
       <div class="service-info">
-        <header inert>
+        <div inert class="header">
           <div class="heading">
             <div class="icon skeleton"></div>
             <div class="heading-text">
@@ -195,7 +195,7 @@ export class ReciaServiceInfoLayout extends LitElement {
               <span class="tag-category skeleton"></span>
             </div>
           </div>
-        </header>
+        </div>
         <div class="content" inert>
           <section class="description">
             <h2 class="h3">${msg(str`Description`)}</h2>
@@ -259,7 +259,7 @@ export class ReciaServiceInfoLayout extends LitElement {
 
     return html`
       <div class="service-info">
-        <header>
+        <div class="header">
           <div class="heading">
             ${getSvgIconService(this.iconUrl)}
             <div class="heading-text">
@@ -306,7 +306,7 @@ export class ReciaServiceInfoLayout extends LitElement {
                 `
               : nothing
           }
-        </header>
+        </div>
         <div class="content">
           <section class="description">
             <h2 class="h3">${msg(str`Description`)}</h2>

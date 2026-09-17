@@ -112,9 +112,9 @@ export class ReciaChangeEtabBottomSheet extends LitElement {
           @change="${this.handleFormChange}"
           @submit="${this.submitForm}"
         >
-          <header>
+          <div class="header">
             <h1>${msg(str`Changer d'établissement`)}</h1>
-          </header>
+          </div>
           <div class="content">
             <fieldset>
               <legend class="sr-only">${msg(str`Établissement`)}</legend>

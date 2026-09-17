@@ -305,18 +305,18 @@ export class ReciaFavoriteLayout extends LitElement {
   skeletonTemplate(): TemplateResult {
     return html`
         <div class="favorite-layout">
-          <header>
+          <div class="header">
             <h2>${msg(str`Vos favoris`)}</h2>
-          </header>
+          </div>
           <ul inert>
             ${
               map(
                 range(this.loadingSections ?? 1),
                 () => html`
                     <li>
-                      <header>
+                      <div class="header">
                         <span class="skeleton"></span>
-                      </header>
+                      </div>
                       <ul>
                         ${
                           map(
@@ -340,14 +340,14 @@ export class ReciaFavoriteLayout extends LitElement {
 
     return html`
       <div class="favorite-layout">
-        <header>
+        <div class="header">
           <h2>${msg(str`Vos favoris`)}</h2>
           ${
             !(this.data ?? []).some(section => section.loading)
               ? this.manageTemplate()
               : nothing
           }
-        </header>
+        </div>
         <ul>
           ${
             repeat(
@@ -355,9 +355,9 @@ export class ReciaFavoriteLayout extends LitElement {
               section => section.id,
               section => html`
                   <li id="${section.id}">
-                    <header>
+                    <div class="header">
                       <span>${section.name}</span>
-                    </header>
+                    </div>
                     ${
                       section.loading
                         ? html`

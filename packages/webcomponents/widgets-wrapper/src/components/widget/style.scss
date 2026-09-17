@@ -67,7 +67,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
     @include actions;
   }
 
-  > header {
+  > .header {
     > div,
     > button {
       display: inline-flex;
@@ -321,7 +321,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
   }
 
   &:has(> .actions) {
-    > header {
+    > .header {
       > div {
         display: inline-flex !important;
       }
@@ -359,7 +359,7 @@ $skeleton-placeholder-height-md: $header-height-md + $menu-height-md + 2;
       }
     }
 
-    > header {
+    > .header {
       > div {
         display: inline-flex !important;
         height: $header-height-md;

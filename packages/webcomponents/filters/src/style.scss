@@ -16,7 +16,7 @@
   border-radius: 10px;
   box-shadow: var(--#{$prefix}shadow-strong) HEXToRGBA($black, 0.1);
 
-  > header {
+  > .header {
     > button {
       display: inline-flex;
       align-items: center;
@@ -95,7 +95,7 @@
         }
       }
 
-      > header {
+      > .header {
         position: relative;
         margin-bottom: 16px;
         font-size: var(--#{$prefix}font-size-sm);
@@ -134,14 +134,14 @@
     }
   }
 
-  &:has(> header > button:focus-visible) {
+  &:has(> .header > button:focus-visible) {
     outline: 2px solid var(--#{$prefix}primary);
   }
 
   @media (width >= map.get($grid-breakpoints, md)) {
     box-shadow: none;
 
-    > header {
+    > .header {
       margin-bottom: 8px;
 
       > button {
@@ -165,14 +165,14 @@
       > li {
         display: contents;
 
-        > header {
+        > .header {
           grid-column: 1;
           margin: 0;
           margin-top: 8px;
           font-size: var(--#{$prefix}font-size-xs);
         }
 
-        &:has(> header) > form {
+        &:has(> .header) > form {
           grid-column: 2;
         }
 
@@ -185,7 +185,7 @@
             content: none;
           }
 
-          > header,
+          > .header,
           > form > fieldset > ul {
             padding-bottom: 15.5px;
 
@@ -199,7 +199,7 @@
             }
           }
 
-          > header::after {
+          > .header::after {
             right: -16px;
           }
         }

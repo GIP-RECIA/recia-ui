@@ -82,7 +82,7 @@
 }
 
 .favorite-layout {
-  > header {
+  > .header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -106,7 +106,7 @@
     @include unstyled-list;
 
     > li {
-      > header {
+      > .header {
         color: var(--#{$prefix}basic-black-lighter);
         display: block;
         font-weight: 500;

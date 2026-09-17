@@ -235,7 +235,7 @@ export class ReciaServicesLayout extends LitElement {
         @keydown="${this.focusTrap}"
       >
         <div class="container page-layout">
-          <header>
+          <div class="header">
             <div class="heading">
               <button
                 type="button"
@@ -267,7 +267,7 @@ export class ReciaServicesLayout extends LitElement {
                   `
                 : nothing
             }
-          </header>
+          </div>
           ${this.contentTemplate()}
         </div>
       </div>

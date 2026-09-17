@@ -6,7 +6,7 @@
   display: grid;
   gap: 32px;
 
-  > header {
+  > .header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -33,7 +33,7 @@
   @media (width >= map.get($grid-breakpoints, md)) {
     gap: 48px;
 
-    > header {
+    > .header {
       flex-direction: row;
 
       > .heading {

@@ -117,7 +117,7 @@
       @include unstyled-list;
 
       > li {
-        > header {
+        > .header {
           color: var(--#{$prefix}basic-black-lighter);
           display: block;
           font-weight: 500;
@@ -146,7 +146,7 @@
                 margin: 8px 10px;
                 overflow: hidden;
 
-                > header {
+                > .header {
                   display: flex;
                   align-items: center;
                   gap: 4px;
@@ -185,7 +185,7 @@
               &:focus-visible {
                 background-color: #f0f0f0;
 
-                > div > header > .result-title {
+                > div > .header > .result-title {
                   color: var(--#{$prefix}primary);
                   font-weight: 600;
                 }

@@ -465,7 +465,7 @@ export class ReciaWidgetsWrapper extends LitElement {
 
     return html`
       <div class="widget-layout">
-        <header>
+        <div class="header">
           <slot name="header"></slot>
           <h2 class="sr-only">${msg(str`Accès rapides`)}</h2>
           <ul class="actions">
@@ -534,7 +534,7 @@ export class ReciaWidgetsWrapper extends LitElement {
               </button>
             </li>
           </ul>
-        </header>
+        </div>
         <div class="content">
           ${this.contentTemplate()}
         </div>

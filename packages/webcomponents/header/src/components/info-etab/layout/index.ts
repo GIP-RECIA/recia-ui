@@ -145,13 +145,13 @@ export class ReciaInfoEtabLayout extends LitElement {
       <div class="info-etab-layout">
         ${this.imageTemplate('image-container')}
         <div class="content-container">
-          <header>
+          <div class="header">
             ${getSvgIcon(this.svgUrl)}
             <div class="heading">
               ${this.etabName ? html`<span class="etab">${this.etabName}</span>` : nothing}
               ${this.acadName ? html`<span class="acad">${this.acadName}</span>` : nothing}
             </div>
-          </header>
+          </div>
           <div class="content">
             ${this.imageTemplate('image')}
             ${

@@ -204,9 +204,9 @@ export class ReciaSearch extends LitElement {
 
     return html`
       <li id="${section.id}">
-        <header>
+        <div class="header">
           <span>${section.name}</span>
-        </header>
+        </div>
         <ul ?inert="${section.loading}">
           ${
             !section.loading
@@ -239,7 +239,7 @@ export class ReciaSearch extends LitElement {
           @click="${(e: Event) => this.handleLinkClick(e, item.fname)}"
         >
           <div>
-            <header>
+            <div class="header">
               ${
                 name
                   ? html`<span class="result-tag ${className}">${name}</span>`
@@ -248,7 +248,7 @@ export class ReciaSearch extends LitElement {
               <span class="result-title">
                 ${highlight(item.name, searchQueryString)}
               </span>
-            </header>
+            </div>
             ${
               item.description
                 ? html`<span>${highlight(item.description, searchQueryString)}</span>`
