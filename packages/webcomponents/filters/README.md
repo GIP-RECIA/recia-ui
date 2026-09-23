@@ -8,9 +8,9 @@
 
 ## Propriétés
 
-| Nom    |                 Type                  | Obligatoire | Default | Description       |
-| ------ | :-----------------------------------: | :---------: | :-----: | ----------------- |
-| `data` | [`Array`](./src/types/SectionType.ts) |   `false`   | `null`  | Liste des filtres |
+| Nom    |                     Type                      | Obligatoire | Default | Description       |
+| ------ | :-------------------------------------------: | :---------: | :-----: | ----------------- |
+| `data` | [`Section[]`](./src/types/SectionType.ts) |   `false`   | `null`  | Liste des filtres |
 
 ## Évènements
 

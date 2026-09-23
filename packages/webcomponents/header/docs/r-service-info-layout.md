@@ -22,9 +22,9 @@
 | `favorite`        |                  `boolean`                   |   `false`   |   `false`   | Le service est en favoris                          |
 | `description`     |                   `string`                   |   `false`   | `undefined` | Description du service (HTML)                      |
 | `video`           |                   `string`                   |   `false`   | `undefined` | URL d'une vidéo de présentation                    |
-| `ressources`      |    [`Link[]`](../src/types/linkTypes.ts)     |   `false`   | `undefined` | Listes des ressources disponnibles                 |
-| `ressources-link` |     [`Link`](../src/types/linkTypes.ts)      |   `false`   | `undefined` | Lien vers un service listant toutes les ressources |
-| `launch-link`     |     [`Link`](../src/types/linkTypes.ts)      |   `false`   | `undefined` | Lien du service                                    |
+| `ressources`      | [`Link[]`](../../common/types/linkTypes.ts)  |   `false`   | `undefined` | Listes des ressources disponnibles                 |
+| `ressources-link` |  [`Link`](../../common/types/linkTypes.ts)   |   `false`   | `undefined` | Lien vers un service listant toutes les ressources |
+| `launch-link`     |  [`Link`](../../common/types/linkTypes.ts)   |   `false`   | `undefined` | Lien du service                                    |
 | `loading`         |                  `boolean`                   |   `false`   |   `false`   | Affiche l'overlay de chargement                    |
 | `error`           |                  `boolean`                   |   `false`   |   `false`   | Affiche l'overlay d'erreur                         |
 

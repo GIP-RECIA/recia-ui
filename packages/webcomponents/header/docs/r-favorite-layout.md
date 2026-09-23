@@ -10,10 +10,10 @@
 
 ## Propriétés
 
-| Nom                     |                         Type                         | Obligatoire |   Default   | Description                                                  |
-| ----------------------- | :--------------------------------------------------: | :---------: | :---------: | ------------------------------------------------------------ |
-| `data`                  | [`FavoriteSection[]`](../src/types/favoriteTypes.ts) |   `false`   | `undefined` | Liste des sections favorites à afficher                      |
-| `loading`               |                      `boolean`                       |   `false`   |   `false`   | Affiche l'overlay de chargement                              |
+| Nom                      |                         Type                         | Obligatoire |   Default   | Description                                                  |
+| ------------------------ | :--------------------------------------------------: | :---------: | :---------: | ------------------------------------------------------------ |
+| `data`                   | [`FavoriteSection[]`](../src/types/favoriteTypes.ts) |   `false`   | `undefined` | Liste des sections favorites à afficher                      |
+| `loading`                |                      `boolean`                       |   `false`   |   `false`   | Affiche l'overlay de chargement                              |
 | `loading-sections`       |                       `number`                       |   `false`   |      1      | Nombre de séction à afficher pour le chargement              |
 | `loading-sections-items` |                       `number`                       |   `false`   |      4      | Nombre d'éléments à afficher dans les sections au chargement |
 
