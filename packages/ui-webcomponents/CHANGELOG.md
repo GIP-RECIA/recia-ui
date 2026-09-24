@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.20.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.19.0...ui-webcomponents/v1.20.0) (2026-09-24)
+
+### Features
+
+* **wayf:** add Région Réunion ([acb3391](https://github.com/GIP-RECIA/recia-ui/commit/acb33914a56df60d217e4da7ee87c00181f6ff7a))
+
+### Bug Fixes
+
+* **header:** reset favorite layout on dropwodn close ([530b449](https://github.com/GIP-RECIA/recia-ui/commit/530b449ac43665774c081f1c9b97f3209489afee))
 ## [1.19.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.18.2...ui-webcomponents/v1.19.0) (2026-09-17)
 
 ### Features
