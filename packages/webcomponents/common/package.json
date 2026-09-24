@@ -11,6 +11,14 @@
   ],
   "license": "Apache-2.0",
   "exports": {
-    "./*": "./*"
+    "./assets/*": "./assets/*",
+    "./types/*": "./types/*",
+    "./config.*": "./config.ts"
+  },
+  "scripts": {
+    "dev:json-server": "json-server ./json-server/api.json -c ./json-server/config.json"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4"
   }
 }

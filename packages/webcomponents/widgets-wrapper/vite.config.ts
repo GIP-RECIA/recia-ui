@@ -25,12 +25,25 @@ import { name } from './package.json' with { type: 'json' }
 export default ({ mode }: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd())
 
-  const { VITE_BASE_URI, VITE_ALLOWED_HOSTS } = env
+  const { VITE_BASE_URI, VITE_ALLOWED_HOSTS, VITE_PROXY_ROUTES } = env
+
+  const proxy = VITE_PROXY_ROUTES
+    ? Object.fromEntries(
+        JSON.parse(VITE_PROXY_ROUTES).map((route: string) => [
+          route,
+          {
+            target: 'http://localhost:3000',
+            changeOrigin: true,
+          },
+        ]),
+      )
+    : undefined
 
   return defineConfig({
     base: mode === 'development' ? VITE_BASE_URI : undefined,
     server: {
       allowedHosts: JSON.parse(VITE_ALLOWED_HOSTS ?? '[]'),
+      proxy,
     },
     publicDir: mode === 'development' ? undefined : false,
     plugins: [
