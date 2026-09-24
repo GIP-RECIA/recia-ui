@@ -77,6 +77,7 @@ export class ReciaFavoriteDropdown extends LitElement {
     }
     else {
       this.close()
+      this.resetLayout()
     }
   }
 
@@ -102,8 +103,12 @@ export class ReciaFavoriteDropdown extends LitElement {
       && !(this.contains(e.target) || e.composedPath().includes(this))
     ) {
       this.close(undefined, false)
-      this.favoriteLayoutRef.value?.dispatchEvent(new CustomEvent('reset'))
+      this.resetLayout()
     }
+  }
+
+  resetLayout(): void {
+    this.favoriteLayoutRef.value?.dispatchEvent(new CustomEvent('reset'))
   }
 
   render(): TemplateResult {
@@ -142,6 +147,7 @@ export class ReciaFavoriteDropdown extends LitElement {
             class="content"
           >
             <r-favorite-layout
+              ${ref(this.favoriteLayoutRef)}
               .data="${this.data}"
               @updated="${(e: CustomEvent) => this.dispatchEvent(new CustomEvent(e.type, e))}"
             >
