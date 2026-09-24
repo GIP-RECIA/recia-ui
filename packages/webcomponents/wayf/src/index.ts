@@ -49,8 +49,9 @@ export class ReciaWayf extends LitElement {
       [IdpId.ParentEleveEN]: msg(str`Élève ou parent de l'éducation nationale\n(ÉduConnect)`),
       [IdpId.Catel]: msg(str`Personnel de l'éducation nationale`),
       [IdpId.Agri]: msg(str`Élève, parent ou personnel de l'enseignement agricole (ÉduAgri)`),
-      [IdpId.RCVL]: msg(str`Personnel de la Région Centre-Val de Loire`),
       [IdpId.CD28]: msg(str`Personnel du département d'Eure-et-Loir`),
+      [IdpId.RCVL]: msg(str`Personnel de la Région Centre-Val de Loire`),
+      [IdpId.RReunion]: msg(str`Personnel de la Région Réunion`),
       [IdpId.AutresPublics]: msg(str`Autre public\n(utilisateur local, entreprise,...)`),
     }
   }

@@ -12,6 +12,7 @@
       's1bcb1fb4564acdca': str`Centre-Val de Loire region staff`,
 's4a27e1a8c902f0e7': str`Student, parent or education staff in the agricultural
 (ÉduAgri)`,
+'s6981cc73e764190b': str`Réunion region staff`,
 's97a3d79692bf6b4a': str`National education staff`,
 'sd76deeb0fc71eb13': str`Student or parent in the national education
 (ÉduConnect)`,

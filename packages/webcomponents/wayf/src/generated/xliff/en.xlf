@@ -31,6 +31,10 @@
   <target>Student, parent or education staff in the agricultural
 (ÉduAgri)</target>
 </trans-unit>
+<trans-unit id="s6981cc73e764190b">
+  <source>Personnel de la Région Réunion</source>
+  <target>Réunion region staff</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
