@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.1.0](https://github.com/GIP-RECIA/recia-ui/compare/ui/v1.0.5...ui/v1.1.0) (2026-09-24)
+
+### Features
+
+* add entkapreunion theme ([dd6713a](https://github.com/GIP-RECIA/recia-ui/commit/dd6713a08348309f3405828bee7ad29f5b85bcb8))
+* **ui:** add links layout ([c0c5204](https://github.com/GIP-RECIA/recia-ui/commit/c0c5204086a2cf7c60701cdd110c3f6e1c659430))
+
+### Bug Fixes
+
+* **header:** dark theme declaration ([e25b781](https://github.com/GIP-RECIA/recia-ui/commit/e25b7817854c052aa2263b0bd54de5b6371d86dd))
 ## [1.0.5](https://github.com/GIP-RECIA/recia-ui/compare/ui/v1.0.4...ui/v1.0.5) (2026-06-05)
 
 ## [1.0.4](https://github.com/GIP-RECIA/recia-ui/compare/ui/v1.0.3...ui/v1.0.4) (2026-03-10)
