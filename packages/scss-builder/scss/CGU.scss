@@ -7,7 +7,7 @@
 @use 'pkg:@gip-recia/ui/mixins' as *;
 
 @use 'pkg:@gip-recia/ui/themes';
-@use 'pkg:@gip-recia/ui/layouts';
+@use 'pkg:@gip-recia/ui/layouts/containers';
 
 @include dm-sans;
 @include sora;

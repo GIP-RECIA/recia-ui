@@ -1,5 +1,5 @@
 {
-  "name": "static-css",
+  "name": "scss-builder",
   "type": "module",
   "private": true,
   "contributors": [

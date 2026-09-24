@@ -6831,6 +6831,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"scss-builder@workspace:packages/scss-builder":
+  version: 0.0.0-use.local
+  resolution: "scss-builder@workspace:packages/scss-builder"
+  dependencies:
+    "@antfu/eslint-config": "npm:^9.3.0"
+    "@gip-recia/ui": "workspace:^"
+    eslint: "npm:^10.9.1"
+    eslint-plugin-format: "npm:^2.0.1"
+    ress: "npm:^6.0.0"
+    sass: "npm:^1.103.1"
+  languageName: unknown
+  linkType: soft
+
 "semver-compare@npm:^1.0.0":
   version: 1.0.0
   resolution: "semver-compare@npm:1.0.0"
@@ -7056,19 +7069,6 @@ __metadata:
   checksum: 10/ae560d0378d074006a71b06af71bfbe84a3fe1ac6e16c1f07575f69e670d40170507fe52b21bcc23399429bc6a15f4bc3ea8d9bc88e9dfd7e87de564e6da6a72
   languageName: node
   linkType: hard
-
-"static-css@workspace:packages/scss-builder":
-  version: 0.0.0-use.local
-  resolution: "static-css@workspace:packages/scss-builder"
-  dependencies:
-    "@antfu/eslint-config": "npm:^9.3.0"
-    "@gip-recia/ui": "workspace:^"
-    eslint: "npm:^10.9.1"
-    eslint-plugin-format: "npm:^2.0.1"
-    ress: "npm:^6.0.0"
-    sass: "npm:^1.103.1"
-  languageName: unknown
-  linkType: soft
 
 "statuses@npm:~2.0.1, statuses@npm:~2.0.2":
   version: 2.0.2
