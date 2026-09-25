@@ -4,7 +4,7 @@
   "watch": true,
   "routes": "./json-server/routes.json",
   "middlewares": [
-    "./json-server/middlewares/userinfo.cjs"
+    "./json-server/middlewares/api.cjs"
   ],
   "static": "./json-server/static",
   "readOnly": false,

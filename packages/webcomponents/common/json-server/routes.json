@@ -1,14 +1,14 @@
 {
+  "/portail/api/v5-1/userinfo\\?*": "/api/portail/userinfo",
+  "/portail/api/session.json": "/api/portail/session",
+  "/portail/api/v4-3/dlm/layout.json": "/api/portail/layout",
   "/portail/api/layout\\?*": "/actionsOnlayout",
-  "/portail/api/v4-3/dlm/layout.json": "/layout",
-  "/portail/api/v4-3/dlm/portletRegistry.json\\?*": "/portletRegistry",
-  "/paramuseretab/rest/v2/structures/structs/\\?*": "/structs",
-  "/portail/api/v5-1/userinfo\\?*": "/userinfo",
-  "/portail/api/session.json": "/session",
-  "/paramuseretab/changeetab/api/*": "/changeetab",
+  "/portail/api/v4-3/dlm/portletRegistry.json\\?*": "/api/portail/portletRegistry",
   "/portail/api/portlet/*": "/$1",
-  "/service-info-api/api/serviceInfo/*": "/$1",
-  "/service-info-api/api/allServices": "/allServices",
-  "/commun/portal_template_api.tpl.json": "/template",
-  "/notif-web/notif/all": "/notifications"
+  "/paramuseretab/rest/v2/structures/structs/\\?*": "/api/structs",
+  "/paramuseretab/changeetab/api/*": "/changeetab",
+  "/service-info-api/api/allServices": "/api/service-info/allServices",
+  "/service-info-api/api/serviceInfo/*": "/api/service-info/$1",
+  "/commun/portal_template_api.tpl.json": "/api/template",
+  "/notif-web/notif/all": "/api/notifications"
 }
