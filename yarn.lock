@@ -2160,7 +2160,7 @@ __metadata:
     sass: "npm:^1.103.1"
     tabbable: "npm:^6.5.0"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -2979,7 +2979,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -3932,7 +3932,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -4017,7 +4017,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -4182,6 +4182,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob-to-regexp@npm:0.4.1":
+  version: 0.4.1
+  resolution: "glob-to-regexp@npm:0.4.1"
+  checksum: 10/9009529195a955c40d7b9690794aeff5ba665cc38f1519e111c58bb54366fd0c106bde80acf97ba4e533208eb53422c83b136611a54c5fefb1edd8dc267cb62e
+  languageName: node
+  linkType: hard
+
 "glob@npm:^13.0.0":
   version: 13.0.6
   resolution: "glob@npm:13.0.6"
@@ -4293,7 +4300,7 @@ __metadata:
     sass: "npm:^1.103.1"
     tabbable: "npm:^6.5.0"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -6202,7 +6209,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -6485,7 +6492,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -6513,7 +6520,7 @@ __metadata:
     sass: "npm:^1.103.1"
     tabs: "workspace:^"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -7265,7 +7272,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
@@ -7535,14 +7542,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-dts@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "unplugin-dts@npm:1.0.3"
+"unplugin-dts@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "unplugin-dts@npm:1.1.1"
   dependencies:
     "@rollup/pluginutils": "npm:^5.1.4"
     "@volar/typescript": "npm:^2.4.26"
     compare-versions: "npm:^6.1.1"
     debug: "npm:^4.4.0"
+    glob-to-regexp: "npm:0.4.1"
     kolorist: "npm:^1.8.0"
     local-pkg: "npm:^1.1.1"
     magic-string: "npm:^0.30.17"
@@ -7574,7 +7582,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/bb6e5b8dfe9a25d2524b6a7ecfac29dbf4db408dcfd31df9d8cd74daa048eb3aec90c1cd4c025b1d63fe42864f274767a7290e30e3d6f4e964f14371cbe096f4
+  checksum: 10/5c04e44dc3dd2062e4f12c741c16553474a6cf06851a38a9a0df5ea192307bb8eec2cd768ef1d5ad1e204c8e4ab25c786d7b66047971e4346250e918eff9cfc2
   languageName: node
   linkType: hard
 
@@ -7772,7 +7780,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
     vite-plugin-svg-spritemap: "npm:^2.0.1"
   languageName: unknown
@@ -7839,7 +7847,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.103.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.0.3"
+    unplugin-dts: "npm:^1.1.1"
     vite: "npm:^8.2.2"
   languageName: unknown
   linkType: soft
