@@ -16,7 +16,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^9.5.1",
     "@gip-recia/ui": "workspace:^",
-    "eslint": "^10.9.1",
+    "eslint": "^10.11.0",
     "eslint-plugin-format": "^2.0.1",
     "ress": "^6.0.0",
     "sass": "^1.103.1"
