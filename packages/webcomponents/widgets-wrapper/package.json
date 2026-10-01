@@ -49,7 +49,7 @@
     "@uportal/open-id-connect": "^1.40.2",
     "common": "workspace:^",
     "concurrently": "^10.0.5",
-    "eslint": "^10.9.1",
+    "eslint": "^10.11.0",
     "eslint-plugin-format": "^2.0.1",
     "lodash-es": "^4.18.1",
     "regenerator-runtime": "^0.14.1",
