@@ -23,7 +23,7 @@
     "eslint": "^10.11.0",
     "eslint-plugin-format": "^2.0.1",
     "ress": "^6.0.0",
-    "sass": "^1.103.1",
+    "sass": "^1.105.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.2.2"
   }
