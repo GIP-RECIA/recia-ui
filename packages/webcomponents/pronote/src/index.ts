@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 
-import './components/page/index.ts'
 import './components/summary/index.ts'
