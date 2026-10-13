@@ -667,7 +667,7 @@ __metadata:
   resolution: "@gip-recia/ui@workspace:packages/ui"
   dependencies:
     "@antfu/eslint-config": "npm:^9.5.1"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.0"
@@ -687,7 +687,7 @@ __metadata:
     "@types/regenerator-runtime": "npm:^0"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lodash-es: "npm:^4.18.1"
     regenerator-runtime: "npm:^0.14.1"
@@ -2075,7 +2075,7 @@ __metadata:
     "@gip-recia/ui": "workspace:^"
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.0"
@@ -2200,7 +2200,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -3041,7 +3041,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -3640,9 +3640,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^10.11.0":
-  version: 10.11.0
-  resolution: "eslint@npm:10.11.0"
+"eslint@npm:^10.12.0":
+  version: 10.12.0
+  resolution: "eslint@npm:10.12.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.8.0"
     "@eslint-community/regexpp": "npm:^4.12.2"
@@ -3681,7 +3681,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 10/b4de8711cae009d6978e3760d400d5b2cba4117625764d9b1b77969c61f4db7dfa7bfb2754c0a22b3d9f35960a3e4f03bd579104d2c25894490bf3cf7b448cac
+  checksum: 10/1cff87e4db79d4c9b6bd0af4c2aa483d88936a16f70e73af192a2aeee5ec597ad1de5d42ba1242336c27b25be6f0e503e4ea41ca036ab134eb5f4b4c24af15b9
   languageName: node
   linkType: hard
 
@@ -3996,7 +3996,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -4082,7 +4082,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -4369,7 +4369,7 @@ __metadata:
     common: "workspace:^"
     concurrently: "npm:^10.0.5"
     date-fns: "npm:^4.4.0"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     filters: "workspace:^"
     lit: "npm:^3.3.3"
@@ -6297,7 +6297,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -6580,7 +6580,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -6607,7 +6607,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -6632,7 +6632,7 @@ __metadata:
     "@gip-recia/ui": "workspace:^"
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.0"
@@ -6984,7 +6984,7 @@ __metadata:
   dependencies:
     "@antfu/eslint-config": "npm:^9.5.1"
     "@gip-recia/ui": "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.0"
@@ -7371,7 +7371,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -7879,7 +7879,7 @@ __metadata:
     "@types/node": "npm:^24"
     "@typescript/native": "npm:typescript@^7.0.2"
     common: "workspace:^"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
@@ -7945,7 +7945,7 @@ __metadata:
     "@uportal/open-id-connect": "npm:^1.40.2"
     common: "workspace:^"
     concurrently: "npm:^10.0.5"
-    eslint: "npm:^10.11.0"
+    eslint: "npm:^10.12.0"
     eslint-plugin-format: "npm:^2.0.1"
     lit: "npm:^3.3.3"
     lodash-es: "npm:^4.18.1"
