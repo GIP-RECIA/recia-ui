@@ -7,6 +7,8 @@
   - [r-footer](#r-footer)
   - [r-header](#r-header)
   - [r-page-layout](#r-page-layout)
+  - [r-pronote](#r-pronote)
+  - [r-tabs](#r-tabs)
   - [r-wayf](#r-wayf)
   - [r-widgets-wrapper](#r-widgets-wrapper)
 
@@ -24,6 +26,10 @@ Ces élément sont défini dans le dossier [`common`](./common/).
 ## [r-header](./header/)
 
 ## [r-page-layout](./page-layout/)
+
+## [r-pronote](./pronote/)
+
+## [r-tabs](./tabs/)
 
 ## [r-wayf](./wayf/)
 
