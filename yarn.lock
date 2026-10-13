@@ -2208,7 +2208,7 @@ __metadata:
     sass: "npm:^1.105.1"
     tabbable: "npm:^6.5.0"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -3048,7 +3048,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -4003,7 +4003,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -4089,7 +4089,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -4381,7 +4381,7 @@ __metadata:
     sass: "npm:^1.105.1"
     tabbable: "npm:^6.5.0"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -6304,7 +6304,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -6587,7 +6587,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -6615,7 +6615,7 @@ __metadata:
     sass: "npm:^1.105.1"
     tabs: "workspace:^"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -7378,7 +7378,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
@@ -7648,9 +7648,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-dts@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "unplugin-dts@npm:1.1.1"
+"unplugin-dts@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "unplugin-dts@npm:1.1.2"
   dependencies:
     "@rollup/pluginutils": "npm:^5.1.4"
     "@volar/typescript": "npm:^2.4.26"
@@ -7688,7 +7688,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/5c04e44dc3dd2062e4f12c741c16553474a6cf06851a38a9a0df5ea192307bb8eec2cd768ef1d5ad1e204c8e4ab25c786d7b66047971e4346250e918eff9cfc2
+  checksum: 10/3837caaaa5515755a129da90bc9a5368931dec4b0bbc39f3396d5d8258a38b8fa415e310af5b9c32dd459ae234a1849a823110b4996d09f75af85d703b0221c5
   languageName: node
   linkType: hard
 
@@ -7886,7 +7886,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
     vite-plugin-svg-spritemap: "npm:^2.0.1"
   languageName: unknown
@@ -7953,7 +7953,7 @@ __metadata:
     ress: "npm:^6.0.0"
     sass: "npm:^1.105.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
-    unplugin-dts: "npm:^1.1.1"
+    unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.1"
   languageName: unknown
   linkType: soft
