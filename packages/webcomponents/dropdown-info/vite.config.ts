@@ -19,7 +19,7 @@ import type { ConfigEnv } from 'vite'
 import { fileName, libName } from 'common/config.ts'
 import dts from 'unplugin-dts/vite'
 import { defineConfig, loadEnv } from 'vite'
-import { name } from './package.json' with { type: 'json' }
+import pkg from './package.json' with { type: 'json' }
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
@@ -50,11 +50,11 @@ export default ({ mode }: ConfigEnv) => {
       lib: {
         entry: './src/index.ts',
         formats: ['iife'],
-        name: libName(name),
+        name: libName(pkg.name),
       },
       rollupOptions: {
         output: {
-          entryFileNames: fileName(name),
+          entryFileNames: fileName(pkg.name),
         },
       },
     },
