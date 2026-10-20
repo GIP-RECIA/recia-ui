@@ -44,7 +44,8 @@ html {
       p,
       blockquote,
       ul,
-      ol {
+      ol,
+      .table-container {
         &:not(:last-child) {
           margin-bottom: 1em !important;
         }
@@ -56,6 +57,40 @@ html {
 
         > li:not(:last-child) {
           margin-bottom: 0.5em;
+        }
+      }
+
+      .table-container {
+        overflow-x: auto;
+
+        > table {
+          border-collapse: collapse;
+
+          > caption {
+            text-align: start;
+            margin-bottom: 0.5em;
+          }
+
+          > thead > tr > th,
+          > tbody > tr > td {
+            text-align: start;
+            vertical-align: first;
+            padding: 8px 16px;
+          }
+
+          > thead {
+            > tr {
+              border-bottom: 1px solid var(--#{$prefix}basic-black);
+            }
+          }
+
+          > tbody {
+            > tr {
+              &:nth-child(2n + 1) {
+                background-color: var(--#{$prefix}stroke);
+              }
+            }
+          }
         }
       }
 
