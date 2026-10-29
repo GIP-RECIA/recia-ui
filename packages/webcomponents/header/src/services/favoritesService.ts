@@ -61,6 +61,7 @@ export default class FavoritesService {
       const response = await fetch(`${favoriteApiUrl}?${getParams}`, {
         method: 'POST',
         credentials: 'include',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

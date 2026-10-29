@@ -29,6 +29,7 @@ export default class GroupsService {
         headers: {
           Authorization: token,
         },
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

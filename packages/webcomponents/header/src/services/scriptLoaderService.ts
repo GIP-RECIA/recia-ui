@@ -60,7 +60,7 @@ export default class ScriptLoaderService {
       }
 
       if (cacheBuster && !src.includes('?v=')) {
-        src += `?v=${Math.floor(Date.now() / (cacheBuster * 1000))}`
+        src += `?v=${Math.floor(Date.now() / (cacheBuster * 1_000))}`
       }
 
       const script = document.createElement('script')

@@ -82,7 +82,7 @@ const $features = atom<HeaderFeatures>({
 const $settings = atom<Partial<HeaderProperties> & Partial<otherSettings>>({
   contextApiUrl: import.meta.env.VITE_PORTAL_BASE_URL,
   domain: window.location.hostname,
-  cacheBusterVersion: Math.floor(Date.now() / (24 * 60 * 60 * 1000)).toString(),
+  cacheBusterVersion: Math.floor(Date.now() / (24 * 60 * 60 * 1_000)).toString(),
 })
 
 const $soffit = atom<Soffit | undefined>()
@@ -673,7 +673,7 @@ async function updateSoffit(): Promise<void> {
     let complementary: object | undefined
     if (response) {
       complementary = {
-        expire: new Date(response.exp * 1000).toLocaleString(),
+        expire: new Date(response.exp * 1_000).toLocaleString(),
       }
     }
     // eslint-disable-next-line no-console
@@ -1006,7 +1006,7 @@ const renewSoffitAndSession = throttle(() => {
   }
   if (!SessionService.timeout)
     updateSession()
-}, 5000)
+}, 5_000)
 
 function updateFeatures() {
   const {

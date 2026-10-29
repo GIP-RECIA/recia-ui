@@ -20,7 +20,7 @@ import UserActionService from './userActionService.ts'
 export default class SessionService {
   static loading: boolean = false
   static timeout: ReturnType<typeof setTimeout> | null = null
-  static timeoutDefault: number = 60000
+  static timeoutDefault: number = 60_000
   static timeoutDelay: number = SessionService.timeoutDefault
 
   static async get(
@@ -31,6 +31,7 @@ export default class SessionService {
       const response = await fetch(sessionApiUrl, {
         method: 'GET',
         credentials: 'include',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

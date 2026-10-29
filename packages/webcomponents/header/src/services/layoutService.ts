@@ -24,6 +24,7 @@ export default class LayoutService {
       const response = await fetch(layoutApiUrl, {
         method: 'GET',
         credentials: 'include',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

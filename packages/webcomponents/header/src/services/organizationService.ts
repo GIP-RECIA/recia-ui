@@ -45,6 +45,7 @@ export default class OrganizationService {
       const response = await fetch(`${orgApiUrl}?${getParams}`, {
         method: 'GET',
         credentials: 'include',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

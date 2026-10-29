@@ -253,7 +253,7 @@ export class ReciaHeader extends LitElement {
   notificationsDeleteApiUrl?: string
 
   @property({ type: Number, attribute: 'notification-refresh-delay' })
-  notificationsRefreshDelay: number = 60000
+  notificationsRefreshDelay: number = 60_000
 
   @property({ type: String, attribute: 'mediacentre-config-url' })
   mediacentreConfigUrl?: string

@@ -23,7 +23,7 @@ export default class DnmaService {
       return
 
     if (!dnmaUrl.includes('?v='))
-      dnmaUrl += `?v=${Math.floor(Date.now() / (24 * 60 * 60 * 1000))}`
+      dnmaUrl += `?v=${Math.floor(Date.now() / (24 * 60 * 60 * 1_000))}`
 
     const dnmaScript = document.createElement('script')
     dnmaScript.id = 'dnma'

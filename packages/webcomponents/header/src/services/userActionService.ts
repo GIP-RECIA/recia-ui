@@ -19,7 +19,7 @@ import { $authenticated, renewSoffitAndSession } from '../stores/index.ts'
 export default class UserActionService {
   static hasUserAction: boolean = false
   static timeout: ReturnType<typeof setTimeout> | null = null
-  static timeoutDelay: number = 120000
+  static timeoutDelay: number = 120_000
 
   static userAction(e: Event): void {
     const authenticated = $authenticated.get()

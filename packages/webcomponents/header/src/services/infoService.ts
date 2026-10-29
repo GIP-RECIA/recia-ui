@@ -26,11 +26,10 @@ export default class InfoService {
     serviceInfoApiUrl: string,
   ): Promise<Partial<ServiceInfoLayout> | undefined> {
     try {
-      const options = {
+      const response = await fetch(serviceInfoApiUrl, {
         method: 'GET',
-      }
-
-      const response = await fetch(serviceInfoApiUrl, options)
+        signal: AbortSignal.timeout(10_000),
+      })
 
       if (!response.ok) {
         throw new Error(response.statusText)

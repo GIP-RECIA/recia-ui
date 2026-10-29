@@ -44,11 +44,10 @@ export default class PortletService {
     }
 
     try {
-      const options = {
+      const response = await fetch(portalInfoApiUrl, {
         method: 'GET',
-      }
-
-      const response = await fetch(portalInfoApiUrl, options)
+        signal: AbortSignal.timeout(10_000),
+      })
 
       if (!response.ok) {
         throw new Error(response.statusText)
@@ -99,6 +98,7 @@ export default class PortletService {
       const response = await fetch(portletApiUrl, {
         method: 'GET',
         credentials: 'include',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

@@ -22,6 +22,7 @@ export default class PreferencesService {
       const response = await fetch(preferencesApiUrl, {
         method: 'GET',
         credentials: 'include',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)
@@ -44,6 +45,7 @@ export default class PreferencesService {
         method: 'PUT',
         credentials: 'include',
         body: JSON.stringify(body),
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

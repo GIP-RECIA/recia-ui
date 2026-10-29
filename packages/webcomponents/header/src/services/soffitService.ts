@@ -22,7 +22,7 @@ import UserActionService from './userActionService.ts'
 export default class SoffitService {
   static loading: boolean = false
   static timeout: ReturnType<typeof setTimeout> | null = null
-  static timeoutDefault: number = 60000
+  static timeoutDefault: number = 60_000
   static timeoutDelay: number = SoffitService.timeoutDefault
 
   static async get(
@@ -33,7 +33,7 @@ export default class SoffitService {
       const response: Response = await oidc({ userInfoApiUrl })
       const { encoded, decoded } = response
 
-      const timeout = (decoded.exp - decoded.iat - 5) * 1000
+      const timeout = (decoded.exp - decoded.iat - 5) * 1_000
       SoffitService.timeoutDelay = timeout > 0
         ? timeout
         : SoffitService.timeoutDefault

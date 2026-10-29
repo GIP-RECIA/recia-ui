@@ -39,6 +39,7 @@ export default class MediacentreService {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ uais: [] }),
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)
@@ -90,6 +91,7 @@ export default class MediacentreService {
           isMemberOf: filteredGroups,
           favorites: mediacentreFavorites,
         }),
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)

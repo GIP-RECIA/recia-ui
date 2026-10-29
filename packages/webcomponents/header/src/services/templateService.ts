@@ -24,6 +24,7 @@ export default class TemplateService {
       const response = await fetch(templateApiUrl, {
         method: 'GET',
         cache: 'no-cache',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)
