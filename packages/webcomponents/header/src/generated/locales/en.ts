@@ -10,6 +10,7 @@
 
     export const templates = {
       's053c80dfb273b703': str`Photo of the institution`,
+'s1200308220956658': str`An error occurred while retrieving notifications.`,
 's130d574b67f1fd9b': str`Favorites`,
 's1ac8916da1fbf5d6': str`Back to home`,
 's1c703460a5da79b1': str`Rorder to the left`,
@@ -64,13 +65,13 @@ Do you agree to log out now?`,
 'se1e9c7a19e8dd236': str`new`,
 'se430513274f9b495': str`Save`,
 'se627415befeda34d': str`Home`,
+'se67ae86332ee7cb8': str`Error`,
 'se7036a0f025bd641': str`Institution information menu`,
 'se831b27916e38e5f': str`Rorder to the right`,
 'se9bc00ac86dcb50b': str`Available resources`,
 'sef8481fc13f940c8': str`Institution information`,
+'sef9b3325c04d4490': str`An error occurred while retrieving services.`,
 'sf0da99a184bafb7e': str`Close`,
-'sf52ce9bda73f60a6': str`An error occurred while retrieving services.
-Try refreshing the page.`,
 'sf55d634dcc743595': str`Services`,
 'sfaa072ad346ce9d6': str`Launch service`,
 'sfb9d2d8c7ef581a9': str`External service`,

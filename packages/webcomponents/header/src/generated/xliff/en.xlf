@@ -102,12 +102,6 @@
   <source>Effacer la recherche</source>
   <target>Clear search</target>
 </trans-unit>
-<trans-unit id="sf52ce9bda73f60a6">
-  <source>Une erreur est survenue lors de la récupération des services.
-Tentez de rafraichir la page.</source>
-  <target>An error occurred while retrieving services.
-Try refreshing the page.</target>
-</trans-unit>
 <trans-unit id="sba76902f0ee13f8d">
   <source>Afin que le changement d'établissement soit effectif, vous devez vous déonnecter.
 
@@ -257,6 +251,18 @@ Please try reopening this file.</target>
 <trans-unit id="s3ee5c5545dbd01f8">
   <source>Tiroir de notification</source>
   <target>Notification drawer</target>
+</trans-unit>
+<trans-unit id="se67ae86332ee7cb8">
+  <source>Erreur</source>
+  <target>Error</target>
+</trans-unit>
+<trans-unit id="sef9b3325c04d4490">
+  <source>Une erreur est survenue lors de la récupération des services.</source>
+  <target>An error occurred while retrieving services.</target>
+</trans-unit>
+<trans-unit id="s1200308220956658">
+  <source>Une erreur est survenue lors de la récupération des notifications.</source>
+  <target>An error occurred while retrieving notifications.</target>
 </trans-unit>
 </body>
 </file>

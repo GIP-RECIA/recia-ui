@@ -142,7 +142,7 @@ export class ReciaServicesLayout extends LitElement {
       <div class="error">
         ${getIcon(faWarning)}
         <p>
-          ${msg(str`Une erreur est survenue lors de la récupération des services.\nTentez de rafraichir la page.`)}
+          ${msg(str`Une erreur est survenue lors de la récupération des services.`)}
         </p>
       </div>
     `

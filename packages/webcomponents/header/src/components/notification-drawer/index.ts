@@ -19,7 +19,9 @@ import type { Ref } from 'lit/directives/ref.js'
 import type { Notif } from '../../types/index.ts'
 import {
   faBellSlash,
+  faPersonDigging,
   faTimes,
+  faWarning,
 } from '@fortawesome/free-solid-svg-icons'
 import { localized, msg, str } from '@lit/localize'
 import { useStores } from '@nanostores/lit'
@@ -34,6 +36,8 @@ import { css, html, LitElement, nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { map } from 'lit/directives/map.js'
+import { range } from 'lit/directives/range.js'
 import { createRef, ref } from 'lit/directives/ref.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { styleMap } from 'lit/directives/style-map.js'
@@ -41,13 +45,14 @@ import langHelper from '../../helpers/langHelper.ts'
 import NotificationService from '../../services/notificationService.ts'
 import {
   $groupedNotifications,
+  $notificationsLoad,
   $services,
   $settings,
   $soffit,
   deleteNotifications,
   getNotificationsIds,
 } from '../../stores/index.ts'
-import { priorityMap } from '../../types/index.ts'
+import { LoadingState, priorityMap } from '../../types/index.ts'
 import { getCategory } from '../../utils/categoryUtils.ts'
 import { getIcon, getIconWithStyle } from '../../utils/fontawesomeUtils.ts'
 import { getSvgIconService } from '../../utils/iconUtils.ts'
@@ -57,6 +62,7 @@ import styles from './style.scss?inline'
 
 @localized()
 @useStores($groupedNotifications)
+@useStores($notificationsLoad)
 @useStores($services)
 export class ReciaNotificationDrawer extends LitElement {
   @property({ type: Boolean, attribute: 'expanded' })
@@ -156,6 +162,121 @@ export class ReciaNotificationDrawer extends LitElement {
     )
     if (response)
       deleteNotifications(notifIds)
+  }
+
+  contentTemplate(): TemplateResult | typeof nothing {
+    const loadingState = $notificationsLoad.get()
+    const groupedNotifications = $groupedNotifications.get()
+
+    switch (loadingState) {
+      case LoadingState.ERROR:
+        return this.errorTemplate()
+
+      case LoadingState.LOADED:
+        return groupedNotifications && groupedNotifications.size > 0
+          ? this.notificationsTemplate(groupedNotifications)
+          : this.emptyTemplate()
+
+      case LoadingState.UNLOADED:
+      case LoadingState.LOADING:
+      default:
+        return this.skeletonTemplate()
+    }
+  }
+
+  errorTemplate(): TemplateResult {
+    return html`
+        <p class="error">
+          ${getIconWithStyle(faWarning, undefined, { icon: true })}
+          <span class="text">
+            ${msg(str`Erreur`)}
+            <span class="large">${msg(str`Une erreur est survenue lors de la récupération des notifications.`)}</span>
+          </span>
+        </p>
+      `
+  }
+
+  skeletonTemplate(): TemplateResult {
+    function dayTemplate(): TemplateResult {
+      return html`
+          <li>
+            <h2 class="skeleton"></h2>
+
+            <ul>
+              ${map(range(2), () => serviceTemplate())}
+            </ul>
+          </li>
+        `
+    }
+
+    function serviceTemplate(): TemplateResult {
+      return html`
+          <li>
+            <div class="header skeleton">
+              <h3></h3>
+            </div>
+
+            <ul>
+              ${map(range(4), () => notificationTemplate())}
+            </ul>
+          </li>
+        `
+    }
+
+    function notificationTemplate(): TemplateResult {
+      return html`
+          <li class="notif skeleton">
+            <div class="header">
+              ${
+                getIconWithStyle(
+                  faPersonDigging,
+                  undefined,
+                  {
+                    icon: true,
+                  },
+                )
+              }
+              <h4></h4>
+            </div>
+            <p class="message"></p>
+            <p class="createdAt"></p>
+          </li>
+        `
+    }
+
+    return html`
+        <ul inert>
+          ${map(range(1), () => dayTemplate())}
+        </ul>
+      `
+  }
+
+  emptyTemplate(): TemplateResult {
+    return html`
+        <p class="empty">
+          ${getIconWithStyle(faBellSlash, undefined, { icon: true })}
+          <span class="text">
+            ${msg(str`Vous n'avez`)}
+            <span class="large">${msg(str`Aucune notification`)}</span>
+          </span>
+        </p>
+      `
+  }
+
+  notificationsTemplate(
+    groupedNotifications: Map<string, Map<string, Notif[]>>,
+  ): TemplateResult {
+    return html`
+        <ul>
+          ${
+            repeat(
+              groupedNotifications,
+              ([key, value]) => `${key}-${value.size}`,
+              ([key, value]) => this.dayTemplate(key, value),
+            )
+          }
+        </ul>
+      `
   }
 
   dayTemplate(
@@ -333,8 +454,6 @@ export class ReciaNotificationDrawer extends LitElement {
   }
 
   render(): TemplateResult {
-    const groupedNotifications = $groupedNotifications.get()
-
     return html`
       <button
         type="button"
@@ -356,29 +475,7 @@ export class ReciaNotificationDrawer extends LitElement {
         })}notification-drawer"
         aria-label="${msg(str`Tiroir de notification`)}"
       >
-        ${
-          groupedNotifications && groupedNotifications.size > 0
-            ? html`
-                <ul>
-                  ${
-                    repeat(
-                      groupedNotifications,
-                      ([key, value]) => `${key}-${value.size}`,
-                      ([key, value]) => this.dayTemplate(key, value),
-                    )
-                  }
-                </ul>
-              `
-            : html`
-                <p class="empty">
-                  ${getIconWithStyle(faBellSlash, undefined, { icon: true })}
-                  <span class="text">
-                    ${msg(str`Vous n'avez`)}
-                    <span class="large">${msg(str`Aucune notification`)}</span>
-                  </span>
-                </p>
-              `
-        }
+        ${this.contentTemplate()}
       </div>
     `
   }

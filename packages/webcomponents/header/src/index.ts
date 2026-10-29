@@ -392,11 +392,11 @@ export class ReciaHeader extends LitElement {
     $debug.listen((value) => {
       if (value === true) {
         this.addEventListener('update-soffit', updateSoffit)
-        this.addEventListener('update-notifications', updateNotifications)
+        this.addEventListener('update-notifications', () => updateNotifications(true))
       }
       else {
         this.removeEventListener('update-soffit', updateSoffit)
-        this.removeEventListener('update-notifications', updateNotifications)
+        this.removeEventListener('update-notifications', () => updateNotifications(true))
       }
     })
   }
@@ -414,8 +414,10 @@ export class ReciaHeader extends LitElement {
     if (!isExpanded === undefined || typeof isExpanded !== 'boolean')
       return
 
-    if (isExpanded)
+    if (isExpanded) {
+      updateNotifications()
       updateServices()
+    }
     this.isNotificationDrawerExpanded = isExpanded
   }
 

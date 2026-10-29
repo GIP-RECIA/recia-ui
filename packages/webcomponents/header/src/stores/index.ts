@@ -113,6 +113,8 @@ const $selectedCategory = atom<string>(defaultFilterKey)
 
 const $notifications = atom<Notif[] | undefined>()
 
+const $notificationsLoad = atom<LoadingState>(LoadingState.UNLOADED)
+
 const $authenticated: ReadableAtom<boolean> = batched(
   [$soffit],
   newValue => newValue?.authenticated ?? false,
@@ -530,7 +532,9 @@ $userInfo.listen(onDiff((diffs) => {
     $favoritesIds.set(undefined)
     $mediacentreFavoritesLoad.set(LoadingState.UNLOADED)
     $mediacentreFavorites.set(undefined)
-    updateNotifications()
+    $notificationsLoad.set(LoadingState.UNLOADED)
+    $notifications.set(undefined)
+    updateNotifications(true)
   }
   if (
     diffs.has('sub')
@@ -572,11 +576,6 @@ $authenticated.listen((value) => {
     document.body.classList.remove('navigation-drawer-visible')
     $userInfo.set(undefined)
     $organizations.set(undefined)
-    $baseServicesLoad.set(LoadingState.UNLOADED)
-    $baseServices.set(undefined)
-    $services.set(undefined)
-    $layout.set(undefined)
-    $favoritesIds.set(undefined)
   }
 })
 
@@ -899,7 +898,7 @@ async function updateSession(): Promise<void> {
   }
 }
 
-async function updateNotifications(): Promise<void> {
+async function updateNotifications(forceUpdate: boolean = false): Promise<void> {
   const {
     notificationsApiUrl,
     notificationsRefreshDelay,
@@ -908,6 +907,7 @@ async function updateNotifications(): Promise<void> {
   const {
     notifications: featNotifications,
   } = $features.get()
+  const notificationsLoad = $notificationsLoad.get()
   if (
     notificationsRefreshDelay
     && notificationsRefreshDelay > 0
@@ -918,13 +918,24 @@ async function updateNotifications(): Promise<void> {
   if (!featNotifications || !soffit || !notificationsApiUrl)
     return
 
+  if (notificationsLoad === LoadingState.LOADING)
+    return
+
+  if (!forceUpdate && $notifications.get() !== undefined)
+    return
+
+  if ([LoadingState.UNLOADED, LoadingState.ERROR].includes(notificationsLoad))
+    $notificationsLoad.set(LoadingState.LOADING)
+
   const response = await NotificationService.getAll(
     soffit,
     getDomainLink(notificationsApiUrl),
   )
-  NotificationService.refresh(updateNotifications)
+  if (response)
+    NotificationService.refresh(() => updateNotifications(true))
 
   $notifications.set(response)
+  $notificationsLoad.set(response ? LoadingState.LOADED : LoadingState.ERROR)
   if ($debug.get()) {
     // eslint-disable-next-line no-console
     console.info('Notifications', response)
@@ -994,15 +1005,17 @@ function getNotificationsIds(
 }
 
 const renewSoffitAndSession = throttle(() => {
+  const canUpdateNotifications = $notificationsLoad.get() === LoadingState.LOADED
+
   if (!SoffitService.timeout) {
-    if (!NotificationService.timeout)
-      updateSoffit().then(() => updateNotifications())
+    if (!NotificationService.timeout && canUpdateNotifications)
+      updateSoffit().then(() => updateNotifications(true))
     else
       updateSoffit()
   }
   else {
-    if (!NotificationService.timeout)
-      updateNotifications()
+    if (!NotificationService.timeout && canUpdateNotifications)
+      updateNotifications(true)
   }
   if (!SessionService.timeout)
     updateSession()
@@ -1051,6 +1064,7 @@ export {
   $filteredServices,
   $groupedNotifications,
   $infoEtabData,
+  $notificationsLoad,
   $organizations,
   $searchQueryString,
   $searchResults,
