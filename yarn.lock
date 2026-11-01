@@ -1526,15 +1526,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^26.4.0":
-  version: 26.6.5
-  resolution: "@types/node@npm:26.6.5"
-  dependencies:
-    undici-types: "npm:~8.9.0"
-  checksum: 10/03780cc68280b566af47c0f673318e665258dbdcc953737a83c11593424d55aecb8b2642a573da33f76cb4dd5457379548388b78ab284cb3b762030e5d58b252
-  languageName: node
-  linkType: hard
-
 "@types/regenerator-runtime@npm:^0":
   version: 0.13.8
   resolution: "@types/regenerator-runtime@npm:0.13.8"
@@ -1640,17 +1631,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.72.1, @typescript-eslint/types@npm:^8.44.1, @typescript-eslint/types@npm:^8.71.2, @typescript-eslint/types@npm:^8.72.0, @typescript-eslint/types@npm:^8.72.1":
+"@typescript-eslint/types@npm:8.72.1, @typescript-eslint/types@npm:^8.44.1, @typescript-eslint/types@npm:^8.56.0, @typescript-eslint/types@npm:^8.65.0, @typescript-eslint/types@npm:^8.71.2, @typescript-eslint/types@npm:^8.72.0, @typescript-eslint/types@npm:^8.72.1":
   version: 8.72.1
   resolution: "@typescript-eslint/types@npm:8.72.1"
   checksum: 10/5df4d298766f25b95beae1ca2374d0a01719b3ac12f5f6a9977241d5ac7808064a72d07002b09bcdc6876453fb3a1bc8bc4988cd10ff2d07b4fb4fbcf71bd706
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/types@npm:^8.56.0, @typescript-eslint/types@npm:^8.65.0":
-  version: 8.71.1
-  resolution: "@typescript-eslint/types@npm:8.71.1"
-  checksum: 10/e719c89af197092fe69bee725582013e57b661d14f2edbdf0637811216e207139876d57631708d544ede41e52b1a01200e0511c8d9c46742d408cc70f3edc7a1
   languageName: node
   linkType: hard
 
@@ -2160,15 +2144,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"baseline-browser-mapping@npm:^2.11.26":
-  version: 2.11.28
-  resolution: "baseline-browser-mapping@npm:2.11.28"
-  bin:
-    baseline-browser-mapping: dist/cli.cjs
-  checksum: 10/8561ad5d30b36e17d1c2b7c6e492eb4a6792d3441335669f7e95806149d759b6af3fc9f151586a65044636e65cf848b15c83fdd34c86d22d0da970c905fc7ac8
-  languageName: node
-  linkType: hard
-
 "baseline-browser-mapping@npm:^2.11.33":
   version: 2.11.34
   resolution: "baseline-browser-mapping@npm:2.11.34"
@@ -2270,22 +2245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.28.7":
-  version: 4.29.3
-  resolution: "browserslist@npm:4.29.3"
-  dependencies:
-    baseline-browser-mapping: "npm:^2.11.26"
-    caniuse-lite: "npm:^1.0.30001813"
-    electron-to-chromium: "npm:^1.5.439"
-    node-releases: "npm:^2.0.57"
-    update-browserslist-db: "npm:^1.3.3"
-  bin:
-    browserslist: cli.js
-  checksum: 10/9649d4d73fff11f7c0b19948f08f9f287c184feb0965ac0b489cee7e1a9f430e747809db0d6014a30fdbcc42755e7a4dd047dfd7e28f62982072dcd0f8291eb0
-  languageName: node
-  linkType: hard
-
-"browserslist@npm:^4.29.1":
+"browserslist@npm:^4.28.7, browserslist@npm:^4.29.1":
   version: 4.29.5
   resolution: "browserslist@npm:4.29.5"
   dependencies:
@@ -2365,13 +2325,6 @@ __metadata:
   version: 3.1.0
   resolution: "callsites@npm:3.1.0"
   checksum: 10/072d17b6abb459c2ba96598918b55868af677154bec7e73d222ef95a8fdb9bbf7dae96a8421085cdad8cd190d86653b5b6dc55a4484f2e5b2e27d5e0c3fc15b3
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001813":
-  version: 1.0.30001815
-  resolution: "caniuse-lite@npm:1.0.30001815"
-  checksum: 10/975bc77d07201295d56ce25c0f796bede1b7c2447c46c4a4b1819cc67de3a505897a3e22926bb5195cf5cd4c31c32aed90fa2d8533a10e379c0a6a16916a8380
   languageName: node
   linkType: hard
 
@@ -3111,13 +3064,6 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 10/1b4cac778d64ce3b582a7e26b218afe07e207a0f9bfe13cc7395a6d307849cfe361e65033c3251e00c27dd060cab43014c2d6b2647676135e18b77d2d05b3f4f
-  languageName: node
-  linkType: hard
-
-"electron-to-chromium@npm:^1.5.439":
-  version: 1.5.452
-  resolution: "electron-to-chromium@npm:1.5.452"
-  checksum: 10/0c256b0f0a48afe69f57f8074319a0777599a429d0b71e895e6bcd6ca5ff979a2f6afa2b3bc57921126dd4e2af1a7fa4c999f5c652a22e5ac54080dcdd31ac4d
   languageName: node
   linkType: hard
 
@@ -4692,13 +4638,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdoc-type-pratt-parser@npm:^9.0.0":
-  version: 9.2.2
-  resolution: "jsdoc-type-pratt-parser@npm:9.2.2"
+"jsdoc-type-pratt-parser@npm:^9.0.0, jsdoc-type-pratt-parser@npm:~9.4.0":
+  version: 9.4.0
+  resolution: "jsdoc-type-pratt-parser@npm:9.4.0"
   dependencies:
     "@types/estree": "npm:^1.0.9"
-    "@types/node": "npm:^26.4.0"
-  checksum: 10/cd39db679ca33d8ad6279e7523e4a7a2ef58475577dd42240c5d7b155209315d3c2b3a708369ec6e9828fd8d936161208931b98f112078d787b34ba0f332da87
+  checksum: 10/4bd07679799a6cdadb9deb1739176e15cc4774b565f496339a7dfb61a5cbedaef57baed3182ddb9808ddd4b1b6421d4d2d52c8b86a3727b35140e0f287e88d10
   languageName: node
   linkType: hard
 
@@ -4715,15 +4660,6 @@ __metadata:
   dependencies:
     "@types/estree": "npm:^1.0.9"
   checksum: 10/a3a335745fa7ee9963ff875dee0f61cb789fac0586d7c57cf99816a404d0c236e445554b0fbbb812f0ef991f985890fc25bcb3f645ef06d3024d6d4b3953b3c7
-  languageName: node
-  linkType: hard
-
-"jsdoc-type-pratt-parser@npm:~9.4.0":
-  version: 9.4.0
-  resolution: "jsdoc-type-pratt-parser@npm:9.4.0"
-  dependencies:
-    "@types/estree": "npm:^1.0.9"
-  checksum: 10/4bd07679799a6cdadb9deb1739176e15cc4774b565f496339a7dfb61a5cbedaef57baed3182ddb9808ddd4b1b6421d4d2d52c8b86a3727b35140e0f287e88d10
   languageName: node
   linkType: hard
 
@@ -5969,13 +5905,6 @@ __metadata:
     css-select: "npm:^5.1.0"
     entities: "npm:^8.0.0"
   checksum: 10/87286c8810b88627b1d87bf5423cd5429ba6ff32ac3c85081a12cefbee7a29acbedb07e665ded177a6a3fc8dd0f67aa77f3773b842849b46ceb0f3227237a2bb
-  languageName: node
-  linkType: hard
-
-"node-releases@npm:^2.0.57":
-  version: 2.0.58
-  resolution: "node-releases@npm:2.0.58"
-  checksum: 10/06039e07aef63b25e2f2597c4d68e147139977edbe1f147159d2d0379eb16a179709ab91ac25b294309cca0ff980266a7c4cffd079b6c5ac3dd9769204628051
   languageName: node
   linkType: hard
 
@@ -7422,13 +7351,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~8.9.0":
-  version: 8.9.0
-  resolution: "undici-types@npm:8.9.0"
-  checksum: 10/8785591929de2b71d281c684e915c4a8c41becc225adbf42a3e89148f8b384724a21533494c30a1cbb85b4cbccd088d020788ff4f2d605013eb2863cd47a1639
-  languageName: node
-  linkType: hard
-
 "undici@npm:^8.4.1":
   version: 8.12.3
   resolution: "undici@npm:8.12.3"
@@ -7555,7 +7477,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"update-browserslist-db@npm:^1.3.3, update-browserslist-db@npm:^1.3.4":
+"update-browserslist-db@npm:^1.3.4":
   version: 1.3.4
   resolution: "update-browserslist-db@npm:1.3.4"
   dependencies:
