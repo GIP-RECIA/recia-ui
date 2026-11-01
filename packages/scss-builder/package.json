@@ -14,7 +14,7 @@
     "build": "rm -r dist ; sass -p node -s compressed --error-css --update --no-source-map scss/:dist/"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^9.5.1",
+    "@antfu/eslint-config": "^10.0.0",
     "@gip-recia/ui": "workspace:^",
     "eslint": "^10.12.0",
     "eslint-plugin-format": "^2.0.1",
