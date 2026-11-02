@@ -2210,7 +2210,7 @@ __metadata:
     lodash-es: "npm:^4.18.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.107.0"
-    tabbable: "npm:^6.5.0"
+    tabbable: "npm:^6.5.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
     unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.5"
@@ -4371,7 +4371,7 @@ __metadata:
     regenerator-runtime: "npm:^0.14.1"
     ress: "npm:^6.0.0"
     sass: "npm:^1.107.0"
-    tabbable: "npm:^6.5.0"
+    tabbable: "npm:^6.5.1"
     typescript: "npm:@typescript/typescript6@^6.0.2"
     unplugin-dts: "npm:^1.1.2"
     vite: "npm:^8.3.5"
@@ -7138,10 +7138,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabbable@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "tabbable@npm:6.5.0"
-  checksum: 10/c3b37430dd1a9f1c3a413b46d0598e3af55588959d4c386eeb1910a82632ac45cb6ed237902353e38e2a956326286773621cf5b8dca6d82c76da441918f8c718
+"tabbable@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "tabbable@npm:6.5.1"
+  checksum: 10/8952617afb99d377128c4a328642ff69e8ed8b5682b379e8883b94facc4e3c3ab84227e48a015bf26a130c813e73533e206abe5891c99c7980dfb61fbcbc0720
   languageName: node
   linkType: hard
 
