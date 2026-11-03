@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.21.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.20.0...ui-webcomponents/v1.21.0) (2026-11-03)
+
+### Features
+
+* **header:** add fetch timeout ([7e03fe8](https://github.com/GIP-RECIA/recia-ui/commit/7e03fe8d01824e9ce4bf4aecf9f9a9ee379fbde6))
+* **header:** improve notification ([becee3e](https://github.com/GIP-RECIA/recia-ui/commit/becee3e9559a8aac3ba26515d18f6648ef8cfbba))
+
 ## [1.20.0](https://github.com/GIP-RECIA/recia-ui/compare/ui-webcomponents/v1.19.0...ui-webcomponents/v1.20.0) (2026-09-24)
 
 ### Features
