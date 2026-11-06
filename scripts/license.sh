@@ -12,20 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-files=$(find ./packages/ ./scripts/ \
-  \( \
-    -path '.*/dist/*' -o \
-    -path '.*/generated/*' -o\
-    -path '.*/node_modules/*' \
-  \) -prune -o \
-  \( \
-    -name '*.vue' -o \
-    -name '*.tsx' -o \
-    -name '*.ts' -o \
-    -name '*.java' -o \
-    -name '*.xml' -o \
-    -name '*.sh' \
-  \) -type f -print)
+files=$(find ./etc/webcomponent/project-skeleton/ ./packages/ ./scripts/ \
+  \( -path '.*/dist/*' \
+  -o -path '.*/generated/*' \
+  -o -path '.*/node_modules/*' \) \
+  -prune -o -type f \
+  \( -name '*.vue' \
+  -o -name '*.tsx' \
+  -o -name '*.ts' \
+  -o -name '*.sh' \) \
+  ! -name '*.d.ts' \
+  -print
+)
 
 check() {
   docker run --rm -t --name licence -v ${PWD}:/src \
