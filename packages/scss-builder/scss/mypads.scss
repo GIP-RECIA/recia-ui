@@ -1,0 +1,177 @@
+@use 'sass:map';
+
+@use 'pkg:@gip-recia/ui/core/variables' as *;
+@use 'pkg:@gip-recia/ui/core/typo';
+@use 'pkg:@gip-recia/ui/functions' as *;
+@use 'pkg:@gip-recia/ui/mixins' as *;
+
+@use 'pkg:@gip-recia/ui/layouts/containers';
+@use 'pkg:@gip-recia/ui/layouts/links';
+
+@include dm-sans;
+@include sora;
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-size: unset;
+
+  > body {
+    background-color: var(--#{$prefix}body-bg);
+    font-family: $dm-sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--#{$prefix}body-font-size);
+    letter-spacing: 0;
+    color: var(--#{$prefix}body);
+
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      'header'
+      'alert'
+      'main'
+      'footer';
+
+    > header {
+      grid-area: header;
+      height: var(--#{$prefix}header-height, 68px);
+    }
+
+    > .alert {
+      grid-area: alert;
+    }
+
+    > .container {
+      grid-area: main;
+      padding-top: 32px;
+      // padding-top: 40px;
+      padding-bottom: 40px;
+
+      #mypads {
+        > header.hidden {
+          display: block !important;
+        }
+
+        .container,
+        .container-fluid {
+          padding: unset;
+          max-width: unset;
+        }
+
+        .nav-tabs {
+          border: none;
+
+          > li {
+            &.active > a {
+              &,
+              &:hover,
+              &:focus {
+                background-color: var(--#{$prefix}primary);
+                color: var(--#{$prefix}btn-primary);
+              }
+            }
+
+            > a {
+              &:hover,
+              &:focus {
+                color: var(--#{$prefix}primary);
+              }
+            }
+
+            &.active > a,
+            > a {
+              &,
+              &:hover,
+              &:focus {
+                border: none;
+                border-radius: 4px;
+              }
+            }
+          }
+        }
+
+        .ombre {
+          box-shadow: none;
+        }
+
+        .mp-tooltip {
+          color: #808080;
+
+          &:hover,
+          &:focus {
+            &::after {
+              background-color: #9eddfa;
+              color: #303030;
+              border: 1px solid #0c98d9;
+            }
+          }
+        }
+
+        .panel-primary {
+          border-color: #808080;
+        }
+
+        .panel-info {
+          border-color: #f3f3f3;
+
+          > .panel-heading {
+            color: #808080;
+            background-color: #f3f3f3;
+            border-color: #f3f3f3;
+          }
+        }
+
+        .panel-primary > .panel-heading {
+          background-color: #808080;
+          border-color: #808080;
+        }
+
+        a:not(.btn) {
+          color: inherit;
+          text-decoration: none;
+
+          &:focus,
+          &:hover {
+            color: var(--#{$prefix}system-blue);
+            text-decoration: none;
+          }
+        }
+
+        .form-control:focus {
+          color: #303030;
+          border: 1px solid var(--#{$prefix}primary);
+          box-shadow: unset;
+        }
+
+        .btn-primary,
+        .btn-info {
+          background-color: var(--#{$prefix}btn-primary-bg);
+          border-color: var(--#{$prefix}btn-primary-bg);
+          color: var(--#{$prefix}btn-primary);
+
+          &:hover,
+          &:focus {
+            background-color: var(--#{$prefix}primary);
+            border-color: var(--#{$prefix}primary);
+            color: var(--#{$prefix}btn-primary);
+          }
+        }
+      }
+    }
+
+    > footer {
+      grid-area: footer;
+    }
+
+    @media (width >= map.get($grid-breakpoints, md)) {
+      > .container {
+        // padding-top: 60px;
+        padding-bottom: 60px;
+      }
+    }
+  }
+}
