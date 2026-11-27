@@ -31,7 +31,7 @@ export interface Notif {
     }
     header: {
       eventHeader: {
-        channels: string[]
+        channels: Channel[]
         createdAt: string
         eventId: string
         priority: Priority
@@ -54,6 +54,12 @@ export enum Priority {
   LOW = 'LOW',
   NORMAL = 'NORMAL',
   HIGH = 'HIGH',
+}
+
+export enum Channel {
+  WEB = 'WEB',
+  MAIL = 'MAIL',
+  PUSH = 'PUSH',
 }
 
 export const priorityMap: Record<
