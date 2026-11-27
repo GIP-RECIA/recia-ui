@@ -48,10 +48,16 @@ export default class InfoService {
 
         return {
           description,
-          'video': video_link ? getDomainLink(video_link) : undefined,
+          'video': video_link
+            ? getDomainLink(video_link)
+            : undefined,
           'category': categorie_principale,
           'ressources': tutorials,
-          'ressources-link': resource_link ? { href: getDomainLink(resource_link) } : undefined,
+          'ressources-link': resource_link
+            ? {
+                href: getDomainLink(resource_link),
+              }
+            : undefined,
         }
       }
       else {
@@ -71,6 +77,7 @@ export default class InfoService {
     try {
       const response = await fetch(serviceInfoApiUrl, {
         method: 'GET',
+        signal: AbortSignal.timeout(10_000),
       })
 
       if (!response.ok)
